@@ -1,2 +1,13 @@
 /target/
 /bin/
+/.idea
+/.settings/
+.classpath
+.project
+chromedriver.exe
+test-output/junitreports/*
+*.iml
+TestsScreenshots/*
+*.versionsBackup
+test-output/
+Automation.html

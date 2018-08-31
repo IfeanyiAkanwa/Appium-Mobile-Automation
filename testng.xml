@@ -9,6 +9,11 @@
             <include name="usernamePasswordTest"/>
         </methods>
       </class>
+      <class name="com.sf.testCases.captureNewSimSerialRegistration">
+      	<methods>
+            <include name="navigateToCaptureMenuTest"/>
+        </methods>
+      </class>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->
