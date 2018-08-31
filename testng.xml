@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+<parameter name="groupReport" value="DroidReport.html" />
+  <test thread-count="5"  verbose="2" preserve-order="true" name="bioSmartDroid">
+    <classes>
+      <class name="com.sf.testCases.login">
+      	<methods>
+            <include name="usernamePasswordTest"/>
+        </methods>
+      </class>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->
