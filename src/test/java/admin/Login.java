@@ -14,13 +14,13 @@ public class Login extends TestBase {
         Thread.sleep(500);
         WebDriverWait wait = new WebDriverWait(getDriver(), 30);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Login']")));
-        getDriver().findElement(By.id("com.seamfix.biocapture.activity:id/otp_login")).click();
+        getDriver().findElement(By.id("com.sf.biocapture.activity:id/otp_login")).click();
         Thread.sleep(1000);
-        getDriver().findElement(By.id("com.seamfix.biocapture.activity:id/login_username")).clear();
-        getDriver().findElement(By.id("com.seamfix.biocapture.activity:id/login_username")).sendKeys("oosifala@seamfix.com");
-        getDriver().findElement(By.id("com.seamfix.biocapture.activity:id/login_password")).clear();
-        getDriver().findElement(By.id("com.seamfix.biocapture.activity:id/login_password")).sendKeys("bankole1!!");
-        getDriver().findElement(By.id("com.seamfix.biocapture.activity:id/submit")).click();
+        getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).sendKeys("bestify@seamfix.com");
+        getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_password")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_password")).sendKeys("bankole1!!");
+        getDriver().findElement(By.id("com.sf.biocapture.activity:id/submit")).click();
         Thread.sleep(1000);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
     }
