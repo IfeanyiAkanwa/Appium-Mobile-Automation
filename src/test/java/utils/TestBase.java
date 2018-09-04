@@ -5,9 +5,13 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.remote.AutomationName;
+import io.appium.java_client.remote.MobileCapabilityType;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
@@ -20,8 +24,7 @@ import java.net.URL;
 
 public class TestBase {
 
-    public static WebDriverWait wait;
-    public static ThreadLocal<WebDriver> driver = new ThreadLocal<WebDriver>();
+    public static ThreadLocal<AndroidDriver> driver = new ThreadLocal<AndroidDriver>();
     public static ExtentReports reports;
     public static ExtentHtmlReporter htmlReporter;
     private static ThreadLocal<ExtentTest> parentTest = new ThreadLocal<ExtentTest>();
@@ -29,7 +32,7 @@ public class TestBase {
     public static String URLbase = "http:simreg.mtnnigeria.net";
 
 
-    public static  WebDriver getDriver(){
+    public static  AndroidDriver getDriver(){
         return driver.get();
     }
 
@@ -44,10 +47,11 @@ public class TestBase {
         capabilities.setCapability("noReset", "false");
         capabilities.setCapability(CapabilityType.BROWSER_NAME, "Android");
         capabilities.setCapability("deviceName", "R7L4C15920003639");
-        capabilities.setCapability("platformVersion", "4.4.2");
+        capabilities.setCapability("platformVersion", "7.0");
         capabilities.setCapability("platformName", "Android");
         capabilities.setCapability("appPackage", "com.sf.biocapture.activity");
         capabilities.setCapability("appActivity", "com.sf.biocapture.activity.SplashScreenActivity");
+        capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.ANDROID_UIAUTOMATOR2);
 
         driver.set( new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities));
 
@@ -89,5 +93,21 @@ public class TestBase {
     @AfterSuite
     public void closeApp() {
         getDriver().quit();
+    }
+
+    @Test
+    public void UsernamePasswordTest() throws InterruptedException {
+        Thread.sleep(500);
+        WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Login']")));
+        getDriver().findElement(By.id("com.sf.biocapture.activity:id/otp_login")).click();
+        Thread.sleep(1000);
+        getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).sendKeys("bestify@seamfix.com");
+        getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_password")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_password")).sendKeys("bankole1!!");
+        getDriver().findElement(By.id("com.sf.biocapture.activity:id/submit")).click();
+        Thread.sleep(1000);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
     }
 }
