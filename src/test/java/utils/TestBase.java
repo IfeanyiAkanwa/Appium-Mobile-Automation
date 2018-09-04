@@ -24,7 +24,8 @@ import java.net.URL;
 
 public class TestBase {
 
-    public static ThreadLocal<AndroidDriver> driver = new ThreadLocal<AndroidDriver>();
+    public static WebDriverWait wait;
+    public static ThreadLocal<AndroidDriver> driver = new ThreadLocal<>();
     public static ExtentReports reports;
     public static ExtentHtmlReporter htmlReporter;
     private static ThreadLocal<ExtentTest> parentTest = new ThreadLocal<ExtentTest>();
@@ -42,8 +43,8 @@ public class TestBase {
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("autoGrantPermissions", "true");
-//        capabilities.setCapability("unicodeKeyboard", false);
-//        capabilities.setCapability("resetKeyboard", true);
+        capabilities.setCapability("unicodeKeyboard", true);
+        capabilities.setCapability("resetKeyboard", true);
         capabilities.setCapability("noReset", "false");
         capabilities.setCapability(CapabilityType.BROWSER_NAME, "Android");
         capabilities.setCapability("deviceName", "R7L4C15920003639");
@@ -96,7 +97,7 @@ public class TestBase {
     }
 
     @Test
-    public void UsernamePasswordTest() throws InterruptedException {
+    public void Login() throws InterruptedException {
         Thread.sleep(500);
         WebDriverWait wait = new WebDriverWait(getDriver(), 30);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Login']")));
