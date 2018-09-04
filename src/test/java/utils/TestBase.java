@@ -5,7 +5,10 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.remote.AutomationName;
+import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -45,10 +48,11 @@ public class TestBase {
         capabilities.setCapability("noReset", "false");
         capabilities.setCapability(CapabilityType.BROWSER_NAME, "Android");
         capabilities.setCapability("deviceName", "R7L4C15920003639");
-        capabilities.setCapability("platformVersion", "4.4.2");
+        capabilities.setCapability("platformVersion", "7.0");
         capabilities.setCapability("platformName", "Android");
         capabilities.setCapability("appPackage", "com.sf.biocapture.activity");
         capabilities.setCapability("appActivity", "com.sf.biocapture.activity.SplashScreenActivity");
+        capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.ANDROID_UIAUTOMATOR2);
 
         driver.set( new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities));
 
