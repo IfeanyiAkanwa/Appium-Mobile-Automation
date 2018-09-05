@@ -9,10 +9,7 @@ import com.aventstack.extentreports.Status;
 import enums.TargetTypeEnum;
 import io.appium.java_client.TouchAction;
 import org.apache.commons.codec.binary.Base64;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.*;
 import org.testng.Assert;
 
 public class TestUtils extends TestBase {
@@ -103,6 +100,45 @@ public class TestUtils extends TestBase {
         if(getDriver().isKeyboardShown()) {
             getDriver().hideKeyboard();
             Thread.sleep(500);
+        }
+    }
+
+    public static boolean isElementPresent(String elementType, String locator){
+
+        WebElement elementPresent = null;
+
+        TargetTypeEnum targetTypeEnum = TargetTypeEnum.valueOf(elementType);
+        switch (targetTypeEnum) {
+            case ID:
+                try{
+                    elementPresent = getDriver().findElement(By.id(locator));
+                }catch (Exception e){}
+                break;
+            case NAME:
+                try{
+                    elementPresent = getDriver().findElement(By.name(locator));
+                }catch (Exception e){}
+                break;
+            case CSS:
+                try{
+                    elementPresent = getDriver().findElement(By.cssSelector(locator));
+                }catch (Exception e){}
+                break;
+            case XPATH:
+                try{
+                    elementPresent = getDriver().findElement(By.xpath(locator));
+                }catch (Exception e){}
+                break;
+            default:
+                try{
+                    elementPresent = getDriver().findElement(By.id(locator));
+                }catch (Exception e){}
+        }
+        if(elementPresent != null){
+            return true;
+        }
+        else {
+            return false;
         }
     }
 }

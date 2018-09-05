@@ -4,11 +4,17 @@
     <parameter name="groupReport" value="/DroidReport.html"/>
     <test name="name">
         <classes>
-            <class name="admin.captureNewSimSerialRegistration">
+            <class name="admin.CaptureNewSimSerialRegistration">
                 <methods>
                     <include name="Login"/>
                     <include name="navigateToCaptureMenuTest"/>
                     <include name="RegisterNewSimSerial"/>
+                </methods>
+            </class>
+            <class name="admin.NewRegistrationMsisdn">
+                <methods>
+                    <include name="navigateToCaptureMenuTest"/>
+                    <include name="CaptureNewMSISDNTest"/>
                 </methods>
             </class>
             <class name="admin.AgentOnBoardingTest">
