@@ -32,6 +32,7 @@ public class ChangePasswordTest extends TestBase {
         WebDriverWait wait = new WebDriverWait(getDriver(), 30);
 
         //Tries to change password with invalid Password Policy
+        testInfo.get().info("Trying to change password to one that unmatches the password policy");
         //Current Password
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/current_password")).clear();
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/current_password")).sendKeys(password);
