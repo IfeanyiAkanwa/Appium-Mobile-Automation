@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="iClockerSuite">
+<suite name="BioSmartSuite">
     <parameter name="groupReport" value="/DroidReport.html"/>
     <test name="name">
         <classes>
@@ -9,6 +9,27 @@
                     <include name="Login"/>
                     <include name="navigateToCaptureMenuTest"/>
                     <include name="RegisterNewSimSerial"/>
+                </methods>
+            </class>
+            <class name="admin.AgentOnBoardingTest">
+                <methods>
+                    <include name="Login"></include>
+                    <include name="navigateToAgentOnBoardingPage"/>
+                    <include name="navigateToDashboard"/>
+                </methods>
+            </class>
+            <!--<class name="admin.NotificationsTest">
+                <methods>
+                    <include name="navigateToNotifiactions"/>
+                    <include name="navigateToDashboard"/>
+                </methods>
+            </class>-->
+            <class name="admin.ChangePasswordTest">
+                <methods>
+                    <include name="navigateToChangePasswordPage"/>
+                    <include name="changeToNewPassword"/>
+                    <include name="loginWithNewPassword"/>
+                    <include name="changeBackToOldPassword"/>
                 </methods>
             </class>
         </classes>

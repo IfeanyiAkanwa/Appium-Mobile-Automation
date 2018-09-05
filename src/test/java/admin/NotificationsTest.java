@@ -13,9 +13,14 @@ public class NotificationsTest extends TestBase {
 
         WebDriverWait wait = new WebDriverWait(getDriver(), 30);
 
-        getDriver().startActivity(new Activity("com.sf.biocapture.activity", "com.sf.biocapture.activity.NewHomeActivity"));
+//        getDriver().startActivity(new Activity("com.sf.biocapture.activity", "com.sf.biocapture.activity.NewHomeActivity"));
         getDriver().findElementByAccessibilityId("Navigate up").click();
         Thread.sleep(500);
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@Text='Notifications']")).click();
+    }
+
+    @Test
+    public static void navigateToDashboard() {
+
     }
 }
