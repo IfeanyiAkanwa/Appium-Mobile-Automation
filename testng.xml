@@ -13,13 +13,13 @@
             </class>
             <class name="admin.NewRegistrationMsisdn">
                 <methods>
-                    <include name="navigateToCaptureMenuTest"/>
+                    <include name="NavigateToCaptureMenuTest"/>
                     <include name="CaptureNewMSISDNTest"/>
                 </methods>
             </class>
             <class name="admin.AgentOnBoardingTest">
                 <methods>
-                    <include name="Login"></include>
+                    <!--<include name="Login"></include>-->
                     <include name="navigateToAgentOnBoardingPage"/>
                     <include name="navigateToDashboard"/>
                 </methods>

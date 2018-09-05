@@ -35,6 +35,7 @@ public class NewRegistrationMsisdn extends TestBase {
 
         WebDriverWait wait = new WebDriverWait(getDriver(), 30);
 
+        Thread.sleep(1000);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/msisdn")).clear();
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/msisdn")).sendKeys("1111113112");
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/add_msisdn_button")).click();

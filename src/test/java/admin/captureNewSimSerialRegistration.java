@@ -8,34 +8,33 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 import utils.TestUtils;
 
-public class captureNewSimSerialRegistration extends TestBase {
-	
-	@Test
-    public void navigateToCaptureMenuTest() throws InterruptedException {
-	Thread.sleep(500);
-    WebDriverWait wait = new WebDriverWait(getDriver(), 30);
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
-    Thread.sleep(500);
-    getDriver().findElement(By.id("com.sf.biocapture.activity:id/button_start_capture")).click();
-    Thread.sleep(500);
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Registration Type']")));
-    TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Registration Type']", "Registration Type");
-    Thread.sleep(500);
-    getDriver().findElement(By.id("com.sf.biocapture.activity:id/linear_layout_username")).click();
-    getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='New Registration (Sim Serial)']")).click();
-    Thread.sleep(500);
-    getDriver().findElement(By.id("com.sf.biocapture.activity:id/next_button")).click();
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/page_title")));
-    TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/page_title", "New Registration (Serial)");
-    
+public class CaptureNewSimSerialRegistration extends TestBase {
 
-    
-	}
+    @Test
+    public void NavigateToCaptureMenuTest() throws InterruptedException {
+        Thread.sleep(500);
+        WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
+        Thread.sleep(500);
+        getDriver().findElement(By.id("com.sf.biocapture.activity:id/button_start_capture")).click();
+        Thread.sleep(500);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Registration Type']")));
+        TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Registration Type']", "Registration Type");
+        Thread.sleep(500);
+        getDriver().findElement(By.id("com.sf.biocapture.activity:id/linear_layout_username")).click();
+        getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='New Registration (Sim Serial)']")).click();
+        Thread.sleep(500);
+        getDriver().findElement(By.id("com.sf.biocapture.activity:id/next_button")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/page_title")));
+        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/page_title", "New Registration (Serial)");
 
-	@Test
-    public void RegisterNewSimSerial() throws InterruptedException{
 
-	    WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+    }
+
+    @Test
+    public void RegisterNewSimSerialTest() throws InterruptedException {
+
+        WebDriverWait wait = new WebDriverWait(getDriver(), 30);
 
         //Enter SIM Serial
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/sim_serial_field")).clear();
@@ -57,7 +56,13 @@ public class captureNewSimSerialRegistration extends TestBase {
         Thread.sleep(1000);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/next_button")).click(); // ok button
         Thread.sleep(1000);
-        Form.IndividualForeignerForm();
+        Form.NigerianCompanyForm();
+        if (TestUtils.isElementPresent("XPATH", "//android.widget.TextView[@text='Sell Airtime/Data']")) {
+            getDriver().findElement(By.className("android.widget.ImageButton")).click();
+        }
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/kpi_report_name")));
+        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/kpi_report_name", "Total Subscribers");
 
     }
 }

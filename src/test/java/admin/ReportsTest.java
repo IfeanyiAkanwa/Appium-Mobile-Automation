@@ -46,6 +46,6 @@ public class ReportsTest extends TestBase {
         //OK
         getDriver().findElement(By.xpath("//android.widget.Button[@text='OK']")).click();
         //Verify
-        
+
     }
 }
