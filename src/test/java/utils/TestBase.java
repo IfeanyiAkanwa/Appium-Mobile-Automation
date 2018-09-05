@@ -47,11 +47,11 @@ public class TestBase {
         capabilities.setCapability("noReset", "false");
         capabilities.setCapability(CapabilityType.BROWSER_NAME, "Android");
         capabilities.setCapability("deviceName", "R7L4C15920003639");
-        capabilities.setCapability("platformVersion", "4.4.2");
+        capabilities.setCapability("platformVersion", "7.0");
         capabilities.setCapability("platformName", "Android");
         capabilities.setCapability("appPackage", "com.sf.biocapture.activity");
         capabilities.setCapability("appActivity", "com.sf.biocapture.activity.SplashScreenActivity");
-//        capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.ANDROID_UIAUTOMATOR2);
+        capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.ANDROID_UIAUTOMATOR2);
 
         driver.set( new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities));
 
@@ -95,13 +95,6 @@ public class TestBase {
         getDriver().quit();
     }
 
-    @BeforeClass
-    public void beforeClass() {
-        ExtentTest parent = reports.createTest(getClass().getName());
-        parentTest.set(parent);
-    }
-
-
     @Test
     public void Login() throws InterruptedException {
         Thread.sleep(500);
@@ -110,7 +103,7 @@ public class TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/otp_login")).click();
         Thread.sleep(1000);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).sendKeys("oosifala@seamfix.com");
+        getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).sendKeys("bestify@seamfix.com");
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_password")).clear();
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_password")).sendKeys("bankole1!!");
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/submit")).click();
