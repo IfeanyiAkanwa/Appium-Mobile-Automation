@@ -210,70 +210,7 @@ public class Form extends TestBase {
         Thread.sleep(1000);
         getDriver().findElement(By.id("android:id/button2")).click();
 
-        //override
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/override_poor_portrait_capture_button")).click();
-        Thread.sleep(500);
-        getDriver().findElement(By.id("android:id/button1")).click();
-        Thread.sleep(500);
-
-        //capture override
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/capture_button")).click();
-        Thread.sleep(500);
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/button_camera_capture")).click();
-        Thread.sleep(500);
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/ok")).click();
-        Thread.sleep(500);
-        getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Scarred']")).click();
-        Thread.sleep(500);
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/capture_button")).click();
-        Thread.sleep(500);
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/buttonImageInfo")).click();
-        Thread.sleep(1000);
-
-        //finger print override
-        //left hand
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/override_finger_print_capture_button")).click();
-        Thread.sleep(500);
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/capture_button")).click();
-        Thread.sleep(500);
-        getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='MISSING RIGHT HAND']")).click();
-        Thread.sleep(500);
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/button_camera_capture")).click();
-        Thread.sleep(500);
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/ok")).click();
-        Thread.sleep(500);
-        getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='No prints']")).click();
-        Thread.sleep(500);
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/capture_button")).click();
-        Thread.sleep(2000);
-
-        //finger print override
-        //left hand
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/override_finger_print_capture_button")).click();
-        Thread.sleep(500);
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/capture_button")).click();
-        Thread.sleep(500);
-        getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='MISSING LEFT HAND']")).click();
-        Thread.sleep(500);
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/button_camera_capture")).click();
-        Thread.sleep(500);
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/ok")).click();
-        Thread.sleep(500);
-        getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='No prints']")).click();
-        Thread.sleep(500);
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/capture_button")).click();
-
-        //save enrollment
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/fp_save_enrolment")).click();
-
-        //popup
-        Thread.sleep(2000);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/content")));
-        TestUtils.assertSearchText("ID", "android:id/message", "Captured record was saved successfully");
-        Thread.sleep(2000);
-
-        //ok button
-        getDriver().findElement(By.id("android:id/button1")).click();
+        override();
 
     }
 
@@ -287,7 +224,8 @@ public class Form extends TestBase {
         TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Personal Details']", "Personal Details");
         Thread.sleep(2000);
         //personal details
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/reg_type")).click();
+//        getDriver().findElement(By.id("com.sf.biocapture.activity:id/reg_type")).click();
+        getDriver().findElement(By.xpath("//android.widget.TextView[@text='[Select Registration Type] *']")).click();
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Individual']")).click();
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/surnname")).clear();
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/surnname")).sendKeys("Demetrice");
@@ -423,6 +361,14 @@ public class Form extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/save_continue")).click();
         Thread.sleep(1000);
         getDriver().findElement(By.id("android:id/button2")).click();
+        override();
+
+
+    }
+
+    public static void override() throws InterruptedException{
+
+        WebDriverWait wait = new WebDriverWait(getDriver(), 30);
 
         //override
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/override_poor_portrait_capture_button")).click();
@@ -489,6 +435,7 @@ public class Form extends TestBase {
         //ok button
         getDriver().findElement(By.id("android:id/button1")).click();
         Thread.sleep(2000);
+
 
     }
 
