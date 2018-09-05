@@ -24,7 +24,6 @@ import java.net.URL;
 
 public class TestBase {
 
-    public static WebDriverWait wait;
     public static ThreadLocal<AndroidDriver> driver = new ThreadLocal<>();
     public static ExtentReports reports;
     public static ExtentHtmlReporter htmlReporter;
