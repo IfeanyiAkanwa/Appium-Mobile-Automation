@@ -97,14 +97,14 @@ public class ChangePasswordTest extends TestBase {
         Thread.sleep(500);
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Logout']")).click();
         Thread.sleep(300);
-        getDriver().findElement(By.xpath("//android.widget.Button[@text='OK']")).click();
+        getDriver().findElement(By.xpath("//android.widget.Button[@text='Ok']")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/otp_login")));
 
         //Login
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/otp_login")).click();
         Thread.sleep(1000);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).sendKeys("bestify@seamfix.com");
+        getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).sendKeys("oosifala@seamfix.com");
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_password")).clear();
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_password")).sendKeys(newPassword);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/submit")).click();

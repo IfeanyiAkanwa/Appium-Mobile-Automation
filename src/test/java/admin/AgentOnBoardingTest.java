@@ -28,9 +28,9 @@ public class AgentOnBoardingTest extends TestBase {
     public static void navigateToDashboard() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(getDriver(), 30);
         getDriver().findElementByAccessibilityId("Navigate up").click();
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         if (getDriver().findElement(By.id("android:id/message")).getText().contains("Do you wish to exit Agent OnBoarding")) {
-            getDriver().findElement(By.xpath("//android.widget.Button[@text='YES']")).click();
+            getDriver().findElement(By.xpath("//android.widget.Button[@text='Yes']")).click();
         }
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
     }
