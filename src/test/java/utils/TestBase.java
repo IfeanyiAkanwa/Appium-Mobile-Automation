@@ -30,6 +30,7 @@ public class TestBase {
     private static ThreadLocal<ExtentTest> parentTest = new ThreadLocal<ExtentTest>();
     public static ThreadLocal<ExtentTest> testInfo = new ThreadLocal<ExtentTest>();
     public static String URLbase = "http:simreg.mtnnigeria.net";
+    public static String toAddress;
 
 
     public static  AndroidDriver getDriver(){
@@ -41,17 +42,17 @@ public class TestBase {
     public void setUp( String groupReport) throws MalformedURLException {
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("autoGrantPermissions", "true");
+        capabilities.setCapability("autoGrantPermissions", true);
         capabilities.setCapability("unicodeKeyboard", true);
         capabilities.setCapability("resetKeyboard", true);
-        capabilities.setCapability("noReset", "false");
+        capabilities.setCapability("noReset", false);
         capabilities.setCapability(CapabilityType.BROWSER_NAME, "Android");
-        capabilities.setCapability("deviceName", "R7L4C15920003639");
-        capabilities.setCapability("platformVersion", "7.0");
+        capabilities.setCapability("deviceName", "SeamfixTab");
+        capabilities.setCapability("platformVersion", "4.4.2");
         capabilities.setCapability("platformName", "Android");
         capabilities.setCapability("appPackage", "com.sf.biocapture.activity");
         capabilities.setCapability("appActivity", "com.sf.biocapture.activity.SplashScreenActivity");
-        capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.ANDROID_UIAUTOMATOR2);
+//        capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.ANDROID_UIAUTOMATOR2);
 
         driver.set( new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities));
 
@@ -67,12 +68,9 @@ public class TestBase {
     @BeforeMethod(description = "fetch test cases name")
     public void register(Method method) {
 
-        ExtentTest parent = reports.createTest(getClass().getName());
-        parentTest.set(parent);
         ExtentTest child = parentTest.get().createNode(method.getName());
         testInfo.set(child);
         testInfo.get().assignCategory("Sanity");
-
     }
 
     @AfterMethod(description = "to display the result after each test method")
@@ -87,12 +85,23 @@ public class TestBase {
             testInfo.get().skip(result.getThrowable());
         else
             testInfo.get().pass(result.getName() +" Test passed");
+
         reports.flush();
     }
 
     @AfterSuite
-    public void closeApp() {
+    @Parameters("toMails")
+    public void cleanup(String toMails) {
+        toAddress = toMails;
+        SendMail.ComposeGmail("seamfix.test.report@gmail.com", toAddress);
+
         getDriver().quit();
+    }
+
+    @BeforeClass
+    public void beforeClass() {
+        ExtentTest parent = reports.createTest(getClass().getName());
+        parentTest.set(parent);
     }
 
     @Test
@@ -103,7 +112,7 @@ public class TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/otp_login")).click();
         Thread.sleep(1000);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).sendKeys("bestify@seamfix.com");
+        getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).sendKeys("oosifala@seamfix.com");
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_password")).clear();
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_password")).sendKeys("bankole1!!");
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/submit")).click();

@@ -8,6 +8,8 @@ import org.testng.annotations.Test;
 import utils.TestBase;
 import utils.TestUtils;
 
+import java.io.IOException;
+
 public class NewRegistrationMsisdn extends TestBase {
 
     @Test
@@ -26,12 +28,12 @@ public class NewRegistrationMsisdn extends TestBase {
         Thread.sleep(500);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/next_button")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/page_title")));
-        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/page_title", "New Registration (msisdn)");
+        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/page_title", "New Registration (MSISDN)");
 
     }
 
     @Test
-    public void CaptureNewMSISDNTest() throws InterruptedException{
+    public void CaptureNewMSISDNTest() throws InterruptedException, IOException {
 
         WebDriverWait wait = new WebDriverWait(getDriver(), 30);
 
@@ -42,7 +44,8 @@ public class NewRegistrationMsisdn extends TestBase {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/next_button")));
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/next_button")).click();
         Thread.sleep(1000);
-        Form.IndividualForeignerForm();
+//        Form.IndividualForeignerForm();
+        Form.NigerianCompanyForm();
         if (TestUtils.isElementPresent("XPATH", "//android.widget.TextView[@text='Sell Airtime/Data']")) {
             getDriver().findElement(By.className("android.widget.ImageButton")).click();
         }

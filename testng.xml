@@ -2,13 +2,15 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="BioSmartSuite">
     <parameter name="groupReport" value="/DroidReport.html"/>
+    <parameter name="toMails" value="knwabueze@seamfix.com;soli@seamfix.com;kasuamah@seamfix.com;cngwu@seamfix.com"/>
+    
     <test name="name">
         <classes>
             <class name="admin.CaptureNewSimSerialRegistration">
                 <methods>
                     <include name="Login"/>
-                    <include name="navigateToCaptureMenuTest"/>
-                    <include name="RegisterNewSimSerial"/>
+                    <include name="NavigateToCaptureMenuTest"/>
+                    <include name="RegisterNewSimSerialTest"/>
                 </methods>
             </class>
             <class name="admin.NewRegistrationMsisdn">
