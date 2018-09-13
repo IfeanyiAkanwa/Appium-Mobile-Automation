@@ -28,7 +28,7 @@ public class CaptureNewSimSerialRegistration extends TestBase {
         Thread.sleep(500);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/next_button")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/page_title")));
-        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/page_title", "New Registration (Serial)");
+        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/page_title", "New Registration (SIM Serial)");
 
 
     }
