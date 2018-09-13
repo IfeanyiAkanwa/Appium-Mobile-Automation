@@ -10,10 +10,10 @@ import utils.TestUtils;
 
 import java.io.IOException;
 
-public class NewRegistrationMsisdn extends TestBase {
+public class CaptureNewMSISDNRegistration extends TestBase {
 
     @Test
-    public void NavigateToCaptureMenuTest() throws InterruptedException {
+    public static void NavigateToCaptureMenuTest() throws InterruptedException {
         Thread.sleep(500);
         WebDriverWait wait = new WebDriverWait(getDriver(), 30);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
@@ -23,12 +23,6 @@ public class NewRegistrationMsisdn extends TestBase {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Registration Type']")));
         TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Registration Type']", "Registration Type");
         Thread.sleep(500);
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/linear_layout_username")).click();
-        getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='New Registration (MSISDN)']")).click();
-        Thread.sleep(500);
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/next_button")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/page_title")));
-        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/page_title", "New Registration (MSISDN)");
 
     }
 
@@ -36,6 +30,13 @@ public class NewRegistrationMsisdn extends TestBase {
     public void CaptureNewMSISDNTest() throws InterruptedException, IOException {
 
         WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+
+        getDriver().findElement(By.id("com.sf.biocapture.activity:id/linear_layout_username")).click();
+        getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='New Registration (MSISDN)']")).click();
+        Thread.sleep(500);
+        getDriver().findElement(By.id("com.sf.biocapture.activity:id/next_button")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/page_title")));
+        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/page_title", "New Registration (MSISDN)");
 
         Thread.sleep(1000);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/msisdn")).clear();
