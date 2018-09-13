@@ -117,7 +117,7 @@ public class ChangePasswordTest extends TestBase {
     @Test
     public static void changeBackToOldPassword() throws InterruptedException {
 
-        WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+        WebDriverWait wait = new WebDriverWait(getDriver(), 60);
         navigateToChangePasswordPage();
 
         //Current Password

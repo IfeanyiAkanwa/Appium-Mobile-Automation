@@ -3,8 +3,8 @@
 <suite name="BioSmartSuite">
     <parameter name="groupReport" value="/DroidReport.html"/>
     <parameter name="toMails" value="knwabueze@seamfix.com;soli@seamfix.com;kasuamah@seamfix.com;cngwu@seamfix.com"/>
-    
-    <test name="name">
+
+    <test name="BioSmart-Android">
         <classes>
             <class name="admin.CaptureNewSimSerialRegistration">
                 <methods>
