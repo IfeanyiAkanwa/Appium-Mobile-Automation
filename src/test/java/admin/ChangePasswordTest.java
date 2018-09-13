@@ -104,7 +104,7 @@ public class ChangePasswordTest extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/otp_login")).click();
         Thread.sleep(1000);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).sendKeys("oosifala@seamfix.com");
+        getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).sendKeys("snapshot@seamfix.com");
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_password")).clear();
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_password")).sendKeys(newPassword);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/submit")).click();
