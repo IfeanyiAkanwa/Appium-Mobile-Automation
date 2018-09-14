@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
+import utils.Asserts;
 import utils.TestBase;
 import DemographicForm.Form;
 import utils.TestUtils;
@@ -36,6 +37,11 @@ public class BiometricUpdate extends TestBase {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Personal Details']")));
 
         Thread.sleep(1000);
+
+        Asserts.AssertIndividualForm();
+        getDriver().findElement(By.className("android.widget.ImageButton")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/collapsing_toolbar")));
+
         Form.IndividualForeignerForm();
         if (TestUtils.isElementPresent("XPATH", "//android.widget.TextView[@text='Sell Airtime/Data']")) {
             getDriver().findElement(By.className("android.widget.ImageButton")).click();

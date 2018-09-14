@@ -8,7 +8,7 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.AutomationName;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -41,20 +41,6 @@ public class TestBase {
     @BeforeSuite
     public void setUp( String groupReport) throws MalformedURLException {
 
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("autoGrantPermissions", true);
-        capabilities.setCapability("unicodeKeyboard", true);
-        capabilities.setCapability("resetKeyboard", true);
-        capabilities.setCapability("noReset", false);
-        capabilities.setCapability(CapabilityType.BROWSER_NAME, "Android");
-        capabilities.setCapability("deviceName", "SeamfixTab");
-        capabilities.setCapability("platformVersion", "4.4.2");
-        capabilities.setCapability("platformName", "Android");
-        capabilities.setCapability("appPackage", "com.sf.biocapture.activity");
-        capabilities.setCapability("appActivity", "com.sf.biocapture.activity.SplashScreenActivity");
-//        capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.ANDROID_UIAUTOMATOR2);
-
-        driver.set( new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities));
 
         htmlReporter = new ExtentHtmlReporter(new File(System.getProperty("user.dir") + groupReport));
         htmlReporter.loadXMLConfig(new File(System.getProperty("user.dir") + "/resources/extent-config.xml"));
@@ -98,8 +84,43 @@ public class TestBase {
         getDriver().quit();
     }
 
+    @AfterClass
+    public void startApp() {
+        getDriver().quit();
+    }
+
     @BeforeClass
-    public void beforeClass() {
+    public void beforeClass() throws MalformedURLException {
+
+        try {
+            DesiredCapabilities capabilities = new DesiredCapabilities();
+            capabilities.setCapability("autoGrantPermissions", true);
+            capabilities.setCapability("unicodeKeyboard", true);
+            capabilities.setCapability("resetKeyboard", true);
+            capabilities.setCapability("noReset", false);
+            capabilities.setCapability(CapabilityType.BROWSER_NAME, "Android");
+            capabilities.setCapability("deviceName", "SeamfixTab");
+            capabilities.setCapability("platformName", "Android");
+            capabilities.setCapability("appPackage", "com.sf.biocapture.activity");
+            capabilities.setCapability("appActivity", "com.sf.biocapture.activity.SplashScreenActivity");
+            capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.ANDROID_UIAUTOMATOR2);
+
+            driver.set( new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities));
+        } catch (WebDriverException e) {
+            DesiredCapabilities capabilities = new DesiredCapabilities();
+            capabilities.setCapability("autoGrantPermissions", true);
+            capabilities.setCapability("unicodeKeyboard", true);
+            capabilities.setCapability("resetKeyboard", true);
+            capabilities.setCapability("noReset", false);
+            capabilities.setCapability(CapabilityType.BROWSER_NAME, "Android");
+            capabilities.setCapability("deviceName", "SeamfixTab");
+            capabilities.setCapability("platformName", "Android");
+            capabilities.setCapability("appPackage", "com.sf.biocapture.activity");
+            capabilities.setCapability("appActivity", "com.sf.biocapture.activity.SplashScreenActivity");
+
+            driver.set( new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities));
+        }
+
         ExtentTest parent = reports.createTest(getClass().getName());
         parentTest.set(parent);
     }
