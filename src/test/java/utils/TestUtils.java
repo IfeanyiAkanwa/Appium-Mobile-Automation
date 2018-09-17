@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import com.aventstack.extentreports.Status;
 import enums.TargetTypeEnum;
@@ -97,47 +100,51 @@ public class TestUtils extends TestBase {
     }
 
     public static void hideKeyboard() throws InterruptedException {
-        if(getDriver().isKeyboardShown()) {
+        if (getDriver().isKeyboardShown()) {
             getDriver().hideKeyboard();
             Thread.sleep(500);
         }
     }
 
-    public static boolean isElementPresent(String elementType, String locator){
+    public static boolean isElementPresent(String elementType, String locator) {
 
         WebElement elementPresent = null;
 
         TargetTypeEnum targetTypeEnum = TargetTypeEnum.valueOf(elementType);
         switch (targetTypeEnum) {
             case ID:
-                try{
+                try {
                     elementPresent = getDriver().findElement(By.id(locator));
-                }catch (Exception e){}
+                } catch (Exception e) {
+                }
                 break;
             case NAME:
-                try{
+                try {
                     elementPresent = getDriver().findElement(By.name(locator));
-                }catch (Exception e){}
+                } catch (Exception e) {
+                }
                 break;
             case CSS:
-                try{
+                try {
                     elementPresent = getDriver().findElement(By.cssSelector(locator));
-                }catch (Exception e){}
+                } catch (Exception e) {
+                }
                 break;
             case XPATH:
-                try{
+                try {
                     elementPresent = getDriver().findElement(By.xpath(locator));
-                }catch (Exception e){}
+                } catch (Exception e) {
+                }
                 break;
             default:
-                try{
+                try {
                     elementPresent = getDriver().findElement(By.id(locator));
-                }catch (Exception e){}
+                } catch (Exception e) {
+                }
         }
-        if(elementPresent != null){
+        if (elementPresent != null) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }

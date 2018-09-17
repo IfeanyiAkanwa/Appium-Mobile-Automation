@@ -37,7 +37,7 @@ public class ReRegistrationCapture extends TestBase {
     }
 
     @Test
-    public void ReRegistertionTest() throws InterruptedException, SQLException {
+    public void ReRegisterationTest() throws InterruptedException, SQLException {
 
         WebDriverWait wait = new WebDriverWait(getDriver(), 30);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/primary_msisdn_field")).clear();
@@ -51,6 +51,8 @@ public class ReRegistrationCapture extends TestBase {
         if(!ConnectDB.changeOTP(phoneNumber, otp)){
             TestUtils.assertSearchText("ID", "me", "Fail here");
         }
+        Thread.sleep(2000);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/otp_field")));
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/otp_field")).clear();
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/otp_field")).sendKeys(otp);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/otp_confirm_button")).click();

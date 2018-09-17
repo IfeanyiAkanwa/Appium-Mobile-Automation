@@ -18,7 +18,12 @@ public class Asserts extends TestBase {
         String firstName = getDriver().findElement(By.id("com.sf.biocapture.activity:id/firstname")).getText();
         String middleName = getDriver().findElement(By.id("com.sf.biocapture.activity:id/firstname")).getText();
         String mothersMaidenName = getDriver().findElement(By.id("com.sf.biocapture.activity:id/moms_maidenname")).getText();
-        String sex = getDriver().findElement(By.id("com.sf.biocapture.activity:id/male_radio_button")).getText();
+        String sex;
+        if(getDriver().findElement(By.id("com.sf.biocapture.activity:id/male_radio_button")).isSelected()){
+            sex  = "Male";
+        }else {
+            sex = "Female";
+        }
         String dateOfBirth = getDriver().findElement(By.id("com.sf.biocapture.activity:id/date_of_birth")).getText();
         TestUtils.scrollDown();
         String houseNo = getDriver().findElement(By.id("com.sf.biocapture.activity:id/house_or_flat_no")).getText();
@@ -40,10 +45,11 @@ public class Asserts extends TestBase {
         String occupation = getDriver().findElement(By.id("com.sf.biocapture.activity:id/occupation")).getText();
         String stateOfResidence = getDriver().findElement(By.id("com.sf.biocapture.activity:id/states_residence")).getText();
         String lgaAreaOfResidence = getDriver().findElement(By.id("com.sf.biocapture.activity:id/lga_residence")).getText();
+        TestUtils.scrollDown();
         String areaOfResidence = getDriver().findElement(By.id("com.sf.biocapture.activity:id/area")).getText();
         String lgaOfRegistration = getDriver().findElement(By.id("com.sf.biocapture.activity:id/lga_of_reg")).getText();
 
-        String NA = "";
+        String NA = "No Data Found";
 
         String[] toList = {"Type of Registration:" + typeOfRegistration, "Surname:" + surName, "First Name:" + firstName, "Middle Name:" + middleName,
                 "Mother's Maiden Name:" + mothersMaidenName, "Sex:" + sex, "Date of Birth:" + dateOfBirth, "House No:" + houseNo, "Street:" + street, "City:" + city,
@@ -51,7 +57,6 @@ public class Asserts extends TestBase {
                 "Email Address:" + email, "Alternate Phone No:" + alternatePhoneNumber, "Postal Code:" + postalCode, "Occupation:" + occupation,
                 "State of Residence:" + stateOfResidence, "LGA of Residence:" + lgaAreaOfResidence, "Area Of Residence" + areaOfResidence,
                 "LGA of Registration:" + lgaOfRegistration
-                ,
         };
         for (String field : toList) {
             String name = "";
@@ -59,7 +64,11 @@ public class Asserts extends TestBase {
             try {
                 String[] fields = field.split(":");
                 name = fields[0];
-                val = fields[1];
+                try {
+                    val = fields[1];
+                }catch(Exception e){
+                    val = NA;
+                }
                 Assert.assertNotEquals(val, NA);
                 testInfo.get().log(Status.INFO, name + " : " + val);
             } catch (Error e) {

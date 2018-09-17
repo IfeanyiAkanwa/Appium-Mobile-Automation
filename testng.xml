@@ -15,18 +15,28 @@
             </class>
             <class name="admin.CaptureNewMSISDNRegistration">
                 <methods>
+                    <include name="Login"/>
                     <include name="NavigateToCaptureMenuTest"/>
                     <include name="CaptureNewMSISDNTest"/>
                 </methods>
             </class>
             <class name="admin.BiometricUpdate">
                 <methods>
+                    <include name="Login"/>
                     <include name="navigateToCaptureSubscriber"/>
                     <include name="captureBiometricUpdate"/>
                 </methods>
             </class>
+            <class name="admin.ReRegistrationCapture">
+                <methods>
+                    <include name="Login"/>
+                    <include name="NavigateToCaptureMenuTest"/>
+                    <include name="ReRegisterationTest"/>
+                </methods>
+            </class>
             <class name="admin.AgentOnBoardingTest">
                 <methods>
+                    <include name="Login"/>
                     <include name="navigateToAgentOnBoardingPage"/>
                     <include name="navigateToDashboard"/>
                 </methods>
@@ -39,6 +49,7 @@
             </class>-->
             <class name="admin.ChangePasswordTest">
                 <methods>
+                    <include name="Login"/>
                     <include name="navigateToChangePasswordPage"/>
                     <include name="changeToNewPassword"/>
                     <include name="loginWithNewPassword"/>
