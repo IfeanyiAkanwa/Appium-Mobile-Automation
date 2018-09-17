@@ -79,18 +79,18 @@ public class TestBase {
     @Parameters("toMails")
     public void cleanup(String toMails) {
         toAddress = toMails;
-        SendMail.ComposeGmail("seamfix.test.report@gmail.com", toAddress);
+        SendMail.ComposeGmail("BioSmart Report <seamfix.test.report@gmail.com>", toAddress);
 
         getDriver().quit();
     }
 
     @AfterClass
-    public void startApp() {
+    public void closeApp() {
         getDriver().quit();
     }
 
     @BeforeClass
-    public void beforeClass() throws MalformedURLException {
+    public void startApp() throws MalformedURLException {
 
         try {
             DesiredCapabilities capabilities = new DesiredCapabilities();
