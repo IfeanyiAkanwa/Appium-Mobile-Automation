@@ -1,14 +1,12 @@
 package utils;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.aventstack.extentreports.Status;
+import com.testinium.deviceinformation.helper.ProcessHelper;
 import enums.TargetTypeEnum;
 import io.appium.java_client.TouchAction;
 import org.apache.commons.codec.binary.Base64;
@@ -147,5 +145,24 @@ public class TestUtils extends TestBase {
         } else {
             return false;
         }
+    }
+
+    //TODO
+    //Possible solution to interacting with Android Internal or External memory
+    public static String executeAdbCommand(String command) throws IOException {
+        Process process = null;
+        String commandString;
+        commandString = String.format("%s", "adb shell " + command);
+        System.out.print("Command is "+commandString+"\n");
+        try {
+            process = ProcessHelper.runTimeExec(commandString);
+        } catch (IOException e) {
+        }
+        BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+        String line;
+        while ((line = reader.readLine()) != null) {
+            System.out.print(line+"\n");
+        }
+        return line;
     }
 }

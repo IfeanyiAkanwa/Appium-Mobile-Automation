@@ -41,7 +41,7 @@
                     <include name="navigateToDashboard"/>
                 </methods>
             </class>
-            <!--<class name="admin.NotificationsTest">
+            <!--<class name="admin.NotificationsTest"
                 <methods>
                     <include name="navigateToNotifiactions"/>
                     <include name="navigateToDashboard"/>

@@ -1,7 +1,5 @@
 package utils;
 
-import org.testng.annotations.Parameters;
-
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;

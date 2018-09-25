@@ -48,6 +48,6 @@ public class BiometricUpdate extends TestBase {
         }
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/kpi_report_name")));
-//        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/kpi_report_name", "Total Subscribers");
+        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/kpi_report_name", "Total Subscribers");
     }
 }

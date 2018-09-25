@@ -21,7 +21,6 @@ public class CaptureNewSimSerialRegistration extends TestBase {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Registration Type']")));
         TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Registration Type']", "Registration Type");
         Thread.sleep(500);
-//        getDriver().findElement(By.id("com.sf.biocapture.activity:id/linear_layout_username")).click();
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/typeofreg")).click();
         Thread.sleep(1000);
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='New Registration (SIM Serial)']")).click();
@@ -64,7 +63,5 @@ public class CaptureNewSimSerialRegistration extends TestBase {
         }
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/kpi_report_name")));
-//        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/kpi_report_name", "Total Subscribers");
-
     }
 }

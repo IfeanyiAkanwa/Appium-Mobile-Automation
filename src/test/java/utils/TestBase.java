@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.concurrent.TimeUnit;
 
 public class TestBase {
 
@@ -39,8 +40,7 @@ public class TestBase {
 
     @Parameters( "groupReport")
     @BeforeSuite
-    public void setUp( String groupReport) throws MalformedURLException {
-
+    public void setUp( String groupReport) {
 
         htmlReporter = new ExtentHtmlReporter(new File(System.getProperty("user.dir") + groupReport));
         htmlReporter.loadXMLConfig(new File(System.getProperty("user.dir") + "/resources/extent-config.xml"));
@@ -90,7 +90,7 @@ public class TestBase {
     }
 
     @BeforeClass
-    public void startApp() throws MalformedURLException {
+    public void startApp() throws IOException {
 
         try {
             DesiredCapabilities capabilities = new DesiredCapabilities();
@@ -106,6 +106,8 @@ public class TestBase {
             capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.ANDROID_UIAUTOMATOR2);
 
             driver.set( new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities));
+
+            getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         } catch (WebDriverException e) {
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setCapability("autoGrantPermissions", true);
@@ -119,8 +121,11 @@ public class TestBase {
             capabilities.setCapability("appActivity", "com.sf.biocapture.activity.SplashScreenActivity");
 
             driver.set( new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities));
+
+            getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         }
 
+        getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         ExtentTest parent = reports.createTest(getClass().getName());
         parentTest.set(parent);
     }
