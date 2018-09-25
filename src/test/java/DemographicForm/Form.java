@@ -302,6 +302,9 @@ public class Form extends TestBase {
 
         //Social Media
         Thread.sleep(1000);
+        if(TestUtils.isElementPresent("ID", "com.sf.biocapture.activity:id/delete_button")){
+            getDriver().findElement(By.id("com.sf.biocapture.activity:id/delete_button")).click();
+        }
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/add_social_media_button")).click();
         Thread.sleep(500);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/delete_button")).click();
