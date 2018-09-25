@@ -42,10 +42,10 @@ public class Asserts extends TestBase {
         String email = getDriver().findElement(By.id("com.sf.biocapture.activity:id/email")).getText();
         String alternatePhoneNumber = getDriver().findElement(By.id("com.sf.biocapture.activity:id/alt_phone_number")).getText();
         String postalCode = getDriver().findElement(By.id("com.sf.biocapture.activity:id/postalcode")).getText();
+        TestUtils.scrollDown();
         String occupation = getDriver().findElement(By.id("com.sf.biocapture.activity:id/occupation")).getText();
         String stateOfResidence = getDriver().findElement(By.id("com.sf.biocapture.activity:id/states_residence")).getText();
         String lgaAreaOfResidence = getDriver().findElement(By.id("com.sf.biocapture.activity:id/lga_residence")).getText();
-        TestUtils.scrollDown();
         String areaOfResidence = getDriver().findElement(By.id("com.sf.biocapture.activity:id/area")).getText();
         String lgaOfRegistration = getDriver().findElement(By.id("com.sf.biocapture.activity:id/lga_of_reg")).getText();
 

@@ -1,6 +1,5 @@
 package admin;
 
-import io.appium.java_client.android.Activity;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -13,8 +12,6 @@ public class AgentOnBoardingTest extends TestBase {
     public static void navigateToAgentOnBoardingPage() {
 
         WebDriverWait wait = new WebDriverWait(getDriver(), 30);
-
-//        getDriver().startActivity(new Activity("com.sf.biocapture.activity", "com.sf.biocapture.activity.NewHomeActivity"));
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
         getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc=\"Navigate up\"]")).click();
@@ -30,7 +27,11 @@ public class AgentOnBoardingTest extends TestBase {
         getDriver().findElementByAccessibilityId("Navigate up").click();
         Thread.sleep(2000);
         if (getDriver().findElement(By.id("android:id/message")).getText().contains("Do you wish to exit Agent OnBoarding")) {
-            getDriver().findElement(By.xpath("//android.widget.Button[@text='Yes']")).click();
+            try{
+                getDriver().findElement(By.xpath("//android.widget.Button[@text='Yes']")).click();
+            }catch (Exception e){
+                getDriver().findElement(By.xpath("//android.widget.Button[@text='YES']")).click();
+            }
         }
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
     }

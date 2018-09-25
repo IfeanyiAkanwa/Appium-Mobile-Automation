@@ -1,6 +1,5 @@
 package admin;
 
-import io.appium.java_client.android.Activity;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -14,8 +13,6 @@ public class ChangePasswordTest extends TestBase {
     @Test
     public static void navigateToChangePasswordPage() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(getDriver(), 30);
-
-//        getDriver().startActivity(new Activity("com.sf.biocapture.activity", "com.sf.biocapture.activity.NewHomeActivity"));
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
 
@@ -97,7 +94,11 @@ public class ChangePasswordTest extends TestBase {
         Thread.sleep(500);
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Logout']")).click();
         Thread.sleep(300);
-        getDriver().findElement(By.xpath("//android.widget.Button[@text='Ok']")).click();
+        try{
+            getDriver().findElement(By.xpath("//android.widget.Button[@text='Ok']")).click();
+        }catch (Exception e){
+            getDriver().findElement(By.xpath("//android.widget.Button[@text='OK']")).click();
+        }
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/otp_login")));
 
         //Login
