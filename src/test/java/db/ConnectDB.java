@@ -1,10 +1,7 @@
 package db;
 
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class ConnectDB {
 
@@ -12,24 +9,28 @@ public class ConnectDB {
     private static final String DB_CONNECTION = "jdbc:oracle:thin:@10.1.216.126:1521:bsm_n2";
     private static final String DB_USER = "biocapture";
     private static final String DB_PASSWORD = "s3amf1xK0l0";
+    private static String otp;
 
-    public static boolean changeOTP(String phoneNumber, String otp) throws SQLException {
+    public static String getOTP(String phoneNumber) throws SQLException {
 
         Connection dbConnection = null;
         Statement statement = null;
 
-        String updateOTPSQL = "UPDATE OTP_STATUS_RECORD SET OTP = '" + otp + "' WHERE MSISDN = " + phoneNumber;
+        String getOTPSql = "SELECT OTP FROM OTP_STATUS_RECORD WHERE MSISDN = '" + phoneNumber + "' ORDER BY CREATE_DATE DESC";
 
         try {
             dbConnection = getDBConnection();
             statement = dbConnection.createStatement();
-            statement.execute(updateOTPSQL);
-            return true;
+            ResultSet rs = statement.executeQuery(getOTPSql);
+            if(rs.next()) {
+                otp = rs.getString("OTP");
+            }
+            return otp;
 
         } catch (SQLException e) {
 
             System.out.println(e.getMessage());
-            return false;
+            return null;
 
         } finally {
 
@@ -73,5 +74,11 @@ public class ConnectDB {
 
         return dbConnection;
 
+    }
+
+    public static void main(String[] args) throws SQLException {
+        if(getOTP("08142050914") != null){
+            System.out.println(getOTP("08142050914"));
+        }
     }
 }
