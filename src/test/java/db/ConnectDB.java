@@ -22,7 +22,7 @@ public class ConnectDB {
             dbConnection = getDBConnection();
             statement = dbConnection.createStatement();
             ResultSet rs = statement.executeQuery(getOTPSql);
-            if(rs.next()) {
+            if (rs.next()) {
                 otp = rs.getString("OTP");
             }
             return otp;
@@ -76,9 +76,4 @@ public class ConnectDB {
 
     }
 
-    public static void main(String[] args) throws SQLException {
-        if(getOTP("08142050914") != null){
-            System.out.println(getOTP("08142050914"));
-        }
-    }
 }
