@@ -41,14 +41,16 @@ public class CaptureNewSimSerialRegistration extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/sim_serial_field")).clear();
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/sim_serial_field")).sendKeys("11111111111111111111");
         Thread.sleep(500);
+
         //Request Dya
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/dya_check_box")).click();
-        Thread.sleep(500);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/alertTitle")));
-        TestUtils.assertSearchText("ID", "android:id/alertTitle", "[Select Yellow Account Type]");
-        getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='DYA']")).click();
-        getDriver().findElement(By.id("android:id/button1")).click();
-        Thread.sleep(500);
+//        getDriver().findElement(By.id("com.sf.biocapture.activity:id/dya_check_box")).click();
+//        Thread.sleep(500);
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/alertTitle")));
+//        TestUtils.assertSearchText("ID", "android:id/alertTitle", "[Select Yellow Account Type]");
+//        getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='DYA']")).click();
+//        getDriver().findElement(By.id("android:id/button1")).click();
+//        Thread.sleep(500);
+
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/add_sim_serial")).click();
         Thread.sleep(500);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/alertTitle")));

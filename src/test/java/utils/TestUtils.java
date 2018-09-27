@@ -1,17 +1,17 @@
 package utils;
 
-import java.io.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import com.aventstack.extentreports.Status;
 import com.testinium.deviceinformation.helper.ProcessHelper;
 import enums.TargetTypeEnum;
 import io.appium.java_client.TouchAction;
 import org.apache.commons.codec.binary.Base64;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+
+import java.io.*;
 
 public class TestUtils extends TestBase {
 
@@ -147,13 +147,21 @@ public class TestUtils extends TestBase {
         }
     }
 
+    public static void scrollUntilElementIsVisible(String elementType, String locator) throws InterruptedException {
+        Thread.sleep(1000);
+        while (!TestUtils.isElementPresent(elementType, locator)) {
+            scrollDown();
+        }
+    }
+
     //TODO
     //Possible solution to interacting with Android Internal or External memory
     public static String executeAdbCommand(String command) throws IOException {
         Process process = null;
+        StringBuilder builder = new StringBuilder();
         String commandString;
-        commandString = String.format("%s", "adb shell " + command);
-        System.out.print("Command is "+commandString+"\n");
+        commandString = String.format("%s", command);
+        //System.out.print("Command is " + commandString + "\n");
         try {
             process = ProcessHelper.runTimeExec(commandString);
         } catch (IOException e) {
@@ -161,8 +169,10 @@ public class TestUtils extends TestBase {
         BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
         String line;
         while ((line = reader.readLine()) != null) {
-            System.out.print(line+"\n");
+            System.out.print(line + "\n");
+            builder.append(line);
         }
-        return line;
+        return builder.toString();
     }
+
 }
