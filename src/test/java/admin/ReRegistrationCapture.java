@@ -14,8 +14,7 @@ import java.sql.SQLException;
 
 public class ReRegistrationCapture extends TestBase {
     String phoneNumber = "08142050914";
-    String otp = "12345";
-
+    String otp = null;
     @Test
     public void NavigateToCaptureMenuTest() throws InterruptedException {
         Thread.sleep(500);
@@ -48,8 +47,9 @@ public class ReRegistrationCapture extends TestBase {
         if(TestUtils.isElementPresent("ID", "android:id/body")){
             wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("android:id/body")));
         }
-        if(!ConnectDB.changeOTP(phoneNumber, otp)){
-            TestUtils.assertSearchText("ID", "me", "Fail here");
+        otp = ConnectDB.getOTP(phoneNumber);
+        if(otp == null){
+            getDriver().quit();
         }
         Thread.sleep(2000);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/otp_field")));

@@ -59,18 +59,20 @@ public class Form extends TestBase {
         TestUtils.scrollDown();
 
         //Social Media
-        Thread.sleep(1000);
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/add_social_media_button")).click();
-        Thread.sleep(500);
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/delete_button")).click();
-        Thread.sleep(500);
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/add_social_media_button")).click();
-        Thread.sleep(500);
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/type_spinner")).click();
-        Thread.sleep(500);
-        getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='INSTAGRAM']")).click();
-        Thread.sleep(500);
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/username_edit_text")).sendKeys("@testuser");
+        if (TestUtils.isElementPresent("ID", "com.sf.biocapture.activity:id/add_social_media_button")) {
+            Thread.sleep(1000);
+            getDriver().findElement(By.id("com.sf.biocapture.activity:id/add_social_media_button")).click();
+            Thread.sleep(500);
+            getDriver().findElement(By.id("com.sf.biocapture.activity:id/delete_button")).click();
+            Thread.sleep(500);
+            getDriver().findElement(By.id("com.sf.biocapture.activity:id/add_social_media_button")).click();
+            Thread.sleep(500);
+            getDriver().findElement(By.id("com.sf.biocapture.activity:id/type_spinner")).click();
+            Thread.sleep(500);
+            getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='INSTAGRAM']")).click();
+            Thread.sleep(500);
+            getDriver().findElement(By.id("com.sf.biocapture.activity:id/username_edit_text")).sendKeys("@testuser");
+        }
 
         Thread.sleep(500);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/house_or_flat_no")).clear();
@@ -259,7 +261,7 @@ public class Form extends TestBase {
     }
 
 
-    public static void IndividualForeignerForm() throws InterruptedException{
+    public static void IndividualForeignerForm() throws InterruptedException {
 
 
         WebDriverWait wait = new WebDriverWait(getDriver(), 30);
@@ -270,6 +272,7 @@ public class Form extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/reg_type")).click();
         Thread.sleep(500);
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Individual']")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/surnname")));
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/surnname")).clear();
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/surnname")).sendKeys("Demetrice");
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/firstname")).clear();
@@ -301,21 +304,23 @@ public class Form extends TestBase {
         TestUtils.scrollDown();
 
         //Social Media
-        Thread.sleep(1000);
-        if(TestUtils.isElementPresent("ID", "com.sf.biocapture.activity:id/delete_button")){
+        if (TestUtils.isElementPresent("ID", "com.sf.biocapture.activity:id/add_social_media_button")) {
+            Thread.sleep(1000);
+            if (TestUtils.isElementPresent("ID", "com.sf.biocapture.activity:id/delete_button")) {
+                getDriver().findElement(By.id("com.sf.biocapture.activity:id/delete_button")).click();
+            }
+            getDriver().findElement(By.id("com.sf.biocapture.activity:id/add_social_media_button")).click();
+            Thread.sleep(500);
             getDriver().findElement(By.id("com.sf.biocapture.activity:id/delete_button")).click();
+            Thread.sleep(500);
+            getDriver().findElement(By.id("com.sf.biocapture.activity:id/add_social_media_button")).click();
+            Thread.sleep(500);
+            getDriver().findElement(By.id("com.sf.biocapture.activity:id/type_spinner")).click();
+            Thread.sleep(500);
+            getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='INSTAGRAM']")).click();
+            Thread.sleep(500);
+            getDriver().findElement(By.id("com.sf.biocapture.activity:id/username_edit_text")).sendKeys("@testuser");
         }
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/add_social_media_button")).click();
-        Thread.sleep(500);
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/delete_button")).click();
-        Thread.sleep(500);
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/add_social_media_button")).click();
-        Thread.sleep(500);
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/type_spinner")).click();
-        Thread.sleep(500);
-        getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='INSTAGRAM']")).click();
-        Thread.sleep(500);
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/username_edit_text")).sendKeys("@testuser");
 
         Thread.sleep(500);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/house_or_flat_no")).clear();
@@ -331,7 +336,7 @@ public class Form extends TestBase {
 
         try {
             getDriver().findElement(By.id("com.sf.biocapture.activity:id/btn_continue_reg")).click();
-        } catch(NoSuchElementException exc) {
+        } catch (NoSuchElementException exc) {
 
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/passport_details_title")));
             TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/passport_details_title", "Passport/ID Details");
@@ -374,7 +379,6 @@ public class Form extends TestBase {
         }
 
 
-
         //Registration Details
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/typeofid"))).click();
         Thread.sleep(500);
@@ -403,9 +407,14 @@ public class Form extends TestBase {
                 getDriver().findElement(By.xpath("//android.widget.EditText[@text='2019']")).click();
             }
         } catch (NoSuchElementException ex) {
+            Thread.sleep(2000);
             getDriver().findElement(By.id("android:id/date_picker_header_year")).click();
             Thread.sleep(500);
-            getDriver().findElement(By.xpath("//android.widget.TextView[@text='2020']")).click();
+            try {
+                getDriver().findElement(By.xpath("//android.widget.TextView[@text='2020']")).click();
+            } catch (Exception e) {
+                getDriver().findElement(By.xpath("//android.widget.EditText[@text='2020']")).click();
+            }
         }
         getDriver().findElement(By.id("android:id/button1")).click();
         Thread.sleep(1000);
@@ -421,7 +430,6 @@ public class Form extends TestBase {
         Thread.sleep(1000);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/passport_ok")).click();
         Thread.sleep(1000);
-
 
 
         //Other details starting from email
@@ -493,7 +501,7 @@ public class Form extends TestBase {
 
     }
 
-    public static void override() throws InterruptedException{
+    public static void override() throws InterruptedException {
 
         WebDriverWait wait = new WebDriverWait(getDriver(), 30);
 
