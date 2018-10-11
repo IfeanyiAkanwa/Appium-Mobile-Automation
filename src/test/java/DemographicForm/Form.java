@@ -35,7 +35,7 @@ public class Form extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/moms_maidenname")).clear();
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/moms_maidenname")).sendKeys("Peters");
         Thread.sleep(500);
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/male_radio_button")).click();
+        getDriver().findElement(By.id("com.sf.biocapture.activity:id/female_radio_button")).click();
         Thread.sleep(500);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/select_date_button")).click();
         Thread.sleep(500);
@@ -61,6 +61,9 @@ public class Form extends TestBase {
         //Social Media
         if (TestUtils.isElementPresent("ID", "com.sf.biocapture.activity:id/add_social_media_button")) {
             Thread.sleep(1000);
+            if (TestUtils.isElementPresent("ID", "com.sf.biocapture.activity:id/delete_button")) {
+                getDriver().findElement(By.id("com.sf.biocapture.activity:id/delete_button")).click();
+            }
             getDriver().findElement(By.id("com.sf.biocapture.activity:id/add_social_media_button")).click();
             Thread.sleep(500);
             getDriver().findElement(By.id("com.sf.biocapture.activity:id/delete_button")).click();
@@ -83,23 +86,26 @@ public class Form extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/street")).clear();
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/street")).sendKeys("Lewis Lane");
         Thread.sleep(500);
+        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity:id/city");
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/city")).clear();
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/city")).sendKeys("Lagos");
         Thread.sleep(500);
+        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity:id/country");
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/country")).click();
-        Thread.sleep(500);
+        Thread.sleep(1000);
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='NIGERIA']")).click();
         Thread.sleep(500);
-        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity:id/states");
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/states")).click();
         Thread.sleep(500);
-        getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='ABIA']")).click();
+        getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='BENUE']")).click();
         Thread.sleep(500);
+        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity:id/lga");
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/lga")).click();
         Thread.sleep(500);
-        getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Aba North']")).click();
+        getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Ado']")).click();
         Thread.sleep(500);
         //Next
+        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity:id/btn_continue_reg");
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/btn_continue_reg")).click();
         Thread.sleep(2000);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/page_title")));
@@ -112,7 +118,7 @@ public class Form extends TestBase {
         Thread.sleep(500);
         //capture
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/capture_id_button")).click();
-        Thread.sleep(500);
+        Thread.sleep(1000);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/capture_button")).click();
         Thread.sleep(500);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/button_camera_capture")).click();
@@ -234,6 +240,7 @@ public class Form extends TestBase {
         Thread.sleep(500);
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Aba North']")).click();
         Thread.sleep(500);
+        TestUtils.scrollDown();
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/area")).click();
         Thread.sleep(500);
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='ARIARIA']")).click();
@@ -276,6 +283,7 @@ public class Form extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/reg_type")).click();
         Thread.sleep(500);
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Individual']")).click();
+
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/surnname")));
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/surnname")).clear();
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/surnname")).sendKeys("Demetrice");
@@ -305,7 +313,7 @@ public class Form extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/done_button")).click();
         Thread.sleep(500);
 
-        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity:id/house_or_flat_no");
+        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity:id/add_social_media_button");
 
         //Social Media
         if (TestUtils.isElementPresent("ID", "com.sf.biocapture.activity:id/add_social_media_button")) {
@@ -327,12 +335,16 @@ public class Form extends TestBase {
         }
 
         Thread.sleep(500);
+        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity:id/house_or_flat_no");
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/house_or_flat_no")).clear();
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/house_or_flat_no")).sendKeys("455");
+        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity:id/street");
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/street")).clear();
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/street")).sendKeys("Neville Street");
+        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity:id/city");
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/city")).clear();
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/city")).sendKeys("Lagos");
+        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity:id/country");
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/country")).click();
         Thread.sleep(500);
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='ANGOLA']")).click();
@@ -373,7 +385,7 @@ public class Form extends TestBase {
             //capture passport image
             TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity:id/capture_passport_image");
             getDriver().findElement(By.id("com.sf.biocapture.activity:id/capture_passport_image")).click();
-            Thread.sleep(500);
+            Thread.sleep(1000);
             getDriver().findElement(By.id("com.sf.biocapture.activity:id/button_camera_capture")).click();
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/ok"))).click();
             Thread.sleep(1000);

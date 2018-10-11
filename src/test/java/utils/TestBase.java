@@ -20,7 +20,6 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.URL;
-import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 public class TestBase {
 
@@ -51,7 +50,8 @@ public class TestBase {
                 devices = devices.replaceAll("device", " ").trim();
                 udid = devices.split(" ");
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println("No devices found: "+e.toString());
+
             }
         }
 
@@ -107,6 +107,9 @@ public class TestBase {
     @Parameters({"systemPort", "deviceNo"})
     public void startApp(String systemPort, int deviceNo) throws IOException {
             deviceNo = deviceNo-1;
+            while (deviceNo >= udid.length){
+                deviceNo = deviceNo-1;
+            }
         try {
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setCapability("autoGrantPermissions", true);

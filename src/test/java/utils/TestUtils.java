@@ -18,11 +18,11 @@ public class TestUtils extends TestBase {
     @SuppressWarnings("resource")
     public static String addScreenshot() {
 
-        TakesScreenshot ts = (TakesScreenshot) getDriver();
+        TakesScreenshot ts = getDriver();
         File scrFile = ts.getScreenshotAs(OutputType.FILE);
 
         String encodedBase64 = null;
-        FileInputStream fileInputStreamReader = null;
+        FileInputStream fileInputStreamReader;
         try {
             fileInputStreamReader = new FileInputStream(scrFile);
             byte[] bytes = new byte[(int) scrFile.length()];
@@ -154,7 +154,6 @@ public class TestUtils extends TestBase {
         }
     }
 
-    //TODO
     //Possible solution to interacting with Android Internal or External memory
     public static String executeAdbCommand(String command) throws IOException {
         Process process = null;

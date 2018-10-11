@@ -23,7 +23,13 @@ public class CaptureNewSimSerialRegistration extends TestBase {
         Thread.sleep(500);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/typeofreg")).click();
         Thread.sleep(1000);
-        getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='New Registration (SIM Serial)']")).click();
+        try {
+            getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='New Registration (SIM Serial)']")).click();
+
+        } catch (Exception e) {
+            getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='New Registration (Sim Serial)']")).click();
+
+        }
         Thread.sleep(500);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/next_button")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/page_title")));

@@ -19,7 +19,7 @@ public class BiometricUpdate extends TestBase {
     }
 
     @Test
-    public void captureBiometricUpdate() throws InterruptedException {
+    public void captureBiometricUpdate() throws InterruptedException, IOException {
 
         WebDriverWait wait = new WebDriverWait(getDriver(), 30);
 

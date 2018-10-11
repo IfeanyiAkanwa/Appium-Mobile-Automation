@@ -8,7 +8,7 @@ import org.testng.Assert;
 
 public class Asserts extends TestBase {
 
-    public static void AssertIndividualForm() {
+    public static void AssertIndividualForm() throws InterruptedException {
 
         WebDriverWait wait = new WebDriverWait(getDriver(), 30);
 
@@ -25,12 +25,17 @@ public class Asserts extends TestBase {
             sex = "Female";
         }
         String dateOfBirth = getDriver().findElement(By.id("com.sf.biocapture.activity:id/date_of_birth")).getText();
-        TestUtils.scrollDown();
+        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity:id/house_or_flat_no");
         String houseNo = getDriver().findElement(By.id("com.sf.biocapture.activity:id/house_or_flat_no")).getText();
+        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity:id/street");
         String street = getDriver().findElement(By.id("com.sf.biocapture.activity:id/street")).getText();
+        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity:id/city");
         String city = getDriver().findElement(By.id("com.sf.biocapture.activity:id/city")).getText();
+        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity:id/country");
         String countryOfOrigin = getDriver().findElement(By.id("com.sf.biocapture.activity:id/country")).getText();
+        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity:id/states");
         String stateOfOrigin = getDriver().findElement(By.id("com.sf.biocapture.activity:id/states")).getText();
+        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity:id/lga");
         String lgaOfOrigin = getDriver().findElement(By.id("com.sf.biocapture.activity:id/lga")).getText();
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/btn_continue_reg")).click();
 
@@ -38,16 +43,21 @@ public class Asserts extends TestBase {
 
         //page 2
         String identificationType = getDriver().findElement(By.id("com.sf.biocapture.activity:id/typeofid")).getText();
-        TestUtils.scrollDown();
+        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity:id/email");
         String email = getDriver().findElement(By.id("com.sf.biocapture.activity:id/email")).getText();
+        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity:id/alt_phone_number");
         String alternatePhoneNumber = getDriver().findElement(By.id("com.sf.biocapture.activity:id/alt_phone_number")).getText();
+        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity:id/postalcode");
         String postalCode = getDriver().findElement(By.id("com.sf.biocapture.activity:id/postalcode")).getText();
-        TestUtils.scrollDown();
+        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity:id/occupation");
         String occupation = getDriver().findElement(By.id("com.sf.biocapture.activity:id/occupation")).getText();
+        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity:id/states_residence");
         String stateOfResidence = getDriver().findElement(By.id("com.sf.biocapture.activity:id/states_residence")).getText();
+        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity:id/lga_residence");
         String lgaAreaOfResidence = getDriver().findElement(By.id("com.sf.biocapture.activity:id/lga_residence")).getText();
-        TestUtils.scrollDown();
+        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity:id/area");
         String areaOfResidence = getDriver().findElement(By.id("com.sf.biocapture.activity:id/area")).getText();
+        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity:id/lga_of_reg");
         String lgaOfRegistration = getDriver().findElement(By.id("com.sf.biocapture.activity:id/lga_of_reg")).getText();
 
         String NA = "No Data Found";
