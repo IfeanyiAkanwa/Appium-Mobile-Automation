@@ -22,6 +22,13 @@
                     <include name="ReRegisterationTest"/>
                 </methods>
             </class>
+            <class name="admin.NotificationsTest">
+                <methods>
+                    <include name="Login"/>
+                    <include name="navigateToNotifications"/>
+                    <include name="viewNotifications"/>
+                </methods>
+            </class>
         </classes>
     </test>
     <test name="test2">
@@ -36,11 +43,18 @@
                     <include name="CaptureNewMSISDNTest"/>
                 </methods>
             </class>
+            <class name="admin.ReactivationTest">
+                <methods>
+                    <include name="Login"/>
+                    <include name="NavigateToCaptureMenuTest"/>
+                    <include name="msisdnReactivateTest"/>
+                </methods>
+            </class>
             <class name="admin.AgentOnBoardingTest">
                 <methods>
                     <include name="Login"/>
                     <include name="navigateToAgentOnBoardingPage"/>
-                    <include name="navigateToDashboard"/>
+                    <include name="viewNotifications"/>
                 </methods>
             </class>
         </classes>
@@ -55,6 +69,13 @@
                     <include name="Login"/>
                     <include name="navigateToCaptureSubscriber"/>
                     <include name="captureBiometricUpdate"/>
+                </methods>
+            </class>
+            <class name="admin.ReportsTest">
+                <methods>
+                    <include name="Login"/>
+                    <include name="navigateToReportsPage"/>
+                    <include name="reportSummary"/>
                 </methods>
             </class>
             <class name="admin.ChangePasswordTest">

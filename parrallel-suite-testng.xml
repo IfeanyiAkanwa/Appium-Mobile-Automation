@@ -14,7 +14,7 @@
                     <include name="NavigateToCaptureMenuTest"/>
                     <include name="RegisterNewSimSerialTest"/>
                 </methods>
-            </class>
+            </class> 
             <class name="admin.CaptureNewMSISDNRegistration">
                 <methods>
                     <include name="Login"/>
@@ -22,13 +22,13 @@
                     <include name="CaptureNewMSISDNTest"/>
                 </methods>
             </class>
-            <class name="admin.BiometricUpdate">
+          <class name="admin.BiometricUpdate">
                 <methods>
                     <include name="Login"/>
                     <include name="navigateToCaptureSubscriber"/>
                     <include name="captureBiometricUpdate"/>
                 </methods>
-            </class>
+            </class> 
             <class name="admin.ReRegistrationCapture">
                 <methods>
                     <include name="Login"/>
@@ -36,11 +36,32 @@
                     <include name="ReRegisterationTest"/>
                 </methods>
             </class>
+            <class name="admin.ReactivationTest">
+                <methods>
+                    <include name="Login"/>
+                    <include name="NavigateToCaptureMenuTest"/>
+                    <include name="msisdnReactivateTest"/>
+                </methods>
+            </class>
+            <class name="admin.ReportsTest">
+                <methods>
+                    <include name="Login"/>
+                    <include name="navigateToReportsPage"/>
+                    <include name="reportSummary"/>
+                </methods>
+            </class>
+            <class name="admin.NotificationsTest">
+                <methods>
+                    <include name="Login"/>
+                    <include name="navigateToNotifications"/>
+                    <include name="viewNotifications"/>
+                </methods>
+            </class>
             <class name="admin.AgentOnBoardingTest">
                 <methods>
                     <include name="Login"/>
                     <include name="navigateToAgentOnBoardingPage"/>
-                    <include name="navigateToDashboard"/>
+                    <include name="viewNotifications"/>
                 </methods>
             </class>
             <class name="admin.ChangePasswordTest">
@@ -51,7 +72,7 @@
                     <include name="loginWithNewPassword"/>
                     <include name="changeBackToOldPassword"/>
                 </methods>
-            </class>
+            </class> 
         </classes>
     </test>
     <test name="test2">
@@ -65,7 +86,7 @@
                     <include name="NavigateToCaptureMenuTest"/>
                     <include name="RegisterNewSimSerialTest"/>
                 </methods>
-            </class>
+            </class> 
             <class name="admin.CaptureNewMSISDNRegistration">
                 <methods>
                     <include name="Login"/>
@@ -73,13 +94,13 @@
                     <include name="CaptureNewMSISDNTest"/>
                 </methods>
             </class>
-            <class name="admin.BiometricUpdate">
+          <class name="admin.BiometricUpdate">
                 <methods>
                     <include name="Login"/>
                     <include name="navigateToCaptureSubscriber"/>
                     <include name="captureBiometricUpdate"/>
                 </methods>
-            </class>
+            </class> 
             <class name="admin.ReRegistrationCapture">
                 <methods>
                     <include name="Login"/>
@@ -87,11 +108,32 @@
                     <include name="ReRegisterationTest"/>
                 </methods>
             </class>
+            <class name="admin.ReactivationTest">
+                <methods>
+                    <include name="Login"/>
+                    <include name="NavigateToCaptureMenuTest"/>
+                    <include name="msisdnReactivateTest"/>
+                </methods>
+            </class>
+            <class name="admin.ReportsTest">
+                <methods>
+                    <include name="Login"/>
+                    <include name="navigateToReportsPage"/>
+                    <include name="reportSummary"/>
+                </methods>
+            </class>
+            <class name="admin.NotificationsTest">
+                <methods>
+                    <include name="Login"/>
+                    <include name="navigateToNotifications"/>
+                    <include name="viewNotifications"/>
+                </methods>
+            </class>
             <class name="admin.AgentOnBoardingTest">
                 <methods>
                     <include name="Login"/>
                     <include name="navigateToAgentOnBoardingPage"/>
-                    <include name="navigateToDashboard"/>
+                    <include name="viewNotifications"/>
                 </methods>
             </class>
             <class name="admin.ChangePasswordTest">
@@ -102,7 +144,7 @@
                     <include name="loginWithNewPassword"/>
                     <include name="changeBackToOldPassword"/>
                 </methods>
-            </class>
+            </class> 
         </classes>
     </test>
     <test name="test3">
@@ -116,7 +158,7 @@
                     <include name="NavigateToCaptureMenuTest"/>
                     <include name="RegisterNewSimSerialTest"/>
                 </methods>
-            </class>
+            </class> 
             <class name="admin.CaptureNewMSISDNRegistration">
                 <methods>
                     <include name="Login"/>
@@ -124,13 +166,13 @@
                     <include name="CaptureNewMSISDNTest"/>
                 </methods>
             </class>
-            <class name="admin.BiometricUpdate">
+          <class name="admin.BiometricUpdate">
                 <methods>
                     <include name="Login"/>
                     <include name="navigateToCaptureSubscriber"/>
                     <include name="captureBiometricUpdate"/>
                 </methods>
-            </class>
+            </class> 
             <class name="admin.ReRegistrationCapture">
                 <methods>
                     <include name="Login"/>
@@ -138,11 +180,32 @@
                     <include name="ReRegisterationTest"/>
                 </methods>
             </class>
+            <class name="admin.ReactivationTest">
+                <methods>
+                    <include name="Login"/>
+                    <include name="NavigateToCaptureMenuTest"/>
+                    <include name="msisdnReactivateTest"/>
+                </methods>
+            </class>
+            <class name="admin.ReportsTest">
+                <methods>
+                    <include name="Login"/>
+                    <include name="navigateToReportsPage"/>
+                    <include name="reportSummary"/>
+                </methods>
+            </class>
+            <class name="admin.NotificationsTest">
+                <methods>
+                    <include name="Login"/>
+                    <include name="navigateToNotifications"/>
+                    <include name="viewNotifications"/>
+                </methods>
+            </class>
             <class name="admin.AgentOnBoardingTest">
                 <methods>
                     <include name="Login"/>
                     <include name="navigateToAgentOnBoardingPage"/>
-                    <include name="navigateToDashboard"/>
+                    <include name="viewNotifications"/>
                 </methods>
             </class>
             <class name="admin.ChangePasswordTest">
@@ -153,7 +216,7 @@
                     <include name="loginWithNewPassword"/>
                     <include name="changeBackToOldPassword"/>
                 </methods>
-            </class>
+            </class> 
         </classes>
     </test>
 </suite>

@@ -20,6 +20,11 @@ public class ConnectDB {
 
         try {
             dbConnection = getDBConnection();
+            if (dbConnection != null) {
+                System.out.println("Connected to db");
+            } else {
+                System.out.println("Not able to connect to db");
+            }
             statement = dbConnection.createStatement();
             ResultSet rs = statement.executeQuery(getOTPSql);
             if (rs.next()) {

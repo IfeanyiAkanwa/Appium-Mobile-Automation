@@ -143,4 +143,38 @@ public class Asserts extends TestBase {
             }
         }
     }
+    
+    public static void AssertReportSummary() throws Exception {
+
+        String totalRegistrations = getDriver().findElement(By.id("com.sf.biocapture.activity:id/reg_subscribers")).getText();
+        String totalSyncSent = getDriver().findElement(By.id("com.sf.biocapture.activity:id/total_sync_sent")).getText();
+        String totalSyncConfirmed = getDriver().findElement(By.id("com.sf.biocapture.activity:id/sync_confirmed")).getText();
+        String totalSyncPending = getDriver().findElement(By.id("com.sf.biocapture.activity:id/total_pending")).getText();
+        String totalRejected = getDriver().findElement(By.id("com.sf.biocapture.activity:id/total_rejected")).getText();
+        String totalActivated = getDriver().findElement(By.id("com.sf.biocapture.activity:id/total_activated")).getText();
+        String totalReactivated = getDriver().findElement(By.id("com.sf.biocapture.activity:id/total_reactivated")).getText();
+        String totalSimSwap = getDriver().findElement(By.id("com.sf.biocapture.activity:id/total_swaps")).getText();
+        String registeredSIMs = getDriver().findElement(By.id("com.sf.biocapture.activity:id/reg_sims")).getText();
+        String confirmedSIMs = getDriver().findElement(By.id("com.sf.biocapture.activity:id/sims_confirmed")).getText();
+        String duplicateSIMs = getDriver().findElement(By.id("com.sf.biocapture.activity:id/duplicate_sims")).getText();
+        
+        String NA = "";
+
+        String[] toList = {"Total Registrations: " + totalRegistrations, "Total Sync Sent: " + totalSyncSent, "Total Sync Confirmed: " + totalSyncConfirmed, "Total Sync Pending:" + totalSyncPending,
+                "Total Rejected: " + totalRejected, "Total Activated: " + totalActivated, "Total Reactivated: " + totalReactivated, "Total SIM Swap: " + totalSimSwap
+                , "Registered SIMS: " + registeredSIMs, "Confirmed SIMS: " + confirmedSIMs, "Duplicate SIMS: " + duplicateSIMs};
+        for (String field : toList) {
+            String name = "";
+            String val = NA;
+            try {
+                String[] fields = field.split(":");
+                name = fields[0];
+                val = fields[1];
+                Assert.assertNotEquals(val, NA);
+                testInfo.get().log(Status.INFO, name + " : " + val);
+            } catch (Error e) {
+                testInfo.get().error(name + " : " + val);
+            }
+        }
+    }
 }

@@ -11,3 +11,4 @@ TestsScreenshots/*
 *.versionsBackup
 test-output/
 Automation.html
+/DroidReport.html
