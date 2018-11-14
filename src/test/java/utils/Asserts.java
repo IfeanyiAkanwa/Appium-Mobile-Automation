@@ -37,6 +37,7 @@ public class Asserts extends TestBase {
         String stateOfOrigin = getDriver().findElement(By.id("com.sf.biocapture.activity:id/states")).getText();
         TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity:id/lga");
         String lgaOfOrigin = getDriver().findElement(By.id("com.sf.biocapture.activity:id/lga")).getText();
+        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity:id/btn_continue_reg");
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/btn_continue_reg")).click();
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/page_title")));

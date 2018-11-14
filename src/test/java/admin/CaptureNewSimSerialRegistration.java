@@ -1,7 +1,9 @@
 package admin;
 
 import DemographicForm.Form;
+import io.appium.java_client.android.Connection;
 import utils.TestBase;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -9,6 +11,8 @@ import org.testng.annotations.Test;
 import utils.TestUtils;
 
 public class CaptureNewSimSerialRegistration extends TestBase {
+	
+	
 
     @Test
     public void NavigateToCaptureMenuTest() throws InterruptedException {
@@ -42,10 +46,14 @@ public class CaptureNewSimSerialRegistration extends TestBase {
     public void RegisterNewSimSerialTest() throws InterruptedException {
 
         WebDriverWait wait = new WebDriverWait(getDriver(), 30);
-
+        
+        //turn off Network
+        Connection networks = getDriver().getConnection();
+        getDriver().setConnection(Connection.NONE);
+        
         //Enter SIM Serial
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/sim_serial_field")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/sim_serial_field")).sendKeys("11111111111111111111");
+        getDriver().findElement(By.id("com.sf.biocapture.activity:id/sim_serial_field")).sendKeys("111111111111111113352");
         Thread.sleep(500);
 
         //Request Dya
@@ -60,9 +68,13 @@ public class CaptureNewSimSerialRegistration extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/add_sim_serial")).click();
         Thread.sleep(500);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/alertTitle")));
-        TestUtils.assertSearchText("ID", "android:id/message", "Sim Serial: 11111111111111111111  verified!");
+        TestUtils.assertSearchText("ID", "android:id/message", "Do you still wish to proceed with unverified Sim Serial");
         getDriver().findElement(By.id("android:id/button1")).click(); // ok button
         Thread.sleep(1000);
+        
+        //turn on Network
+        getDriver().setConnection(Connection.valueOf(networks.toString()));
+        
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/next_button")).click(); // ok button
         Thread.sleep(1000);
         Form.IndividualForeignerForm();

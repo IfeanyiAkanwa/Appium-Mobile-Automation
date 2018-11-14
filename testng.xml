@@ -61,8 +61,8 @@
             <class name="admin.AgentOnBoardingTest">
                 <methods>
                     <include name="Login"/>
-                    <include name="navigateToAgentOnBoardingPage"/>
-                    <include name="viewNotifications"/>
+                    <include name="AgentOnBoarding"/>
+                    <!-- <include name="viewNotifications"/> -->
                 </methods>
             </class>
             <class name="admin.ChangePasswordTest">

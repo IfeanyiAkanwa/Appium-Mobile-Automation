@@ -77,7 +77,7 @@ public class ReactivationTest extends TestBase {
         Thread.sleep(1000);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
         TestUtils.assertSearchText("ID", "android:id/message", "MSISDN has been reactivated successfully.");
-        getDriver().findElement(By.className("android.widget.ImageButton")).click();
+        getDriver().findElement(By.id("android:id/button1")).click();
         Thread.sleep(500);
         
     }

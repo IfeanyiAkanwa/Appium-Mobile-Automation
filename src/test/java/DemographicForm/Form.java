@@ -73,7 +73,7 @@ public class Form extends TestBase {
             Thread.sleep(500);
             getDriver().findElement(By.id("com.sf.biocapture.activity:id/type_spinner")).click();
             Thread.sleep(500);
-            getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Instagram']")).click();
+            getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='INSTAGRAM']")).click();
             Thread.sleep(500);
             getDriver().findElement(By.id("com.sf.biocapture.activity:id/username_edit_text")).sendKeys("@testuser");
         }
@@ -90,16 +90,22 @@ public class Form extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/city")).sendKeys("Lagos");
         TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity:id/country");
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='[Select Nationality]*']")).click();
-        Thread.sleep(1000);
+        Thread.sleep(500);
+        getDriver().findElementByAndroidUIAutomator(
+                "new UiScrollable(new UiSelector()).scrollIntoView(new UiSelector().text(\"NIGERIA\"));");
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='NIGERIA']")).click();
         Thread.sleep(500);
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='[Select State]*']")).click();
         Thread.sleep(500);
+        getDriver().findElementByAndroidUIAutomator(
+                "new UiScrollable(new UiSelector()).scrollIntoView(new UiSelector().text(\"BENUE\"));");
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='BENUE']")).click();
         Thread.sleep(500);
         TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity:id/lga");
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/lga")).click();
         Thread.sleep(500);
+        getDriver().findElementByAndroidUIAutomator(
+                "new UiScrollable(new UiSelector()).scrollIntoView(new UiSelector().text(\"Ado\"));");
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Ado']")).click();
         Thread.sleep(500);
         //Next
@@ -161,10 +167,14 @@ public class Form extends TestBase {
         Thread.sleep(500);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/company_state_address")).click();
         Thread.sleep(500);
+        getDriver().findElementByAndroidUIAutomator(
+                "new UiScrollable(new UiSelector()).scrollIntoView(new UiSelector().text(\"ABIA\"));");
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='ABIA']")).click();
         Thread.sleep(500);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/company_lga_address")).click();
         Thread.sleep(500);
+        getDriver().findElementByAndroidUIAutomator(
+                "new UiScrollable(new UiSelector()).scrollIntoView(new UiSelector().text(\"Aba North\"));");
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Aba North']")).click();
         Thread.sleep(500);
 
@@ -231,25 +241,35 @@ public class Form extends TestBase {
         Thread.sleep(500);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/occupation")).click();
         Thread.sleep(500);
+        getDriver().findElementByAndroidUIAutomator(
+                "new UiScrollable(new UiSelector()).scrollIntoView(new UiSelector().text(\"Aeronautical Engineer\"));");
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Aeronautical Engineer']")).click();
         Thread.sleep(500);
         TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity:id/states_residence");
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/states_residence")).click();
         Thread.sleep(500);
+        getDriver().findElementByAndroidUIAutomator(
+                "new UiScrollable(new UiSelector()).scrollIntoView(new UiSelector().text(\"ABIA\"));");
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='ABIA']")).click();
         Thread.sleep(500);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/lga_residence")).click();
         Thread.sleep(500);
+        getDriver().findElementByAndroidUIAutomator(
+                "new UiScrollable(new UiSelector()).scrollIntoView(new UiSelector().text(\"Aba North\"));");
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Aba North']")).click();
         Thread.sleep(500);
         TestUtils.scrollDown();
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/area")).click();
         Thread.sleep(500);
+        getDriver().findElementByAndroidUIAutomator(
+                "new UiScrollable(new UiSelector()).scrollIntoView(new UiSelector().text(\"ARIARIA\"));");
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='ARIARIA']")).click();
         Thread.sleep(500);
         TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity:id/lga_of_reg");
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/lga_of_reg")).click();
         Thread.sleep(500);
+        getDriver().findElementByAndroidUIAutomator(
+                "new UiScrollable(new UiSelector()).scrollIntoView(new UiSelector().text(\"Agege\"));");
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Agege']")).click();
         Thread.sleep(500);
 
@@ -267,7 +287,7 @@ public class Form extends TestBase {
 
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/save_continue")).click();
         Thread.sleep(1000);
-        getDriver().findElement(By.id("android:id/button2")).click();
+//        getDriver().findElement(By.id("android:id/button2")).click();
 
         override();
 
@@ -320,18 +340,16 @@ public class Form extends TestBase {
         //Social Media
         if (TestUtils.isElementPresent("ID", "com.sf.biocapture.activity:id/add_social_media_button")) {
             Thread.sleep(1000);
-            if (TestUtils.isElementPresent("ID", "com.sf.biocapture.activity:id/delete_button")) {
+            boolean elementPresent = TestUtils.isElementPresent("ID", "com.sf.biocapture.activity:id/delete_button");
+			while (elementPresent) {
                 getDriver().findElement(By.id("com.sf.biocapture.activity:id/delete_button")).click();
+                elementPresent = TestUtils.isElementPresent("ID", "com.sf.biocapture.activity:id/delete_button");
             }
-            getDriver().findElement(By.id("com.sf.biocapture.activity:id/add_social_media_button")).click();
-            Thread.sleep(500);
-            getDriver().findElement(By.id("com.sf.biocapture.activity:id/delete_button")).click();
-            Thread.sleep(500);
-            getDriver().findElement(By.id("com.sf.biocapture.activity:id/add_social_media_button")).click();
+			getDriver().findElement(By.id("com.sf.biocapture.activity:id/add_social_media_button")).click();
             Thread.sleep(500);
             getDriver().findElement(By.id("com.sf.biocapture.activity:id/type_spinner")).click();
             Thread.sleep(500);
-            getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Instagram']")).click();
+            getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='INSTAGRAM']")).click();
             Thread.sleep(500);
             getDriver().findElement(By.id("com.sf.biocapture.activity:id/username_edit_text")).sendKeys("@testuser");
         }
@@ -349,6 +367,8 @@ public class Form extends TestBase {
         TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity:id/country");
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/country")).click();
         Thread.sleep(500);
+        getDriver().findElementByAndroidUIAutomator(
+                "new UiScrollable(new UiSelector()).scrollIntoView(new UiSelector().text(\"ANGOLA\"));");
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='ANGOLA']")).click();
         Thread.sleep(1000);
 
@@ -466,25 +486,35 @@ public class Form extends TestBase {
         TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity:id/occupation");
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/occupation")).click();
         Thread.sleep(500);
-        getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Actor/Actress']")).click();
+        getDriver().findElementByAndroidUIAutomator(
+                "new UiScrollable(new UiSelector()).scrollIntoView(new UiSelector().text(\"Pilot\"));");
+        getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Pilot']")).click();
         Thread.sleep(500);
         TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity:id/states_residence");
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/states_residence")).click();
         Thread.sleep(500);
+        getDriver().findElementByAndroidUIAutomator(
+                "new UiScrollable(new UiSelector()).scrollIntoView(new UiSelector().text(\"ABIA\"));");
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='ABIA']")).click();
         Thread.sleep(500);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/lga_residence")).click();
         Thread.sleep(500);
+        getDriver().findElementByAndroidUIAutomator(
+                "new UiScrollable(new UiSelector()).scrollIntoView(new UiSelector().text(\"Aba North\"));");
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Aba North']")).click();
         Thread.sleep(500);
         TestUtils.scrollDown();
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/area")).click();
         Thread.sleep(500);
+        getDriver().findElementByAndroidUIAutomator(
+                "new UiScrollable(new UiSelector()).scrollIntoView(new UiSelector().text(\"ARIARIA\"));");
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='ARIARIA']")).click();
         Thread.sleep(500);
         TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity:id/lga_of_reg");
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/lga_of_reg")).click();
         Thread.sleep(500);
+        getDriver().findElementByAndroidUIAutomator(
+                "new UiScrollable(new UiSelector()).scrollIntoView(new UiSelector().text(\"Agege\"));");
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Agege']")).click();
         Thread.sleep(500);
 
@@ -502,7 +532,7 @@ public class Form extends TestBase {
         //save
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/save_continue")).click();
         Thread.sleep(1000);
-        getDriver().findElement(By.id("android:id/button2")).click();
+//        getDriver().findElement(By.id("android:id/button2")).click();
         override();
 
 
