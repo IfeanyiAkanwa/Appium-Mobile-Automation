@@ -5,6 +5,7 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.AutomationName;
 import io.appium.java_client.remote.MobileCapabilityType;
@@ -32,6 +33,12 @@ public class TestBase {
     public static String URLbase = "http:simreg.mtnnigeria.net";
     public static String toAddress;
 
+
+    public static String userName = "USERNAME";
+    public static String accessKey = "ACCESS_KEY";
+    public String local="local";
+    public String remoteJenkins="remote-jenkins";
+    public String remoteBrowserStack="remote-browserStack";
 
     public static  AndroidDriver getDriver(){
         return driver.get();
@@ -104,49 +111,60 @@ public class TestBase {
     }
 
     @BeforeClass
-    @Parameters({"systemPort", "deviceNo"})
-    public void startApp(String systemPort, int deviceNo) throws IOException {
-            deviceNo = deviceNo-1;
-            while (deviceNo >= udid.length){
-                deviceNo = deviceNo-1;
+    @Parameters({"systemPort", "deviceNo", "server"})
+    public void startApp(String systemPort, int deviceNo, String server) throws IOException {
+
+        if (server.equals(remoteBrowserStack)) {
+            DesiredCapabilities caps = new DesiredCapabilities();
+            caps.setCapability("device", "Samsung Galaxy S8 Plus");
+            caps.setCapability("app", "bs://<hashed app-id>");
+            driver.set(new AndroidDriver<AndroidElement>(new URL("https://"+userName+":"+accessKey+"@hub-cloud.browserstack.com/wd/hub"), caps));
+
+        }else if(server.equals(remoteJenkins)) {
+
+        }else if(server.equals(local)) {
+
+            deviceNo = deviceNo - 1;
+            while (deviceNo >= udid.length) {
+                deviceNo = deviceNo - 1;
             }
-        try {
-            DesiredCapabilities capabilities = new DesiredCapabilities();
-            capabilities.setCapability("autoGrantPermissions", true);
-            capabilities.setCapability("unicodeKeyboard", true);
-            capabilities.setCapability("resetKeyboard", true);
-            capabilities.setCapability("noReset", false);
-            capabilities.setCapability("browserName", "Android");
-            capabilities.setCapability(AndroidMobileCapabilityType.SYSTEM_PORT, systemPort);
-            capabilities.setCapability(MobileCapabilityType.UDID, udid[deviceNo].trim());
-            capabilities.setCapability("deviceName", "SeamfixTab");
-            capabilities.setCapability("platformName", "Android");
-            capabilities.setCapability("appPackage", "com.sf.biocapture.activity");
-            capabilities.setCapability("appActivity", "com.sf.biocapture.activity.SplashScreenActivity");
-            capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.ANDROID_UIAUTOMATOR2);
+            try {
+                DesiredCapabilities capabilities = new DesiredCapabilities();
+                capabilities.setCapability("autoGrantPermissions", true);
+                capabilities.setCapability("unicodeKeyboard", true);
+                capabilities.setCapability("resetKeyboard", true);
+                capabilities.setCapability("noReset", false);
+                capabilities.setCapability("browserName", "Android");
+                capabilities.setCapability(AndroidMobileCapabilityType.SYSTEM_PORT, systemPort);
+                capabilities.setCapability(MobileCapabilityType.UDID, udid[deviceNo].trim());
+                capabilities.setCapability("deviceName", "SeamfixTab");
+                capabilities.setCapability("platformName", "Android");
+                capabilities.setCapability("appPackage", "com.sf.biocapture.activity");
+                capabilities.setCapability("appActivity", "com.sf.biocapture.activity.SplashScreenActivity");
+                capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.ANDROID_UIAUTOMATOR2);
 
-            driver.set( new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities));
-            System.out.println("++++++++++UIAUTOMATOR 2 DRIVER INSTANCE RUNNING++++++++++++");
+                driver.set(new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities));
+                System.out.println("++++++++++UIAUTOMATOR 2 DRIVER INSTANCE RUNNING++++++++++++");
 
-        } catch (WebDriverException e) {
-            DesiredCapabilities capabilities = new DesiredCapabilities();
-            capabilities.setCapability(MobileCapabilityType.UDID, udid[deviceNo].trim());
-            capabilities.setCapability("autoGrantPermissions", true);
-            capabilities.setCapability(AndroidMobileCapabilityType.SYSTEM_PORT, systemPort);
-            capabilities.setCapability("unicodeKeyboard", true);
-            capabilities.setCapability("resetKeyboard", true);
-            capabilities.setCapability("noReset", false);
-            capabilities.setCapability("browserName", "Android");
-            capabilities.setCapability("deviceName", "SeamfixTab");
-            capabilities.setCapability("platformName", "Android");
-            capabilities.setCapability("appPackage", "com.sf.biocapture.activity");
-            capabilities.setCapability("appActivity", "com.sf.biocapture.activity.SplashScreenActivity");
+            } catch (WebDriverException e) {
+                DesiredCapabilities capabilities = new DesiredCapabilities();
+                capabilities.setCapability(MobileCapabilityType.UDID, udid[deviceNo].trim());
+                capabilities.setCapability("autoGrantPermissions", true);
+                capabilities.setCapability(AndroidMobileCapabilityType.SYSTEM_PORT, systemPort);
+                capabilities.setCapability("unicodeKeyboard", true);
+                capabilities.setCapability("resetKeyboard", true);
+                capabilities.setCapability("noReset", false);
+                capabilities.setCapability("browserName", "Android");
+                capabilities.setCapability("deviceName", "SeamfixTab");
+                capabilities.setCapability("platformName", "Android");
+                capabilities.setCapability("appPackage", "com.sf.biocapture.activity");
+                capabilities.setCapability("appActivity", "com.sf.biocapture.activity.SplashScreenActivity");
 
-            driver.set( new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities));
-            System.out.println("++++++++++UIAUTOMATOR DRIVER INSTANCE RUNNING++++++++++++");
+                driver.set(new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities));
+                System.out.println("++++++++++UIAUTOMATOR DRIVER INSTANCE RUNNING++++++++++++");
 
+            }
         }
-
         ExtentTest parent = reports.createTest(getClass().getName());
         parentTest.set(parent);
     }
