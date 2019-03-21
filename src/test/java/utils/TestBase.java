@@ -143,7 +143,7 @@ public class TestBase {
                 capabilities.setCapability("appActivity", "com.sf.biocapture.activity.SplashScreenActivity");
                 capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.ANDROID_UIAUTOMATOR2);
 
-                driver.set(new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities));
+                driver.set(new AndroidDriver(new URL("http://0.0.0.0:4723/wd/hub"), capabilities));
                 System.out.println("++++++++++UIAUTOMATOR 2 DRIVER INSTANCE RUNNING++++++++++++");
 
             } catch (WebDriverException e) {
@@ -160,7 +160,7 @@ public class TestBase {
                 capabilities.setCapability("appPackage", "com.sf.biocapture.activity");
                 capabilities.setCapability("appActivity", "com.sf.biocapture.activity.SplashScreenActivity");
 
-                driver.set(new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities));
+                driver.set(new AndroidDriver(new URL("http://0.0.0.0:4723/wd/hub"), capabilities));
                 System.out.println("++++++++++UIAUTOMATOR DRIVER INSTANCE RUNNING++++++++++++");
 
             }
