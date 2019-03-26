@@ -2,6 +2,7 @@ package admin;
 
 import DemographicForm.Form;
 import io.appium.java_client.android.Connection;
+import io.appium.java_client.android.connection.ConnectionState;
 import utils.TestBase;
 
 import org.openqa.selenium.By;
@@ -48,7 +49,7 @@ public class CaptureNewSimSerialRegistration extends TestBase {
         WebDriverWait wait = new WebDriverWait(getDriver(), 30);
         
         //turn off Network
-        Connection networks = getDriver().getConnection();
+        ConnectionState networks = getDriver().getConnection();
         getDriver().setConnection(Connection.NONE);
         
         //Enter SIM Serial
@@ -57,13 +58,13 @@ public class CaptureNewSimSerialRegistration extends TestBase {
         Thread.sleep(500);
 
         //Request Dya
-//        getDriver().findElement(By.id("com.sf.biocapture.activity:id/dya_check_box")).click();
-//        Thread.sleep(500);
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/alertTitle")));
-//        TestUtils.assertSearchText("ID", "android:id/alertTitle", "[Select Yellow Account Type]");
-//        getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='DYA']")).click();
-//        getDriver().findElement(By.id("android:id/button1")).click();
-//        Thread.sleep(500);
+        getDriver().findElement(By.id("com.sf.biocapture.activity:id/dya_check_box")).click();
+        Thread.sleep(500);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/alertTitle")));
+        TestUtils.assertSearchText("ID", "android:id/alertTitle", "[Select Yellow Account Type]");
+        getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='DYA']")).click();
+        getDriver().findElement(By.id("android:id/button1")).click();
+        Thread.sleep(500);
 
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/add_sim_serial")).click();
         Thread.sleep(500);

@@ -134,7 +134,7 @@ public class TestBase {
                 capabilities.setCapability("unicodeKeyboard", true);
                 capabilities.setCapability("resetKeyboard", true);
                 capabilities.setCapability("noReset", false);
-                capabilities.setCapability("browserName", "Android");
+                
                 capabilities.setCapability(AndroidMobileCapabilityType.SYSTEM_PORT, systemPort);
                 capabilities.setCapability(MobileCapabilityType.UDID, udid[deviceNo].trim());
                 capabilities.setCapability("deviceName", "SeamfixTab");
@@ -154,7 +154,7 @@ public class TestBase {
                 capabilities.setCapability("unicodeKeyboard", true);
                 capabilities.setCapability("resetKeyboard", true);
                 capabilities.setCapability("noReset", false);
-                capabilities.setCapability("browserName", "Android");
+               
                 capabilities.setCapability("deviceName", "SeamfixTab");
                 capabilities.setCapability("platformName", "Android");
                 capabilities.setCapability("appPackage", "com.sf.biocapture.activity");
@@ -172,9 +172,9 @@ public class TestBase {
     @Test
     @Parameters("email")
     public void Login(String email) throws InterruptedException {
-        Thread.sleep(500);
-        WebDriverWait wait = new WebDriverWait(getDriver(), 30);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Login']")));
+        WebDriverWait wait = new WebDriverWait(getDriver(), 50);
+       
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/otp_login")));
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/otp_login")).click();
         Thread.sleep(1000);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).clear();
