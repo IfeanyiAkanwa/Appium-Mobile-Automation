@@ -4,7 +4,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
+
+import com.aventstack.extentreports.markuputils.ExtentColor;
+import com.aventstack.extentreports.markuputils.Markup;
+import com.aventstack.extentreports.markuputils.MarkupHelper;
+
 import utils.TestBase;
+import utils.TestUtils;
 
 
 public class Login extends TestBase {
@@ -12,6 +18,16 @@ public class Login extends TestBase {
 	@Test
 	public void loginWithFingerprint() {
 		 WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+		 //Try to login with fingerprint
+		 String fpLogin = "Try to login with fingerprint";
+			Markup m = MarkupHelper.createLabel(fpLogin, ExtentColor.BLUE);
+			testInfo.get().info(m);
+		 wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/finger_print")));
+		 getDriver().findElement(By.id("com.sf.biocapture.activity:id/finger_print")).click();
+		 wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/page_sub_title")));
+		 TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/page_sub_title", "Fingerprint");
+		 //Try to login with a user that does not exist
+		 getDriver().findElement(By.id("com.sf.biocapture.activity:id/finger_print")).click();
 		 
 	}
 	@Test
