@@ -29,7 +29,7 @@
 
 				</methods>
 			</class>
-			<!-- <class name="admin.CaptureNewSimSerialRegistration"> <methods> <include 
+			<class name="admin.CaptureNewSimSerialRegistration"> <methods> <include 
 				name="Login"/> <include name="NavigateToCaptureMenuTest"/> <include name="RegisterNewSimSerialTest"/> 
 				</methods> </class> <class name="admin.ReRegistrationCapture"> <methods> 
 				<include name="Login"/> <include name="NavigateToCaptureMenuTest"/> <include 
@@ -48,7 +48,7 @@
 				<include name="reportSummary"/> </methods> </class> <class name="admin.ChangePasswordTest"> 
 				<methods> <include name="Login"/> <include name="navigateToChangePasswordPage"/> 
 				<include name="changeToNewPassword"/> <include name="loginWithNewPassword"/> 
-				<include name="changeBackToOldPassword"/> </methods> </class> -->
+				<include name="changeBackToOldPassword"/> </methods> </class> 
 		</classes>
 	</test>
 </suite>
