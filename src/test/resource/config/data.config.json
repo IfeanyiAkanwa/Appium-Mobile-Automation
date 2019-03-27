@@ -1,0 +1,10 @@
+{
+	"invalid_username": "ada@seamnix.com",
+	"valid_username": "adazejohnson@gmail.com",
+	"new_password": "Bankole1!!",
+	"confirm_password": "Bankole1!!",
+	"invalid_password_policy": "bankole1!!",
+	"confirm_password_not_matching": "ban",
+	"invalid_OTP": "0000"
+
+}

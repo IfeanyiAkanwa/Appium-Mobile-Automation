@@ -10,6 +10,11 @@ import utils.TestBase;
 public class Login extends TestBase {
 	
 	@Test
+	public void loginWithFingerprint() {
+		 WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+		 
+	}
+	@Test
     public void UsernamePasswordTest() throws InterruptedException {
         Thread.sleep(500);
         WebDriverWait wait = new WebDriverWait(getDriver(), 30);
