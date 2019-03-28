@@ -1,10 +1,20 @@
 {
-	"invalid_username": "ada@seamnix.com",
-	"valid_username": "adazejohnson@gmail.com",
-	"new_password": "Bankole1!!",
-	"confirm_password": "Bankole1!!",
-	"invalid_password_policy": "bankole1!!",
-	"confirm_password_not_matching": "ban",
-	"invalid_OTP": "0000"
-
+	"Login": {
+		"onboarded_username": "adazejohnson@gmail.com",
+		"invalid_username": "ada@seamnix.com",
+		"not_onboarded_username": "faruk.muhammad@mtnagent.com",
+		"valid_username": "adazejohnson@gmail.com",
+		"invalid_password": "adazejohn@1",
+		"valid_password": "Bankole1!!",
+		"deactivated_username": "amusa.adewaleibrahim@mtnagent.com"
+	},
+	"ForgotPassword": {
+		"invalid_username": "ada@seamnix.com",
+		"valid_username": "adazejohnson@gmail.com",
+		"new_password": "Bankole1!!",
+		"confirm_password": "Bankole1!!",
+		"invalid_password_policy": "bankole1!!",
+		"confirm_password_not_matching": "ban",
+		"invalid_OTP": "0000"
+	}
 }
