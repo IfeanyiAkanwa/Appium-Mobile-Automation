@@ -2,8 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="BioSmartSuite" parallel="tests" thread-count="3">
 	<parameter name="groupReport" value="/DroidReport.html" />
-	<parameter name="toMails"
-		value="jikhile@seamfix.com;soli@seamfix.com" />
+	<parameter name="toMails" value="jikhile@seamfix.com" />
 	<parameter name="myURL"
 		value="http://10.1.242.245:7080/selfservice/" />
 	<parameter name="gridUrl"

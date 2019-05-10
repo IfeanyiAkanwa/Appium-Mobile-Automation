@@ -96,6 +96,12 @@ public class TestUtils extends TestBase {
         int topY = getDriver().manage().window().getSize().height / 8;
         scroll(pressX, bottomY, pressX, topY);
     }
+    public static void scrollUp() {
+        int pressX = getDriver().manage().window().getSize().width / 2;
+        int bottomY = getDriver().manage().window().getSize().height * 4 / 5;
+        int topY = getDriver().manage().window().getSize().height / 8;
+        scroll(pressX, topY, pressX, bottomY);
+    }
 
     public static void hideKeyboard() throws InterruptedException {
         if (getDriver().isKeyboardShown()) {

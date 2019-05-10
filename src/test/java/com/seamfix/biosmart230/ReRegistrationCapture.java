@@ -1,4 +1,4 @@
-package admin;
+package com.seamfix.biosmart230;
 
 import DemographicForm.Form;
 import db.ConnectDB;
