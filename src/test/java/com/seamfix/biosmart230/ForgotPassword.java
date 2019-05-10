@@ -230,7 +230,7 @@ public class ForgotPassword extends TestBase {
 
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/submit")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
-
+		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Home']", "Home");
 	}
 
 }
