@@ -47,8 +47,9 @@ public class ForgotPassword extends TestBase {
 		JSONParser parser = new JSONParser();
 		JSONObject config = (JSONObject) parser
 				.parse(new FileReader("src/test/resource/config/data.config.json"));
-
-		String invalid_username = (String) config.get("invalid_username");
+		JSONObject envs = (JSONObject) config.get("ForgotPassword");
+		
+		String invalid_username = (String) envs.get("invalid_username");
 		WebDriverWait wait = new WebDriverWait(getDriver(), 50);
 
 		// Trying to change password with invalid username
@@ -71,16 +72,17 @@ public class ForgotPassword extends TestBase {
 	@Test
 	public static void changePasswordWithValidUsername()
 			throws InterruptedException, SQLException, FileNotFoundException, IOException, ParseException {
-		WebDriverWait wait = new WebDriverWait(getDriver(), 50);
+		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
 		JSONParser parser = new JSONParser();
 		JSONObject config = (JSONObject) parser
 				.parse(new FileReader("src/test/resource/config/data.config.json"));
+		JSONObject envs = (JSONObject) config.get("ForgotPassword");
 
-		String valid_username = (String) config.get("valid_username");
-		String new_password = (String) config.get("new_password");
-		String confirm_password = (String) config.get("confirm_password");
-		String confirm_password_not_matching = (String) config.get("confirm_password_not_matching");
-		String invalid_password_policy = (String) config.get("invalid_password_policy");
+		String valid_username = (String) envs.get("valid_username");
+		String new_password = (String) envs.get("new_password");
+		String confirm_password = (String) envs.get("confirm_password");
+		String confirm_password_not_matching = (String) envs.get("confirm_password_not_matching");
+		String invalid_password_policy = (String) envs.get("invalid_password_policy");
 
 		// Trying to change password with valid username
 		String validUsername = "Try to change password with valid username: " + valid_username;
@@ -95,25 +97,24 @@ public class ForgotPassword extends TestBase {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/dialog_title")));
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/dialog_title", "OTP verification");
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/dialog_message",
-				"Enter One Time Password sent to : 07034154347");
+				"Enter One Time Password sent to : 08060660747");
 
 		// Trying to test with invalid OTP
-		String invalid_OTP = (String) config.get("invalid_OTP");
-		;
+		String invalid_OTP = (String) envs.get("invalid_OTP");
 		String inValidOTP = "Try to enter OTP that does not exist: " + invalid_OTP;
 		Markup otp = MarkupHelper.createLabel(inValidOTP, ExtentColor.BLUE);
 		testInfo.get().info(otp);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/user_input_dialog")).clear();
-
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/user_input_dialog")).sendKeys(invalid_OTP);
 		getDriver().findElement(By.id("android:id/button1")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/alertTitle")));
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/alertTitle", "Error");
 		TestUtils.assertSearchText("ID", "android:id/message", "No match was found for the specified OTP.");
 		getDriver().findElement(By.id("android:id/button1")).click();
-
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/dialog_title")));
 
 		// Try to test with valid OTP
-		String valid_OTP = ConnectDB.getOTP("07034154347");
+		String valid_OTP = ConnectDB.getOTP("08060660747");
 
 		String ValidOTP = "Try to enter valid OTP : " + valid_OTP;
 		Markup o = MarkupHelper.createLabel(ValidOTP, ExtentColor.BLUE);
@@ -133,7 +134,7 @@ public class ForgotPassword extends TestBase {
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/change_password_title", "Change Password");
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/change_password_guide",
 				"Password must contain at least 10 Characters with at least 1 LowerCase, 1 UpperCase, 1 Number, and 1 Symbol");
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/agent_full_name", "Lizzy Ikhile");
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/agent_full_name", "frank atube");
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/textView3", "New password");
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/textView4", "Confirm New password");
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/cancel", "Cancel");
@@ -159,7 +160,7 @@ public class ForgotPassword extends TestBase {
 		TestUtils.assertSearchText("ID", "android:id/button1", "Ok");
 		getDriver().findElement(By.id("android:id/button1")).click();
 
-		// Trying to change password when the new password doesnt match confirm new
+		// Trying to change password when the new password doesnt match confirm old
 		// password
 
 		String notMatchingConfirmPassword = "Try to change password with confirm password" + "("
@@ -209,9 +210,10 @@ public class ForgotPassword extends TestBase {
 		JSONParser parser = new JSONParser();
 		JSONObject config = (JSONObject) parser
 				.parse(new FileReader("src/test/resource/config/data.config.json"));
-
-		String valid_username = (String) config.get("valid_username");
-		String new_password = (String) config.get("new_password");
+		JSONObject envs = (JSONObject) config.get("ForgotPassword");
+		
+		String valid_username = (String) envs.get("valid_username");
+		String new_password = (String) envs.get("new_password");
 		// Trying to login in with the new password
 		String login = "Trying to login with the newly changed password: " + new_password;
 		Markup pass = MarkupHelper.createLabel(login, ExtentColor.BLUE);
@@ -228,7 +230,7 @@ public class ForgotPassword extends TestBase {
 
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/submit")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
-
+		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Home']", "Home");
 	}
 
 }
