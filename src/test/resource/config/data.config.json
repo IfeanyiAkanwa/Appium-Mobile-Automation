@@ -3,14 +3,14 @@
 		"onboarded_username": "adazejohnson@gmail.com",
 		"invalid_username": "ada@seamnix.com",
 		"not_onboarded_username": "faruk.muhammad@mtnagent.com",
-		"valid_username": "adazejohnson@gmail.com",
+		"valid_username": "fatube@seamfix.com",
 		"invalid_password": "adazejohn@1",
 		"valid_password": "Bankole1!!",
 		"deactivated_username": "amusa.adewaleibrahim@mtnagent.com"
 	},
 	"ForgotPassword": {
 		"invalid_username": "ada@seamnix.com",
-		"valid_username": "adazejohnson@gmail.com",
+		"valid_username": "fatube@seamfix.com",
 		"new_password": "Bankole1!!",
 		"confirm_password": "Bankole1!!",
 		"invalid_password_policy": "bankole1!!",

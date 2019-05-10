@@ -45,57 +45,56 @@ public class Login extends TestBase {
 		String wrongUsername = "Try to login with username that does not exist" + "(" + invalid_username + ")";
 		Markup n = MarkupHelper.createLabel(wrongUsername, ExtentColor.BLUE);
 		testInfo.get().info(n);
-		getDriver().findElement(By.id("com.sf.biocapture.activity:id/linear_layout_username")).clear();
-		getDriver().findElement(By.id("com.sf.biocapture.activity:id/linear_layout_username"))
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/email")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/email"))
 				.sendKeys(invalid_username);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/verify")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/alertTitle")));
 		TestUtils.assertSearchText("ID", "android:id/message", "No agent was found with entered email address");
 		getDriver().findElement(By.id("android:id/button1")).click();
 		wait.until(ExpectedConditions
-				.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/linear_layout_username")));
+				.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/email")));
 
 		// Try to login with user that has not been onboarded
 		String notOnboardedUsername = "Try to login with username that is not onboarded" + "(" + not_onboarded_username
 				+ ")";
 		Markup b = MarkupHelper.createLabel(notOnboardedUsername, ExtentColor.BLUE);
 		testInfo.get().info(b);
-		getDriver().findElement(By.id("com.sf.biocapture.activity:id/linear_layout_username")).clear();
-		getDriver().findElement(By.id("com.sf.biocapture.activity:id/linear_layout_username"))
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/email")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/email"))
 				.sendKeys(not_onboarded_username);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/verify")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/alertTitle")));
 		TestUtils.assertSearchText("ID", "android:id/message", "Agent has not been onboarded yet");
 		getDriver().findElement(By.id("android:id/button1")).click();
 		wait.until(ExpectedConditions
-				.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/linear_layout_username")));
+				.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/email")));
 
 		// Try to login with user that has been blacklisted
 		String deactivatedUsername = "Try to login with username that is blacklisted" + "(" + deactivated_username
 				+ ")";
 		Markup d = MarkupHelper.createLabel(deactivatedUsername, ExtentColor.BLUE);
 		testInfo.get().info(d);
-		getDriver().findElement(By.id("com.sf.biocapture.activity:id/linear_layout_username")).clear();
-		getDriver().findElement(By.id("com.sf.biocapture.activity:id/linear_layout_username"))
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/email")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/email"))
 				.sendKeys(deactivated_username);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/verify")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/alertTitle")));
 		TestUtils.assertSearchText("ID", "android:id/message", "Your account is blacklisted. Please contact support");
 		getDriver().findElement(By.id("android:id/button1")).click();
 		wait.until(ExpectedConditions
-				.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/linear_layout_username")));
+				.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/email")));
 
 		// Try to login with an onboarded username
 		String onboardedUsername = "Try to login with an onboarded username" + "(" + onboarded_username + ")";
 		Markup u = MarkupHelper.createLabel(onboardedUsername, ExtentColor.BLUE);
 		testInfo.get().info(u);
-		getDriver().findElement(By.id("com.sf.biocapture.activity:id/linear_layout_username")).clear();
-		getDriver().findElement(By.id("com.sf.biocapture.activity:id/linear_layout_username"))
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/email")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/email"))
 				.sendKeys(onboarded_username);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/verify")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/finger_image")));
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/fingerType_text", "VERIFICATION");
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/btnScan", "Scan");
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/btnStop", "Capture");
 	}
 
