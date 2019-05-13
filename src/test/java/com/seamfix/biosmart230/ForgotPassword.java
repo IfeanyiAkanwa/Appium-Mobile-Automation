@@ -11,6 +11,7 @@ import org.json.simple.parser.ParseException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.markuputils.ExtentColor;
@@ -41,12 +42,12 @@ public class ForgotPassword extends TestBase {
 		testInfo.get().info("Successful landing to Forgot Password page");
 	}
 
+	@Parameters({ "dataEnv"})
 	@Test
-	public static void changePasswordWithInvalidUsername()
+	public static void changePasswordWithInvalidUsername(String dataEnv)
 			throws InterruptedException, SQLException, FileNotFoundException, IOException, ParseException {
 		JSONParser parser = new JSONParser();
-		JSONObject config = (JSONObject) parser
-				.parse(new FileReader("src/test/resource/config/data.config.json"));
+		JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
 		JSONObject envs = (JSONObject) config.get("ForgotPassword");
 		
 		String invalid_username = (String) envs.get("invalid_username");
@@ -69,13 +70,13 @@ public class ForgotPassword extends TestBase {
 				ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/password_reset")));
 	}
 
+	@Parameters({ "dataEnv"})
 	@Test
-	public static void changePasswordWithValidUsername()
+	public static void changePasswordWithValidUsername(String dataEnv)
 			throws InterruptedException, SQLException, FileNotFoundException, IOException, ParseException {
 		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
 		JSONParser parser = new JSONParser();
-		JSONObject config = (JSONObject) parser
-				.parse(new FileReader("src/test/resource/config/data.config.json"));
+		JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
 		JSONObject envs = (JSONObject) config.get("ForgotPassword");
 
 		String valid_username = (String) envs.get("valid_username");
@@ -97,7 +98,7 @@ public class ForgotPassword extends TestBase {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/dialog_title")));
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/dialog_title", "OTP verification");
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/dialog_message",
-				"Enter One Time Password sent to : 08060660747");
+				"Enter One Time Password sent to : 08169548454");
 
 		// Trying to test with invalid OTP
 		String invalid_OTP = (String) envs.get("invalid_OTP");
@@ -114,7 +115,7 @@ public class ForgotPassword extends TestBase {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/dialog_title")));
 
 		// Try to test with valid OTP
-		String valid_OTP = ConnectDB.getOTP("08060660747");
+		String valid_OTP = ConnectDB.getOTP("08169548454");
 
 		String ValidOTP = "Try to enter valid OTP : " + valid_OTP;
 		Markup o = MarkupHelper.createLabel(ValidOTP, ExtentColor.BLUE);
@@ -134,7 +135,7 @@ public class ForgotPassword extends TestBase {
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/change_password_title", "Change Password");
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/change_password_guide",
 				"Password must contain at least 10 Characters with at least 1 LowerCase, 1 UpperCase, 1 Number, and 1 Symbol");
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/agent_full_name", "frank atube");
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/agent_full_name", "Geraldine Nwabude");
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/textView3", "New password");
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/textView4", "Confirm New password");
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/cancel", "Cancel");
@@ -204,12 +205,12 @@ public class ForgotPassword extends TestBase {
 
 	}
 
+	@Parameters({ "dataEnv"})
 	@Test
-	public static void loginWithNewPassword()
+	public static void loginWithNewPassword(String dataEnv)
 			throws InterruptedException, FileNotFoundException, IOException, ParseException {
 		JSONParser parser = new JSONParser();
-		JSONObject config = (JSONObject) parser
-				.parse(new FileReader("src/test/resource/config/data.config.json"));
+		JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
 		JSONObject envs = (JSONObject) config.get("ForgotPassword");
 		
 		String valid_username = (String) envs.get("valid_username");
