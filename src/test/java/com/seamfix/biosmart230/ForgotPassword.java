@@ -84,6 +84,8 @@ public class ForgotPassword extends TestBase {
 		String confirm_password = (String) envs.get("confirm_password");
 		String confirm_password_not_matching = (String) envs.get("confirm_password_not_matching");
 		String invalid_password_policy = (String) envs.get("invalid_password_policy");
+		String user_full_name = (String) envs.get("user_full_name");
+		String user_phoneNumber = (String) envs.get("user_phoneNumber");
 
 		// Trying to change password with valid username
 		String validUsername = "Try to change password with valid username: " + valid_username;
@@ -98,7 +100,7 @@ public class ForgotPassword extends TestBase {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/dialog_title")));
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/dialog_title", "OTP verification");
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/dialog_message",
-				"Enter One Time Password sent to : 08169548454");
+				"Enter One Time Password sent to : " + user_phoneNumber);
 
 		// Trying to test with invalid OTP
 		String invalid_OTP = (String) envs.get("invalid_OTP");
@@ -115,7 +117,7 @@ public class ForgotPassword extends TestBase {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/dialog_title")));
 
 		// Try to test with valid OTP
-		String valid_OTP = ConnectDB.getOTP("08169548454");
+		String valid_OTP = ConnectDB.getOTP(user_phoneNumber);
 
 		String ValidOTP = "Try to enter valid OTP : " + valid_OTP;
 		Markup o = MarkupHelper.createLabel(ValidOTP, ExtentColor.BLUE);
@@ -135,7 +137,7 @@ public class ForgotPassword extends TestBase {
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/change_password_title", "Change Password");
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/change_password_guide",
 				"Password must contain at least 10 Characters with at least 1 LowerCase, 1 UpperCase, 1 Number, and 1 Symbol");
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/agent_full_name", "Geraldine Nwabude");
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/agent_full_name", user_full_name);
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/textView3", "New password");
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/textView4", "Confirm New password");
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/cancel", "Cancel");

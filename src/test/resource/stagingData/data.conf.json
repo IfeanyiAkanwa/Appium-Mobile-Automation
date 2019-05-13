@@ -15,7 +15,9 @@
 		"confirm_password": "Bankole1!!",
 		"invalid_password_policy": "ban",
 		"confirm_password_not_matching": "ban",
-		"invalid_OTP": "0000"
+		"invalid_OTP": "0000",
+		"user_full_name": "Geraldine Nwabude",
+		"user_phoneNumber": "08169548454"
 	},
 	"NewRegistration": {
 		"valid_msisdn": "1111113112",
