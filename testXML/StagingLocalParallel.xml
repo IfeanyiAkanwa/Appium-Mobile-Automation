@@ -3,15 +3,12 @@
 <suite name="BioSmartSuite" parallel="tests" thread-count="3">
 	<parameter name="groupReport" value="/DroidReport.html" />
 	<parameter name="toMails" value="gnwabude@seamfix.com" />
-	<parameter name="myURL"
-		value="http://10.1.242.245:7080/selfservice/" />
-	<parameter name="gridUrl"
-		value="https://selenium.k8.seamfix.com/wd/hub" />
 	<parameter name="config" value="data.conf.json" />
 	<parameter name="environment" value="chrome" />
 	<parameter name="server" value="local" />
 	<parameter name="downloadPath" value="/files/" />
-
+ 	<parameter name="dataEnv" value="stagingData" />
+ 
 	<test name="test1">
 		<parameter name="email" value="snapshot@seamfix.com" />
 		<parameter name="systemPort" value="8228" />
@@ -29,7 +26,7 @@
 			</class>
 			<class name="com.seamfix.biosmart230.Login">
 				<methods>
-					<include name="UsernamePasswordTest" />
+					<include name="usernamePasswordTest" />
 					<include name="loginWithFingerprint" />
 				</methods>
 			</class>

@@ -1,0 +1,72 @@
+{
+	"Login": {
+		"onboarded_username": "adazejohnson@gmail.com",
+		"invalid_username": "ada@seamnix.com",
+		"not_onboarded_username": "faruk.muhammad@mtnagent.com",
+		"valid_username": "gnwabude@seamfix.com",
+		"invalid_password": "adazejohn@1",
+		"valid_password": "Bankole1!!",
+		"deactivated_username": "amusa.adewaleibrahim@mtnagent.com"
+	},
+	"ForgotPassword": {
+		"invalid_username": "ada@seamnix.com",
+		"valid_username": "gnwabude@seamfix.com",
+		"new_password": "Bankole1!!",
+		"confirm_password": "Bankole1!!",
+		"invalid_password_policy": "ban",
+		"confirm_password_not_matching": "ban",
+		"invalid_OTP": "0000",
+		"user_full_name": "Geraldine Nwabude",
+		"user_phoneNumber": "08169548454"
+	},
+	"NewRegistration": {
+		"valid_msisdn": "1111113112",
+		"invalid_msisdn": "1111167112"
+	},
+	"UserDetails": {
+		"surname": "Amanda",
+		"firstname": "Rock",
+		"middlename": "Brain",
+		"maiden_name": "Merlin",
+		"social_media_type": "INSTAGRAM",
+		"social_media_username": "@testusers",
+		"street": "Neville Street",
+		"city": "Lagos",
+		"nationality": "NIGERIA",
+		"state": "BENUE",
+		"LGA": "Ado"
+	},
+	"CompanyDetails": {
+		"house_or_flat_no": "456C",
+		"company_regno": "NIG/LAG/16253",
+		"company_street": "Lekki Leasing House",
+		"company_city": "Lekki",
+		"company_state_address": "ABIA",
+		"company_lga_address": "Aba North",
+		"company_postalcode": "5200",
+		"email": "test@yopmail.com",
+		"alt_phone_number": "08000000000",
+		"postalcode": "746583",
+		"occupation": "Aeronautical Engineer",
+		"states_residence": "ABIA",
+		"lga_residence": "Aba North",
+		"area": "ARIARIA",
+		"lga_of_reg": "Akamkpa"
+	},
+	"IndividualForeignerDetails": {
+		"surname": "Saraswati",
+		"firstname": "Joubert",
+		"middlename": "Ganga",
+		"maiden_name": "Merlin",
+		"social_media_type": "INSTAGRAM",
+		"social_media_username": "@ganga",
+		"street": "Banaris",
+		"city": "Mumbai",
+		"nationality": "INDIA",
+		"state": "BENUE",
+		"LGA": "Ado"
+	},
+	"LandingPage_Url": {
+	"stagingUrl": "http:simregpoc.mtnnigeria.net"
+	}
+}

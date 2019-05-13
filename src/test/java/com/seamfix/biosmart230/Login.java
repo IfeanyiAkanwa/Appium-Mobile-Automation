@@ -10,6 +10,7 @@ import org.json.simple.parser.ParseException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.markuputils.ExtentColor;
@@ -21,11 +22,12 @@ import utils.TestUtils;
 
 public class Login extends TestBase {
 
+	@Parameters({ "dataEnv"})
 	@Test
-	public void loginWithFingerprint() throws FileNotFoundException, IOException, ParseException {
+	public void loginWithFingerprint(String dataEnv) throws FileNotFoundException, IOException, ParseException {
 		WebDriverWait wait = new WebDriverWait(getDriver(), 50);
 		JSONParser parser = new JSONParser();
-		JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/config/data.config.json"));
+		JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
 		JSONObject envs = (JSONObject) config.get("Login");
 		String onboarded_username = (String) envs.get("onboarded_username");
 		String invalid_username = (String) envs.get("invalid_username");
@@ -98,11 +100,12 @@ public class Login extends TestBase {
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/btnStop", "Capture");
 	}
 
+	@Parameters({ "dataEnv"})
 	@Test
-	public void UsernamePasswordTest() throws InterruptedException, FileNotFoundException, IOException, ParseException {
+	public void usernamePasswordTest(String dataEnv) throws InterruptedException, FileNotFoundException, IOException, ParseException {
 		WebDriverWait wait = new WebDriverWait(getDriver(), 50);
 		JSONParser parser = new JSONParser();
-		JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/config/data.config.json"));
+		JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
 		JSONObject envs = (JSONObject) config.get("Login");
 
 		String valid_username = (String) envs.get("valid_username");

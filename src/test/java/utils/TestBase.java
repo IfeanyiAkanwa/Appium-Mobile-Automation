@@ -38,7 +38,7 @@ public class TestBase {
 	public static ExtentHtmlReporter htmlReporter;
 	private static ThreadLocal<ExtentTest> parentTest = new ThreadLocal<ExtentTest>();
 	public static ThreadLocal<ExtentTest> testInfo = new ThreadLocal<ExtentTest>();
-	public static String URLbase = "http:simregpoc.mtnnigeria.net";
+	public static String gridUrl = System.getProperty("grid-url", "https://selenium.k8.seamfix.com/wd/hub");
 	public static String toAddress;
 
 	public static String userName = "USERNAME";
@@ -53,10 +53,29 @@ public class TestBase {
 
 	String devices;
 	static String[] udid;
+	
+	 @Parameters ("dataEnv")
+		public static String myUrl(String dataEnv) throws FileNotFoundException, IOException, ParseException {
+	    	JSONParser parser = new JSONParser();
+			JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
+			JSONObject envs = (JSONObject) config.get("LandingPage_Url");
 
-	@Parameters("groupReport")
+			String stagingUrl = (String) envs.get("stagingUrl");
+			String prodUrl = (String) envs.get("prodUrl");
+			
+			String myUrl = null;
+			if(dataEnv.equalsIgnoreCase("stagingData")) {
+				myUrl = System.getProperty("instance-url", stagingUrl);
+			} else
+			{
+				myUrl = System.getProperty("instance-url", prodUrl);
+			}
+			return myUrl;
+		}
+
+	@Parameters({"groupReport", "dataEnv"})
 	@BeforeSuite
-	public void setUp(String groupReport) {
+	public void setUp(String groupReport, String dataEnv) throws FileNotFoundException, IOException, ParseException {
 
 		{
 			try {
@@ -73,7 +92,7 @@ public class TestBase {
 		htmlReporter = new ExtentHtmlReporter(new File(System.getProperty("user.dir") + groupReport));
 		htmlReporter.loadXMLConfig(new File(System.getProperty("user.dir") + "/resources/extent-config.xml"));
 		reports = new ExtentReports();
-		reports.setSystemInfo("POC", URLbase);
+		reports.setSystemInfo("Test Environment", myUrl(dataEnv));
 		reports.attachReporter(htmlReporter);
 
 	}
@@ -176,11 +195,12 @@ public class TestBase {
 		parentTest.set(parent);
 	}
 
+	@Parameters ({"dataEnv"})
 	@Test
-	public void Login() throws InterruptedException, FileNotFoundException, IOException, ParseException {
+	public void Login(String dataEnv) throws InterruptedException, FileNotFoundException, IOException, ParseException {
 		WebDriverWait wait = new WebDriverWait(getDriver(), 50);
 		JSONParser parser = new JSONParser();
-		JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/config/data.config.json"));
+		JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
 		JSONObject envs = (JSONObject) config.get("Login");
 
 		String valid_username = (String) envs.get("valid_username");
