@@ -16,7 +16,7 @@
 
 
 		<classes>
-			<!-- <class name="com.seamfix.biosmart230.ForgotPassword">
+			<class name="com.seamfix.biosmart230.ForgotPassword">
 				<methods>
 					<include name="navigateToForgotPassword" />
 					<include name="changePasswordWithInvalidUsername" />
@@ -29,7 +29,7 @@
 					<include name="usernamePasswordTest" />
 					<include name="loginWithFingerprint" />
 				</methods>
-			</class> -->
+			</class>
 			<class name="com.seamfix.biosmart230.ChangePasswordTest">
 				<methods>
 					<include name="Login" />
