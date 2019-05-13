@@ -38,7 +38,7 @@ public class TestBase {
 	public static ExtentHtmlReporter htmlReporter;
 	private static ThreadLocal<ExtentTest> parentTest = new ThreadLocal<ExtentTest>();
 	public static ThreadLocal<ExtentTest> testInfo = new ThreadLocal<ExtentTest>();
-	public static String gridUrl = System.getProperty("grid-url", "https://selenium.k8.seamfix.com/wd/hub");
+	public static String gridUrl = System.getProperty("grid-url", "http:simregpoc.mtnnigeria.net");
 	public static String toAddress;
 
 	public static String userName = "USERNAME";

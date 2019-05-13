@@ -30,6 +30,15 @@
 					<include name="loginWithFingerprint" />
 				</methods>
 			</class>
+			<class name="com.seamfix.biosmart230.ChangePasswordTest">
+				<methods>
+					<include name="Login" />
+					<include name="navigateToChangePasswordPage" />
+					<include name="changeToNewPassword" />
+					<include name="loginWithNewPassword" />
+					<include name="changeBackToOldPassword" />
+				</methods>
+			</class>
 			
 		</classes>
 	</test>
