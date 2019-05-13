@@ -19,6 +19,13 @@
 		"user_full_name": "Geraldine Nwabude",
 		"user_phoneNumber": "08169548454"
 	},
+	"ChangePassword": {
+		"valid_username": "gnwabude@seamfix.com",
+		"newPassword": "Rankole1!!!",
+		"password": "Bankole1!!",
+		"invalid_password_policy": "ban",
+		"confirm_password_not_matching": "ban"
+	},
 	"NewRegistration": {
 		"valid_msisdn": "1111113112",
 		"invalid_msisdn": "1111167112"
