@@ -1,15 +1,12 @@
 package com.seamfix.biosmart230;
 
-import java.io.FileReader;
-
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.Parameters;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.Markup;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
@@ -19,6 +16,9 @@ import utils.TestBase;
 import utils.TestUtils;
 
 public class ReportsTest extends TestBase {
+	
+	private static StringBuffer verificationErrors = new StringBuffer();
+	
     @Test
     public static void navigateToReportsPage() throws InterruptedException {
     	
@@ -37,6 +37,27 @@ public class ReportsTest extends TestBase {
     public static void reportSummary() throws Exception {
     	
     	Asserts.AssertReportSummary();
+    	String totalRegistrationsValString = getDriver().findElement(By.id("com.sf.biocapture.activity:id/reg_subscribers")).getText();
+		String totalSyncSentValString = getDriver().findElement(By.id("com.sf.biocapture.activity:id/total_sync_sent")).getText();
+		String totalSyncPendingValString = getDriver().findElement(By.id("com.sf.biocapture.activity:id/total_pending")).getText();
+		String totalSyncConfirmedValString = getDriver().findElement(By.id("com.sf.biocapture.activity:id/sync_confirmed")).getText();
+		
+		int actualTotalRegistrationsVal = TestUtils.convertToInt(totalRegistrationsValString);
+		int actualTotalSyncSentVal = TestUtils.convertToInt(totalSyncSentValString);
+		int actualTotalSyncPendingVal = TestUtils.convertToInt(totalSyncPendingValString);
+		int actualTotalSyncConfirmedVal = TestUtils.convertToInt(totalSyncConfirmedValString);
+				
+		int expectedTotalRegistrationsVal = actualTotalSyncSentVal + actualTotalSyncPendingVal;
+
+		try {
+			Assert.assertEquals(expectedTotalRegistrationsVal, actualTotalRegistrationsVal);
+			testInfo.get().log(Status.INFO, "Total Registrations (" + expectedTotalRegistrationsVal + ") is equal to summation of total Sync sent (" + actualTotalSyncSentVal + ") + total Sync pending (" + actualTotalSyncPendingVal + ") which is also equal to  total Sync confirmed (" + actualTotalSyncConfirmedVal + ")");
+		} catch (Error e) {
+			verificationErrors.append(e.toString());
+			String verificationErrorString = verificationErrors.toString();
+			testInfo.get().error("Summation not equal");
+			testInfo.get().error(verificationErrorString);
+		}
     	
         //Refresh
     	TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity:id/refresh_button");
