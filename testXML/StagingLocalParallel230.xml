@@ -14,7 +14,6 @@
 		<parameter name="systemPort" value="8228" />
 		<parameter name="deviceNo" value="1" />
 
-
 		<classes>
 			<class name="com.seamfix.biosmart230.ForgotPassword">
 				<methods>
@@ -37,6 +36,21 @@
 					<include name="changeToNewPassword" />
 					<include name="loginWithNewPassword" />
 					<include name="changeBackToOldPassword" />
+				</methods>
+			</class>
+			<class name="com.seamfix.biosmart230.NotificationsTest">
+				<methods>
+					<include name="Login" />
+					<include name="navigateToNotifications" />
+					<include name="viewNotifications" />
+				</methods>
+			</class>
+			<class name="com.seamfix.biosmart230.ReportsTest">
+				<methods>
+					<include name="Login" />
+					<include name="navigateToReportsPage" />
+					<include name="reportSummary" />
+					<include name="searchParameters" />
 				</methods>
 			</class>
 			
