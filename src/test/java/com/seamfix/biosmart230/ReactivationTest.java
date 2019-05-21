@@ -1,61 +1,110 @@
 package com.seamfix.biosmart230;
 
+import java.io.FileReader;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.markuputils.ExtentColor;
+import com.aventstack.extentreports.markuputils.Markup;
+import com.aventstack.extentreports.markuputils.MarkupHelper;
 
 import db.ConnectDB;
 import utils.TestBase;
 import utils.TestUtils;
 
 public class ReactivationTest extends TestBase {
-	
-	String phoneNumber = "09062058526";
+
     String otp = null;
     
 	@Test
-    public static void NavigateToCaptureMenuTest() throws InterruptedException {
-        Thread.sleep(500);
+    public static void navigateToCaptureMenuTest() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+        
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
-        Thread.sleep(500);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/button_start_capture")).click();
-        Thread.sleep(500);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Registration Type']")));
-        TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Registration Type']", "Registration Type");
-        Thread.sleep(500);
-
+        wait.until(ExpectedConditions
+				.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/reg_type_placeholder")));
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/reg_type_placeholder",
+				"Registration Type");
+	    Thread.sleep(500);
     }
 	
+	@Parameters({ "dataEnv"})
 	@Test
-    public void msisdnReactivateTest() throws InterruptedException, IOException, SQLException {
+    public void msisdnReactivateTest(String dataEnv) throws Exception {
 
-        WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+        WebDriverWait wait = new WebDriverWait(getDriver(), 60);
+        JSONParser parser = new JSONParser();
+		JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
+		JSONObject envs = (JSONObject) config.get("Reactivation");
+		
+		String invalid_msisdn = (String) envs.get("invalid_msisdn");
+		String valid_msisdn = (String) envs.get("valid_msisdn");
+		String lga = (String) envs.get("lga");
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/linear_layout_username"))).click();
-        Thread.sleep(1000);
-        getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='MSISDN Re-Activation']")).click();
-        Thread.sleep(500);
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/next_button")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='MSISDN Reactivation']")));
-        TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='MSISDN Reactivation']", "MSISDN Reactivation");
-        Thread.sleep(1000);
+		// Try to select LGA of Registration
+		String lgaa = "Try to select LGA of Registration: " + lga;
+		Markup m = MarkupHelper.createLabel(lgaa, ExtentColor.BLUE);
+		testInfo.get().info(m);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/lga_of_reg")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/alertTitle")));
+		TestUtils.assertSearchText("ID", "android:id/alertTitle", "LGA of Registration*");
+		getDriver().findElement(By.id("android:id/search_src_text")).sendKeys(lga);
+		getDriver().findElement(By.id("android:id/button1")).click();
+		
+		// Try to select MSISDN Re-Activation
+		String reAct = "Try to select MSISDN Re-Activation";
+		Markup d = MarkupHelper.createLabel(reAct, ExtentColor.BLUE);
+		testInfo.get().info(d);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/typeofreg"))).click();
+		TestUtils.assertSearchText("ID", "android:id/alertTitle", "Select Item");
+		TestUtils.assertSearchText("ID", "android:id/text1", "[Select Registration Type]");
+		getDriver().findElement(By.xpath("//android.widget.TextView[@text='MSISDN Re-Activation']")).click();
+		Thread.sleep(500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/next_button")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='MSISDN Reactivation']")));
+		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='MSISDN Reactivation']", "MSISDN Reactivation");
+		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Please provide information for the \n" + 
+				"corresponding fields']", "Please provide information for the \n" + 
+				"corresponding fields");
+		Thread.sleep(500);
+		
+		// Try to enter invalid msisdn
+		String invalidMsisdn = "Try to enter invalid MSISDN " + "(" + invalid_msisdn + ") " + "for validation";
+		Markup i = MarkupHelper.createLabel(invalidMsisdn, ExtentColor.BLUE);
+		testInfo.get().info(i);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/primary_msisdn_field")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/primary_msisdn_field")).sendKeys(invalid_msisdn);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/submit_button")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/alertTitle")));
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/alertTitle", "Error");
+		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='MSISDN is not eligible for reactivation']", "MSISDN is not eligible for reactivation");
+		getDriver().findElement(By.id("android:id/button1")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='MSISDN Reactivation']")));
+		
+		// Try to enter valid msisdn
+		String validMsisdn = "Try to enter valid MSISDN" + "(" + valid_msisdn + ") " + "for validation";
+		Markup v = MarkupHelper.createLabel(validMsisdn, ExtentColor.BLUE);
+		testInfo.get().info(v);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/primary_msisdn_field")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/primary_msisdn_field")).sendKeys(phoneNumber);
+        getDriver().findElement(By.id("com.sf.biocapture.activity:id/primary_msisdn_field")).sendKeys(valid_msisdn);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/submit_button")).click();
-        
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/otp_panel_view")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/otp_field")));
+        Thread.sleep(1000);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/otp_request_button")).click();
-        if(TestUtils.isElementPresent("ID", "android:id/body")){
-            wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("android:id/body")));
-        }
-        otp = ConnectDB.getOTP(phoneNumber);
+        Thread.sleep(1000);
+        
+        // DB Connection for OTP
+        otp = ConnectDB.getOTP(valid_msisdn);
         if(otp == null){
         	testInfo.get().log(Status.INFO, "Can't get otp.");
             getDriver().quit();
@@ -70,13 +119,9 @@ public class ReactivationTest extends TestBase {
         testInfo.get().addScreenCaptureFromPath(screenshotPath);
         TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/reactivate_button", "Reactivate Subscriber");
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/reactivate_button")).click();
-        if(TestUtils.isElementPresent("ID", "android:id/body")){
-        	testInfo.get().log(Status.INFO, "Message: "+ getDriver().findElement(By.id("android:id/message")).getText());
-            wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("android:id/body")));
-        }
         Thread.sleep(1000);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
-        TestUtils.assertSearchText("ID", "android:id/message", "MSISDN has been reactivated successfully.");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='MSISDN has been reactivated successfully.']")));
+        TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='MSISDN has been reactivated successfully.']", "MSISDN has been reactivated successfully.");
         getDriver().findElement(By.id("android:id/button1")).click();
         Thread.sleep(500);
         
