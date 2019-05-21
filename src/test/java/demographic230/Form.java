@@ -68,12 +68,12 @@ public class Form extends TestBase {
 		testInfo.get().info(e);
 		// Company details
 		wait.until(ExpectedConditions.visibilityOfElementLocated((By.id("com.sf.biocapture.activity:id/reg_type"))));
-		Thread.sleep(500);
+		Thread.sleep(1000);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/reg_type")).click();
 		Thread.sleep(1000);
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//android.widget.CheckedTextView[@index='1']")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.CheckedTextView[@text='Company']")));
 		Thread.sleep(1000);
-		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@index='1']")).click();
+		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Company']")).click();
 		Thread.sleep(500);
 		wait.until(ExpectedConditions.visibilityOfElementLocated((By.id("com.sf.biocapture.activity:id/company_details_title"))));
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/company_details_title", "Company Details");
@@ -345,7 +345,7 @@ public class Form extends TestBase {
 		Thread.sleep(1000);
 		
 		// Capture KYC FORM
-		getDriver().findElement(By.xpath("com.sf.biocapture.activity:id/capture_kyc_form_button")).click();
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/capture_kyc_form_button")).click();
 		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/button_camera_capture")).click();
 		Thread.sleep(500);
@@ -369,7 +369,7 @@ public class Form extends TestBase {
 		Thread.sleep(500);
 		
 		// Face Capture
-		getDriver().findElement(By.xpath("com.sf.biocapture.activity:id/face_capture_button")).click();
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/face_capture_button")).click();
 		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/button_camera_capture")).click();
 		Thread.sleep(500);

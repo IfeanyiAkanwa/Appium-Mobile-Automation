@@ -124,12 +124,5 @@ public class CaptureNewMSISDNRegistration extends TestBase {
 		Thread.sleep(1000);
 		
 		Form.NigerianCompanyForm(dataEnv);
-		if (TestUtils.isElementPresent("XPATH", "//android.widget.TextView[@text='Sell Airtime/Data']")) {
-			getDriver().findElement(By.className("android.widget.ImageButton")).click();
-		}
-
-		wait.until(
-				ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/kpi_report_name")));
-
 	}
 }
