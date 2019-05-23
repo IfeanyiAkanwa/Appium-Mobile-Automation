@@ -39,6 +39,20 @@
 					<include name="changeBackToOldPassword" />
 				</methods>
 			</class>
+			<class name="com.seamfix.biosmart230.CaptureNewMSISDNRegistration">
+				<methods>
+					<include name="Login" />
+					<include name="NavigateToCaptureMenuTest" />
+					<include name="CaptureNewMSISDNTest" />
+				</methods>
+			</class>
+			<class name="com.seamfix.biosmart230.ReactivationTest">
+				<methods>
+					<include name="Login" />
+					<include name="navigateToCaptureMenuTest" />
+					<include name="msisdnReactivateTest" />
+				</methods>
+			</class>
 			
 		</classes>
 	</test>

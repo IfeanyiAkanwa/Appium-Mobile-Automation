@@ -18,7 +18,7 @@
 			<class name="com.seamfix.biosmart230.ForgotPassword">
 				<methods>
 					<include name="navigateToForgotPassword" />
-					<include name="changePasswordWithInvalidUsername" />
+					<include name="changePayousswordWithInvalidUsername" />
 					<include name="changePasswordWithValidUsername" />
 					<include name="loginWithNewPassword" />
 				</methods>
@@ -51,6 +51,20 @@
 					<include name="navigateToReportsPage" />
 					<include name="reportSummary" />
 					<include name="searchParameters" />
+				</methods>
+			</class>
+			<class name="com.seamfix.biosmart230.CaptureNewMSISDNRegistration">
+				<methods>
+					<include name="Login" />
+					<include name="NavigateToCaptureMenuTest" />
+					<include name="CaptureNewMSISDNTest" />
+				</methods>
+			</class>
+			<class name="com.seamfix.biosmart230.ReactivationTest">
+				<methods>
+					<include name="Login" />
+					<include name="navigateToCaptureMenuTest" />
+					<include name="msisdnReactivateTest" />
 				</methods>
 			</class>
 			

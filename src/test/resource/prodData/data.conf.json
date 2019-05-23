@@ -33,6 +33,11 @@
 		"valid_msisdn": "1111113112",
 		"invalid_msisdn": "1111167112"
 	},
+	"Reactivation": {
+		"valid_msisdn": "09062058526",
+		"invalid_msisdn": "08083733777",
+		"lga": "Ibeju-Lekki"
+	},
 	"UserDetails": {
 		"surname": "Amanda",
 		"firstname": "Rock",
@@ -41,7 +46,7 @@
 		"social_media_type": "INSTAGRAM",
 		"social_media_username": "@testusers",
 		"street": "Neville Street",
-		"city": "Lagos",
+		"city": "Aba",
 		"nationality": "NIGERIA",
 		"state": "BENUE",
 		"LGA": "Ado"
@@ -49,6 +54,7 @@
 	"CompanyDetails": {
 		"house_or_flat_no": "456C",
 		"company_regno": "NIG/LAG/16253",
+		"company_description": "Seamfix Nigeria QA test",
 		"company_street": "Lekki Leasing House",
 		"company_city": "Lekki",
 		"company_state_address": "ABIA",
@@ -73,8 +79,15 @@
 		"street": "Banaris",
 		"city": "Mumbai",
 		"nationality": "INDIA",
+		"house_or_flat_no": "456C",
 		"state": "BENUE",
-		"LGA": "Ado"
+		"LGA": "Ado",
+		"email": "test@yopmail.com",
+		"alt_phone_number": "08000000000",
+		"postalcode": "746583",
+		"occupation": "Aeronautical Engineer",
+		"area": "AGILA",
+		"passport_ID_number": "6861637BC"
 	},
 	"LandingPage_Url": {
 	"prodUrl": "http:simreg.mtnnigeria.net"
