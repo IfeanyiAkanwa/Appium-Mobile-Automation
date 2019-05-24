@@ -151,6 +151,9 @@ public class SellAirtimeAndData extends TestBase {
 		TestUtils.assertSearchText("ID", "android:id/message", "SUCCESS");
 		getDriver().findElement(By.id("android:id/button1")).click();
 		Thread.sleep(500);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/alertTitle")));
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/cancel")).click();
+		Thread.sleep(500);
 
 	}
 	

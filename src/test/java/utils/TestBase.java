@@ -206,8 +206,7 @@ public class TestBase {
 		String valid_username = (String) envs.get("valid_username");
 		String valid_password = (String) envs.get("valid_password");
 
-		String validUsernameValidPassword = "Try to login with a valid username" + "(" + valid_username + ")"
-				+ "and valid password" + "(" + valid_password + ")";
+		String validUsernameValidPassword = "Login with a valid username: " + valid_username 	+ " and valid password "+ valid_password;
 		Markup v = MarkupHelper.createLabel(validUsernameValidPassword, ExtentColor.BLUE);
 		testInfo.get().info(v);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/otp_login")));
@@ -227,8 +226,7 @@ public class TestBase {
 	public static void Login1(String dataEnv, String valid_username, String valid_password) throws Exception {
 		WebDriverWait wait = new WebDriverWait(getDriver(), 50);
 	
-		String validUsernameValidPassword = "Try to login with a valid username" + "(" + valid_username + ")"
-				+ "and valid password" + "(" + valid_password + ")";
+		String validUsernameValidPassword = "Login with a valid username: " + valid_username + " and valid password "  + valid_password;
 		Markup v = MarkupHelper.createLabel(validUsernameValidPassword, ExtentColor.BLUE);
 		testInfo.get().info(v);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/otp_login")));
