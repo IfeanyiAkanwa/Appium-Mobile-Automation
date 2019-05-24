@@ -42,7 +42,7 @@ public class ReactivationTest extends TestBase {
 		Thread.sleep(500);
 		
 		// Try to select LGA of Registration
-		String lgaa = "Try to select LGA of Registration: " + lga;
+		String lgaa = "Select LGA of Registration: " + lga;
 		Markup m = MarkupHelper.createLabel(lgaa, ExtentColor.BLUE);
 		testInfo.get().info(m);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/lga_of_reg")).click();
@@ -52,7 +52,7 @@ public class ReactivationTest extends TestBase {
 		getDriver().findElement(By.id("android:id/button1")).click();
 		
 		// Try to select MSISDN Re-Activation
-		String reAct = "Try to select MSISDN Re-Activation";
+		String reAct = "Select MSISDN Re-Activation";
 		Markup d = MarkupHelper.createLabel(reAct, ExtentColor.BLUE);
 		testInfo.get().info(d);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/typeofreg"))).click();
@@ -68,7 +68,7 @@ public class ReactivationTest extends TestBase {
 		Thread.sleep(500);
 		
 		// Try to log out
-		String logOut = "Try to logout" + "(" + valid_username + ")";
+		String logOut = "logout username: "  + valid_username;
 		Markup o = MarkupHelper.createLabel(logOut, ExtentColor.BLUE);
 		testInfo.get().info(o);
 		getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
@@ -113,7 +113,7 @@ public class ReactivationTest extends TestBase {
 		String lga = (String) envs.get("lga");
 
 		// Try to select LGA of Registration
-		String lgaa = "Try to select LGA of Registration: " + lga;
+		String lgaa = "Select LGA of Registration: " + lga;
 		Markup m = MarkupHelper.createLabel(lgaa, ExtentColor.BLUE);
 		testInfo.get().info(m);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/lga_of_reg")).click();
@@ -123,7 +123,7 @@ public class ReactivationTest extends TestBase {
 		getDriver().findElement(By.id("android:id/button1")).click();
 		
 		// Try to select MSISDN Re-Activation
-		String reAct = "Try to select MSISDN Re-Activation";
+		String reAct = "Select MSISDN Re-Activation";
 		Markup d = MarkupHelper.createLabel(reAct, ExtentColor.BLUE);
 		testInfo.get().info(d);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/typeofreg"))).click();
@@ -140,7 +140,7 @@ public class ReactivationTest extends TestBase {
 		Thread.sleep(500);
 		
 		// Try to enter invalid msisdn
-		String invalidMsisdn = "Try to enter invalid MSISDN " + "(" + invalid_msisdn + ") " + "for validation";
+		String invalidMsisdn = "Enter invalid MSISDN " + invalid_msisdn + " for validation";
 		Markup i = MarkupHelper.createLabel(invalidMsisdn, ExtentColor.BLUE);
 		testInfo.get().info(i);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/primary_msisdn_field")).clear();
@@ -153,7 +153,7 @@ public class ReactivationTest extends TestBase {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='MSISDN Reactivation']")));
 		
 		// Try to enter valid msisdn with invalid OTP
-		String validMs = "Try to enter valid msisdn with invalid OTP"  + "(" + valid_msisdn + ")";
+		String validMs = "Enter valid msisdn with invalid OTP: "  + valid_msisdn;
 		Markup r = MarkupHelper.createLabel(validMs, ExtentColor.BLUE);
 		testInfo.get().info(r);
 		String invalid_OTP = (String) envs.get("invalid_OTP");
@@ -175,7 +175,7 @@ public class ReactivationTest extends TestBase {
 	    Thread.sleep(500);
 	     
 		// Try to enter valid msisdn with valid OTP
-		String validMsisdn = "Try to enter valid msisdn with valid OTP" + "(" + valid_msisdn + ") " + "for validation";
+		String validMsisdn = "Enter valid msisdn with valid OTP: " + valid_msisdn + " for validation";
 		Markup v = MarkupHelper.createLabel(validMsisdn, ExtentColor.BLUE);
 		testInfo.get().info(v);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/primary_msisdn_field")).clear();
@@ -189,7 +189,7 @@ public class ReactivationTest extends TestBase {
         // DB Connection for OTP
     	String valid_OTP = ConnectDB.getOTP(valid_msisdn);
 
-		String ValidOTP = "Try to enter valid OTP : " + valid_OTP;
+		String ValidOTP = "Enter valid OTP : " + valid_OTP;
 		Markup o = MarkupHelper.createLabel(ValidOTP, ExtentColor.BLUE);
 		testInfo.get().info(o);
         if(valid_OTP == null){

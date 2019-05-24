@@ -64,7 +64,7 @@ public class SellAirtimeAndData extends TestBase {
 		String invalid_agent_vtu = (String) envs.get("invalid_agent_vtu");
 		
 		// Try to sell airtime with invalid Agent VTU number
-		String air = "Try to sell airtime with invalid Agent VTU number: " + invalid_agent_vtu;
+		String air = "Sell airtime with invalid Agent VTU number: " + invalid_agent_vtu;
 		Markup m = MarkupHelper.createLabel(air, ExtentColor.BLUE);
 		testInfo.get().info(m);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/agent_vtu")).clear();
@@ -83,11 +83,11 @@ public class SellAirtimeAndData extends TestBase {
 		Thread.sleep(1000);
 		
 		// Try to sell airtime with valid Agent VTU number and invalid OTP
-		String validMs = "TTry to sell airtime with valid Agent VTU number and invalid OTP"  + "(" + agent_vtu + ")";
+		String validMs = "Sell airtime with valid Agent VTU number and invalid OTP"  + "(" + agent_vtu + ")";
 		Markup r = MarkupHelper.createLabel(validMs, ExtentColor.BLUE);
 		testInfo.get().info(r);
 		String invalid_OTP = (String) envs.get("invalid_OTP");
-		String inValidOTP = "Try to enter OTP that does not exist: " + invalid_OTP;
+		String inValidOTP = "Enter OTP that does not exist: " + invalid_OTP;
 		Markup otp = MarkupHelper.createLabel(inValidOTP, ExtentColor.BLUE);
 		testInfo.get().info(otp);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/agent_vtu")).clear();
@@ -115,7 +115,7 @@ public class SellAirtimeAndData extends TestBase {
 		Thread.sleep(500);
 		
 		// Try to sell airtime with valid Agent VTU number and valid OTP
-		String airtime = "Try to sell airtime with valid Agent VTU number and valid OTP: " + agent_vtu;
+		String airtime = "Sell airtime with valid Agent VTU number and valid OTP: " + agent_vtu;
 		Markup e = MarkupHelper.createLabel(airtime, ExtentColor.BLUE);
 		testInfo.get().info(e);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Airtime']")));
@@ -135,7 +135,7 @@ public class SellAirtimeAndData extends TestBase {
 		  // DB Connection for OTP
     	String valid_OTP = ConnectDB.getOTP(agent_vtu);
 
-		String ValidOTP = "Try to enter valid OTP : " + valid_OTP;
+		String ValidOTP = "Enter valid OTP : " + valid_OTP;
 		Markup o = MarkupHelper.createLabel(ValidOTP, ExtentColor.BLUE);
 		testInfo.get().info(o);
         if(valid_OTP == null){
@@ -167,7 +167,7 @@ public class SellAirtimeAndData extends TestBase {
 		String invalid_agent_vtu = (String) envs.get("invalid_agent_vtu");
 		
 		// Try to vend data with invalid Agent VTU number
-		String data = "Try to vend data with invalid Agent VTU number: " + invalid_agent_vtu;
+		String data = "Vend data with invalid Agent VTU number: " + invalid_agent_vtu;
 		Markup a = MarkupHelper.createLabel(data, ExtentColor.BLUE);
 		testInfo.get().info(a);
 		getDriver().findElement(By.xpath("//android.widget.TextView[@text='Data']")).click();
@@ -194,11 +194,11 @@ public class SellAirtimeAndData extends TestBase {
 		Thread.sleep(500);
 		
 		// Try to vend data with valid Agent VTU number and invalid OTP
-		String validMs = "Try to vend data with valid Agent VTU number and invalid OTP"  + "(" + agent_vtu + ")";
+		String validMs = "Vend data with valid Agent VTU number and invalid OTP"  + "(" + agent_vtu + ")";
 		Markup r = MarkupHelper.createLabel(validMs, ExtentColor.BLUE);
 		testInfo.get().info(r);
 		String invalid_OTP = (String) envs.get("invalid_OTP");
-		String inValidOTP = "Try to enter OTP that does not exist: " + invalid_OTP;
+		String inValidOTP = "Enter OTP that does not exist: " + invalid_OTP;
 		Markup otp = MarkupHelper.createLabel(inValidOTP, ExtentColor.BLUE);
 		testInfo.get().info(otp);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/name")).clear();
@@ -230,7 +230,7 @@ public class SellAirtimeAndData extends TestBase {
 		Thread.sleep(500);
 
 		// Try to vend data with valid Agent VTU number and valid OTP
-		String dataa = "Try to vend data with valid Agent VTU number and valid OTP: " + agent_vtu;
+		String dataa = "Vend data with valid Agent VTU number and valid OTP: " + agent_vtu;
 		Markup t = MarkupHelper.createLabel(dataa, ExtentColor.BLUE);
 		testInfo.get().info(t);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Data']")));
@@ -255,7 +255,7 @@ public class SellAirtimeAndData extends TestBase {
 		  // DB Connection for OTP
     	String valid_OTP = ConnectDB.getOTP(agent_vtu);
 
-		String ValidOTP = "Try to enter valid OTP : " + valid_OTP;
+		String ValidOTP = "Enter valid OTP : " + valid_OTP;
 		Markup o = MarkupHelper.createLabel(ValidOTP, ExtentColor.BLUE);
 		testInfo.get().info(o);
         if(valid_OTP == null){
