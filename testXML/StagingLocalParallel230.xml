@@ -15,7 +15,7 @@
 		<parameter name="deviceNo" value="1" />
 
 		<classes>
-			<!-- <class name="com.seamfix.biosmart230.ForgotPassword">
+			<class name="com.seamfix.biosmart230.ForgotPassword">
 				<methods>
 					<include name="navigateToForgotPassword" />
 					<include name="changePayousswordWithInvalidUsername" />
@@ -59,7 +59,7 @@
 					<include name="NavigateToCaptureMenuTest" />
 					<include name="CaptureNewMSISDNTest" />
 				</methods>
-			</class> -->
+			</class>
 			<class name="com.seamfix.biosmart230.ReactivationTest">
 				<methods>
 					<include name="noneReactivationPrivilegeLoginTest" />
