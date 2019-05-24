@@ -62,9 +62,18 @@
 			</class>
 			<class name="com.seamfix.biosmart230.ReactivationTest">
 				<methods>
+					<include name="noneReactivationPrivilegeLoginTest" />
 					<include name="Login" />
 					<include name="navigateToCaptureMenuTest" />
 					<include name="msisdnReactivateTest" />
+				</methods>
+			</class>
+			<class name="com.seamfix.biosmart230.SellAirtimeAndData">
+				<methods>
+					<include name="sellAirtimeLoginTest" />
+					<include name="navigateToSellAirtimeAndData" />
+					<include name="sellAirtimeTest" />
+					<include name="sellDataTest" />
 				</methods>
 			</class>
 			

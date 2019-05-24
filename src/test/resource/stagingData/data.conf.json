@@ -37,7 +37,19 @@
 	"Reactivation": {
 		"valid_msisdn": "09062058526",
 		"invalid_msisdn": "08083733777",
-		"lga": "Ibeju-Lekki"
+		"lga": "Ibeju-Lekki",
+		"valid_username": "e.okafor@seamfix.com",
+		"valid_password": "bankole1!!",
+		"invalid_OTP": "00000"
+	},
+	"SellAirtimeAndData": {
+		"valid_username": "folalere@seamfix.com",
+		"valid_password": "Bankole1!!",
+		"agent_vtu": "08032791952",
+		"sub_msisdn": "08169548454",
+		"amount": "50",
+		"invalid_agent_vtu": "08133302299",
+		"invalid_OTP": "00000"
 	},
 	"UserDetails": {
 		"surname": "Amanda",

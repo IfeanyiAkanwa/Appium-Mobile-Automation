@@ -197,7 +197,7 @@ public class TestBase {
 
 	@Parameters ({"dataEnv"})
 	@Test
-	public void Login(String dataEnv) throws InterruptedException, FileNotFoundException, IOException, ParseException {
+	public static void Login(String dataEnv) throws InterruptedException, FileNotFoundException, IOException, ParseException {
 		WebDriverWait wait = new WebDriverWait(getDriver(), 50);
 		JSONParser parser = new JSONParser();
 		JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
@@ -206,8 +206,27 @@ public class TestBase {
 		String valid_username = (String) envs.get("valid_username");
 		String valid_password = (String) envs.get("valid_password");
 
-		String validUsernameValidPassword = "Try to login with a valid username" + "(" + valid_username + ")"
-				+ "and valid password" + "(" + valid_password + ")";
+		String validUsernameValidPassword = "Login with a valid username: " + valid_username 	+ " and valid password "+ valid_password;
+		Markup v = MarkupHelper.createLabel(validUsernameValidPassword, ExtentColor.BLUE);
+		testInfo.get().info(v);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/otp_login")));
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/otp_login")).click();
+		wait.until(
+				ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/login_username")));
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).sendKeys(valid_username);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_password")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_password")).sendKeys(valid_password);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/submit")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
+		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Home']", "Home");
+	}
+	@Parameters ({"dataEnv"})
+	@Test
+	public static void Login1(String dataEnv, String valid_username, String valid_password) throws Exception {
+		WebDriverWait wait = new WebDriverWait(getDriver(), 50);
+	
+		String validUsernameValidPassword = "Login with a valid username: " + valid_username + " and valid password "  + valid_password;
 		Markup v = MarkupHelper.createLabel(validUsernameValidPassword, ExtentColor.BLUE);
 		testInfo.get().info(v);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/otp_login")));
