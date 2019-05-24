@@ -1,3 +1,4 @@
+
 package com.seamfix.biosmart230;
 
 import java.io.FileReader;
@@ -191,7 +192,7 @@ public class ReactivationTest extends TestBase {
 		String ValidOTP = "Try to enter valid OTP : " + valid_OTP;
 		Markup o = MarkupHelper.createLabel(ValidOTP, ExtentColor.BLUE);
 		testInfo.get().info(o);
-        if(otp == null){
+        if(valid_OTP == null){
         	testInfo.get().log(Status.INFO, "Can't get otp.");
             getDriver().quit();
         }
@@ -210,6 +211,5 @@ public class ReactivationTest extends TestBase {
         TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='MSISDN has been reactivated successfully.']", "MSISDN has been reactivated successfully.");
         getDriver().findElement(By.id("android:id/button1")).click();
         Thread.sleep(500);
-        
     }
 }

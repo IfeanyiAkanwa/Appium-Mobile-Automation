@@ -48,7 +48,8 @@
 		"agent_vtu": "08032791952",
 		"sub_msisdn": "08169548454",
 		"amount": "50",
-		"invalid_agent_vtu": "08133302299"
+		"invalid_agent_vtu": "08133302299",
+		"invalid_OTP": "00000"
 	},
 	"UserDetails": {
 		"surname": "Amanda",
