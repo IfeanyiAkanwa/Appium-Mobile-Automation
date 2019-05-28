@@ -1,10 +1,19 @@
 package utils;
 
 import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.markuputils.ExtentColor;
+import com.aventstack.extentreports.markuputils.Markup;
+import com.aventstack.extentreports.markuputils.MarkupHelper;
+
+import java.io.FileReader;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.Parameters;
 
 public class Asserts extends TestBase {
 
@@ -88,7 +97,93 @@ public class Asserts extends TestBase {
             }
         }
     }
+    
+   
+    public static void AssertIndividualForm230() throws Exception {
+    	WebDriverWait wait = new WebDriverWait(getDriver(), 60);
+    	String assertDetails = "Asserting individual form of registered subscriber";
+		Markup ad = MarkupHelper.createLabel(assertDetails, ExtentColor.BLUE);
+		testInfo.get().info(ad);
+		
+        String typeOfRegistration = getDriver().findElement(By.id("com.sf.biocapture.activity:id/reg_type")).getText();
+        String surName = getDriver().findElement(By.id("com.sf.biocapture.activity:id/surname")).getText();
+        String firstName = getDriver().findElement(By.id("com.sf.biocapture.activity:id/firstname")).getText();
+        String middleName = getDriver().findElement(By.id("com.sf.biocapture.activity:id/middlename")).getText();
+        String mothersMaidenName = getDriver().findElement(By.id("com.sf.biocapture.activity:id/moms_maidenname")).getText();
+        String sex;
+        if(getDriver().findElement(By.id("com.sf.biocapture.activity:id/male_radio_button")).isSelected()){
+            sex  = "Male";
+        }else {
+            sex = "Female";
+        }
+        String dateOfBirth = getDriver().findElement(By.id("com.sf.biocapture.activity:id/date_of_birth")).getText();
+        String altPhoneNumber = getDriver().findElement(By.id("com.sf.biocapture.activity:id/alternate_phone")).getText();
+        String email = getDriver().findElement(By.id("com.sf.biocapture.activity:id/alternate_email")).getText();
+        TestUtils.scrollDown();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/occupation")));
+    	Thread.sleep(500);
+        String occupation = getDriver().findElement(By.id("com.sf.biocapture.activity:id/occupation")).getText();
+        
+    
+        String NA = "No Data Found";
 
+        String[] toList = {"Type of Registration:" + typeOfRegistration, "Surname: " + surName, "First Name: " + firstName, "Middle Name: " + middleName,
+                "Mother's Maiden Name: " + mothersMaidenName, "Sex: " + sex, "Date of Birth:" + dateOfBirth, "Alternate Phone Number: " + altPhoneNumber, 
+                "Email Address: " + email,  "Occupation: " + occupation};
+        for (String field : toList) {
+            String name = "";
+            String val = NA;
+            try {
+                String[] fields = field.split(":");
+                name = fields[0];
+                try {
+                    val = fields[1];
+                }catch(Exception e){
+                    val = NA;
+                }
+                Assert.assertNotEquals(val, NA);
+                testInfo.get().log(Status.INFO, name + " : " + val);
+            } catch (Error e) {
+                testInfo.get().error(name + " : " + val);
+            }
+        }
+    }
+
+    public static void AssertAddresstDetails230() throws Exception {
+    	
+    	String assertDetails = "Asserting address Details of registered subscriber";
+		Markup ad = MarkupHelper.createLabel(assertDetails, ExtentColor.BLUE);
+		testInfo.get().info(ad);
+        String countryOfOrigin = getDriver().findElement(By.id("com.sf.biocapture.activity:id/country_spinner")).getText();
+        String stateOfOrigin = getDriver().findElement(By.id("com.sf.biocapture.activity:id/state_of_origin_spinner")).getText();
+        String lgaOfOrigin = getDriver().findElement(By.id("com.sf.biocapture.activity:id/lga_of_origin")).getText();
+        String stateOfResidence = getDriver().findElement(By.id("com.sf.biocapture.activity:id/state_of_residence")).getText();
+        String lgaOfResidence = getDriver().findElement(By.id("com.sf.biocapture.activity:id/lga_of_residence")).getText();
+        String areaOfResidence = getDriver().findElement(By.id("com.sf.biocapture.activity:id/area_of_residence")).getText();
+        String houseNum = getDriver().findElement(By.id("com.sf.biocapture.activity:id/house_or_flat_no")).getText();
+        String street = getDriver().findElement(By.id("com.sf.biocapture.activity:id/street")).getText();
+        String city = getDriver().findElement(By.id("com.sf.biocapture.activity:id/city")).getText();
+        String postalCode = getDriver().findElement(By.id("com.sf.biocapture.activity:id/postal_code")).getText();
+
+        String NA = "";
+
+        String[] toList = {"Country of Origin: " + countryOfOrigin, "State of Origin: " + stateOfOrigin, "LGA of Origin: " + lgaOfOrigin,  "State of Residence: " + stateOfResidence, "LGA of Residence: " + lgaOfResidence,
+        		"Area of Residence: " + areaOfResidence, "House/Flat Number: " + houseNum, "Street: " + street,  "City: " + city, "Postal Code: " + postalCode};
+        for (String field : toList) {
+            String name = "";
+            String val = NA;
+            try {
+                String[] fields = field.split(":");
+                name = fields[0];
+                val = fields[1];
+                Assert.assertNotEquals(val, NA);
+                testInfo.get().log(Status.INFO, name + " : " + val);
+            } catch (Error e) {
+                testInfo.get().error(name + " : " + val);
+            }
+        }
+    }
+    
     public static void AssertPassportDetails() throws Exception {
 
         //Passport Details
@@ -164,6 +259,36 @@ public class Asserts extends TestBase {
         String[] toList = {"Total Registrations: " + totalRegistrations, "Total Sync Sent: " + totalSyncSent, "Total Sync Confirmed: " + totalSyncConfirmed, "Total Sync Pending:" + totalSyncPending,
                 "Total Rejected: " + totalRejected, "Total Activated: " + totalActivated, "Total Reactivated: " + totalReactivated, "Total SIM Swap: " + totalSimSwap
                 , "Registered SIMS: " + registeredSIMs, "Confirmed SIMS: " + confirmedSIMs, "Duplicate SIMS: " + duplicateSIMs};
+        for (String field : toList) {
+            String name = "";
+            String val = NA;
+            try {
+                String[] fields = field.split(":");
+                name = fields[0];
+                val = fields[1];
+                Assert.assertNotEquals(val, NA);
+                testInfo.get().log(Status.INFO, name + " : " + val);
+            } catch (Error e) {
+                testInfo.get().error(name + " : " + val);
+            }
+        }
+    }
+    
+    public static void AssertSubscriberInfo230() throws Exception {
+    	
+    	String assertDetails = "Asserting returned Subscriber's Details";
+		Markup ad = MarkupHelper.createLabel(assertDetails, ExtentColor.BLUE);
+		testInfo.get().info(ad);
+        String msisdn = getDriver().findElement(By.id("com.sf.biocapture.activity:id/msisdn")).getText();
+        String simSerial = getDriver().findElement(By.id("com.sf.biocapture.activity:id/sim_serial")).getText();
+        String activationStatus = getDriver().findElement(By.id("com.sf.biocapture.activity:id/activation_status")).getText();
+        String failureReason = getDriver().findElement(By.id("com.sf.biocapture.activity:id/failure_reason")).getText();
+        String Agent = getDriver().findElement(By.id("com.sf.biocapture.activity:id/agent")).getText();
+        String DOB = getDriver().findElement(By.id("com.sf.biocapture.activity:id/reg_date")).getText();
+        
+        String NA = "";
+
+        String[] toList = {"MSISDN: " + msisdn, "SIM Serial: " + simSerial, "Activation Status: " + activationStatus,  "Failure Reason: " + failureReason, "Agent: " + Agent, "Date of Birth: " + DOB};
         for (String field : toList) {
             String name = "";
             String val = NA;

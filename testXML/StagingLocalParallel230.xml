@@ -76,7 +76,28 @@
 					<include name="sellDataTest" />
 				</methods>
 			</class>
-			
+			<class name="com.seamfix.biosmart230.SearchTest">
+				<methods>
+					<include name="Login" />
+					<include name="navigateToSearchTest" />
+					<include name="searchByMsisdnTest" />
+					<include name="searchBySimSerialTest" />
+				</methods>
+			</class>
+			<class name="com.seamfix.biosmart230.ReRegistrationCapture">
+				<methods>
+					<include name="Login" />
+					<include name="navigateToCaptureMenuTest" />
+					<include name="reRegisterationTest" />
+				</methods>
+			</class>
+			<class name="com.seamfix.biosmart230.AgentOnBoardingTest">
+				<methods>
+					<include name="onboardedAgentLoginTest" />
+					<include name="navigateToAgentOnBoardingTest" />
+					<include name="agentOnBoardingTest" />
+				</methods>
+			</class>
 		</classes>
 	</test>
 </suite>
