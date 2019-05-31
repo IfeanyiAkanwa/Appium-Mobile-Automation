@@ -51,6 +51,30 @@
 		"invalid_agent_vtu": "08133302299",
 		"invalid_OTP": "00000"
 	},
+	"Search": {
+		"valid_msisdn": "1111113116",
+		"valid_sim_serial_no": "11111111111111111365"
+	},
+	"ReRegistration": {
+		"valid_msisdn": "09062059126",
+		"invalid_msisdn": "08169548454",
+		"invalid_OTP": "00000",
+		"alternate_phone": "08142050326",
+		"lga": "Ibeju-Lekki",
+		"state": "BENUE",
+		"LGA": "Ado",
+		"expired_OTP": "99191"
+	},
+	"AgentOnboarding": {
+		"valid_username": "fatube@seamfix.com",
+		"valid_password": "Bankole1!!",
+		"agent_phoNum": "08069548454",
+		"agent_email": "gokafor@seamfix.com",
+		"onboardedAgent": "e.okafor@seamfix.com",
+		"invalid_email": "y.com@x.com",
+		"invalid_OTP": "00000",
+		"used_OTP": "25269"
+	},
 	"UserDetails": {
 		"surname": "Amanda",
 		"firstname": "Rock",
