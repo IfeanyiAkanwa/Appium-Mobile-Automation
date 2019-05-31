@@ -6,6 +6,8 @@ import com.aventstack.extentreports.markuputils.Markup;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 
 import java.io.FileReader;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -124,32 +126,33 @@ public class Asserts extends TestBase {
     	Thread.sleep(500);
         String occupation = getDriver().findElement(By.id("com.sf.biocapture.activity:id/occupation")).getText();
         
-    
-        String NA = "No Data Found";
-
-        String[] toList = {"Type of Registration:" + typeOfRegistration, "Surname: " + surName, "First Name: " + firstName, "Middle Name: " + middleName,
-                "Mother's Maiden Name: " + mothersMaidenName, "Sex: " + sex, "Date of Birth:" + dateOfBirth, "Alternate Phone Number: " + altPhoneNumber, 
-                "Email Address: " + email,  "Occupation: " + occupation};
-        for (String field : toList) {
-            String name = "";
-            String val = NA;
+        String empty = "";
+        Map<String, String> fields = new HashMap<>();
+        fields.put("Type of registration", typeOfRegistration);
+        fields.put("Surname", surName);
+        fields.put("First Name", firstName);
+        fields.put("Middle name", middleName);
+        fields.put("Mother's maiden name", mothersMaidenName);
+        fields.put("Sex", sex);
+        fields.put("Date of Birth", dateOfBirth);
+        fields.put("Alternate phone Number", altPhoneNumber);
+        fields.put("Email", email);
+        fields.put("Occupation", occupation);
+       
+        for (Map.Entry<String, String> entry : fields.entrySet()) {
             try {
-                String[] fields = field.split(":");
-                name = fields[0];
-                try {
-                    val = fields[1];
-                }catch(Exception e){
-                    val = NA;
-                }
-                Assert.assertNotEquals(val, NA);
-                testInfo.get().log(Status.INFO, name + " : " + val);
+                Assert.assertNotEquals(entry.getValue(), empty);
+                Assert.assertNotEquals(entry.getValue(), null);
+                testInfo.get().log(Status.INFO, entry.getKey() + " : " + entry.getValue());
             } catch (Error e) {
-                testInfo.get().error(name + " : " + val);
+                testInfo.get().error(entry.getKey() + " : " + entry.getValue());
             }
+
         }
     }
 
     public static void AssertAddresstDetails230() throws Exception {
+    	WebDriverWait wait = new WebDriverWait(getDriver(), 60);
     	
     	String assertDetails = "Asserting address Details of registered subscriber";
 		Markup ad = MarkupHelper.createLabel(assertDetails, ExtentColor.BLUE);
@@ -160,27 +163,36 @@ public class Asserts extends TestBase {
         String stateOfResidence = getDriver().findElement(By.id("com.sf.biocapture.activity:id/state_of_residence")).getText();
         String lgaOfResidence = getDriver().findElement(By.id("com.sf.biocapture.activity:id/lga_of_residence")).getText();
         String areaOfResidence = getDriver().findElement(By.id("com.sf.biocapture.activity:id/area_of_residence")).getText();
+        TestUtils.scrollDown();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/house_or_flat_no")));
+    	Thread.sleep(500);
         String houseNum = getDriver().findElement(By.id("com.sf.biocapture.activity:id/house_or_flat_no")).getText();
         String street = getDriver().findElement(By.id("com.sf.biocapture.activity:id/street")).getText();
         String city = getDriver().findElement(By.id("com.sf.biocapture.activity:id/city")).getText();
         String postalCode = getDriver().findElement(By.id("com.sf.biocapture.activity:id/postal_code")).getText();
 
-        String NA = "";
-
-        String[] toList = {"Country of Origin: " + countryOfOrigin, "State of Origin: " + stateOfOrigin, "LGA of Origin: " + lgaOfOrigin,  "State of Residence: " + stateOfResidence, "LGA of Residence: " + lgaOfResidence,
-        		"Area of Residence: " + areaOfResidence, "House/Flat Number: " + houseNum, "Street: " + street,  "City: " + city, "Postal Code: " + postalCode};
-        for (String field : toList) {
-            String name = "";
-            String val = NA;
+        String empty = "";
+        Map<String, String> fields = new HashMap<>();
+        fields.put("Country of Origin", countryOfOrigin);
+        fields.put("State of origin", stateOfOrigin);
+        fields.put("LGA of Origin", lgaOfOrigin);
+        fields.put("State of Residence", stateOfResidence);
+        fields.put("LGA of Residence", lgaOfResidence);
+        fields.put("Area of Residence", areaOfResidence);
+        fields.put("House number", houseNum);
+        fields.put("Street", street);
+        fields.put("City", city);
+        fields.put("Postal code", postalCode);
+       
+        for (Map.Entry<String, String> entry : fields.entrySet()) {
             try {
-                String[] fields = field.split(":");
-                name = fields[0];
-                val = fields[1];
-                Assert.assertNotEquals(val, NA);
-                testInfo.get().log(Status.INFO, name + " : " + val);
+                Assert.assertNotEquals(entry.getValue(), empty);
+                Assert.assertNotEquals(entry.getValue(), null);
+                testInfo.get().log(Status.INFO, entry.getKey() + " : " + entry.getValue());
             } catch (Error e) {
-                testInfo.get().error(name + " : " + val);
+                testInfo.get().error(entry.getKey() + " : " + entry.getValue());
             }
+
         }
     }
     

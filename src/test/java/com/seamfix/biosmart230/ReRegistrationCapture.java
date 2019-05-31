@@ -55,6 +55,7 @@ public class ReRegistrationCapture extends TestBase {
 		String invalid_OTP = (String) envs.get("invalid_OTP");
 		String state = (String) envs.get("state");
 		String LGA = (String) envs.get("LGA");
+		String expired_OTP = (String) envs.get("expired_OTP");
 		
 		// Select LGA of Registration
 		String lgaa = "Select LGA of Registration: " + lga;
@@ -286,10 +287,5 @@ public class ReRegistrationCapture extends TestBase {
 		// Face Capture
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/face_capture_button")).click();
 		Thread.sleep(500);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Instructions']")));
-	    TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Instructions']", "Instructions");
-	    getDriver().findElement(By.id("android:id/button1")).click();
-        Thread.sleep(500);
-
     }
 }

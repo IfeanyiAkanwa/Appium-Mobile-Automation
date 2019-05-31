@@ -61,9 +61,102 @@ public class AgentOnBoardingTest extends TestBase {
 		
 		String agent_email = (String) envs.get("agent_email");
 		String agent_phoNum = (String) envs.get("agent_phoNum");
+		String onboardedAgent = (String) envs.get("onboardedAgent");
+		String invalid_email = (String) envs.get("invalid_email");
+		String invalid_OTP  = (String) envs.get("invalid_OTP");
+		String used_OTP = (String) envs.get("expired_OTP");
+		
+		// To On-board an already existing agent
+		String email1 = "To Onboard an already existing agent: " + onboardedAgent;
+		Markup g = MarkupHelper.createLabel(email1, ExtentColor.BLUE);
+		testInfo.get().info(g);
+        getDriver().findElement(By.id("com.sf.biocapture.activity:id/email")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity:id/email")).sendKeys(onboardedAgent);
+        getDriver().findElement(By.id("com.sf.biocapture.activity:id/submit")).click();
+        Thread.sleep(500);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/alertTitle")));
+        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/alertTitle", "Error");
+        TestUtils.assertSearchText("ID", "android:id/message", "Agent already onboarded");
+        getDriver().findElement(By.id("android:id/button1")).click();
+	    Thread.sleep(500);
+	    
+		// To On-board agent without supplying email address
+		String email2 = " To On-board agent without supplying email address";
+		Markup v = MarkupHelper.createLabel(email2, ExtentColor.BLUE);
+		testInfo.get().info(v);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/email")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/email")).sendKeys();
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/submit")).click();
+		Thread.sleep(500);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/alertTitle")));
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/alertTitle", "Error");
+		TestUtils.assertSearchText("ID", "android:id/message", "Please enter a valid email address");
+		getDriver().findElement(By.id("android:id/button1")).click();
+		Thread.sleep(500);
         
+		// To On-board user with an invalid email address
+		String email3 = "To On-board user with an invalid email address: " + invalid_email;
+		Markup b = MarkupHelper.createLabel(email3, ExtentColor.BLUE);
+		testInfo.get().info(b);
+        getDriver().findElement(By.id("com.sf.biocapture.activity:id/email")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity:id/email")).sendKeys(invalid_email);
+        getDriver().findElement(By.id("com.sf.biocapture.activity:id/submit")).click();
+        Thread.sleep(500);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/alertTitle")));
+        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/alertTitle", "Error");
+        TestUtils.assertSearchText("ID", "android:id/message", "Invalid email address was entered.");
+        getDriver().findElement(By.id("android:id/button1")).click();
+	    Thread.sleep(500);
+	    
+		// To On-board new agent with an invalid OTP
+		String email4 = "To On-board new agent " + agent_email + " with an invalid OTP: " + invalid_OTP;
+		Markup h = MarkupHelper.createLabel(email4, ExtentColor.BLUE);
+		testInfo.get().info(h);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/email")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/email")).sendKeys(agent_email);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/submit")).click();
+		Thread.sleep(500);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/otp")));
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/alertTitle", "OTP verification");
+		Thread.sleep(500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/otp")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/otp")).sendKeys(invalid_OTP);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/confirm_otp")).click();
+		Thread.sleep(500);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/alertTitle")));
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/alertTitle", "Error");
+		TestUtils.assertSearchText("ID", "android:id/message", "No match was found for the specified OTP.");
+		getDriver().findElement(By.id("android:id/button1")).click();
+		Thread.sleep(500);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/cancel")));
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/cancel")).click();
+		Thread.sleep(1000);
+		
+		String email6 = "To On-board new agent " + agent_email + " with an used OTP: " + used_OTP;
+		Markup u = MarkupHelper.createLabel(email6, ExtentColor.BLUE);
+		testInfo.get().info(u);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/email")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/email")).sendKeys(agent_email);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/submit")).click();
+		Thread.sleep(500);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/otp")));
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/alertTitle", "OTP verification");
+		Thread.sleep(500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/otp")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/otp")).sendKeys(used_OTP);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/confirm_otp")).click();
+		Thread.sleep(500);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/alertTitle")));
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/alertTitle", "Error");
+		TestUtils.assertSearchText("ID", "android:id/message", "No match was found for the specified OTP.");
+		getDriver().findElement(By.id("android:id/button1")).click();
+		Thread.sleep(500);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/cancel")));
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/cancel")).click();
+		Thread.sleep(1000);
+		
         // Email Validation
-		String email = "Agent email to be onboarded: " + agent_email;
+		String email = "To On-board new agent with a valid OTP: " + agent_email;
 		Markup d = MarkupHelper.createLabel(email, ExtentColor.BLUE);
 		testInfo.get().info(d);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/email")).clear();
@@ -93,17 +186,5 @@ public class AgentOnBoardingTest extends TestBase {
         TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/on_boarding_camera_title", "Camera");
         TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Capture Passport']", "Capture Passport");
         Thread.sleep(1000);
-        
-        // Biometric Capture
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/button_capture_image")).click();
-        Thread.sleep(1000);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Instructions']")));
-	    TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Instructions']", "Instructions");
-	    getDriver().findElement(By.id("android:id/button1")).click();
-	    Thread.sleep(500);
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/button_capture_picture")).click();
-        Thread.sleep(500);
-        
-    }
-
+   }
 }
