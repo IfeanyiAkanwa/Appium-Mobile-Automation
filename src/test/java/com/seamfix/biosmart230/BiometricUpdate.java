@@ -2,7 +2,7 @@ package com.seamfix.biosmart230;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -15,11 +15,10 @@ import com.aventstack.extentreports.markuputils.MarkupHelper;
 
 import utils.Asserts;
 import utils.TestBase;
-import DemographicForm.Form;
-import utils.TestUtils;
 
+import utils.TestUtils;
 import java.io.FileReader;
-import java.io.IOException;
+
 
 public class BiometricUpdate extends TestBase {
 	
@@ -112,16 +111,15 @@ public class BiometricUpdate extends TestBase {
         Thread.sleep(1000);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/country_spinner")));
         Thread.sleep(1000);
-        Asserts.assertBasicInfoDetails230(dataEnv);
+        Asserts.AssertAddresstDetails230();
         Thread.sleep(1000);
         
 		// Area of residence
-		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='[Select Area]*']")).click();
-		Thread.sleep(500);
-		TestUtils.assertSearchText("ID", "android:id/text1", "[Select Area]*");
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/area_of_residence")).click();
+		Thread.sleep(1000);
 		getDriver().findElement(By.xpath("//android.widget.TextView[@text='" + area + "']")).click();
 		Thread.sleep(500);
-	
+     	
 		// Next button
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/save_continue")).click();
 		Thread.sleep(500);

@@ -79,16 +79,7 @@
 		"valid_msisdn": "08142050913",
 		"invalid_msisdn": "08169548454",
 		"area": "AKILO",
-		"alternate_phone": "08142050326",
-		"lga": "Ibeju-Lekki",
-		"state": "BENUE",
-		"LGA": "Ado",
-		"country": "NIGERIA",
-		"stateOri": "ANAMBRA",
-		"lgaOri": "Anaocha",
-		"stateRes": "LAGOS",
-		"lgaRes": "Agege",
-		"areaRes": "[Select Area]*"
+		"lga": "Ibeju-Lekki"
 	},
 	"UserDetails": {
 		"surname": "Amanda",
