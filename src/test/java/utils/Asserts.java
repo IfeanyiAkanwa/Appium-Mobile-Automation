@@ -16,6 +16,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 
 public class Asserts extends TestBase {
 
@@ -151,6 +152,62 @@ public class Asserts extends TestBase {
         }
     }
 
+    @Parameters({ "dataEnv" })
+	@Test
+    public static void assertBasicInfoDetails230(String dataEnv) throws Exception {
+    	WebDriverWait wait = new WebDriverWait(getDriver(), 60);
+    	JSONParser parser = new JSONParser();
+		JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
+		JSONObject envs = (JSONObject) config.get("BiometricUpdate");
+		
+		String country = (String) envs.get("country");
+		String stateOri = (String) envs.get("stateOri");
+		String lgaOri = (String) envs.get("lgaOri");
+		String stateRes= (String) envs.get("stateRes");
+		String lgaRes = (String) envs.get("lgaRes");
+		String areaRes= (String) envs.get("areaRes");
+
+    	String assertDetails = "Asserting address Details of registered subscriber";
+		Markup ad = MarkupHelper.createLabel(assertDetails, ExtentColor.BLUE);
+		testInfo.get().info(ad);
+        String countryOfOrigin = getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='" + country + "']")).getText();
+        String stateOfOrigin = getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='" + stateOri + "']")).getText();
+        String lgaOfOrigin = getDriver().findElement(By.xpath("//android.widget.TextView[@text='" + lgaOri + "']")).getText();
+        String stateOfResidence = getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='" + stateRes + "']")).getText();
+        String lgaOfResidence = getDriver().findElement(By.xpath("//android.widget.TextView[@text='" + lgaRes + "']")).getText();
+        String areaOfResidence = getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='" + areaRes + "']")).getText();
+        TestUtils.scrollDown();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/house_or_flat_no")));
+    	Thread.sleep(500);
+        String houseNum = getDriver().findElement(By.id("com.sf.biocapture.activity:id/house_or_flat_no")).getText();
+        String street = getDriver().findElement(By.id("com.sf.biocapture.activity:id/street")).getText();
+        String city = getDriver().findElement(By.id("com.sf.biocapture.activity:id/city")).getText();
+        String postalCode = getDriver().findElement(By.id("com.sf.biocapture.activity:id/postal_code")).getText();
+
+        String empty = "";
+        Map<String, String> fields = new HashMap<>();
+        fields.put("Country of Origin", countryOfOrigin);
+        fields.put("State of origin", stateOfOrigin);
+        fields.put("LGA of Origin", lgaOfOrigin);
+        fields.put("State of Residence", stateOfResidence);
+        fields.put("LGA of Residence", lgaOfResidence);
+        fields.put("Area of Residence", areaOfResidence);
+        fields.put("House number", houseNum);
+        fields.put("Street", street);
+        fields.put("City", city);
+        fields.put("Postal code", postalCode);
+       
+        for (Map.Entry<String, String> entry : fields.entrySet()) {
+            try {
+                Assert.assertNotEquals(entry.getValue(), empty);
+                Assert.assertNotEquals(entry.getValue(), null);
+                testInfo.get().log(Status.INFO, entry.getKey() + " : " + entry.getValue());
+            } catch (Error e) {
+                testInfo.get().error(entry.getKey() + " : " + entry.getValue());
+            }
+
+        }
+    }
     public static void AssertAddresstDetails230() throws Exception {
     	WebDriverWait wait = new WebDriverWait(getDriver(), 60);
     	
