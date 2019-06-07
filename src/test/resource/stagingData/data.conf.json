@@ -75,6 +75,12 @@
 		"invalid_OTP": "00000",
 		"used_OTP": "25269"
 	},
+	"BiometricUpdate": {
+		"valid_msisdn": "08142050913",
+		"invalid_msisdn": "08169548454",
+		"area": "AKILO",
+		"lga": "Ibeju-Lekki"
+	},
 	"UserDetails": {
 		"surname": "Amanda",
 		"firstname": "Rock",
