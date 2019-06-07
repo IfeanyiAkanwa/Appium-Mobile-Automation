@@ -63,7 +63,7 @@ public class BiometricUpdate extends TestBase {
 		Thread.sleep(500);
 
 		// Select Bio-metric Update
-		String biometric = "Select New Registration MSISDN";
+		String biometric = "Select Biometric Update";
 		Markup d = MarkupHelper.createLabel(biometric, ExtentColor.BLUE);
 		testInfo.get().info(d);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/typeofreg")));
