@@ -55,17 +55,15 @@ public class ReRegistrationCapture extends TestBase {
 		String invalid_OTP = (String) envs.get("invalid_OTP");
 		String state = (String) envs.get("state");
 		String LGA = (String) envs.get("LGA");
-		String expired_OTP = (String) envs.get("expired_OTP");
 		
-		// Select LGA of Registration
+		// Try to select LGA of Registration
 		String lgaa = "Select LGA of Registration: " + lga;
 		Markup m = MarkupHelper.createLabel(lgaa, ExtentColor.BLUE);
 		testInfo.get().info(m);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/lga_of_reg")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/alertTitle")));
 		TestUtils.assertSearchText("ID", "android:id/alertTitle", "LGA of Registration*");
-		getDriver().findElement(By.id("android:id/search_src_text")).sendKeys(lga);
-		getDriver().findElement(By.id("android:id/button1")).click();
+		getDriver().findElement(By.xpath("//android.widget.TextView[@text='" + lga + "']")).click();
 		Thread.sleep(500);
 		
 		//Select Re-Registration
@@ -123,8 +121,27 @@ public class ReRegistrationCapture extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/submit_button")).click();
 		Thread.sleep(500);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/otp_field")));
+		Thread.sleep(1000);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/otp_request_button")).click();
 		Thread.sleep(500);
-		String assertDetails = "Assert user's full name";
+		
+		  // DB Connection for OTP
+    	String valid_OTP = ConnectDB.getOTP(valid_msisdn);
+
+		String ValidOTP = "Enter valid OTP : " + valid_OTP;
+		Markup o = MarkupHelper.createLabel(ValidOTP, ExtentColor.BLUE);
+		testInfo.get().info(o);
+        if(valid_OTP == null){
+        	testInfo.get().log(Status.INFO, "Can't get otp.");
+            getDriver().quit();
+        }
+        Thread.sleep(1000);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/otp_field")));
+        getDriver().findElement(By.id("com.sf.biocapture.activity:id/otp_field")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity:id/otp_field")).sendKeys(valid_OTP);
+        getDriver().findElement(By.id("com.sf.biocapture.activity:id/otp_confirm_button")).click();
+        Thread.sleep(1000);
+        String assertDetails = "Assert user's full name";
 		Markup ad = MarkupHelper.createLabel(assertDetails, ExtentColor.BLUE);
 		testInfo.get().info(ad);
 		String NA = "N/A";
@@ -150,26 +167,7 @@ public class ReRegistrationCapture extends TestBase {
 
 			}
 		}
-		Thread.sleep(1000);
-		getDriver().findElement(By.id("com.sf.biocapture.activity:id/otp_request_button")).click();
 		Thread.sleep(500);
-		
-		  // DB Connection for OTP
-    	String valid_OTP = ConnectDB.getOTP(valid_msisdn);
-
-		String ValidOTP = "Enter valid OTP : " + valid_OTP;
-		Markup o = MarkupHelper.createLabel(ValidOTP, ExtentColor.BLUE);
-		testInfo.get().info(o);
-        if(valid_OTP == null){
-        	testInfo.get().log(Status.INFO, "Can't get otp.");
-            getDriver().quit();
-        }
-        Thread.sleep(1000);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/otp_field")));
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/otp_field")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/otp_field")).sendKeys(valid_OTP);
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/otp_confirm_button")).click();
-        Thread.sleep(1000);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/next_button")));
         Thread.sleep(500);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/next_button")).click();

@@ -48,8 +48,8 @@ public class ReactivationTest extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/lga_of_reg")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/alertTitle")));
 		TestUtils.assertSearchText("ID", "android:id/alertTitle", "LGA of Registration*");
-		getDriver().findElement(By.id("android:id/search_src_text")).sendKeys(lga);
-		getDriver().findElement(By.id("android:id/button1")).click();
+		getDriver().findElement(By.xpath("//android.widget.TextView[@text='" + lga + "']")).click();
+		Thread.sleep(500);
 		
 		// Try to select MSISDN Re-Activation
 		String reAct = "Select MSISDN Re-Activation";

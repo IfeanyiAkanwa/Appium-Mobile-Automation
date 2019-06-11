@@ -14,6 +14,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.Markup;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
@@ -54,7 +55,7 @@ public class ForgotPassword extends TestBase {
 		WebDriverWait wait = new WebDriverWait(getDriver(), 50);
 
 		// Trying to change password with invalid username
-		String invalidUsername = "Try to change password with invalid username: " + invalid_username;
+		String invalidUsername = "Change password with invalid username: " + invalid_username;
 		Markup m = MarkupHelper.createLabel(invalidUsername, ExtentColor.BLUE);
 		testInfo.get().info(m);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/email")).clear();
@@ -67,7 +68,8 @@ public class ForgotPassword extends TestBase {
 		TestUtils.assertSearchText("ID", "android:id/button1", "Ok");
 		getDriver().findElement(By.id("android:id/button1")).click();
 		wait.until(
-				ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/password_reset")));
+			ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/password_reset")));
+		Thread.sleep(500);
 	}
 
 	@Parameters({ "dataEnv"})
@@ -88,11 +90,11 @@ public class ForgotPassword extends TestBase {
 		String user_phoneNumber = (String) envs.get("user_phoneNumber");
 
 		// Trying to change password with valid username
-		String validUsername = "Try to change password with valid username: " + valid_username;
+		String validUsername = "Change password with valid username: " + valid_username;
 		Markup m = MarkupHelper.createLabel(validUsername, ExtentColor.BLUE);
 		testInfo.get().info(m);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/password_reset")).click();
-
+		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/email")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/email")).sendKeys(valid_username);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/send")).click();
@@ -104,7 +106,7 @@ public class ForgotPassword extends TestBase {
 
 		// Trying to test with invalid OTP
 		String invalid_OTP = (String) envs.get("invalid_OTP");
-		String inValidOTP = "Try to enter OTP that does not exist: " + invalid_OTP;
+		String inValidOTP = "Enter OTP that does not exist: " + invalid_OTP;
 		Markup otp = MarkupHelper.createLabel(inValidOTP, ExtentColor.BLUE);
 		testInfo.get().info(otp);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/user_input_dialog")).clear();
@@ -116,20 +118,24 @@ public class ForgotPassword extends TestBase {
 		getDriver().findElement(By.id("android:id/button1")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/dialog_title")));
 
-		// Try to test with valid OTP
-		String valid_OTP = ConnectDB.getOTP(user_phoneNumber);
+		 // DB Connection for OTP
+    	String valid_OTP = ConnectDB.getOTP(user_phoneNumber);
 
-		String ValidOTP = "Try to enter valid OTP : " + valid_OTP;
+		String ValidOTP = "Enter valid OTP : " + valid_OTP;
 		Markup o = MarkupHelper.createLabel(ValidOTP, ExtentColor.BLUE);
 		testInfo.get().info(o);
-
+        if(valid_OTP == null){
+        	testInfo.get().log(Status.INFO, "Can't get otp.");
+            getDriver().quit();
+        }
+        Thread.sleep(1000);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/user_input_dialog")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/user_input_dialog")).sendKeys(valid_OTP);
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/user_input_dialog", valid_OTP);
 		getDriver().findElement(By.id("android:id/button1")).click();
 
 		// Trying to assert the ChangePassword modal
-		String assertChangeModal = "Try to assert the Change Password modal";
+		String assertChangeModal = "Assert the Change Password modal";
 		Markup mark = MarkupHelper.createLabel(assertChangeModal, ExtentColor.BLUE);
 		testInfo.get().info(mark);
 
@@ -144,7 +150,7 @@ public class ForgotPassword extends TestBase {
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/update_pwd", "Change");
 
 		// Trying to change password with an invalid password policy
-		String invalidPasswordPolicy = "Try to change password with invalid password policy: "
+		String invalidPasswordPolicy = "Change password with invalid password policy: "
 				+ invalid_password_policy;
 		Markup ip = MarkupHelper.createLabel(invalidPasswordPolicy, ExtentColor.BLUE);
 		testInfo.get().info(ip);
@@ -166,7 +172,7 @@ public class ForgotPassword extends TestBase {
 		// Trying to change password when the new password doesnt match confirm old
 		// password
 
-		String notMatchingConfirmPassword = "Try to change password with confirm password" + "("
+		String notMatchingConfirmPassword = "Change password with confirm password" + "("
 				+ confirm_password_not_matching + " )" + "not matching new password (" + new_password + ")";
 		Markup pa = MarkupHelper.createLabel(notMatchingConfirmPassword, ExtentColor.BLUE);
 		testInfo.get().info(pa);
@@ -187,7 +193,7 @@ public class ForgotPassword extends TestBase {
 		getDriver().findElement(By.id("android:id/button1")).click();
 
 		// Trying to change password with a valid password policy
-		String validPassword = "Try to change password with valid Password Policy: " + new_password;
+		String validPassword = "Change password with valid Password Policy: " + new_password;
 		Markup pass = MarkupHelper.createLabel(validPassword, ExtentColor.BLUE);
 		testInfo.get().info(pass);
 		wait.until(ExpectedConditions
@@ -218,7 +224,7 @@ public class ForgotPassword extends TestBase {
 		String valid_username = (String) envs.get("valid_username");
 		String new_password = (String) envs.get("new_password");
 		// Trying to login in with the new password
-		String login = "Trying to login with the newly changed password: " + new_password;
+		String login = "Login with the newly changed password: " + new_password;
 		Markup pass = MarkupHelper.createLabel(login, ExtentColor.BLUE);
 		testInfo.get().info(pass);
 		WebDriverWait wait = new WebDriverWait(getDriver(), 50);

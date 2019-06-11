@@ -62,8 +62,7 @@
 		"alternate_phone": "08142050326",
 		"lga": "Ibeju-Lekki",
 		"state": "BENUE",
-		"LGA": "Ado",
-		"expired_OTP": "99191"
+		"LGA": "Ado"
 	},
 	"AgentOnboarding": {
 		"valid_username": "fatube@seamfix.com",
@@ -79,6 +78,22 @@
 		"valid_msisdn": "08142050913",
 		"invalid_msisdn": "08169548454",
 		"area": "AKILO",
+		"lga": "Ibeju-Lekki"
+	},
+	"NewSimSerialRegistration": {
+		"valid_simSerial": "11111111111111111367",
+		"invalid_simSerial": "11111111111",
+		"area": "AKILO",
+		"lga": "Ibeju-Lekki"
+	},
+	"AdditionalRegistration": {
+		"valid_Msisdn": "08142050025",
+		"invalid_Msisdn": "09062059126",
+		"lga": "Ibeju-Lekki"
+	},
+	"SIMSwap": {
+		"valid_Msisdn": "08142050025",
+		"invalid_Msisdn": "08169548454",
 		"lga": "Ibeju-Lekki"
 	},
 	"UserDetails": {

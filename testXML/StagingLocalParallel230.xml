@@ -7,8 +7,8 @@
 	<parameter name="environment" value="chrome" />
 	<parameter name="server" value="local" />
 	<parameter name="downloadPath" value="/files/" />
- 	<parameter name="dataEnv" value="stagingData" />
- 
+	<parameter name="dataEnv" value="stagingData" />
+
 	<test name="test1">
 		<parameter name="email" value="snapshot@seamfix.com" />
 		<parameter name="systemPort" value="8228" />
@@ -18,7 +18,7 @@
 			<class name="com.seamfix.biosmart230.ForgotPassword">
 				<methods>
 					<include name="navigateToForgotPassword" />
-					<include name="changePayousswordWithInvalidUsername" />
+					<include name="changePasswordWithInvalidUsername" />
 					<include name="changePasswordWithValidUsername" />
 					<include name="loginWithNewPassword" />
 				</methods>
@@ -26,7 +26,7 @@
 			<class name="com.seamfix.biosmart230.Login">
 				<methods>
 					<include name="usernamePasswordTest" />
-					<include name="loginWithFingerprint" /> 
+					<include name="loginWithFingerprint" />
 				</methods>
 			</class>
 			<class name="com.seamfix.biosmart230.ChangePasswordTest">
@@ -53,7 +53,8 @@
 					<include name="searchParameters" />
 				</methods>
 			</class>
-			<class name="com.seamfix.biosmart230.CaptureNewMSISDNRegistration">
+			<class
+				name="com.seamfix.biosmart230.CaptureNewMSISDNRegistration">
 				<methods>
 					<include name="Login" />
 					<include name="NavigateToCaptureMenuTest" />
@@ -103,6 +104,27 @@
 					<include name="Login" />
 					<include name="navigateToCaptureMenuTest" />
 					<include name="captureBiometricUpdate" />
+				</methods>
+			</class>
+			<class name="com.seamfix.biosmart230.CaptureNewSimSerialRegistration">
+				<methods>
+					<include name="Login" />
+					<include name="navigateToCaptureMenuTest" />
+					<include name="registerNewSimSerialTest" />
+				</methods>
+			</class>
+			<class name="com.seamfix.biosmart230.AdditionalRegistration">
+				<methods>
+					<include name="Login" />
+					<include name="navigateToCaptureMenuTest" />
+					<include name="additionalRegistrationTest" />
+				</methods>
+			</class>
+			<class name="com.seamfix.biosmart230.SimSwap">
+				<methods>
+					<include name="Login" />
+					<include name="navigateToCaptureMenuTest" />
+					<include name="simSwapTest" />
 				</methods>
 			</class>
 		</classes>
