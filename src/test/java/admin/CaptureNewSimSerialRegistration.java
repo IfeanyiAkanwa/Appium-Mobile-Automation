@@ -2,6 +2,7 @@ package admin;
 
 import DemographicForm.Form;
 import io.appium.java_client.android.Connection;
+import io.appium.java_client.android.connection.ConnectionState;
 import utils.TestBase;
 
 import org.openqa.selenium.By;
@@ -48,7 +49,7 @@ public class CaptureNewSimSerialRegistration extends TestBase {
         WebDriverWait wait = new WebDriverWait(getDriver(), 30);
         
         //turn off Network
-        Connection networks = getDriver().getConnection();
+        ConnectionState networks = getDriver().getConnection();
         getDriver().setConnection(Connection.NONE);
         
         //Enter SIM Serial

@@ -1,0 +1,34 @@
+{
+"Login": {
+		"onboarded_username": "adazejohnson@gmail.com",
+		"invalid_username": "ada@seamnix.com",
+		"not_onboarded_username": "faruk.muhammad@mtnagent.com",
+		"valid_username": "gnwabude@seamfix.com",
+		"invalid_password": "adazejohn@1",
+		"valid_password": "Bankole1!!",
+		"deactivated_username": "amusa.adewaleibrahim@mtnagent.com",
+		"invalid_email_format": "amusa@.com"
+	},
+	"ForgotPassword": {
+		"invalid_username": "ada@seamnix.com",
+		"valid_username": "gnwabude@seamfix.com",
+		"new_password": "Bankole1!!",
+		"confirm_password": "Bankole1!!",
+		"invalid_password_policy": "ban",
+		"confirm_password_not_matching": "ban",
+		"invalid_OTP": "0000",
+		"user_full_name": "Geraldine Nwabude",
+		"user_phoneNumber": "08169548454"
+	},
+	"ChangePassword": {
+		"valid_username": "gnwabude@seamfix.com",
+		"newPassword": "Rankole1!!!",
+		"password": "Bankole1!!",
+		"invalid_password_policy": "ban",
+		"confirm_password_not_matching": "ban"
+	},
+  "LandingPage_Url": {
+	"stagingUrl": "http:simregpoc.mtnnigeria.net"
+	}
+  
+}

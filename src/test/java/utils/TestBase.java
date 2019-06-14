@@ -3,12 +3,19 @@ package utils;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.markuputils.ExtentColor;
+import com.aventstack.extentreports.markuputils.Markup;
+import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.AutomationName;
 import io.appium.java_client.remote.MobileCapabilityType;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -18,10 +25,13 @@ import org.testng.ITestResult;
 import org.testng.annotations.*;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
+
 public class TestBase {
 
 
@@ -30,7 +40,7 @@ public class TestBase {
     public static ExtentHtmlReporter htmlReporter;
     private static ThreadLocal<ExtentTest> parentTest = new ThreadLocal<ExtentTest>();
     public static ThreadLocal<ExtentTest> testInfo = new ThreadLocal<ExtentTest>();
-    public static String URLbase = "http:simreg.mtnnigeria.net";
+    public static String gridUrl = System.getProperty("grid-url", "http:simregpoc.mtnnigeria.net");
     public static String toAddress;
 
 
@@ -46,9 +56,29 @@ public class TestBase {
 
     String devices;
     static String[] udid;
-    @Parameters( "groupReport")
+    
+    @Parameters ("dataEnv")
+	public static String myUrl(String dataEnv) throws Exception {
+    	JSONParser parser = new JSONParser();
+		JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
+		JSONObject envs = (JSONObject) config.get("LandingPage_Url");
+
+		String stagingUrl = (String) envs.get("stagingUrl");
+		String prodUrl = (String) envs.get("prodUrl");
+		
+		String myUrl = null;
+		if(dataEnv.equalsIgnoreCase("stagingData")) {
+			myUrl = System.getProperty("instance-url", stagingUrl);
+		} else
+		{
+			myUrl = System.getProperty("instance-url", prodUrl);
+		}
+		return myUrl;
+	}
+    
+    @Parameters({"groupReport", "dataEnv"})
     @BeforeSuite
-    public void setUp( String groupReport) {
+    public void setUp( String groupReport, String dataEnv) throws Exception {
 
         {
             try {
@@ -65,9 +95,8 @@ public class TestBase {
         htmlReporter = new ExtentHtmlReporter(new File(System.getProperty("user.dir") + groupReport));
         htmlReporter.loadXMLConfig(new File(System.getProperty("user.dir") + "/resources/extent-config.xml"));
         reports = new ExtentReports();
-        reports.setSystemInfo("POC", URLbase);
-        reports.attachReporter(htmlReporter);
-
+        reports.setSystemInfo("Test Environment", myUrl(dataEnv));
+		reports.attachReporter(htmlReporter);
 
     }
 
@@ -154,7 +183,6 @@ public class TestBase {
                 capabilities.setCapability("unicodeKeyboard", true);
                 capabilities.setCapability("resetKeyboard", true);
                 capabilities.setCapability("noReset", false);
-                capabilities.setCapability("browserName", "Android");
                 capabilities.setCapability("deviceName", "SeamfixTab");
                 capabilities.setCapability("platformName", "Android");
                 capabilities.setCapability("appPackage", "com.sf.biocapture.activity");
@@ -170,19 +198,30 @@ public class TestBase {
     }
 
     @Test
-    @Parameters("email")
-    public void Login(String email) throws InterruptedException {
-        Thread.sleep(500);
-        WebDriverWait wait = new WebDriverWait(getDriver(), 30);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Login']")));
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/otp_login")).click();
-        Thread.sleep(1000);
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).sendKeys(email);
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_password")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_password")).sendKeys("bankole1!!");
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/submit")).click();
-        Thread.sleep(1000);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
-    }
+    @Parameters ({"dataEnv"})
+    public void Login(String dataEnv) throws Exception {
+    	WebDriverWait wait = new WebDriverWait(getDriver(), 50);
+		JSONParser parser = new JSONParser();
+		JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
+		JSONObject envs = (JSONObject) config.get("Login");
+
+		String valid_username = (String) envs.get("valid_username");
+		String valid_password = (String) envs.get("valid_password");
+
+		String validUsernameValidPassword = "Login with a valid username: " + valid_username + " and valid password "+ valid_password;
+		Markup v = MarkupHelper.createLabel(validUsernameValidPassword, ExtentColor.BLUE);
+		testInfo.get().info(v);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/otp_login")));
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/otp_login")).click();
+		wait.until(
+				ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/login_username")));
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).sendKeys(valid_username);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_password")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_password")).sendKeys(valid_password);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/submit")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
+		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Home']", "Home");
+	}
+
 }
