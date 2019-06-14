@@ -46,7 +46,7 @@ public class SendMail {
                 Address toAddress = new InternetAddress(emailRecipient);
                 message.addRecipient(Message.RecipientType.TO, toAddress);
             }
-            message.setSubject("BioRegistra Automated Test Result");
+            message.setSubject("BioSmart Automated Test Result");
             MimeBodyPart messageBodyPart = new MimeBodyPart();
             messageBodyPart.setText("Hello," + "\n" + "Attached to this mail is the report of an automated test on BioSmart Android.");
             Multipart multipart = new MimeMultipart();
@@ -60,7 +60,7 @@ public class SendMail {
             multipart.addBodyPart(messageBodyPart);
             System.out.println("Sending...");
             message.setContent(multipart);
-            Transport.send(message, "seamfix.test.report@gmail.com", "password123=");
+            Transport.send(message, "seamfix.test.report@gmail.com", "Bankole1!!");
             System.out.println("Sent.");
         } catch (MessagingException ex) {
             throw new RuntimeException(ex);

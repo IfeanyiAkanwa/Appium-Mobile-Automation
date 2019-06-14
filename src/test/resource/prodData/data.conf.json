@@ -1,5 +1,5 @@
 {
-"Login": {
+	"Login": {
 		"onboarded_username": "adazejohnson@gmail.com",
 		"invalid_username": "ada@seamnix.com",
 		"not_onboarded_username": "faruk.muhammad@mtnagent.com",
@@ -23,10 +23,73 @@
 		"valid_username": "gnwabude@seamfix.com",
 		"newPassword": "Rankole1!!!",
 		"password": "Bankole1!!",
-		"invalid_password_policy": "ban",
+		"invalid_password_policy":"ban",
 		"confirm_password_not_matching": "ban"
 	},
-  "LandingPage_Url": {
+	"Notifications": {
+		"searchParam": "SIM"
+	},
+	"NewRegistration": {
+		"valid_msisdn": "1111113112",
+		"invalid_msisdn": "1111167112"
+	},
+	"Reactivation": {
+		"valid_msisdn": "09062058526",
+		"invalid_msisdn": "08083733777",
+		"lga": "Ibeju-Lekki"
+	},
+	"UserDetails": {
+		"surname": "Amanda",
+		"firstname": "Rock",
+		"middlename": "Brain",
+		"maiden_name": "Merlin",
+		"social_media_type": "INSTAGRAM",
+		"social_media_username": "@testusers",
+		"street": "Neville Street",
+		"city": "Aba",
+		"nationality": "NIGERIA",
+		"state": "BENUE",
+		"LGA": "Ado"
+	},
+	"CompanyDetails": {
+		"house_or_flat_no": "456C",
+		"company_regno": "NIG/LAG/16253",
+		"company_description": "Seamfix Nigeria QA test",
+		"company_street": "Lekki Leasing House",
+		"company_city": "Lekki",
+		"company_state_address": "ABIA",
+		"company_lga_address": "Aba North",
+		"company_postalcode": "5200",
+		"email": "test@yopmail.com",
+		"alt_phone_number": "08000000000",
+		"postalcode": "746583",
+		"occupation": "Aeronautical Engineer",
+		"states_residence": "ABIA",
+		"lga_residence": "Aba North",
+		"area": "ARIARIA",
+		"lga_of_reg": "Akamkpa"
+	},
+	"IndividualForeignerDetails": {
+		"surname": "Saraswati",
+		"firstname": "Joubert",
+		"middlename": "Ganga",
+		"maiden_name": "Merlin",
+		"social_media_type": "INSTAGRAM",
+		"social_media_username": "@ganga",
+		"street": "Banaris",
+		"city": "Mumbai",
+		"nationality": "INDIA",
+		"house_or_flat_no": "456C",
+		"state": "BENUE",
+		"LGA": "Ado",
+		"email": "test@yopmail.com",
+		"alt_phone_number": "08000000000",
+		"postalcode": "746583",
+		"occupation": "Aeronautical Engineer",
+		"area": "AGILA",
+		"passport_ID_number": "6861637BC"
+	},
+	"LandingPage_Url": {
 	"prodUrl": "http:simreg.mtnnigeria.net"
 	}
 }

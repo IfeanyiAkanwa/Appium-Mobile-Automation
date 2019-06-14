@@ -12,6 +12,7 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
 import java.io.*;
+import java.util.Collection;
 
 public class TestUtils extends TestBase {
 
@@ -96,6 +97,12 @@ public class TestUtils extends TestBase {
         int topY = getDriver().manage().window().getSize().height / 8;
         scroll(pressX, bottomY, pressX, topY);
     }
+    public static void scrollUp() {
+        int pressX = getDriver().manage().window().getSize().width / 2;
+        int bottomY = getDriver().manage().window().getSize().height * 4 / 5;
+        int topY = getDriver().manage().window().getSize().height / 8;
+        scroll(pressX, topY, pressX, bottomY);
+    }
 
     public static void hideKeyboard() throws InterruptedException {
         if (getDriver().isKeyboardShown()) {
@@ -172,6 +179,52 @@ public class TestUtils extends TestBase {
             builder.append(line);
         }
         return builder.toString();
+    }
+    
+    public static boolean validateParams(Object... params) {
+
+        for (Object param : params) {
+            if (param == null) {
+                return false;
+            }
+
+            if (param instanceof String && ((String) param).isEmpty()) {
+                return false;
+            }
+
+            if (param instanceof Collection<?> && ((Collection<?>) param).isEmpty()) {
+                return false;
+            }
+
+            if (param instanceof Long && ((Long) param).compareTo(0L) == 0) {
+                return false;
+            }
+            if (param instanceof Double && ((Double) param).compareTo(0D) == 0) {
+                return false;
+            }
+
+            if (param instanceof Integer && ((Integer) param).compareTo(0) == 0) {
+                return false;
+            }
+
+        }
+
+        return true;
+    }
+    
+    public static Integer convertToInt(String value) throws InterruptedException {
+        Integer result = null;
+        String convertedString = value.replaceAll("[^0-9]", "");
+        if (validateParams(convertedString)) {
+            try {
+                return result = Integer.parseInt(convertedString);
+            } catch (NumberFormatException e) {
+                testInfo.get().error("convertToInt  Error converting to integer ");
+                testInfo.get().error(e);
+            }
+        }
+        return result;
+
     }
 
 }

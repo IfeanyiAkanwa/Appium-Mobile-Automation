@@ -2,6 +2,8 @@ package admin;
 
 import DemographicForm.Form;
 import db.ConnectDB;
+
+import org.json.simple.parser.ParseException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -13,6 +15,8 @@ import utils.Asserts;
 import utils.TestBase;
 import utils.TestUtils;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.SQLException;
 
 public class ReRegistrationCapture extends TestBase {
@@ -39,7 +43,7 @@ public class ReRegistrationCapture extends TestBase {
     }
 
     @Test
-    public void ReRegisterationTest() throws InterruptedException, SQLException {
+    public void ReRegisterationTest() throws InterruptedException, SQLException, FileNotFoundException, IOException, ParseException {
 
         WebDriverWait wait = new WebDriverWait(getDriver(), 30);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/primary_msisdn_field")).clear();

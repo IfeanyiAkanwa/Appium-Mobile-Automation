@@ -1,5 +1,6 @@
 package admin;
 
+import org.json.simple.parser.ParseException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -19,7 +20,7 @@ public class BiometricUpdate extends TestBase {
     }
 
     @Test
-    public void captureBiometricUpdate() throws InterruptedException, IOException {
+    public void captureBiometricUpdate() throws InterruptedException, IOException, ParseException {
 
         WebDriverWait wait = new WebDriverWait(getDriver(), 30);
 

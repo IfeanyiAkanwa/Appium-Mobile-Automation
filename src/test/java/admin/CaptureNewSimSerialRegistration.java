@@ -5,6 +5,10 @@ import io.appium.java_client.android.Connection;
 import io.appium.java_client.android.connection.ConnectionState;
 import utils.TestBase;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import org.json.simple.parser.ParseException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -44,7 +48,7 @@ public class CaptureNewSimSerialRegistration extends TestBase {
     }
 
     @Test
-    public void RegisterNewSimSerialTest() throws InterruptedException {
+    public void RegisterNewSimSerialTest() throws InterruptedException, FileNotFoundException, IOException, ParseException {
 
         WebDriverWait wait = new WebDriverWait(getDriver(), 30);
         
@@ -58,13 +62,13 @@ public class CaptureNewSimSerialRegistration extends TestBase {
         Thread.sleep(500);
 
         //Request Dya
-//        getDriver().findElement(By.id("com.sf.biocapture.activity:id/dya_check_box")).click();
-//        Thread.sleep(500);
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/alertTitle")));
-//        TestUtils.assertSearchText("ID", "android:id/alertTitle", "[Select Yellow Account Type]");
-//        getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='DYA']")).click();
-//        getDriver().findElement(By.id("android:id/button1")).click();
-//        Thread.sleep(500);
+        getDriver().findElement(By.id("com.sf.biocapture.activity:id/dya_check_box")).click();
+        Thread.sleep(500);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/alertTitle")));
+        TestUtils.assertSearchText("ID", "android:id/alertTitle", "[Select Yellow Account Type]");
+        getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='DYA']")).click();
+        getDriver().findElement(By.id("android:id/button1")).click();
+        Thread.sleep(500);
 
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/add_sim_serial")).click();
         Thread.sleep(500);

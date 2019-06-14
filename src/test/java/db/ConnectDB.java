@@ -6,7 +6,7 @@ import java.sql.*;
 public class ConnectDB {
 
     private static final String DB_DRIVER = "oracle.jdbc.driver.OracleDriver";
-    private static final String DB_CONNECTION = "jdbc:oracle:thin:@10.1.216.126:1521:bsm_n2";
+    private static final String DB_CONNECTION = "jdbc:oracle:thin:@10.1.242.245:1521:bsm_n2";
     private static final String DB_USER = "biocapture";
     private static final String DB_PASSWORD = "s3amf1xK0l0";
     private static String otp;
@@ -23,7 +23,7 @@ public class ConnectDB {
             if (dbConnection != null) {
                 System.out.println("Connected to db");
             } else {
-                System.out.println("Not able to connect to db");
+                System.out .println("Not able to connect to db");
             }
             statement = dbConnection.createStatement();
             ResultSet rs = statement.executeQuery(getOTPSql);
