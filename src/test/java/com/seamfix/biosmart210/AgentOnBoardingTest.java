@@ -1,4 +1,4 @@
-package admin;
+package com.seamfix.biosmart210;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;

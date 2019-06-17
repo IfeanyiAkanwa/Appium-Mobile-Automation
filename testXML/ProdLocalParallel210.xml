@@ -13,13 +13,13 @@
 	<parameter name="downloadPath" value="/files/" />
 	<parameter name="dataEnv" value="prodData" />
 	
-   <test name="test1">
+    <test name="test1">
 		<parameter name="email" value="snapshot@seamfix.com" />
 		<parameter name="systemPort" value="8228" />
 		<parameter name="deviceNo" value="1" />
 
 		<classes>
-			<class name="admin.ForgotPassword">
+			<class name="com.seamfix.biosmart210.ForgotPassword">
 				<methods>
 					<include name="navigateToForgotPassword" />
 					<include name="changePasswordWithInvalidUsername" />
@@ -27,19 +27,34 @@
 					<include name="loginWithNewPassword" />
 				</methods>
 			</class>
-			<class name="admin.Login">
+			<class name="com.seamfix.biosmart210.Login">
 				<methods>
 					<include name="usernamePasswordTest" />
 					<include name="loginWithFingerprint" />
 				</methods>
 			</class>
-			<class name="admin.ChangePasswordTest">
+			<class name="com.seamfix.biosmart210.ChangePasswordTest">
 				<methods>
 					<include name="Login" />
 					<include name="navigateToChangePasswordPage" />
 					<include name="changeToNewPassword" />
 					<include name="loginWithNewPassword" />
 					<include name="changeBackToOldPassword" />
+				</methods>
+			</class>
+			<class name="com.seamfix.biosmart210.NotificationsTest">
+				<methods>
+					<include name="Login" />
+					<include name="navigateToNotifications" />
+					<include name="viewNotifications" />
+				</methods>
+			</class>
+			<class name="com.seamfix.biosmart210.ReportsTest">
+				<methods>
+					<include name="Login" />
+					<include name="navigateToReportsPage" />
+					<include name="reportSummary" />
+					<include name="searchParameters" />
 				</methods>
 			</class>
 		</classes>

@@ -1,4 +1,4 @@
-package admin;
+package com.seamfix.biosmart210;
 
 import java.io.IOException;
 import java.sql.SQLException;

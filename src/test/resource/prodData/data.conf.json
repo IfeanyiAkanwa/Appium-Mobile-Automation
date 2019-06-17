@@ -23,19 +23,77 @@
 		"valid_username": "gnwabude@seamfix.com",
 		"newPassword": "Rankole1!!!",
 		"password": "Bankole1!!",
-		"invalid_password_policy":"ban",
+		"invalid_password_policy": "ban",
 		"confirm_password_not_matching": "ban"
 	},
 	"Notifications": {
 		"searchParam": "SIM"
 	},
 	"NewRegistration": {
-		"valid_msisdn": "1111113112",
-		"invalid_msisdn": "1111167112"
+		"valid_msisdn": "1111113456",
+		"invalid_msisdn": "1111167112",
+		"lga": "Ibeju-Lekki"
 	},
 	"Reactivation": {
 		"valid_msisdn": "09062058526",
 		"invalid_msisdn": "08083733777",
+		"lga": "Ibeju-Lekki",
+		"valid_username": "e.okafor@seamfix.com",
+		"valid_password": "bankole1!!",
+		"invalid_OTP": "00000"
+	},
+	"SellAirtimeAndData": {
+		"valid_username": "folalere@seamfix.com",
+		"valid_password": "Bankole1!!",
+		"agent_vtu": "08032791952",
+		"sub_msisdn": "08169548454",
+		"amount": "50",
+		"invalid_agent_vtu": "08133302299",
+		"invalid_OTP": "00000"
+	},
+	"Search": {
+		"valid_msisdn": "1111113116",
+		"valid_sim_serial_no": "11111111111111111365"
+	},
+	"ReRegistration": {
+		"valid_msisdn": "09062059126",
+		"invalid_msisdn": "08169548454",
+		"invalid_OTP": "00000",
+		"alternate_phone": "08142050326",
+		"lga": "Ibeju-Lekki",
+		"state": "BENUE",
+		"LGA": "Ado"
+	},
+	"AgentOnboarding": {
+		"valid_username": "fatube@seamfix.com",
+		"valid_password": "Bankole1!!",
+		"agent_phoNum": "08069548454",
+		"agent_email": "gokafor@seamfix.com",
+		"onboardedAgent": "e.okafor@seamfix.com",
+		"invalid_email": "y.com@x.com",
+		"invalid_OTP": "00000",
+		"used_OTP": "25269"
+	},
+	"BiometricUpdate": {
+		"valid_msisdn": "08142050913",
+		"invalid_msisdn": "08169548454",
+		"area": "AKILO",
+		"lga": "Ibeju-Lekki"
+	},
+	"NewSimSerialRegistration": {
+		"valid_simSerial": "11111111111111111367",
+		"invalid_simSerial": "11111111111",
+		"area": "AKILO",
+		"lga": "Ibeju-Lekki"
+	},
+	"AdditionalRegistration": {
+		"valid_Msisdn": "08142050025",
+		"invalid_Msisdn": "09062059126",
+		"lga": "Ibeju-Lekki"
+	},
+	"SIMSwap": {
+		"valid_Msisdn": "08142050025",
+		"invalid_Msisdn": "08169548454",
 		"lga": "Ibeju-Lekki"
 	},
 	"UserDetails": {
@@ -90,6 +148,6 @@
 		"passport_ID_number": "6861637BC"
 	},
 	"LandingPage_Url": {
-	"prodUrl": "http:simreg.mtnnigeria.net"
+	"stagingUrl": "http:simregpoc.mtnnigeria.net"
 	}
 }
