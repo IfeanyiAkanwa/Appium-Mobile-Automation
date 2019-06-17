@@ -37,7 +37,9 @@ public class ForgotPassword extends TestBase {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/password_reset")));
 		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/password_reset")).click();
-		testInfo.get().info("Successful landing to Forgot Password page");
+		Thread.sleep(500);
+		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='FORGOT PASSWORD']", "FORGOT PASSWORD");
+		Thread.sleep(500);
 	}
 
 	@Parameters({ "dataEnv"})

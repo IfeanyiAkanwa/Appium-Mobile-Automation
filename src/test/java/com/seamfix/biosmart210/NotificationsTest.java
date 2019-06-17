@@ -23,14 +23,16 @@ public class NotificationsTest extends TestBase {
     public static void navigateToNotifications() throws InterruptedException {
 
     	WebDriverWait wait = new WebDriverWait(getDriver(), 30);
-
+    	String notification = "Navigate to Notifications page";
+  		Markup m = MarkupHelper.createLabel(notification, ExtentColor.BLUE);
+  		testInfo.get().info(m);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
         getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc=\"Navigate up\"]")).click();
         Thread.sleep(500);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/navigation_item_notification")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Notification']")));
         TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Notification']", "Notification");
-        testInfo.get().info("Successful landing to Notification Page");
+        Thread.sleep(500);
     }
 
     @Parameters({ "dataEnv"})

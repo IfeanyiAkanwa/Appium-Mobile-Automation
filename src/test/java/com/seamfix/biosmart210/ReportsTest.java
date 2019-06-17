@@ -23,14 +23,15 @@ public class ReportsTest extends TestBase {
     public static void navigateToReportsPage() throws InterruptedException {
     	
     	WebDriverWait wait = new WebDriverWait(getDriver(), 30);
-
+    	String report = "Navigate to Reports page";
+  		Markup m = MarkupHelper.createLabel(report, ExtentColor.BLUE);
+  		testInfo.get().info(m);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
         getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc=\"Navigate up\"]")).click();
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Reports']")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/report_title")));
         TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/report_title", "Report Summary");
-        testInfo.get().info("Successful landing to Report Summary Page");
-    	
+        Thread.sleep(500);    	
     }
 
     @Test

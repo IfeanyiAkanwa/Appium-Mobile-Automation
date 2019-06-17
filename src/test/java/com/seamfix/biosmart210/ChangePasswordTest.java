@@ -21,7 +21,9 @@ public class ChangePasswordTest extends TestBase {
     @Test
     public static void navigateToChangePasswordPage() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(getDriver(), 30);
-
+        String PasswordPage = "Navigate to Change password page";
+		Markup m = MarkupHelper.createLabel(PasswordPage, ExtentColor.BLUE);
+		testInfo.get().info(m);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
 
         getDriver().findElementByAccessibilityId("Navigate up").click();
@@ -31,6 +33,7 @@ public class ChangePasswordTest extends TestBase {
         TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/title", "CHANGE PASSWORD");
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/change_password_guide",
 				"Password must contain at least 10 Characters with at least 1 LowerCase, 1 UpperCase, 1 Number, and 1 Symbol");
+		Thread.sleep(500);
     }
 
     @Parameters({ "dataEnv"})
@@ -72,7 +75,7 @@ public class ChangePasswordTest extends TestBase {
         getDriver().findElement(By.id("android:id/button1")).click();
 
 		// Change password when the new password doesn't match confirm old password
-		String notMatchingConfirmPassword = "Change password with confirm password: " + confirm_password_not_matching + " not matching new password " + newPassword;
+		String notMatchingConfirmPassword = "Change password when confirm password field: " + "(" +confirm_password_not_matching+ ")" + " does not match new password field: " + newPassword;
 		Markup pa = MarkupHelper.createLabel(notMatchingConfirmPassword, ExtentColor.BLUE);
 		testInfo.get().info(pa);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/change_password_title")));
