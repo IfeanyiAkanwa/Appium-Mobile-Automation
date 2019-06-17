@@ -88,7 +88,7 @@ public class ReportsTest extends TestBase {
         getDriver().findElement(By.id("android:id/button1")).click();
         String sTime = getDriver().findElement(By.id("com.sf.biocapture.activity:id/start_time")).getText();
         
-		String date = "Try to set start date: " + sDate+ " and start time " + sTime;
+		String date = "Set start date: " + sDate+ " and start time " + sTime;
 		Markup m = MarkupHelper.createLabel(date, ExtentColor.BLUE);
 		testInfo.get().info(m);
 		
@@ -107,7 +107,7 @@ public class ReportsTest extends TestBase {
         getDriver().findElement(By.id("android:id/button1")).click();
         String eTime = getDriver().findElement(By.id("com.sf.biocapture.activity:id/end_time")).getText();
         
-        String datee = "Try to set end date: " + eDate+ " and end time " + eTime;
+        String datee = "Set end date: " + eDate+ " and end time " + eTime;
 		Markup d = MarkupHelper.createLabel(datee, ExtentColor.BLUE);
 		testInfo.get().info(d);
 		
