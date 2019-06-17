@@ -75,7 +75,7 @@ public class ChangePasswordTest extends TestBase {
         getDriver().findElement(By.id("android:id/button1")).click();
 
 		// Change password when the new password doesn't match confirm old password
-		String notMatchingConfirmPassword = "Change password when confirm password field: " + "(" +confirm_password_not_matching+ ")" + " does not match new password field: " + newPassword;
+		String notMatchingConfirmPassword = "Change password when confirm password field: ("  +confirm_password_not_matching+   ") does not match new password field: " + newPassword;
 		Markup pa = MarkupHelper.createLabel(notMatchingConfirmPassword, ExtentColor.BLUE);
 		testInfo.get().info(pa);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/change_password_title")));
