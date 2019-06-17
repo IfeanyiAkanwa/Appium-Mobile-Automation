@@ -82,7 +82,7 @@ public class Login extends TestBase {
 				.sendKeys(deactivated_username);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/verify")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/alertTitle")));
-		TestUtils.assertSearchText("ID", "android:id/message", "Your Account has been deactivated");
+		TestUtils.assertSearchText("ID", "android:id/message", "Your account is blacklisted. Please contact support");
 		getDriver().findElement(By.id("android:id/button1")).click();
 		wait.until(ExpectedConditions
 				.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/email")));

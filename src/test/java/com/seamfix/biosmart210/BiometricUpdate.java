@@ -1,4 +1,4 @@
-package admin;
+package com.seamfix.biosmart210;
 
 import org.json.simple.parser.ParseException;
 import org.openqa.selenium.By;

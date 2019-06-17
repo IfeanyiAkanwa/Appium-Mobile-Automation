@@ -1,4 +1,4 @@
-package admin;
+package com.seamfix.biosmart210;
 
 import DemographicForm.Form;
 import io.appium.java_client.android.Connection;
