@@ -15,7 +15,7 @@
 		<parameter name="deviceNo" value="1" />
 
 		<classes>
-			<!-- <class name="com.seamfix.biosmart210.ForgotPassword">
+			<class name="com.seamfix.biosmart210.ForgotPassword">
 				<methods>
 					<include name="navigateToForgotPassword" />
 					<include name="changePasswordWithInvalidUsername" />
@@ -52,7 +52,7 @@
 					<include name="reportSummary" />
 					<include name="searchParameters" />
 				</methods>
-			</class> -->
+			</class>
 			<class name="com.seamfix.biosmart210.SellAirtimeAndData">
 				<methods>
 					<include name="sellAirtimeLoginTest" />

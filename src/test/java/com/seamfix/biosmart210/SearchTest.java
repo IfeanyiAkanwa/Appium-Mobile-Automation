@@ -87,6 +87,8 @@ public class SearchTest extends TestBase {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/search_list")));
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/msisdn")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Subscriber Information']")));
+        TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Subscriber Information']", "Subscriber Information");
+        Thread.sleep(500);
         Asserts.AssertSubscriberInfo230();
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/ok")).click();
         Thread.sleep(500);

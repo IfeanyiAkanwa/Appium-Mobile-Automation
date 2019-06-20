@@ -35,19 +35,23 @@ public class SellAirtimeAndData extends TestBase {
 		TestBase.Login1(dataEnv, valid_username, valid_password);
 	}
 	
-	  @Test
-	    public static void navigateToSellAirtimeAndData() throws InterruptedException {
-	        WebDriverWait wait = new WebDriverWait(getDriver(), 30);
-
-	        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
-	        getDriver().findElementByAccessibilityId("Navigate up").click();
-	        Thread.sleep(500);
-	        getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Sell Airtime/Data']")).click();
-	        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Sell Airtime/Data']")));
-	        TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Sell Airtime/Data']", "Sell Airtime/Data");
-			TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Airtime']", "Airtime");
-			TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Data']", "Data");
-			Thread.sleep(500);
+	@Test
+	public static void navigateToSellAirtimeAndData() throws InterruptedException {
+		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+		String PasswordPage = "Navigate to Sell Airtime/Data page";
+		Markup m = MarkupHelper.createLabel(PasswordPage, ExtentColor.BLUE);
+		testInfo.get().info(m);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
+		getDriver().findElementByAccessibilityId("Navigate up").click();
+		Thread.sleep(500);
+		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Sell Airtime/Data']")).click();
+		wait.until(ExpectedConditions
+				.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Sell Airtime/Data']")));
+		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Sell Airtime/Data']",
+				"Sell Airtime/Data");
+		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Airtime']", "Airtime");
+		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Data']", "Data");
+		Thread.sleep(500);
 	    }
 	
 	@Parameters({ "dataEnv"})
@@ -62,8 +66,9 @@ public class SellAirtimeAndData extends TestBase {
 		String sub_msisdn = (String) envs.get("sub_msisdn");
 		String amount = (String) envs.get("amount");
 		String invalid_agent_vtu = (String) envs.get("invalid_agent_vtu");
+		String invalid_OTP = (String) envs.get("invalid_OTP");
 		
-		// Try to sell airtime with invalid Agent VTU number
+		// Sell airtime with invalid Agent VTU number
 		String air = "Sell airtime with invalid Agent VTU number: " + invalid_agent_vtu;
 		Markup m = MarkupHelper.createLabel(air, ExtentColor.BLUE);
 		testInfo.get().info(m);
@@ -82,15 +87,11 @@ public class SellAirtimeAndData extends TestBase {
 		getDriver().findElement(By.id("android:id/button1")).click();
 		Thread.sleep(1000);
 		
-		// Try to sell airtime with valid Agent VTU number and invalid OTP
-		String validMs = "Sell airtime with valid Agent VTU number and invalid OTP"  + "(" + agent_vtu + ")";
+		// Sell airtime with valid Agent VTU number and invalid OTP
+		String validMs = "Sell airtime with valid Agent VTU number: "  + agent_vtu + "  and invalid OTP: " + invalid_OTP;
 		Markup r = MarkupHelper.createLabel(validMs, ExtentColor.BLUE);
 		testInfo.get().info(r);
-		String invalid_OTP = (String) envs.get("invalid_OTP");
-		String inValidOTP = "Enter OTP that does not exist: " + invalid_OTP;
-		Markup otp = MarkupHelper.createLabel(inValidOTP, ExtentColor.BLUE);
-		testInfo.get().info(otp);
-		getDriver().findElement(By.id("com.sf.biocapture.activity:id/agent_vtu")).clear();
+		
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/agent_vtu")).sendKeys(agent_vtu);
 		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/sub_msisdn")).clear();
@@ -114,7 +115,7 @@ public class SellAirtimeAndData extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/cancel")).click();
 		Thread.sleep(500);
 		
-		// Try to sell airtime with valid Agent VTU number and valid OTP
+		// Sell airtime with valid Agent VTU number and valid OTP
 		String airtime = "Sell airtime with valid Agent VTU number and valid OTP: " + agent_vtu;
 		Markup e = MarkupHelper.createLabel(airtime, ExtentColor.BLUE);
 		testInfo.get().info(e);
@@ -148,7 +149,7 @@ public class SellAirtimeAndData extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/otp")).sendKeys(valid_OTP);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/confirm_otp")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
-		TestUtils.assertSearchText("ID", "android:id/message", "SUCCESS");
+		TestUtils.assertSearchText("ID", "android:id/message", "OTP is invalid.");
 		getDriver().findElement(By.id("android:id/button1")).click();
 		Thread.sleep(500);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/alertTitle")));
@@ -168,8 +169,9 @@ public class SellAirtimeAndData extends TestBase {
 		String agent_vtu = (String) envs.get("agent_vtu");
 		String sub_msisdn = (String) envs.get("sub_msisdn");
 		String invalid_agent_vtu = (String) envs.get("invalid_agent_vtu");
+		String invalid_OTP = (String) envs.get("invalid_OTP");
 		
-		// Try to vend data with invalid Agent VTU number
+		// Vend data with invalid Agent VTU number
 		String data = "Vend data with invalid Agent VTU number: " + invalid_agent_vtu;
 		Markup a = MarkupHelper.createLabel(data, ExtentColor.BLUE);
 		testInfo.get().info(a);
@@ -196,14 +198,11 @@ public class SellAirtimeAndData extends TestBase {
 		getDriver().findElement(By.id("android:id/button1")).click();
 		Thread.sleep(500);
 		
-		// Try to vend data with valid Agent VTU number and invalid OTP
-		String validMs = "Vend data with valid Agent VTU number and invalid OTP"  + "(" + agent_vtu + ")";
+		// Vend data with valid Agent VTU number and invalid OTP
+		String validMs = "Vend data with valid Agent VTU number: "  + agent_vtu + "  and invalid OTP: " + invalid_OTP;
 		Markup r = MarkupHelper.createLabel(validMs, ExtentColor.BLUE);
 		testInfo.get().info(r);
-		String invalid_OTP = (String) envs.get("invalid_OTP");
-		String inValidOTP = "Enter OTP that does not exist: " + invalid_OTP;
-		Markup otp = MarkupHelper.createLabel(inValidOTP, ExtentColor.BLUE);
-		testInfo.get().info(otp);
+		
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/name")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/name")).sendKeys(agent_vtu);
 		Thread.sleep(500);
@@ -232,7 +231,7 @@ public class SellAirtimeAndData extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/cancel")).click();
 		Thread.sleep(500);
 
-		// Try to vend data with valid Agent VTU number and valid OTP
+		// Vend data with valid Agent VTU number and valid OTP
 		String dataa = "Vend data with valid Agent VTU number and valid OTP: " + agent_vtu;
 		Markup t = MarkupHelper.createLabel(dataa, ExtentColor.BLUE);
 		testInfo.get().info(t);
@@ -271,10 +270,12 @@ public class SellAirtimeAndData extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/otp")).sendKeys(valid_OTP);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/confirm_otp")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
-        TestUtils.assertSearchText("ID", "android:id/message", "SUCCESS");
+        TestUtils.assertSearchText("ID", "android:id/message", "OTP is invalid.");
         getDriver().findElement(By.id("android:id/button1")).click();
 		Thread.sleep(500);
-
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/alertTitle")));
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/cancel")).click();
+		Thread.sleep(500);
 	}
 
 }
