@@ -53,6 +53,22 @@
 					<include name="searchParameters" />
 				</methods>
 			</class>
+			<class name="com.seamfix.biosmart210.SellAirtimeAndData">
+				<methods>
+					<include name="sellAirtimeLoginTest" />
+					<include name="navigateToSellAirtimeAndData" />
+					<include name="sellAirtimeTest" />
+					<include name="sellDataTest" />
+				</methods>
+			</class>
+			<class name="com.seamfix.biosmart210.SearchTest">
+				<methods>
+					<include name="Login" />
+					<include name="navigateToSearchTest" />
+					<include name="searchByMsisdnTest" />
+					<include name="searchBySimSerialTest" />
+				</methods>
+			</class>
 		</classes>
 	</test>
 </suite>
