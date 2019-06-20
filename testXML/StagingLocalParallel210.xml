@@ -69,6 +69,21 @@
 					<include name="searchBySimSerialTest" />
 				</methods>
 			</class>
+			<class name="com.seamfix.biosmart230.AgentOnBoardingTest">
+				<methods>
+					<include name="onboardedAgentLoginTest" />
+					<include name="navigateToAgentOnBoardingTest" />
+					<include name="agentOnBoardingTest" />
+				</methods>
+			</class>
+			<class name="com.seamfix.biosmart210.ReactivationTest">
+				<methods>
+					<include name="noneReactivationPrivilegeLoginTest" />
+					<include name="Login" />
+					<include name="navigateToCaptureMenuTest" />
+					<include name="msisdnReactivateTest" />
+				</methods>
+			</class>
 		</classes>
 	</test>
 </suite>
