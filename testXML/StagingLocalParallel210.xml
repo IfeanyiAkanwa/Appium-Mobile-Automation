@@ -65,7 +65,7 @@
 				<methods>
 					<include name="Login" />
 					<include name="navigateToSearchTest" />
-					<include name="searchByMsisdnTest" />
+					<include name="searc hByMsisdnTest" />
 					<include name="searchBySimSerialTest" />
 				</methods>
 			</class>
