@@ -46,7 +46,7 @@ public class CaptureNewMSISDNRegistration extends TestBase {
 		WebDriverWait wait = new WebDriverWait(getDriver(), 50);
 		JSONParser parser = new JSONParser();
 		JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
-		JSONObject envs = (JSONObject) config.get("NewRegistration");
+		JSONObject envs = (JSONObject) config.get("NewRegistrationMsisdn");
 		
 		String invalid_msisdn = (String) envs.get("invalid_msisdn");
 		String valid_msisdn = (String) envs.get("valid_msisdn");

@@ -29,8 +29,8 @@
 	"Notifications": {
 		"searchParam": "SIM"
 	},
-	"NewRegistration": {
-		"valid_msisdn": "1111113456",
+	"NewRegistrationMsisdn": {
+		"valid_msisdn": "1111113606",
 		"invalid_msisdn": "1111167112",
 		"lga": "Ibeju-Lekki"
 	},
@@ -125,7 +125,7 @@
 		"states_residence": "ABIA",
 		"lga_residence": "Aba North",
 		"area": "ARIARIA",
-		"lga_of_reg": "Akamkpa"
+		"lga_of_reg": "Agege"
 	},
 	"IndividualForeignerDetails": {
 		"surname": "Saraswati",

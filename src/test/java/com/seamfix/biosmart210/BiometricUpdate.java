@@ -15,7 +15,7 @@ import java.io.IOException;
 public class BiometricUpdate extends TestBase {
     @Test
     public static void navigateToCaptureSubscriber() throws InterruptedException {
-        CaptureNewMSISDNRegistration.NavigateToCaptureMenuTest();
+        CaptureNewMSISDNRegistration.navigateToCaptureMenuTest();
         testInfo.get().info("Successful landing to Capture Subscriber page");
     }
 
