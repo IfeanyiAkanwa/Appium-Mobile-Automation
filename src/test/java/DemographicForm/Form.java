@@ -236,14 +236,12 @@ public class Form extends TestBase {
 		// Company Address State
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/company_state_address")).click();
 		Thread.sleep(500);
-		TestUtils.assertSearchText("ID", "android:id/text1", "[Select State]*");
 		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='" + company_state_address + "']")).click();
 		Thread.sleep(500);
 		
 		// Company Address LGA
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/company_lga_address")).click();
 		Thread.sleep(500);
-		TestUtils.assertSearchText("ID", "android:id/text1", "[Select LGA]*");
 		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='" + company_lga_address + "']")).click();
 		Thread.sleep(500);
 		
@@ -299,6 +297,9 @@ public class Form extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/email")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/email")).sendKeys(email);
 		Thread.sleep(500);
+		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity:id/postalcode");
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/alt_phone_number")));
+		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/alt_phone_number")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/alt_phone_number")).sendKeys(alt_phone_number);
 		Thread.sleep(500);
@@ -314,14 +315,14 @@ public class Form extends TestBase {
 		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='" + occupation + "']")).click();
 		Thread.sleep(500);
 		
-		//  State  of Residence
+		//  State of Residence
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/states_residence")).click();
 		Thread.sleep(500);
 		TestUtils.assertSearchText("ID", "android:id/text1", "[Select State]*");
 		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='" + states_residence + "']")).click();
 		Thread.sleep(500);
 		
-		// LGA Residence
+		// LGA of Residence
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/lga_residence")).click();
 		Thread.sleep(500);
 		TestUtils.assertSearchText("ID", "android:id/text1", "[Select LGA]*");
@@ -335,10 +336,9 @@ public class Form extends TestBase {
 		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='" + area + "']")).click();
 		Thread.sleep(500);
 		
-		// LGA Residence
+		// LGA of Registration
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/lga_of_reg")).click();
 		Thread.sleep(500);
-		TestUtils.assertSearchText("ID", "android:id/text1", "[Select LGA]*");
 		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='" + lga_of_reg + "']")).click();
 		Thread.sleep(500);
 		
@@ -351,7 +351,7 @@ public class Form extends TestBase {
 		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/button_camera_capture")).click();
 		Thread.sleep(500);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/ok"))).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/ok")));
 		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/ok")).click();
 		Thread.sleep(500);
@@ -615,86 +615,107 @@ public class Form extends TestBase {
 		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
 
 		// override
-		wait.until(ExpectedConditions.visibilityOfElementLocated(
-				By.id("com.sf.biocapture.activity:id/override_poor_portrait_capture_button"))).click();
-		Thread.sleep(2000);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/override_poor_portrait_capture_button")));
+		Thread.sleep(500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/override_poor_portrait_capture_button")).click();
+		Thread.sleep(500);
 		getDriver().findElement(By.id("android:id/button1")).click();
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 
 		// capture override
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/capture_button")).click();
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/button_camera_capture")).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/ok"))).click();
-		Thread.sleep(1000);
+		Thread.sleep(500);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/ok")));
+		Thread.sleep(500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/ok")).click();
+		Thread.sleep(500);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/alertTitle")));
+		Thread.sleep(500);
+		TestUtils.assertSearchText("ID", "android:id/alertTitle", "Override Reason");
+		Thread.sleep(500);
 		getDriver().findElement(By.xpath("//android.widget.TextView[@text='Scarred']")).click();
-		Thread.sleep(1000);
+		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/capture_button")).click();
-		Thread.sleep(1000);
+		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/buttonImageInfo")).click();
 		Thread.sleep(1000);
 
-		// finger print override
-		// left hand
+		// Override Finger prints
+		// Right hand
 
-		String override_fingerprint = "Try to override fingerprints";
+		String override_fingerprint = "Override finger prints";
 		Markup o = MarkupHelper.createLabel(override_fingerprint, ExtentColor.BLUE);
 		testInfo.get().info(o);
-		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Choose Your Preferred Capture Mode']",
-				"Choose Your Preferred Capture Mode");
-		getDriver().findElement(By.id("com.sf.biocapture.activity:id/fp_left_index")).click();
-		Thread.sleep(1000);
-
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/override_finger_print_capture_button",
-				"Override Finger Print");
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/bt_basic_info_title", "Capture Fingerprint Image");
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/override_finger_print_capture_button", "Override fingerprint capture");
+		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/override_finger_print_capture_button")).click();
-		wait.until(ExpectedConditions
-				.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/bt_basic_info_title")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/bt_basic_info_title")));
+		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/capture_button")).click();
-		Thread.sleep(1000);
+		Thread.sleep(500);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/alertTitle")));
+		TestUtils.assertSearchText("ID", "android:id/alertTitle", "Please Select Missing Hand");
+		Thread.sleep(500);
+		String override_rightHand = "Override right hand";
+		Markup b = MarkupHelper.createLabel(override_rightHand, ExtentColor.BLUE);
+		testInfo.get().info(b);
 		getDriver().findElement(By.xpath("//android.widget.TextView[@text='MISSING RIGHT HAND']")).click();
 		Thread.sleep(1000);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/button_camera_capture")).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/ok"))).click();
-		Thread.sleep(1000);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/ok")));
+		Thread.sleep(500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/ok")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/alertTitle")));
+		TestUtils.assertSearchText("ID", "android:id/alertTitle", "Override Reason");
+		Thread.sleep(500);
 		getDriver().findElement(By.xpath("//android.widget.TextView[@text='No prints']")).click();
-		Thread.sleep(1000);
+		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/capture_button")).click();
 		Thread.sleep(1000);
 
 		// finger print override
 		// left hand
+		String override_leftHand = "Override left hand";
+		Markup l = MarkupHelper.createLabel(override_leftHand, ExtentColor.BLUE);
+		testInfo.get().info(l);
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/override_finger_print_capture_button",
-				"Override Finger Print");
+				"Override fingerprint capture");
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/override_finger_print_capture_button")).click();
-		wait.until(ExpectedConditions
-				.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/bt_basic_info_title")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/bt_basic_info_title")));
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/capture_button")).click();
-		Thread.sleep(1000);
+		Thread.sleep(500);
 		getDriver().findElement(By.xpath("//android.widget.TextView[@text='MISSING LEFT HAND']")).click();
-		Thread.sleep(1000);
+		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/button_camera_capture")).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/ok"))).click();
-		Thread.sleep(1000);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/ok")));
+		Thread.sleep(500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/ok")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/alertTitle")));
+		TestUtils.assertSearchText("ID", "android:id/alertTitle", "Override Reason");
+		Thread.sleep(500);
 		getDriver().findElement(By.xpath("//android.widget.TextView[@text='No prints']")).click();
-		Thread.sleep(1000);
+		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/capture_button")).click();
-
+		Thread.sleep(1000);
+		
 		// save enrollment
-		String saveEnrollment = "Try to save enrollement";
+		String saveEnrollment = "Save enrollement";
 		Markup s = MarkupHelper.createLabel(saveEnrollment, ExtentColor.BLUE);
 		testInfo.get().info(s);
-		Thread.sleep(1000);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/fp_save_enrolment")).click();
-
-		// popup
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/content")));
+		Thread.sleep(500);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
 		TestUtils.assertSearchText("ID", "android:id/message", "Captured record was saved successfully");
-
-		// ok button
+		Thread.sleep(500);
 		getDriver().findElement(By.id("android:id/button1")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
+		TestUtils.assertSearchText("ID", "android:id/message", "Do you wish to Top Up the registered subscriber ?");
+		Thread.sleep(500);
+		getDriver().findElement(By.id("android:id/button3")).click();
 		Thread.sleep(1000);
-
 	}
 
 }

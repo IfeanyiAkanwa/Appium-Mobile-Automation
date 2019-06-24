@@ -81,9 +81,6 @@ public class CaptureNewMSISDNRegistration extends TestBase {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/msisdn")));
 		Thread.sleep(500);
 		
-		// turn off all (data and wi-fi)
-		getDriver().setConnection(Connection.NONE);
-		
 		// Enter valid msisdn
 		String validMsisdn = "Enter valid MSISDN: " + valid_msisdn + " for validation";
 		Markup v = MarkupHelper.createLabel(validMsisdn, ExtentColor.BLUE);
@@ -91,16 +88,6 @@ public class CaptureNewMSISDNRegistration extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/msisdn")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/msisdn")).sendKeys(valid_msisdn);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/add_msisdn_button")).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/button2")));
-		TestUtils.assertSearchText("ID", "android:id/message", "Do you still wish to proceed with unverified Phone Number");
-		Thread.sleep(500);
-		getDriver().findElement(By.id("android:id/button2")).click();
-		Thread.sleep(500);
-		
-		// Turn on network
-		getDriver().setConnection(Connection.ALL);
-		
-		// Next button
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/next_button")));
 		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/next_button")).click();
