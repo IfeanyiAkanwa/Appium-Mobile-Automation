@@ -4,6 +4,7 @@ import org.json.simple.parser.ParseException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import utils.Asserts;
 import utils.TestBase;
@@ -19,8 +20,9 @@ public class BiometricUpdate extends TestBase {
         testInfo.get().info("Successful landing to Capture Subscriber page");
     }
 
+    @Parameters({ "dataEnv"})
     @Test
-    public void captureBiometricUpdate() throws InterruptedException, IOException, ParseException {
+    public void captureBiometricUpdate(String dataEnv) throws Exception {
 
         WebDriverWait wait = new WebDriverWait(getDriver(), 30);
 
@@ -43,7 +45,7 @@ public class BiometricUpdate extends TestBase {
         getDriver().findElement(By.className("android.widget.ImageButton")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/collapsing_toolbar")));
 
-        Form.IndividualForeignerForm();
+        Form.individualForeignerForm(dataEnv);
         if (TestUtils.isElementPresent("XPATH", "//android.widget.TextView[@text='Sell Airtime/Data']")) {
             getDriver().findElement(By.className("android.widget.ImageButton")).click();
         }

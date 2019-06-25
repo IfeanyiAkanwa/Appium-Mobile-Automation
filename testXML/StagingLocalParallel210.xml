@@ -92,6 +92,13 @@
 					<include name="captureNewMSISDNTest" />
 				</methods>
 			</class>
+			<class name="com.seamfix.biosmart210.CaptureNewSimSerialRegistration">
+				<methods>
+					<include name="Login" />
+					<include name="navigateToCaptureMenuTest" />
+					<include name="registerNewSimSerialTest" />
+				</methods>
+			</class>
 		</classes>
 	</test>
 </suite>

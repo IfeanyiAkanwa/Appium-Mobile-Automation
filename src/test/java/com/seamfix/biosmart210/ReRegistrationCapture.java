@@ -7,6 +7,7 @@ import org.json.simple.parser.ParseException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.Status;
@@ -42,8 +43,9 @@ public class ReRegistrationCapture extends TestBase {
 
     }
 
+    @Parameters({ "dataEnv"})
     @Test
-    public void ReRegisterationTest() throws InterruptedException, SQLException, FileNotFoundException, IOException, ParseException {
+    public void ReRegisterationTest(String dataEnv) throws Exception {
 
         WebDriverWait wait = new WebDriverWait(getDriver(), 30);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/primary_msisdn_field")).clear();
@@ -70,7 +72,7 @@ public class ReRegistrationCapture extends TestBase {
         Asserts.AssertIndividualForm();
         getDriver().findElement(By.className("android.widget.ImageButton")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/collapsing_toolbar")));
-        Form.IndividualForeignerForm();
+        Form.individualForeignerForm(dataEnv);
 
     }
 }
