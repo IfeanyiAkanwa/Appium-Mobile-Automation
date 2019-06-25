@@ -2,16 +2,11 @@ package com.seamfix.biosmart210;
 
 import DemographicForm.Form;
 import io.appium.java_client.android.Connection;
-import io.appium.java_client.android.connection.ConnectionState;
 import utils.TestBase;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
-
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -85,7 +80,7 @@ public class CaptureNewSimSerialRegistration extends TestBase {
  		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/sim_serial_field")));
  		Thread.sleep(500);
  		
- 		// Tsurn off all (data and wi-fi)
+ 		// Turn off all (data and wi-fi)
  		getDriver().setConnection(Connection.NONE);
  		
  		// Enter valid sim serial
