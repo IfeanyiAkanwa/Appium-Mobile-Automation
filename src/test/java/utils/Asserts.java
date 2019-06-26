@@ -63,7 +63,7 @@ public class Asserts extends TestBase {
 		String alternatePhoneNumber = getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.TableLayout/android.widget.LinearLayout[2]/android.widget.EditText")).getText();
 		String postalCode = getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.TableLayout/android.widget.LinearLayout[3]/android.widget.EditText")).getText();
 		if (postalCode.equals("e.g 100102")) {
-			testInfo.get().error("e.g 100102");
+			testInfo.get().error("Postal code: e.g 100102");
 		}
 		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity:id/capture_kyc_form");
 		Thread.sleep(500);
@@ -74,7 +74,7 @@ public class Asserts extends TestBase {
 		Assert.assertNotEquals(lgaOfResidence, "[Select LGA]*");
 		String areaOfResidence = getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.TableLayout/android.widget.LinearLayout[4]/android.widget.Spinner/android.widget.CheckedTextView")).getText();
 		if (areaOfResidence.equals("[Select Area]*")) {
-			testInfo.get().error("[Select Area]*");
+			testInfo.get().error("Area of Residence: [Select Area]*");
 		}
 		Thread.sleep(500);
 		String lgaOfRegistration = getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.TableLayout/android.widget.LinearLayout[5]/android.widget.Spinner/android.widget.TextView")).getText();
