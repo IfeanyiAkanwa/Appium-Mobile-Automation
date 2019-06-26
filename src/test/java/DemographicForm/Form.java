@@ -481,7 +481,7 @@ public class Form extends TestBase {
 		Thread.sleep(500);
 
 		// Nationality
-		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='[Select Nationality]*']")).click();
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/country")).click();
 		TestUtils.assertSearchText("ID", "android:id/text1", "[Select Nationality]*");
 		Thread.sleep(500);
 		getDriver().findElementByAndroidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(new UiSelector().text(\"INDIA\"));");

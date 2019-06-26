@@ -69,7 +69,7 @@ public class ReRegistrationCapture extends TestBase {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/user_details_panel")));
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/next_button")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/collapsing_toolbar")));
-        Asserts.AssertIndividualForm();
+        Asserts.assertIndividualForm210();
         getDriver().findElement(By.className("android.widget.ImageButton")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/collapsing_toolbar")));
         Form.individualForeignerForm(dataEnv);

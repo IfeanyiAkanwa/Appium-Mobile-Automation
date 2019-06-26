@@ -99,6 +99,13 @@
 					<include name="registerNewSimSerialTest" />
 				</methods>
 			</class>
+			<class name="com.seamfix.biosmart210.BiometricUpdate">
+				<methods>
+					<include name="Login" />
+					<include name="navigateToCaptureMenuTest" />
+					<include name="captureBiometricUpdate" />
+				</methods>
+			</class>
 		</classes>
 	</test>
 </suite>
