@@ -67,7 +67,7 @@ public class ReRegistrationCapture extends TestBase {
 		Thread.sleep(500);
 		
 		//Select Re-Registration
-		String newReg = "Select New Registration MSISDN";
+		String newReg = "Select Re-Registration";
 		Markup d = MarkupHelper.createLabel(newReg, ExtentColor.BLUE);
 		testInfo.get().info(d);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/typeofreg")));
