@@ -21,7 +21,10 @@ public class ChangePasswordTest extends TestBase {
     @Test
     public static void navigateToChangePasswordPage() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(getDriver(), 30);
-
+        String forgotPasswordPage = "Navigate to Change password page";
+		Markup m = MarkupHelper.createLabel(forgotPasswordPage, ExtentColor.BLUE);
+		testInfo.get().info(m);
+		
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
 
         getDriver().findElementByAccessibilityId("Navigate up").click();
@@ -48,8 +51,8 @@ public class ChangePasswordTest extends TestBase {
 		String valid_username = (String) envs.get("valid_username");
 		String confirm_password_not_matching = (String) envs.get("confirm_password_not_matching");
 
-        //Try to change password with invalid Password Policy
-		String invalidPass = "Try to change password with invalid password policy: " + invalid_password_policy;
+        // Change password with invalid Password Policy
+		String invalidPass = "Change password with invalid password policy: " + invalid_password_policy;
 		Markup m = MarkupHelper.createLabel(invalidPass, ExtentColor.BLUE);
 		testInfo.get().info(m);
       
@@ -71,8 +74,8 @@ public class ChangePasswordTest extends TestBase {
         TestUtils.assertSearchText("ID", "android:id/message", "Entered password does not match the password policy, please try again.");
         getDriver().findElement(By.id("android:id/button1")).click();
 
-		// Trying to change password when the new password doesnt match confirm old password
-		String notMatchingConfirmPassword = "Try to change password with confirm password " + "("
+		// Change password when the new password doesnt match confirm old password
+		String notMatchingConfirmPassword = "Change password with confirm password " + "("
 				+ confirm_password_not_matching + " )" + "not matching new password (" + newPassword + ")";
 		Markup pa = MarkupHelper.createLabel(notMatchingConfirmPassword, ExtentColor.BLUE);
 		testInfo.get().info(pa);
@@ -98,8 +101,8 @@ public class ChangePasswordTest extends TestBase {
 		TestUtils.assertSearchText("ID", "android:id/button1", "Ok");
 		getDriver().findElement(By.id("android:id/button1")).click();
 
-    	// Trying to change password with valid password policy
-		String validpass= "Try to change password with valid password policy: " + newPassword;
+    	// Change password with valid password policy
+		String validpass= "Change password with valid password policy: " + newPassword;
 		Markup e = MarkupHelper.createLabel(validpass, ExtentColor.BLUE);
 		testInfo.get().info(e);
         //Current Password
@@ -122,7 +125,7 @@ public class ChangePasswordTest extends TestBase {
         getDriver().findElement(By.id("android:id/button1")).click();
         
         //Logs out
-		String logOut = "Try to logout" + "(" + valid_username + ")";
+		String logOut = "Logout" + "(" + valid_username + ")";
 		Markup o = MarkupHelper.createLabel(logOut, ExtentColor.BLUE);
 		testInfo.get().info(o);
 		getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
@@ -148,11 +151,11 @@ public class ChangePasswordTest extends TestBase {
 		String newPassword = (String) envs.get("newPassword");
 		String valid_username = (String) envs.get("valid_username");
 
-		// Try to login in with the new password
+		// Login in with the new password
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/otp_login")).click();
         wait.until(
 				ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/login_username")));
-        String login = "Try to login with newly changed password : " + "(" + newPassword + ")"  + " and valid username: " + "(" +valid_username + ")";
+        String login = "Login with newly changed password : " + "(" + newPassword + ")"  + " and valid username: " + "(" +valid_username + ")";
 		Markup g = MarkupHelper.createLabel(login, ExtentColor.BLUE);
 		testInfo.get().info(g);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).clear();
@@ -179,8 +182,8 @@ public class ChangePasswordTest extends TestBase {
 
         navigateToChangePasswordPage();
         
-		// Try to change back to old password
-		String pw = "Try to change back to old password: "+ password;
+		// Change back to old password
+		String pw = "Change back to old password: "+ password;
 		Markup m = MarkupHelper.createLabel(pw, ExtentColor.BLUE);
 		testInfo.get().info(m);
         //Current Password

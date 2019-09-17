@@ -33,7 +33,8 @@ public class Login extends TestBase {
 		String invalid_username = (String) envs.get("invalid_username");
 		String not_onboarded_username = (String) envs.get("not_onboarded_username");
 		String deactivated_username = (String) envs.get("deactivated_username");
-		// Try to login with fingerprint
+		
+		// Login with fingerprint
 		String fpLogin = "Login with fingerprint";
 		Markup m = MarkupHelper.createLabel(fpLogin, ExtentColor.BLUE);
 		testInfo.get().info(m);
@@ -43,7 +44,7 @@ public class Login extends TestBase {
 				ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/page_sub_title")));
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/page_sub_title", "Fingerprint");
 
-		// Try to login with a user that does not exist
+		// Login with a user that does not exist
 		String wrongUsername = "Login with username that does not exist" + "(" + invalid_username + ")";
 		Markup n = MarkupHelper.createLabel(wrongUsername, ExtentColor.BLUE);
 		testInfo.get().info(n);
@@ -57,7 +58,7 @@ public class Login extends TestBase {
 		wait.until(ExpectedConditions
 				.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/email")));
 
-		// Try to login with user that has not been onboarded
+		// Login with user that has not been onboarded
 		String notOnboardedUsername = "Login with username that is not onboarded" + "(" + not_onboarded_username
 				+ ")";
 		Markup b = MarkupHelper.createLabel(notOnboardedUsername, ExtentColor.BLUE);
@@ -72,7 +73,7 @@ public class Login extends TestBase {
 		wait.until(ExpectedConditions
 				.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/email")));
 
-		// Try to login with user that has been blacklisted
+		// Login with user that has been blacklisted
 		String deactivatedUsername = "Login with username that is blacklisted" + "(" + deactivated_username
 				+ ")";
 		Markup d = MarkupHelper.createLabel(deactivatedUsername, ExtentColor.BLUE);
@@ -82,12 +83,12 @@ public class Login extends TestBase {
 				.sendKeys(deactivated_username);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/verify")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/alertTitle")));
-		TestUtils.assertSearchText("ID", "android:id/message", "Your account is blacklisted. Please contact support");
+		TestUtils.assertSearchText("ID", "android:id/message", "Your Account has been deactivated");
 		getDriver().findElement(By.id("android:id/button1")).click();
 		wait.until(ExpectedConditions
 				.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/email")));
 
-		// Try to login with an onboarded username
+		// Login with an onboarded username
 		String onboardedUsername = "Login with an onboarded username" + "(" + onboarded_username + ")";
 		Markup u = MarkupHelper.createLabel(onboardedUsername, ExtentColor.BLUE);
 		testInfo.get().info(u);
@@ -119,7 +120,7 @@ public class Login extends TestBase {
 		wait.until(
 				ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/login_username")));
 
-		// Try to login with valid username and invalid password
+		// Login with valid username and invalid password
 		String validUsernameInvalidPassword = "Login with a valid username" + "(" + valid_username + ")"
 				+ " and invalid password" + "(" + invalid_password + ")";
 		Markup u = MarkupHelper.createLabel(validUsernameInvalidPassword, ExtentColor.BLUE);
@@ -138,8 +139,8 @@ public class Login extends TestBase {
 		wait.until(
 				ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/login_username")));
 
-		// Try to login with invalid username and valid password
-		String invalidUsernameValidPassword = "Try to login with invalid username" + "(" + invalid_username + ")"
+		// Login with invalid username and valid password
+		String invalidUsernameValidPassword = "Login with invalid username" + "(" + invalid_username + ")"
 				+ "and valid password" + "(" + valid_password + ")";
 		Markup p = MarkupHelper.createLabel(invalidUsernameValidPassword, ExtentColor.BLUE);
 		testInfo.get().info(p);
@@ -157,7 +158,7 @@ public class Login extends TestBase {
 		wait.until(
 				ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/login_username")));
 
-		// Try to login with empty username and empty password
+		// Login with empty username and empty password
 		String emptyUsernameAndPassword = "Login with an empty username" + "()" + " and empty password" + "()";
 		Markup e = MarkupHelper.createLabel(emptyUsernameAndPassword, ExtentColor.BLUE);
 		testInfo.get().info(e);
@@ -175,7 +176,7 @@ public class Login extends TestBase {
 		wait.until(
 				ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/login_username")));
 
-		// Try to login with deactivated username and valid password
+		// Login with deactivated username and valid password
 		String deactivatedUsernameAndValidPassword = "Login with deactivated username" + "("
 				+ deactivated_username + ")" + " and valid password" + "(" + valid_password + ")";
 		Markup d = MarkupHelper.createLabel(deactivatedUsernameAndValidPassword, ExtentColor.BLUE);
@@ -194,7 +195,7 @@ public class Login extends TestBase {
 		wait.until(
 				ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/login_username")));
 
-		// Try to login with valid username and valid password
+		// Login with valid username and valid password
 		String validUsernameValidPassword = "Login with a valid username" + "(" + valid_username + ")"
 				+ "and valid password" + "(" + valid_password + ")";
 		Markup v = MarkupHelper.createLabel(validUsernameValidPassword, ExtentColor.BLUE);
@@ -208,7 +209,7 @@ public class Login extends TestBase {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
 		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Home']", "Home");
 
-		// Try to log out
+		// Log out
 		String logOut = "Logout" + "(" + valid_username + ")";
 		Markup o = MarkupHelper.createLabel(logOut, ExtentColor.BLUE);
 		testInfo.get().info(o);

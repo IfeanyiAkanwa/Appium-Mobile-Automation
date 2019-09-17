@@ -57,15 +57,17 @@ public class Form extends TestBase {
 		String lga_residence = (String) envs2.get("lga_residence");
 		String area = (String) envs2.get("area");
 
+		// Proceed with registration after supplying all mandatory fields
+		String completeField = "Proceed with registration after supplying all mandatory fields";
+		Markup e = MarkupHelper.createLabel(completeField, ExtentColor.BLUE);
+		testInfo.get().info(e);
+		
 		TestUtils.scrollUp();
 		wait.until(ExpectedConditions
 				.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Personal Details']")));
 		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Personal Details']", "Personal Details");
 		Thread.sleep(2000);
-		// Try to proceed with registration after supplying all mandatory fields
-		String completeField = "Proceed with registration after supplying all mandatory fields";
-		Markup e = MarkupHelper.createLabel(completeField, ExtentColor.BLUE);
-		testInfo.get().info(e);
+		
 		// Company details
 		wait.until(ExpectedConditions.visibilityOfElementLocated((By.id("com.sf.biocapture.activity:id/reg_type"))));
 		Thread.sleep(1000);
@@ -85,7 +87,7 @@ public class Form extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/company_regno")).sendKeys(company_regno);
 		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/house_or_flat_no")).clear();
-		getDriver().findElement(By.id("com.sf.biocapture.activity:id/house_or_flat_no")).sendKeys(surname);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/house_or_flat_no")).sendKeys(house_or_flat_no);
 		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/street")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/street")).sendKeys(company_street);

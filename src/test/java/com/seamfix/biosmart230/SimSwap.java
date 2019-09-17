@@ -168,6 +168,11 @@ public class SimSwap extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/btn_sim_swap_search_msisdn")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/btn_verify_fingerprint")));
 		Thread.sleep(500);
+		
+		// To return this details, this settings (VALIDATE-SUB-BEFORE-INFO-DISPLAY) must be set to false
+		String assertDetails = "Assert user's full name";
+		Markup ad = MarkupHelper.createLabel(assertDetails, ExtentColor.BLUE);
+		testInfo.get().info(ad);
 		String NA = "N/A";
 		String fullName = getDriver().findElement(By.id("com.sf.biocapture.activity:id/full_name")).getText();
 	
@@ -176,7 +181,7 @@ public class SimSwap extends TestBase {
 			String name = "";
 			String val = NA;
 			if (field.endsWith(":")) {
-				field = field + val;
+				field = field + val;	
 			}
 			try {
 				String[] fields = field.split(":");

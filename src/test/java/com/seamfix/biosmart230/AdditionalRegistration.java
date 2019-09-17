@@ -10,9 +10,11 @@ import org.json.simple.parser.JSONParser;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.Markup;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
@@ -23,8 +25,8 @@ public class AdditionalRegistration extends TestBase {
 
 	@Test
 	public static void navigateToCaptureMenuTest() throws InterruptedException {
-		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
-		// Try to navigate to Registration Type
+		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
+		
 		String regType = "Navigate to Registration Type";
 		Markup r = MarkupHelper.createLabel(regType, ExtentColor.BLUE);
 		testInfo.get().info(r);
@@ -40,7 +42,7 @@ public class AdditionalRegistration extends TestBase {
     @Test
     public void additionalRegistrationTest(String dataEnv) throws Exception {
 
-        WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+        WebDriverWait wait = new WebDriverWait(getDriver(), 60);
         
         JSONParser parser = new JSONParser();
 		JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
@@ -96,15 +98,32 @@ public class AdditionalRegistration extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/primary_msisdn_field")).sendKeys(valid_Msisdn);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/submit_button")).click();
 		Thread.sleep(1000);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/summary_title")));
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/summary_title", "Basic Info");
-		Thread.sleep(500);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Surname']")));
-		Asserts.assertBasicInfoAddReg230();
-		Thread.sleep(500);
-		getDriver().findElement(By.id("com.sf.biocapture.activity:id/summary_ok_button")).click();
-		Thread.sleep(500);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/spinner_finger_type")));
+		String assertDetails = "Assert user's full name";
+		Markup ad = MarkupHelper.createLabel(assertDetails, ExtentColor.BLUE);
+		testInfo.get().info(ad);
+		String NA = "N/A";
+		String surName = getDriver().findElement(By.id("com.sf.biocapture.activity:id/tv_surname")).getText();
+		String firstName = getDriver().findElement(By.id("com.sf.biocapture.activity:id/tv_first_name")).getText();
+		String[] toList = {"Surname: " + surName, "First name: " + firstName};
+		for (String field : toList) {
+			String name = "";
+			String val = NA;
+			if (field.endsWith(":")) {
+				field = field + val;	
+			}
+			try {
+				String[] fields = field.split(":");
+				name = fields[0];
+				val = fields[1];
+				Assert.assertNotEquals(val, NA);
+				testInfo.get().log(Status.INFO, name + " : " + val);
+			} catch (Error e) {
+				testInfo.get().error(name + " : " + val);
+
+			}
+		}
+		
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/spinner_finger_type")).click();
 		Thread.sleep(500);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='RIGHT THUMB']")));
@@ -113,12 +132,25 @@ public class AdditionalRegistration extends TestBase {
 		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/verify_finger_print_button")).click();
 		Thread.sleep(500);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/fingerType_text")));
-		Thread.sleep(500);
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/fingerType_text", "VERIFICATION");
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/btnStop", "Capture");
-		Thread.sleep(500);
-       
+		try {
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/alertTitle")));
+			Thread.sleep(500);
+			TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/alertTitle", "Scanner not found");
+			getDriver().findElement(By.id("android:id/button1")).click();
+			Thread.sleep(500);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/fingerType_text")));
+			Thread.sleep(500);
+			TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/fingerType_text", "VERIFICATION");
+			TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/btnStop", "Capture");
+			Thread.sleep(500);
+		} catch (Exception e) {
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/fingerType_text")));
+			Thread.sleep(500);
+			TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/fingerType_text", "VERIFICATION");
+			TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/btnStop", "Capture");
+			Thread.sleep(500);
+		}
+		
 	}
       
 }

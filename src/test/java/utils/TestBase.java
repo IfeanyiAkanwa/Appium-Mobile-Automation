@@ -90,7 +90,7 @@ public class TestBase {
 		}
 
 		htmlReporter = new ExtentHtmlReporter(new File(System.getProperty("user.dir") + groupReport));
-		htmlReporter.loadXMLConfig(new File(System.getProperty("user.dir") + "/resources/extent-config.xml"));
+		//htmlReporter.loadXMLConfig(new File(System.getProperty("user.dir") + "/resources/extent-config.xml"));
 		reports = new ExtentReports();
 		reports.setSystemInfo("Test Environment", myUrl(dataEnv));
 		reports.attachReporter(htmlReporter);

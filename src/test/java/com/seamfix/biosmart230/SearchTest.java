@@ -25,8 +25,12 @@ public class SearchTest extends TestBase {
     @Test
     public static void navigateToSearchTest() throws InterruptedException {
     	
-    	WebDriverWait wait = new WebDriverWait(getDriver(), 30);
-
+    	WebDriverWait wait = new WebDriverWait(getDriver(), 60);
+    	
+    	String fpLogin = "Navigate to Search";
+		Markup m = MarkupHelper.createLabel(fpLogin, ExtentColor.BLUE);
+		testInfo.get().info(m);
+		
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
         getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
         Thread.sleep(500);

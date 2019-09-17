@@ -43,10 +43,10 @@
 		"invalid_OTP": "00000"
 	},
 	"SellAirtimeAndData": {
-		"valid_username": "folalere@seamfix.com",
+		"valid_username": "nerondu@seamfix.com",
 		"valid_password": "Bankole1!!",
-		"agent_vtu": "08032791952",
-		"sub_msisdn": "08169548454",
+		"agent_vtu": "09062058470",
+		"sub_msisdn": "09062058471",
 		"amount": "50",
 		"invalid_agent_vtu": "08133302299",
 		"invalid_OTP": "00000"
@@ -56,7 +56,7 @@
 		"valid_sim_serial_no": "11111111111111111367"
 	},
 	"ReRegistration": {
-		"valid_msisdn": "09062059126",
+		"valid_msisdn": "08142050502",
 		"invalid_msisdn": "08169548454",
 		"invalid_OTP": "00000",
 		"alternate_phone": "08142050326",

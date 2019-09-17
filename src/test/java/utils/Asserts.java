@@ -114,10 +114,13 @@ public class Asserts extends TestBase {
 	public static void AssertIndividualForm230() throws Exception {
 		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
 		String assertDetails = "Asserting individual form of registered subscriber";
-		Markup ad = MarkupHelper.createLabel(assertDetails, ExtentColor.BLUE);
+		Markup ad = MarkupHelper.createLabel(assertDetails, ExtentColor.GREEN);
 		testInfo.get().info(ad);
 
-		String typeOfRegistration = getDriver().findElement(By.id("com.sf.biocapture.activity:id/reg_type")).getText();
+		String typeOfRegistration = getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/"
+				+ "android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout/"
+				+ "android.widget.FrameLayout/android.view.View/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/"
+				+ "android.widget.LinearLayout/android.widget.LinearLayout[1]/android.widget.Spinner/android.widget.TextView")).getText();
 		String surName = getDriver().findElement(By.id("com.sf.biocapture.activity:id/surname")).getText();
 		String firstName = getDriver().findElement(By.id("com.sf.biocapture.activity:id/firstname")).getText();
 		String middleName = getDriver().findElement(By.id("com.sf.biocapture.activity:id/middlename")).getText();
@@ -136,7 +139,10 @@ public class Asserts extends TestBase {
 		TestUtils.scrollDown();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/occupation")));
 		Thread.sleep(500);
-		String occupation = getDriver().findElement(By.id("com.sf.biocapture.activity:id/occupation")).getText();
+		String occupation = getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/"
+				+ "android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.FrameLayout/"
+				+ "android.view.View/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/"
+				+ "android.widget.LinearLayout[10]/android.widget.Spinner/android.widget.CheckedTextView")).getText();
 
 		String empty = "";
 		Map<String, String> fields = new HashMap<>();
@@ -169,8 +175,10 @@ public class Asserts extends TestBase {
 		String assertDetails = "Asserting address Details of registered subscriber";
 		Markup ad = MarkupHelper.createLabel(assertDetails, ExtentColor.BLUE);
 		testInfo.get().info(ad);
-		String countryOfOrigin = getDriver().findElement(By.xpath(
-				"/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.View/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout[1]/android.widget.Spinner[1]/android.widget.CheckedTextView"))
+		String countryOfOrigin = getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/"
+				+ "android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.FrameLayout/"
+				+ "android.view.View/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout[1]/android.widget.Spinner[1]/"
+				+ "android.widget.CheckedTextView"))
 				.getText();
 		String stateOfOrigin = getDriver().findElement(By.xpath(
 				"/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.View/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout[1]/android.widget.LinearLayout/android.widget.Spinner[1]/android.widget.CheckedTextView"))

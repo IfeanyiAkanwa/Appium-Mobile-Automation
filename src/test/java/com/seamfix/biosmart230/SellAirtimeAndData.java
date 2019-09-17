@@ -37,7 +37,11 @@ public class SellAirtimeAndData extends TestBase {
 	
 	  @Test
 	    public static void navigateToSellAirtimeAndData() throws InterruptedException {
-	        WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+	        WebDriverWait wait = new WebDriverWait(getDriver(), 60);
+	        
+	        String fpLogin = "Navigate to Sell Airtime/Data";
+			Markup m = MarkupHelper.createLabel(fpLogin, ExtentColor.BLUE);
+			testInfo.get().info(m);
 
 	        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
 	        getDriver().findElementByAccessibilityId("Navigate up").click();
@@ -63,7 +67,7 @@ public class SellAirtimeAndData extends TestBase {
 		String amount = (String) envs.get("amount");
 		String invalid_agent_vtu = (String) envs.get("invalid_agent_vtu");
 		
-		// Try to sell airtime with invalid Agent VTU number
+		// Sell airtime with invalid Agent VTU number
 		String air = "Sell airtime with invalid Agent VTU number: " + invalid_agent_vtu;
 		Markup m = MarkupHelper.createLabel(air, ExtentColor.BLUE);
 		testInfo.get().info(m);
@@ -82,8 +86,8 @@ public class SellAirtimeAndData extends TestBase {
 		getDriver().findElement(By.id("android:id/button1")).click();
 		Thread.sleep(1000);
 		
-		// Try to sell airtime with valid Agent VTU number and invalid OTP
-		String validMs = "Sell airtime with valid Agent VTU number and invalid OTP"  + "(" + agent_vtu + ")";
+		// Sell airtime with valid Agent VTU number and invalid OTP
+		String validMs = "Sell airtime with valid Agent VTU number and invalid OTP: "  + "(" + agent_vtu + ")";
 		Markup r = MarkupHelper.createLabel(validMs, ExtentColor.BLUE);
 		testInfo.get().info(r);
 		String invalid_OTP = (String) envs.get("invalid_OTP");
@@ -114,7 +118,7 @@ public class SellAirtimeAndData extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/cancel")).click();
 		Thread.sleep(500);
 		
-		// Try to sell airtime with valid Agent VTU number and valid OTP
+		// Sell airtime with valid Agent VTU number and valid OTP
 		String airtime = "Sell airtime with valid Agent VTU number and valid OTP: " + agent_vtu;
 		Markup e = MarkupHelper.createLabel(airtime, ExtentColor.BLUE);
 		testInfo.get().info(e);
@@ -148,13 +152,10 @@ public class SellAirtimeAndData extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/otp")).sendKeys(valid_OTP);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/confirm_otp")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
-		TestUtils.assertSearchText("ID", "android:id/message", "SUCCESS");
+		TestUtils.assertSearchText("ID", "android:id/message", "The vending of N50.0 airtime to " + sub_msisdn + " was successful");
 		getDriver().findElement(By.id("android:id/button1")).click();
-		Thread.sleep(500);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/alertTitle")));
-		getDriver().findElement(By.id("com.sf.biocapture.activity:id/cancel")).click();
-		Thread.sleep(500);
-
+		Thread.sleep(1000);
+		
 	}
 	
 	@Parameters({ "dataEnv"})
@@ -169,7 +170,7 @@ public class SellAirtimeAndData extends TestBase {
 		String sub_msisdn = (String) envs.get("sub_msisdn");
 		String invalid_agent_vtu = (String) envs.get("invalid_agent_vtu");
 		
-		// Try to vend data with invalid Agent VTU number
+		// Vend data with invalid Agent VTU number
 		String data = "Vend data with invalid Agent VTU number: " + invalid_agent_vtu;
 		Markup a = MarkupHelper.createLabel(data, ExtentColor.BLUE);
 		testInfo.get().info(a);
@@ -196,8 +197,8 @@ public class SellAirtimeAndData extends TestBase {
 		getDriver().findElement(By.id("android:id/button1")).click();
 		Thread.sleep(500);
 		
-		// Try to vend data with valid Agent VTU number and invalid OTP
-		String validMs = "Vend data with valid Agent VTU number and invalid OTP"  + "(" + agent_vtu + ")";
+		// Vend data with valid Agent VTU number and invalid OTP
+		String validMs = "Vend data with valid Agent VTU number and invalid OTP: "  + "(" + agent_vtu + ")";
 		Markup r = MarkupHelper.createLabel(validMs, ExtentColor.BLUE);
 		testInfo.get().info(r);
 		String invalid_OTP = (String) envs.get("invalid_OTP");
@@ -232,7 +233,7 @@ public class SellAirtimeAndData extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/cancel")).click();
 		Thread.sleep(500);
 
-		// Try to vend data with valid Agent VTU number and valid OTP
+		// Vend data with valid Agent VTU number and valid OTP
 		String dataa = "Vend data with valid Agent VTU number and valid OTP: " + agent_vtu;
 		Markup t = MarkupHelper.createLabel(dataa, ExtentColor.BLUE);
 		testInfo.get().info(t);
@@ -271,10 +272,9 @@ public class SellAirtimeAndData extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/otp")).sendKeys(valid_OTP);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/confirm_otp")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
-        TestUtils.assertSearchText("ID", "android:id/message", "SUCCESS");
+        TestUtils.assertSearchText("ID", "android:id/message", "The vending of MTN 50MB Data plan @ N100.0 to " + sub_msisdn+ " was successful");
         getDriver().findElement(By.id("android:id/button1")).click();
 		Thread.sleep(500);
-
 	}
 
 }

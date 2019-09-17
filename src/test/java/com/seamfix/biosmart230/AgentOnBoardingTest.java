@@ -40,6 +40,10 @@ public class AgentOnBoardingTest extends TestBase {
    	public void navigateToAgentOnBoardingTest( ) throws Exception {
    		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
 
+   		String forgotPasswordPage = "Navigate to Agent Onboarding page";
+		Markup m = MarkupHelper.createLabel(forgotPasswordPage, ExtentColor.BLUE);
+		testInfo.get().info(m);
+   		
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
         getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
         Thread.sleep(500);
