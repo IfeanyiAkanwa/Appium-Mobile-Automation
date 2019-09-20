@@ -98,7 +98,7 @@ public class AdditionalRegistration extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/primary_msisdn_field")).sendKeys(valid_Msisdn);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/submit_button")).click();
 		Thread.sleep(1000);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/spinner_finger_type")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/verify_finger_print_button")));
 		String assertDetails = "Assert user's full name";
 		Markup ad = MarkupHelper.createLabel(assertDetails, ExtentColor.BLUE);
 		testInfo.get().info(ad);

@@ -6,7 +6,8 @@
 		"valid_username": "gnwabude@seamfix.com",
 		"invalid_password": "adazejohn@1",
 		"valid_password": "Bankole1!!",
-		"deactivated_username": "amusa.adewaleibrahim@mtnagent.com"
+		"blacklisted_username": "amusa.adewaleibrahim@mtnagent.com",
+		"deactivated_username": "ndububa.benjamin@mtnagent.com"
 	},
 	"ForgotPassword": {
 		"invalid_username": "ada@seamnix.com",
@@ -35,7 +36,7 @@
 		"lga": "Ibeju-Lekki"
 	},
 	"Reactivation": {
-		"valid_msisdn": "09062058526",
+		"valid_msisdn": "09062059404",
 		"invalid_msisdn": "08083733777",
 		"lga": "Ibeju-Lekki",
 		"valid_username": "e.okafor@seamfix.com",

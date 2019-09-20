@@ -110,6 +110,7 @@ public class SellAirtimeAndData extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/otp")).clear();
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/otp")).sendKeys(invalid_OTP);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/confirm_otp")).click();
+        Thread.sleep(1000);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
 		TestUtils.assertSearchText("ID", "android:id/message", "OTP is invalid.");
 		getDriver().findElement(By.id("android:id/button1")).click();
@@ -151,6 +152,7 @@ public class SellAirtimeAndData extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/otp")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/otp")).sendKeys(valid_OTP);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/confirm_otp")).click();
+		Thread.sleep(1000);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
 		TestUtils.assertSearchText("ID", "android:id/message", "The vending of N50.0 airtime to " + sub_msisdn + " was successful");
 		getDriver().findElement(By.id("android:id/button1")).click();
@@ -225,6 +227,7 @@ public class SellAirtimeAndData extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/otp")).clear();
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/otp")).sendKeys(invalid_OTP);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/confirm_otp")).click();
+        Thread.sleep(1000);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
 		TestUtils.assertSearchText("ID", "android:id/message", "OTP is invalid.");
 		getDriver().findElement(By.id("android:id/button1")).click();
@@ -271,6 +274,7 @@ public class SellAirtimeAndData extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/otp")).clear();
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/otp")).sendKeys(valid_OTP);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/confirm_otp")).click();
+        Thread.sleep(1000);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
         TestUtils.assertSearchText("ID", "android:id/message", "The vending of MTN 50MB Data plan @ N100.0 to " + sub_msisdn+ " was successful");
         getDriver().findElement(By.id("android:id/button1")).click();

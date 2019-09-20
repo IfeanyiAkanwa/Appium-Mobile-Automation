@@ -114,7 +114,7 @@ public class ForgotPassword extends TestBase {
 		getDriver().findElement(By.id("android:id/button1")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/alertTitle")));
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/alertTitle", "Error");
-		TestUtils.assertSearchText("ID", "android:id/message", "No match was found for the specified OTP.");
+		TestUtils.assertSearchText("ID", "android:id/message", "There is no record associated with the provided otp.");
 		getDriver().findElement(By.id("android:id/button1")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/dialog_title")));
 
