@@ -211,8 +211,12 @@ public class TestBase {
 		testInfo.get().info(v);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/otp_login")));
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/otp_login")).click();
-		wait.until(
-				ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/login_username")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/login_username")));
+		
+		// Select Login mode
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_mode_types_spinner")).click();
+		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Biosmart']")).click();
+		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).sendKeys(valid_username);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_password")).clear();
@@ -231,8 +235,12 @@ public class TestBase {
 		testInfo.get().info(v);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/otp_login")));
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/otp_login")).click();
-		wait.until(
-				ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/login_username")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/login_username")));
+		
+		// Select Login mode
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_mode_types_spinner")).click();
+		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Biosmart']")).click();
+		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).sendKeys(valid_username);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_password")).clear();

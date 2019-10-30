@@ -1,13 +1,19 @@
 {
 	"Login": {
-		"onboarded_username": "adazejohnson@gmail.com",
+		"onboarded_username": "gokafor@seamfix.com",
 		"invalid_username": "ada@seamnix.com",
 		"not_onboarded_username": "faruk.muhammad@mtnagent.com",
 		"valid_username": "gnwabude@seamfix.com",
 		"invalid_password": "adazejohn@1",
 		"valid_password": "Bankole1!!",
-		"blacklisted_username": "amusa.adewaleibrahim@mtnagent.com",
-		"deactivated_username": "ndububa.benjamin@mtnagent.com"
+		"blacklisted_username": "test126@test.com",
+		"deactivated_username": "akindolie.tosin@mtnagent.com",
+		"invalid_email_format" : "@seamfix.com",
+		"AD_UserName": "seamkit2",
+		"valid_AD_pw": "W3lcomeB10sm@t2019#",
+		"BS_email": "virgyonline1000@gmail.com",
+		"AD_UserName1": "camaike",
+		"BS_email1": "camaike@seamfix.com"
 	},
 	"ForgotPassword": {
 		"invalid_username": "ada@seamnix.com",
