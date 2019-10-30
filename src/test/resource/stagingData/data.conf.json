@@ -46,7 +46,7 @@
 		"invalid_msisdn": "08083733777",
 		"lga": "Ibeju-Lekki",
 		"valid_username": "e.okafor@seamfix.com",
-		"valid_password": "bankole1!!",
+		"valid_password": "B.ankole1!!",
 		"invalid_OTP": "00000"
 	},
 	"SellAirtimeAndData": {
@@ -90,8 +90,8 @@
 	"AgentOnboarding": {
 		"valid_username": "fatube@seamfix.com",
 		"valid_password": "Bankole1!!",
-		"agent_phoNum": "08069548454",
-		"agent_email": "gokafor@seamfix.com",
+		"agent_phoNum": "08143049728",
+		"agent_email": "benjamin.muogbo@mtnagent.com",
 		"onboardedAgent": "e.okafor@seamfix.com",
 		"invalid_email": "y.com@x.com",
 		"invalid_OTP": "00000",
