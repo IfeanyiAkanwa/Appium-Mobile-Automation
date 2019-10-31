@@ -114,10 +114,13 @@ public class Asserts extends TestBase {
 	public static void AssertIndividualForm230() throws Exception {
 		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
 		String assertDetails = "Asserting individual form of registered subscriber";
-		Markup ad = MarkupHelper.createLabel(assertDetails, ExtentColor.BLUE);
+		Markup ad = MarkupHelper.createLabel(assertDetails, ExtentColor.GREEN);
 		testInfo.get().info(ad);
 
-		String typeOfRegistration = getDriver().findElement(By.id("com.sf.biocapture.activity:id/reg_type")).getText();
+		String typeOfRegistration = getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/"
+				+ "android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout/"
+				+ "android.widget.FrameLayout/android.view.View/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/"
+				+ "android.widget.LinearLayout/android.widget.LinearLayout[1]/android.widget.Spinner/android.widget.TextView")).getText();
 		String surName = getDriver().findElement(By.id("com.sf.biocapture.activity:id/surname")).getText();
 		String firstName = getDriver().findElement(By.id("com.sf.biocapture.activity:id/firstname")).getText();
 		String middleName = getDriver().findElement(By.id("com.sf.biocapture.activity:id/middlename")).getText();
@@ -136,7 +139,10 @@ public class Asserts extends TestBase {
 		TestUtils.scrollDown();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/occupation")));
 		Thread.sleep(500);
-		String occupation = getDriver().findElement(By.id("com.sf.biocapture.activity:id/occupation")).getText();
+		String occupation = getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/"
+				+ "android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.FrameLayout/"
+				+ "android.view.View/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/"
+				+ "android.widget.LinearLayout[10]/android.widget.Spinner/android.widget.CheckedTextView")).getText();
 
 		String empty = "";
 		Map<String, String> fields = new HashMap<>();
@@ -165,34 +171,48 @@ public class Asserts extends TestBase {
 
 	public static void AssertAddresstDetails230() throws Exception {
 		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
-
+		Map<String, String> fields = new HashMap<>();
 		String assertDetails = "Asserting address Details of registered subscriber";
 		Markup ad = MarkupHelper.createLabel(assertDetails, ExtentColor.BLUE);
 		testInfo.get().info(ad);
-		String countryOfOrigin = getDriver().findElement(By.xpath(
-				"/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.View/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout[1]/android.widget.Spinner[1]/android.widget.CheckedTextView"))
+		String countryOfOrigin = getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/"
+				+ "android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.FrameLayout/"
+				+ "android.view.View/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout[1]/android.widget.Spinner[1]/"
+				+ "android.widget.CheckedTextView"))
 				.getText();
 		String stateOfOrigin = getDriver().findElement(By.xpath(
 				"/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.View/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout[1]/android.widget.LinearLayout/android.widget.Spinner[1]/android.widget.CheckedTextView"))
 				.getText();
-		Assert.assertNotEquals(stateOfOrigin, "[Select State]*");
+		if (stateOfOrigin.equals("[Select State]*")) {
+			fields.put("State of origin", stateOfOrigin);
+		}
+		//Assert.assertNotEquals(stateOfOrigin, "[Select State]*");
 		String lgaOfOrigin = getDriver().findElement(By.xpath(
 				"/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.View/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout[1]/android.widget.LinearLayout/android.widget.Spinner[2]/android.widget.TextView"))
 				.getText();
-		Assert.assertNotEquals(lgaOfOrigin, "[Select LGA]*");
+		if (lgaOfOrigin.equals("[Select LGA]*")) {
+			fields.put("LGA of Origin", lgaOfOrigin);
+		}
+		//Assert.assertNotEquals(lgaOfOrigin, "[Select LGA]*");
 		String stateOfResidence = getDriver().findElement(By.xpath(
 				"/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.View/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout[1]/android.widget.Spinner[2]/android.widget.CheckedTextView"))
 				.getText();
-		Assert.assertNotEquals(stateOfResidence, "[Select State]*");
+		if (stateOfResidence.equals("[Select State]*")) {
+			fields.put("State of Residence", stateOfResidence);
+		}
+		//Assert.assertNotEquals(stateOfResidence, "[Select State]*");
 		String lgaOfResidence = getDriver().findElement(By.xpath(
 				"/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.View/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout[1]/android.widget.Spinner[3]/android.widget.TextView"))
 				.getText();
-		Assert.assertNotEquals(lgaOfResidence, "[Select LGA]*");
+		if (lgaOfResidence.equals("[Select State]*")) {
+			fields.put("LGA of Residence", lgaOfResidence);
+		}
+		//Assert.assertNotEquals(lgaOfResidence, "[Select LGA]*");
 		String areaOfResidence = getDriver().findElement(By.xpath(
 				"/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.View/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout[1]/android.widget.Spinner[4]/android.widget.CheckedTextView"))
 				.getText();
 		if (areaOfResidence.equals("[Select Area]*")) {
-			testInfo.get().error("[Select Area]*");
+			fields.put("Area of Residence", areaOfResidence);
 		}
 		Thread.sleep(500);
 		TestUtils.scrollDown();
@@ -205,13 +225,13 @@ public class Asserts extends TestBase {
 		String postalCode = getDriver().findElement(By.id("com.sf.biocapture.activity:id/postal_code")).getText();
 
 		String empty = "";
-		Map<String, String> fields = new HashMap<>();
+		//Map<String, String> fields = new HashMap<>();
 		fields.put("Country of Origin", countryOfOrigin);
-		fields.put("State of origin", stateOfOrigin);
+		/*fields.put("State of origin", stateOfOrigin);
 		fields.put("LGA of Origin", lgaOfOrigin);
 		fields.put("State of Residence", stateOfResidence);
 		fields.put("LGA of Residence", lgaOfResidence);
-		fields.put("Area of Residence", areaOfResidence);
+		fields.put("Area of Residence", areaOfResidence);*/
 		fields.put("House number", houseNum);
 		fields.put("Street", street);
 		fields.put("City", city);

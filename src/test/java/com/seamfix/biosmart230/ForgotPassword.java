@@ -28,8 +28,8 @@ public class ForgotPassword extends TestBase {
 	@Test
 
 	public static void navigateToForgotPassword() throws InterruptedException {
-		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
-		String forgotPasswordPage = "Try to navigate to forgot password page";
+		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
+		String forgotPasswordPage = "Navigate to forgot password page";
 		Markup m = MarkupHelper.createLabel(forgotPasswordPage, ExtentColor.BLUE);
 		testInfo.get().info(m);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/otp_login")));
@@ -52,9 +52,9 @@ public class ForgotPassword extends TestBase {
 		JSONObject envs = (JSONObject) config.get("ForgotPassword");
 		
 		String invalid_username = (String) envs.get("invalid_username");
-		WebDriverWait wait = new WebDriverWait(getDriver(), 50);
+		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
 
-		// Trying to change password with invalid username
+		// Change password with invalid username
 		String invalidUsername = "Change password with invalid username: " + invalid_username;
 		Markup m = MarkupHelper.createLabel(invalidUsername, ExtentColor.BLUE);
 		testInfo.get().info(m);
@@ -89,7 +89,7 @@ public class ForgotPassword extends TestBase {
 		String user_full_name = (String) envs.get("user_full_name");
 		String user_phoneNumber = (String) envs.get("user_phoneNumber");
 
-		// Trying to change password with valid username
+		// Change password with valid username
 		String validUsername = "Change password with valid username: " + valid_username;
 		Markup m = MarkupHelper.createLabel(validUsername, ExtentColor.BLUE);
 		testInfo.get().info(m);
@@ -104,7 +104,7 @@ public class ForgotPassword extends TestBase {
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/dialog_message",
 				"Enter One Time Password sent to : " + user_phoneNumber);
 
-		// Trying to test with invalid OTP
+		// Test with invalid OTP
 		String invalid_OTP = (String) envs.get("invalid_OTP");
 		String inValidOTP = "Enter OTP that does not exist: " + invalid_OTP;
 		Markup otp = MarkupHelper.createLabel(inValidOTP, ExtentColor.BLUE);
@@ -114,7 +114,7 @@ public class ForgotPassword extends TestBase {
 		getDriver().findElement(By.id("android:id/button1")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/alertTitle")));
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/alertTitle", "Error");
-		TestUtils.assertSearchText("ID", "android:id/message", "No match was found for the specified OTP.");
+		TestUtils.assertSearchText("ID", "android:id/message", "There is no record associated with the provided otp.");
 		getDriver().findElement(By.id("android:id/button1")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/dialog_title")));
 
@@ -134,7 +134,7 @@ public class ForgotPassword extends TestBase {
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/user_input_dialog", valid_OTP);
 		getDriver().findElement(By.id("android:id/button1")).click();
 
-		// Trying to assert the ChangePassword modal
+		// Assert the ChangePassword modal
 		String assertChangeModal = "Assert the Change Password modal";
 		Markup mark = MarkupHelper.createLabel(assertChangeModal, ExtentColor.BLUE);
 		testInfo.get().info(mark);
@@ -149,7 +149,7 @@ public class ForgotPassword extends TestBase {
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/cancel", "Cancel");
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/update_pwd", "Change");
 
-		// Trying to change password with an invalid password policy
+		// Change password with an invalid password policy
 		String invalidPasswordPolicy = "Change password with invalid password policy: "
 				+ invalid_password_policy;
 		Markup ip = MarkupHelper.createLabel(invalidPasswordPolicy, ExtentColor.BLUE);
@@ -169,9 +169,7 @@ public class ForgotPassword extends TestBase {
 		TestUtils.assertSearchText("ID", "android:id/button1", "Ok");
 		getDriver().findElement(By.id("android:id/button1")).click();
 
-		// Trying to change password when the new password doesnt match confirm old
-		// password
-
+		// Change password when the new password doesnt match confirm old password
 		String notMatchingConfirmPassword = "Change password with confirm password" + "("
 				+ confirm_password_not_matching + " )" + "not matching new password (" + new_password + ")";
 		Markup pa = MarkupHelper.createLabel(notMatchingConfirmPassword, ExtentColor.BLUE);
@@ -192,13 +190,12 @@ public class ForgotPassword extends TestBase {
 		TestUtils.assertSearchText("ID", "android:id/button1", "Ok");
 		getDriver().findElement(By.id("android:id/button1")).click();
 
-		// Trying to change password with a valid password policy
+		// Change password with a valid password policy
 		String validPassword = "Change password with valid Password Policy: " + new_password;
 		Markup pass = MarkupHelper.createLabel(validPassword, ExtentColor.BLUE);
 		testInfo.get().info(pass);
 		wait.until(ExpectedConditions
 				.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/change_password_title")));
-
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/new_password")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/new_password")).sendKeys(new_password);
 
@@ -223,7 +220,7 @@ public class ForgotPassword extends TestBase {
 		
 		String valid_username = (String) envs.get("valid_username");
 		String new_password = (String) envs.get("new_password");
-		// Trying to login in with the new password
+		// Login in with the new password
 		String login = "Login with the newly changed password: " + new_password;
 		Markup pass = MarkupHelper.createLabel(login, ExtentColor.BLUE);
 		testInfo.get().info(pass);

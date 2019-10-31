@@ -25,7 +25,7 @@ public class BiometricUpdate extends TestBase {
 	
 	 @Test
 	public static void navigateToCaptureMenuTest() throws InterruptedException {
-		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
 		// Navigate to Registration Type
 		String regType = "Navigate to Registration Type";
 		Markup r = MarkupHelper.createLabel(regType, ExtentColor.BLUE);
@@ -41,7 +41,7 @@ public class BiometricUpdate extends TestBase {
 	@Test
     public void captureBiometricUpdate(String dataEnv) throws Exception {
 
-        WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+        WebDriverWait wait = new WebDriverWait(getDriver(), 60);
         JSONParser parser = new JSONParser();
 		JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
 		JSONObject envs = (JSONObject) config.get("BiometricUpdate");
@@ -51,7 +51,7 @@ public class BiometricUpdate extends TestBase {
 		String lga = (String) envs.get("lga");
 		String area = (String) envs.get("area");
 		
-		// Try to select LGA of Registration
+		// Select LGA of Registration
 		String lgaa = "Select LGA of Registration: " + lga;
 		Markup m = MarkupHelper.createLabel(lgaa, ExtentColor.BLUE);
 		testInfo.get().info(m);
@@ -120,20 +120,10 @@ public class BiometricUpdate extends TestBase {
 	    TestUtils.scrollDown();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/btn_continue_reg")));
         Thread.sleep(500);
-        if (TestUtils.isElementPresent("ID", "com.sf.biocapture.activity:id/add_social_media_button")) {
-			Thread.sleep(1000);
-			if (TestUtils.isElementPresent("ID", "com.sf.biocapture.activity:id/delete_button")) {
-				getDriver().findElement(By.id("com.sf.biocapture.activity:id/delete_button")).click();
-			}
+		if (TestUtils.isElementPresent("ID", "com.sf.biocapture.activity:id/delete_button")) {
 			getDriver().findElement(By.id("com.sf.biocapture.activity:id/delete_button")).click();
-			Thread.sleep(500);
-			getDriver().findElement(By.id("com.sf.biocapture.activity:id/delete_button")).click();
-			Thread.sleep(500);
-			getDriver().findElement(By.id("com.sf.biocapture.activity:id/delete_button")).click();
-			Thread.sleep(500);
-			getDriver().findElement(By.id("com.sf.biocapture.activity:id/delete_button")).click();
-			Thread.sleep(500);
 		}
+
         TestUtils.scrollUp();
     	String fillingForm = "Filling Demographics form after asserting existing details";
 		Markup c = MarkupHelper.createLabel(fillingForm, ExtentColor.BLUE);

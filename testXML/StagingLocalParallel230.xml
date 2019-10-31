@@ -25,6 +25,7 @@
 			</class>
 			<class name="com.seamfix.biosmart230.Login">
 				<methods>
+					<include name="erorrMessagesValidationTest" />
 					<include name="usernamePasswordTest" />
 					<include name="loginWithFingerprint" />
 				</methods>

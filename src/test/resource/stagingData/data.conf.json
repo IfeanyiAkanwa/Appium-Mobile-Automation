@@ -1,12 +1,19 @@
 {
 	"Login": {
-		"onboarded_username": "adazejohnson@gmail.com",
+		"onboarded_username": "gokafor@seamfix.com",
 		"invalid_username": "ada@seamnix.com",
 		"not_onboarded_username": "faruk.muhammad@mtnagent.com",
 		"valid_username": "gnwabude@seamfix.com",
 		"invalid_password": "adazejohn@1",
 		"valid_password": "Bankole1!!",
-		"deactivated_username": "amusa.adewaleibrahim@mtnagent.com"
+		"blacklisted_username": "test126@test.com",
+		"deactivated_username": "akindolie.tosin@mtnagent.com",
+		"invalid_email_format" : "@seamfix.com",
+		"AD_UserName": "seamkit2",
+		"valid_AD_pw": "W3lcomeB10sm@t2019#",
+		"BS_email": "virgyonline1000@gmail.com",
+		"AD_UserName1": "camaike",
+		"BS_email1": "camaike@seamfix.com"
 	},
 	"ForgotPassword": {
 		"invalid_username": "ada@seamnix.com",
@@ -35,18 +42,18 @@
 		"lga": "Ibeju-Lekki"
 	},
 	"Reactivation": {
-		"valid_msisdn": "09062058526",
+		"valid_msisdn": "09062059404",
 		"invalid_msisdn": "08083733777",
 		"lga": "Ibeju-Lekki",
 		"valid_username": "e.okafor@seamfix.com",
-		"valid_password": "bankole1!!",
+		"valid_password": "B.ankole1!!",
 		"invalid_OTP": "00000"
 	},
 	"SellAirtimeAndData": {
-		"valid_username": "folalere@seamfix.com",
+		"valid_username": "nerondu@seamfix.com",
 		"valid_password": "Bankole1!!",
-		"agent_vtu": "08032791952",
-		"sub_msisdn": "08169548454",
+		"agent_vtu": "09062058470",
+		"sub_msisdn": "09062058471",
 		"amount": "50",
 		"invalid_agent_vtu": "08133302299",
 		"invalid_OTP": "00000"
@@ -56,7 +63,7 @@
 		"valid_sim_serial_no": "11111111111111111367"
 	},
 	"ReRegistration": {
-		"valid_msisdn": "09062059126",
+		"valid_msisdn": "08142050502",
 		"invalid_msisdn": "08169548454",
 		"invalid_OTP": "00000",
 		"alternate_phone": "08142050326",
@@ -83,8 +90,8 @@
 	"AgentOnboarding": {
 		"valid_username": "fatube@seamfix.com",
 		"valid_password": "Bankole1!!",
-		"agent_phoNum": "08069548454",
-		"agent_email": "gokafor@seamfix.com",
+		"agent_phoNum": "08143049728",
+		"agent_email": "benjamin.muogbo@mtnagent.com",
 		"onboardedAgent": "e.okafor@seamfix.com",
 		"invalid_email": "y.com@x.com",
 		"invalid_OTP": "00000",

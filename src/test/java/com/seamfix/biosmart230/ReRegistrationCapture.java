@@ -2,6 +2,7 @@ package com.seamfix.biosmart230;
 
 import db.ConnectDB;
 
+import java.io.File;
 import java.io.FileReader;
 
 import org.json.simple.JSONObject;
@@ -18,6 +19,7 @@ import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.Markup;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 
+import DemographicForm.Form;
 import utils.Asserts;
 import utils.TestBase;
 import utils.TestUtils;
@@ -47,6 +49,7 @@ public class ReRegistrationCapture extends TestBase {
 		JSONParser parser = new JSONParser();
 		JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
 		JSONObject envs = (JSONObject) config.get("ReRegistration");
+		JSONObject envs2 = (JSONObject) config.get("CompanyDetails");
 		
 		String invalid_msisdn = (String) envs.get("invalid_msisdn");
 		String valid_msisdn = (String) envs.get("valid_msisdn");
@@ -56,7 +59,16 @@ public class ReRegistrationCapture extends TestBase {
 		String state = (String) envs.get("state");
 		String LGA = (String) envs.get("LGA");
 		
-		// Try to select LGA of Registration
+		String company_description = (String) envs2.get("company_description");
+		String company_regno = (String) envs2.get("company_regno");
+		String house_or_flat_no = (String) envs2.get("house_or_flat_no");
+		String company_street = (String) envs2.get("company_street");
+		String company_city = (String) envs2.get("company_city");
+		String company_state_address = (String) envs2.get("company_state_address");
+		String company_lga_address = (String) envs2.get("company_lga_address");
+		String company_postalcode = (String) envs2.get("company_postalcode");
+		
+		// Select LGA of Registration
 		String lgaa = "Select LGA of Registration: " + lga;
 		Markup m = MarkupHelper.createLabel(lgaa, ExtentColor.BLUE);
 		testInfo.get().info(m);
@@ -171,14 +183,100 @@ public class ReRegistrationCapture extends TestBase {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/next_button")));
         Thread.sleep(500);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/next_button")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Personal Details']")));
+        
+		// Company details
+		wait.until(ExpectedConditions.visibilityOfElementLocated((By.id("com.sf.biocapture.activity:id/reg_type"))));
+		Thread.sleep(1000);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/reg_type")).click();
+		Thread.sleep(1000);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.CheckedTextView[@text='Company']")));
+		Thread.sleep(1000);
+		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Company']")).click();
+		Thread.sleep(500);
+		wait.until(ExpectedConditions.visibilityOfElementLocated((By.id("com.sf.biocapture.activity:id/company_details_title"))));
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/company_details_title", "Company Details");
+		Thread.sleep(500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/company_name_descrptn")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/company_name_descrptn")).sendKeys(company_description);
+		Thread.sleep(500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/company_regno")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/company_regno")).sendKeys(company_regno);
+		Thread.sleep(500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/house_or_flat_no")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/house_or_flat_no")).sendKeys(house_or_flat_no);
+		Thread.sleep(500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/street")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/street")).sendKeys(company_street);
+		Thread.sleep(500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/city")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/city")).sendKeys(company_city);
+		Thread.sleep(500);
+
+		// Company Address State
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/company_state_address")).click();
+		Thread.sleep(500);
+		TestUtils.assertSearchText("ID", "android:id/text1", "[Select State]*");
+		getDriver().findElement(By.xpath("//android.widget.TextView[@text='" + company_state_address + "']")).click();
+		Thread.sleep(500);
+
+		// Company Address LGA
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/company_lga_address")).click();
+		Thread.sleep(500);
+		TestUtils.assertSearchText("ID", "android:id/text1", "[Select LGA]*");
+		getDriver().findElement(By.xpath("//android.widget.TextView[@text='" + company_lga_address + "']")).click();
+		Thread.sleep(500);
+
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/company_postalcode")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/company_postalcode")).sendKeys(company_postalcode);
+		Thread.sleep(500);
+
+		// Certificate of Incorporation
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/document_type_spinner")).click();
+		Thread.sleep(500);
+		getDriver().findElement(By.xpath("//android.widget.TextView[@text='Certificate of Incorporation *']")).click();
+		Thread.sleep(500);
+
+		// Push File
+		File pic = new File(System.getProperty("user.dir") + "/files/idCard.jpg");
+		getDriver().pushFile("/mnt/sdcard/picture.jpg", pic);
+
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/btn_load_document")).click();
+		Thread.sleep(500);
+		TestUtils.scrollUntilElementIsVisible("XPATH", "//android.widget.TextView[@text='picture.jpg']");
+		getDriver().findElement(By.xpath("//android.widget.TextView[@text='picture.jpg']")).click();
+		Thread.sleep(500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/btn_remove_document")).click();
+		Thread.sleep(500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/btn_load_document")).click();
+		Thread.sleep(1000);
+		TestUtils.scrollUntilElementIsVisible("XPATH", "//android.widget.TextView[@text='picture.jpg']");
+		getDriver().findElement(By.xpath("//android.widget.TextView[@text='picture.jpg']")).click();
+		Thread.sleep(500);
+
+		// contact person form
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/document_type_spinner")).click();
+		Thread.sleep(500);
+		getDriver().findElement(By.xpath("//android.widget.TextView[@text='Contact Person Form *']")).click();
+		Thread.sleep(500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/btn_remove_document")).click();
+		Thread.sleep(500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/btn_load_document")).click();
+		Thread.sleep(1000);
+		TestUtils.scrollUntilElementIsVisible("XPATH", "//android.widget.TextView[@text='picture.jpg']");
+		Thread.sleep(500);
+		getDriver().findElement(By.xpath("//android.widget.TextView[@text='picture.jpg']")).click();
+		Thread.sleep(500);
+
+		// save
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/company_ok")).click();
+		Thread.sleep(1000);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Personal Details']")));
+		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Personal Details']", "Personal Details");
+		
         Thread.sleep(2000);
         Asserts.AssertIndividualForm230();
-        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity:id/alternate_phone");
+        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity:id/btn_continue_reg");
         Thread.sleep(1000);
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/alternate_phone")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/alternate_phone")).sendKeys(alternate_phone);
-        TestUtils.scrollDown();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/btn_continue_reg")));
         Thread.sleep(500);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/btn_continue_reg")).click();
@@ -187,29 +285,13 @@ public class ReRegistrationCapture extends TestBase {
         Thread.sleep(1000);
         Asserts.AssertAddresstDetails230();
         Thread.sleep(1000);
-        
-    	//State of Origin
-		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='[Select State]*']")).click();
-		Thread.sleep(500);
-		TestUtils.assertSearchText("ID", "android:id/text1", "[Select State]*");
-		getDriver().findElement(By.xpath("//android.widget.TextView[@text='" + state + "']")).click();
-		Thread.sleep(500);
-		
-		// LGA of Origin
-		getDriver().findElement(By.xpath("//android.widget.TextView[@text='[Select LGA]*']")).click();
-		Thread.sleep(500);
-		TestUtils.assertSearchText("ID", "android:id/text1", "[Select LGA]*");
-		getDriver().findElement(By.xpath("//android.widget.TextView[@text='" + LGA + "']")).click();
-		Thread.sleep(500);
-    
+      
 		// Next button
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/save_continue")).click();
 		Thread.sleep(500);
-		wait.until(ExpectedConditions
-				.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Capture Data']")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Capture Data']")));
 		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Capture Data']", "Capture Data");
-		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Identification Type']",
-				"Identification Type");
+		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Identification Type']","Identification Type");
 		Thread.sleep(500);
 
 		// Capture Data
@@ -230,7 +312,7 @@ public class ReRegistrationCapture extends TestBase {
 		Thread.sleep(500);
 
 		// View Captured ID
-		String capturedID = "Try to view captured ID";
+		String capturedID = "View captured ID";
 		Markup c = MarkupHelper.createLabel(capturedID, ExtentColor.BLUE);
 		testInfo.get().info(c);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/view_id_button")).click();
@@ -245,8 +327,8 @@ public class ReRegistrationCapture extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/done_button")).click();
 		Thread.sleep(500);
 
-		// Try to proceed with registration without completing the capture process
-		String emptyField = "Try to proceed with registration without completing the capture process";
+		// Proceed with registration without completing the capture process
+		String emptyField = "Proceed with registration without completing the capture process";
 		Markup f = MarkupHelper.createLabel(emptyField, ExtentColor.BLUE);
 		testInfo.get().info(f);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/next_button")).click();
@@ -266,8 +348,8 @@ public class ReRegistrationCapture extends TestBase {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/ok"))).click();
 		Thread.sleep(500);
 
-		// View Captured ID
-		String capturedKycForm = "Try to view captured KYC Form";
+		// View captured KYC Form
+		String capturedKycForm = "View captured KYC Form";
 		Markup b = MarkupHelper.createLabel(capturedKycForm, ExtentColor.BLUE);
 		testInfo.get().info(b);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/view_kyc_form_button")).click();

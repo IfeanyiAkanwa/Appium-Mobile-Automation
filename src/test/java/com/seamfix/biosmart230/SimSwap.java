@@ -168,35 +168,26 @@ public class SimSwap extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/btn_sim_swap_search_msisdn")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/btn_verify_fingerprint")));
 		Thread.sleep(500);
-		String NA = "N/A";
-		String fullName = getDriver().findElement(By.id("com.sf.biocapture.activity:id/full_name")).getText();
-	
-		String[] toList = {"Full name: " + fullName};
-		for (String field : toList) {
-			String name = "";
-			String val = NA;
-			if (field.endsWith(":")) {
-				field = field + val;
-			}
-			try {
-				String[] fields = field.split(":");
-				name = fields[0];
-				val = fields[1];
-				Assert.assertNotEquals(val, NA);
-				testInfo.get().log(Status.INFO, name + " : " + val);
-			} catch (Error e) {
-				testInfo.get().error(name + " : " + val);
-
-			}
-		}
-		Thread.sleep(1000);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/btn_verify_fingerprint")).click();
 		Thread.sleep(500);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/fingerType_text")));
-		Thread.sleep(500);
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/fingerType_text", "VERIFICATION");
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/btnStop", "Capture");
-		Thread.sleep(500);
+		try {
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/alertTitle")));
+			Thread.sleep(500);
+			TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/alertTitle", "Scanner not found");
+			getDriver().findElement(By.id("android:id/button1")).click();
+			Thread.sleep(500);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/fingerType_text")));
+			Thread.sleep(500);
+			TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/fingerType_text", "VERIFICATION");
+			TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/btnStop", "Capture");
+			Thread.sleep(500);
+		} catch (Exception e) {
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/fingerType_text")));
+			Thread.sleep(500);
+			TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/fingerType_text", "VERIFICATION");
+			TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/btnStop", "Capture");
+			Thread.sleep(500);
+		}
     
 	}
       

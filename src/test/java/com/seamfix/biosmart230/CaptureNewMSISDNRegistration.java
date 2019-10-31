@@ -28,7 +28,7 @@ public class CaptureNewMSISDNRegistration extends TestBase {
 	public static void NavigateToCaptureMenuTest() throws InterruptedException {
 		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
 		// Try to navigate to Registration Type
-		String regType = "Try to navigate to Registration Type";
+		String regType = "Navigate to Registration Type";
 		Markup r = MarkupHelper.createLabel(regType, ExtentColor.BLUE);
 		testInfo.get().info(r);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
@@ -52,7 +52,7 @@ public class CaptureNewMSISDNRegistration extends TestBase {
 		String valid_msisdn = (String) envs.get("valid_msisdn");
 		String lga = (String) envs.get("lga");
 
-		// Try to select LGA of Registration
+		// Select LGA of Registration
 		String lgaa = "Select LGA of Registration: " + lga;
 		Markup m = MarkupHelper.createLabel(lgaa, ExtentColor.BLUE);
 		testInfo.get().info(m);
@@ -62,8 +62,8 @@ public class CaptureNewMSISDNRegistration extends TestBase {
 		getDriver().findElement(By.xpath("//android.widget.TextView[@text='" + lga + "']")).click();
 		Thread.sleep(500);
 
-		// Try to select New Registration MSISDN
-		String newReg = "Try to select New Registration MSISDN";
+		// Select New Registration MSISDN
+		String newReg = "Select New Registration MSISDN";
 		Markup d = MarkupHelper.createLabel(newReg, ExtentColor.BLUE);
 		testInfo.get().info(d);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/typeofreg")));
@@ -76,10 +76,10 @@ public class CaptureNewMSISDNRegistration extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/next_button")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/page_title")));
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/page_title", "New Registration (MSISDN)");
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/dya_check_box", "Request for Yellow Account");
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/dya_check_box", "Request PSB Account");
 
-		// Try to enter invalid msisdn
-		String invalidMsisdn = "Try to enter invalid MSISDN " + "(" + invalid_msisdn + ") " + "for validation";
+		// Enter invalid msisdn
+		String invalidMsisdn = "Enter invalid MSISDN " + "(" + invalid_msisdn + ") " + "for validation";
 		Markup i = MarkupHelper.createLabel(invalidMsisdn, ExtentColor.BLUE);
 		testInfo.get().info(i);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/msisdn")).clear();
@@ -90,8 +90,8 @@ public class CaptureNewMSISDNRegistration extends TestBase {
 		getDriver().findElement(By.id("android:id/button1")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/msisdn")));
 
-		// Try to enter valid msisdn
-		String validMsisdn = "Try to enter valid MSISDN" + "(" + valid_msisdn + ") " + "for validation";
+		// Enter valid msisdn
+		String validMsisdn = "Enter valid MSISDN" + "(" + valid_msisdn + ") " + "for validation";
 		Markup v = MarkupHelper.createLabel(validMsisdn, ExtentColor.BLUE);
 		testInfo.get().info(v);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/msisdn")).clear();
@@ -102,10 +102,11 @@ public class CaptureNewMSISDNRegistration extends TestBase {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Personal Details']")));
 		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Personal Details']", "Personal Details");
 
-		// Try to proceed with registration without supplying all mandatory fields
-		String emptyField = "Try to proceed with registration without supplying all mandatory fields";
+		// Proceed with registration without supplying all mandatory fields
+		String emptyField = "Proceed with registration without supplying all mandatory fields";
 		Markup e = MarkupHelper.createLabel(emptyField, ExtentColor.BLUE);
 		testInfo.get().info(e);
+		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Personal Details']", "Personal Details");
 		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity:id/btn_continue_reg");
 		wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.id("com.sf.biocapture.activity:id/btn_continue_reg")));
 		Thread.sleep(500);
