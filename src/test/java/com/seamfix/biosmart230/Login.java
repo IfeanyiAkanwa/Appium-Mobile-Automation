@@ -1,6 +1,5 @@
 package com.seamfix.biosmart230;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -10,7 +9,6 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -79,7 +77,7 @@ public class Login extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/email")).sendKeys(blacklisted_username);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/verify")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/alertTitle")));
-		TestUtils.assertSearchText("ID", "android:id/message", "Your account is blacklisted. Please contact support");
+		TestUtils.assertSearchText("ID", "android:id/message", "Your Account has been blacklisted");
 		getDriver().findElement(By.id("android:id/button1")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/email")));
 

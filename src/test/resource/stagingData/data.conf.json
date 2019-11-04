@@ -17,6 +17,7 @@
 	},
 	"ForgotPassword": {
 		"invalid_username": "ada@seamnix.com",
+		"invalid_email_format" : "@seamfix.com",
 		"valid_username": "gnwabude@seamfix.com",
 		"new_password": "Bankole1!!",
 		"confirm_password": "Bankole1!!",
@@ -24,7 +25,11 @@
 		"confirm_password_not_matching": "ban",
 		"invalid_OTP": "0000",
 		"user_full_name": "Geraldine Nwabude",
-		"user_phoneNumber": "08169548454"
+		"user_phoneNumber": "08169548454",
+		"AD_UserName": "seamkit2",
+		"BS_email": "virgyonline1000@gmail.com",
+		"AD_UserName1": "camaike",
+		"BS_email1": "camaike@seamfix.com"
 	},
 	"ChangePassword": {
 		"valid_username": "gnwabude@seamfix.com",
