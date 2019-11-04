@@ -17,11 +17,11 @@
 		<classes>
 			<class name="com.seamfix.biosmart230.ForgotPassword">
 				<methods>
-					<include name="navigateToForgotPassword" />
+					<include name="navigateToForgotPasswordTest" />
 					<include name="erorrMessagesValidationTest" />
-					<include name="changePasswordWithInvalidUsername" />
-					<include name="changePasswordWithValidUsername" />
-					<include name="loginWithNewPassword" />
+					<include name="changePasswordWithInvalidUsernameTest" />
+					<include name="changePasswordWithValidUsernameTest" />
+					<include name="loginWithNewPasswordTest" />
 				</methods>
 			</class>
 			<class name="com.seamfix.biosmart230.Login">

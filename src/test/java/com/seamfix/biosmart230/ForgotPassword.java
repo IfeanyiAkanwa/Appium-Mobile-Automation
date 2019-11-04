@@ -27,7 +27,7 @@ public class ForgotPassword extends TestBase {
 
 	@Test
 
-	public static void navigateToForgotPassword() throws InterruptedException {
+	public static void navigateToForgotPasswordTest() throws InterruptedException {
 		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
 		String forgotPasswordPage = "Navigate to forgot password page";
 		Markup m = MarkupHelper.createLabel(forgotPasswordPage, ExtentColor.BLUE);
@@ -43,7 +43,7 @@ public class ForgotPassword extends TestBase {
 
 	@Parameters({ "dataEnv"})
 	@Test
-	public static void changePasswordWithInvalidUsername(String dataEnv)
+	public static void changePasswordWithInvalidUsernameTest(String dataEnv)
 			throws InterruptedException, SQLException, FileNotFoundException, IOException, ParseException {
 		JSONParser parser = new JSONParser();
 		JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
@@ -89,7 +89,7 @@ public class ForgotPassword extends TestBase {
 
 	@Parameters({ "dataEnv"})
 	@Test
-	public static void changePasswordWithValidUsername(String dataEnv)
+	public static void changePasswordWithValidUsernameTest(String dataEnv)
 			throws InterruptedException, SQLException, FileNotFoundException, IOException, ParseException {
 		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
 		JSONParser parser = new JSONParser();
@@ -228,7 +228,7 @@ public class ForgotPassword extends TestBase {
 
 	@Parameters({ "dataEnv"})
 	@Test
-	public static void loginWithNewPassword(String dataEnv)
+	public static void loginWithNewPasswordTest(String dataEnv)
 			throws InterruptedException, FileNotFoundException, IOException, ParseException {
 		JSONParser parser = new JSONParser();
 		JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
