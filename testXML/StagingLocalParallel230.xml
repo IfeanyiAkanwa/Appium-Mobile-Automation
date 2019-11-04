@@ -18,6 +18,7 @@
 			<class name="com.seamfix.biosmart230.ForgotPassword">
 				<methods>
 					<include name="navigateToForgotPassword" />
+					<include name="erorrMessagesValidationTest" />
 					<include name="changePasswordWithInvalidUsername" />
 					<include name="changePasswordWithValidUsername" />
 					<include name="loginWithNewPassword" />

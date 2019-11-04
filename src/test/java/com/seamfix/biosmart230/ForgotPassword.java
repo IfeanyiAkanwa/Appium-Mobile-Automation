@@ -32,15 +32,13 @@ public class ForgotPassword extends TestBase {
 		String forgotPasswordPage = "Navigate to forgot password page";
 		Markup m = MarkupHelper.createLabel(forgotPasswordPage, ExtentColor.BLUE);
 		testInfo.get().info(m);
+	
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/otp_login")));
-
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/otp_login")).click();
-
-		wait.until(
-				ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/password_reset")));
-
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/password_reset")));
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/password_reset")).click();
-		testInfo.get().info("Successful landing to Forgot Password page");
+		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='FORGOT PASSWORD']", "FORGOT PASSWORD");
+		Thread.sleep(500);
 	}
 
 	@Parameters({ "dataEnv"})
@@ -52,23 +50,40 @@ public class ForgotPassword extends TestBase {
 		JSONObject envs = (JSONObject) config.get("ForgotPassword");
 		
 		String invalid_username = (String) envs.get("invalid_username");
+		String invalid_email_format  = (String) envs.get("invalid_email_format");
 		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
 
+		// Select Login mode
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_mode_types_spinner")).click();
+		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Biosmart']")).click();
+		Thread.sleep(500);
+		
 		// Change password with invalid username
 		String invalidUsername = "Change password with invalid username: " + invalid_username;
 		Markup m = MarkupHelper.createLabel(invalidUsername, ExtentColor.BLUE);
 		testInfo.get().info(m);
-		getDriver().findElement(By.id("com.sf.biocapture.activity:id/email")).clear();
-		getDriver().findElement(By.id("com.sf.biocapture.activity:id/email")).sendKeys(invalid_username);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).sendKeys(invalid_username);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/send")).click();
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("android:id/body")));
-
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/alertTitle", "Error");
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/alertTitle")));
 		TestUtils.assertSearchText("ID", "android:id/message", "No agent found");
-		TestUtils.assertSearchText("ID", "android:id/button1", "Ok");
 		getDriver().findElement(By.id("android:id/button1")).click();
-		wait.until(
-			ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/password_reset")));
+		Thread.sleep(500);
+		
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/password_reset")));
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/password_reset")).click();
+		Thread.sleep(500);
+		
+		// Change password with invalid email format
+		String invalidUsername1 = "Change password with invalid email format: " + invalid_email_format;
+		Markup c = MarkupHelper.createLabel(invalidUsername1, ExtentColor.BLUE);
+		testInfo.get().info(c);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).sendKeys(invalid_email_format);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/send")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/alertTitle")));
+		TestUtils.assertSearchText("ID", "android:id/message", "Please enter a valid Username format (AD Username or email)");
+		getDriver().findElement(By.id("android:id/button1")).click();
 		Thread.sleep(500);
 	}
 
@@ -93,16 +108,17 @@ public class ForgotPassword extends TestBase {
 		String validUsername = "Change password with valid username: " + valid_username;
 		Markup m = MarkupHelper.createLabel(validUsername, ExtentColor.BLUE);
 		testInfo.get().info(m);
-		getDriver().findElement(By.id("com.sf.biocapture.activity:id/password_reset")).click();
+		
+		// Select Login mode
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_mode_types_spinner")).click();
+		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Biosmart']")).click();
 		Thread.sleep(500);
-		getDriver().findElement(By.id("com.sf.biocapture.activity:id/email")).clear();
-		getDriver().findElement(By.id("com.sf.biocapture.activity:id/email")).sendKeys(valid_username);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).sendKeys(valid_username);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/send")).click();
-
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/dialog_title")));
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/dialog_title", "OTP verification");
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/dialog_message",
-				"Enter One Time Password sent to : " + user_phoneNumber);
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/dialog_message", "Enter One Time Password sent to : " + user_phoneNumber);
 
 		// Test with invalid OTP
 		String invalid_OTP = (String) envs.get("invalid_OTP");
@@ -114,7 +130,7 @@ public class ForgotPassword extends TestBase {
 		getDriver().findElement(By.id("android:id/button1")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/alertTitle")));
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/alertTitle", "Error");
-		TestUtils.assertSearchText("ID", "android:id/message", "There is no record associated with the provided otp.");
+		TestUtils.assertSearchText("ID", "android:id/message", "There is no record with the otp, msisdn combination.");
 		getDriver().findElement(By.id("android:id/button1")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/dialog_title")));
 
@@ -226,8 +242,12 @@ public class ForgotPassword extends TestBase {
 		testInfo.get().info(pass);
 		WebDriverWait wait = new WebDriverWait(getDriver(), 50);
 
-		wait.until(
-				ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/login_username")));
+		// Select Login mode
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_mode_types_spinner")).click();
+		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Biosmart']")).click();
+		Thread.sleep(500);
+		
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/login_username")));
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).sendKeys(valid_username);
 
@@ -237,6 +257,129 @@ public class ForgotPassword extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/submit")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
 		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Home']", "Home");
+	}
+	
+	@Parameters ({"dataEnv"})
+	@Test (groups = { "Regression" })
+	public void erorrMessagesValidationTest(String dataEnv) throws InterruptedException, FileNotFoundException, IOException, ParseException {
+		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
+		
+		JSONParser parser = new JSONParser();
+		JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
+		JSONObject envs = (JSONObject) config.get("ForgotPassword");
+
+		String AD_UserName = (String) envs.get("AD_UserName");
+		String AD_UserName1 = (String) envs.get("AD_UserName1");
+		String BS_email = (String) envs.get("BS_email");
+		String BS_email1 = (String) envs.get("BS_email1");
+		
+		// Login with Active Directory user but select Biosmart as Auth mode and biosmart email
+		String log = "Login with Active Directory user but select Biosmart as Auth mode and biosmart email: " + BS_email;
+		Markup v = MarkupHelper.createLabel(log, ExtentColor.BLUE);
+		testInfo.get().info(v);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_mode_types_spinner")).click();
+		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Biosmart']")).click();
+		Thread.sleep(500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).sendKeys(BS_email);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/send")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/alertTitle")));
+		TestUtils.assertSearchText("ID", "android:id/message", "Your allowed login mode is Active Directory. Please use your active directory username to request for forgot password");
+		getDriver().findElement(By.id("android:id/button1")).click();
+		Thread.sleep(500);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/password_reset")));
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/password_reset")).click();
+		Thread.sleep(500);
+		
+		// Login with Active Directory user but select Biosmart as Auth mode and Active Directory user name
+		String log1 = "Login with Active Directory user but select Biosmart as Auth mode and Active Directory user name: " + AD_UserName;
+		Markup w = MarkupHelper.createLabel(log1, ExtentColor.BLUE);
+		testInfo.get().info(w);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_mode_types_spinner")).click();
+		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Biosmart']")).click();
+		Thread.sleep(500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).sendKeys(AD_UserName);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/send")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/alertTitle")));
+		TestUtils.assertSearchText("ID", "android:id/message", "Your allowed login mode is Active Directory. Please use your active directory username to request for forgot password");
+		getDriver().findElement(By.id("android:id/button1")).click();
+		Thread.sleep(500);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/password_reset")));
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/password_reset")).click();
+		Thread.sleep(500);
+		
+		// Login with Active Directory user but select Active Directory as Auth mode and Biosmart email
+		String log2 = "Login with Active Directory user but select Active Directory as Auth mode and Biosmart email: " + BS_email;
+		Markup d = MarkupHelper.createLabel(log2, ExtentColor.BLUE);
+		testInfo.get().info(d);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_mode_types_spinner")).click();
+		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Active Directory']")).click();
+		Thread.sleep(500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).sendKeys(BS_email);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/send")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/alertTitle")));
+		TestUtils.assertSearchText("ID", "android:id/message", "Your allowed login mode is Active Directory. Please use your active directory username to request for forgot password");
+		getDriver().findElement(By.id("android:id/button1")).click();
+		Thread.sleep(500);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/password_reset")));
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/password_reset")).click();
+		Thread.sleep(500);
+		
+		// Login with Biosmart user but select Active Directory as Auth mode and Active Directory username
+		String log3 = "Login with Biosmart user but select Active Directory as Auth mode and Active Directory username: " + AD_UserName1;
+		Markup g = MarkupHelper.createLabel(log3, ExtentColor.BLUE);
+		testInfo.get().info(g);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_mode_types_spinner")).click();
+		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Active Directory']")).click();
+		Thread.sleep(500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).sendKeys(AD_UserName1);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/send")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/alertTitle")));
+		TestUtils.assertSearchText("ID", "android:id/message", "Your allowed login mode is BioSmart. Please use your email address to request for forgot password");
+		getDriver().findElement(By.id("android:id/button1")).click();
+		Thread.sleep(500);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/password_reset")));
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/password_reset")).click();
+		Thread.sleep(500);
+		
+		// Login with Biosmart user but select Active Directory as Auth mode and Biosmart email
+		String log4 = "Login with Biosmart user but select Active Directory as Auth mode and Biosmart email: " + BS_email1;
+		Markup s = MarkupHelper.createLabel(log4, ExtentColor.BLUE);
+		testInfo.get().info(s);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_mode_types_spinner")).click();
+		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Active Directory']")).click();
+		Thread.sleep(500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).sendKeys(BS_email1);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/send")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/alertTitle")));
+		TestUtils.assertSearchText("ID", "android:id/message", "Your allowed login mode is BioSmart. Please use your email address to request for forgot password");
+		getDriver().findElement(By.id("android:id/button1")).click();
+		Thread.sleep(500);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/password_reset")));
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/password_reset")).click();
+		Thread.sleep(500);
+		
+		// Login with Biosmart user but select Biosmart as Auth mode and Active Directory username
+		String log5 = "Login with Biosmart user but select Biosmart as Auth mode and Active Directory username: " + AD_UserName1;
+		Markup a = MarkupHelper.createLabel(log5, ExtentColor.BLUE);
+		testInfo.get().info(a);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_mode_types_spinner")).click();
+		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Biosmart']")).click();
+		Thread.sleep(500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).sendKeys(AD_UserName1);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/send")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/alertTitle")));
+		TestUtils.assertSearchText("ID", "android:id/message", "Your allowed login mode is BioSmart. Please use your email address to request for forgot password");
+		getDriver().findElement(By.id("android:id/button1")).click();
+		Thread.sleep(500);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/password_reset")));
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/password_reset")).click();
+		Thread.sleep(500);
 	}
 
 }
