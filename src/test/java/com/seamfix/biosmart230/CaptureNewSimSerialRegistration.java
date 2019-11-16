@@ -53,7 +53,7 @@ public class CaptureNewSimSerialRegistration extends TestBase {
 		String valid_simSerial = (String) envs.get("valid_simSerial");
 		String lga = (String) envs.get("lga");
 
-		// Try to select LGA of Registration
+		// Select LGA of Registration
 		String lgaa = "Select LGA of Registration: " + lga;
 		Markup m = MarkupHelper.createLabel(lgaa, ExtentColor.BLUE);
 		testInfo.get().info(m);
@@ -63,16 +63,15 @@ public class CaptureNewSimSerialRegistration extends TestBase {
 		getDriver().findElement(By.xpath("//android.widget.TextView[@text='" + lga + "']")).click();
 		Thread.sleep(500);
 		
-		// Try to select New Registration MSISDN
+		// Select New Registration MSISDN
 		String newReg = "Select New Registration (SIM Serial)";
 		Markup d = MarkupHelper.createLabel(newReg, ExtentColor.BLUE);
 		testInfo.get().info(d);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/typeofreg")));
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/typeofreg")).click();
 		Thread.sleep(500);
-		TestUtils.assertSearchText("ID", "android:id/alertTitle", "Select Item");
-		TestUtils.assertSearchText("ID", "android:id/text1", "[Select Registration Type]");
-		getDriver().findElement(By.xpath("//android.widget.TextView[@text='New Registration (SIM Serial)']")).click();
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/alertTitle", "Select Registration Type");
+		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='New Registration (SIM Serial)']")).click();
 		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/next_button")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/page_title")));

@@ -68,8 +68,8 @@ public class BiometricUpdate extends TestBase {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/typeofreg")));
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/typeofreg")).click();
 		Thread.sleep(500);
-		TestUtils.assertSearchText("ID", "android:id/text1", "[Select Registration Type]");
-		getDriver().findElement(By.xpath("//android.widget.TextView[@text='Biometric Update']")).click();
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/alertTitle", "Select Registration Type");
+		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Biometric Update']")).click();
 		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/next_button")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Biometric Update']")));

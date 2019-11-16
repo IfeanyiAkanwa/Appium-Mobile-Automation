@@ -129,7 +129,7 @@ public class AgentOnBoardingTest extends TestBase {
 		Thread.sleep(500);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/alertTitle")));
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/alertTitle", "Error");
-		TestUtils.assertSearchText("ID", "android:id/message", "No match was found for the specified OTP.");
+		TestUtils.assertSearchText("ID", "android:id/message", "There is no record with the otp, msisdn combination.");
 		getDriver().findElement(By.id("android:id/button1")).click();
 		Thread.sleep(500);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/cancel")));
@@ -152,7 +152,7 @@ public class AgentOnBoardingTest extends TestBase {
 		Thread.sleep(500);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/alertTitle")));
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/alertTitle", "Error");
-		TestUtils.assertSearchText("ID", "android:id/message", "No match was found for the specified OTP.");
+		TestUtils.assertSearchText("ID", "android:id/message", "There is no record with the otp, msisdn combination.");
 		getDriver().findElement(By.id("android:id/button1")).click();
 		Thread.sleep(500);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/cancel")));

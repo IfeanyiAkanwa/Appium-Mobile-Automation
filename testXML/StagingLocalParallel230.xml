@@ -15,7 +15,7 @@
 		<parameter name="deviceNo" value="1" />
 
 		<classes>
-			<class name="com.seamfix.biosmart230.ForgotPassword">
+			<!-- <class name="com.seamfix.biosmart230.ForgotPassword">
 				<methods>
 					<include name="navigateToForgotPasswordTest" />
 					<include name="erorrMessagesValidationTest" />
@@ -54,7 +54,7 @@
 					<include name="reportSummary" />
 					<include name="searchParameters" />
 				</methods>
-			</class>
+			</class> -->
 			<class
 				name="com.seamfix.biosmart230.CaptureNewMSISDNRegistration">
 				<methods>
@@ -63,15 +63,7 @@
 					<include name="CaptureNewMSISDNTest" />
 				</methods>
 			</class>
-			<class name="com.seamfix.biosmart230.ReactivationTest">
-				<methods>
-					<include name="noneReactivationPrivilegeLoginTest" />
-					<include name="Login" />
-					<include name="navigateToCaptureMenuTest" />
-					<include name="msisdnReactivateTest" />
-				</methods>
-			</class>
-			<class name="com.seamfix.biosmart230.SellAirtimeAndData">
+			<!-- <class name="com.seamfix.biosmart230.SellAirtimeAndData">
 				<methods>
 					<include name="sellAirtimeLoginTest" />
 					<include name="navigateToSellAirtimeAndData" />
@@ -86,7 +78,7 @@
 					<include name="searchByMsisdnTest" />
 					<include name="searchBySimSerialTest" />
 				</methods>
-			</class>
+			</class> -->
 			<class name="com.seamfix.biosmart230.ReRegistrationCapture">
 				<methods>
 					<include name="Login" />
@@ -94,13 +86,13 @@
 					<include name="reRegisterationTest" />
 				</methods>
 			</class>
-			<class name="com.seamfix.biosmart230.AgentOnBoardingTest">
+			<!-- <class name="com.seamfix.biosmart230.AgentOnBoardingTest">
 				<methods>
 					<include name="onboardedAgentLoginTest" />
 					<include name="navigateToAgentOnBoardingTest" />
 					<include name="agentOnBoardingTest" />
 				</methods>
-			</class>
+			</class> -->
 			<class name="com.seamfix.biosmart230.BiometricUpdate">
 				<methods>
 					<include name="Login" />
@@ -127,6 +119,14 @@
 					<include name="Login" />
 					<include name="navigateToCaptureMenuTest" />
 					<include name="simSwapTest" />
+				</methods>
+			</class>
+			<class name="com.seamfix.biosmart230.ReactivationTest">
+				<methods>
+					<include name="noneReactivationPrivilegeLoginTest" />
+					<include name="Login" />
+					<include name="navigateToCaptureMenuTest" />
+					<include name="msisdnReactivateTest" />
 				</methods>
 			</class>
 		</classes>
