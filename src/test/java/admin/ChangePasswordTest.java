@@ -1,4 +1,4 @@
-package com.seamfix.biosmart230;
+package admin;
 
 import java.io.FileReader;
 import org.json.simple.JSONObject;
@@ -20,7 +20,7 @@ public class ChangePasswordTest extends TestBase {
     
     @Test
     public static void navigateToChangePasswordPage() throws InterruptedException {
-        WebDriverWait wait = new WebDriverWait(getDriver(), 60);
+        WebDriverWait wait = new WebDriverWait(getDriver(), 30);
         String forgotPasswordPage = "Navigate to Change password page";
 		Markup m = MarkupHelper.createLabel(forgotPasswordPage, ExtentColor.BLUE);
 		testInfo.get().info(m);
@@ -40,7 +40,7 @@ public class ChangePasswordTest extends TestBase {
     @Test
     public static void changeToNewPassword(String dataEnv) throws Exception {
 
-        WebDriverWait wait = new WebDriverWait(getDriver(), 60);
+        WebDriverWait wait = new WebDriverWait(getDriver(), 30);
     	JSONParser parser = new JSONParser();
 		JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
 		JSONObject envs = (JSONObject) config.get("ChangePassword");
@@ -143,7 +143,7 @@ public class ChangePasswordTest extends TestBase {
     @Test
     public static void loginWithNewPassword(String dataEnv) throws Exception {
 
-        WebDriverWait wait = new WebDriverWait(getDriver(), 60);
+        WebDriverWait wait = new WebDriverWait(getDriver(), 30);
         JSONParser parser = new JSONParser();
 		JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
 		JSONObject envs = (JSONObject) config.get("ChangePassword");

@@ -1,4 +1,4 @@
-package com.seamfix.biosmart230;
+package admin;
 
 import db.ConnectDB;
 
@@ -19,7 +19,6 @@ import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.Markup;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 
-import DemographicForm.Form;
 import utils.Asserts;
 import utils.TestBase;
 import utils.TestUtils;
@@ -85,8 +84,8 @@ public class ReRegistrationCapture extends TestBase {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/typeofreg")));
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/typeofreg")).click();
 		Thread.sleep(500);
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/alertTitle", "Select Registration Type");
-		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Re-Registration']")).click();
+		TestUtils.assertSearchText("ID", "android:id/text1", "[Select Registration Type]");
+		getDriver().findElement(By.xpath("//android.widget.TextView[@text='Re-Registration']")).click();
 		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/next_button")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Re Registration']")));

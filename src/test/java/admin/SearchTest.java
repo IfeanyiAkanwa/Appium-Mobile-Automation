@@ -1,4 +1,4 @@
-package com.seamfix.biosmart210;
+package admin;
 
 import java.io.FileReader;
 
@@ -25,10 +25,12 @@ public class SearchTest extends TestBase {
     @Test
     public static void navigateToSearchTest() throws InterruptedException {
     	
-    	WebDriverWait wait = new WebDriverWait(getDriver(), 30);
-    	String PasswordPage = "Navigate to Search page";
-   		Markup m = MarkupHelper.createLabel(PasswordPage, ExtentColor.BLUE);
-   		testInfo.get().info(m);
+    	WebDriverWait wait = new WebDriverWait(getDriver(), 60);
+    	
+    	String fpLogin = "Navigate to Search";
+		Markup m = MarkupHelper.createLabel(fpLogin, ExtentColor.BLUE);
+		testInfo.get().info(m);
+		
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
         getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
         Thread.sleep(500);
@@ -87,8 +89,6 @@ public class SearchTest extends TestBase {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/search_list")));
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/msisdn")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Subscriber Information']")));
-        TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Subscriber Information']", "Subscriber Information");
-        Thread.sleep(500);
         Asserts.AssertSubscriberInfo230();
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/ok")).click();
         Thread.sleep(500);

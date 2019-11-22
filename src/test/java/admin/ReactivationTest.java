@@ -1,5 +1,5 @@
 
-package com.seamfix.biosmart230;
+package admin;
 
 import java.io.FileReader;
 import org.json.simple.JSONObject;
@@ -56,9 +56,10 @@ public class ReactivationTest extends TestBase {
 		Markup d = MarkupHelper.createLabel(reAct, ExtentColor.BLUE);
 		testInfo.get().info(d);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/typeofreg"))).click();
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/alertTitle", "Select Registration Type");
+		TestUtils.assertSearchText("ID", "android:id/alertTitle", "Select Item");
+		TestUtils.assertSearchText("ID", "android:id/text1", "[Select Registration Type]");
 		Thread.sleep(500);
-		if (TestUtils.isElementPresent("XPATH", "//android.widget.CheckedTextView[@text='MSISDN Re-Activation']")) {
+		if (TestUtils.isElementPresent("XPATH", "//android.widget.TextView[@text='MSISDN Re-Activation']")) {
 			 testInfo.get().error("Element is present");
 		} else {
 			testInfo.get().info("Element is not present");
@@ -126,8 +127,9 @@ public class ReactivationTest extends TestBase {
 		Markup d = MarkupHelper.createLabel(reAct, ExtentColor.BLUE);
 		testInfo.get().info(d);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/typeofreg"))).click();
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/alertTitle", "Select Registration Type");
-		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='MSISDN Re-Activation']")).click();
+		TestUtils.assertSearchText("ID", "android:id/alertTitle", "Select Item");
+		TestUtils.assertSearchText("ID", "android:id/text1", "[Select Registration Type]");
+		getDriver().findElement(By.xpath("//android.widget.TextView[@text='MSISDN Re-Activation']")).click();
 		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/next_button")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='MSISDN Reactivation']")));

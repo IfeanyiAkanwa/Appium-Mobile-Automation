@@ -1,4 +1,4 @@
-package com.seamfix.biosmart230;
+package admin;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;

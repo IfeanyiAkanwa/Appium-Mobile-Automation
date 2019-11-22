@@ -1,6 +1,4 @@
-package com.seamfix.biosmart230;
-
-import demographic230.Form;
+package admin;
 
 import io.appium.java_client.android.Connection;
 import utils.TestBase;
@@ -20,6 +18,7 @@ import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.Markup;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 
+import demographics.Form;
 import utils.TestUtils;
 
 public class CaptureNewSimSerialRegistration extends TestBase {
@@ -27,14 +26,13 @@ public class CaptureNewSimSerialRegistration extends TestBase {
 	@Test
 	public static void navigateToCaptureMenuTest() throws InterruptedException {
 		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
-		// Try to navigate to Registration Type
+		// Navigate to Registration Type
 		String regType = "Navigate to Registration Type";
 		Markup r = MarkupHelper.createLabel(regType, ExtentColor.BLUE);
 		testInfo.get().info(r);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/button_start_capture")).click();
-		wait.until(ExpectedConditions
-				.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/reg_type_placeholder")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/reg_type_placeholder")));
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/reg_type_placeholder",
 				"Registration Type");
 	}
@@ -63,7 +61,7 @@ public class CaptureNewSimSerialRegistration extends TestBase {
 		getDriver().findElement(By.xpath("//android.widget.TextView[@text='" + lga + "']")).click();
 		Thread.sleep(500);
 		
-		// Select New Registration MSISDN
+		// Select New Registration Sim Serial
 		String newReg = "Select New Registration (SIM Serial)";
 		Markup d = MarkupHelper.createLabel(newReg, ExtentColor.BLUE);
 		testInfo.get().info(d);
@@ -124,11 +122,10 @@ public class CaptureNewSimSerialRegistration extends TestBase {
 		String emptyField ="Proceed with registration without supplying all mandatory fields on demographics form";
 		Markup e = MarkupHelper.createLabel(emptyField, ExtentColor.BLUE);
 		testInfo.get().info(e);
-		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity:id/btn_continue_reg");
-		wait.until(ExpectedConditions
-				.visibilityOfAllElementsLocatedBy(By.id("com.sf.biocapture.activity:id/btn_continue_reg")));
+		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity:id/btnContinueReg");
+		wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.id("com.sf.biocapture.activity:id/btnContinueReg")));
 		Thread.sleep(500);
-		getDriver().findElement(By.id("com.sf.biocapture.activity:id/btn_continue_reg")).click();
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/btnContinueReg")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/alertTitle")));
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/alertTitle", "Error");
 		TestUtils.assertSearchText("ID", "android:id/message",
