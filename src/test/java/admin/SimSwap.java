@@ -1,4 +1,4 @@
-package com.seamfix.biosmart210;
+package admin;
 
 import utils.TestBase;
 
@@ -25,16 +25,16 @@ public class SimSwap extends TestBase {
 	@Test
 	public static void navigateToCaptureMenuTest() throws InterruptedException {
 		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
-		// Navigate to Registration Type
+		// Try to navigate to Registration Type
 		String regType = "Navigate to Registration Type";
 		Markup r = MarkupHelper.createLabel(regType, ExtentColor.BLUE);
 		testInfo.get().info(r);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/button_start_capture")).click();
-		Thread.sleep(500);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Registration Type']")));
-		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Registration Type']",	"Registration Type");
-		Thread.sleep(500);
+		wait.until(ExpectedConditions
+				.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/reg_type_placeholder")));
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/reg_type_placeholder",
+				"Registration Type");
 	}
 	
 	@Parameters({ "dataEnv"})
@@ -49,17 +49,28 @@ public class SimSwap extends TestBase {
 		
 		String invalid_Msisdn= (String) envs.get("invalid_Msisdn");
 		String valid_Msisdn = (String) envs.get("valid_Msisdn");
+		String lga = (String) envs.get("lga");
 
+		// Select LGA of Registration
+		String lgaa = "Select LGA of Registration: " + lga;
+		Markup m = MarkupHelper.createLabel(lgaa, ExtentColor.BLUE);
+		testInfo.get().info(m);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/lga_of_reg")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/alertTitle")));
+		TestUtils.assertSearchText("ID", "android:id/alertTitle", "LGA of Registration*");
+		getDriver().findElement(By.xpath("//android.widget.TextView[@text='" + lga + "']")).click();
+		Thread.sleep(500);
+		
 		// Select Sim Swap
-		String simSwap = "Select SIM Swap";
-		Markup d = MarkupHelper.createLabel(simSwap, ExtentColor.BLUE);
+		String newReg = "Select SIM Swap";
+		Markup d = MarkupHelper.createLabel(newReg, ExtentColor.BLUE);
 		testInfo.get().info(d);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='[Select Registration Type]']")));
-		getDriver().findElement(By.xpath("//android.widget.TextView[@text='[Select Registration Type]']")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/typeofreg")));
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/typeofreg")).click();
 		Thread.sleep(500);
-		TestUtils.assertSearchText("ID", "android:id/alertTitle", "Select Registration Type");
-		Thread.sleep(500);
-		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='SIM Swap']")).click();
+		TestUtils.assertSearchText("ID", "android:id/alertTitle", "Select Item");
+		TestUtils.assertSearchText("ID", "android:id/text1", "[Select Registration Type]");
+		getDriver().findElement(By.xpath("//android.widget.TextView[@text='SIM Swap']")).click();
 		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/next_button")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/page_title")));
@@ -157,35 +168,26 @@ public class SimSwap extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/btn_sim_swap_search_msisdn")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/btn_verify_fingerprint")));
 		Thread.sleep(500);
-		String NA = "N/A";
-		String fullName = getDriver().findElement(By.id("com.sf.biocapture.activity:id/full_name")).getText();
-	
-		String[] toList = {"Full name: " + fullName};
-		for (String field : toList) {
-			String name = "";
-			String val = NA;
-			if (field.endsWith(":")) {
-				field = field + val;
-			}
-			try {
-				String[] fields = field.split(":");
-				name = fields[0];
-				val = fields[1];
-				Assert.assertNotEquals(val, NA);
-				testInfo.get().log(Status.INFO, name + " : " + val);
-			} catch (Error e) {
-				testInfo.get().error(name + " : " + val);
-
-			}
-		}
-		Thread.sleep(1000);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/btn_verify_fingerprint")).click();
 		Thread.sleep(500);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/fingerType_text")));
-		Thread.sleep(500);
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/fingerType_text", "VERIFICATION");
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/btnStop", "Capture");
-		Thread.sleep(500);
+		try {
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/alertTitle")));
+			Thread.sleep(500);
+			TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/alertTitle", "Scanner not found");
+			getDriver().findElement(By.id("android:id/button1")).click();
+			Thread.sleep(500);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/fingerType_text")));
+			Thread.sleep(500);
+			TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/fingerType_text", "VERIFICATION");
+			TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/btnStop", "Capture");
+			Thread.sleep(500);
+		} catch (Exception e) {
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/fingerType_text")));
+			Thread.sleep(500);
+			TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/fingerType_text", "VERIFICATION");
+			TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/btnStop", "Capture");
+			Thread.sleep(500);
+		}
     
 	}
       

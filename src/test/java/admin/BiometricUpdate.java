@@ -1,4 +1,4 @@
-package com.seamfix.biosmart230;
+package admin;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -13,7 +13,7 @@ import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.Markup;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 
-import demographic230.Form;
+import demographics.Form;
 import utils.Asserts;
 import utils.TestBase;
 

@@ -60,7 +60,7 @@ public class SendMail {
             multipart.addBodyPart(messageBodyPart);
             System.out.println("Sending...");
             message.setContent(multipart);
-            Transport.send(message, "seamfix.test.report@gmail.com", "Bankole2!!");
+            Transport.send(message, "seamfix.test.report@gmail.com", "Bankole2!!!");
             System.out.println("Sent.");
         } catch (MessagingException ex) {
             throw new RuntimeException(ex);

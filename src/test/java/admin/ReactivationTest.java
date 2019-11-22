@@ -1,5 +1,5 @@
 
-package com.seamfix.biosmart230;
+package admin;
 
 import java.io.FileReader;
 import org.json.simple.JSONObject;

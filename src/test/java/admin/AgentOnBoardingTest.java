@@ -1,4 +1,4 @@
-package com.seamfix.biosmart230;
+package admin;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;

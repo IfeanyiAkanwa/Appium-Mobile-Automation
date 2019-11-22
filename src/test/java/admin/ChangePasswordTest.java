@@ -1,4 +1,4 @@
-package com.seamfix.biosmart210;
+package admin;
 
 import java.io.FileReader;
 import org.json.simple.JSONObject;
@@ -21,9 +21,10 @@ public class ChangePasswordTest extends TestBase {
     @Test
     public static void navigateToChangePasswordPage() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(getDriver(), 30);
-        String PasswordPage = "Navigate to Change password page";
-		Markup m = MarkupHelper.createLabel(PasswordPage, ExtentColor.BLUE);
+        String forgotPasswordPage = "Navigate to Change password page";
+		Markup m = MarkupHelper.createLabel(forgotPasswordPage, ExtentColor.BLUE);
 		testInfo.get().info(m);
+		
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
 
         getDriver().findElementByAccessibilityId("Navigate up").click();
@@ -33,7 +34,6 @@ public class ChangePasswordTest extends TestBase {
         TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/title", "CHANGE PASSWORD");
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/change_password_guide",
 				"Password must contain at least 10 Characters with at least 1 LowerCase, 1 UpperCase, 1 Number, and 1 Symbol");
-		Thread.sleep(500);
     }
 
     @Parameters({ "dataEnv"})
@@ -74,12 +74,13 @@ public class ChangePasswordTest extends TestBase {
         TestUtils.assertSearchText("ID", "android:id/message", "Entered password does not match the password policy, please try again.");
         getDriver().findElement(By.id("android:id/button1")).click();
 
-		// Change password when the new password doesn't match confirm old password
-		String notMatchingConfirmPassword = "Change password when confirm password field: ("  +confirm_password_not_matching+   ") does not match new password field: " + newPassword;
+		// Change password when the new password doesnt match confirm old password
+		String notMatchingConfirmPassword = "Change password with confirm password " + "("
+				+ confirm_password_not_matching + " )" + "not matching new password (" + newPassword + ")";
 		Markup pa = MarkupHelper.createLabel(notMatchingConfirmPassword, ExtentColor.BLUE);
 		testInfo.get().info(pa);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/change_password_title")));
-		
+		wait.until(ExpectedConditions
+				.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/change_password_title")));
 		//Current Password
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/current_password")).clear();
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/current_password")).sendKeys(password);
@@ -90,7 +91,8 @@ public class ChangePasswordTest extends TestBase {
 
 		 //Confirm New Password
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/confirm_password")).clear();
-		getDriver().findElement(By.id("com.sf.biocapture.activity:id/confirm_password")).sendKeys(confirm_password_not_matching);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/confirm_password"))
+				.sendKeys(confirm_password_not_matching);
 		
 		//Clicks on Change Button
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/update_pwd")).click();
@@ -103,7 +105,6 @@ public class ChangePasswordTest extends TestBase {
 		String validpass= "Change password with valid password policy: " + newPassword;
 		Markup e = MarkupHelper.createLabel(validpass, ExtentColor.BLUE);
 		testInfo.get().info(e);
-		
         //Current Password
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/current_password")).clear();
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/current_password")).sendKeys(password);
@@ -124,11 +125,12 @@ public class ChangePasswordTest extends TestBase {
         getDriver().findElement(By.id("android:id/button1")).click();
         
         //Logs out
-		String logOut = "Logout: " + valid_username;
+		String logOut = "Logout" + "(" + valid_username + ")";
 		Markup o = MarkupHelper.createLabel(logOut, ExtentColor.BLUE);
 		testInfo.get().info(o);
 		getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/design_menu_item_text")));
+		wait.until(ExpectedConditions
+				.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/design_menu_item_text")));
 		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Logout']")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
 		TestUtils.assertSearchText("ID", "android:id/message", "   Log out?");
@@ -151,8 +153,9 @@ public class ChangePasswordTest extends TestBase {
 
 		// Login in with the new password
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/otp_login")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/login_username")));
-        String login = "Login with newly changed password: " +  newPassword + " and valid username: " + valid_username;
+        wait.until(
+				ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/login_username")));
+        String login = "Login with newly changed password : " + "(" + newPassword + ")"  + " and valid username: " + "(" +valid_username + ")";
 		Markup g = MarkupHelper.createLabel(login, ExtentColor.BLUE);
 		testInfo.get().info(g);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).clear();
@@ -183,7 +186,6 @@ public class ChangePasswordTest extends TestBase {
 		String pw = "Change back to old password: "+ password;
 		Markup m = MarkupHelper.createLabel(pw, ExtentColor.BLUE);
 		testInfo.get().info(m);
-		
         //Current Password
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/current_password")).clear();
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/current_password")).sendKeys(newPassword);

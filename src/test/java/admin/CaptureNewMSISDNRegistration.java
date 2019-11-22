@@ -1,6 +1,4 @@
-package com.seamfix.biosmart230;
-
-import demographic230.Form;
+package admin;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -16,6 +14,7 @@ import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.Markup;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 
+import demographics.Form;
 import utils.TestBase;
 import utils.TestUtils;
 
@@ -27,7 +26,7 @@ public class CaptureNewMSISDNRegistration extends TestBase {
 	@Test
 	public static void NavigateToCaptureMenuTest() throws InterruptedException {
 		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
-		// Try to navigate to Registration Type
+		// Navigate to Registration Type
 		String regType = "Navigate to Registration Type";
 		Markup r = MarkupHelper.createLabel(regType, ExtentColor.BLUE);
 		testInfo.get().info(r);
@@ -69,14 +68,12 @@ public class CaptureNewMSISDNRegistration extends TestBase {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/typeofreg")));
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/typeofreg")).click();
 		Thread.sleep(500);
-		TestUtils.assertSearchText("ID", "android:id/alertTitle", "Select Item");
-		TestUtils.assertSearchText("ID", "android:id/text1", "[Select Registration Type]");
-		getDriver().findElement(By.xpath("//android.widget.TextView[@text='New Registration (MSISDN)']")).click();
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/alertTitle", "Select Registration Type");
+		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='New Registration (MSISDN)']")).click();
 		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/next_button")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/page_title")));
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/page_title", "New Registration (MSISDN)");
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/dya_check_box", "Request PSB Account");
 
 		// Enter invalid msisdn
 		String invalidMsisdn = "Enter invalid MSISDN " + "(" + invalid_msisdn + ") " + "for validation";
@@ -86,7 +83,7 @@ public class CaptureNewMSISDNRegistration extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/msisdn")).sendKeys(invalid_msisdn);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/add_msisdn_button")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/button1")));
-		TestUtils.assertSearchText("ID", "android:id/message", "Failure");
+		TestUtils.assertSearchText("ID", "android:id/message", "Invalid MSISDN");
 		getDriver().findElement(By.id("android:id/button1")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/msisdn")));
 
@@ -97,6 +94,9 @@ public class CaptureNewMSISDNRegistration extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/msisdn")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/msisdn")).sendKeys(valid_msisdn);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/add_msisdn_button")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/button1")));
+		TestUtils.assertSearchText("ID", "android:id/message", "Valid MSISDN. ");
+		getDriver().findElement(By.id("android:id/button1")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/next_button")));
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/next_button")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Personal Details']")));
@@ -106,11 +106,10 @@ public class CaptureNewMSISDNRegistration extends TestBase {
 		String emptyField = "Proceed with registration without supplying all mandatory fields";
 		Markup e = MarkupHelper.createLabel(emptyField, ExtentColor.BLUE);
 		testInfo.get().info(e);
-		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Personal Details']", "Personal Details");
-		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity:id/btn_continue_reg");
-		wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.id("com.sf.biocapture.activity:id/btn_continue_reg")));
+		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity:id/btnContinueReg");
+		wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.id("com.sf.biocapture.activity:id/btnContinueReg")));
 		Thread.sleep(500);
-		getDriver().findElement(By.id("com.sf.biocapture.activity:id/btn_continue_reg")).click();
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/btnContinueReg")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/alertTitle")));
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/alertTitle", "Error");
 		TestUtils.assertSearchText("ID", "android:id/message", "\n" + 
