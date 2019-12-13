@@ -457,7 +457,7 @@ public class Form extends TestBase {
 		// Next button
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/btnContinueReg")).click();
 		Thread.sleep(500);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/nationality")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/countrySpinner")));
 		Thread.sleep(500);
 		
 		// Nationality
@@ -467,12 +467,19 @@ public class Form extends TestBase {
 		getDriver().findElement(By.xpath("//android.widget.TextView[@text='" + nationality + "']")).click();
 		Thread.sleep(1000);
 		
-		// Filling passport details
-		String passport = "Fill passport details of nationality: " + nationality + " and passport number: " + passport_ID_number;
-		Markup g = MarkupHelper.createLabel(passport, ExtentColor.BLUE);
-		testInfo.get().info(g);
+		// Proceed with registration without supplying all mandatory Passport fields and fill form
+		String emptyField ="Proceed with registration without supplying all mandatory Passport fields and fill form";
+		Markup e = MarkupHelper.createLabel(emptyField, ExtentColor.BLUE);
+		testInfo.get().info(e);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/passport_details_title")));
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/passport_details_title", "Passport/ID Details");
+		Thread.sleep(500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/passport_issuing_country")).click();
+		Thread.sleep(1000);
+		getDriver().findElement(By.xpath("//android.widget.TextView[@text='[Select Issuing Country]']")).click();
+		Thread.sleep(500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/passport_ok")).click();
+		TestUtils.assertToast();
 		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/passport_issuing_country")).click();
 		Thread.sleep(1000);
@@ -481,14 +488,25 @@ public class Form extends TestBase {
 		getDriver().findElement(By.xpath("//android.widget.TextView[@text='" + nationality + "']")).click();
 		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/passport_number")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/passport_ok")).click();
+		TestUtils.assertToast();
+		Thread.sleep(500);
+		
+		// Passport/ ID Number
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/passport_number")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/passport_number")).sendKeys(passport_ID_number);
 		Thread.sleep(500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/passport_ok")).click();
+		TestUtils.assertToast();
+		Thread.sleep(500);
+		
+		// Expiry date
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/passport_expiry_date")).click();
 		Thread.sleep(500);
 		try {
 			try {
 				getDriver().findElement(By.xpath("//android.widget.Button[@text='2020']")).click();
-			} catch (NoSuchElementException e) {
+			} catch (NoSuchElementException e1) {
 				getDriver().findElement(By.xpath("//android.widget.EditText[@text='2020']")).click();
 			}
 		} catch (NoSuchElementException ex) {
@@ -498,9 +516,14 @@ public class Form extends TestBase {
 		}
 		getDriver().findElement(By.id("android:id/button1")).click();
 		Thread.sleep(1000);
+		
+		// Nigerian Resident Box
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/passport_nigerian_resident")).click();
 		Thread.sleep(500);
-		
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/passport_ok")).click();
+		TestUtils.assertToast();
+		Thread.sleep(500);
+				
 		// capture passport image
 		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity:id/capture_passport_image");
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/capture_passport_image")).click();
@@ -611,8 +634,8 @@ public class Form extends TestBase {
 		Thread.sleep(500);
 
 		// Proceed with registration without completing the capture process
-		String emptyField = "Proceed with registration without completing the capture process";
-		Markup d = MarkupHelper.createLabel(emptyField, ExtentColor.BLUE);
+		String emptyField1 = "Proceed with registration without completing the capture process";
+		Markup d = MarkupHelper.createLabel(emptyField1, ExtentColor.BLUE);
 		testInfo.get().info(d);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/next_button")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/alertTitle")));

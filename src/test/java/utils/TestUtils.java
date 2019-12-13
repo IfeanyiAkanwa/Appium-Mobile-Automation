@@ -227,4 +227,12 @@ public class TestUtils extends TestBase {
 
     }
 
+    public static void assertToast() {
+		WebElement toastView = getDriver().findElement(By.xpath("//android.widget.Toast[1]"));
+		String text = toastView.getAttribute("name");
+		testInfo.get().info(text);
+
+		// TODO: //div[@class='toast-message'], //android.widget.Toast,
+		// //android.widget.Toast[@text='toast text']
+	}
 }

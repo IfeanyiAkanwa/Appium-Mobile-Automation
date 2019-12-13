@@ -68,12 +68,12 @@ public class BiometricUpdate extends TestBase {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/typeofreg")));
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/typeofreg")).click();
 		Thread.sleep(500);
-		TestUtils.assertSearchText("ID", "android:id/text1", "[Select Registration Type]");
-		getDriver().findElement(By.xpath("//android.widget.TextView[@text='Biometric Update']")).click();
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/alertTitle", "Select Registration Type");
+		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Biometric Update']")).click();
 		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/next_button")).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Biometric Update']")));
-		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Biometric Update']", "Biometric Update");
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/page_title")));
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/page_title", "Biometric Update");
 		Thread.sleep(500);
 		
 		// Enter agent MSISDN without biometric update privilege
@@ -98,33 +98,22 @@ public class BiometricUpdate extends TestBase {
 		Thread.sleep(500);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Personal Details']")));
 	    Thread.sleep(1000);
-	    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/surname")));
+	    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/surNameTXT")));
 	    Thread.sleep(500);
-	    Asserts.AssertIndividualForm230();
+	    Asserts.AssertIndividualForm();
 	    Thread.sleep(1000);
 	    TestUtils.scrollDown();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/btn_continue_reg")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/btnContinueReg")));
         Thread.sleep(500);
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/btn_continue_reg")).click();
+        getDriver().findElement(By.id("com.sf.biocapture.activity:id/btnContinueReg")).click();
         Thread.sleep(500);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/nationality")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/countrySpinner")));
         Thread.sleep(1000);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/country_spinner")));
-        Thread.sleep(1000);
-        Asserts.AssertAddresstDetails230();
+        Asserts.AssertAddresstDetails();
         Thread.sleep(1000);
         getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
         Thread.sleep(1000);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Personal Details']")));
-	    Thread.sleep(1000);
-	    TestUtils.scrollDown();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/btn_continue_reg")));
-        Thread.sleep(500);
-		if (TestUtils.isElementPresent("ID", "com.sf.biocapture.activity:id/delete_button")) {
-			getDriver().findElement(By.id("com.sf.biocapture.activity:id/delete_button")).click();
-		}
-
-        TestUtils.scrollUp();
+    
     	String fillingForm = "Filling Demographics form after asserting existing details";
 		Markup c = MarkupHelper.createLabel(fillingForm, ExtentColor.BLUE);
 		testInfo.get().info(c);
