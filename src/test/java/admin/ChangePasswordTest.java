@@ -153,8 +153,13 @@ public class ChangePasswordTest extends TestBase {
 
 		// Login in with the new password
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/otp_login")).click();
-        wait.until(
-				ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/login_username")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/login_username")));
+        
+        // Select Login mode
+     	getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_mode_types_spinner")).click();
+     	getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Biosmart']")).click();
+     	Thread.sleep(500);
+     		
         String login = "Login with newly changed password : " + "(" + newPassword + ")"  + " and valid username: " + "(" +valid_username + ")";
 		Markup g = MarkupHelper.createLabel(login, ExtentColor.BLUE);
 		testInfo.get().info(g);

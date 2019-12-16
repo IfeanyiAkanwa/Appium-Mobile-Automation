@@ -273,7 +273,7 @@ public class ReRegistrationCapture extends TestBase {
 		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Personal Details']", "Personal Details");
 		
         Thread.sleep(2000);
-        Asserts.AssertIndividualForm230();
+        Asserts.AssertIndividualForm();
         TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity:id/btn_continue_reg");
         Thread.sleep(1000);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/btn_continue_reg")));
@@ -282,7 +282,7 @@ public class ReRegistrationCapture extends TestBase {
         Thread.sleep(500);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/nationality")));
         Thread.sleep(1000);
-        Asserts.AssertAddresstDetails230();
+        Asserts.AssertAddresstDetails();
         Thread.sleep(1000);
       
 		// Next button

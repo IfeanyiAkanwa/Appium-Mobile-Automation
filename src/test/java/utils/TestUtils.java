@@ -3,6 +3,7 @@ package utils;
 import com.aventstack.extentreports.Status;
 import com.testinium.deviceinformation.helper.ProcessHelper;
 import enums.TargetTypeEnum;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import org.apache.commons.codec.binary.Base64;
 import org.openqa.selenium.By;
