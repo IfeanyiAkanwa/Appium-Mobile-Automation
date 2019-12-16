@@ -46,7 +46,7 @@ public class Asserts extends TestBase {
 		String occupation = getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/"
 				+ "android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.FrameLayout/"
 				+ "android.view.View/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/"
-				+ "android.widget.LinearLayout[10]/android.widget.Spinner/android.widget.CheckedTextView")).getText();
+				+ "android.widget.LinearLayout[9]/android.widget.Spinner/android.widget.CheckedTextView")).getText();
 
 		String empty = "";
 		Map<String, String> fields = new HashMap<>();
@@ -65,9 +65,9 @@ public class Asserts extends TestBase {
 			try {
 				Assert.assertNotEquals(entry.getValue(), empty);
 				Assert.assertNotEquals(entry.getValue(), null);
-				testInfo.get().log(Status.INFO, entry.getKey() + " : " + entry.getValue());
+				testInfo.get().log(Status.INFO, "<b>" +  entry.getKey() + "</b> : " + entry.getValue());
 			} catch (Error e) {
-				testInfo.get().error(entry.getKey() + " : " + entry.getValue());
+				testInfo.get().error("<b>" + entry.getKey() + " </b> : " + entry.getValue());
 			}
 
 		}
@@ -77,7 +77,7 @@ public class Asserts extends TestBase {
 		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
 		Map<String, String> fields = new HashMap<>();
 		String assertDetails = "Asserting address Details of registered subscriber";
-		Markup ad = MarkupHelper.createLabel(assertDetails, ExtentColor.BLUE);
+		Markup ad = MarkupHelper.createLabel(assertDetails, ExtentColor.GREEN);
 		testInfo.get().info(ad);
 		String countryOfOrigin = getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/"
 				+ "android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.FrameLayout/"
@@ -94,7 +94,7 @@ public class Asserts extends TestBase {
 		String lgaOfOrigin = getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/"
 				+ "android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.FrameLayout/"
 				+ "android.view.View/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout[1]/android.widget.LinearLayout/"
-				+ "android.widget.Spinner[2]/android.widget.TextView")).getText();
+				+ "android.widget.Spinner[2]/android.widget.CheckedTextView")).getText();
 		if (lgaOfOrigin.equals("[Select LGA]*")) {
 			fields.put("LGA of Origin", lgaOfOrigin);
 		}
@@ -110,7 +110,7 @@ public class Asserts extends TestBase {
 		String lgaOfResidence = getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/"
 				+ "android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.FrameLayout/"
 				+ "android.view.View/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout[1]/android.widget.Spinner[3]/"
-				+ "android.widget.TextView")).getText();
+				+ "android.widget.CheckedTextView")).getText();
 		if (lgaOfResidence.equals("[Select State]*")) {
 			fields.put("LGA of Residence", lgaOfResidence);
 		}
@@ -124,21 +124,21 @@ public class Asserts extends TestBase {
 		}
 		Thread.sleep(500);
 		TestUtils.scrollDown();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/house_or_flat_no")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/houseNumberEditText")));
 		Thread.sleep(500);
-		String houseNum = getDriver().findElement(By.id("com.sf.biocapture.activity:id/house_or_flat_no")).getText();
-		String street = getDriver().findElement(By.id("com.sf.biocapture.activity:id/street")).getText();
-		String city = getDriver().findElement(By.id("com.sf.biocapture.activity:id/city")).getText();
-		String postalCode = getDriver().findElement(By.id("com.sf.biocapture.activity:id/postal_code")).getText();
+		String houseNum = getDriver().findElement(By.id("com.sf.biocapture.activity:id/houseNumberEditText")).getText();
+		String street = getDriver().findElement(By.id("com.sf.biocapture.activity:id/streetEditText")).getText();
+		String city = getDriver().findElement(By.id("com.sf.biocapture.activity:id/cityEditText")).getText();
+		String postalCode = getDriver().findElement(By.id("com.sf.biocapture.activity:id/postalCodeTXT")).getText();
 
 		String empty = "";
-		//Map<String, String> fields = new HashMap<>();
+
 		fields.put("Country of Origin", countryOfOrigin);
-		/*fields.put("State of origin", stateOfOrigin);
+		fields.put("State of origin", stateOfOrigin);
 		fields.put("LGA of Origin", lgaOfOrigin);
 		fields.put("State of Residence", stateOfResidence);
 		fields.put("LGA of Residence", lgaOfResidence);
-		fields.put("Area of Residence", areaOfResidence);*/
+		fields.put("Area of Residence", areaOfResidence);
 		fields.put("House number", houseNum);
 		fields.put("Street", street);
 		fields.put("City", city);
@@ -148,9 +148,9 @@ public class Asserts extends TestBase {
 			try {
 				Assert.assertNotEquals(entry.getValue(), empty);
 				Assert.assertNotEquals(entry.getValue(), null);
-				testInfo.get().log(Status.INFO, entry.getKey() + " : " + entry.getValue());
+				testInfo.get().log(Status.INFO, "<b>" +  entry.getKey() + "</b> : " + entry.getValue());
 			} catch (Error e) {
-				testInfo.get().error(entry.getKey() + " : " + entry.getValue());
+				testInfo.get().error("<b>" + entry.getKey() + " </b> : " + entry.getValue());
 			}
 
 		}

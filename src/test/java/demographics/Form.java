@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Parameters;
 
+import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.Markup;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
@@ -442,8 +443,6 @@ public class Form extends TestBase {
 		Thread.sleep(500);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Select Item']")));
 		Thread.sleep(500);
-		TestUtils.assertSearchText("ID", "android:id/text1", "[Select an Occupation]");
-		Thread.sleep(500);
 		getDriver().findElement(By.xpath("//android.widget.TextView[@text='" + occupation + "']")).click();
 		Thread.sleep(500);
 	
@@ -479,8 +478,8 @@ public class Form extends TestBase {
 		getDriver().findElement(By.xpath("//android.widget.TextView[@text='[Select Issuing Country]']")).click();
 		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/passport_ok")).click();
-		TestUtils.assertToast();
 		Thread.sleep(500);
+		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='[Select Issuing Country]']", "[Select Issuing Country]");
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/passport_issuing_country")).click();
 		Thread.sleep(1000);
 		getDriver().findElementByAndroidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(new UiSelector().text(\"INDIA\"));");
@@ -489,15 +488,12 @@ public class Form extends TestBase {
 		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/passport_number")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/passport_ok")).click();
-		TestUtils.assertToast();
 		Thread.sleep(500);
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/field_passport_number", "Passport/ID Number*");
 		
 		// Passport/ ID Number
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/passport_number")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/passport_number")).sendKeys(passport_ID_number);
-		Thread.sleep(500);
-		getDriver().findElement(By.id("com.sf.biocapture.activity:id/passport_ok")).click();
-		TestUtils.assertToast();
 		Thread.sleep(500);
 		
 		// Expiry date
@@ -521,10 +517,13 @@ public class Form extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/passport_nigerian_resident")).click();
 		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/passport_ok")).click();
-		TestUtils.assertToast();
+		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Passport Image*']", "Passport Image*");
 		Thread.sleep(500);
 				
 		// capture passport image
+		String capturedPass1 = "Capture passport Image and Preview";
+		Markup v = MarkupHelper.createLabel(capturedPass1, ExtentColor.BLUE);
+		testInfo.get().info(v);
 		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity:id/capture_passport_image");
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/capture_passport_image")).click();
 		Thread.sleep(1500);
@@ -534,10 +533,6 @@ public class Form extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/ok")).click();
 		Thread.sleep(1000);
 		
-		// View Captured ID
-		String capturedPass = "View captured passport";
-		Markup c = MarkupHelper.createLabel(capturedPass, ExtentColor.BLUE);
-		testInfo.get().info(c);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/view_passport")).click();
 		Thread.sleep(500);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/title")));
@@ -596,15 +591,30 @@ public class Form extends TestBase {
 		// Next button
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/btnNext")).click();
 		Thread.sleep(500);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Capture Data']")));
+		
+		// Proceed with registration without completing the capture process
+		String emptyField1 = "Proceed with registration without completing the capture process";
+		Markup d = MarkupHelper.createLabel(emptyField1, ExtentColor.BLUE);
+		testInfo.get().info(d);
 		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Capture Data']", "Capture Data");
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/next_button")).click();
+		Thread.sleep(500);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/alertTitle")));
+		TestUtils.assertSearchText("ID", "android:id/message", "\n" + 
+				"KYC Form: Please Capture KYC/REGISTRATION Form \n" + 
+				"Face Capture: Please capture valid portrait \n" + 
+				"");
+		getDriver().findElement(By.id("android:id/button1")).click();
+		Thread.sleep(1000);
+		
+		// Capture Identification Type
+		String capturedPass2 = "Capture Identification Type";
+		Markup b = MarkupHelper.createLabel(capturedPass2, ExtentColor.BLUE);
+		testInfo.get().info(b);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Capture Data']")));
 		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Identification Type']", "Identification Type");
 		Thread.sleep(500);
-
-		// Capture Data
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/identification_type_spinner")).click();
-		Thread.sleep(500);
-		TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='[Select Identification Type]']","[Select Identification Type]");
 		Thread.sleep(500);
 
 		// Capture ID CARD
@@ -618,7 +628,7 @@ public class Form extends TestBase {
 		Thread.sleep(500);
 
 		// View Captured ID
-		String capturedID = "View captured ID";
+		String capturedID = "Preview captured ID";
 		Markup r = MarkupHelper.createLabel(capturedID, ExtentColor.BLUE);
 		testInfo.get().info(r);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/view_id_button")).click();
@@ -633,20 +643,11 @@ public class Form extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/done_button")).click();
 		Thread.sleep(500);
 
-		// Proceed with registration without completing the capture process
-		String emptyField1 = "Proceed with registration without completing the capture process";
-		Markup d = MarkupHelper.createLabel(emptyField1, ExtentColor.BLUE);
-		testInfo.get().info(d);
-		getDriver().findElement(By.id("com.sf.biocapture.activity:id/next_button")).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/alertTitle")));
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/alertTitle", "Error");
-		TestUtils.assertSearchText("ID", "android:id/message",
-				"\n" + "KYC Form: Please Capture KYC/REGISTRATION Form \n"
-						+ "Face Capture: Please capture valid portrait \n" + "");
-		getDriver().findElement(By.id("android:id/button1")).click();
-		Thread.sleep(1000);
-		
 		// Capture KYC FORM
+		String capturedPass3 = "Capture KYC FORM";
+		Markup t = MarkupHelper.createLabel(capturedPass3, ExtentColor.BLUE);
+		testInfo.get().info(t);
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/capture_kyc_form_button", "Capture KYC Form *");
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/capture_kyc_form_button")).click();
 		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/captureButton")).click();
@@ -654,23 +655,27 @@ public class Form extends TestBase {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/ok"))).click();
 		Thread.sleep(500);
 
-		// View Captured ID
-		String capturedKycForm = "View captured KYC Form";
-		Markup b = MarkupHelper.createLabel(capturedKycForm, ExtentColor.BLUE);
-		testInfo.get().info(b);
+		// Preview
+		String capturedID1 = "Preview KYC FORM";
+		Markup f = MarkupHelper.createLabel(capturedID1, ExtentColor.BLUE);
+		testInfo.get().info(f);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/view_kyc_form_button")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/title")));
 		TestUtils.assertSearchText("ID", "android:id/title", "Preview");
 		if (getDriver().findElement(By.id("com.sf.biocapture.activity:id/image")).isDisplayed()) {
-			testInfo.get().info("Captured ID is displayed");
+			testInfo.get().info("Captured KYC FORM is displayed");
 		} else {
-			testInfo.get().info("Captured ID is not displayed");
+			testInfo.get().info("Captured KYC FORM is not displayed");
 			testInfo.get().addScreenCaptureFromPath(TestUtils.addScreenshot());
 		}
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/done_button")).click();
 		Thread.sleep(500);
 
 		// Face Capture
+		String capturedPass4 = "Face Capture";
+		Markup z = MarkupHelper.createLabel(capturedPass4, ExtentColor.BLUE);
+		testInfo.get().info(z);
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/face_capture_button", "Face Capture *");
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/face_capture_button")).click();
 		Thread.sleep(500);
 		try {

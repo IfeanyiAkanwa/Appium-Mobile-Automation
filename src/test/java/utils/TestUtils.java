@@ -3,6 +3,7 @@ package utils;
 import com.aventstack.extentreports.Status;
 import com.testinium.deviceinformation.helper.ProcessHelper;
 import enums.TargetTypeEnum;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import org.apache.commons.codec.binary.Base64;
 import org.openqa.selenium.By;
@@ -227,12 +228,4 @@ public class TestUtils extends TestBase {
 
     }
 
-    public static void assertToast() {
-		WebElement toastView = getDriver().findElement(By.xpath("//android.widget.Toast[1]"));
-		String text = toastView.getAttribute("name");
-		testInfo.get().info(text);
-
-		// TODO: //div[@class='toast-message'], //android.widget.Toast,
-		// //android.widget.Toast[@text='toast text']
-	}
 }
