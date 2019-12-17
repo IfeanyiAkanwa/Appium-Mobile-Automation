@@ -71,7 +71,7 @@ public class AgentOnBoardingTest extends TestBase {
 		String onboardedAgent = (String) envs.get("onboardedAgent");
 		String invalid_email = (String) envs.get("invalid_email");
 		String invalid_OTP  = (String) envs.get("invalid_OTP");
-		String used_OTP = (String) envs.get("expired_OTP");
+		String used_OTP = (String) envs.get("used_OTP");
 		
 		// To On-board an already existing agent
 		String email1 = "To Onboard an already existing agent: ( " + onboardedAgent + " )";
@@ -135,7 +135,7 @@ public class AgentOnBoardingTest extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/cancel")).click();
 		Thread.sleep(1000);
 		
-		String email6 = "To On-board new agent: ( " + agent_email + " ) with an used OTP: " + used_OTP;
+		String email6 = "To On-board new agent: ( " + agent_email + " ) with used OTP: " + used_OTP;
 		Markup u = MarkupHelper.createLabel(email6, ExtentColor.BLUE);
 		testInfo.get().info(u);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/email")).clear();
