@@ -1,6 +1,5 @@
 package admin;
 
-import utils.Asserts;
 import utils.TestBase;
 
 import java.io.FileReader;
@@ -27,6 +26,7 @@ public class AdditionalRegistration extends TestBase {
 	public static void navigateToCaptureMenuTest() throws InterruptedException {
 		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
 		
+		// Navigate to Registration Type
 		String regType = "Navigate to Registration Type";
 		Markup r = MarkupHelper.createLabel(regType, ExtentColor.BLUE);
 		testInfo.get().info(r);
@@ -34,8 +34,7 @@ public class AdditionalRegistration extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/button_start_capture")).click();
 		wait.until(ExpectedConditions
 				.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/reg_type_placeholder")));
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/reg_type_placeholder",
-				"Registration Type");
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/reg_type_placeholder", "Registration Type");
 	}
 	
 	@Parameters({ "dataEnv"})
@@ -69,14 +68,26 @@ public class AdditionalRegistration extends TestBase {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/typeofreg")));
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/typeofreg")).click();
 		Thread.sleep(500);
-		TestUtils.assertSearchText("ID", "android:id/alertTitle", "Select Item");
-		TestUtils.assertSearchText("ID", "android:id/text1", "[Select Registration Type]");
-		getDriver().findElement(By.xpath("//android.widget.TextView[@text='Additional Registration']")).click();
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/alertTitle", "Select Registration Type");
+		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Additional Registration']")).click();
 		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/next_button")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Additional Registration']")));
 		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Additional Registration']", "Additional Registration");
-	
+		Thread.sleep(500);
+		
+		// Proceed without supplying msisdn
+		String emptyMsisdn = "Proceed without supplying msisdn";
+		Markup n = MarkupHelper.createLabel(emptyMsisdn, ExtentColor.BLUE);
+		testInfo.get().info(n);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/primary_msisdn_field")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/primary_msisdn_field")).sendKeys();
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/submit_button")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
+		TestUtils.assertSearchText("ID", "android:id/message", "Required Input Field: Phone Number");
+		getDriver().findElement(By.id("android:id/button1")).click();
+		Thread.sleep(1000);
+		
 		// Enter invalid Msisdn
 		String invalidMsisdn = "Enter invalid MSISDN: "  + invalid_Msisdn + " for registration";
 		Markup i = MarkupHelper.createLabel(invalidMsisdn, ExtentColor.BLUE);
@@ -117,9 +128,9 @@ public class AdditionalRegistration extends TestBase {
 				name = fields[0];
 				val = fields[1];
 				Assert.assertNotEquals(val, NA);
-				testInfo.get().log(Status.INFO, name + " : " + val);
+				testInfo.get().log(Status.INFO,"<b>" + name + " </b> : " + val);
 			} catch (Error e) {
-				testInfo.get().error(name + " : " + val);
+				testInfo.get().error("<b>" + name + " </b> : " + val);
 
 			}
 		}
