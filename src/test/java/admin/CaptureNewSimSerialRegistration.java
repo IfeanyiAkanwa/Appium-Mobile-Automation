@@ -139,6 +139,10 @@ public class CaptureNewSimSerialRegistration extends TestBase {
 		getDriver().findElement(By.id("android:id/button1")).click();
 		Thread.sleep(1000);
 		
+		// Proceed with registration after supplying all mandatory fields
+		String completeField = "Proceed with registration after supplying all mandatory fields";
+		Markup x = MarkupHelper.createLabel(completeField, ExtentColor.BLUE);
+		testInfo.get().info(x);
 		Form.individualForeignerForm(dataEnv);
 	}
       
