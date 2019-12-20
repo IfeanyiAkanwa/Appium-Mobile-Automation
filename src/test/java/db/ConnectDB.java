@@ -16,7 +16,7 @@ public class ConnectDB {
         Connection dbConnection = null;
         Statement statement = null;
 
-        String getOTPSql = "SELECT OTP FROM OTP_STATUS_RECORD WHERE MSISDN = '" + phoneNumber + "' ORDER BY CREATE_DATE DESC";
+        String getOTPSql = "SELECT OTP FROM OTP_STATUS_RECORD WHERE MSISDN = '" + phoneNumber + "' AND OTP_USED = 0 AND DELETED = 0 AND EXPIRATION_TIME >= SYSDATE ORDER BY CREATE_DATE DESC";
 
         try {
             dbConnection = getDBConnection();

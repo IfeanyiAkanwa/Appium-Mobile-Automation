@@ -68,29 +68,10 @@
 		"valid_sim_serial_no": "11111111111111111367"
 	},
 	"ReRegistration": {
-		"valid_msisdn": "08142050502",
+		"valid_msisdn": "09062059126",
 		"invalid_msisdn": "08169548454",
 		"invalid_OTP": "00000",
-		"alternate_phone": "08142050326",
-		"lga": "Ibeju-Lekki",
-		"state": "BENUE",
-		"LGA": "Ado",
-		"surname": "Saraswati",
-		"firstname": "Joubert",
-		"middlename": "Ganga",
-		"maiden_name": "Merlin",
-		"social_media_type": "INSTAGRAM",
-		"social_media_username": "@ganga",
-		"street": "Banaris",
-		"city": "Mumbai",
-		"nationality": "INDIA",
-		"house_or_flat_no": "456C",
-		"email": "test@yopmail.com",
-		"postalcode": "746583",
-		"occupation": "Aeronautical Engineer",
-		"areaOfResidence": "AGILA",
-		"passport_ID_number": "6861637BC",
-		"lga_of_reg": "Agege"
+		"lga": "Ibeju-Lekki"
 	},
 	"AgentOnboarding": {
 		"valid_username": "fatube@seamfix.com",
@@ -134,8 +115,8 @@
 		"lga": "Ibeju-Lekki"
 	},
 	"AdditionalRegistration": {
-		"valid_Msisdn": "08142050025",
-		"invalid_Msisdn": "09062059126",
+		"valid_Msisdn": "09062059126",
+		"invalid_Msisdn": "08083733577",
 		"lga": "Ibeju-Lekki"
 	},
 	"SIMSwap": {

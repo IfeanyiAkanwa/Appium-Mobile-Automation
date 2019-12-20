@@ -86,6 +86,7 @@ public class CaptureNewMSISDNRegistration extends TestBase {
 		TestUtils.assertSearchText("ID", "android:id/message", "Invalid MSISDN");
 		getDriver().findElement(By.id("android:id/button1")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/msisdn")));
+		Thread.sleep(1000);
 
 		// Enter valid msisdn
 		String validMsisdn = "Enter valid MSISDN" + "(" + valid_msisdn + ") " + "for validation";
@@ -100,28 +101,7 @@ public class CaptureNewMSISDNRegistration extends TestBase {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/next_button")));
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/next_button")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Personal Details']")));
-		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Personal Details']", "Personal Details");
-
-		// Proceed with registration without supplying all mandatory fields
-		String emptyField = "Proceed with registration without supplying all mandatory fields";
-		Markup e = MarkupHelper.createLabel(emptyField, ExtentColor.BLUE);
-		testInfo.get().info(e);
-		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity:id/btnContinueReg");
-		wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.id("com.sf.biocapture.activity:id/btnContinueReg")));
-		Thread.sleep(500);
-		getDriver().findElement(By.id("com.sf.biocapture.activity:id/btnContinueReg")).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/alertTitle")));
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/alertTitle", "Error");
-		TestUtils.assertSearchText("ID", "android:id/message", "\n" + 
-				"Surname: Empty field \n" + 
-				"First Name: Empty field \n" + 
-				"Mother's Maiden Name: Empty field \n" + 
-				"Date of Birth: Empty field \n" + 
-				"Gender: Empty field \n" + 
-				"");
-		getDriver().findElement(By.id("android:id/button1")).click();
 		Thread.sleep(1000);
-		
 		Form.NigerianCompanyForm(dataEnv);
 	}
 }
