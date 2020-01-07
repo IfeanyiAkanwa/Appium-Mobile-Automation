@@ -562,14 +562,14 @@ public class Form extends TestBase {
 		Thread.sleep(500);
 		try {
 			try {
-				getDriver().findElement(By.xpath("//android.widget.Button[@text='2020']")).click();
+				getDriver().findElement(By.xpath("//android.widget.Button[@text='2021']")).click();
 			} catch (NoSuchElementException e1) {
-				getDriver().findElement(By.xpath("//android.widget.EditText[@text='2020']")).click();
+				getDriver().findElement(By.xpath("//android.widget.EditText[@text='2021']")).click();
 			}
 		} catch (NoSuchElementException ex) {
 			getDriver().findElement(By.id("android:id/date_picker_header_year")).click();
 			Thread.sleep(500);
-			getDriver().findElement(By.xpath("//android.widget.TextView[@text='2021']")).click();
+			getDriver().findElement(By.xpath("//android.widget.TextView[@text='2022']")).click();
 		}
 		getDriver().findElement(By.id("android:id/button1")).click();
 		Thread.sleep(1000);

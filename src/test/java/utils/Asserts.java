@@ -341,4 +341,35 @@ public class Asserts extends TestBase {
 		}
 	}
 	
+	public static void assertTransactionIdRecords() throws Exception {
+
+		String assertDetails = "Asserting returned Subscriber's Details";
+		Markup ad = MarkupHelper.createLabel(assertDetails, ExtentColor.BLUE);
+		testInfo.get().info(ad);
+		String firstName = getDriver().findElement(By.id("com.sf.biocapture.activity:id/first_name_value")).getText();
+		String surName = getDriver().findElement(By.id("com.sf.biocapture.activity:id/surname_value")).getText();
+		String gender = getDriver().findElement(By.id("com.sf.biocapture.activity:id/gender_value")).getText();
+		String dateOfBirth = getDriver().findElement(By.id("com.sf.biocapture.activity:id/transaction_id_date_of_birth_value")).getText();
+		String dateOfReg = getDriver().findElement(By.id("com.sf.biocapture.activity:id/date_of_registration_value")).getText();
+		String transactionID = getDriver().findElement(By.id("com.sf.biocapture.activity:id/transaction_id_value")).getText();
+
+		String NA = "";
+
+		String[] toList = { "First Name: " + firstName, "Surname: " + surName, "Gender: " + gender,
+				"Date of Birth: " + dateOfBirth, "Date of Registration: " + dateOfReg, "Transaction ID: " + transactionID };
+		for (String field : toList) {
+			String name = "";
+			String val = NA;
+			try {
+				String[] fields = field.split(":");
+				name = fields[0];
+				val = fields[1];
+				Assert.assertNotEquals(val, NA);
+				testInfo.get().log(Status.INFO, "<b>" +name + " : </b>" + val);
+			} catch (Error e) {
+				testInfo.get().error("<b>" + name + " : </b>" + val);
+			}
+		}
+	}
+	
 }

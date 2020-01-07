@@ -176,6 +176,13 @@
 		"passport_ID_number": "6861637BC",
 		"lga_of_reg": "Agege"
 	},
+	"Crop": {
+		"valid_msisdn": "09062059540",
+		"invalid_tranID": "CIUT3W5JQM5",
+		"lga": "Ibeju-Lekki",
+		"email": "mugwu@seamfix.com",
+		"invalid_email": "m@.com"
+	},
 	"LandingPage_Url": {
 	"stagingUrl": "http:simregpoc.mtnnigeria.net"
 	}
