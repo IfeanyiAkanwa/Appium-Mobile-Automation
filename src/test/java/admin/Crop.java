@@ -176,8 +176,8 @@ public class Crop extends TestBase {
 		try {
 			if (getDriver().findElement(By.id("com.sf.biocapture.activity:id/company_details_title")).isDisplayed()) {
 				TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/company_details_title", "Company Details");
-				Thread.sleep(1000);
 				getDriver().findElement(By.id("com.sf.biocapture.activity:id/company_cancel")).click();
+				Thread.sleep(500);
 				
 				// Back button
 				getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
@@ -185,7 +185,7 @@ public class Crop extends TestBase {
 			}
 		} catch (Exception e) {
 			TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Personal Details']", "Personal Details");
-			Thread.sleep(1000);
+			Thread.sleep(500);
 			
 			// Back button
 			getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
@@ -258,7 +258,7 @@ public class Crop extends TestBase {
 		Thread.sleep(500);
 		
 		// Proceed without supplying msisdn
-        String newReg2 = "Proceed after supplying valid transaction ID (" + transactionID + ") and empty msisdn";
+        String newReg2 = "Proceed after supplying valid transaction ID: (" + transactionID + ") and empty msisdn";
 		Markup a = MarkupHelper.createLabel(newReg2, ExtentColor.BLUE);
 		testInfo.get().info(a);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/msisdn")).clear();
@@ -272,7 +272,7 @@ public class Crop extends TestBase {
 		Thread.sleep(500);
 		
 		// Proceed after supplying valid msisdn and invalid transaction Id
-        String newReg3 = "Proceed after supplying valid msisdn (" + valid_msisdn + ") and invalid transaction Id (" + invalid_tranID + ")";
+        String newReg3 = "Proceed after supplying valid msisdn: (" + valid_msisdn + ") and invalid transaction Id: (" + invalid_tranID + ")";
 		Markup f = MarkupHelper.createLabel(newReg3, ExtentColor.BLUE);
 		testInfo.get().info(f);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/msisdn")).clear();
@@ -290,22 +290,27 @@ public class Crop extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/new_msisdn_delete_transaction_id")).click();
 		Thread.sleep(500);
 		
-		// Proceed after supplying valid msisdn and invalid transaction Id
-        String newReg5 = "Proceed after supplying valid msisdn (" + valid_msisdn + ") and Old transaction Id (" + old_tranID + ")";
+		// Proceed after supplying valid msisdn and Old transaction Id
+        String newReg5 = "Proceed after supplying valid msisdn: (" + valid_msisdn + ") and Old transaction Id: (" + old_tranID + ")";
 		Markup b = MarkupHelper.createLabel(newReg5, ExtentColor.BLUE);
 		testInfo.get().info(b);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/msisdn")).clear();
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/msisdn")).sendKeys(valid_msisdn);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/new_msisdn_transaction_id")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/new_msisdn_transaction_id")).sendKeys(invalid_tranID);
+        getDriver().findElement(By.id("com.sf.biocapture.activity:id/new_msisdn_transaction_id")).sendKeys(old_tranID);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/add_msisdn_button")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/alertTitle")));
 		TestUtils.assertSearchText("ID", "android:id/message", "Valid MSISDN. Transaction ID is invalid");
 		getDriver().findElement(By.id("android:id/button1")).click();
 		Thread.sleep(500);
 		
+		// Delete button
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/delete_button")).click();
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/new_msisdn_delete_transaction_id")).click();
+		Thread.sleep(500);
+		
 		// Proceed after supplying valid msisdn and valid transaction Id
-        String newReg4 = "Proceed after supplying valid msisdn (" + valid_msisdn + ") and valid transaction Id (" + transactionID + ")";
+        String newReg4 = "Proceed after supplying valid msisdn: (" + valid_msisdn + ") and valid transaction Id: (" + transactionID + ")";
 		Markup h = MarkupHelper.createLabel(newReg4, ExtentColor.BLUE);
 		testInfo.get().info(h);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/msisdn")).clear();

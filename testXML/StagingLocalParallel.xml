@@ -133,8 +133,8 @@
 				<methods>
 					<include name="Login" />
 					<include name="navigateToCaptureMenuTest" />
-					<include name="forgotTransactionIdTest"></include>
-					<!-- <include name="cropTest" /> -->
+					<include name="forgotTransactionIdTest" />
+					<include name="cropTest" />
 				</methods>
 			</class>
 		</classes>
