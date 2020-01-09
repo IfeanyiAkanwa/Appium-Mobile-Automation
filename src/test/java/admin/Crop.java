@@ -1,5 +1,6 @@
 package admin;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -29,6 +30,8 @@ import utils.TestUtils;
 
 public class Crop extends TestBase {
 	
+	private static final String String = null;
+
 	@Test
 	public static void navigateToCaptureMenuTest() throws InterruptedException {
 		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
@@ -127,9 +130,11 @@ public class Crop extends TestBase {
 		
 		// Get Count of Records found
 		int count = getDriver().findElements(By.id("com.sf.biocapture.activity:id/transaction_id_result_item")).size();
-		String num = "Number of records returned: " + count;
+		String count1 = Integer.toString(count);
+		String num = "Number of records returned";
 		Markup h = MarkupHelper.createLabel(num, ExtentColor.GREEN);
 		testInfo.get().info(h);
+		testInfo.get().info(count1);
 		
 		for (int i = 0; i < count; i++) {
 			Asserts.assertTransactionIdRecords((WebElement) getDriver().findElements(By.id("com.sf.biocapture.activity:id/transaction_id_result_item")).get(i));
@@ -142,9 +147,10 @@ public class Crop extends TestBase {
 		
 		// Assert Transaction ID after Retrieving records
 		String tranID = getDriver().findElement(By.id("com.sf.biocapture.activity:id/new_msisdn_transaction_id")).getText();
-		String tid = "Assert Transaction ID after Retrieving records: " + tranID;
+		String tid = "Assert Transaction ID after Retrieving records";
 		Markup r = MarkupHelper.createLabel(tid, ExtentColor.GREEN);
 		testInfo.get().info(r);
+		testInfo.get().info(tranID);
 		
 		// PSB Account
 		String psb = "Click on PSB checkbox";
@@ -206,7 +212,7 @@ public class Crop extends TestBase {
 		String invalid_tranID = (String) envs.get("invalid_tranID");
 		String valid_msisdn = (String) envs.get("valid_msisdn");
 		String lga = (String) envs.get("lga");
-		String old_tranID = (String) envs.get("old_tranID");
+		String used_tranID = (String) envs.get("used_tranID");
 
 		// Select LGA of Registration
 		String lgaa = "Select LGA of Registration: " + lga;
@@ -235,9 +241,10 @@ public class Crop extends TestBase {
 		// DB Connection for Transaction ID
     	String transactionID = ConnectDB.getTransactionID();
 
-		String tranID = "Valid Transaction ID: " + transactionID;
+		String tranID = "Valid Transaction ID";
 		Markup o = MarkupHelper.createLabel(tranID, ExtentColor.GREEN);
 		testInfo.get().info(o);
+		testInfo.get().info(transactionID);
         if(transactionID == null){
         	testInfo.get().log(Status.INFO, "Can't get transaction ID.");
             getDriver().quit();
@@ -291,13 +298,13 @@ public class Crop extends TestBase {
 		Thread.sleep(500);
 		
 		// Proceed after supplying valid msisdn and Old transaction Id
-        String newReg5 = "Proceed after supplying valid msisdn: (" + valid_msisdn + ") and Old transaction Id: (" + old_tranID + ")";
+        String newReg5 = "Proceed after supplying valid msisdn: (" + valid_msisdn + ") and Old transaction Id: (" + used_tranID + ")";
 		Markup b = MarkupHelper.createLabel(newReg5, ExtentColor.BLUE);
 		testInfo.get().info(b);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/msisdn")).clear();
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/msisdn")).sendKeys(valid_msisdn);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/new_msisdn_transaction_id")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/new_msisdn_transaction_id")).sendKeys(old_tranID);
+        getDriver().findElement(By.id("com.sf.biocapture.activity:id/new_msisdn_transaction_id")).sendKeys(used_tranID);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/add_msisdn_button")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/alertTitle")));
 		TestUtils.assertSearchText("ID", "android:id/message", "Valid MSISDN. Transaction ID is invalid");
@@ -331,10 +338,81 @@ public class Crop extends TestBase {
 			if (getDriver().findElement(By.id("com.sf.biocapture.activity:id/company_details_title")).isDisplayed()) {
 				Asserts.AssertCompanyDetails();
 				Thread.sleep(1000);
+				
+				// Certificate of Incorporation
+				getDriver().findElement(By.id("com.sf.biocapture.activity:id/company_ok")).click();
+				wait.until(ExpectedConditions.visibilityOfElementLocated((By.id("com.sf.biocapture.activity:id/alertTitle"))));
+				TestUtils.assertSearchText("ID", "android:id/message", "Certificate of Incorporation is compulsory");
+				getDriver().findElement(By.id("android:id/button1")).click();
+				Thread.sleep(500);
+				getDriver().findElement(By.id("com.sf.biocapture.activity:id/document_type_spinner")).click();
+				Thread.sleep(500);
+				getDriver().findElement(By.xpath("//android.widget.TextView[@text='Certificate of Incorporation *']")).click();
+				Thread.sleep(500);
+
+				// Push File
+				File pic = new File(System.getProperty("user.dir") + "/files/idCard.jpg");
+				getDriver().pushFile("/mnt/sdcard/picture.jpg", pic);
+
+				getDriver().findElement(By.id("com.sf.biocapture.activity:id/btn_load_document")).click();
+				Thread.sleep(500);
+				TestUtils.scrollUntilElementIsVisible("XPATH", "//android.widget.TextView[@text='picture.jpg']");
+				getDriver().findElement(By.xpath("//android.widget.TextView[@text='picture.jpg']")).click();
+				Thread.sleep(500);
+				getDriver().findElement(By.id("com.sf.biocapture.activity:id/btn_remove_document")).click();
+				Thread.sleep(500);
+				getDriver().findElement(By.id("com.sf.biocapture.activity:id/btn_load_document")).click();
+				Thread.sleep(1000);
+				TestUtils.scrollUntilElementIsVisible("XPATH", "//android.widget.TextView[@text='picture.jpg']");
+				getDriver().findElement(By.xpath("//android.widget.TextView[@text='picture.jpg']")).click();
+				Thread.sleep(500);
+
+				// contact person form
+				getDriver().findElement(By.id("com.sf.biocapture.activity:id/document_type_spinner")).click();
+				Thread.sleep(500);
+				getDriver().findElement(By.xpath("//android.widget.TextView[@text='Contact Person Form *']")).click();
+				Thread.sleep(500);
+				getDriver().findElement(By.id("com.sf.biocapture.activity:id/btn_remove_document")).click();
+				Thread.sleep(500);
+				getDriver().findElement(By.id("com.sf.biocapture.activity:id/btn_load_document")).click();
+				Thread.sleep(1000);
+				TestUtils.scrollUntilElementIsVisible("XPATH", "//android.widget.TextView[@text='picture.jpg']");
+				Thread.sleep(500);
+				getDriver().findElement(By.xpath("//android.widget.TextView[@text='picture.jpg']")).click();
+				Thread.sleep(500);
+				
+				// Save
+				getDriver().findElement(By.id("com.sf.biocapture.activity:id/company_ok")).click();
+				Thread.sleep(500);
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/surNameTXT"))); 
+				Thread.sleep(500);
+				Asserts.AssertIndividualForm(); Thread.sleep(1000);
+				TestUtils.scrollDown();
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/btnContinueReg"))); 
+				Thread.sleep(500);
+				getDriver().findElement(By.id("com.sf.biocapture.activity:id/btnContinueReg")).click(); 
+				Thread.sleep(500);
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/countrySpinner")));
+				Thread.sleep(1000);
+				Asserts.AssertAddresstDetails(); Thread.sleep(1000);
+				getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
+				Thread.sleep(1000);
 				Form.NigerianCompanyForm(dataEnv);
 			} 
 		} catch (Exception e) {
-			Asserts.AssertIndividualForm();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/surNameTXT"))); 
+			Thread.sleep(500);
+			Asserts.AssertIndividualForm(); Thread.sleep(1000);
+			TestUtils.scrollDown();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/btnContinueReg"))); 
+			Thread.sleep(500);
+			getDriver().findElement(By.id("com.sf.biocapture.activity:id/btnContinueReg")).click(); 
+			Thread.sleep(500);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/countrySpinner")));
+			Thread.sleep(1000);
+			Asserts.AssertAddresstDetails(); Thread.sleep(1000);
+			getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
+			Thread.sleep(1000);
 			Form.individualForeignerForm(dataEnv);
 		}
 		
