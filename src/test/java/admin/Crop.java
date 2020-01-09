@@ -298,7 +298,7 @@ public class Crop extends TestBase {
 		Thread.sleep(500);
 		
 		// Proceed after supplying valid msisdn and Old transaction Id
-        String newReg5 = "Proceed after supplying valid msisdn: (" + valid_msisdn + ") and Old transaction Id: (" + used_tranID + ")";
+        String newReg5 = "Proceed after supplying valid msisdn: (" + valid_msisdn + ") and Used transaction Id: (" + used_tranID + ")";
 		Markup b = MarkupHelper.createLabel(newReg5, ExtentColor.BLUE);
 		testInfo.get().info(b);
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/msisdn")).clear();
