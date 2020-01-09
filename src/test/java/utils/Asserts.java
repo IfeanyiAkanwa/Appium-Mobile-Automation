@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -341,17 +342,17 @@ public class Asserts extends TestBase {
 		}
 	}
 	
-	public static void assertTransactionIdRecords(int i) throws Exception {
+	public static void assertTransactionIdRecords(WebElement webElement) throws Exception {
 
 			String assertDetails = "Asserting returned Subscriber's Details";
 			Markup ad = MarkupHelper.createLabel(assertDetails, ExtentColor.BLUE);
 			testInfo.get().info(ad);
-			String firstName = getDriver().findElement(By.id("(com.sf.biocapture.activity:id/first_name_value)[" + i + "]")).getText();
-			String surName = getDriver().findElement(By.id("(com.sf.biocapture.activity:id/surname_value)[" + i + "]")).getText();
-			String gender = getDriver().findElement(By.id("(com.sf.biocapture.activity:id/gender_value)[" + i + "]")).getText();
-			String dateOfBirth = getDriver().findElement(By.id("(com.sf.biocapture.activity:id/transaction_id_date_of_birth_value)[" + i + "]")).getText();
-			String dateOfReg = getDriver().findElement(By.id("(com.sf.biocapture.activity:id/date_of_registration_value)[" + i + "]")).getText();
-			String transactionID = getDriver().findElement(By.id("(com.sf.biocapture.activity:id/transaction_id_value)[" + i + "]")).getText();
+			String firstName = webElement.findElement(By.id("com.sf.biocapture.activity:id/first_name_value")).getText();
+			String surName = webElement.findElement(By.id("com.sf.biocapture.activity:id/surname_value")).getText();
+			String gender = webElement.findElement(By.id("com.sf.biocapture.activity:id/gender_value")).getText();
+			String dateOfBirth = webElement.findElement(By.id("com.sf.biocapture.activity:id/transaction_id_date_of_birth_value")).getText();
+			String dateOfReg = webElement.findElement(By.id("com.sf.biocapture.activity:id/date_of_registration_value")).getText();
+			String transactionID = webElement.findElement(By.id("com.sf.biocapture.activity:id/transaction_id_value")).getText();
 
 			String NA = "";
 
@@ -371,4 +372,5 @@ public class Asserts extends TestBase {
 				}
 			}
 		}
+		
 }
