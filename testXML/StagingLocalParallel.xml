@@ -129,6 +129,14 @@
 					<include name="msisdnReactivateTest" />
 				</methods>
 			</class>
+			<class name="admin.Crop">
+				<methods>
+					<include name="Login" />
+					<include name="navigateToCaptureMenuTest" />
+					<include name="forgotTransactionIdTest" />
+					<include name="cropTest" />
+				</methods>
+			</class>
 		</classes>
 	</test>
 </suite>

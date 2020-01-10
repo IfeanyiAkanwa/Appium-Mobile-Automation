@@ -1,6 +1,5 @@
 package db;
 
-
 import java.sql.*;
 
 public class ConnectDB {
@@ -10,7 +9,8 @@ public class ConnectDB {
     private static final String DB_USER = "biocapture";
     private static final String DB_PASSWORD = "s3amf1xK0l0";
     private static String otp;
-
+    private static String transactionID;
+    
     public static String getOTP(String phoneNumber) throws SQLException {
 
         Connection dbConnection = null;
@@ -31,6 +31,46 @@ public class ConnectDB {
                 otp = rs.getString("OTP");
             }
             return otp;
+
+        } catch (SQLException e) {
+
+            System.out.println(e.getMessage());
+            return null;
+
+        } finally {
+
+            if (statement != null) {
+                statement.close();
+            }
+
+            if (dbConnection != null) {
+                dbConnection.close();
+            }
+
+        }
+
+    }
+    
+    public static String getTransactionID() throws SQLException {
+
+        Connection dbConnection = null;
+        Statement statement = null;
+
+        String getTranIDSql = "SELECT TRANSACTION_ID FROM SUBSCRIBER_DETAIL WHERE SUBSCRIBER_TYPE = 'NEW' AND BIOMETRICS_UPDATED = 0 AND TXN_ID_EXP_DATE_TIME > SYSDATE ORDER BY CREATE_DATE DESC";
+
+        try {
+            dbConnection = getDBConnection();
+            if (dbConnection != null) {
+                System.out.println("Connected to db");
+            } else {
+                System.out .println("Not able to connect to db");
+            }
+            statement = dbConnection.createStatement();
+            ResultSet rs = statement.executeQuery(getTranIDSql);
+            if (rs.next()) {
+            	transactionID = rs.getString("TRANSACTION_ID");
+            }
+            return transactionID;
 
         } catch (SQLException e) {
 
