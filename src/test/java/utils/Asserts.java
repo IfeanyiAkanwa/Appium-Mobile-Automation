@@ -187,6 +187,10 @@ public class Asserts extends TestBase {
 
 	public static void AssertCompanyDetails() throws Exception {
 
+		String assertDetails = "Asserting Company Details of registered subscriber";
+		Markup ad = MarkupHelper.createLabel(assertDetails, ExtentColor.GREEN);
+		testInfo.get().info(ad);
+		
 		// Company Details
 		String companyName = getDriver().findElement(By.id("com.sf.biocapture.activity:id/company_name_descrptn"))
 				.getText();
@@ -195,31 +199,33 @@ public class Asserts extends TestBase {
 		String houseNumber = getDriver().findElement(By.id("com.sf.biocapture.activity:id/house_or_flat_no")).getText();
 		String companyAddressStreet = getDriver().findElement(By.id("com.sf.biocapture.activity:id/street")).getText();
 		String companyAddressCity = getDriver().findElement(By.id("com.sf.biocapture.activity:id/city")).getText();
-		String companyState = getDriver().findElement(By.id("com.sf.biocapture.activity:id/company_state_address"))
+		String companyState = getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.ScrollView/android.widget.TableLayout/android.widget.Spinner[1]/android.widget.TextView"))
 				.getText();
-		String companyLga = getDriver().findElement(By.id("com.sf.biocapture.activity:id/company_lga_address"))
+		String companyLga = getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.ScrollView/android.widget.TableLayout/android.widget.Spinner[2]/android.widget.TextView"))
 				.getText();
 		String companyPostalCode = getDriver().findElement(By.id("com.sf.biocapture.activity:id/company_postalcode"))
 				.getText();
-
-		String NA = "";
-
-		String[] toList = { "Name /Description:" + companyName, "Registration Number:" + registrationNumber,
-				"House No.:" + houseNumber, "Street:" + companyAddressStreet, "City:" + companyAddressCity,
-				"Company Address State:" + companyState, "Company Address LGA:" + companyLga,
-				"Postal Code:" + companyPostalCode };
-		for (String field : toList) {
-			String name = "";
-			String val = NA;
+		
+		String empty = "";
+		Map<String, String> fields = new HashMap<>();
+		fields.put("Name /Description", companyName);
+		fields.put("Registration Number", registrationNumber);
+		fields.put("House No.", houseNumber);
+		fields.put("Street", companyAddressStreet);
+		fields.put("City", companyAddressCity);
+		fields.put("Company Address State", companyState);
+		fields.put("Company Address LGA", companyLga);
+		fields.put("Postal Code", companyPostalCode);
+	
+		for (Map.Entry<String, String> entry : fields.entrySet()) {
 			try {
-				String[] fields = field.split(":");
-				name = fields[0];
-				val = fields[1];
-				Assert.assertNotEquals(val, NA);
-				testInfo.get().log(Status.INFO, name + " : " + val);
+				Assert.assertNotEquals(entry.getValue(), empty);
+				Assert.assertNotEquals(entry.getValue(), null);
+				testInfo.get().log(Status.INFO, "<b>" +  entry.getKey() + "</b> : " + entry.getValue());
 			} catch (Error e) {
-				testInfo.get().error(name + " : " + val);
+				testInfo.get().error("<b>" + entry.getKey() + " </b> : " + entry.getValue());
 			}
+
 		}
 	}
 

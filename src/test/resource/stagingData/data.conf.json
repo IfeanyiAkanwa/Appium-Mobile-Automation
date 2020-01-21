@@ -180,9 +180,11 @@
 		"valid_msisdn": "09062059540",
 		"invalid_tranID": "CIUT3W5JQM5",
 		"lga": "Ibeju-Lekki",
-		"email": "mugwu@seamfix.com",
+		"email": "gnwabude@seamfix.com",
 		"invalid_email": "m@.com",
-		"used_tranID": "CIU7100000020XW6XYA"
+		"used_tranID": "CIU7100000020XW6XYA",
+		"alternate_phoneNum": "07038851805",
+		"valid_simSerial": "11111111111111111362"
 	},
 	"LandingPage_Url": {
 	"stagingUrl": "http:simregpoc.mtnnigeria.net"

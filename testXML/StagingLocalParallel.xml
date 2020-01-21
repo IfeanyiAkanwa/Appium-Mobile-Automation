@@ -15,7 +15,7 @@
 		<parameter name="deviceNo" value="1" />
 
 		<classes>
-			<class name="admin.ForgotPassword">
+			<!-- <class name="admin.ForgotPassword">
 				<methods>
 					<include name="navigateToForgotPasswordTest" />
 					<include name="erorrMessagesValidationTest" />
@@ -54,13 +54,15 @@
 					<include name="reportSummary" />
 					<include name="searchParameters" />
 				</methods>
-			</class>
+			</class> -->
 			<class
 				name="admin.CaptureNewMSISDNRegistration">
 				<methods>
 					<include name="Login" />
-					<include name="NavigateToCaptureMenuTest" />
-					<include name="CaptureNewMSISDNTest" />
+					<include name="navigateToCaptureMenuTest" />
+					<include name="forgotTransactionIdWthNewMsisdnTest" />
+					<include name="cropWithNewMsisdnTest" />
+					<include name="captureNewMSISDNTest" />
 				</methods>
 			</class>
 			<class name="admin.SellAirtimeAndData">
@@ -104,6 +106,8 @@
 				<methods>
 					<include name="Login" />
 					<include name="navigateToCaptureMenuTest" />
+					<include name="forgotTransactionIdWthNewSimSerialTest" />
+					<include name="cropWithNewSimSerialTest" />
 					<include name="registerNewSimSerialTest" />
 				</methods>
 			</class>

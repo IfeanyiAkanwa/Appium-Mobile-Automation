@@ -37,6 +37,85 @@ public class CaptureNewSimSerialRegistration extends TestBase {
 				"Registration Type");
 	}
 	
+	
+	@Parameters({ "dataEnv"})
+	@Test
+	public void forgotTransactionIdWthNewSimSerialTest(String dataEnv) throws Exception {
+		
+		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
+		JSONParser parser = new JSONParser();
+		JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
+		JSONObject envs = (JSONObject) config.get("Crop");
+		
+		String lga = (String) envs.get("lga");
+		
+		// Select LGA of Registration
+		String lgaa = "Select LGA of Registration: " + lga;
+		Markup m = MarkupHelper.createLabel(lgaa, ExtentColor.BLUE);
+		testInfo.get().info(m);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/lga_of_reg")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/alertTitle")));
+		TestUtils.assertSearchText("ID", "android:id/alertTitle", "LGA of Registration*");
+		getDriver().findElement(By.xpath("//android.widget.TextView[@text='" + lga + "']")).click();
+		Thread.sleep(500);
+
+		// Select New Registration Sim Serial
+		String newReg = "Select New Registration (SIM Serial)";
+		Markup d = MarkupHelper.createLabel(newReg, ExtentColor.BLUE);
+		testInfo.get().info(d);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/typeofreg")));
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/typeofreg")).click();
+		Thread.sleep(500);
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/alertTitle", "Select Registration Type");
+		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='New Registration (SIM Serial)']")).click();
+		Thread.sleep(500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/next_button")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/page_title")));
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/page_title", "New Registration (SIM Serial)");
+		
+		Crop.forgotTransactionIdTest(dataEnv);
+		Thread.sleep(500);
+	}
+	
+	@Parameters({ "dataEnv"})
+	@Test
+	public void cropWithNewSimSerialTest(String dataEnv) throws Exception {
+		
+		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
+		JSONParser parser = new JSONParser();
+		JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
+		JSONObject envs = (JSONObject) config.get("Crop");
+		
+		String lga = (String) envs.get("lga");
+		
+		// Select LGA of Registration
+		String lgaa = "Select LGA of Registration: " + lga;
+		Markup m = MarkupHelper.createLabel(lgaa, ExtentColor.BLUE);
+		testInfo.get().info(m);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/lga_of_reg")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/alertTitle")));
+		TestUtils.assertSearchText("ID", "android:id/alertTitle", "LGA of Registration*");
+		getDriver().findElement(By.xpath("//android.widget.TextView[@text='" + lga + "']")).click();
+		Thread.sleep(500);
+
+		// Select New Registration Sim Serial
+		String newReg = "Select New Registration (SIM Serial)";
+		Markup d = MarkupHelper.createLabel(newReg, ExtentColor.BLUE);
+		testInfo.get().info(d);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/typeofreg")));
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/typeofreg")).click();
+		Thread.sleep(500);
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/alertTitle", "Select Registration Type");
+		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='New Registration (SIM Serial)']")).click();
+		Thread.sleep(500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity:id/next_button")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/page_title")));
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/page_title", "New Registration (SIM Serial)");
+		
+		Crop.cropTest(dataEnv);
+		Thread.sleep(500);
+	}
+	
 	@Parameters({ "dataEnv"})
     @Test
     public void registerNewSimSerialTest(String dataEnv) throws Exception {
