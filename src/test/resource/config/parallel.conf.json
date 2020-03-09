@@ -8,7 +8,9 @@
     "name": "sample_test",
     "browserstack.debug": true,
     "app": "bs://cf47cdc4b1dae0b1986c85c93bedac296eca0194",
-    "browserstack.local": true
+    "browserstack.local":true,
+    "browserstack.localIdentifier":"randomstring"
+    
  	},
 
   "environments": {

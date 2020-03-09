@@ -3,7 +3,6 @@ package utils;
 import com.aventstack.extentreports.Status;
 import com.testinium.deviceinformation.helper.ProcessHelper;
 import enums.TargetTypeEnum;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import org.apache.commons.codec.binary.Base64;
 import org.openqa.selenium.By;
@@ -17,7 +16,6 @@ import java.util.Collection;
 
 public class TestUtils extends TestBase {
 
-    @SuppressWarnings("resource")
     public static String addScreenshot() {
 
         TakesScreenshot ts = getDriver();
@@ -87,7 +85,8 @@ public class TestUtils extends TestBase {
         }
     }
 
-    public static void scroll(int fromX, int fromY, int toX, int toY) {
+    @SuppressWarnings({ "rawtypes", "deprecation" })
+	public static void scroll(int fromX, int fromY, int toX, int toY) {
         TouchAction touchAction = new TouchAction(getDriver());
         touchAction.longPress(fromX, fromY).moveTo(toX, toY).release().perform();
     }
