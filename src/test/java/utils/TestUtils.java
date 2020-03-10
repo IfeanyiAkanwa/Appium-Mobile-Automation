@@ -1,6 +1,9 @@
 package utils;
 
 import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.markuputils.ExtentColor;
+import com.aventstack.extentreports.markuputils.Markup;
+import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.testinium.deviceinformation.helper.ProcessHelper;
 import enums.TargetTypeEnum;
 import io.appium.java_client.TouchAction;
@@ -226,5 +229,11 @@ public class TestUtils extends TestBase {
         return result;
 
     }
+    
+    public static void testTitle(String phrase) {
+		String word = "<b>"+phrase+"</b>";
+        Markup w = MarkupHelper.createLabel(word, ExtentColor.BLUE);
+        testInfo.get().info(w);
+	}
 
 }

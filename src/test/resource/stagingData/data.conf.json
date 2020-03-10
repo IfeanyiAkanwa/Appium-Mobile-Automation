@@ -1,13 +1,14 @@
 {
 	"Login": {
-		"onboarded_username": "gokafor@seamfix.com",
+		"onboarded_username": "soli@seamfix.com",
 		"invalid_username": "ada@seamnix.com",
-		"not_onboarded_username": "faruk.muhammad@mtnagent.com",
+		"not_onboarded_username": "vnwauwa@seamfix.com",
 		"valid_username": "gnwabude@seamfix.com",
 		"invalid_password": "adazejohn@1",
 		"valid_password": "Bankole1!!",
-		"blacklisted_username": "test126@test.com",
-		"deactivated_username": "akindolie.tosin@mtnagent.com",
+		"valid_pw": "Glo1user11!!",
+		"blacklisted_username": "eoluwabusola@seamfix.com",
+		"deactivated_username": "glo-dh-002g@gloworld.ng",
 		"invalid_email_format" : "@seamfix.com",
 		"AD_UserName": "seamkit2",
 		"valid_AD_pw": "W3lcomeB10sm@t2019#",
@@ -187,6 +188,6 @@
 		"valid_simSerial": "11111111111111111362"
 	},
 	"LandingPage_Url": {
-	"stagingUrl": "http:simregpoc.mtnnigeria.net"
+	"stagingUrl": "https:simregtest.gloworld.com"
 	}
 }

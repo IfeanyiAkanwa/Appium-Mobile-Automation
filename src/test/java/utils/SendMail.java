@@ -48,7 +48,7 @@ public class SendMail {
             }
             message.setSubject("BioSmart Automated Test Result");
             MimeBodyPart messageBodyPart = new MimeBodyPart();
-            messageBodyPart.setText("Hello," + "\n" + "Attached to this mail is the report of an automated test on BioSmart Android.");
+            messageBodyPart.setText("Hello," + "\n" + "Attached to this mail is the report of an automated test on BioSmart Glo Android.");
             Multipart multipart = new MimeMultipart();
             multipart.addBodyPart(messageBodyPart);
             messageBodyPart = new MimeBodyPart();

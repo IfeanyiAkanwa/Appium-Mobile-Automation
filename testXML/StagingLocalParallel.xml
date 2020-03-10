@@ -5,6 +5,7 @@
 	<parameter name="toMails" value="gnwabude@seamfix.com" />
 	<parameter name="config" value="data.conf.json" />
 	<parameter name="environment" value="chrome" />
+	<parameter name="testConfig" value="parallel.conf.json" />
 	<parameter name="server" value="local" />
 	<parameter name="downloadPath" value="/files/" />
 	<parameter name="dataEnv" value="stagingData" />
@@ -13,6 +14,7 @@
 		<parameter name="email" value="snapshot@seamfix.com" />
 		<parameter name="systemPort" value="8228" />
 		<parameter name="deviceNo" value="1" />
+		<parameter name="deviceName" value="SeamfixTab"/>
 
 		<classes>
 			<class name="admin.ForgotPassword">
@@ -26,8 +28,10 @@
 			</class>
 			<class name="admin.Login">
 				<methods>
-					<include name="erorrMessagesValidationTest" />
+					<!-- <include name="erorrMessagesBiosmartValidationTest" />
+					<include name="erorrMessagesActiveDirectoryValidationTest" /> -->
 					<include name="usernamePasswordTest" />
+					<!-- <include name="activeDirectoryValidLoginTest" /> -->
 					<include name="loginWithFingerprint" />
 				</methods>
 			</class>
@@ -65,14 +69,14 @@
 					<include name="captureNewMSISDNTest" />
 				</methods>
 			</class>
-			<!-- <class name="admin.SellAirtimeAndData">
+			<class name="admin.SellAirtimeAndData">
 				<methods>
 					<include name="sellAirtimeLoginTest" />
 					<include name="navigateToSellAirtimeAndData" />
 					<include name="sellAirtimeTest" />
 					<include name="sellDataTest" />
 				</methods>
-			</class> -->
+			</class>
 			<class name="admin.SearchTest">
 				<methods>
 					<include name="Login" />
