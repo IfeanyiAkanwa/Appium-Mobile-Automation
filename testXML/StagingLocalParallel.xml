@@ -69,14 +69,6 @@
 					<include name="captureNewMSISDNTest" />
 				</methods>
 			</class>
-			<class name="admin.SellAirtimeAndData">
-				<methods>
-					<include name="sellAirtimeLoginTest" />
-					<include name="navigateToSellAirtimeAndData" />
-					<include name="sellAirtimeTest" />
-					<include name="sellDataTest" />
-				</methods>
-			</class>
 			<class name="admin.SearchTest">
 				<methods>
 					<include name="Login" />
