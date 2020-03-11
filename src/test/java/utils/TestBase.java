@@ -45,7 +45,7 @@ public class TestBase {
 	public static ExtentHtmlReporter htmlReporter;
 	private static ThreadLocal<ExtentTest> parentTest = new ThreadLocal<ExtentTest>();
 	public static ThreadLocal<ExtentTest> testInfo = new ThreadLocal<ExtentTest>();
-	public static String gridUrl = System.getProperty("grid-url", "http:simregpoc.mtnnigeria.net");
+	public static String gridUrl = System.getProperty("grid-url", "https:simregtest.gloworld.com");
 	public static String toAddress;
 
 	public static String userName = "USERNAME";
@@ -53,14 +53,13 @@ public class TestBase {
 	public String local = "local";
 	public String remoteJenkins = "remote-jenkins";
 	public String remoteBrowserStack = "remote-browserStack";
+	public static String Id = "glo";
 
 	@SuppressWarnings("rawtypes")
 	public static AndroidDriver getDriver() {
 		return driver.get();
 	}
 
-	
-	
 	 @Parameters ("dataEnv")
 		public static String myUrl(String dataEnv) throws FileNotFoundException, IOException, ParseException {
 	    	JSONParser parser = new JSONParser();
@@ -132,7 +131,7 @@ public class TestBase {
 	@Parameters("toMails")
 	public void cleanup(String toMails) {
 		toAddress = toMails;
-		SendMail.ComposeGmail("BioSmart Report <seamfix.test.report@gmail.com>", toAddress);
+		SendMail.ComposeGmail("BioSmart Glo Report <seamfix.test.report@gmail.com>", toAddress);
 
 		getDriver().quit();
 	}
@@ -210,7 +209,8 @@ public class TestBase {
 				capabilities.setCapability("autoGrantPermissions", true);
 				capabilities.setCapability("unicodeKeyboard", true);
 				capabilities.setCapability("resetKeyboard", true);
-				capabilities.setCapability("noReset", false);
+				capabilities.setCapability("noReset", true);
+				capabilities.setCapability("fullReset", false);
 
 				capabilities.setCapability(AndroidMobileCapabilityType.SYSTEM_PORT, systemPort);
 				capabilities.setCapability(MobileCapabilityType.UDID, udid[deviceNo].trim());
@@ -230,11 +230,12 @@ public class TestBase {
 				capabilities.setCapability(AndroidMobileCapabilityType.SYSTEM_PORT, systemPort);
 				capabilities.setCapability("unicodeKeyboard", true);
 				capabilities.setCapability("resetKeyboard", true);
-				capabilities.setCapability("noReset", false);
+				capabilities.setCapability("noReset", true);
+				capabilities.setCapability("fullReset", false);
 
 				capabilities.setCapability("deviceName", "SeamfixTab");
 				capabilities.setCapability("platformName", "Android");
-				capabilities.setCapability("appPackage", "com.sf.biocapture.activity");
+				capabilities.setCapability("appPackage", "com.sf.biocapture.activity." +Id);
 				capabilities.setCapability("appActivity", "com.sf.biocapture.activity.SplashScreenActivity");
 
 				driver.set(new AndroidDriver(new URL("http://0.0.0.0:4723/wd/hub"), capabilities));
