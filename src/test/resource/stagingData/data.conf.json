@@ -42,9 +42,11 @@
 	"Notifications": {
 		"searchParam": "SIM"
 	},
-	"NewRegistrationMsisdn": {
-		"valid_msisdn": "1111113606",
-		"invalid_msisdn": "1111167112",
+	"NewRegistration": {
+		"valid_msisdn": "08117023467",
+		"invalid_msisdn": "764785",
+		"invalid_simSerial": "177606",
+		"valid_simSerial": "8923748494949749494F",
 		"lga": "Ibeju-Lekki"
 	},
 	"Reactivation": {

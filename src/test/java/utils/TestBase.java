@@ -248,56 +248,60 @@ public class TestBase {
 	}
 
 	@Parameters ({"dataEnv"})
-	@Test
-	public static void Login(String dataEnv) throws InterruptedException, FileNotFoundException, IOException, ParseException {
-		WebDriverWait wait = new WebDriverWait(getDriver(), 50);
+	public static void LoginLogic(String dataEnv, String jValue) throws FileNotFoundException, IOException, ParseException, InterruptedException {
+		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
 		JSONParser parser = new JSONParser();
 		JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
-		JSONObject envs = (JSONObject) config.get("Login");
+		JSONObject envs = (JSONObject) config.get(jValue);
 
 		String valid_username = (String) envs.get("valid_username");
 		String valid_password = (String) envs.get("valid_password");
 
-		String validUsernameValidPassword = "Login with a valid username: ( " + valid_username 	+ " ) and valid password: ( "+ valid_password + " )";
-		Markup v = MarkupHelper.createLabel(validUsernameValidPassword, ExtentColor.BLUE);
-		testInfo.get().info(v);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/otp_login")));
-		getDriver().findElement(By.id("com.sf.biocapture.activity:id/otp_login")).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/login_username")));
+		TestUtils.testTitle("Login with a valid username: ( " + valid_username 	+ " ) and valid password: ( "+ valid_password + " )");
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/otp_login")));
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/otp_login")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/login_username")));
 		
 		// Select Login mode
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_mode_types_spinner")).click();
 		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Biosmart']")).click();
 		Thread.sleep(500);
-		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).clear();
-		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).sendKeys(valid_username);
-		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_password")).clear();
-		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_password")).sendKeys(valid_password);
-		getDriver().findElement(By.id("com.sf.biocapture.activity:id/submit")).click();
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/login_username")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/login_username")).sendKeys(valid_username);
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/login_password")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/login_password")).sendKeys(valid_password);
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/submit")).click();
+		
+	}
+	
+	@Parameters ({"dataEnv"})
+	@Test
+	public static void Login(String dataEnv) throws InterruptedException, FileNotFoundException, IOException, ParseException {
+		WebDriverWait wait = new WebDriverWait(getDriver(), 50);
+		LoginLogic(dataEnv, "Login");
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
 		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Home']", "Home");
 	}
+
 	@Parameters ({"dataEnv"})
 	@Test
 	public static void Login1(String dataEnv, String valid_username, String valid_password) throws Exception {
 		WebDriverWait wait = new WebDriverWait(getDriver(), 50);
 	
-		String validUsernameValidPassword = "Login with a valid username: ( " + valid_username + " ) and valid password: ( "  + valid_password + " )";
-		Markup v = MarkupHelper.createLabel(validUsernameValidPassword, ExtentColor.BLUE);
-		testInfo.get().info(v);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/otp_login")));
-		getDriver().findElement(By.id("com.sf.biocapture.activity:id/otp_login")).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/login_username")));
+		TestUtils.testTitle("Login with a valid username: ( " + valid_username + " ) and valid password: ( "  + valid_password + " )");
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/otp_login")));
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/otp_login")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/login_username")));
 		
 		// Select Login mode
-		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_mode_types_spinner")).click();
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/login_mode_types_spinner")).click();
 		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Biosmart']")).click();
 		Thread.sleep(500);
-		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).clear();
-		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_username")).sendKeys(valid_username);
-		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_password")).clear();
-		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_password")).sendKeys(valid_password);
-		getDriver().findElement(By.id("com.sf.biocapture.activity:id/submit")).click();
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/login_username")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/login_username")).sendKeys(valid_username);
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/login_password")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/login_password")).sendKeys(valid_password);
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/submit")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
 		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Home']", "Home");
 	}

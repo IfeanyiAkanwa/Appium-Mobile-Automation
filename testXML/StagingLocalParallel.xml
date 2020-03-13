@@ -17,7 +17,7 @@
 		<parameter name="deviceName" value="SeamfixTab"/>
 
 		<classes>
-			<class name="admin.ForgotPassword">
+			<!-- <class name="admin.ForgotPassword">
 				<methods>
 					<include name="navigateToForgotPasswordTest" />
 					<include name="erorrMessagesValidationTest" />
@@ -25,17 +25,17 @@
 					<include name="changePasswordWithValidUsernameTest" />
 					<include name="loginWithNewPasswordTest" />
 				</methods>
-			</class>
-			<class name="admin.Login">
+			</class> -->
+			<!-- <class name="admin.Login">
 				<methods>
-					<!-- <include name="erorrMessagesBiosmartValidationTest" />
-					<include name="erorrMessagesActiveDirectoryValidationTest" /> -->
+					<include name="erorrMessagesBiosmartValidationTest" />
+					<include name="erorrMessagesActiveDirectoryValidationTest" />
 					<include name="usernamePasswordTest" />
-					<!-- <include name="activeDirectoryValidLoginTest" /> -->
+					<include name="activeDirectoryValidLoginTest" />
 					<include name="loginWithFingerprint" />
 				</methods>
-			</class>
-			<class name="admin.ChangePasswordTest">
+			</class> -->
+			<!-- <class name="admin.ChangePasswordTest">
 				<methods>
 					<include name="Login" />
 					<include name="navigateToChangePasswordPage" />
@@ -58,18 +58,16 @@
 					<include name="reportSummary" />
 					<include name="searchParameters" />
 				</methods>
-			</class>
+			</class> -->
 			<class
-				name="admin.CaptureNewMSISDNRegistration">
+				name="admin.NewRegistration">
 				<methods>
 					<include name="Login" />
 					<include name="navigateToCaptureMenuTest" />
-					<!-- <include name="forgotTransactionIdWthNewMsisdnTest" />
-					<include name="cropWithNewMsisdnTest" /> -->
-					<include name="captureNewMSISDNTest" />
+					<include name="captureNewSimTest" />
 				</methods>
 			</class>
-			<class name="admin.SearchTest">
+			<!-- <class name="admin.SearchTest">
 				<methods>
 					<include name="Login" />
 					<include name="navigateToSearchTest" />
@@ -102,8 +100,8 @@
 				<methods>
 					<include name="Login" />
 					<include name="navigateToCaptureMenuTest" />
-					<!-- <include name="forgotTransactionIdWthNewSimSerialTest" />
-					<include name="cropWithNewSimSerialTest" /> -->
+					<include name="forgotTransactionIdWthNewSimSerialTest" />
+					<include name="cropWithNewSimSerialTest" />
 					<include name="registerNewSimSerialTest" />
 				</methods>
 			</class>
@@ -128,7 +126,7 @@
 					<include name="navigateToCaptureMenuTest" />
 					<include name="msisdnReactivateTest" />
 				</methods>
-			</class>
+			</class> -->
 		</classes>
 	</test>
 </suite>
