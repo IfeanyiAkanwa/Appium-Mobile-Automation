@@ -45,8 +45,8 @@ public class NewRegistration extends TestBase {
 		
 		String invalid_msisdn = (String) envs.get("invalid_msisdn");
 		String valid_msisdn = (String) envs.get("valid_msisdn");
-		String invalid_simSerial = (String) envs.get("invalid_msisdn");
-		String valid_simSerial = (String) envs.get("valid_msisdn");
+		String invalid_simSerial = (String) envs.get("invalid_simSerial");
+		String valid_simSerial = (String) envs.get("valid_simSerial");
 		String lga = (String) envs.get("lga");
 
 		// Select LGA of Registration
@@ -109,14 +109,14 @@ public class NewRegistration extends TestBase {
 		Thread.sleep(500);
 		
 		// Proceed after supplying invalid msisdn and sim serial
-		TestUtils.testTitle("Proceed after supplying: (" + invalid_msisdn + ") and invalid sim serial: (" + invalid_simSerial + "for validation");
+		TestUtils.testTitle("Proceed after supplying invalid msisdn: (" + invalid_msisdn + ") and invalid sim serial: (" + invalid_simSerial + ") for validation");
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/msisdn")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/msisdn")).sendKeys(invalid_msisdn);
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/sim_serial")).clear();
-		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/sim_serial")).sendKeys(invalid_msisdn);
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/sim_serial")).sendKeys(invalid_simSerial);
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/add_msisdn_sim_serial_button")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/alertTitle")));
-		TestUtils.assertSearchText("ID", "android:id/message", "Entered Phone Number is invalid. Entered value should not be less than 6 or more than 11 digits.");
+		TestUtils.assertSearchText("ID", "android:id/message", "Sim Serial format is invalid");
 		getDriver().findElement(By.id("android:id/button1")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/msisdn")));
 		Thread.sleep(500);
@@ -128,12 +128,13 @@ public class NewRegistration extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/sim_serial")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/sim_serial")).sendKeys(valid_simSerial);
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/add_msisdn_sim_serial_button")).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/next_button")));
+		Thread.sleep(1000);
+		//wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/next_button")));
 		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Added Numbers']", "Added Numbers");
 		Asserts.assertAddedNumbers();
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/next_button")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Personal Details']")));
 		Thread.sleep(500);
-		//Form.NigerianCompanyForm(dataEnv);
+		Form.NigerianCompanyForm(dataEnv);
 	}
 }

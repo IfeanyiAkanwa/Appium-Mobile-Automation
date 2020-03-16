@@ -263,7 +263,7 @@ public class TestBase {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/login_username")));
 		
 		// Select Login mode
-		getDriver().findElement(By.id("com.sf.biocapture.activity:id/login_mode_types_spinner")).click();
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/login_mode_types_spinner")).click();
 		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Biosmart']")).click();
 		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/login_username")).clear();

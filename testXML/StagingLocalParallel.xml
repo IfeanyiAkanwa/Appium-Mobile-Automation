@@ -17,7 +17,7 @@
 		<parameter name="deviceName" value="SeamfixTab"/>
 
 		<classes>
-			<!-- <class name="admin.ForgotPassword">
+			<class name="admin.ForgotPassword">
 				<methods>
 					<include name="navigateToForgotPasswordTest" />
 					<include name="erorrMessagesValidationTest" />
@@ -25,8 +25,8 @@
 					<include name="changePasswordWithValidUsernameTest" />
 					<include name="loginWithNewPasswordTest" />
 				</methods>
-			</class> -->
-			<!-- <class name="admin.Login">
+			</class>
+			<class name="admin.Login">
 				<methods>
 					<include name="erorrMessagesBiosmartValidationTest" />
 					<include name="erorrMessagesActiveDirectoryValidationTest" />
@@ -34,8 +34,8 @@
 					<include name="activeDirectoryValidLoginTest" />
 					<include name="loginWithFingerprint" />
 				</methods>
-			</class> -->
-			<!-- <class name="admin.ChangePasswordTest">
+			</class>
+			<class name="admin.ChangePasswordTest">
 				<methods>
 					<include name="Login" />
 					<include name="navigateToChangePasswordPage" />
@@ -58,7 +58,7 @@
 					<include name="reportSummary" />
 					<include name="searchParameters" />
 				</methods>
-			</class> -->
+			</class>
 			<class
 				name="admin.NewRegistration">
 				<methods>
@@ -67,7 +67,7 @@
 					<include name="captureNewSimTest" />
 				</methods>
 			</class>
-			<!-- <class name="admin.SearchTest">
+			<class name="admin.SearchTest">
 				<methods>
 					<include name="Login" />
 					<include name="navigateToSearchTest" />
@@ -96,15 +96,6 @@
 					<include name="captureBiometricUpdate" />
 				</methods>
 			</class>
-			<class name="admin.CaptureNewSimSerialRegistration">
-				<methods>
-					<include name="Login" />
-					<include name="navigateToCaptureMenuTest" />
-					<include name="forgotTransactionIdWthNewSimSerialTest" />
-					<include name="cropWithNewSimSerialTest" />
-					<include name="registerNewSimSerialTest" />
-				</methods>
-			</class>
 			<class name="admin.AdditionalRegistration">
 				<methods>
 					<include name="Login" />
@@ -126,7 +117,7 @@
 					<include name="navigateToCaptureMenuTest" />
 					<include name="msisdnReactivateTest" />
 				</methods>
-			</class> -->
+			</class>
 		</classes>
 	</test>
 </suite>
