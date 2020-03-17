@@ -42,9 +42,11 @@
 	"Notifications": {
 		"searchParam": "SIM"
 	},
-	"NewRegistrationMsisdn": {
-		"valid_msisdn": "1111113606",
-		"invalid_msisdn": "1111167112",
+	"NewRegistration": {
+		"valid_msisdn": "08117023467",
+		"invalid_msisdn": "764785",
+		"invalid_simSerial": "177606",
+		"valid_simSerial": "8923748494949749494F",
 		"lga": "Ibeju-Lekki"
 	},
 	"Reactivation": {
@@ -109,12 +111,6 @@
 		"passport_ID_number": "6861637BC",
 		"lga_of_reg": "Agege"
 	},
-	"NewSimSerialRegistration": {
-		"valid_simSerial": "11111111111111111367",
-		"invalid_simSerial": "11111111111",
-		"area": "AKILO",
-		"lga": "Ibeju-Lekki"
-	},
 	"AdditionalRegistration": {
 		"valid_Msisdn": "09062059126",
 		"invalid_Msisdn": "08083733577",
@@ -136,7 +132,8 @@
 		"city": "Aba",
 		"nationality": "NIGERIA",
 		"state": "BENUE",
-		"LGA": "Ado"
+		"LGA": "Ado",
+		"documentNumber": "89733736AD"
 	},
 	"CompanyDetails": {
 		"house_or_flat_no": "456C",
@@ -148,7 +145,7 @@
 		"company_lga_address": "Aba North",
 		"company_postalcode": "5200",
 		"email": "test@yopmail.com",
-		"alt_phone_number": "08000000000",
+		"alt_phone_number": "08110000000",
 		"postalcode": "746583",
 		"occupation": "Aeronautical Engineer",
 		"states_residence": "ABIA",
@@ -170,22 +167,13 @@
 		"state": "BENUE",
 		"LGA": "Ado",
 		"email": "test@yopmail.com",
-		"alt_phone_number": "08000000000",
+		"alt_phone_number": "08110000000",
 		"postalcode": "746583",
 		"occupation": "Aeronautical Engineer",
 		"area": "AGILA",
 		"passport_ID_number": "6861637BC",
-		"lga_of_reg": "Agege"
-	},
-	"Crop": {
-		"valid_msisdn": "09062059540",
-		"invalid_tranID": "CIUT3W5JQM5",
-		"lga": "Ibeju-Lekki",
-		"email": "gnwabude@seamfix.com",
-		"invalid_email": "m@.com",
-		"used_tranID": "CIU7100000020XW6XYA",
-		"alternate_phoneNum": "07038851805",
-		"valid_simSerial": "11111111111111111362"
+		"lga_of_reg": "Agege",
+		"documentNumber": "89733736AD"
 	},
 	"LandingPage_Url": {
 	"stagingUrl": "https:simregtest.gloworld.com"

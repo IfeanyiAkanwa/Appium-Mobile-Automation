@@ -379,4 +379,29 @@ public class Asserts extends TestBase {
 			}
 		}
 		
+	public static void assertAddedNumbers() throws Exception {
+
+		String assertDetails = "Assert Valid Numbers";
+		Markup ad = MarkupHelper.createLabel(assertDetails, ExtentColor.BLUE);
+		testInfo.get().info(ad);
+		String msisdn = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/phone_no_view")).getText();
+		String simSerial = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/tv_sim_serial")).getText();
+
+		String NA = "";
+
+		String[] toList = { "Msisdn: " + msisdn, "Sim Serial: " + simSerial};
+		for (String field : toList) {
+			String name = "";
+			String val = NA;
+			try {
+				String[] fields = field.split(":");
+				name = fields[0];
+				val = fields[1];
+				Assert.assertNotEquals(val, NA);
+				testInfo.get().log(Status.INFO, "<b>" +name + " : </b>" + val);
+			} catch (Error e) {
+				testInfo.get().error("<b>" + name + " : </b>" + val);
+			}
+		}
+	}
 }

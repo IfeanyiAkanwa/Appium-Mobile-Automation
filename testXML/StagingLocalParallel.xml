@@ -28,10 +28,10 @@
 			</class>
 			<class name="admin.Login">
 				<methods>
-					<!-- <include name="erorrMessagesBiosmartValidationTest" />
-					<include name="erorrMessagesActiveDirectoryValidationTest" /> -->
+					<include name="erorrMessagesBiosmartValidationTest" />
+					<include name="erorrMessagesActiveDirectoryValidationTest" />
 					<include name="usernamePasswordTest" />
-					<!-- <include name="activeDirectoryValidLoginTest" /> -->
+					<include name="activeDirectoryValidLoginTest" />
 					<include name="loginWithFingerprint" />
 				</methods>
 			</class>
@@ -60,13 +60,11 @@
 				</methods>
 			</class>
 			<class
-				name="admin.CaptureNewMSISDNRegistration">
+				name="admin.NewRegistration">
 				<methods>
 					<include name="Login" />
 					<include name="navigateToCaptureMenuTest" />
-					<!-- <include name="forgotTransactionIdWthNewMsisdnTest" />
-					<include name="cropWithNewMsisdnTest" /> -->
-					<include name="captureNewMSISDNTest" />
+					<include name="captureNewSimTest" />
 				</methods>
 			</class>
 			<class name="admin.SearchTest">
@@ -96,15 +94,6 @@
 					<include name="Login" />
 					<include name="navigateToCaptureMenuTest" />
 					<include name="captureBiometricUpdate" />
-				</methods>
-			</class>
-			<class name="admin.CaptureNewSimSerialRegistration">
-				<methods>
-					<include name="Login" />
-					<include name="navigateToCaptureMenuTest" />
-					<!-- <include name="forgotTransactionIdWthNewSimSerialTest" />
-					<include name="cropWithNewSimSerialTest" /> -->
-					<include name="registerNewSimSerialTest" />
 				</methods>
 			</class>
 			<class name="admin.AdditionalRegistration">
