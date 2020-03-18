@@ -112,11 +112,12 @@
 		"lga_of_reg": "Agege"
 	},
 	"AdditionalRegistration": {
-		"valid_Msisdn": "111111111100",
+		"pri_valid_Msisdn": "11111111100",
 		"invalid_Msisdn": "083377",
 		"lga": "Ibeju-Lekki",
 		"invalid_simSerial": "03733577",
-		"valid_simSerial": "1111111111111111100F"
+		"pri_valid_simSerial": "1111111111111111100F",
+		"new_valid_simSerial": "083377"
 	},
 	"SIMSwap": {
 		"valid_Msisdn": "08142050025",

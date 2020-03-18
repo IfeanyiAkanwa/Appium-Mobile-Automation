@@ -231,23 +231,24 @@ public class Asserts extends TestBase {
 
 	public static void AssertReportSummary() throws Exception {
 
-		String totalRegistrations = getDriver().findElement(By.id("com.sf.biocapture.activity:id/reg_subscribers"))
+		TestUtils.testTitle("Report Summary of Registrations");
+		String totalRegistrations = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/reg_subscribers"))
 				.getText();
-		String totalSyncSent = getDriver().findElement(By.id("com.sf.biocapture.activity:id/total_sync_sent"))
+		String totalSyncSent = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/total_sync_sent"))
 				.getText();
-		String totalSyncConfirmed = getDriver().findElement(By.id("com.sf.biocapture.activity:id/sync_confirmed"))
+		String totalSyncConfirmed = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/sync_confirmed"))
 				.getText();
-		String totalSyncPending = getDriver().findElement(By.id("com.sf.biocapture.activity:id/total_pending"))
+		String totalSyncPending = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/total_pending"))
 				.getText();
-		String totalRejected = getDriver().findElement(By.id("com.sf.biocapture.activity:id/total_rejected")).getText();
-		String totalActivated = getDriver().findElement(By.id("com.sf.biocapture.activity:id/total_activated"))
+		String totalRejected = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/total_rejected")).getText();
+		String totalActivated = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/total_activated"))
 				.getText();
-		String totalReactivated = getDriver().findElement(By.id("com.sf.biocapture.activity:id/total_reactivated"))
+		String totalReactivated = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/total_reactivated"))
 				.getText();
-		String totalSimSwap = getDriver().findElement(By.id("com.sf.biocapture.activity:id/total_swaps")).getText();
-		String registeredSIMs = getDriver().findElement(By.id("com.sf.biocapture.activity:id/reg_sims")).getText();
-		String confirmedSIMs = getDriver().findElement(By.id("com.sf.biocapture.activity:id/sims_confirmed")).getText();
-		String duplicateSIMs = getDriver().findElement(By.id("com.sf.biocapture.activity:id/duplicate_sims")).getText();
+		String totalSimSwap = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/total_swaps")).getText();
+		String registeredSIMs = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/reg_sims")).getText();
+		String confirmedSIMs = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/sims_confirmed")).getText();
+		String duplicateSIMs = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/duplicate_sims")).getText();
 
 		String NA = "";
 
@@ -265,9 +266,9 @@ public class Asserts extends TestBase {
 				name = fields[0];
 				val = fields[1];
 				Assert.assertNotEquals(val, NA);
-				testInfo.get().log(Status.INFO, name + " : " + val);
+				testInfo.get().log(Status.INFO, "<b>" + name + " : </b>" + val);
 			} catch (Error e) {
-				testInfo.get().error(name + " : " + val);
+				testInfo.get().error("<b>" + name + " : </b>" + val);
 			}
 		}
 	}
@@ -388,6 +389,32 @@ public class Asserts extends TestBase {
 		String NA = "";
 
 		String[] toList = { "Msisdn: " + msisdn, "Sim Serial: " + simSerial};
+		for (String field : toList) {
+			String name = "";
+			String val = NA;
+			try {
+				String[] fields = field.split(":");
+				name = fields[0];
+				val = fields[1];
+				Assert.assertNotEquals(val, NA);
+				testInfo.get().log(Status.INFO, "<b>" +name + " : </b>" + val);
+			} catch (Error e) {
+				testInfo.get().error("<b>" + name + " : </b>" + val);
+			}
+		}
+	}
+	
+	public static void assertSubscriberFullNameAddReg() throws Exception {
+
+		String assertDetails = "Assert Returned Subscriber Full name after Number Validation";
+		Markup ad = MarkupHelper.createLabel(assertDetails, ExtentColor.BLUE);
+		testInfo.get().info(ad);
+		String firstName = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/tv_first_name")).getText();
+		String Surname = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/tv_surname")).getText();
+
+		String NA = "";
+
+		String[] toList = { "First Name: " + firstName, "Surname: " + Surname};
 		for (String field : toList) {
 			String name = "";
 			String val = NA;

@@ -309,10 +309,9 @@ public class TestBase {
 	@Test
 	public static void navigateToCaptureMenuTest() throws InterruptedException {
 		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+		
 		// Navigate to Registration Type
-		String regType = "Navigate to Registration Type";
-		Markup r = MarkupHelper.createLabel(regType, ExtentColor.BLUE);
-		testInfo.get().info(r);
+		TestUtils.testTitle("Navigate to Registration Type");
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/button_start_capture")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/reg_type_placeholder")));

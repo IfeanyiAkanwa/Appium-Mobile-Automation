@@ -235,5 +235,33 @@ public class TestUtils extends TestBase {
         Markup w = MarkupHelper.createLabel(word, ExtentColor.BLUE);
         testInfo.get().info(w);
 	}
+    
+    /**
+	 * @return number
+	 * @description to generate a 11 digit number.
+	 */
+	public static String generatePhoneNumber() {
+
+		long y = (long) (Math.random() * 100000 + 0113330000L);
+		String Surfix = "081";
+		String num = Long.toString(y);
+		String number = Surfix + num;
+		return number;
+
+	}
+	
+	/**
+	 * @return sim serial number
+	 * @description to generate a 19 digit number.
+	 */
+	public static String generateSimSrial() {
+
+		long y = (long) (Math.random() * 1000000000 + 011333000000000000L);
+		String Surfix = "8923";
+		String num = Long.toString(y);
+		String simSerialNumber = Surfix + num + "F";
+		return simSerialNumber;
+
+	}
 
 }
