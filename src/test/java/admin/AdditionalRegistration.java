@@ -9,34 +9,16 @@ import org.json.simple.parser.JSONParser;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.Markup;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
-
 import utils.TestUtils;
 
 public class AdditionalRegistration extends TestBase {
 
-	@Test
-	public static void navigateToCaptureMenuTest() throws InterruptedException {
-		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
-		
-		// Navigate to Registration Type
-		String regType = "Navigate to Registration Type";
-		Markup r = MarkupHelper.createLabel(regType, ExtentColor.BLUE);
-		testInfo.get().info(r);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
-		getDriver().findElement(By.id("com.sf.biocapture.activity:id/button_start_capture")).click();
-		wait.until(ExpectedConditions
-				.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/reg_type_placeholder")));
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/reg_type_placeholder", "Registration Type");
-	}
-	
 	@Parameters({ "dataEnv"})
     @Test
     public void additionalRegistrationTest(String dataEnv) throws Exception {
@@ -49,13 +31,15 @@ public class AdditionalRegistration extends TestBase {
 		
 		String invalid_Msisdn= (String) envs.get("invalid_Msisdn");
 		String valid_Msisdn = (String) envs.get("valid_Msisdn");
+		String invalid_simSerial= (String) envs.get("invalid_simSerial");
+		String valid_simSerial = (String) envs.get("valid_simSerial");
 		String lga = (String) envs.get("lga");
 
 		// Select LGA of Registration
 		String lgaa = "Select LGA of Registration: " + lga;
 		Markup m = MarkupHelper.createLabel(lgaa, ExtentColor.BLUE);
 		testInfo.get().info(m);
-		getDriver().findElement(By.id("com.sf.biocapture.activity:id/lga_of_reg")).click();
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/lga_of_reg")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/alertTitle")));
 		TestUtils.assertSearchText("ID", "android:id/alertTitle", "LGA of Registration*");
 		getDriver().findElement(By.xpath("//android.widget.TextView[@text='" + lga + "']")).click();
@@ -65,75 +49,78 @@ public class AdditionalRegistration extends TestBase {
 		String newReg = "Select Additional Registration";
 		Markup d = MarkupHelper.createLabel(newReg, ExtentColor.BLUE);
 		testInfo.get().info(d);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/typeofreg")));
-		getDriver().findElement(By.id("com.sf.biocapture.activity:id/typeofreg")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/typeofreg")));
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/typeofreg")).click();
 		Thread.sleep(500);
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/alertTitle", "Select Registration Type");
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity." + Id + ":id/alertTitle", "Select Registration Type");
 		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Additional Registration']")).click();
 		Thread.sleep(500);
-		getDriver().findElement(By.id("com.sf.biocapture.activity:id/next_button")).click();
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/next_button")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Additional Registration']")));
 		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Additional Registration']", "Additional Registration");
 		Thread.sleep(500);
 		
-		// Proceed without supplying msisdn
-		String emptyMsisdn = "Proceed without supplying msisdn";
-		Markup n = MarkupHelper.createLabel(emptyMsisdn, ExtentColor.BLUE);
-		testInfo.get().info(n);
-		getDriver().findElement(By.id("com.sf.biocapture.activity:id/primary_msisdn_field")).clear();
-		getDriver().findElement(By.id("com.sf.biocapture.activity:id/primary_msisdn_field")).sendKeys();
-		getDriver().findElement(By.id("com.sf.biocapture.activity:id/submit_button")).click();
+		// Proceed after supplying empty details
+		TestUtils.testTitle("Proceed after supplying empty details");
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/primary_msisdn_field")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/primary_msisdn_field")).sendKeys();
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/primary_serial_field")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/primary_serial_field")).sendKeys();
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/submit_button")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
 		TestUtils.assertSearchText("ID", "android:id/message", "Required Input Field: Phone Number");
 		getDriver().findElement(By.id("android:id/button1")).click();
 		Thread.sleep(1000);
 		
-		// Enter invalid Msisdn
-		String invalidMsisdn = "Enter invalid MSISDN: "  + invalid_Msisdn + " for registration";
-		Markup i = MarkupHelper.createLabel(invalidMsisdn, ExtentColor.BLUE);
-		testInfo.get().info(i);
-		getDriver().findElement(By.id("com.sf.biocapture.activity:id/primary_msisdn_field")).clear();
-		getDriver().findElement(By.id("com.sf.biocapture.activity:id/primary_msisdn_field")).sendKeys(invalid_Msisdn);
-		getDriver().findElement(By.id("com.sf.biocapture.activity:id/submit_button")).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/alertTitle")));
-		TestUtils.assertSearchText("ID", "android:id/message", "No Biometric Data found for this phone Number, Please Select another type of registration");
-		getDriver().findElement(By.id("android:id/button2")).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/primary_msisdn_field")));
+		// Proceed after supplying only Msisdn
+		TestUtils.testTitle("Proceed after supplying only Msisdn: " + valid_Msisdn);
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/primary_msisdn_field")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/primary_msisdn_field")).sendKeys(valid_Msisdn);
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/primary_serial_field")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/primary_serial_field")).sendKeys();
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/submit_button")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/alertTitle")));
+		TestUtils.assertSearchText("ID", "android:id/message", "Sim Serial format is invalid");
+		getDriver().findElement(By.id("android:id/button1")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/msisdn")));
 		Thread.sleep(500);
-		
-		// Enter valid sim Msisdn
-		String validMsisdn = "Enter valid Msisdn: " + valid_Msisdn + " for registration";
-		Markup v = MarkupHelper.createLabel(validMsisdn, ExtentColor.BLUE);
-		testInfo.get().info(v);
-		getDriver().findElement(By.id("com.sf.biocapture.activity:id/primary_msisdn_field")).clear();
-		getDriver().findElement(By.id("com.sf.biocapture.activity:id/primary_msisdn_field")).sendKeys(valid_Msisdn);
-		getDriver().findElement(By.id("com.sf.biocapture.activity:id/submit_button")).click();
-		Thread.sleep(1000);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/verify_finger_print_button")));
-		String assertDetails = "Assert user's full name";
-		Markup ad = MarkupHelper.createLabel(assertDetails, ExtentColor.BLUE);
-		testInfo.get().info(ad);
-		String NA = "N/A";
-		String surName = getDriver().findElement(By.id("com.sf.biocapture.activity:id/tv_surname")).getText();
-		String firstName = getDriver().findElement(By.id("com.sf.biocapture.activity:id/tv_first_name")).getText();
-		String[] toList = {"Surname: " + surName, "First name: " + firstName};
-		for (String field : toList) {
-			String name = "";
-			String val = NA;
-			if (field.endsWith(":")) {
-				field = field + val;	
-			}
-			try {
-				String[] fields = field.split(":");
-				name = fields[0];
-				val = fields[1];
-				Assert.assertNotEquals(val, NA);
-				testInfo.get().log(Status.INFO,"<b>" + name + " </b> : " + val);
-			} catch (Error e) {
-				testInfo.get().error("<b>" + name + " </b> : " + val);
+				
+		// Proceed after supplying only Sim Serial
+		TestUtils.testTitle("Proceed after supplying only Sim Serial: " + valid_simSerial);
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/primary_msisdn_field")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/primary_msisdn_field")).sendKeys();
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/primary_serial_field")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/primary_serial_field")).sendKeys(valid_simSerial);
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/submit_button")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/alertTitle")));
+		TestUtils.assertSearchText("ID", "android:id/message", "Required Input Field: Phone Number");
+		getDriver().findElement(By.id("android:id/button1")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/msisdn")));
+		Thread.sleep(500);
+				
+		// Proceed after supplying invalid msisdn and sim serial
+		TestUtils.testTitle("Proceed after supplying invalid msisdn: (" + invalid_Msisdn + ") and invalid sim serial: (" + invalid_simSerial + ") for validation");
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/primary_msisdn_field")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/primary_msisdn_field")).sendKeys(invalid_Msisdn);
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/primary_serial_field")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/primary_serial_field")).sendKeys(invalid_simSerial);
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/submit_button")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/alertTitle")));
+		TestUtils.assertSearchText("ID", "android:id/message", "Sim Serial format is invalid");
+		getDriver().findElement(By.id("android:id/button1")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/msisdn")));
+		Thread.sleep(500);
 
-			}
-		}
+		// Proceed after supplying valid msisdn and Sim serial
+		TestUtils.testTitle("Proceed after supplying valid msisdn: (" + valid_Msisdn + ") and valid Sim serial: (" + valid_simSerial + ")");
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/primary_msisdn_field")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/primary_msisdn_field")).sendKeys(valid_Msisdn);
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/primary_serial_field")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/primary_serial_field")).sendKeys(valid_simSerial);
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/submit_button")).click();
+				
+
+		
 		
 		getDriver().findElement(By.id("com.sf.biocapture.activity:id/spinner_finger_type")).click();
 		Thread.sleep(500);

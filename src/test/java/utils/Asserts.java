@@ -307,9 +307,7 @@ public class Asserts extends TestBase {
 	public static void assertBasicInfoAddReg230() throws Exception {
 		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
 		
-		String assertDetails = "Asserting returned Basic Info of Additional Registration";
-		Markup ad = MarkupHelper.createLabel(assertDetails, ExtentColor.BLUE);
-		testInfo.get().info(ad);
+		TestUtils.testTitle("Assert returned Basic Info of Additional Registration");
 		String surname = getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.ListView/android.widget.LinearLayout[1]/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.TextView[2]")).getText();
 		String firstName = getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.ListView/android.widget.LinearLayout[2]/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.TextView[2]")).getText();
 		String mothersMaidenName = getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.ListView/android.widget.LinearLayout[3]/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.TextView[2]")).getText();

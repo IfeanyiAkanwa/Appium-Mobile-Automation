@@ -106,7 +106,7 @@ public class TestBase {
 	@BeforeMethod(description = "fetch test cases name")
 	public void register(Method method) {
 
-		getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		ExtentTest child = parentTest.get().createNode(method.getName());
 		testInfo.set(child);
 		testInfo.get().assignCategory("Sanity");
@@ -304,5 +304,18 @@ public class TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/submit")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
 		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Home']", "Home");
+	}
+	
+	@Test
+	public static void navigateToCaptureMenuTest() throws InterruptedException {
+		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+		// Navigate to Registration Type
+		String regType = "Navigate to Registration Type";
+		Markup r = MarkupHelper.createLabel(regType, ExtentColor.BLUE);
+		testInfo.get().info(r);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/button_start_capture")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/reg_type_placeholder")));
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity." + Id + ":id/reg_type_placeholder","Registration Type");
 	}
 }

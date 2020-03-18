@@ -8,10 +8,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import com.aventstack.extentreports.markuputils.ExtentColor;
-import com.aventstack.extentreports.markuputils.Markup;
-import com.aventstack.extentreports.markuputils.MarkupHelper;
-
 import demographics.Form;
 import utils.Asserts;
 import utils.TestBase;
@@ -20,19 +16,6 @@ import utils.TestUtils;
 import java.io.FileReader;
 
 public class NewRegistration extends TestBase {
-
-	@Test
-	public static void navigateToCaptureMenuTest() throws InterruptedException {
-		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
-		// Navigate to Registration Type
-		String regType = "Navigate to Registration Type";
-		Markup r = MarkupHelper.createLabel(regType, ExtentColor.BLUE);
-		testInfo.get().info(r);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
-		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/button_start_capture")).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/reg_type_placeholder")));
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity." + Id + ":id/reg_type_placeholder","Registration Type");
-	}
 
 	@Parameters({ "dataEnv"})
 	@Test
