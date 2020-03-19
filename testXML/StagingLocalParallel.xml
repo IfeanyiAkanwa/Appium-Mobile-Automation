@@ -28,10 +28,10 @@
 			</class>
 			<class name="admin.Login">
 				<methods>
-					<include name="erorrMessagesBiosmartValidationTest" />
-					<include name="erorrMessagesActiveDirectoryValidationTest" />
+					<!-- <include name="erorrMessagesBiosmartValidationTest" />
+					<include name="erorrMessagesActiveDirectoryValidationTest" /> -->
 					<include name="usernamePasswordTest" />
-					<include name="activeDirectoryValidLoginTest" />
+					<!-- <include name="activeDirectoryValidLoginTest" /> -->
 					<include name="loginWithFingerprint" />
 				</methods>
 			</class>
