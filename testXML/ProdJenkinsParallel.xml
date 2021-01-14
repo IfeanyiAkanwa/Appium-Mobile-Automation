@@ -49,13 +49,16 @@
         <parameter name="systemPort" value="8215"/>
         <parameter name="deviceNo" value="2"/>
         <classes>
-            <class name="admin.CaptureNewMSISDNRegistration">
-                <methods>
-                    <include name="Login"/>
-                    <include name="NavigateToCaptureMenuTest"/>
-                    <include name="CaptureNewMSISDNTest"/>
-                </methods>
-            </class>
+            <class
+				name="admin.NewRegistration">
+				<methods>
+					<include name="Login" />
+					<include name="navigateToCaptureMenuTest" />
+					<include name="msisdnCategoryAndNDCValidationTest" />
+					<include name="msisdnSimSerialValidationTest" />
+					<include name="captureNewSimTest" />
+				</methods>
+			</class>
             <class name="admin.ReactivationTest">
                 <methods>
                     <include name="Login"/>

@@ -131,7 +131,7 @@ public class TestBase {
 	@Parameters("toMails")
 	public void cleanup(String toMails) {
 		toAddress = toMails;
-//		SendMail.ComposeGmail("BioSmart Glo Report <seamfix.test.report@gmail.com>", toAddress);
+		SendMail.ComposeGmail("BioSmart Android Glo Report <seamfix.test.report@gmail.com>", toAddress);
 
 		getDriver().quit();
 	}
@@ -216,7 +216,7 @@ public class TestBase {
 				capabilities.setCapability(MobileCapabilityType.UDID, udid[deviceNo].trim());
 				capabilities.setCapability("deviceName", "SeamfixTab");
 				capabilities.setCapability("platformName", "Android");
-				capabilities.setCapability("appPackage", "com.sf.biocapture.activity");
+				capabilities.setCapability("appPackage", "com.sf.biocapture.activity." +Id);
 				capabilities.setCapability("appActivity", "com.sf.biocapture.activity.SplashScreenActivity");
 				capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.ANDROID_UIAUTOMATOR2);
 
