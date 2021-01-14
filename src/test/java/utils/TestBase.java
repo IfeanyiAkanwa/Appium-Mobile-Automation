@@ -131,7 +131,7 @@ public class TestBase {
 	@Parameters("toMails")
 	public void cleanup(String toMails) {
 		toAddress = toMails;
-		SendMail.ComposeGmail("BioSmart Glo Report <seamfix.test.report@gmail.com>", toAddress);
+//		SendMail.ComposeGmail("BioSmart Glo Report <seamfix.test.report@gmail.com>", toAddress);
 
 		getDriver().quit();
 	}
