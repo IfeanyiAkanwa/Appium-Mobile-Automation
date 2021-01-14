@@ -43,11 +43,17 @@
 		"searchParam": "SIM"
 	},
 	"NewRegistration": {
-		"valid_msisdn": "08117023467",
+		"valid_msisdn": "08159437736",
 		"invalid_msisdn": "764785",
 		"invalid_simSerial": "177606",
-		"valid_simSerial": "8923748494949749494F",
-		"lga": "Ibeju-Lekki"
+		"valid_simSerial": "8923450608191696491F",
+		"lga": "Ibeju-Lekki",
+		"valid_fixed_msisdn": "080500066",
+		"valid_fixed_serial": "8923456000000000066F",
+		"invalidPrefixMsisdn" : "07083799086",
+		"invalidPrefixSimSerial" : "8923420037187785273F",
+		"valid_msisdn2" : "08159434191",
+		"valid_simSerial2" : "8923450608191696434F"
 	},
 	"Reactivation": {
 		"valid_msisdn": "09062059404",
