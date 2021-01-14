@@ -14,6 +14,13 @@
         <parameter name="systemPort" value="8228"/>
         <parameter name="deviceNo" value="1"/>
         <classes>
+            <class name="admin.Login">
+                <methods>
+                    <include name="usernamePasswordLogin" />
+                    <include name="fingerprintLogin" />
+                    <include name="deactivateAccount"/>
+                </methods>
+            </class>
             <class name="admin.CaptureNewSimSerialRegistration">
                 <methods>
                     <include name="Login"/>

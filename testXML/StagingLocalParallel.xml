@@ -17,6 +17,13 @@
 		<parameter name="deviceName" value="SeamfixTab"/>
 
 		<classes>
+            <class name="admin.Login">
+                <methods>
+                    <include name="usernamePasswordLogin" />
+                    <include name="fingerprintLogin" />
+                    <include name="deactivateAccount"/>
+                </methods>
+            </class>
 			<class name="admin.ForgotPassword">
 				<methods>
 					<include name="navigateToForgotPasswordTest" />
@@ -24,15 +31,6 @@
 					<include name="changePasswordWithInvalidUsernameTest" />
 					<include name="changePasswordWithValidUsernameTest" />
 					<include name="loginWithNewPasswordTest" />
-				</methods>
-			</class>
-			<class name="admin.Login">
-				<methods>
-					<!-- <include name="erorrMessagesBiosmartValidationTest" />
-					<include name="erorrMessagesActiveDirectoryValidationTest" /> -->
-					<include name="usernamePasswordTest" />
-					<!-- <include name="activeDirectoryValidLoginTest" /> -->
-					<include name="loginWithFingerprint" />
 				</methods>
 			</class>
 			<class name="admin.ChangePasswordTest">

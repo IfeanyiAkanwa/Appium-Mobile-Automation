@@ -27,11 +27,9 @@
 			</class>
 			<class name="admin.Login">
 				<methods>
-					<!-- <include name="erorrMessagesBiosmartValidationTest" />
-					<include name="erorrMessagesActiveDirectoryValidationTest" /> -->
-					<include name="usernamePasswordTest" />
-					<!-- <include name="activeDirectoryValidLoginTest" /> -->
-					<include name="loginWithFingerprint" />
+					<include name="usernamePasswordLogin" />
+					<include name="fingerprintLogin" />
+					<include name="deactivateAccount"/>
 				</methods>
 			</class>
 			<class name="admin.ChangePasswordTest">
