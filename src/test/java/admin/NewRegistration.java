@@ -163,6 +163,32 @@ public class NewRegistration extends TestBase {
 		Thread.sleep(500);
 		
 		// Select Msisdn Category
+		TestUtils.testTitle("Select Fixed Msisdn Category");
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/msisdnCategorySpinner")).click();
+		Thread.sleep(500);
+		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Fixed']")).click();
+		Thread.sleep(500);
+		TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='Fixed']", "Fixed");
+		Thread.sleep(500);
+
+		// Enter Msisdn with prefix not allowed by NDC
+		TestUtils.testTitle("Proceed after supplying msisdn with prefix not allowed by NDC: " + invalidPrefixMsisdn	+ " and SIM Serial: " + invalidPrefixSimSerial);
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/msisdnField")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/msisdnField")).sendKeys(invalidPrefixMsisdn);
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/simSerialField")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/simSerialField")).sendKeys(invalidPrefixSimSerial);
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/addMsisdnSimSerialButton")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/alertTitle")));
+		TestUtils.assertSearchText("ID", "android:id/message", "The MSISDN has an unrecognized National Destination Code. "
+				+ "Please ensure the MSISDN starts with any of the following NDCs: "
+				+ "0701,0708,0802,0808,0812,0901,0902,0904,0907,0809,0817,0818,0908,"
+				+ "0909,0705,0805,0807,0811,0815,0905,0915,0703,0706,0803,0806,0810,"
+				+ "0813,0814,0816,0903,0906 and must be 9 digits");
+		getDriver().findElement(By.id("android:id/button1")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/msisdnField")));
+		Thread.sleep(500);
+		
+		// Select Msisdn Category
 		TestUtils.testTitle("Select Mobile Msisdn Category");
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/msisdnCategorySpinner")).click();
 		Thread.sleep(500);
@@ -171,8 +197,8 @@ public class NewRegistration extends TestBase {
 		TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='Mobile']", "Mobile");
 		Thread.sleep(500);
 
-		// Enter Msisdn with prefix not allowed by NDC
-		TestUtils.testTitle("Proceed after supplying msisdn with prefix not allowed by NDC: " + invalidPrefixMsisdn + " and SIM Serial: " + invalidPrefixSimSerial);
+		// Enter Msisdn that does not exist on MPS table and Siebel
+		TestUtils.testTitle("Proceed after supplying msisdn that does not exist on MPS table and Siebel: " + invalidPrefixMsisdn + " and SIM Serial: " + invalidPrefixSimSerial);
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/msisdnField")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/msisdnField")).sendKeys(invalidPrefixMsisdn);
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/simSerialField")).clear();
