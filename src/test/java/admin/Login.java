@@ -283,7 +283,7 @@ public class Login extends TestBase {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/otp_login")));
 		Thread.sleep(500);
 	}
-	
+
 	@Parameters ({"dataEnv"})
 	@Test (groups = { "Regression" })
 	public void erorrMessagesBiosmartValidationTest(String dataEnv) throws InterruptedException, FileNotFoundException, IOException, ParseException {
@@ -411,4 +411,43 @@ public class Login extends TestBase {
 		getDriver().pressKeyCode(AndroidKeyCode.BACK);
 	}
 
+
+    @Parameters ({"dataEnv"})
+    @Test (groups = { "Regression" })
+    public void deactivateAccount(String dataEnv) throws InterruptedException, FileNotFoundException, IOException, ParseException {
+        WebDriverWait wait = new WebDriverWait(getDriver(), 60);
+        Login(dataEnv);
+
+        //Confirm there is Account Menu on Android
+        TestUtils.testTitle("Confirm Account Menu");
+        getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/design_menu_item_text")));
+        TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='Account']", "Account");
+        getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Account']")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/alertTitle")));
+
+        //Confirm there are Change Password and Deactivate Account on the Menu
+        TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Change Password']", "Change Password");
+        TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Deactivate Account']", "Deactivate Account");
+
+        //Click on Deactivate Account
+        getDriver().findElement(By.xpath("//android.widget.TextView[@text='Deactivate Account']")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/alertTitle")));
+        TestUtils.assertSearchText("ID", "android:id/message", "Do you want to deactivate your account? Activation can only be done by an Admin.");
+
+        //Cancel Deactivation
+        getDriver().findElement(By.id("android:id/button2")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")));
+
+        //Logout
+        getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/design_menu_item_text")));
+        TestUtils.scrollDown();
+        getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Logout']")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
+        getDriver().findElement(By.id("android:id/button3")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/otp_login")));
+        Thread.sleep(500);
+
+    }
 }

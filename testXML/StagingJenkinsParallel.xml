@@ -18,6 +18,7 @@
                 <methods>
                     <include name="usernamePasswordLogin" />
                     <include name="fingerprintLogin" />
+                    <include name="deactivateAccount"/>
                 </methods>
             </class>
             <class name="admin.CaptureNewSimSerialRegistration">
