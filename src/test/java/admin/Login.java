@@ -195,7 +195,7 @@ public class Login extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/email")).sendKeys(not_onboarded_username);
         getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/verify")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/alertTitle")));
-        TestUtils.assertSearchText("ID", "android:id/message", "No agent was found with entered email address");
+        TestUtils.assertSearchText("ID", "android:id/message", "Agent has not been onboarded yet");
         getDriver().findElement(By.id("android:id/button1")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/email")));
 
