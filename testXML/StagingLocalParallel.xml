@@ -22,7 +22,12 @@
                     <include name="usernamePasswordLogin" />
                     <include name="fingerprintLogin" />
                     <include name="deactivateAccount"/>
-                </methods>
+                    <include name="forgotPassword" />
+					<include name="validUserIdLogin" />
+					<include name="erorrMessagesBiosmartValidationTest" />
+					<include name="erorrMessagesActiveDirectoryValidationTest" />
+					<include name="activeDirectoryValidLoginTest"/>
+				</methods>
             </class>
 			<class name="admin.ForgotPassword">
 				<methods>

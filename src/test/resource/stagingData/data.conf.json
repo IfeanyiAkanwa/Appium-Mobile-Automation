@@ -11,11 +11,13 @@
         "blacklisted_password": "Bankole11!!",
 		"deactivated_username": "akin.ugwu@mtnagent.com",
 		"invalid_email_format" : "@seamfix.com",
-		"AD_UserName": "seamkit2",
-		"valid_AD_pw": "W3lcomeB10sm@t2019#",
+		"AD_UserName": "seamfixadconnect",
+		"valid_AD_pw": "S3@mf1x747",
 		"BS_email": "virgyonline1000@gmail.com",
 		"AD_UserName1": "camaike",
-		"BS_email1": "camaike@seamfix.com"
+		"BS_email1": "camaike@seamfix.com",
+        "valid_userid": "SS08057577391_00001",
+        "valid_useridpw": "Bankole2!!"
 	},
 	"ForgotPassword": {
 		"invalid_username": "ada@seamnix.com",
