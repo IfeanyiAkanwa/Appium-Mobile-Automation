@@ -57,10 +57,10 @@
 		"valid_simSerial2" : "8923450608191696434F"
 	},
 	"Reactivation": {
-		"valid_msisdn": "09062059404",
+		"valid_msisdn": "08050000034",
 		"invalid_msisdn": "08083733777",
 		"lga": "Ibeju-Lekki",
-		"valid_username": "e.okafor@seamfix.com",
+		"valid_username": "eze.sfxtest@yopmail.com",
 		"valid_password": "Bankole1!!",
 		"invalid_OTP": "00000"
 	},

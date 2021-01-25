@@ -4,10 +4,10 @@ import java.sql.*;
 
 public class ConnectDB {
 
-    private static final String DB_DRIVER = "oracle.jdbc.driver.OracleDriver";
-    private static final String DB_CONNECTION = "jdbc:oracle:thin:@10.1.242.245:1521:bsm_n2";
+    private static final String DB_DRIVER = "org.postgresql.Driver";
+    private static final String DB_CONNECTION = "jdbc:postgresql://13.56.69.207:5445/biocapture";
     private static final String DB_USER = "biocapture";
-    private static final String DB_PASSWORD = "s3amf1xK0l0";
+    private static final String DB_PASSWORD = "3I0K@7t#Ur5Q=";
     private static String otp;
     private static String transactionID;
     

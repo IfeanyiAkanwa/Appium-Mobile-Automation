@@ -17,7 +17,7 @@
 		<parameter name="deviceName" value="SeamfixTab"/>
 
 		<classes>
-            <class name="admin.Login">
+            <!-- <class name="admin.Login">
                 <methods>
                     <include name="usernamePasswordLogin" />
                     <include name="fingerprintLogin" />
@@ -109,13 +109,13 @@
 					<include name="navigateToCaptureMenuTest" />
 					<include name="simSwapTest" />
 				</methods>
-			</class>
+			</class> -->
 			<class name="admin.ReactivationTest">
 				<methods>
-					<include name="noneReactivationPrivilegeLoginTest" />
+					<!-- <include name="noneReactivationPrivilegeTest" /> -->
 					<include name="Login" />
 					<include name="navigateToCaptureMenuTest" />
-					<include name="msisdnReactivateTest" />
+					<include name="msisdnReactivationTest" />
 				</methods>
 			</class>
 		</classes>
