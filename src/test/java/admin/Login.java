@@ -18,6 +18,7 @@ import utils.TestBase;
 import utils.TestUtils;
 
 public class Login extends TestBase {
+
     @Parameters({ "dataEnv"})
 	@Test (groups = {"Regression"})
 	public void usernamePasswordLogin(String dataEnv) throws InterruptedException, IOException, ParseException {
@@ -140,6 +141,45 @@ public class Login extends TestBase {
 		Thread.sleep(500);
 	}
 
+	@Parameters({ "dataEnv"})
+	@Test (groups = {"Regression"})
+	public void validUserIdLogin(String dataEnv) throws InterruptedException, IOException, ParseException {
+		WebDriverWait wait = new WebDriverWait(getDriver(), 50);
+		JSONParser parser = new JSONParser();
+		JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
+		JSONObject envs = (JSONObject) config.get("Login");
+
+		String valid_userid = (String) envs.get("valid_userid");
+		String valid_useridpw = (String) envs.get("valid_useridpw");
+
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/otp_login")));
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/otp_login")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/login_username")));
+
+		// Login with valid user Id and valid password
+		TestUtils.testTitle("Login with a valid User Id " + "(" + valid_userid + ")" + " and valid password " + "(" + valid_useridpw + ")");
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/login_username")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/login_username")).sendKeys(valid_userid);
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/login_password")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/login_password")).sendKeys(valid_useridpw);
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/submit")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
+		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Home']", "Home");
+
+		// Log out
+		TestUtils.testTitle("Logout " + "(" + valid_userid + ")");
+		getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/design_menu_item_text")));
+		TestUtils.scrollDown();
+		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Logout']")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
+		TestUtils.assertSearchText("ID", "android:id/message", "   Log out?");
+		getDriver().findElement(By.id("android:id/button3")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/otp_login")));
+		Thread.sleep(500);
+
+	}
+
     @Parameters({ "dataEnv"})
     @Test(groups = { "Regression", ""})
     public void fingerprintLogin(String dataEnv) throws Exception {
@@ -240,6 +280,115 @@ public class Login extends TestBase {
         getDriver().pressKeyCode(AndroidKeyCode.BACK);
     }
 
+    @Parameters ({"dataEnv"})
+    @Test (groups = { "Regression" })
+    public void forgotPassword(String dataEnv) throws InterruptedException, IOException, ParseException {
+        WebDriverWait wait = new WebDriverWait(getDriver(), 60);
+
+        JSONParser parser = new JSONParser();
+        JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
+        JSONObject envs = (JSONObject) config.get("Login");
+        String valid_username = (String) envs.get("valid_username");
+        String blacklisted_username = (String) envs.get("blacklisted_username");
+        String deactivated_username = (String) envs.get("deactivated_username");
+        String invalid_email_format = (String) envs.get("invalid_email_format");
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/otp_login")));
+        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/otp_login")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/login_username")));
+
+        //Reset password with empty email address
+        TestUtils.testTitle("Reset password with empty email address");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/password_reset")));
+        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/password_reset")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/login_username")));
+        if(getDriver().findElement(By.id("android:id/content")).isDisplayed()){
+            // Go back
+            getDriver().pressKeyCode(AndroidKeyCode.BACK);
+        }
+        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/send")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/alertTitle")));
+        TestUtils.assertSearchText("ID", "android:id/message", "Please enter a valid email address");
+        getDriver().findElement(By.id("android:id/button1")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/login_username")));
+
+        //Reset password with blacklisted email address
+        TestUtils.testTitle("Reset password with blacklisted email address (" + blacklisted_username + ")");
+        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/login_username")).clear();
+		if(getDriver().findElement(By.id("android:id/content")).isDisplayed()){
+			// Go back
+			getDriver().pressKeyCode(AndroidKeyCode.BACK);
+		}
+        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/login_username")).sendKeys(blacklisted_username);
+        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/send")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/alertTitle")));
+        TestUtils.assertSearchText("ID", "android:id/message", "Agent account is deactived, Please contact support");
+        getDriver().findElement(By.id("android:id/button1")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/login_username")));
+
+        //Reset password with deactivated email address
+        TestUtils.testTitle("Reset password with deactivated email address (" + deactivated_username + ")");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/password_reset")));
+        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/password_reset")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/login_username")));
+		if(getDriver().findElement(By.id("android:id/content")).isDisplayed()){
+			// Go back
+			getDriver().pressKeyCode(AndroidKeyCode.BACK);
+		}
+        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/login_username")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/login_username")).sendKeys(deactivated_username);
+        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/send")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/alertTitle")));
+        TestUtils.assertSearchText("ID", "android:id/message", "Agent account is deactived, Please contact support");
+        getDriver().findElement(By.id("android:id/button1")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/login_username")));
+
+        //Reset password with invalid email format
+        TestUtils.testTitle("Reset password with invalid email format (" + invalid_email_format + ")");
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/password_reset")));
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/password_reset")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/login_username")));
+		if(getDriver().findElement(By.id("android:id/content")).isDisplayed()){
+			// Go back
+			getDriver().pressKeyCode(AndroidKeyCode.BACK);
+		}
+        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/login_username")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/login_username")).sendKeys(invalid_email_format);
+        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/send")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/alertTitle")));
+        TestUtils.assertSearchText("ID", "android:id/message", "Please enter a valid User ID or Please enter a valid Email address");
+        getDriver().findElement(By.id("android:id/button1")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/login_username")));
+
+        //Reset password with valid email
+        TestUtils.testTitle("Reset password with valid email (" + valid_username + ")");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/login_username")));
+		if(getDriver().findElement(By.id("android:id/content")).isDisplayed()){
+			// Go back
+			getDriver().pressKeyCode(AndroidKeyCode.BACK);
+		}
+        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/login_username")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/login_username")).sendKeys(valid_username);
+        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/send")).click();
+
+        //Confirm OTP dialog pop up
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/dialog_title")));
+        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/dialog_title", "OTP verification");
+
+        //enter invalid otp
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/user_input_dialog")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/user_input_dialog")).sendKeys("1111dd");
+		getDriver().findElement(By.id("android:id/button1")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/alertTitle")));
+		TestUtils.assertSearchText("ID", "android:id/message", "There is no record with the otp, msisdn combination.");
+		getDriver().findElement(By.id("android:id/button1")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/dialog_title")));
+		getDriver().findElement(By.id("android:id/button2")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/login_username")));
+		getDriver().pressKeyCode(AndroidKeyCode.BACK);
+    }
+
+
 	@Parameters ({"dataEnv"})
 	@Test (groups = { "Regression" })
 	public void activeDirectoryValidLoginTest(String dataEnv) throws InterruptedException, IOException, ParseException {
@@ -313,7 +462,7 @@ public class Login extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/login_password")).sendKeys(valid_AD_pw);
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/submit")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/title_template")));
-		TestUtils.assertSearchText("ID", "android:id/message", "Your allowed Login Mode is Active Directory. Your AD Username is; " + AD_UserName);
+		TestUtils.assertSearchText("ID", "android:id/message", "Invalid username or password entered.");
 		getDriver().findElement(By.id("android:id/button1")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/login_username")));
 		
@@ -328,7 +477,7 @@ public class Login extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/login_password")).sendKeys(valid_AD_pw);
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/submit")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/title_template")));
-		TestUtils.assertSearchText("ID", "android:id/message", "Your allowed Login Mode is Active Directory. Your AD Username is; " + AD_UserName);
+		TestUtils.assertSearchText("ID", "android:id/message", "Please enter a valid User ID or Please enter a valid Email address");
 		getDriver().findElement(By.id("android:id/button1")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/login_username")));
 		
@@ -343,10 +492,9 @@ public class Login extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/login_password")).sendKeys(valid_AD_pw);
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/submit")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/title_template")));
-		TestUtils.assertSearchText("ID", "android:id/message", "Your allowed Login Mode is Active Directory. Your AD Username is; " + AD_UserName);
+		TestUtils.assertSearchText("ID", "android:id/message", "You are not allowed to login with your AD account. Please login with your BioSmart account; " + BS_email);
 		getDriver().findElement(By.id("android:id/button1")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/login_username")));
-
 	}
 	
 	@Parameters ({"dataEnv"})
@@ -373,7 +521,7 @@ public class Login extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/login_password")).sendKeys(valid_AD_pw);
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/submit")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/title_template")));
-		TestUtils.assertSearchText("ID", "android:id/message", "Your allowed Login Mode is Biosmart. Your email address is; " + BS_email1);
+		TestUtils.assertSearchText("ID", "android:id/message", "Please enter a valid User ID or Please enter a valid Email address");
 		getDriver().findElement(By.id("android:id/button1")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/login_username")));
 		
@@ -388,7 +536,7 @@ public class Login extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/login_password")).sendKeys(valid_AD_pw);
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/submit")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/title_template")));
-		TestUtils.assertSearchText("ID", "android:id/message", "Your allowed Login Mode is Biosmart. Your email address is; " + BS_email1);
+		TestUtils.assertSearchText("ID", "android:id/message", "You are not allowed to login with your AD account. Please login with your BioSmart account; " + BS_email1);
 		getDriver().findElement(By.id("android:id/button1")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/login_username")));
 		
@@ -403,7 +551,7 @@ public class Login extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/login_password")).sendKeys(valid_AD_pw);
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/submit")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/title_template")));
-		TestUtils.assertSearchText("ID", "android:id/message","Your allowed Login Mode is Biosmart. Your email address is; " + BS_email1);
+		TestUtils.assertSearchText("ID", "android:id/message","You are not allowed to login with your AD account. Please login with your BioSmart account; " + AD_UserName1);
 		getDriver().findElement(By.id("android:id/button1")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/login_username")));
 		
