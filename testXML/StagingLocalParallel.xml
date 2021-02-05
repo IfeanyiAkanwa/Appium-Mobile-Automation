@@ -117,10 +117,10 @@
 			</class>
 			<class name="admin.ReactivationTest">
 				<methods>
-					<include name="noneReactivationPrivilegeLoginTest" />
+					<include name="noneReactivationPrivilegeTest" />
 					<include name="Login" />
 					<include name="navigateToCaptureMenuTest" />
-					<include name="msisdnReactivateTest" />
+					<include name="msisdnReactivationTest" />
 				</methods>
 			</class>
 		</classes>
