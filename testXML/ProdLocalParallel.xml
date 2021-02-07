@@ -42,8 +42,8 @@
 					<include name="Login" />
 					<include name="navigateToChangePasswordPage" />
 					<include name="changeToNewPassword" />
-					<include name="loginWithNewPassword" />
-					<include name="changeBackToOldPassword" />
+					<!--<include name="loginWithNewPassword" />-->
+					<!--<include name="changeBackToOldPassword" />-->
 				</methods>
 			</class>
 			<class name="admin.NotificationsTest">
