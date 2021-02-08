@@ -81,7 +81,9 @@
 		"alternate_phone": "08142050326",
 		"lga": "Ibeju-Lekki",
 		"state": "BENUE",
-		"LGA": "Ado"
+		"LGA": "Ado",
+		"msisdnLessThanSix": "123",
+		"unrecognizedMsisdn": "11111111111"
 	},
 	"AgentOnboarding": {
 		"valid_username": "fatube@seamfix.com",
