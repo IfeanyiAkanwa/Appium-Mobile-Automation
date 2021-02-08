@@ -29,7 +29,9 @@
 	},
 	"ChangePassword": {
 		"valid_username": "gnwabude@seamfix.com",
-		"newPassword": "Rankole1!!!",
+		"newPassword": "Bankole44!!",
+		"newPassword2": "Bankole22!!",
+		"newPassword3": "Bankole33!!",
 		"password": "Bankole1!!",
 		"invalid_password_policy": "ban",
 		"confirm_password_not_matching": "ban"

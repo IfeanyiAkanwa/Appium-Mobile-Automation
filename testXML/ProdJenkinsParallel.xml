@@ -106,6 +106,7 @@
                     <include name="changeToNewPassword"/>
                     <include name="loginWithNewPassword"/>
                     <include name="changeBackToOldPassword"/>
+                    <include name="loginWithOldPassword" />
                 </methods>
             </class>
         </classes>

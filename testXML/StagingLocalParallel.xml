@@ -45,6 +45,7 @@
 					<include name="changeToNewPassword" />
 					<include name="loginWithNewPassword" />
 					<include name="changeBackToOldPassword" />
+					<include name="loginWithOldPassword" />
 				</methods>
 			</class>
 			<class name="admin.NotificationsTest">
@@ -117,10 +118,10 @@
 			</class>
 			<class name="admin.ReactivationTest">
 				<methods>
-					<include name="noneReactivationPrivilegeLoginTest" />
+					<include name="noneReactivationPrivilegeTest" />
 					<include name="Login" />
 					<include name="navigateToCaptureMenuTest" />
-					<include name="msisdnReactivateTest" />
+					<include name="msisdnReactivationTest" />
 				</methods>
 			</class>
 		</classes>
