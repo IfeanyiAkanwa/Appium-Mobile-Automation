@@ -83,7 +83,10 @@
 		"state": "BENUE",
 		"LGA": "Ado",
 		"msisdnLessThanSix": "123",
-		"unrecognizedMsisdn": "11111111111"
+		"unrecognizedMsisdn": "11111111111",
+		"msisdnWithFingerprint": "08050000009",
+		"ninVerificationMode": "Search By NIN",
+		"nin": "11111111111"
 	},
 	"AgentOnboarding": {
 		"valid_username": "fatube@seamfix.com",
