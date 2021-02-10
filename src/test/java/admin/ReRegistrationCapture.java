@@ -128,6 +128,7 @@ public class ReRegistrationCapture extends TestBase {
 		getDriver().findElement(By.id("android:id/button1")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Re Registration']")));
 
+
 		// Enter valid msisdn with invalid OTP
 		TestUtils.testTitle("Enter valid MSISDN: " + valid_msisdn + " for Re-Registration with invalid OTP: " + invalid_OTP);
 
@@ -141,6 +142,25 @@ public class ReRegistrationCapture extends TestBase {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/alertTitle")));
 		TestUtils.assertSearchText("ID", "android:id/message", "There is no record with the otp, msisdn combination.");
 		getDriver().findElement(By.id("android:id/button1")).click();
+
+		//OTP Buttons
+		TestUtils.testTitle("Confirm Request OTP, Confirm OTP and Bypass OTP buttons are displayed");
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/otp_confirm_button", "CONFIRM OTP");
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/otp_bypass_button", "BYPASS OTP");
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/otp_request_button", "REQUEST OTP");
+
+		//Confirm that BYPASS OTP Button is functional
+		TestUtils.testTitle("BYPASS OTP Test");
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/otp_bypass_button")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/next_button")));
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/next_button", "NEXT");
+
+		//Confirm COO checkbox
+		TestUtils.testTitle("Change of Ownership (COO) Checkbox Test");
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/change_sim_ownership", "Change of Ownership");
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/change_sim_ownership")).click();
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/change_sim_ownership")).click();
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/change_sim_ownership")).click();
 
 		//MSISDN With Fingerprint
 		TestUtils.testTitle("Verify that fingerprint match option is the default option available to the user if user fingerprint is returned (WSQL is retreived): "+msisdnWithFingerprint);
@@ -164,10 +184,16 @@ public class ReRegistrationCapture extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/cancel_otp")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/otp_request_button")));
 
-		//Request OTP
+		//Request OTP Modal
+		TestUtils.testTitle("Request OTP Modal");
 		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/otp_request_button")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/otpHintMessage")));
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/otpHintMessage", "Tick options for OTP Request");
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/primary_phone_number", "Primary Phone Number");
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/alt_phone_number", "Alternate Phone Number");
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/email_address", "Email Address");
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/cancel_otp", "CANCEL");
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/request_otp", "REQUEST");
 		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/alt_phone_number")).click();
 		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/request_otp")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/otp_field")));
@@ -274,20 +300,49 @@ public class ReRegistrationCapture extends TestBase {
 		}
 
 
+        //Confirm that user can do both Individual and Company Registration
+		TestUtils.testTitle("Confirm that user can do both Individual and Company Registration");
+		getDriver().findElement(By.xpath("//android.widget.TextView[@text='Individual']")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.CheckedTextView[@text='Company']")));
+		TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='Company']", "Company");
+		TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='Individual']", "Individual");
+		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Company']")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/company_details_title")));
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/company_details_title", "Company Details");
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/company_cancel")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Company']")));
+		getDriver().findElement(By.xpath("//android.widget.TextView[@text='Company']")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.CheckedTextView[@text='Individual']")));
+		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Individual']")).click();
+
 		//Assert Invividual Form
-//		Asserts.AssertIndividualForm();
-//		TestUtils.scrollDown();
-//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/btnContinueReg")));
-//		Thread.sleep(500);
-//		getDriver().findElement(By.id("com.sf.biocapture.activity:id/btnContinueReg")).click();
-//		Thread.sleep(500);
-//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/countrySpinner")));
-//		Thread.sleep(1000);
-//		Asserts.AssertAddresstDetails();
-//		Thread.sleep(1000);
-//		getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
-//		Thread.sleep(1000);
-//	    Form.NigerianCompanyForm(dataEnv);
- 
+		Asserts.AssertIndividualForm();
+
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/btnContinueReg")));
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/btnContinueReg")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/countrySpinner")));
+
+		Asserts.AssertAddresstDetails();
+
+		TestUtils.scrollUp();
+		TestUtils.scrollUp();
+		TestUtils.scrollUp();
+		//Confirm User can do Foreigner registration
+		TestUtils.testTitle("Confirm User can do Foreigner registration");
+		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='NIGERIA']")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/alertTitle")));
+		TestUtils.assertSearchText("ID", "android:id/alertTitle", "Select Item");
+		getDriver().findElement(By.xpath("//android.widget.TextView[@text='AFGHANISTAN']")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/field_issuing_country")));
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/field_issuing_country", "Passport Issuing Country*");
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/passport_cancel")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.CheckedTextView[@text='AFGHANISTAN']")));
+		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='AFGHANISTAN']")).click();
+		getDriver().findElement(By.xpath("//android.widget.TextView[@text='NIGERIA']")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.CheckedTextView[@text='NIGERIA']")));
+
+		getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
+
+	    Form.individualForeignerForm(dataEnv);
     }
 }

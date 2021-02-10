@@ -192,7 +192,8 @@
 		"area": "AGILA",
 		"passport_ID_number": "6861637BC",
 		"lga_of_reg": "Agege",
-		"documentNumber": "89733736AD"
+		"documentNumber": "89733736AD",
+		"nin": "11111111111"
 	},
 	"LandingPage_Url": {
 	"stagingUrl": "https:simregtest.gloworld.com"
