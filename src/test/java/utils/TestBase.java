@@ -133,7 +133,7 @@ public class TestBase {
 		toAddress = toMails;
 		SendMail.ComposeGmail("BioSmart Android Glo Report <seamfix.test.report@gmail.com>", toAddress);
 
-		getDriver().quit();
+		//getDriver().quit();
 	}
 
 	@AfterClass

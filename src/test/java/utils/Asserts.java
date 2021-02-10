@@ -190,7 +190,7 @@ public class Asserts extends TestBase {
 		String assertDetails = "Asserting Company Details of registered subscriber";
 		Markup ad = MarkupHelper.createLabel(assertDetails, ExtentColor.GREEN);
 		testInfo.get().info(ad);
-		
+
 		// Company Details
 		String companyName = getDriver().findElement(By.id("com.sf.biocapture.activity:id/company_name_descrptn"))
 				.getText();
@@ -205,7 +205,7 @@ public class Asserts extends TestBase {
 				.getText();
 		String companyPostalCode = getDriver().findElement(By.id("com.sf.biocapture.activity:id/company_postalcode"))
 				.getText();
-		
+
 		String empty = "";
 		Map<String, String> fields = new HashMap<>();
 		fields.put("Name /Description", companyName);
@@ -216,7 +216,7 @@ public class Asserts extends TestBase {
 		fields.put("Company Address State", companyState);
 		fields.put("Company Address LGA", companyLga);
 		fields.put("Postal Code", companyPostalCode);
-	
+
 		for (Map.Entry<String, String> entry : fields.entrySet()) {
 			try {
 				Assert.assertNotEquals(entry.getValue(), empty);
@@ -246,18 +246,24 @@ public class Asserts extends TestBase {
 		String totalReactivated = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/total_reactivated"))
 				.getText();
 		String totalSimSwap = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/total_swaps")).getText();
-		String registeredSIMs = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/reg_sims")).getText();
+
+
+		//TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity." + Id + ":id/reg_sims");
+		Thread.sleep(300);
+
+		/*String registeredSIMs = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/reg_sims")).getText();
 		String confirmedSIMs = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/sims_confirmed")).getText();
-		String duplicateSIMs = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/duplicate_sims")).getText();
+		String duplicateSIMs = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/duplicate_sims")).getText();*/
 
 		String NA = "";
 
-		String[] toList = { "Total Registrations: " + totalRegistrations, "Total Sync Sent: " + totalSyncSent,
+		String[] toList = {"Total Registrations: " + totalRegistrations, "Total Sync Sent: " + totalSyncSent,
 				"Total Sync Confirmed: " + totalSyncConfirmed, "Total Sync Pending:" + totalSyncPending,
 				"Total Rejected: " + totalRejected, "Total Activated: " + totalActivated,
-				"Total Reactivated: " + totalReactivated, "Total SIM Swap: " + totalSimSwap,
-				"Registered SIMS: " + registeredSIMs, "Confirmed SIMS: " + confirmedSIMs,
-				"Duplicate SIMS: " + duplicateSIMs };
+				"Total Reactivated: " + totalReactivated, "Total SIM Swap: " + totalSimSwap
+				//"Registered SIMS: " + registeredSIMs, "Confirmed SIMS: " + confirmedSIMs,
+				//"Duplicate SIMS: " + duplicateSIMs };
+		};
 		for (String field : toList) {
 			String name = "";
 			String val = NA;
@@ -271,6 +277,7 @@ public class Asserts extends TestBase {
 				testInfo.get().error("<b>" + name + " : </b>" + val);
 			}
 		}
+
 	}
 
 	public static void AssertSubscriberInfo230() throws Exception {
@@ -304,10 +311,10 @@ public class Asserts extends TestBase {
 			}
 		}
 	}
-	
+
 	public static void assertBasicInfoAddReg230() throws Exception {
 		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
-		
+
 		TestUtils.testTitle("Assert returned Basic Info of Additional Registration");
 		String surname = getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.ListView/android.widget.LinearLayout[1]/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.TextView[2]")).getText();
 		String firstName = getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.ListView/android.widget.LinearLayout[2]/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.TextView[2]")).getText();
@@ -330,7 +337,7 @@ public class Asserts extends TestBase {
 
 		String[] toList = { "Surname: " + surname, "First Name: " + firstName, "Mother's maiden name: " + mothersMaidenName,"Gender: " + gender,
 				"Street: " + street, "City: " + city , "Country of Origin: " + countryOfOrigin, "State of Origin: " + stateOfOrigin,
-				"LGA of Origin: " + lgaOfOrigin, "Area of residence: " + areaOfResidence,	"Type of identification: " + typeOfIdentification, "State of Residence: " 
+				"LGA of Origin: " + lgaOfOrigin, "Area of residence: " + areaOfResidence,	"Type of identification: " + typeOfIdentification, "State of Residence: "
 				+ stateOfResidence, "LGA of Residence: " + lgaOfResidence, "LGA of Registration: " + lgaOfRegistration,};
 		for (String field : toList) {
 			String name = "";
@@ -346,38 +353,38 @@ public class Asserts extends TestBase {
 			}
 		}
 	}
-	
+
 	public static void assertTransactionIdRecords(WebElement webElement) throws Exception {
 
-			String assertDetails = "Asserting returned Subscriber's Details";
-			Markup ad = MarkupHelper.createLabel(assertDetails, ExtentColor.BLUE);
-			testInfo.get().info(ad);
-			String firstName = webElement.findElement(By.id("com.sf.biocapture.activity:id/first_name_value")).getText();
-			String surName = webElement.findElement(By.id("com.sf.biocapture.activity:id/surname_value")).getText();
-			String gender = webElement.findElement(By.id("com.sf.biocapture.activity:id/gender_value")).getText();
-			String dateOfBirth = webElement.findElement(By.id("com.sf.biocapture.activity:id/transaction_id_date_of_birth_value")).getText();
-			String dateOfReg = webElement.findElement(By.id("com.sf.biocapture.activity:id/date_of_registration_value")).getText();
-			String transactionID = webElement.findElement(By.id("com.sf.biocapture.activity:id/transaction_id_value")).getText();
+		String assertDetails = "Asserting returned Subscriber's Details";
+		Markup ad = MarkupHelper.createLabel(assertDetails, ExtentColor.BLUE);
+		testInfo.get().info(ad);
+		String firstName = webElement.findElement(By.id("com.sf.biocapture.activity:id/first_name_value")).getText();
+		String surName = webElement.findElement(By.id("com.sf.biocapture.activity:id/surname_value")).getText();
+		String gender = webElement.findElement(By.id("com.sf.biocapture.activity:id/gender_value")).getText();
+		String dateOfBirth = webElement.findElement(By.id("com.sf.biocapture.activity:id/transaction_id_date_of_birth_value")).getText();
+		String dateOfReg = webElement.findElement(By.id("com.sf.biocapture.activity:id/date_of_registration_value")).getText();
+		String transactionID = webElement.findElement(By.id("com.sf.biocapture.activity:id/transaction_id_value")).getText();
 
-			String NA = "";
+		String NA = "";
 
-			String[] toList = { "First Name: " + firstName, "Surname: " + surName, "Gender: " + gender,
-					"Date of Birth: " + dateOfBirth, "Date of Registration: " + dateOfReg, "Transaction ID: " + transactionID };
-			for (String field : toList) {
-				String name = "";
-				String val = NA;
-				try {
-					String[] fields = field.split(":");
-					name = fields[0];
-					val = fields[1];
-					Assert.assertNotEquals(val, NA);
-					testInfo.get().log(Status.INFO, "<b>" +name + " : </b>" + val);
-				} catch (Error e) {
-					testInfo.get().error("<b>" + name + " : </b>" + val);
-				}
+		String[] toList = { "First Name: " + firstName, "Surname: " + surName, "Gender: " + gender,
+				"Date of Birth: " + dateOfBirth, "Date of Registration: " + dateOfReg, "Transaction ID: " + transactionID };
+		for (String field : toList) {
+			String name = "";
+			String val = NA;
+			try {
+				String[] fields = field.split(":");
+				name = fields[0];
+				val = fields[1];
+				Assert.assertNotEquals(val, NA);
+				testInfo.get().log(Status.INFO, "<b>" +name + " : </b>" + val);
+			} catch (Error e) {
+				testInfo.get().error("<b>" + name + " : </b>" + val);
 			}
 		}
-		
+	}
+
 	public static void assertAddedNumbers() throws Exception {
 
 		String assertDetails = "Assert Valid Numbers";
@@ -403,7 +410,7 @@ public class Asserts extends TestBase {
 			}
 		}
 	}
-	
+
 	public static void assertSubscriberFullNameAddReg() throws Exception {
 
 		String assertDetails = "Assert Returned Subscriber Full name after Number Validation";
