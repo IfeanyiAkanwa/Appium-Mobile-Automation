@@ -15,7 +15,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 public class Asserts extends TestBase {
-
+	private static StringBuffer verificationErrors = new StringBuffer();
 	public static void AssertIndividualForm() throws Exception {
 		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
 		String assertDetails = "Assert individual form of registered subscriber";
@@ -248,22 +248,22 @@ public class Asserts extends TestBase {
 		String totalSimSwap = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/total_swaps")).getText();
 
 
-		//TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity." + Id + ":id/reg_sims");
+		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity." + Id + ":id/reg_sims");
 		Thread.sleep(300);
 
-		/*String registeredSIMs = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/reg_sims")).getText();
+		String registeredSIMs = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/reg_sims")).getText();
 		String confirmedSIMs = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/sims_confirmed")).getText();
-		String duplicateSIMs = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/duplicate_sims")).getText();*/
+		String duplicateSIMs = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/duplicate_sims")).getText();
 
 		String NA = "";
 
 		String[] toList = {"Total Registrations: " + totalRegistrations, "Total Sync Sent: " + totalSyncSent,
 				"Total Sync Confirmed: " + totalSyncConfirmed, "Total Sync Pending:" + totalSyncPending,
 				"Total Rejected: " + totalRejected, "Total Activated: " + totalActivated,
-				"Total Reactivated: " + totalReactivated, "Total SIM Swap: " + totalSimSwap
-				//"Registered SIMS: " + registeredSIMs, "Confirmed SIMS: " + confirmedSIMs,
-				//"Duplicate SIMS: " + duplicateSIMs };
-		};
+				"Total Reactivated: " + totalReactivated, "Total SIM Swap: " + totalSimSwap,
+				"Registered SIMS: " + registeredSIMs, "Confirmed SIMS: " + confirmedSIMs,
+				"Duplicate SIMS: " + duplicateSIMs };
+
 		for (String field : toList) {
 			String name = "";
 			String val = NA;
@@ -277,6 +277,27 @@ public class Asserts extends TestBase {
 				testInfo.get().error("<b>" + name + " : </b>" + val);
 			}
 		}
+
+		int actualTotalRegistrationsVal = TestUtils.convertToInt(totalRegistrations);
+		int actualTotalSyncSentVal = TestUtils.convertToInt(totalSyncSent);
+		int actualTotalSyncPendingVal = TestUtils.convertToInt(totalSyncPending);
+		int actualTotalSyncConfirmedVal = TestUtils.convertToInt(totalSyncConfirmed);
+
+		int expectedTotalRegistrationsVal = actualTotalSyncSentVal + actualTotalSyncPendingVal;
+
+		try {
+			Assert.assertEquals(expectedTotalRegistrationsVal, actualTotalRegistrationsVal);
+			testInfo.get().log(Status.INFO, "Total Registrations (" + expectedTotalRegistrationsVal + ") is equal to summation of total Sync sent (" + actualTotalSyncSentVal + ") + total Sync pending (" + actualTotalSyncPendingVal + ") which is also equal to  total Sync confirmed (" + actualTotalSyncConfirmedVal + ")");
+		} catch (Error e) {
+			verificationErrors.append(e.toString());
+			String verificationErrorString = verificationErrors.toString();
+			testInfo.get().error("Summation not equal");
+			testInfo.get().error(verificationErrorString);
+		}
+		//Refresh
+		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity." + Id + ":id/refresh_button");
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/refresh_button")).click();
+		Thread.sleep(2000);
 
 	}
 

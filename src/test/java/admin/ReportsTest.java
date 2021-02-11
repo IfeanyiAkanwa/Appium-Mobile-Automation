@@ -1,6 +1,8 @@
 package admin;
 
 import io.appium.java_client.MobileDriver;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -20,6 +22,7 @@ import utils.Asserts;
 import utils.TestBase;
 import utils.TestUtils;
 
+import java.io.FileReader;
 import java.io.IOException;
 import java.time.Duration;
 
@@ -41,6 +44,7 @@ public class ReportsTest extends TestBase {
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Reports']")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/report_title")));
         TestUtils.assertSearchText("ID", "com.sf.biocapture.activity." + Id + ":id/report_title", "Report Summary");
+        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity." + Id + ":id/btn_server_reports", "SERVER/CLIENT REPORTS");
 
     }
 
@@ -48,42 +52,13 @@ public class ReportsTest extends TestBase {
     public static void reportSummary() throws Exception {
 
         Asserts.AssertReportSummary();
-        /*Thread.sleep(1000);
-        TestUtils.scrollUp();
-        Thread.sleep(500);*/
-        //scrollUp();
-        String totalRegistrationsValString = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/reg_subscribers")).getText();
-        String totalSyncSentValString = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/total_sync_sent")).getText();
-        String totalSyncPendingValString = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/total_pending")).getText();
-        String totalSyncConfirmedValString = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/sync_confirmed")).getText();
 
-        int actualTotalRegistrationsVal = TestUtils.convertToInt(totalRegistrationsValString);
-        int actualTotalSyncSentVal = TestUtils.convertToInt(totalSyncSentValString);
-        int actualTotalSyncPendingVal = TestUtils.convertToInt(totalSyncPendingValString);
-        int actualTotalSyncConfirmedVal = TestUtils.convertToInt(totalSyncConfirmedValString);
-
-        int expectedTotalRegistrationsVal = actualTotalSyncSentVal + actualTotalSyncPendingVal;
-
-        try {
-            Assert.assertEquals(expectedTotalRegistrationsVal, actualTotalRegistrationsVal);
-            testInfo.get().log(Status.INFO, "Total Registrations (" + expectedTotalRegistrationsVal + ") is equal to summation of total Sync sent (" + actualTotalSyncSentVal + ") + total Sync pending (" + actualTotalSyncPendingVal + ") which is also equal to  total Sync confirmed (" + actualTotalSyncConfirmedVal + ")");
-        } catch (Error e) {
-            verificationErrors.append(e.toString());
-            String verificationErrorString = verificationErrors.toString();
-            testInfo.get().error("Summation not equal");
-            testInfo.get().error(verificationErrorString);
-        }
-        //Refresh
-        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity." + Id + ":id/refresh_button");
-        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/refresh_button")).click();
-        Thread.sleep(2000);
     }
     @Parameters({"dataEnv"})
     @Test
     public static void reportLoginUser2(String dataEnv) throws Exception {
 
         Thread.sleep(500);
-        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/btn_back_home")).click();
         getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
         TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity." + Id + ":id/tv_camera_la");
 
@@ -93,13 +68,15 @@ public class ReportsTest extends TestBase {
         Thread.sleep(1000);
         getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.Button[1]")).click();
 
-        try {
-            TestBase.LoginLogic(dataEnv, "Login");
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        JSONParser parser = new JSONParser();
+        JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
+        JSONObject envs = (JSONObject) config.get("Login2");
+
+        String valid_username = (String) envs.get("valid_username");
+        String valid_password = (String) envs.get("valid_password");
+
+        TestBase.Login1(valid_username, valid_password);
+
         navigateToReportsPage();
         reportSummary();
     }
@@ -154,19 +131,19 @@ public class ReportsTest extends TestBase {
 
         try {
             Assert.assertEquals(totalSubVal, actualTotalRegistrationsVal);
-            testInfo.get().log(Status.INFO, "Total Registrations (" + totalSubVal + ") is equal to actual total reg  (" + actualTotalRegistrationsVal + ") ");
+            testInfo.get().log(Status.INFO, "Total Registrations (" + totalSubVal + ") is equal to Actual Total Reg  (" + actualTotalRegistrationsVal + ") ");
 
             Assert.assertEquals(totalSyncsentVal, actualTotalSyncSentVal);
-            testInfo.get().log(Status.INFO, "Total actual Total Sync Sent (" + totalSyncsentVal + ") is equal to actual total sync sent  (" + actualTotalSyncSentVal + ") ");
+            testInfo.get().log(Status.INFO, "Total Sync Sent (" + totalSyncsentVal + ") is equal to Actual Total Sync Sent  (" + actualTotalSyncSentVal + ") ");
 
             Assert.assertEquals(totalSyncpendingVal, actualTotalSyncPendingVal);
-            testInfo.get().log(Status.INFO, "Total actual Total Sync pending (" + totalSyncpendingVal + ") is equal to actual total sync pending  (" + actualTotalSyncPendingVal + ") ");
+            testInfo.get().log(Status.INFO, "Total Sync Pending (" + totalSyncpendingVal + ") is equal to Actual Total Sync Pending  (" + actualTotalSyncPendingVal + ") ");
 
             Assert.assertEquals(totalSynConfVal, actualTotalSyncConfirmedVal);
-            testInfo.get().log(Status.INFO, "Total actual Total Sync Confirmed (" + totalSynConfVal + ") is equal to actual total sync Confirmed  (" + actualTotalSyncConfirmedVal + ") ");
+            testInfo.get().log(Status.INFO, "Total Sync Confirmed (" + totalSynConfVal + ") is equal to Actual Total Sync Confirmed  (" + actualTotalSyncConfirmedVal + ") ");
 
             Assert.assertEquals(totalRejectVal, total_rejectedVal);
-            testInfo.get().log(Status.INFO, "Total actual Total rejected (" + total_rejectedVal + ") is equal to actual total rejected (" + actualTotalSyncConfirmedVal + ") ");
+            testInfo.get().log(Status.INFO, "Total Rejected (" + total_rejectedVal + ") is equal to Actual Total Rejected (" + actualTotalSyncConfirmedVal + ") ");
 
         } catch (Error e) {
             verificationErrors.append(e.toString());
@@ -181,6 +158,7 @@ public class ReportsTest extends TestBase {
 
     @Test
     public static void searchParameters() throws Exception {
+
         WebDriverWait wait = new WebDriverWait(getDriver(), 50);
         TestUtils.scrollDown();
 
@@ -189,16 +167,16 @@ public class ReportsTest extends TestBase {
         //Start TimeStamp
         // Set date
         getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/start_date")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/alertTitle")));
-        TestUtils.assertSearchText("ID", "android:id/alertTitle", "Set date");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/button1")));
+        //TestUtils.assertSearchText("ID", "android:id/alertTitle", "Set date");
         getDriver().findElement(By.id("android:id/button1")).click();
         String sDate = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/start_date")).getText();
         testInfo.get().info("<b> Start Date: </b>" + sDate);
 
         // Set time
         getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/start_time")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/alertTitle")));
-        TestUtils.assertSearchText("ID", "android:id/alertTitle", "Set time");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/button1")));
+        //TestUtils.assertSearchText("ID", "android:id/alertTitle", "Set time");
         getDriver().findElement(By.id("android:id/button1")).click();
         String sTime = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/start_time")).getText();
         testInfo.get().info("<b> Start Time: </b>" + sTime);
@@ -206,16 +184,16 @@ public class ReportsTest extends TestBase {
         //End TimeStamp
         // Set date
         getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/end_date")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/alertTitle")));
-        TestUtils.assertSearchText("ID", "android:id/alertTitle", "Set date");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/button1")));
+        //TestUtils.assertSearchText("ID", "android:id/alertTitle", "Set date");
         getDriver().findElement(By.id("android:id/button1")).click();
         String eDate = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/end_date")).getText();
         testInfo.get().info("<b> End Date: </b>" + eDate);
 
         // Set time
         getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/end_time")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/alertTitle")));
-        TestUtils.assertSearchText("ID", "android:id/alertTitle", "Set time");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/button1")));
+        //TestUtils.assertSearchText("ID", "android:id/alertTitle", "Set time");
         getDriver().findElement(By.id("android:id/button1")).click();
         String eTime = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/end_time")).getText();
         testInfo.get().info("<b> End Date: </b>" + eTime);

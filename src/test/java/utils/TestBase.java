@@ -283,9 +283,8 @@ public class TestBase {
 		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Home']", "Home");
 	}
 
-	@Parameters ({"dataEnv"})
 	@Test
-	public static void Login1(String dataEnv, String valid_username, String valid_password) throws Exception {
+	public static void Login1(String valid_username, String valid_password) throws Exception {
 		WebDriverWait wait = new WebDriverWait(getDriver(), 50);
 	
 		TestUtils.testTitle("Login with a valid username: ( " + valid_username + " ) and valid password: ( "  + valid_password + " )");

@@ -32,7 +32,7 @@ public class AgentOnBoardingTest extends TestBase {
    		String valid_username = (String) envs.get("valid_username");
    		String valid_password = (String) envs.get("valid_password");
    	
-   		TestBase.Login1(dataEnv, valid_username, valid_password);
+   		TestBase.Login1( valid_username, valid_password);
    		Thread.sleep(500);
     }
 
