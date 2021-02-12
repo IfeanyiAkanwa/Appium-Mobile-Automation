@@ -192,7 +192,7 @@ public class ReportsTest extends TestBase {
         testInfo.get().info("<b> End Date: </b>" + eTime);
 
         getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/query_agent")).click();
-        Thread.sleep(2000);
+
         reportSummary();
         getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/btn_back_home")).click();
     }

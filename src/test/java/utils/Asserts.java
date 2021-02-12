@@ -249,7 +249,6 @@ public class Asserts extends TestBase {
 
 
 		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity." + Id + ":id/reg_sims");
-		Thread.sleep(300);
 
 		String registeredSIMs = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/reg_sims")).getText();
 		String confirmedSIMs = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/sims_confirmed")).getText();
@@ -297,7 +296,7 @@ public class Asserts extends TestBase {
 		//Refresh
 		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity." + Id + ":id/refresh_button");
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/refresh_button")).click();
-		Thread.sleep(2000);
+
 
 	}
 
