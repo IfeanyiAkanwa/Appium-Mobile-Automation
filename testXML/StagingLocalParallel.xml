@@ -17,7 +17,7 @@
 		<parameter name="deviceName" value="SeamfixTab"/>
 
 		<classes>
-			<!--<class name="admin.Login">
+			<class name="admin.Login">
                 <methods>
                     <include name="usernamePasswordLogin" />
                     <include name="fingerprintLogin" />
@@ -54,7 +54,7 @@
                     <include name="navigateToNotifications" />
                     <include name="viewNotifications" />
                 </methods>
-            </class>-->
+            </class>
 			<class name="admin.ReportsTest">
 				<methods>
 					<include name="Login" />
@@ -65,7 +65,7 @@
 					<include name="reportHomepage" />
 				</methods>
 			</class>
-			<!--<class
+			<class
                 name="admin.NewRegistration">
                 <methods>
                     <include name="Login" />
@@ -125,7 +125,7 @@
                     <include name="navigateToCaptureMenuTest" />
                     <include name="msisdnReactivationTest" />
                 </methods>
-            </class>-->
+            </class>
 		</classes>
 	</test>
 </suite>
