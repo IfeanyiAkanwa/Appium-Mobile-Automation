@@ -35,9 +35,9 @@
             </class>
             <class name="admin.ReRegistrationCapture">
                 <methods>
-                    <include name="Login"/>
-                    <include name="NavigateToCaptureMenuTest"/>
-                    <include name="ReRegisterationTest"/>
+                    <include name="Login" />
+                    <include name="navigateToReRegistration" />
+                    <include name="reRegisteration" />
                 </methods>
             </class>
             <class name="admin.NotificationsTest">

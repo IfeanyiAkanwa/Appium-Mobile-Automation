@@ -91,10 +91,15 @@
 		"valid_sim_serial_no": "11111111111111111367"
 	},
 	"ReRegistration": {
-		"valid_msisdn": "09062059126",
-		"invalid_msisdn": "08169548454",
+		"valid_msisdn": "08050000001",
+		"invalid_msisdn": "08022222222",
 		"invalid_OTP": "00000",
-		"lga": "Ibeju-Lekki"
+		"lga": "Ibeju-Lekki",
+		"msisdnLessThanSix": "123",
+		"unrecognizedMsisdn": "11111111111",
+		"msisdnWithFingerprint": "08050000009",
+		"ninVerificationMode": "Search By NIN",
+		"nin": "11111111111"
 	},
 	"AgentOnboarding": {
 		"valid_username": "fatube@seamfix.com",
