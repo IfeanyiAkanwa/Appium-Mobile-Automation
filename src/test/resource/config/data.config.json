@@ -6,6 +6,9 @@
 		"valid_username": "gnwabude@seamfix.com",
 		"invalid_password": "adazejohn@1",
 		"valid_password": "Bankole1!!",
+		"valid_username_": "vnwauwa@seamfix.com",
+		"invalid_password": "adazejohn@1",
+		"valid_password_": "Bankole1!!",
 		"deactivated_username": "amusa.adewaleibrahim@mtnagent.com"
 	},
 	"ForgotPassword": {

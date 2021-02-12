@@ -19,6 +19,15 @@
         "valid_userid": "SS08057577391_00001",
         "valid_useridpw": "Bankole2!!"
 	},
+	"Login2": {
+		"onboarded_username": "adazejohnson@gmail.com",
+		"invalid_username": "ada@seamnix.com",
+		"not_onboarded_username": "faruk.muhammad@mtnagent.com",
+		"valid_username": "vnwauwa@seamfix.com",
+		"invalid_password": "adazejohn@1",
+		"valid_password": "Bankole11!!",
+		"deactivated_username": "amusa.adewaleibrahim@mtnagent.com"
+	},
 	"ForgotPassword": {
 		"invalid_username": "ada@seamnix.com",
 		"invalid_email_format" : "@seamfix.com",
