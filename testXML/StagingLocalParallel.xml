@@ -64,7 +64,7 @@
 					<include name="reportHomepage" />
 				</methods>
 			</class>
-			<class name="admin.ReportsTest">
+
 				<methods>
 					<include name="Login" />
 					<include name="navigateToReportsPage" />

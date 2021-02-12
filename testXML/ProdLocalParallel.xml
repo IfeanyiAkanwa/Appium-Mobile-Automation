@@ -83,8 +83,8 @@
 			<class name="admin.ReRegistrationCapture">
 				<methods>
 					<include name="Login" />
-					<include name="navigateToCaptureMenuTest" />
-					<include name="reRegisterationTest" />
+					<include name="navigateToReRegistration" />
+					<include name="reRegisteration" />
 				</methods>
 			</class>
 			<class name="admin.AgentOnBoardingTest">
