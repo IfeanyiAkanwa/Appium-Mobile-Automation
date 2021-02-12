@@ -58,14 +58,13 @@ public class ReportsTest extends TestBase {
     @Test
     public static void reportLoginUser2(String dataEnv) throws Exception {
 
-        Thread.sleep(500);
         getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
         TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity." + Id + ":id/tv_camera_la");
 
         TestUtils.scrollDown();
 
         getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/androidx.appcompat.widget.LinearLayoutCompat[9]/android.widget.CheckedTextView")).click();
-        Thread.sleep(1000);
+
         getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.Button[1]")).click();
 
         JSONParser parser = new JSONParser();
@@ -84,34 +83,28 @@ public class ReportsTest extends TestBase {
     @Test
     public static void reportHomepage() throws Exception {
 
-        Thread.sleep(800);
-        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/btn_back_home")).click();
         WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/btn_back_home")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Total Subscribers']")));
         String totalSub = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/kpi_report_value")).getText();
         int totalSubVal = TestUtils.convertToInt(totalSub);
-        System.out.println("Total Sub seen proceeding"+totalSub);
-        Thread.sleep(3000);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Total Sync Sent']")));
 
         String totalSyncsent = getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.widget.RelativeLayout/android.widget.FrameLayout[1]/androidx.viewpager.widget.ViewPager/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.TextView")).getText();
         int totalSyncsentVal = TestUtils.convertToInt(totalSyncsent);
-        System.out.println(getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/kpi_report_name")).getText());
-        Thread.sleep(3000);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Total Sync Pending']")));
 
         String totalSyncpending = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/kpi_report_value")).getText();
         int totalSyncpendingVal = TestUtils.convertToInt(totalSyncpending);
-        System.out.println(getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/kpi_report_name")).getText());
-        Thread.sleep(3000);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Total Sync Confirmed']")));
 
         String totalSynConf = getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.widget.RelativeLayout/android.widget.FrameLayout[1]/androidx.viewpager.widget.ViewPager/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.TextView")).getText();
         int totalSynConfVal = TestUtils.convertToInt(totalSynConf);
-        System.out.println(getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/kpi_report_name")).getText());
-        Thread.sleep(3000);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Total Rejected']")));
 
         String totalReject = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/kpi_report_value")).getText();
         int totalRejectVal = TestUtils.convertToInt(totalReject);
-        System.out.println(getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/kpi_report_name")).getText());
-        Thread.sleep(2000);
+        //wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Total Rejected']")));
 
         navigateToReportsPage();
 

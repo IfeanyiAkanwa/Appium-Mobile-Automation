@@ -20,7 +20,8 @@
 			<class name="admin.Login">
                 <methods>
                     <include name="usernamePasswordLogin" />
-                    <include name="fingerprintLogin" /.>                    <include name="deactivateAccount"/>
+                    <include name="fingerprintLogin" />
+                    <include name="deactivateAccount"/>
                     <include name="forgotPassword" />
                     <include name="validUserIdLogin" />
                     <include name="erorrMessagesBiosmartValidationTest" />
@@ -62,13 +63,6 @@
 					<include name="searchParameters" />
 					<include name="reportLoginUser2" />
 					<include name="reportHomepage" />
-				</methods>
-			</class>
-			<class name="admin.ReportsTest">
-				<methods>
-					<include name="Login" />
-					<include name="navigateToReportsPage" />
-					<include name="reportSummary" />
 				</methods>
 			</class>
 			<class
