@@ -5,6 +5,7 @@ import demographics.Form;
 
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -27,8 +28,9 @@ import utils.TestUtils;
 public class ReRegistrationCapture extends TestBase {
   
     @Test
-	public static void navigateToReRegistration() throws InterruptedException {
+	public static void navigateToReRegistration() {
     	WebDriverWait wait = new WebDriverWait(getDriver(), 60);
+
 		// Navigate to Re-Registration Use Case
 		TestUtils.testTitle("Navigate to Re-Registration Use Case");
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
@@ -158,7 +160,6 @@ public class ReRegistrationCapture extends TestBase {
 		//Confirm COO checkbox
 		TestUtils.testTitle("Change of Ownership (COO) Checkbox Test");
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/change_sim_ownership", "Change of Ownership");
-		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/change_sim_ownership")).click();
 		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/change_sim_ownership")).click();
 		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/change_sim_ownership")).click();
 

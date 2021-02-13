@@ -71,10 +71,10 @@
 			<version>1.0</version>
 		</dependency>
 		<dependency>
-		<groupId>org.postgresql</groupId>
-		<artifactId>postgresql</artifactId>
-		<version>42.2.12</version>
-	</dependency>
+			<groupId>postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>9.0-801.jdbc4</version>
+		</dependency>
 	</dependencies>
 	<repositories>
 		<repository>

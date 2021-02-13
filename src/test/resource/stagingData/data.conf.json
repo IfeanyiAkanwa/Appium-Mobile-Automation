@@ -170,7 +170,9 @@
 		"states_residence": "ABIA",
 		"lga_residence": "Aba North",
 		"area": "ARIARIA",
-		"lga_of_reg": "Agege"
+		"lga_of_reg": "Agege",
+		"nin": "11111111111",
+		"postalcode": "450101"
 	},
 	"IndividualForeignerDetails": {
 		"surname": "Saraswati",
@@ -180,14 +182,14 @@
 		"social_media_type": "INSTAGRAM",
 		"social_media_username": "@ganga",
 		"street": "Banaris",
-		"city": "Mumbai",
-		"nationality": "INDIA",
+		"city": "Otukpo",
+		"nationality": "ALBANIA",
 		"house_or_flat_no": "456C",
 		"state": "BENUE",
 		"LGA": "Ado",
 		"email": "test@yopmail.com",
 		"alt_phone_number": "08110000000",
-		"postalcode": "746583",
+		"postalcode": "972101",
 		"occupation": "Aeronautical Engineer",
 		"area": "AGILA",
 		"passport_ID_number": "6861637BC",

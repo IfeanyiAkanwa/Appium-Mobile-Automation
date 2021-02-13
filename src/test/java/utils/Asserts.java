@@ -25,7 +25,9 @@ public class Asserts extends TestBase {
 		String typeOfRegistration = getDriver().findElement(By.xpath("//android.widget.TextView[@text='Individual']")).getText();
 		String surName = getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/surNameTXT")).getText();
 		String firstName = getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/firstNameTXT")).getText();
+
 		TestUtils.scrollDown();
+
 		String middleName = getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/middleNameTXT")).getText();
 		String mothersMaidenName = getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/momsMaidenNameTXT"))
 				.getText();
