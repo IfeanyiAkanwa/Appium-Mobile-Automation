@@ -33,7 +33,7 @@ public class ReactivationTest extends TestBase {
 		String valid_password = (String) envs.get("valid_password");
 		String lga = (String) envs.get("lga");
 	
-		TestBase.Login1(dataEnv, valid_username, valid_password);
+		TestBase.Login1( valid_username, valid_password);
 		Thread.sleep(500);
 		TestUtils.testTitle("To confirm that a user without Msisdn Reactivation privilege can't access the module");
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/button_start_capture")).click();
