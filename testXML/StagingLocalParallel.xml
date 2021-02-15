@@ -17,70 +17,70 @@
 		<parameter name="deviceName" value="SeamfixTab"/>
 
 		<classes>
-            <!--<class name="admin.Login">-->
-                <!--<methods>-->
-                    <!--<include name="usernamePasswordLogin" />-->
-                    <!--<include name="fingerprintLogin" />-->
-                    <!--<include name="deactivateAccount"/>-->
-                    <!--<include name="forgotPassword" />-->
-					<!--<include name="validUserIdLogin" />-->
-					<!--<include name="erorrMessagesBiosmartValidationTest" />-->
-					<!--<include name="erorrMessagesActiveDirectoryValidationTest" />-->
-					<!--<include name="activeDirectoryValidLoginTest"/>-->
-				<!--</methods>-->
-            <!--</class>-->
-			<!--<class name="admin.ForgotPassword">-->
-				<!--<methods>-->
-					<!--<include name="navigateToForgotPasswordTest" />-->
-					<!--<include name="erorrMessagesValidationTest" />-->
-					<!--<include name="changePasswordWithInvalidUsernameTest" />-->
-					<!--<include name="changePasswordWithValidUsernameTest" />-->
-					<!--<include name="loginWithNewPasswordTest" />-->
-				<!--</methods>-->
-			<!--</class>-->
-			<!--<class name="admin.ChangePasswordTest">-->
-				<!--<methods>-->
-					<!--<include name="Login" />-->
-					<!--<include name="navigateToChangePasswordPage" />-->
-					<!--<include name="changeToNewPassword" />-->
-					<!--<include name="loginWithNewPassword" />-->
-					<!--<include name="changeBackToOldPassword" />-->
-					<!--<include name="loginWithOldPassword" />-->
-				<!--</methods>-->
-			<!--</class>-->
-			<!--<class name="admin.NotificationsTest">-->
-				<!--<methods>-->
-					<!--<include name="Login" />-->
-					<!--<include name="navigateToNotifications" />-->
-					<!--<include name="viewNotifications" />-->
-				<!--</methods>-->
-			<!--</class>-->
-			<!--<class name="admin.ReportsTest">-->
-				<!--<methods>-->
-					<!--<include name="Login" />-->
-					<!--<include name="navigateToReportsPage" />-->
-					<!--<include name="reportSummary" />-->
-					<!--<include name="searchParameters" />-->
-				<!--</methods>-->
-			<!--</class>-->
-			<!--<class-->
-				<!--name="admin.NewRegistration">-->
-				<!--<methods>-->
-					<!--<include name="Login" />-->
-					<!--<include name="navigateToCaptureMenuTest" />-->
-					<!--<include name="msisdnCategoryAndNDCValidationTest" />-->
-					<!--<include name="msisdnSimSerialValidationTest" />-->
-					<!--<include name="captureNewSimTest" />-->
-				<!--</methods>-->
-			<!--</class>-->
-			<!--<class name="admin.SearchTest">-->
-				<!--<methods>-->
-					<!--<include name="Login" />-->
-					<!--<include name="navigateToSearchTest" />-->
-					<!--<include name="searchByMsisdnTest" />-->
-					<!--<include name="searchBySimSerialTest" />-->
-				<!--</methods>-->
-			<!--</class>-->
+            <class name="admin.Login">
+                <methods>
+                    <include name="usernamePasswordLogin" />
+                    <include name="fingerprintLogin" />
+                    <include name="deactivateAccount"/>
+                    <include name="forgotPassword" />
+					<include name="validUserIdLogin" />
+					<include name="erorrMessagesBiosmartValidationTest" />
+					<include name="erorrMessagesActiveDirectoryValidationTest" />
+					<include name="activeDirectoryValidLoginTest"/>
+				</methods>
+            </class>
+			<class name="admin.ForgotPassword">
+				<methods>
+					<include name="navigateToForgotPasswordTest" />
+					<include name="erorrMessagesValidationTest" />
+					<include name="changePasswordWithInvalidUsernameTest" />
+					<include name="changePasswordWithValidUsernameTest" />
+					<include name="loginWithNewPasswordTest" />
+				</methods>
+			</class>
+			<class name="admin.ChangePasswordTest">
+				<methods>
+					<include name="Login" />
+					<include name="navigateToChangePasswordPage" />
+					<include name="changeToNewPassword" />
+					<include name="loginWithNewPassword" />
+					<include name="changeBackToOldPassword" />
+					<include name="loginWithOldPassword" />
+				</methods>
+			</class>
+			<class name="admin.NotificationsTest">
+				<methods>
+					<include name="Login" />
+					<include name="navigateToNotifications" />
+					<include name="viewNotifications" />
+				</methods>
+			</class>
+			<class name="admin.ReportsTest">
+				<methods>
+					<include name="Login" />
+					<include name="navigateToReportsPage" />
+					<include name="reportSummary" />
+					<include name="searchParameters" />
+				</methods>
+			</class>
+			<class
+				name="admin.NewRegistration">
+				<methods>
+					<include name="Login" />
+					<include name="navigateToCaptureMenuTest" />
+					<include name="msisdnCategoryAndNDCValidationTest" />
+					<include name="msisdnSimSerialValidationTest" />
+					<include name="captureNewSimTest" />
+				</methods>
+			</class>
+			<class name="admin.SearchTest">
+				<methods>
+					<include name="Login" />
+					<include name="navigateToSearchTest" />
+					<include name="searchByMsisdnTest" />
+					<include name="searchBySimSerialTest" />
+				</methods>
+			</class>
 			<class name="admin.ReRegistrationCapture">
 				<methods>
 					<include name="Login" />
@@ -88,42 +88,42 @@
 					<include name="reRegisteration" />
 				</methods>
 			</class>
-			<!--<class name="admin.AgentOnBoardingTest">-->
-				<!--<methods>-->
-					<!--<include name="onboardedAgentLoginTest" />-->
-					<!--<include name="navigateToAgentOnBoardingTest" />-->
-					<!--<include name="agentOnBoardingTest" />-->
-				<!--</methods>-->
-			<!--</class>-->
-			<!--<class name="admin.BiometricUpdate">-->
-				<!--<methods>-->
-					<!--<include name="Login" />-->
-					<!--<include name="navigateToCaptureMenuTest" />-->
-					<!--<include name="captureBiometricUpdate" />-->
-				<!--</methods>-->
-			<!--</class>-->
-			<!--<class name="admin.AdditionalRegistration">-->
-				<!--<methods>-->
-					<!--<include name="Login" />-->
-					<!--<include name="navigateToCaptureMenuTest" />-->
-					<!--<include name="additionalRegistrationTest" />-->
-				<!--</methods>-->
-			<!--</class>-->
-			<!--<class name="admin.SimSwap">-->
-				<!--<methods>-->
-					<!--<include name="Login" />-->
-					<!--<include name="navigateToCaptureMenuTest" />-->
-					<!--<include name="simSwapTest" />-->
-				<!--</methods>-->
-			<!--</class>-->
-			<!--<class name="admin.ReactivationTest">-->
-				<!--<methods>-->
-					<!--<include name="noneReactivationPrivilegeTest" />-->
-					<!--<include name="Login" />-->
-					<!--<include name="navigateToCaptureMenuTest" />-->
-					<!--<include name="msisdnReactivationTest" />-->
-				<!--</methods>-->
-			<!--</class>-->
+			<class name="admin.AgentOnBoardingTest">
+				<methods>
+					<include name="onboardedAgentLoginTest" />
+					<include name="navigateToAgentOnBoardingTest" />
+					<include name="agentOnBoardingTest" />
+				</methods>
+			</class>
+			<class name="admin.BiometricUpdate">
+				<methods>
+					<include name="Login" />
+					<include name="navigateToCaptureMenuTest" />
+					<include name="captureBiometricUpdate" />
+				</methods>
+			</class>
+			<class name="admin.AdditionalRegistration">
+				<methods>
+					<include name="Login" />
+					<include name="navigateToCaptureMenuTest" />
+					<include name="additionalRegistrationTest" />
+				</methods>
+			</class>
+			<class name="admin.SimSwap">
+				<methods>
+					<include name="Login" />
+					<include name="navigateToCaptureMenuTest" />
+					<include name="simSwapTest" />
+				</methods>
+			</class>
+			<class name="admin.ReactivationTest">
+				<methods>
+					<include name="noneReactivationPrivilegeTest" />
+					<include name="Login" />
+					<include name="navigateToCaptureMenuTest" />
+					<include name="msisdnReactivationTest" />
+				</methods>
+			</class>
 		</classes>
 	</test>
 </suite>

@@ -162,6 +162,7 @@ public class ReRegistrationCapture extends TestBase {
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/change_sim_ownership", "Change of Ownership");
 		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/change_sim_ownership")).click();
 		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/change_sim_ownership")).click();
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/change_sim_ownership")).click();
 
 		//MSISDN With Fingerprint
 		TestUtils.testTitle("Verify that fingerprint match option is the default option available to the user if user fingerprint is returned (WSQL is retreived): "+msisdnWithFingerprint);
