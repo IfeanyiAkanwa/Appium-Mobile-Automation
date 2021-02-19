@@ -30,7 +30,7 @@ public class NotificationsTest extends TestBase {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
         getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc=\"Navigate up\"]")).click();
         Thread.sleep(500);
-        getDriver().findElement(By.id("com.sf.biocapture.activity:id/navigation_item_notification")).click();
+        getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Notifications']")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Notification']")));
         TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Notification']", "Notification");
     }
