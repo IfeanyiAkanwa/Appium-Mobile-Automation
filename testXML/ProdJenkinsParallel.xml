@@ -57,11 +57,11 @@
             <class
 				name="admin.NewRegistration">
 				<methods>
-					<include name="Login" />
-					<include name="navigateToCaptureMenuTest" />
-					<include name="msisdnCategoryAndNDCValidationTest" />
-					<include name="msisdnSimSerialValidationTest" />
-					<include name="captureNewSimTest" />
+                    <include name="Login" />
+                    <include name="navigateToCaptureMenuTest" />
+                    <include name="msisdnCategoryAndNDCValidationTest" />
+                    <include name="captureIndividualSimTest" />
+                    <include name="captureCompanyNewSimTest" />
 				</methods>
 			</class>
             <class name="admin.ReactivationTest">
