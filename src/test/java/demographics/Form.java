@@ -47,7 +47,6 @@ public class Form extends TestBase {
 		String nin = (String) envs.get("nin");
 
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Personal Details']")));
-		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Personal Details']", "Personal Details");
 		Thread.sleep(2000);
 
 		// personal details
@@ -597,6 +596,7 @@ public class Form extends TestBase {
 		getDriver().findElement(By.xpath("//android.widget.TextView[@text='" + company_lga_address + "']")).click();
 		Thread.sleep(500);
 
+		TestUtils.scrollDown();
 		// Postal code
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/company_postalcode")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/company_postalcode")).sendKeys(company_postalcode);
@@ -617,13 +617,17 @@ public class Form extends TestBase {
 		File pic = new File(System.getProperty("user.dir") + "/files/idCard.jpg");
 		getDriver().pushFile("/storage/emulated/0/picture.jpg", pic);
 
+		TestUtils.scrollDown();
+
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/btn_load_document")).click();
 		Thread.sleep(500);
 		TestUtils.scrollUntilElementIsVisible("XPATH", "//android.widget.TextView[@text='picture.jpg']");
 		getDriver().findElement(By.xpath("//android.widget.TextView[@text='picture.jpg']")).click();
 		Thread.sleep(500);
+		TestUtils.scrollDown();
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/btn_remove_document")).click();
 		Thread.sleep(500);
+		TestUtils.scrollDown();
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/btn_load_document")).click();
 		Thread.sleep(1000);
 		TestUtils.scrollUntilElementIsVisible("XPATH", "//android.widget.TextView[@text='picture.jpg']");
@@ -631,12 +635,15 @@ public class Form extends TestBase {
 		Thread.sleep(500);
 
 		// contact person form
+		TestUtils.scrollDown();
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/document_type_spinner")).click();
 		Thread.sleep(500);
 		getDriver().findElement(By.xpath("//android.widget.TextView[@text='Contact Person Form *']")).click();
 		Thread.sleep(500);
+		TestUtils.scrollDown();
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/btn_remove_document")).click();
 		Thread.sleep(500);
+		TestUtils.scrollDown();
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/btn_load_document")).click();
 		Thread.sleep(1000);
 		TestUtils.scrollUntilElementIsVisible("XPATH", "//android.widget.TextView[@text='picture.jpg']");
@@ -653,10 +660,12 @@ public class Form extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/surNameTXT")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/surNameTXT")).sendKeys(surname);
 
+		TestUtils.scrollDown();
+
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/firstNameTXT")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/firstNameTXT")).sendKeys(firstname);
 
-		TestUtils.scrollDown();
+
 
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/middleNameTXT")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/middleNameTXT")).sendKeys(middlename);
@@ -755,12 +764,13 @@ public class Form extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/houseNumberEditText")).sendKeys(house_or_flat_no);
 		Thread.sleep(500);
 
+		TestUtils.scrollDown();
+
 		// Street
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/streetEditText")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/streetEditText")).sendKeys(street);
 		Thread.sleep(500);
 
-		TestUtils.scrollDown();
 
 		// City
 		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/citySpinner")).click();
@@ -778,29 +788,15 @@ public class Form extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/btnNext")).click();
 		Thread.sleep(500);
 
-		// Proceed with registration without completing the capture process
-		TestUtils.testTitle("Proceed with registration without completing the capture process");
-		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Capture Data']", "Capture Data");
-		Thread.sleep(1000);
-		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/nextButton")).click();
-		Thread.sleep(500);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/alertTitle")));
-		TestUtils.assertSearchText("ID", "android:id/message",
-				"\n" + "KYC Form: Please Capture KYC/REGISTRATION Form \n" +
-						"Identification Type: Please capture means of identification \n"
-						+ "Face Capture: Please capture valid portrait \n" + "");
-		getDriver().findElement(By.id("android:id/button1")).click();
-		Thread.sleep(1000);
-
-		// Capture Identification Type
 		TestUtils.testTitle("Capture Identification Type");
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Capture Data']")));
-		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Identification Type']", "Identification Type");
+		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='[Select Identification Type]']", "[Select Identification Type]");
+		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/identificationTypeSpinner")).click();
 		Thread.sleep(500);
 
 		// Capture ID CARD
-		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='National ID card']")).click();
+		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Passport']")).click();
 		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/captureIdButton")).click();
 		Thread.sleep(1500);
@@ -809,7 +805,7 @@ public class Form extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/ok")).click();
 		Thread.sleep(500);
 
-		// Document Nuumber
+		// Document Number
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/documentNumber")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/documentNumber")).sendKeys(documentNumber);
 		Thread.sleep(500);
@@ -827,8 +823,9 @@ public class Form extends TestBase {
 			}
 		} catch (NoSuchElementException ex) {
 			getDriver().findElement(By.id("android:id/date_picker_header_year")).click();
-			Thread.sleep(500);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='2022']")));
 			getDriver().findElement(By.xpath("//android.widget.TextView[@text='2022']")).click();
+			getDriver().findElement(By.id("android:id/button1")).click();
 		}
 
 		// View Captured ID
@@ -844,6 +841,42 @@ public class Form extends TestBase {
 		}
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/done_button")).click();
 		Thread.sleep(500);
+
+		//COO Form
+		TestUtils.testTitle("Upload COO Form");
+		try{
+			TestUtils.scrollDown();
+			// Push File
+			File pic2 = new File(System.getProperty("user.dir") + "/files/idCard.jpg");
+			getDriver().pushFile("/storage/emulated/0/picture.jpg", pic2);
+
+			getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/documentUploadSpinner")).click();
+			Thread.sleep(500);
+			TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='Affidavit']", "Affidavit");
+			TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='Letter of Authorization']", "Letter of Authorization");
+			TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='Newspaper Record']", "Newspaper Record");
+			TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='WAEC Result']", "WAEC Result");
+			getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Affidavit']")).click();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/uploadDocumentBtn")));
+			getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/uploadDocumentBtn")).click();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='picture.jpg']")));
+
+			TestUtils.scrollUntilElementIsVisible("XPATH", "//android.widget.TextView[@text='picture.jpg']");
+			getDriver().findElement(By.xpath("//android.widget.TextView[@text='picture.jpg']")).click();
+			Thread.sleep(500);
+			getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/btn_remove_document")).click();
+			Thread.sleep(500);
+			getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/uploadDocumentBtn")).click();
+			Thread.sleep(1000);
+			TestUtils.scrollDown();
+			getDriver().findElement(By.xpath("//android.widget.TextView[@text='picture.jpg']")).click();
+			Thread.sleep(500);
+		}catch (Exception e){
+
+		}
+
+		TestUtils.scrollDown();
+
 
 		// Capture KYC FORM
 		TestUtils.testTitle("Capture KYC FORM");
@@ -869,24 +902,28 @@ public class Form extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/done_button")).click();
 		Thread.sleep(500);
 
+		TestUtils.scrollDown();
 		// Face Capture
 		TestUtils.testTitle("Face Capture");
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity." + Id + ":id/faceCaptureButton", "FACE CAPTURE *");
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/faceCaptureButton")).click();
 		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/captureButton")).click();
-		Thread.sleep(1000);
-		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/ok")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/alertTitle")));
+		TestUtils.assertSearchText("ID", "android:id/message", "Subscriber's face was successfully captured");
+		getDriver().findElement(By.id("android:id/button1")).click();
 		Thread.sleep(500);
 
 		//Click next button
-		getDriver().findElement(By.xpath("com.sf.biocapture.activity.glo:id/nextButton")).click();
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/nextButton")).click();
 
 		//Fingerprint capture
 
 		//Submit without overriding fingerprint
 		TestUtils.testTitle("Save Enrollment without overriding fingerprint");
-		getDriver().findElement(By.xpath("com.sf.biocapture.activity.glo:id/fp_save_enrolment")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/btn_multi_capture")));
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/btn_multi_capture", "MULTI CAPTURE");
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/fp_save_enrolment")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/alertTitle")));
 		TestUtils.assertSearchText("ID", "android:id/message", "No finger was captured");
 		getDriver().findElement(By.id("android:id/button1")).click();
@@ -894,12 +931,10 @@ public class Form extends TestBase {
 
 
 		//Override left hand
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/btn_multi_capture")));
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/btn_multi_capture", "MULTI CAPTURE");
-		getDriver().findElement(By.xpath("com.sf.biocapture.activity.glo:id/btn_override_left")).click();
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/btn_override_left")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
 		TestUtils.assertSearchText("ID", "android:id/message", "Are you sure? Note that you have to provide a reason");
-		getDriver().findElement(By.xpath("android:id/button1")).click();
+		getDriver().findElement(By.id("android:id/button1")).click();
 		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/captureButton")).click();
 		Thread.sleep(1000);
@@ -910,7 +945,7 @@ public class Form extends TestBase {
 
 		//Submit without overriding right hand
 		TestUtils.testTitle("Save Enrollment without capturing Right Hand");
-		getDriver().findElement(By.xpath("com.sf.biocapture.activity.glo:id/fp_save_enrolment")).click();
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/fp_save_enrolment")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/alertTitle")));
 		TestUtils.assertSearchText("ID", "android:id/message", "RIGHT HAND wasn't overridden, and all selected RIGHT HAND fingers were not captured.");
 		getDriver().findElement(By.id("android:id/button1")).click();
@@ -919,10 +954,10 @@ public class Form extends TestBase {
 		//Override right hand
 		TestUtils.scrollDown();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/btn_override_right")));
-		getDriver().findElement(By.xpath("com.sf.biocapture.activity.glo:id/btn_override_right")).click();
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/btn_override_right")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
 		TestUtils.assertSearchText("ID", "android:id/message", "Are you sure? Note that you have to provide a reason");
-		getDriver().findElement(By.xpath("android:id/button1")).click();
+		getDriver().findElement(By.id("android:id/button1")).click();
 		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/captureButton")).click();
 		Thread.sleep(1000);
@@ -936,7 +971,7 @@ public class Form extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/fp_save_enrolment")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
 		TestUtils.assertSearchText("ID", "android:id/message", "Captured record was saved successfully");
-		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/ok")).click();
+		getDriver().findElement(By.id("android:id/button1")).click();
 
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
 		TestUtils.assertSearchText("ID", "android:id/message", "Do you wish to Top Up the registered subscriber ?");

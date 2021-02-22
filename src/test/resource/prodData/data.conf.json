@@ -7,7 +7,7 @@
 		"invalid_password": "adazejohn@1",
 		"valid_password": "Bankole1!!",
 		"deactivated_username": "amusa.adewaleibrahim@mtnagent.com",
-		"invalid_email_format" : "@seamfix.com",
+		"invalid_email_format": "@seamfix.com",
 		"AD_UserName": "seamfixadconnect",
 		"valid_AD_pw": "S3@mf1x747",
 		"BS_email": "virgyonline1000@gmail.com",
@@ -40,144 +40,145 @@
 		"searchParam": "SIM"
 	},
 	"NewRegistration": {
-		"NewRegistration": {
-		"valid_msisdn": "08159437736",
-		"invalid_msisdn": "764785",
-		"invalid_simSerial": "177606",
-		"valid_simSerial": "8923450608191696491F",
-		"lga": "Ibeju-Lekki",
-		"valid_fixed_msisdn": "080500066",
-		"valid_fixed_serial": "8923456000000000066F",
-		"invalidPrefixMsisdn" : "07083799086",
-		"invalidPrefixSimSerial" : "8923420037187785273F",
-		"valid_msisdn2" : "08159434191",
-		"valid_simSerial2" : "8923450608191696434F"
-	},
-	"Reactivation": {
-		"valid_msisdn": "09062058526",
-		"invalid_msisdn": "08083733777",
-		"lga": "Ibeju-Lekki",
-		"valid_username": "e.okafor@seamfix.com",
-		"valid_password": "bankole1!!",
-		"invalid_OTP": "00000"
-	},
-	"SellAirtimeAndData": {
-		"valid_username": "folalere@seamfix.com",
-		"valid_password": "Bankole1!!",
-		"agent_vtu": "08032791952",
-		"sub_msisdn": "08169548454",
-		"amount": "50",
-		"invalid_agent_vtu": "08133302299",
-		"invalid_OTP": "00000"
-	},
-	"Search": {
-		"valid_msisdn": "1111113116",
-		"valid_sim_serial_no": "11111111111111111365"
-	},
-	"ReRegistration": {
-		"valid_msisdn": "09062059126",
-		"invalid_msisdn": "08169548454",
-		"invalid_OTP": "00000",
-		"alternate_phone": "08142050326",
-		"lga": "Ibeju-Lekki",
-		"state": "BENUE",
-		"LGA": "Ado",
-		"msisdnLessThanSix": "123",
-		"unrecognizedMsisdn": "11111111111",
-		"msisdnWithFingerprint": "08050000009",
-		"ninVerificationMode": "Search By NIN",
-		"nin": "11111111111"
-	},
-	"AgentOnboarding": {
-		"valid_username": "fatube@seamfix.com",
-		"valid_password": "Bankole1!!",
-		"agent_phoNum": "08069548454",
-		"agent_email": "gokafor@seamfix.com",
-		"onboardedAgent": "e.okafor@seamfix.com",
-		"invalid_email": "y.com@x.com",
-		"invalid_OTP": "00000",
-		"used_OTP": "25269"
-	},
-	"BiometricUpdate": {
-		"valid_msisdn": "08142050913",
-		"invalid_msisdn": "08169548454",
-		"area": "AKILO",
-		"lga": "Ibeju-Lekki"
-	},
-	"NewSimSerialRegistration": {
-		"valid_simSerial": "11111111111111111367",
-		"invalid_simSerial": "11111111111",
-		"area": "AKILO",
-		"lga": "Ibeju-Lekki"
-	},
-	"AdditionalRegistration": {
-		"valid_Msisdn": "08142050025",
-		"invalid_Msisdn": "09062059126",
-		"lga": "Ibeju-Lekki"
-	},
-	"SIMSwap": {
-		"valid_Msisdn": "08142050025",
-		"invalid_Msisdn": "08169548454",
-		"lga": "Ibeju-Lekki"
-	},
-	"UserDetails": {
-		"surname": "Amanda",
-		"firstname": "Rock",
-		"middlename": "Brain",
-		"maiden_name": "Merlin",
-		"social_media_type": "INSTAGRAM",
-		"social_media_username": "@testusers",
-		"street": "Neville Street",
-		"city": "Aba",
-		"nationality": "NIGERIA",
-		"state": "BENUE",
-		"LGA": "Ado",
-		"documentNumber": "89733736AD"
-	},
-	"CompanyDetails": {
-		"house_or_flat_no": "456C",
-		"company_regno": "NIG/LAG/16253",
-		"company_description": "Seamfix Nigeria QA test",
-		"company_street": "Lekki Leasing House",
-		"company_city": "Lekki",
-		"company_state_address": "ABIA",
-		"company_lga_address": "Aba North",
-		"company_postalcode": "5200",
-		"email": "test@yopmail.com",
-		"alt_phone_number": "08110000000",
-		"postalcode": "746583",
-		"occupation": "Aeronautical Engineer",
-		"states_residence": "ABIA",
-		"lga_residence": "Aba North",
-		"area": "ARIARIA",
-		"lga_of_reg": "Agege",
-		"nin": "11111111111",
-		"postalcode": "450101"
-	},
-	"IndividualForeignerDetails": {
-		"surname": "Saraswati",
-		"firstname": "Joubert",
-		"middlename": "Ganga",
-		"maiden_name": "Merlin",
-		"social_media_type": "INSTAGRAM",
-		"social_media_username": "@ganga",
-		"street": "Banaris",
-		"city": "Otukpo",
-		"nationality": "ALBANIA",
-		"house_or_flat_no": "456C",
-		"state": "BENUE",
-		"LGA": "Ado",
-		"email": "test@yopmail.com",
-		"alt_phone_number": "08110000000",
-		"postalcode": "972101",
-		"occupation": "Aeronautical Engineer",
-		"area": "AGILA",
-		"passport_ID_number": "6861637BC",
-		"lga_of_reg": "Agege",
-		"documentNumber": "89733736AD",
-		"nin": "11111111111"
-	},
-	"LandingPage_Url": {
-	"prodUrl": "http:simreg.mtnnigeria.net"
-	}
+			"valid_msisdn": "08159437736",
+			"invalid_msisdn": "764785",
+			"invalid_simSerial": "177606",
+			"valid_simSerial": "8923450608191696491F",
+			"lga": "Ibeju-Lekki",
+			"valid_fixed_msisdn": "080500066",
+			"valid_fixed_serial": "8923456000000000066F",
+			"invalidPrefixMsisdn": "07083799086",
+			"invalidPrefixSimSerial": "8923420037187785273F",
+			"valid_msisdn2": "08159434191",
+			"valid_simSerial2": "8923450608191696434F",
+			"ninVerificationMode": "Search By NIN",
+			"nin": "11111111111"
+		},
+		"Reactivation": {
+			"valid_msisdn": "09062058526",
+			"invalid_msisdn": "08083733777",
+			"lga": "Ibeju-Lekki",
+			"valid_username": "e.okafor@seamfix.com",
+			"valid_password": "bankole1!!",
+			"invalid_OTP": "00000"
+		},
+		"SellAirtimeAndData": {
+			"valid_username": "folalere@seamfix.com",
+			"valid_password": "Bankole1!!",
+			"agent_vtu": "08032791952",
+			"sub_msisdn": "08169548454",
+			"amount": "50",
+			"invalid_agent_vtu": "08133302299",
+			"invalid_OTP": "00000"
+		},
+		"Search": {
+			"valid_msisdn": "1111113116",
+			"valid_sim_serial_no": "11111111111111111365"
+		},
+		"ReRegistration": {
+			"valid_msisdn": "09062059126",
+			"invalid_msisdn": "08169548454",
+			"invalid_OTP": "00000",
+			"alternate_phone": "08142050326",
+			"lga": "Ibeju-Lekki",
+			"state": "BENUE",
+			"LGA": "Ado",
+			"msisdnLessThanSix": "123",
+			"unrecognizedMsisdn": "11111111111",
+			"msisdnWithFingerprint": "08050000009",
+			"ninVerificationMode": "Search By NIN",
+			"nin": "11111111111"
+		},
+		"AgentOnboarding": {
+			"valid_username": "fatube@seamfix.com",
+			"valid_password": "Bankole1!!",
+			"agent_phoNum": "08069548454",
+			"agent_email": "gokafor@seamfix.com",
+			"onboardedAgent": "e.okafor@seamfix.com",
+			"invalid_email": "y.com@x.com",
+			"invalid_OTP": "00000",
+			"used_OTP": "25269"
+		},
+		"BiometricUpdate": {
+			"valid_msisdn": "08142050913",
+			"invalid_msisdn": "08169548454",
+			"area": "AKILO",
+			"lga": "Ibeju-Lekki"
+		},
+		"NewSimSerialRegistration": {
+			"valid_simSerial": "11111111111111111367",
+			"invalid_simSerial": "11111111111",
+			"area": "AKILO",
+			"lga": "Ibeju-Lekki"
+		},
+		"AdditionalRegistration": {
+			"valid_Msisdn": "08142050025",
+			"invalid_Msisdn": "09062059126",
+			"lga": "Ibeju-Lekki"
+		},
+		"SIMSwap": {
+			"valid_Msisdn": "08142050025",
+			"invalid_Msisdn": "08169548454",
+			"lga": "Ibeju-Lekki"
+		},
+		"UserDetails": {
+			"surname": "Amanda",
+			"firstname": "Rock",
+			"middlename": "Brain",
+			"maiden_name": "Merlin",
+			"social_media_type": "INSTAGRAM",
+			"social_media_username": "@testusers",
+			"street": "Neville Street",
+			"city": "Aba",
+			"nationality": "NIGERIA",
+			"state": "BENUE",
+			"LGA": "Ado",
+			"documentNumber": "89733736AD"
+		},
+		"CompanyDetails": {
+			"house_or_flat_no": "456C",
+			"company_regno": "NIG/LAG/16253",
+			"company_description": "Seamfix Nigeria QA test",
+			"company_street": "Lekki Leasing House",
+			"company_city": "Lekki",
+			"company_state_address": "ABIA",
+			"company_lga_address": "Aba North",
+			"company_postalcode": "5200",
+			"email": "test@yopmail.com",
+			"alt_phone_number": "08110000000",
+			"postalcode": "746583",
+			"occupation": "Aeronautical Engineer",
+			"states_residence": "ABIA",
+			"lga_residence": "Aba North",
+			"area": "ARIARIA",
+			"lga_of_reg": "Agege",
+			"nin": "11111111111",
+			"postalcode": "450101"
+		},
+		"IndividualForeignerDetails": {
+			"surname": "Saraswati",
+			"firstname": "Joubert",
+			"middlename": "Ganga",
+			"maiden_name": "Merlin",
+			"social_media_type": "INSTAGRAM",
+			"social_media_username": "@ganga",
+			"street": "Banaris",
+			"city": "Otukpo",
+			"nationality": "ALBANIA",
+			"house_or_flat_no": "456C",
+			"state": "BENUE",
+			"LGA": "Ado",
+			"email": "test@yopmail.com",
+			"alt_phone_number": "08110000000",
+			"postalcode": "972101",
+			"occupation": "Aeronautical Engineer",
+			"area": "AGILA",
+			"passport_ID_number": "6861637BC",
+			"lga_of_reg": "Agege",
+			"documentNumber": "89733736AD",
+			"nin": "11111111111"
+		},
+		"LandingPage_Url": {
+			"prodUrl": "http:simreg.mtnnigeria.net"
+		}
 }

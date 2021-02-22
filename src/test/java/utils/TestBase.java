@@ -316,4 +316,52 @@ public class TestBase {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/reg_type_placeholder")));
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity." + Id + ":id/reg_type_placeholder","Registration Type");
 	}
+
+	@Test
+	public static void verifyNINTest(String nin, String ninVerificationMode) throws InterruptedException {
+		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+
+		//Proceed to NIN Verification View
+		TestUtils.testTitle("Select NIN Verification Mode: "+ninVerificationMode);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/alertTitle")));
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/alertTitle", "NIN Verification");
+
+		//Select NIN Verification Type
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/verification_modes")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/alertTitle")));
+		getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+ninVerificationMode+"']")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/alertTitle")));
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/proceed")).click();
+
+		//Search by NIN Modal
+		TestUtils.testTitle("Click on Search without supplying NIN");
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/nin")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/capture_button")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/error_text")));
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/error_text", "Only numbers and minimum of 11 characters are allowed");
+
+		TestUtils.testTitle("Search NIN with less than 11 digits: 11111");
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/nin")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/nin")).sendKeys("11111");
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/capture_button")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/error_text")));
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/error_text", "Only numbers and minimum of 11 characters are allowed");
+
+		TestUtils.testTitle("Search by NIN: "+nin);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/title")));
+		TestUtils.assertSearchText("ID", "android:id/title", "Search By Nin");
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/nin")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/nin")).sendKeys(nin);
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/capture_button")).click();
+
+		//NIN Details View
+		TestUtils.testTitle("Confirm the searched NIN is returned: "+nin);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/title")));
+		TestUtils.assertSearchText("ID", "android:id/title", "NIN Details");
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/nin", nin);
+
+		//Proceed
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/proceed_button")).click();
+
+	}
 }

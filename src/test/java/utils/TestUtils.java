@@ -42,6 +42,7 @@ public class TestUtils extends TestBase {
         return "data:image/png;base64," + encodedBase64;
     }
 
+
     /**
      * @param type
      * @param element
