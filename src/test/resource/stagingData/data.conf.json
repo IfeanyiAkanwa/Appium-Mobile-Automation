@@ -8,7 +8,7 @@
 		"valid_password": "Bankole1!!",
 		"valid_pw": "Glo1user11!!",
 		"blacklisted_username": "ada@yopmail.com",
-        "blacklisted_password": "Bankole11!!",
+		"blacklisted_password": "Bankole11!!",
 		"deactivated_username": "akin.ugwu@mtnagent.com",
 		"invalid_email_format" : "@seamfix.com",
 		"AD_UserName": "seamfixadconnect",
@@ -16,8 +16,8 @@
 		"BS_email": "virgyonline1000@gmail.com",
 		"AD_UserName1": "camaike",
 		"BS_email1": "camaike@seamfix.com",
-        "valid_userid": "SS08057577391_00001",
-        "valid_useridpw": "Bankole2!!"
+		"valid_userid": "SS08057577391_00001",
+		"valid_useridpw": "Bankole2!!"
 	},
 	"Login2": {
 		"onboarded_username": "adazejohnson@gmail.com",
@@ -102,11 +102,11 @@
 		"nin": "11111111111"
 	},
 	"AgentOnboarding": {
-		"valid_username": "fatube@seamfix.com",
-		"valid_password": "Bankole1!!",
-		"agent_phoNum": "08143049728",
-		"agent_email": "benjamin.muogbo@mtnagent.com",
-		"onboardedAgent": "e.okafor@seamfix.com",
+		"valid_username": "vnwauwa@seamfix.com",
+		"valid_password": "Bankole11!!",
+		"agent_phoNum": "08153288700",
+		"agent_email": "aoluwabusola@seamfix.com",
+		"onboardedAgent": "vnwauwa@seamfix.com",
 		"invalid_email": "y.com@x.com",
 		"invalid_OTP": "00000",
 		"used_OTP": "25269"
@@ -207,6 +207,6 @@
 		"nin": "11111111111"
 	},
 	"LandingPage_Url": {
-	"stagingUrl": "https:simregtest.gloworld.com"
+		"stagingUrl": "https:simregtest.gloworld.com"
 	}
 }
