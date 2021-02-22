@@ -17,7 +17,7 @@
 		<parameter name="deviceName" value="SeamfixTab"/>
 
 		<classes>
-			<!--<class name="admin.Login">
+			<class name="admin.Login">
                 <methods>
                     <include name="usernamePasswordLogin" />
                     <include name="fingerprintLogin" />
@@ -90,7 +90,6 @@
                     <include name="reRegisterationTest" />
                 </methods>
             </class>
-            -->
             <class name="admin.AgentOnBoardingTest">
                 <methods>
                     <include name="onboardedAgentLoginTest" />
@@ -98,7 +97,7 @@
                     <include name="agentOnBoardingTest" />
                 </methods>
             </class>
-            <!--<class name="admin.BiometricUpdate">
+            <class name="admin.BiometricUpdate">
                 <methods>
                     <include name="Login" />
                     <include name="navigateToCaptureMenuTest" />
@@ -126,7 +125,7 @@
                     <include name="navigateToCaptureMenuTest" />
                     <include name="msisdnReactivationTest" />
                 </methods>
-            </class>-->
+            </class>
 		</classes>
 	</test>
 </suite>
