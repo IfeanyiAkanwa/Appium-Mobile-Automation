@@ -26,11 +26,13 @@
                     <include name="activeDirectoryValidLoginTest"/>
                 </methods>
             </class>
-            <class name="admin.CaptureNewSimSerialRegistration">
+            <class name="admin.SimSwap">
                 <methods>
-                    <include name="Login"/>
-                    <include name="NavigateToCaptureMenuTest"/>
-                    <include name="RegisterNewSimSerialTest"/>
+                    <include name="noneSIMSwapPrivilegeTest" />
+                    <include name="Login" />
+                    <include name="navigateToCaptureMenuTest" />
+                    <include name="navigateToSimSwapViewTest" />
+                    <include name="simSwapViewValidationTest" />
                 </methods>
             </class>
             <class name="admin.ReRegistrationCapture">
