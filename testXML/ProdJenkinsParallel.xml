@@ -109,6 +109,12 @@
                     <include name="loginWithOldPassword" />
                 </methods>
             </class>
+            <class name="admin.AgentSupport">
+                <methods>
+                    <include name="Login" />
+                    <include name="navigateToAgentSupport" />
+                </methods>
+            </class>
         </classes>
     </test>
 </suite>

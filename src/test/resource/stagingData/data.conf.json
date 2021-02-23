@@ -149,7 +149,12 @@
 	"SIMSwap": {
 		"valid_Msisdn": "08142050025",
 		"invalid_Msisdn": "08169548454",
-		"lga": "Ibeju-Lekki"
+		"lga": "Ibeju-Lekki",
+		"valid_username": "eze.sfxtest@yopmail.com",
+		"valid_password": "Bankole1!!",
+		"invalid_otp": "00000",
+		"expired_otp": "43349",
+		"otp_phone_number": "08073387430"
 	},
 	"UserDetails": {
 		"surname": "Amanda",
@@ -207,6 +212,9 @@
 		"lga_of_reg": "Agege",
 		"documentNumber": "89733736AD",
 		"nin": "11111111111"
+	},
+	"AgentSupport": {
+
 	},
 	"LandingPage_Url": {
 	"stagingUrl": "https:simregtest.gloworld.com"
