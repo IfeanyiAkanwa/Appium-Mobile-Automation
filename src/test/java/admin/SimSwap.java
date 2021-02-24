@@ -369,6 +369,7 @@ public class SimSwap extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/btnValidate")).click();
 
 		//Validate OTP if Setting is turned ON
+		TestBase.verifyNINTest("11111111111", "Search By NIN");
 
 
 
