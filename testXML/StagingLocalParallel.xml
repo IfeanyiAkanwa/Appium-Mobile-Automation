@@ -120,14 +120,14 @@
                     <include name="simSwapViewValidationTest" />
                 </methods>
             </class>
-            <!--<class name="admin.ReactivationTest">-->
-                <!--<methods>-->
-                    <!--<include name="noneReactivationPrivilegeTest" />-->
-                    <!--<include name="Login" />-->
-                    <!--<include name="navigateToCaptureMenuTest" />-->
-                    <!--<include name="msisdnReactivationTest" />-->
-                <!--</methods>-->
-            <!--</class>-->
+            <class name="admin.ReactivationTest">
+                <methods>
+                    <include name="noneReactivationPrivilegeTest" />
+                    <include name="Login" />
+                    <include name="navigateToCaptureMenuTest" />
+                    <include name="msisdnReactivationTest" />
+                </methods>
+            </class>
 			<!--<class name="admin.AgentSupport">-->
 				<!--<methods>-->
 					<!--<include name="Login" />-->

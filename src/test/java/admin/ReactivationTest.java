@@ -72,6 +72,7 @@ public class ReactivationTest extends TestBase {
 		Thread.sleep(500);
 		getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
 		Thread.sleep(500);
+		TestUtils.scrollDown();
 		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Logout']")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
 		TestUtils.assertSearchText("ID", "android:id/message", "   Log out?");
@@ -141,7 +142,7 @@ public class ReactivationTest extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/primary_msisdn_field")).sendKeys(valid_msisdn);
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/submit_button")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/otp_field")));
-		Thread.sleep(1000);
+
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/otp_field")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/otp_field")).sendKeys(invalid_OTP);
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/otp_confirm_button")).click();
@@ -149,6 +150,10 @@ public class ReactivationTest extends TestBase {
 	    TestUtils.assertSearchText("ID", "android:id/message", "There is no record with the otp, msisdn combination.");
 	    getDriver().findElement(By.id("android:id/button1")).click();
 	    Thread.sleep(500);
+		//OTP Buttons
+		TestUtils.testTitle("Confirm Request OTP, Confirm OTP and Bypass OTP buttons are displayed");
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/otp_confirm_button", "CONFIRM OTP");
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/otp_request_button", "REQUEST OTP");
 	     
 		// Enter valid msisdn with valid OTP
 	    TestUtils.testTitle("Enter valid msisdn with valid OTP: " + valid_msisdn + " for validation");
@@ -157,30 +162,42 @@ public class ReactivationTest extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/submit_button")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/otp_field")));
         Thread.sleep(1000);
-        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/otp_request_button")).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/alertTitle")));
-        Thread.sleep(1000);
-        
+
+
+		//Test Cancel Button on Request OTP Modal
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/otp_request_button")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/otpHintMessage")));
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/cancel_otp")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/otp_request_button")));
+
+		//Request OTP Modal
+		TestUtils.testTitle("Request OTP Modal");
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/otp_request_button")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/otpHintMessage")));
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/otpHintMessage", "Tick options for OTP Request");
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/primary_phone_number", "Primary Phone Number");
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/alt_phone_number", "Alternate Phone Number");
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/email_address", "Email Address");
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/cancel_otp", "CANCEL");
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/request_otp", "REQUEST");
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/alt_phone_number")).click();
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/request_otp")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/otp_field")));
+
+
         // DB Connection for OTP
     	String valid_OTP = ConnectDB.getOTP(valid_msisdn);
 
     	TestUtils.testTitle("Enter valid OTP: " + valid_OTP);
-        if(valid_OTP == null){
-        	testInfo.get().log(Status.INFO, "Can't get otp.");
-            getDriver().quit();
-        }
-        Thread.sleep(2000);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/otp_field")));
+
         getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/otp_field")).clear();
         getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/otp_field")).sendKeys(valid_OTP);
         getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/otp_confirm_button")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/reactivate_button")));
-        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity." + Id + ":id/reactivate_button", "Reactivate Subscriber");
+        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity." + Id + ":id/reactivate_button", "REACTIVATE SUBSCRIBER");
         getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/reactivate_button")).click();
-        Thread.sleep(1000);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='MSISDN has been reactivated successfully.']")));
         TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='MSISDN has been reactivated successfully.']", "MSISDN has been reactivated successfully.");
         getDriver().findElement(By.id("android:id/button1")).click();
-        Thread.sleep(500);
     }
 }

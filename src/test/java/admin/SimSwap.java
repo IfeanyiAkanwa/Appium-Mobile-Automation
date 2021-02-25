@@ -257,10 +257,10 @@ public class SimSwap extends TestBase {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/existingMsisdnField")));
 
 		//Enter NON digits
-		TestUtils.testTitle("Enter Invalid Existing MSISDN formart: "+invalid_Msisdn_Format);
-		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/existingMsisdnField")).clear();
-		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/existingMsisdnField")).sendKeys(invalid_Msisdn_Format);
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/existingMsisdnField","Enter Existing MSISDN*");
+//		TestUtils.testTitle("Enter Invalid Existing MSISDN formart: "+invalid_Msisdn_Format);
+//		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/existingMsisdnField")).clear();
+//		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/existingMsisdnField")).sendKeys(invalid_Msisdn_Format);
+//		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/existingMsisdnField","Enter Existing MSISDN*");
 
 		//Enter Existing MSISDN greater than 11 digits
 		TestUtils.testTitle("Enter Existing MSISDN greater than 11 digits: "+msisdn_greater_than_11_digits);
@@ -304,10 +304,10 @@ public class SimSwap extends TestBase {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/newMsisdnField")));
 
 		//Enter NON digits
-		TestUtils.testTitle("Enter Invalid New MSISDN formart: "+invalid_Msisdn_Format);
-		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/newMsisdnField")).clear();
-		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/newMsisdnField")).sendKeys(invalid_Msisdn_Format);
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/newMsisdnField","Enter New MSISDN");
+//		TestUtils.testTitle("Enter Invalid New MSISDN formart: "+invalid_Msisdn_Format);
+//		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/newMsisdnField")).clear();
+//		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/newMsisdnField")).sendKeys(invalid_Msisdn_Format);
+//		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/newMsisdnField","Enter New MSISDN");
 
 		//Enter New MSISDN greater than 11 digits
 		TestUtils.testTitle("Enter New MSISDN greater than 11 digits: "+msisdn_greater_than_11_digits);
