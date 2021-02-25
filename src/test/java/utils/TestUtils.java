@@ -15,6 +15,9 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
 import java.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Collection;
 
 public class TestUtils extends TestBase {
@@ -89,8 +92,8 @@ public class TestUtils extends TestBase {
         }
     }
 
-    @SuppressWarnings({ "rawtypes", "deprecation" })
-	public static void scroll(int fromX, int fromY, int toX, int toY) {
+    @SuppressWarnings({"rawtypes", "deprecation"})
+    public static void scroll(int fromX, int fromY, int toX, int toY) {
         TouchAction touchAction = new TouchAction(getDriver());
         touchAction.longPress(fromX, fromY).moveTo(toX, toY).release().perform();
     }
@@ -101,6 +104,7 @@ public class TestUtils extends TestBase {
         int topY = getDriver().manage().window().getSize().height / 8;
         scroll(pressX, bottomY, pressX, topY);
     }
+
     public static void scrollUp() {
         int pressX = getDriver().manage().window().getSize().width / 2;
         int bottomY = getDriver().manage().window().getSize().height * 4 / 5;
@@ -184,7 +188,7 @@ public class TestUtils extends TestBase {
         }
         return builder.toString();
     }
-    
+
     public static boolean validateParams(Object... params) {
 
         for (Object param : params) {
@@ -215,7 +219,7 @@ public class TestUtils extends TestBase {
 
         return true;
     }
-    
+
     public static Integer convertToInt(String value) throws InterruptedException {
         Integer result = null;
         String convertedString = value.replaceAll("[^0-9]", "");
@@ -230,39 +234,115 @@ public class TestUtils extends TestBase {
         return result;
 
     }
-    
+
     public static void testTitle(String phrase) {
-		String word = "<b>"+phrase+"</b>";
+        String word = "<b>" + phrase + "</b>";
         Markup w = MarkupHelper.createLabel(word, ExtentColor.BLUE);
         testInfo.get().info(w);
-	}
-    
+    }
+
     /**
-	 * @return number
-	 * @description to generate a 11 digit number.
-	 */
-	public static String generatePhoneNumber() {
+     * @return number
+     * @description to generate a 11 digit number.
+     */
+    public static String generatePhoneNumber() {
 
-		long y = (long) (Math.random() * 100000 + 0113330000L);
-		String Surfix = "081";
-		String num = Long.toString(y);
-		String number = Surfix + num;
-		return number;
+        long y = (long) (Math.random() * 100000 + 0113330000L);
+        String Surfix = "081";
+        String num = Long.toString(y);
+        String number = Surfix + num;
+        return number;
 
-	}
-	
-	/**
-	 * @return sim serial number
-	 * @description to generate a 19 digit number.
-	 */
-	public static String generateSimSrial() {
+    }
 
-		long y = (long) (Math.random() * 1000000000 + 011333000000000000L);
-		String Surfix = "8923";
-		String num = Long.toString(y);
-		String simSerialNumber = Surfix + num + "F";
-		return simSerialNumber;
+    /**
+     * @return sim serial number
+     * @description to generate a 19 digit number.
+     */
+    public static String generateSimSrial() {
 
-	}
+        long y = (long) (Math.random() * 1000000000 + 011333000000000000L);
+        String Surfix = "8923";
+        String num = Long.toString(y);
+        String simSerialNumber = Surfix + num + "F";
+        return simSerialNumber;
 
+    }
+
+    public static Calendar yyyymmddToDate(String dateString) {
+        Calendar dateDate = Calendar.getInstance();
+
+        try {
+            String[] dateArray = dateString.split("-");
+            int year = Integer.valueOf(dateArray[0]);
+            int month = Integer.valueOf(dateArray[1]) - 1;
+            int day = Integer.valueOf(dateArray[2]);
+
+            dateDate.set(year, month, day);
+        } catch (NumberFormatException e) {
+            String[] dateArray = dateString.split("/");
+            int year = Integer.valueOf(dateArray[0]);
+            int month = Integer.valueOf(dateArray[1]) - 1;
+            int day = Integer.valueOf(dateArray[2]);
+
+            dateDate.set(year, month, day);
+        }
+
+        return dateDate;
+    }
+
+    public static Calendar mmddyyyyToDate(String dateString) {
+        Calendar dateDate = Calendar.getInstance();
+
+        try {
+            String[] dateArray = dateString.split("-");
+            int month = Integer.valueOf(dateArray[0]) - 1;
+            int day = Integer.valueOf(dateArray[1]);
+            int year = Integer.valueOf(dateArray[2]);
+
+            dateDate.set(month, day, year);
+        } catch (NumberFormatException e) {
+            String[] dateArray = dateString.split("/");
+            int month = Integer.valueOf(dateArray[0]) - 1;
+            int day = Integer.valueOf(dateArray[1]);
+            int year = Integer.valueOf(dateArray[2]);
+
+            dateDate.set(month, day, year);
+        }
+
+        return dateDate;
+    }
+
+    public static void checkDateBoundary(String start, String end, String verify) {
+        Calendar startDate = mmddyyyyToDate(start);
+        Calendar endDate = mmddyyyyToDate(end);
+        Calendar verifyDate = yyyymmddToDate(verify);
+
+        if (verifyDate.before(startDate) && verifyDate.after(endDate)) {
+            testInfo.get().error("Record not within date range");
+        } else {
+            testInfo.get().info("Record within date range");
+        }
+    }
+
+    public static void checkDateyYMDBoundary(String start, String end, String verify) {
+        Calendar startDate = yyyymmddToDate(start);
+        Calendar endDate = yyyymmddToDate(end);
+        Calendar verifyDate = yyyymmddToDate(verify);
+
+        if (verifyDate.before(startDate) && verifyDate.after(endDate)) {
+            testInfo.get().error("Record not within date range");
+        } else {
+            testInfo.get().info("Record within date range");
+        }
+    }
+
+    public static String convertDate(String returnedDate) throws ParseException {
+        SimpleDateFormat sdf;
+        sdf = new SimpleDateFormat("dd/MM/yy, hh:mm a");
+        SimpleDateFormat sdff = new SimpleDateFormat("yyyy-MM-dd");
+        String formattedDate = sdff.format(sdf.parse(returnedDate));
+        testInfo.get().info("Date returned: " + formattedDate);
+        return formattedDate;
+    }
 }

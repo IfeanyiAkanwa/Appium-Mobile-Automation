@@ -134,8 +134,12 @@
 			</class>
 			<class name="admin.AgentSupport">
 				<methods>
-					<include name="Login" />
-					<include name="navigateToAgentSupport" />
+					<include name="Login"/>
+					<include name="navigateToAgentSupport"/>
+					<include name="searchTest"/>
+					<include name="assertSearchDetailsTest"/>
+					<include name="logIssueByUser"/>
+					<include name="logIssueByKit"/>
 				</methods>
 			</class>
 		</classes>
