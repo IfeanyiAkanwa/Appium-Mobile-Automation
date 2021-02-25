@@ -139,12 +139,21 @@
 		"lga_of_reg": "Agege"
 	},
 	"AdditionalRegistration": {
-		"pri_valid_Msisdn": "11111111100",
-		"invalid_Msisdn": "083377",
+		"pri_valid_Msisdn": "07058351178",
+		"valid_Msisdn": "08113825224",
+		"invalid_Msisdn": "081133",
 		"lga": "Ibeju-Lekki",
 		"invalid_simSerial": "03733577",
-		"pri_valid_simSerial": "1111111111111111100F",
-		"new_valid_simSerial": "083377"
+		"pri_valid_simSerial": "8923450412192350244F",
+		"valid_simSerial": "8923450410192953306F",
+		"new_valid_simSerial": "083377",
+		"valid_username": "eze.sfxtest@yopmail.com",
+		"invalid_number": "0813372",
+		"valid_password": "Bankole1!!",
+		"company_Msisdn": "09056982570",
+		"company_serial": "8923450205180264678F",
+		"individual_Msisdn": "09055329127",
+		"individual_serial": "8923450710194933911F"
 	},
 	"SIMSwap": {
 		"valid_Msisdn": "08142050025",
