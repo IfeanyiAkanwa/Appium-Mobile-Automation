@@ -113,9 +113,11 @@
             </class>
             <class name="admin.SimSwap">
                 <methods>
+					<include name="noneSIMSwapPrivilegeTest" />
                     <include name="Login" />
                     <include name="navigateToCaptureMenuTest" />
-                    <include name="simSwapTest" />
+					<include name="navigateToSimSwapViewTest" />
+                    <include name="simSwapViewValidationTest" />
                 </methods>
             </class>
             <class name="admin.ReactivationTest">
@@ -126,6 +128,12 @@
                     <include name="msisdnReactivationTest" />
                 </methods>
             </class>
+			<class name="admin.AgentSupport">
+				<methods>
+					<include name="Login" />
+					<include name="navigateToAgentSupport" />
+				</methods>
+			</class>
 		</classes>
 	</test>
 </suite>
