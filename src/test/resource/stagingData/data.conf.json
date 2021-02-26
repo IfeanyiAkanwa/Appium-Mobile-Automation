@@ -153,8 +153,10 @@
 		"valid_password": "Bankole1!!",
 		"company_Msisdn": "09056982570",
 		"company_serial": "8923450205180264678F",
-		"individual_Msisdn": "09055329127",
-		"individual_serial": "8923450710194933911F"
+		"incomplete_Msisdn": "09055329127",
+		"incomplete_serial": "8923450710194933911F",
+		"individual_Msisdn": "09056982570",
+		"individual_serial": "8923450205180264678F"
 	},
 	"SIMSwap": {
 		"valid_Msisdn": "08142050025",

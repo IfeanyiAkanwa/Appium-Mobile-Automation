@@ -2,8 +2,8 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="BioSmartSuite" parallel="tests" thread-count="3">
 	<parameter name="groupReport" value="/DroidReport.html" />
-	<!--<parameter name="toMails" value="sosepadeolu@seamfix.com;cngwu@seamfix.com;vnwauwa@seamfix.com;dadejuwon@seamfix.com;soli@seamfix.com" />-->
-    <parameter name="toMails" value="sosepadeolu@seamfix.com;cngwu@seamfix.com;soli@seamfix.com" />
+	<!--<parameter name="toMails" value="sosepadeolu@seamfix.com;vnwauwa@seamfix.com;dadejuwon@seamfix.com;soli@seamfix.com" />-->
+    <parameter name="toMails" value="sosepadeolu@seamfix.com;cngwu@seamfix.com;" />
 	<parameter name="config" value="data.conf.json" />
 	<parameter name="environment" value="chrome" />
 	<parameter name="testConfig" value="parallel.conf.json" />
@@ -18,7 +18,7 @@
 		<parameter name="deviceName" value="SeamfixTab"/>
 
 		<classes>
-			<!--<class name="admin.Login">
+			<class name="admin.Login">
                 <methods>
                     <include name="usernamePasswordLogin" />
                     <include name="fingerprintLogin" />
@@ -104,20 +104,20 @@
                     <include name="navigateToCaptureMenuTest" />
                     <include name="captureBiometricUpdate" />
                 </methods>
-            </class>-->
+            </class>
             <class name="admin.AdditionalRegistration">
                 <methods>
 					<include name="noneAdditionalPrivilegeTest" />
                     <include name="Login" />
                     <include name="navigateToCaptureMenuTest" />
-                    <include name="additionalRegPrivilegedUseCase" />
+                    <include name="navigateToAddReg" />
 					<include name="MsisdnCategory" />
 					<include name="additionalRegistration" />
 					<include name="additionalRegTypePrivilege" />
 					<include name="ndcRule" />
                 </methods>
             </class>
-            <!--<class name="admin.SimSwap">
+            <class name="admin.SimSwap">
                 <methods>
                     <include name="Login" />
                     <include name="navigateToCaptureMenuTest" />
@@ -131,7 +131,7 @@
                     <include name="navigateToCaptureMenuTest" />
                     <include name="msisdnReactivationTest" />
                 </methods>
-            </class>-->
+            </class>
 		</classes>
 	</test>
 </suite>
