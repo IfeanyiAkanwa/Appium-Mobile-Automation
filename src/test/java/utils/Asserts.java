@@ -420,7 +420,7 @@ public class Asserts extends TestBase {
 
 	public static void assertSubscriberFullNameAddReg() throws Exception {
 
-		String assertDetails = "Assert Returned Subscriber Full name after Number Validation";
+		String assertDetails = "Assert returned subscriber full name after number validation";
 		Markup ad = MarkupHelper.createLabel(assertDetails, ExtentColor.BLUE);
 		testInfo.get().info(ad);
 		String firstName = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/tv_first_name")).getText();

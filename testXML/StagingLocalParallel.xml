@@ -3,7 +3,7 @@
 <suite name="BioSmartSuite" parallel="tests" thread-count="3">
 	<parameter name="groupReport" value="/DroidReport.html" />
 	<!--<parameter name="toMails" value="sosepadeolu@seamfix.com;cngwu@seamfix.com;vnwauwa@seamfix.com;dadejuwon@seamfix.com;soli@seamfix.com" />-->
-    <parameter name="toMails" value="sosepadeolu@seamfix.com;cngwu@seamfix.com;" />
+    <parameter name="toMails" value="sosepadeolu@seamfix.com;" />
 	<parameter name="config" value="data.conf.json" />
 	<parameter name="environment" value="chrome" />
 	<parameter name="testConfig" value="parallel.conf.json" />
@@ -113,9 +113,8 @@
                     <include name="additionalRegPrivilegedUseCase" />
 					<include name="MsisdnCategory" />
 					<include name="additionalRegistration" />
-					<include name="inCompleteBioData" />
 					<include name="additionalRegTypePrivilege" />
-					<include name="NCDrule" />
+					<include name="ndcRule" />
                 </methods>
             </class>
             <!--<class name="admin.SimSwap">
