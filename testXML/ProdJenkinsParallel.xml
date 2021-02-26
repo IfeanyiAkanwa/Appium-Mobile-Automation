@@ -26,13 +26,6 @@
                     <include name="activeDirectoryValidLoginTest"/>
                 </methods>
             </class>
-            <class name="admin.CaptureNewSimSerialRegistration">
-                <methods>
-                    <include name="Login"/>
-                    <include name="NavigateToCaptureMenuTest"/>
-                    <include name="RegisterNewSimSerialTest"/>
-                </methods>
-            </class>
             <class name="admin.ReRegistrationCapture">
                 <methods>
                     <include name="Login" />
@@ -107,6 +100,25 @@
                     <include name="loginWithNewPassword"/>
                     <include name="changeBackToOldPassword"/>
                     <include name="loginWithOldPassword" />
+                </methods>
+            </class>
+            <class name="admin.SimSwap">
+                <methods>
+                    <include name="noneSIMSwapPrivilegeTest" />
+                    <include name="Login"/>
+                    <include name="navigateToCaptureMenuTest" />
+                    <include name="navigateToSimSwapViewTest" />
+                    <include name="simSwapViewValidationTest" />
+                </methods>
+            </class>
+            <class name="admin.AgentSupport">
+                <methods>
+                    <include name="Login"/>
+                    <include name="navigateToAgentSupport"/>
+                    <include name="searchTest"/>
+                    <include name="assertSearchDetailsTest"/>
+                    <include name="logIssueByUser"/>
+                    <include name="logIssueByKit"/>
                 </methods>
             </class>
         </classes>
