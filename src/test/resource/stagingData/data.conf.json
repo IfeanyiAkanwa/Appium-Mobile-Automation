@@ -250,6 +250,9 @@
     "description": "This is the description given of issues",
     "last_two_digits_of_yr": "21, 00:00 AM"
   },
+  "MNP": {
+    "": ""
+  },
   "LandingPage_Url": {
     "stagingUrl": "https:simregtest.gloworld.com"
   }
