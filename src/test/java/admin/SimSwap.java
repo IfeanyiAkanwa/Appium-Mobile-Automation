@@ -1,6 +1,7 @@
 package admin;
 
 import db.ConnectDB;
+import io.appium.java_client.android.AndroidKeyCode;
 import utils.TestBase;
 
 import java.io.FileReader;
@@ -194,8 +195,12 @@ public class SimSwap extends TestBase {
 		String msisdn_less_than_11_digits = (String) envs.get("msisdn_less_than_11_digits");
 		String unrecognizedMsisdn = (String) envs.get("unrecognizedMsisdn");
 		String valid_Msisdn = (String) envs.get("valid_Msisdn");
+        String invalid_Msisdn = (String) envs.get("invalid_Msisdn");
+        String invalid_new_Msisdn  = (String) envs.get("invalid_new_Msisdn");
 		String new_msisdn = (String) envs.get("new_msisdn");
 		String valid_sim_serial = (String) envs.get("valid_sim_serial");
+		String approver_username = (String) envs.get("approver_username");
+        String approver_password = (String) envs.get("approver_password");
 
 		TestUtils.testTitle("Validate SIM Swap View Details");
 
@@ -366,14 +371,132 @@ public class SimSwap extends TestBase {
 		//Enter Valid New Sim Serail
 		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/simSerialField")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/simSerialField")).sendKeys(valid_sim_serial);
+
+
+		//Confirm that user can't proceed with invalid Old MSISDN
+        TestUtils.testTitle("Confirm that user can't proceed with invalid Old MSISDN ("+invalid_Msisdn+")");
+        //Enter invalid existing MSISDN
+        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/existingMsisdnField")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/existingMsisdnField")).sendKeys(invalid_Msisdn);
+        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/btnValidate")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/alertTitle")));
+        TestUtils.assertSearchText("ID", "android:id/message", "Old Msisdn : MSISDN is not registered and cannot be used for this use case");
+        getDriver().findElement(By.id("android:id/button1")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/existingMsisdnField")));
+
+        //Enter Valid existing MSISDN
+        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/existingMsisdnField")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/existingMsisdnField")).sendKeys(valid_Msisdn);
+
+        //Confirm that user can't proceed with invalid Old MSISDN
+        TestUtils.testTitle("Confirm that user can't proceed with invalid New MSISDN ("+invalid_new_Msisdn+")");
+        //Enter invalid existing MSISDN
+        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/newMsisdnField")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/newMsisdnField")).sendKeys(invalid_new_Msisdn);
+        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/btnValidate")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/alertTitle")));
+        TestUtils.assertSearchText("ID", "android:id/message", "New Msisdn : Target MSISDN is not available for SIM Swap. Kindly use another MSISDN");
+        getDriver().findElement(By.id("android:id/button1")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/newMsisdnField")));
+
+        //Insert Back Valid New MSISDN
+        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/newMsisdnField")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/newMsisdnField")).sendKeys(new_msisdn);
+
 		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/btnValidate")).click();
 
-		//Validate OTP if Setting is turned ON
+		//Check for Approve Sim Swap Validation
+        try{
+            TestUtils.testTitle("Approve Sim Swap Validation");
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/alertTitle")));
+            TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/alertTitle", "Approve Sim Swap Validation");
+            getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/approve_username")).clear();
+            getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/approve_username")).sendKeys(approver_username);
+            getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/approve_password")).clear();
+            getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/approve_password")).sendKeys(approver_password);
+            getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/approve")).click();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/dialog_title")));
+			TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/alertTitle", "Approval Status");
+			TestUtils.assertSearchText("ID", "android:id/message", "Successfully approved!");
+			getDriver().findElement(By.id("android:id/button1")).click();
+        }catch(Exception e){
+
+        }
+		//Confirm There is no otp verification when SIM Swap is selected
+        TestUtils.testTitle("Confirm There is no otp verification when SIM Swap is selected");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/alertTitle")));
+        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/alertTitle", "NIN Verification");
+
+        //Confirm OTP Verification when Sim Upgrade is selected
+        TestUtils.testTitle("Confirm OTP Verification when Sim Upgrade is selected");
+        getDriver().pressKeyCode(AndroidKeyCode.BACK);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/swapCategory")));
+        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/swapCategory")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='SIM UPGRADE']")));
+        getDriver().findElement(By.xpath("//android.widget.TextView[@text='SIM UPGRADE']")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='SIM UPGRADE']")));
+
+        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/btnValidate")).click();
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/dialog_title")));
+        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/dialog_title", "OTP verification");
+
+        String otp = ConnectDB.getOTPWithoutPhoneNumber();
+
+        TestUtils.testTitle("Submit without entering OTP");
+        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/user_input_dialog")).clear();
+        getDriver().findElement(By.id("android:id/button1")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/error_message")));
+        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/error_message", "Required Input Field: OTP");
+
+        TestUtils.testTitle("Invalid OTP Test: u57267");
+        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/user_input_dialog")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/user_input_dialog")).sendKeys("u57267");
+        getDriver().findElement(By.id("android:id/button1")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/alertTitle")));
+        TestUtils.assertSearchText("ID", "android:id/message", "There is no record with the otp, msisdn combination.");
+        getDriver().findElement(By.id("android:id/button1")).click();
+        //Check for Approve Sim Swap Validation
+        try{
+            TestUtils.testTitle("Approve Sim Swap Validation");
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/alertTitle")));
+            TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/alertTitle", "Approve Sim Swap Validation");
+            getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/approve_username")).clear();
+            getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/approve_username")).sendKeys(approver_username);
+            getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/approve_password")).clear();
+            getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/approve_password")).sendKeys(approver_password);
+            getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/approve")).click();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/dialog_title")));
+			TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/alertTitle", "Approval Status");
+			TestUtils.assertSearchText("ID", "android:id/message", "Successfully approved!");
+			getDriver().findElement(By.id("android:id/button1")).click();
+        }catch(Exception e){
+
+        }
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/dialog_title")));
+
+        TestUtils.testTitle("Valid OTP Test: "+otp);
+        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/user_input_dialog")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/user_input_dialog")).sendKeys(otp);
+        getDriver().findElement(By.id("android:id/button1")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/alertTitle")));
+        TestUtils.assertSearchText("ID", "android:id/message", "The specified otp and msisdn combinations are valid.");
+        getDriver().findElement(By.id("android:id/button1")).click();
+
+		//Verify NIN
 		TestBase.verifyNINTest("11111111111", "Search By NIN");
-
-
-
 	}
+
+    @Parameters({ "dataEnv"})
+    @Test
+    public void assertFieldsDisplayed(String dataEnv) throws Exception {
+
+	    TestUtils.testTitle("Assert ");
+
+
+
+    }
 	
 	@Parameters({ "dataEnv"})
     @Test
