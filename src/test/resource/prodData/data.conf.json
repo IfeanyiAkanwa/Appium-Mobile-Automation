@@ -111,10 +111,26 @@
     "area": "AKILO",
     "lga": "Ibeju-Lekki"
   },
+
   "AdditionalRegistration": {
-    "valid_Msisdn": "08142050025",
-    "invalid_Msisdn": "09062059126",
-    "lga": "Ibeju-Lekki"
+    "pri_valid_Msisdn": "07058351178",
+    "valid_Msisdn": "08113825224",
+    "fixed_Msisdn": "08113825212",
+    "invalid_Msisdn": "08113326363",
+    "lga": "Ibeju-Lekki",
+    "invalid_simSerial": "03733577",
+    "pri_valid_simSerial": "8923450412192350244F",
+    "valid_simSerial": "8923450410192953306F",
+    "new_valid_simSerial": "083377",
+    "valid_username": "eze.sfxtest@yopmail.com",
+    "invalid_number": "089343363",
+    "valid_password": "Bankole1!!",
+    "company_Msisdn": "09056982570",
+    "company_serial": "8923450205180264678F",
+    "incomplete_Msisdn": "09055329127",
+    "incomplete_serial": "8923450710194933911F",
+    "individual_Msisdn": "09056982570",
+    "individual_serial": "8923450205180264678F"
   },
   "SIMSwap": {
     "valid_Msisdn": "08118071446",
