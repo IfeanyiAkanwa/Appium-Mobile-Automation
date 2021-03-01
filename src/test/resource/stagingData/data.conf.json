@@ -220,6 +220,9 @@
 		"documentNumber": "89733736AD",
 		"nin": "11111111111"
 	},
+	"MNP": {
+
+	},
 	"LandingPage_Url": {
 	"stagingUrl": "https:simregtest.gloworld.com"
 	}
