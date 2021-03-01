@@ -141,6 +141,7 @@
             </class>-->
             <class name="admin.MobileNumberPorting">
                 <methods>
+					<!--<include name="noneMNPTest"/>-->
                     <include name="Login"/>
                     <include name="mobileNumberPortability"/>
                 </methods>
