@@ -83,6 +83,8 @@ public class MobileNumberPorting extends TestBase {
 
         String pri_valid_Msisdn = (String) envs.get("pri_valid_Msisdn");
         String pri_valid_simSerial = (String) envs.get("pri_valid_simSerial");
+        String invalid_Msisdn = (String) envs.get("invalid_Msisdn");
+        String invalid_simSerial = (String) envs.get("invalid_simSerial");
 
         //To confirm that there is a Registration type called Mobile Number Porting
         TestUtils.testTitle("To confirm that there is a Registration type called Mobile Number Porting");
@@ -92,6 +94,7 @@ public class MobileNumberPorting extends TestBase {
         TestUtils.assertSearchText("ID", "com.sf.biocapture.activity." + Id + ":id/alertTitle", "Select Registration Type");
         TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='Mobile Number Porting']", "Mobile Number Porting");
 
+        //To confirm that only  a user with MOBILE NUMBER PORTABILITY privilege can perform port-in-request
         TestUtils.testTitle("To confirm that only  a user with MOBILE NUMBER PORTABILITY privilege can perform port-in-request");
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Mobile Number Porting']")).click();
         getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/next_button")).click();
@@ -117,7 +120,53 @@ public class MobileNumberPorting extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/primary_msisdn_field")).sendKeys(moreCharacters);
         TestUtils.assertSearchText("ID", "com.sf.biocapture.activity." + Id + ":id/primary_msisdn_field", pri_valid_Msisdn);
 
+        //To verify that if the msisdn entered fails validation, an error message should be displayed and user should not be allowed to proceed
+        /*TestUtils.testTitle("To verify that if the msisdn entered fails validation, an error message should be displayed ("+invalid_Msisdn+")");
+        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/primary_msisdn_field")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/primary_msisdn_field")).sendKeys(invalid_Msisdn);
+        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/sim_serial")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/sim_serial")).sendKeys(pri_valid_simSerial);
+        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/validate_serial_button")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/button1")));
+        TestUtils.assertSearchText("ID", "android:id/message", "Record not found");
+        getDriver().findElement(By.id("android:id/button1")).click();*/
+
+        //To verify that if the sim serial entered fails validation, an error message should be displayed and user should not be allowed to proceed
+        TestUtils.testTitle("To verify that if the sim serial entered fails validation, an error message should be displayed ("+invalid_simSerial+")");
+        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/primary_msisdn_field")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/primary_msisdn_field")).sendKeys(pri_valid_Msisdn);
+        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/sim_serial")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/sim_serial")).sendKeys(invalid_simSerial);
+        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/validate_serial_button")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/button1")));
+        TestUtils.assertSearchText("ID", "android:id/message", "Sim Serial format is invalid");
+        getDriver().findElement(By.id("android:id/button1")).click();
+
+        //To confirm that an empty demographic form is displayed when the NEXT button is clicked
+        TestUtils.testTitle("To confirm that an empty demographic form is displayed when the NEXT button is clicked ("+pri_valid_Msisdn+")");
+        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/primary_msisdn_field")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/primary_msisdn_field")).sendKeys(pri_valid_Msisdn);
+        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/sim_serial")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/sim_serial")).sendKeys(pri_valid_simSerial);
+        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/validate_serial_button")).click();
+        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity." + Id + ":id/collapsingToolbar", "Basic Information - Personal Details");
+
+        //To confirm that there is Client Acivity Log for  port-in requests
+        TestUtils.testTitle("To confirm that there is Client Acivity Log for  port-in requests");
+
         Thread.sleep(50000);
 
     }
+
+    @Parameters({ "dataEnv"})
+    @Test
+    public void vanityNumberReg(String dataEnv) throws Exception {
+
+        WebDriverWait wait = new WebDriverWait(getDriver(), 60);
+        JSONParser parser = new JSONParser();
+        JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
+        JSONObject envs = (JSONObject) config.get("MNP");
+        getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
+    }
+
 }
