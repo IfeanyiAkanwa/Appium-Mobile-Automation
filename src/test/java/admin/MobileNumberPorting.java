@@ -3,6 +3,8 @@ package admin;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.Markup;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.openqa.selenium.WebDriverException;
 import utils.Asserts;
 import utils.TestBase;
 
@@ -85,6 +87,8 @@ public class MobileNumberPorting extends TestBase {
         String pri_valid_simSerial = (String) envs.get("pri_valid_simSerial");
         String invalid_Msisdn = (String) envs.get("invalid_Msisdn");
         String invalid_simSerial = (String) envs.get("invalid_simSerial");
+        String invalid_number = (String) envs.get("invalid_number");
+        String valid_simSerial = (String) envs.get("valid_simSerial");
 
         //To confirm that there is a Registration type called Mobile Number Porting
         TestUtils.testTitle("To confirm that there is a Registration type called Mobile Number Porting");
@@ -121,11 +125,11 @@ public class MobileNumberPorting extends TestBase {
         TestUtils.assertSearchText("ID", "com.sf.biocapture.activity." + Id + ":id/primary_msisdn_field", pri_valid_Msisdn);
 
         //To verify that if the msisdn entered fails validation, an error message should be displayed and user should not be allowed to proceed
-        /*TestUtils.testTitle("To verify that if the msisdn entered fails validation, an error message should be displayed ("+invalid_Msisdn+")");
+        /*TestUtils.testTitle("To verify that if the msisdn entered fails validation, an error message should be displayed ("+invalid_number+")");
         getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/primary_msisdn_field")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/primary_msisdn_field")).sendKeys(invalid_Msisdn);
+        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/primary_msisdn_field")).sendKeys(invalid_number);
         getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/sim_serial")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/sim_serial")).sendKeys(pri_valid_simSerial);
+        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/sim_serial")).sendKeys(valid_simSerial);
         getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/validate_serial_button")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/button1")));
         TestUtils.assertSearchText("ID", "android:id/message", "Record not found");
@@ -149,12 +153,18 @@ public class MobileNumberPorting extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/sim_serial")).clear();
         getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/sim_serial")).sendKeys(pri_valid_simSerial);
         getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/validate_serial_button")).click();
-        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity." + Id + ":id/collapsingToolbar", "Basic Information - Personal Details");
+        Thread.sleep(1000);
+        TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Personal Details']", "Personal Details");
+
+        //To verify that the button to Validate Sim Serial is enabled and functional .
+        TestUtils.testTitle("To verify that the button to Validate Sim Serial is enabled and functional.");
+        TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Personal Details']", "Personal Details");
 
         //To confirm that there is Client Acivity Log for  port-in requests
         TestUtils.testTitle("To confirm that there is Client Acivity Log for  port-in requests");
 
-        Thread.sleep(50000);
+
+
 
     }
 
@@ -166,7 +176,98 @@ public class MobileNumberPorting extends TestBase {
         JSONParser parser = new JSONParser();
         JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
         JSONObject envs = (JSONObject) config.get("MNP");
-        getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
-    }
 
+        String pri_valid_Msisdn = (String) envs.get("pri_valid_Msisdn");
+        String pri_valid_simSerial = (String) envs.get("pri_valid_simSerial");
+        String invalid_Msisdn = (String) envs.get("invalid_Msisdn");
+        String invalid_simSerial = (String) envs.get("invalid_simSerial");
+        String middle_name = (String) envs.get("middle_name");
+        String surname = (String) envs.get("surname");
+        String first_name = (String) envs.get("first_name");
+        String mothers_maiden_name = (String) envs.get("mothers_maiden_name");
+
+        //To confirm that only users with the VNR privilege is able to register vanity numbers
+        TestUtils.testTitle("To confirm that only users with the VNR privilege is able to register vanity numbers");
+        getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/typeofreg")));
+        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/typeofreg")).click();
+        Thread.sleep(1000);
+        getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Mobile Number Porting']")).click();
+        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/next_button")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Mobile Number Porting']")));
+        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity." + Id + ":id/dya_check_box", "Vanity Number");
+
+        try {
+            boolean check = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/dya_check_box")).isEnabled();
+            if (check==false){
+                //To ensure the checkbox option that allows a user with VNR privilege to select vanity number option is available
+                TestUtils.testTitle("To ensure the checkbox option that allows a user with VNR privilege to select vanity number option is available");
+                TestUtils.assertSearchText("ID", "com.sf.biocapture.activity." + Id + ":id/dya_check_box", "false");
+            }else{
+                //To ensure the checkbox option that allows a user with VNR privilege to select vanity number option is available
+                TestUtils.testTitle("To ensure the checkbox option that allows a user with VNR privilege to select vanity number option is available");
+                TestUtils.assertSearchText("ID", "com.sf.biocapture.activity." + Id + ":id/dya_check_box", "true");
+            }
+
+        }catch (WebDriverException e){
+
+        }
+
+        //To confirm that the Email Address field is not mandatory
+        TestUtils.testTitle("To confirm that the Email Address field is not mandatory");
+        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/primary_msisdn_field")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/primary_msisdn_field")).sendKeys(pri_valid_Msisdn);
+        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/sim_serial")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/sim_serial")).sendKeys(pri_valid_simSerial);
+        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/validate_serial_button")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/surNameTXT")));
+        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/surNameTXT")).sendKeys(surname);
+        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/firstNameTXT")).sendKeys(first_name);
+        TestUtils.scrollDown();
+        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/middleNameTXT")).sendKeys(middle_name);
+        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/momsMaidenNameTXT")).sendKeys(mothers_maiden_name);
+        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/maleRadioButton")).click();
+        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/selectDateButton")).click();
+        getDriver().findElement(By.xpath("//android.view.View[@index='0']")).click();
+        getDriver().findElement(By.id("android:id/button1")).click();
+        TestUtils.scrollDown();
+        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/btnContinueReg")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/stateOfOriginSpinner")));
+        TestUtils.assertSearchText("XPATH", "com.sf.biocapture.activity." + Id + ":id/nationality",
+                "Country of Origin*");
+        Thread.sleep(50000);
+        //Address Basic Info
+        /*getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/stateOfOriginSpinner")).click();
+        getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.ListView/android.widget.TextView[2]")).click();
+        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/lgaOfOriginSpinner")).click();
+        getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.ListView/android.widget.TextView[2]")).click();
+        String nin =TestUtils.generatePhoneNumber();
+        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/ninEditText")).sendKeys(nin);
+        TestUtils.scrollDown();
+        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/stateOfResidenceSpinner")).click();
+        getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.ListView/android.widget.TextView[2]")).click();
+        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/lgaOfResidenceSpinner")).click();
+        getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.ListView/android.widget.TextView[2]")).click();
+        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/areaOfResidenceSpinner")).click();
+        getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.ListView/android.widget.TextView[2]")).click();
+        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/houseNumberEditText")).sendKeys("40");
+        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/streetEditText")).sendKeys("Abule Egba");
+        TestUtils.scrollDown();
+        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/citySpinner")).click();
+        getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.ListView/android.widget.TextView[2]")).click();
+        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/postalCodeSpinner")).click();
+        getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.ListView/android.widget.TextView[2]")).click();
+        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/btnNext")).click();
+
+        Thread.sleep(50000);*/
+    }
+    public String generateString() {
+
+        int length = 10;
+        boolean useLetters = true;
+        boolean useNumbers = false;
+        String generatedString = RandomStringUtils.random(length, useLetters, useNumbers);
+
+        return generatedString;
+    }
 }

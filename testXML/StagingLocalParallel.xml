@@ -141,9 +141,10 @@
             </class>-->
             <class name="admin.MobileNumberPorting">
                 <methods>
-					<!--<include name="noneMNPTest"/>-->
+					<include name="noneMNPTest"/>
                     <include name="Login"/>
                     <include name="mobileNumberPortability"/>
+					<include name="vanityNumberReg"/>
                 </methods>
             </class>
 		</classes>
