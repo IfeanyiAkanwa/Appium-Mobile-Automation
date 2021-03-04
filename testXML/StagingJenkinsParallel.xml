@@ -26,6 +26,18 @@
                     <include name="activeDirectoryValidLoginTest"/>
                 </methods>
             </class>
+            <class name="admin.AdditionalRegistration">
+                <methods>
+                    <include name="noneAdditionalPrivilegeTest" />
+                    <include name="Login" />
+                    <include name="navigateToCaptureMenuTest" />
+                    <include name="navigateToAddReg" />
+                    <include name="MsisdnCategory" />
+                    <include name="additionalRegistration" />
+                    <include name="additionalRegTypePrivilege" />
+                    <include name="ndcRule" />
+                </methods>
+            </class>
             <class name="admin.SimSwap">
                 <methods>
                     <include name="noneSIMSwapPrivilegeTest" />
@@ -75,9 +87,9 @@
             </class>
             <class name="admin.AgentOnBoardingTest">
                 <methods>
-                    <include name="Login"/>
-                    <include name="navigateToAgentOnBoardingPage"/>
-                    <include name="viewNotifications"/>
+                    <include name="onboardedAgentLoginTest" />
+                    <include name="navigateToAgentOnBoardingTest" />
+                    <include name="agentOnBoardingTest" />
                 </methods>
             </class>
         </classes>
@@ -96,9 +108,12 @@
             </class>
             <class name="admin.ReportsTest">
                 <methods>
-                    <include name="Login"/>
-                    <include name="navigateToReportsPage"/>
-                    <include name="reportSummary"/>
+                    <include name="Login" />
+                    <include name="navigateToReportsPage" />
+                    <include name="reportSummary" />
+                    <include name="searchParameters" />
+                    <include name="reportLoginUser2" />
+                    <include name="reportHomepage" />
                 </methods>
             </class>
             <class name="admin.ChangePasswordTest">
@@ -119,6 +134,14 @@
                     <include name="assertSearchDetailsTest"/>
                     <include name="logIssueByUser"/>
                     <include name="logIssueByKit"/>
+                </methods>
+            </class>
+            <class name="admin.SearchTest">
+                <methods>
+                    <include name="Login" />
+                    <include name="navigateToSearchTest" />
+                    <include name="searchByMsisdnTest" />
+                    <include name="searchBySimSerialTest" />
                 </methods>
             </class>
             <class name="admin.MobileNumberPorting">

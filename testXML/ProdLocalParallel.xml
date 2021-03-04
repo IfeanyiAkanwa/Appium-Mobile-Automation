@@ -60,6 +60,8 @@
 					<include name="navigateToReportsPage" />
 					<include name="reportSummary" />
 					<include name="searchParameters" />
+					<include name="reportLoginUser2" />
+					<include name="reportHomepage" />
 				</methods>
 			</class>
 			<class
@@ -103,9 +105,14 @@
 			</class>
 			<class name="admin.AdditionalRegistration">
 				<methods>
+					<include name="noneAdditionalPrivilegeTest" />
 					<include name="Login" />
 					<include name="navigateToCaptureMenuTest" />
-					<include name="additionalRegistrationTest" />
+					<include name="navigateToAddReg" />
+					<include name="MsisdnCategory" />
+					<include name="additionalRegistration" />
+					<include name="additionalRegTypePrivilege" />
+					<include name="ndcRule" />
 				</methods>
 			</class>
 			<class name="admin.SimSwap">
