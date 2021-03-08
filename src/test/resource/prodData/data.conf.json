@@ -239,6 +239,21 @@
   "MNP": {
 
   },
+  "MNP": {
+    "pri_valid_Msisdn": "07058351178",
+    "valid_Msisdn": "08113825224",
+    "invalid_Msisdn": "0836133263",
+    "invalid_simSerial": "03733577",
+    "pri_valid_simSerial": "8923450412192350244F",
+    "valid_simSerial": "8923450410192953306F",
+    "middle_name": "Ayodeji",
+    "surname": "Adedayo",
+    "first_name": "Adebayo",
+    "mothers_maiden_name": "Adenike",
+    "valid_username": "eze.sfxtest@yopmail.com",
+    "invalid_number": "089343363",
+    "valid_password": "Bankole1!!"
+  },
   "LandingPage_Url": {
     "prodUrl": "http:simreg.mtnnigeria.net"
   }

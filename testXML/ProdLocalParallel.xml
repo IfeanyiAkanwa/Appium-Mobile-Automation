@@ -149,6 +149,15 @@
 					<include name="logIssueByKit"/>
 				</methods>
 			</class>
+			<class name="admin.MobileNumberPorting">
+				<methods>
+					<include name="noneMobileNumberPortPrivilegeTest"/>
+					<include name="Login"/>
+					<include name="mobileNumberPortingValidationTest"/>
+					<include name="captureMobileNumberPortingTest"/>
+					<include name="vanityNumberReg"/>
+				</methods>
+			</class>
 		</classes>
 	</test>
 </suite>
