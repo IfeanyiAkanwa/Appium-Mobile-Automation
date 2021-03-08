@@ -189,7 +189,8 @@
     "last_invoice_date": "2021-2-28",
     "puk": "99999999",
     "serial": "8923450608191696479F",
-    "alternate_phone": "08050000005"
+    "alternate_phone": "08050000005",
+    "data_pack": "12662"
   },
   "UserDetails": {
     "surname": "Amanda",

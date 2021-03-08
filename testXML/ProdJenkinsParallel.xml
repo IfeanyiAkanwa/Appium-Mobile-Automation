@@ -105,10 +105,13 @@
             <class name="admin.SimSwap">
                 <methods>
                     <include name="noneSIMSwapPrivilegeTest" />
-                    <include name="Login"/>
+                    <include name="Login" />
                     <include name="navigateToCaptureMenuTest" />
                     <include name="navigateToSimSwapViewTest" />
                     <include name="simSwapViewValidationTest" />
+                    <include name="capturePrepaidSimUpgrade" />
+                    <include name="capturePostpaidSimSwap" />
+                    <include name="captureDataSimSwap" />
                 </methods>
             </class>
             <class name="admin.AgentSupport">
