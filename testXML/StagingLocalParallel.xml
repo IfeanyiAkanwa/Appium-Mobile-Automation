@@ -2,8 +2,9 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="BioSmartSuite" parallel="tests" thread-count="3">
 	<parameter name="groupReport" value="/DroidReport.html" />
-	<parameter name="toMails" value="sosepadeolu@seamfix.com;cngwu@seamfix.com;vnwauwa@seamfix.com;dadejuwon@seamfix.com;soli@seamfix.com" />
-	<parameter name="config" value="data.conf.json" />
+	<!--<parameter name="toMails" value="sosepadeolu@seamfix.com;cngwu@seamfix.com;vnwauwa@seamfix.com;dadejuwon@seamfix.com;soli@seamfix.com" />-->
+    <parameter name="toMails" value="sosepadeolu@seamfix.com;vnwauwa@seamfix.com"/>
+    <parameter name="config" value="data.conf.json" />
 	<parameter name="environment" value="chrome" />
 	<parameter name="testConfig" value="parallel.conf.json" />
 	<parameter name="server" value="local" />
@@ -17,7 +18,7 @@
 		<parameter name="deviceName" value="SeamfixTab"/>
 
 		<classes>
-			<class name="admin.Login">
+			<!--<class name="admin.Login">
                 <methods>
                     <include name="usernamePasswordLogin" />
                     <include name="fingerprintLogin" />
@@ -142,12 +143,12 @@
                     <include name="logIssueByUser"/>
                     <include name="logIssueByKit"/>
                 </methods>
-            </class>
+            </class>-->
             <class name="admin.MobileNumberPorting">
                 <methods>
-					<include name="noneMNPTest"/>
+					<include name="noneMobileNumberPortPrivilegeTest"/>
                     <include name="Login"/>
-                    <include name="mobileNumberPortability"/>
+                    <include name="mobileNumberPortingValidationTest"/>
 					<include name="vanityNumberReg"/>
                 </methods>
             </class>
