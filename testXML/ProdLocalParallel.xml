@@ -154,6 +154,7 @@
 					<include name="noneMobileNumberPortPrivilegeTest"/>
 					<include name="Login"/>
 					<include name="mobileNumberPortingValidationTest"/>
+					<include name="captureMobileNumberPortingTest"/>
 					<include name="vanityNumberReg"/>
 				</methods>
 			</class>

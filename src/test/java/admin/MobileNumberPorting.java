@@ -157,8 +157,12 @@ public class MobileNumberPorting extends TestBase {
         TestUtils.testTitle("To verify that the button to Validate Sim Serial is enabled and functional.");
         TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Personal Details']", "Personal Details");
 
-        Form.individualForeignerForm(dataEnv);
+    }
 
+    @Parameters({ "dataEnv"})
+    @Test
+    public void captureMobileNumberPortingTest(String dataEnv) throws Exception{
+        Form.individualForeignerForm(dataEnv);
     }
 
     @Parameters({ "dataEnv"})
