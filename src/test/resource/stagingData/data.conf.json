@@ -104,11 +104,11 @@
     "nin": "11111111111"
   },
   "AgentOnboarding": {
-    "valid_username": "fatube@seamfix.com",
-    "valid_password": "Bankole1!!",
-    "agent_phoNum": "08143049728",
-    "agent_email": "benjamin.muogbo@mtnagent.com",
-    "onboardedAgent": "e.okafor@seamfix.com",
+    "valid_username": "vnwauwa@seamfix.com",
+    "valid_password": "Bankole11!!",
+    "agent_phoNum": "08153288700",
+    "agent_email": "aoluwabusola@seamfix.com",
+    "onboardedAgent": "vnwauwa@seamfix.com",
     "invalid_email": "y.com@x.com",
     "invalid_OTP": "00000",
     "used_OTP": "25269"
@@ -249,6 +249,22 @@
     "lga_of_reg": "Agege",
     "documentNumber": "89733736AD",
     "nin": "11111111111"
+  },
+  "MNP": {
+    "pri_valid_Msisdn": "07058351178",
+    "valid_Msisdn": "08113825224",
+    "invalid_Msisdn": "0836133263",
+    "nonGlo_Msisdn": "07061277525",
+    "invalid_simSerial": "03733577",
+    "pri_valid_simSerial": "8923450412192350244F",
+    "valid_simSerial": "8923450410192953306F",
+    "middle_name": "Ayodeji",
+    "surname": "Adedayo",
+    "first_name": "Adebayo",
+    "mothers_maiden_name": "Adenike",
+    "valid_username": "eze.sfxtest@yopmail.com",
+    "invalid_number": "089343363",
+    "valid_password": "Bankole1!!"
   },
   "AgentSupport": {
     "issueID": "ISS-25072020-00304",
