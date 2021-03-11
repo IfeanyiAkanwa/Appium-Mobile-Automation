@@ -35,7 +35,6 @@
                     <include name="simSwapViewValidationTest" />
                     <include name="capturePrepaidSimUpgrade" />
                     <include name="capturePostpaidSimSwap" />
-                    <include name="captureDataSimSwap" />
                 </methods>
             </class>
             <class name="admin.ReRegistrationCapture">
