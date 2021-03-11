@@ -161,7 +161,7 @@ public class AgentOnBoardingTest extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/submit")).click();
 
 		//Call OTP
-		OTP(dataEnv);
+		ConfirmOTPDialogue(dataEnv);
 
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/on_boarding_camera_title")));
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity." + Id + ":id/on_boarding_camera_title", "Camera");
@@ -174,7 +174,7 @@ public class AgentOnBoardingTest extends TestBase {
 
 	@Parameters({ "dataEnv"})
 	@Test
-	public static void OTP(String dataEnv) throws Exception {
+	public static void ConfirmOTPDialogue(String dataEnv) throws Exception {
 
 		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
 		JSONParser parser = new JSONParser();
@@ -186,7 +186,7 @@ public class AgentOnBoardingTest extends TestBase {
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity." + Id + ":id/alertTitle", "OTP verification");
 
 		// DB Connection for OTP
-		String valid_OTP = ConnectDB.getOTPWithoutPhoneNumber();
+		String valid_OTP = ConnectDB.getOTP(agent_phoNum);
 
 		String ValidOTP = "Enter valid OTP : " + valid_OTP;
 		TestUtils.testTitle(ValidOTP);
