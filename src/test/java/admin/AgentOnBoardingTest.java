@@ -1,5 +1,3 @@
-
-
 package admin;
 
 import org.json.simple.JSONObject;
@@ -43,8 +41,7 @@ public class AgentOnBoardingTest extends TestBase {
 		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
 
 		String forgotPasswordPage = "Navigate to Agent Onboarding page";
-		Markup m = MarkupHelper.createLabel(forgotPasswordPage, ExtentColor.BLUE);
-		testInfo.get().info(m);
+		TestUtils.testTitle(forgotPasswordPage);
 
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
 		getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
@@ -76,22 +73,22 @@ public class AgentOnBoardingTest extends TestBase {
 		String used_OTP = (String) envs.get("used_OTP");
 
 		// To On-board an already existing agent
-		String email1 = "To Onboard an already existing agent: ( " + onboardedAgent + " )";
-		Markup g = MarkupHelper.createLabel(email1, ExtentColor.BLUE);
-		testInfo.get().info(g);
+		/*String email1 = "To Onboard an already existing agent: ( " + onboardedAgent + " )";
+		TestUtils.testTitle(email1);
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/email")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/email")).sendKeys(onboardedAgent);
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/submit")).click();
 		//Thread.sleep(500);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/alertTitle")));
-		TestUtils.assertSearchText("ID", "android:id/message", "Agent already onboarded");
-		getDriver().findElement(By.id("android:id/button1")).click();
-		//Thread.sleep(500);
+		//Pass OTP
+		OTP(dataEnv);
+		TestUtils.assertSearchText("ID", "android:id/message", "Agent already onboarded");*/
+		//getDriver().findElement(By.id("android:id/button1")).click();
+
 
 		// To On-board agent without supplying email address
 		String email2 = "To On-board agent without supplying email address";
-		Markup v = MarkupHelper.createLabel(email2, ExtentColor.BLUE);
-		testInfo.get().info(v);
+		TestUtils.testTitle(email2);
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/email")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/email")).sendKeys();
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/submit")).click();
@@ -103,8 +100,7 @@ public class AgentOnBoardingTest extends TestBase {
 
 		// To On-board user with an invalid email address
 		String email3 = "To On-board agent with an invalid email address: ( " + invalid_email + " )";
-		Markup b = MarkupHelper.createLabel(email3, ExtentColor.BLUE);
-		testInfo.get().info(b);
+		TestUtils.testTitle(email3);
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/email")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/email")).sendKeys(invalid_email);
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/submit")).click();
@@ -116,8 +112,7 @@ public class AgentOnBoardingTest extends TestBase {
 
 		// To On-board new agent with an invalid OTP
 		String email4 = "To On-board new agent: ( " + agent_email + " ) with an invalid OTP: " + invalid_OTP;
-		Markup h = MarkupHelper.createLabel(email4, ExtentColor.BLUE);
-		testInfo.get().info(h);
+		TestUtils.testTitle(email4);
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/email")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/email")).sendKeys(agent_email);
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/submit")).click();
@@ -138,8 +133,7 @@ public class AgentOnBoardingTest extends TestBase {
 		//Thread.sleep(1000);
 
 		String email6 = "To On-board new agent: ( " + agent_email + " ) with used OTP: " + used_OTP;
-		Markup u = MarkupHelper.createLabel(email6, ExtentColor.BLUE);
-		testInfo.get().info(u);
+		TestUtils.testTitle(email6);
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/email")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/email")).sendKeys(agent_email);
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/submit")).click();
@@ -161,11 +155,33 @@ public class AgentOnBoardingTest extends TestBase {
 
 		// Email Validation
 		String email = "To On-board new agent with a valid OTP: ( " + agent_email + " )";
-		Markup d = MarkupHelper.createLabel(email, ExtentColor.BLUE);
-		testInfo.get().info(d);
+		TestUtils.testTitle(email);
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/email")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/email")).sendKeys(agent_email);
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/submit")).click();
+
+		//Call OTP
+		ConfirmOTPDialogue(dataEnv);
+
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/on_boarding_camera_title")));
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity." + Id + ":id/on_boarding_camera_title", "Camera");
+		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Capture Passport']", "Capture Passport");
+
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/button_capture_image")).click();
+		//getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/buttonCapturePicture")).click();
+
+	}
+
+	@Parameters({ "dataEnv"})
+	@Test
+	public static void ConfirmOTPDialogue(String dataEnv) throws Exception {
+
+		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+		JSONParser parser = new JSONParser();
+		JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
+		JSONObject envs = (JSONObject) config.get("AgentOnboarding");
+
+		String agent_phoNum = (String) envs.get("agent_phoNum");
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/alertTitle")));
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity." + Id + ":id/alertTitle", "OTP verification");
 
@@ -173,23 +189,14 @@ public class AgentOnBoardingTest extends TestBase {
 		String valid_OTP = ConnectDB.getOTP(agent_phoNum);
 
 		String ValidOTP = "Enter valid OTP : " + valid_OTP;
-		Markup o = MarkupHelper.createLabel(ValidOTP, ExtentColor.BLUE);
-		testInfo.get().info(o);
-		if(valid_OTP == null){
-			testInfo.get().log(Status.INFO, "Can't get otp.");
-			System.out.println("otp is null");
-			//getDriver().quit();
-		}
+		TestUtils.testTitle(ValidOTP);
 
 		// OTP Validation
-
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/otp")));
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/otp")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/otp")).sendKeys(valid_OTP);
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/confirm_otp")).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/on_boarding_camera_title")));
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity." + Id + ":id/on_boarding_camera_title", "Camera");
-		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Capture Passport']", "Capture Passport");
-		//Thread.sleep(1000);
+
 	}
+
 }
