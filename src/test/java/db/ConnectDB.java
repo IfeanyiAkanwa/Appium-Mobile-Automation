@@ -10,7 +10,7 @@ public class ConnectDB {
     private static final String DB_PASSWORD = "3I0K@7t#Ur5Q=";
     private static String otp;
     private static String transactionID;
-    
+
     public static String getOTP(String phoneNumber) throws SQLException {
 
         Connection dbConnection = null;
