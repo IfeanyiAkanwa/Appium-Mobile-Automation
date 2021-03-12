@@ -526,6 +526,7 @@ public class SimSwap extends TestBase {
 
         String valid_username = (String) envs2.get("valid_username");
 
+        String valid_Msisdn = (String) envs.get("valid_Msisdn");
         String fName = (String) envs.get("fName");
         String lName = (String) envs.get("lName");
         String mmn = (String) envs.get("mmn");
@@ -1024,7 +1025,7 @@ public class SimSwap extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/continue_btn")).click();
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
-        TestUtils.assertSearchText("ID", "android:id/message", "I, " + valid_username + " acknowledge the submission of the swap request for 08118071446");
+        TestUtils.assertSearchText("ID", "android:id/message", "I, " + valid_username + " acknowledge the submission of the swap request for "+valid_Msisdn);
         getDriver().findElement(By.id("android:id/button1")).click();
 
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Performing Simswap request']")));
@@ -1047,33 +1048,33 @@ public class SimSwap extends TestBase {
 
         String valid_username = (String) envs2.get("valid_username");
 
-        String valid_sim_serial = (String) envs.get("valid_sim_serial");
-        String valid_Msisdn = (String) envs.get("valid_Msisdn");
-        String new_msisdn = (String) envs.get("new_msisdn");
+        String valid_sim_serial = (String) envs.get("pp_valid_sim_serial");
+        String valid_Msisdn = (String) envs.get("pp_valid_Msisdn");
+        String new_msisdn = (String) envs.get("pp_new_msisdn");
         String approver_username = (String) envs.get("approver_username");
         String approver_password = (String) envs.get("approver_password");
-        String fName = (String) envs.get("fName");
-        String lName = (String) envs.get("lName");
-        String mmn = (String) envs.get("mmn");
-        String dob = (String) envs.get("dob");
-        String occupation = (String) envs.get("occupation");
-        String state = (String) envs.get("state");
-        String gender = (String) envs.get("gender");
-        String nationality = (String) envs.get("nationality");
-        String activation_year = (String) envs.get("activation_year");
-        String address = (String) envs.get("address");
-        String fdn1 = (String) envs.get("fdn1");
-        String fdn2 = (String) envs.get("fdn2");
-        String fdn3 = (String) envs.get("fdn3");
-        String fdn4 = (String) envs.get("fdn4");
-        String fdn5 = (String) envs.get("fdn5");
+        String fName = (String) envs.get("pp_fName");
+        String lName = (String) envs.get("pp_lName");
+        String mmn = (String) envs.get("pp_mmn");
+        String dob = (String) envs.get("pp_dob");
+        String occupation = (String) envs.get("pp_occupation");
+        String state = (String) envs.get("pp_state");
+        String gender = (String) envs.get("pp_gender");
+        String nationality = (String) envs.get("pp_nationality");
+        String activation_year = (String) envs.get("pp_activation_year");
+        String address = (String) envs.get("pp_address");
+        String fdn1 = (String) envs.get("pp_fdn1");
+        String fdn2 = (String) envs.get("pp_fdn2");
+        String fdn3 = (String) envs.get("pp_fdn3");
+        String fdn4 = (String) envs.get("pp_fdn4");
+        String fdn5 = (String) envs.get("pp_fdn5");
         String nin = (String) envs.get("nin");
         String proxy_name = (String) envs.get("proxy_name");
         String proxy_phone = (String) envs.get("proxy_phone");
-        String last_invoice_amount = (String) envs.get("last_invoice_amount");
-        String last_invoice_date = (String) envs.get("last_invoice_date");
-        String puk = (String) envs.get("puk");
-        String serial = (String) envs.get("serial");
+        String last_invoice_amount = (String) envs.get("pp_last_invoice_amount");
+        String last_invoice_date = (String) envs.get("pp_last_invoice_date");
+        String puk = (String) envs.get("pp_puk");
+        String serial = (String) envs.get("pp_serial");
         String alternate_phone = (String) envs.get("alternate_phone");
 
         navigateToCaptureMenuTest();
@@ -1245,6 +1246,9 @@ public class SimSwap extends TestBase {
         //State of origin
         getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/stateOfOriginSpinner")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='[Select State of Origin]']")));
+        getDriver().findElement(By.id("android:id/search_src_text")).clear();
+        getDriver().findElement(By.id("android:id/search_src_text")).sendKeys(state);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='" + state + "']")));
         getDriver().findElement(By.xpath("//android.widget.TextView[@text='" + state + "']")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='" + state + "']")));
 
@@ -1449,7 +1453,7 @@ public class SimSwap extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/continue_btn")).click();
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
-        TestUtils.assertSearchText("ID", "android:id/message", "I, " + valid_username + " acknowledge the submission of the swap request for 08118071446");
+        TestUtils.assertSearchText("ID", "android:id/message", "I, " + valid_username + " acknowledge the submission of the swap request for "+valid_Msisdn);
         getDriver().findElement(By.id("android:id/button1")).click();
 
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Performing Simswap request']")));
@@ -1872,7 +1876,7 @@ public class SimSwap extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/continue_btn")).click();
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
-        TestUtils.assertSearchText("ID", "android:id/message", "I, " + valid_username + " acknowledge the submission of the swap request for 08118071446");
+        TestUtils.assertSearchText("ID", "android:id/message", "I, " + valid_username + " acknowledge the submission of the swap request for "+valid_Msisdn);
         getDriver().findElement(By.id("android:id/button1")).click();
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Performing Simswap request']")));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
