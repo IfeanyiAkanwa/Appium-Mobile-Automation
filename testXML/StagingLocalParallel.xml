@@ -123,6 +123,8 @@
                     <include name="navigateToCaptureMenuTest" />
 					<include name="navigateToSimSwapViewTest" />
                     <include name="simSwapViewValidationTest" />
+                    <include name="capturePrepaidSimUpgrade" />
+					<include name="capturePostpaidSimSwap" />
                 </methods>
             </class>
             <class name="admin.ReactivationTest">

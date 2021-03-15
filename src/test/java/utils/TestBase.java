@@ -7,6 +7,7 @@ import com.aventstack.extentreports.markuputils.Markup;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.remote.AndroidMobileCapabilityType;
@@ -42,7 +43,7 @@ public class TestBase {
 	@SuppressWarnings("rawtypes")
 	public static ThreadLocal<AndroidDriver> driver = new ThreadLocal<>();
 	public static ExtentReports reports;
-	public static ExtentHtmlReporter htmlReporter;
+	public static ExtentSparkReporter htmlReporter;
 	private static ThreadLocal<ExtentTest> parentTest = new ThreadLocal<ExtentTest>();
 	public static ThreadLocal<ExtentTest> testInfo = new ThreadLocal<ExtentTest>();
 	public static String gridUrl = System.getProperty("grid-url", "https:simregtest.gloworld.com");
@@ -95,7 +96,8 @@ public class TestBase {
 			}
 		}
 
-		htmlReporter = new ExtentHtmlReporter(new File(System.getProperty("user.dir") + groupReport));
+//		htmlReporter = new ExtentHtmlReporter(new File(System.getProperty("user.dir") + groupReport));  //Old extent reporter
+		htmlReporter = new ExtentSparkReporter(new File(System.getProperty("user.dir") + groupReport));
 		//htmlReporter.loadXMLConfig(new File(System.getProperty("user.dir") + "/resources/extent-config.xml"));
 		reports = new ExtentReports();
 		reports.setSystemInfo("Test Environment", myUrl(dataEnv));
@@ -117,7 +119,7 @@ public class TestBase {
 
 		if (result.getStatus() == ITestResult.FAILURE) {
 			String screenshotPath = TestUtils.addScreenshot();
-			testInfo.get().addScreenCaptureFromPath(screenshotPath);
+            testInfo.get().addScreenCaptureFromBase64String(screenshotPath);
 			testInfo.get().fail(result.getThrowable());
 		} else if (result.getStatus() == ITestResult.SKIP)
 			testInfo.get().skip(result.getThrowable());

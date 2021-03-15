@@ -6,12 +6,13 @@ import com.aventstack.extentreports.markuputils.Markup;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.testinium.deviceinformation.helper.ProcessHelper;
 import enums.TargetTypeEnum;
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
+import io.appium.java_client.android.AndroidTouchAction;
+import io.appium.java_client.touch.TapOptions;
+import io.appium.java_client.touch.offset.ElementOption;
 import org.apache.commons.codec.binary.Base64;
-import org.openqa.selenium.By;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.testng.Assert;
 
 import java.io.*;
@@ -45,6 +46,14 @@ public class TestUtils extends TestBase {
         return "data:image/png;base64," + encodedBase64;
     }
 
+
+    /**
+     * @description adds screenshot to the page.
+     */
+    public static void logScreenshot(){
+        String screenshotPath = TestUtils.addScreenshot();
+        testInfo.get().addScreenCaptureFromBase64String(screenshotPath);
+    }
 
     /**
      * @param type
@@ -110,6 +119,36 @@ public class TestUtils extends TestBase {
         int bottomY = getDriver().manage().window().getSize().height * 4 / 5;
         int topY = getDriver().manage().window().getSize().height / 8;
         scroll(pressX, topY, pressX, bottomY);
+    }
+
+    public static void scrollByID(String Id, int index) {
+
+        try {
+
+            getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().resourceId(\""+Id+"\").instance("+index+"));"));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    /**
+     * This method does a swipe downwards
+     * @author Bill Hileman
+     * @throws Exception
+     */
+    public static void scrollUp2() throws Exception {
+
+        //The viewing size of the device
+        Dimension size = getDriver().manage().window().getSize();
+
+        //Starting y location set to 20% of the height (near bottom)
+        int starty = (int) (size.height * 0.20);
+        //Ending y location set to 80% of the height (near top)
+        int endy = (int) (size.height * 0.80);
+        //x position set to mid-screen horizontally
+        int startx = size.width / 2;
+
+        scroll(startx, starty, startx, endy);
     }
 
     public static void hideKeyboard() throws InterruptedException {
