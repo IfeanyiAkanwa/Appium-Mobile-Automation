@@ -26,11 +26,8 @@ public class SearchTest extends TestBase {
     public static void navigateToSearchTest() throws InterruptedException {
     	
     	WebDriverWait wait = new WebDriverWait(getDriver(), 60);
-    	
-    	String fpLogin = "Navigate to Search";
-		Markup m = MarkupHelper.createLabel(fpLogin, ExtentColor.BLUE);
-		testInfo.get().info(m);
-		
+
+		TestUtils.testTitle("Navigate to Search");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
         getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
         Thread.sleep(500);
@@ -51,9 +48,7 @@ public class SearchTest extends TestBase {
 		
 		String valid_msisdn = (String) envs.get("valid_msisdn");
 		
-		String valMsis = "Search for valid Msisdn: " + valid_msisdn;
-		Markup d = MarkupHelper.createLabel(valMsis, ExtentColor.BLUE);
-		testInfo.get().info(d);
+		TestUtils.testTitle("Search for valid Msisdn: " + valid_msisdn);
     	wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/phone_no")));
     	 getDriver().findElement(By.id("com.sf.biocapture.activity:id/phone_no")).clear();
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/phone_no")).sendKeys(valid_msisdn);
@@ -78,9 +73,7 @@ public class SearchTest extends TestBase {
 		
 		String valid_sim_serial_no = (String) envs.get("valid_sim_serial_no");
 		
-		String valSimserial = "Search for valid SIM Serial number: " + valid_sim_serial_no;
-		Markup d = MarkupHelper.createLabel(valSimserial, ExtentColor.BLUE);
-		testInfo.get().info(d);
+		TestUtils.testTitle("Search for valid SIM Serial number: " + valid_sim_serial_no);
     	wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity:id/phone_no")));
     	 getDriver().findElement(By.id("com.sf.biocapture.activity:id/phone_no")).clear();
         getDriver().findElement(By.id("com.sf.biocapture.activity:id/phone_no")).sendKeys(valid_sim_serial_no);

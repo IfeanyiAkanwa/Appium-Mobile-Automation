@@ -24,27 +24,27 @@ public class Asserts extends TestBase {
         testInfo.get().info(ad);
 
         String typeOfRegistration = getDriver().findElement(By.xpath("//android.widget.TextView[@text='Individual']")).getText();
-        String surName = getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/surNameTXT")).getText();
-        String firstName = getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/firstNameTXT")).getText();
+        String surName = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/surNameTXT")).getText();
+        String firstName = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/firstNameTXT")).getText();
 
         TestUtils.scrollDown();
 
-        String middleName = getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/middleNameTXT")).getText();
-        String mothersMaidenName = getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/momsMaidenNameTXT"))
+        String middleName = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/middleNameTXT")).getText();
+        String mothersMaidenName = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/momsMaidenNameTXT"))
                 .getText();
         String sex;
-        if (getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/maleRadioButton")).isSelected()) {
+        if (getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/maleRadioButton")).isSelected()) {
             sex = "Male";
         } else {
             sex = "Female";
         }
-        String dateOfBirth = getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/dateOfBirth")).getText();
-        String altPhoneNumber = getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/alternatePhone"))
+        String dateOfBirth = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/dateOfBirth")).getText();
+        String altPhoneNumber = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/alternatePhone"))
                 .getText();
         TestUtils.scrollDown();
-        String email = getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/alternateEmail")).getText();
+        String email = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/alternateEmail")).getText();
         TestUtils.scrollDown();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/spinnerOccupation")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/spinnerOccupation")));
         Thread.sleep(500);
         String occupation = getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='[Select an Occupation]']")).getText();
 
@@ -112,10 +112,10 @@ public class Asserts extends TestBase {
         }
         Thread.sleep(500);
         TestUtils.scrollDown();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/houseNumberEditText")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/houseNumberEditText")));
         Thread.sleep(500);
-        String houseNum = getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/houseNumberEditText")).getText();
-        String street = getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/streetEditText")).getText();
+        String houseNum = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/houseNumberEditText")).getText();
+        String street = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/streetEditText")).getText();
         String city = getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='[Select City]*']")).getText();
         String postalCode = getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='[Select Postal Code]*']")).getText();
 
@@ -148,9 +148,9 @@ public class Asserts extends TestBase {
     public static void AssertPassportDetails() throws Exception {
 
         // Passport Details
-        String issuingCountry = getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/passport_issuing_country"))
+        String issuingCountry = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/passport_issuing_country"))
                 .getText();
-        String passportNumber = getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/passport_number"))
+        String passportNumber = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/passport_number"))
                 .getText();
         String expiryDate = getDriver().findElement(By.id("")).getText();
 
@@ -180,18 +180,18 @@ public class Asserts extends TestBase {
         testInfo.get().info(ad);
 
         // Company Details
-        String companyName = getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/company_name_descrptn"))
+        String companyName = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/company_name_descrptn"))
                 .getText();
-        String registrationNumber = getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/company_regno"))
+        String registrationNumber = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/company_regno"))
                 .getText();
-        String houseNumber = getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/house_or_flat_no")).getText();
-        String companyAddressStreet = getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/street")).getText();
-        String companyAddressCity = getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/city")).getText();
+        String houseNumber = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/house_or_flat_no")).getText();
+        String companyAddressStreet = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/street")).getText();
+        String companyAddressCity = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/city")).getText();
         String companyState = getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.ScrollView/android.widget.TableLayout/android.widget.Spinner[1]/android.widget.TextView"))
                 .getText();
         String companyLga = getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.ScrollView/android.widget.TableLayout/android.widget.Spinner[2]/android.widget.TextView"))
                 .getText();
-        String companyPostalCode = getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/company_postalcode"))
+        String companyPostalCode = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/company_postalcode"))
                 .getText();
 
         String empty = "";
@@ -220,27 +220,27 @@ public class Asserts extends TestBase {
     public static void AssertReportSummary() throws Exception {
 
         TestUtils.testTitle("Report Summary of Registrations");
-        String totalRegistrations = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/reg_subscribers"))
+        String totalRegistrations = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/reg_subscribers"))
                 .getText();
-        String totalSyncSent = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/total_sync_sent"))
+        String totalSyncSent = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/total_sync_sent"))
                 .getText();
-        String totalSyncConfirmed = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/sync_confirmed"))
+        String totalSyncConfirmed = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/sync_confirmed"))
                 .getText();
-        String totalSyncPending = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/total_pending"))
+        String totalSyncPending = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/total_pending"))
                 .getText();
-        String totalRejected = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/total_rejected")).getText();
-        String totalActivated = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/total_activated"))
+        String totalRejected = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/total_rejected")).getText();
+        String totalActivated = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/total_activated"))
                 .getText();
-        String totalReactivated = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/total_reactivated"))
+        String totalReactivated = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/total_reactivated"))
                 .getText();
-        String totalSimSwap = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/total_swaps")).getText();
+        String totalSimSwap = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/total_swaps")).getText();
 
 
-        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity." + Id + ":id/reg_sims");
+        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/reg_sims");
 
-        String registeredSIMs = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/reg_sims")).getText();
-        String confirmedSIMs = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/sims_confirmed")).getText();
-        String duplicateSIMs = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/duplicate_sims")).getText();
+        String registeredSIMs = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/reg_sims")).getText();
+        String confirmedSIMs = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/sims_confirmed")).getText();
+        String duplicateSIMs = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/duplicate_sims")).getText();
 
         String NA = "";
 
@@ -282,8 +282,8 @@ public class Asserts extends TestBase {
             testInfo.get().error(verificationErrorString);
         }
         //Refresh
-        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity." + Id + ":id/refresh_button");
-        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/refresh_button")).click();
+        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/refresh_button");
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/refresh_button")).click();
 
 
     }
@@ -398,8 +398,8 @@ public class Asserts extends TestBase {
         String assertDetails = "Assert Valid Numbers";
         Markup ad = MarkupHelper.createLabel(assertDetails, ExtentColor.BLUE);
         testInfo.get().info(ad);
-        String msisdn = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/phone_no_view")).getText();
-        String simSerial = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/tv_sim_serial")).getText();
+        String msisdn = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/phone_no_view")).getText();
+        String simSerial = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/tv_sim_serial")).getText();
 
         String NA = "";
 
@@ -424,8 +424,8 @@ public class Asserts extends TestBase {
         String assertDetails = "Assert Returned Subscriber Full name after Number Validation";
         Markup ad = MarkupHelper.createLabel(assertDetails, ExtentColor.BLUE);
         testInfo.get().info(ad);
-        String firstName = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/tv_first_name")).getText();
-        String Surname = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/tv_surname")).getText();
+        String firstName = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/tv_first_name")).getText();
+        String Surname = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/tv_surname")).getText();
 
         String NA = "";
 
@@ -447,16 +447,16 @@ public class Asserts extends TestBase {
 
     public static void AssertSearchDetails() {
 
-        String issueID = getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/logIssueId"))
+        String issueID = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/logIssueId"))
                 .getText();
-        String status = getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/logIssueStatus"))
+        String status = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/logIssueStatus"))
                 .getText();
-        String dateLogged = getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/dateIssueLogged")).getText();
-        String dateResolved = getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/dateIssueResolved")).getText();
-        String username = getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/userName")).getText();
-        String issueSummary = getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/logIssueSummary")).getText();
-        String description = getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/logIssueDescription")).getText();
-        String resolutionMessage = getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/resolutionIssueMsg")).getText();
+        String dateLogged = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/dateIssueLogged")).getText();
+        String dateResolved = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/dateIssueResolved")).getText();
+        String username = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/userName")).getText();
+        String issueSummary = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/logIssueSummary")).getText();
+        String description = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/logIssueDescription")).getText();
+        String resolutionMessage = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/resolutionIssueMsg")).getText();
 
         String empty = "";
         Map<String, String> fields = new HashMap<>();
@@ -484,10 +484,10 @@ public class Asserts extends TestBase {
 
     public static void AssertSwapSummary() {
 
-        String mandatoryChecks = getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/mandatory_checks_status")).getText();
-        String optionalParameter = getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/optional_params_status")).getText();
-        String authParameter = getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/auth_parameter_status")).getText();
-        String comment = getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/comment")).getText();
+        String mandatoryChecks = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/mandatory_checks_status")).getText();
+        String optionalParameter = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/optional_params_status")).getText();
+        String authParameter = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/auth_parameter_status")).getText();
+        String comment = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/comment")).getText();
 
         String empty = "";
         Map<String, String> fields = new HashMap<>();

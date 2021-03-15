@@ -79,15 +79,6 @@
     "valid_password": "Bankole1!!",
     "invalid_OTP": "00000"
   },
-  "SellAirtimeAndData": {
-    "valid_username": "nerondu@seamfix.com",
-    "valid_password": "Bankole1!!",
-    "agent_vtu": "09062058470",
-    "sub_msisdn": "09062058471",
-    "amount": "50",
-    "invalid_agent_vtu": "08133302299",
-    "invalid_OTP": "00000"
-  },
   "Search": {
     "valid_msisdn": "1111113116",
     "valid_sim_serial_no": "11111111111111111367"

@@ -34,7 +34,7 @@ public class ChangePasswordTest extends TestBase {
         getDriver().findElementByAccessibilityId("Navigate up").click();
         Thread.sleep(500);
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Account']")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/alertTitle")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
 
         TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Change Password']", "Change Password");
         TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Deactivate Account']", "Deactivate Account");
@@ -42,8 +42,8 @@ public class ChangePasswordTest extends TestBase {
 
         //OTP Verification Modal
         TestUtils.testTitle("OTP Dialogue Test");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/dialog_title")));
-        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/dialog_title", "OTP verification");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/dialog_title")));
+        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/dialog_title", "OTP verification");
 
         //Ensure that cancel operation runs only once
         if(i == 0){
@@ -57,20 +57,20 @@ public class ChangePasswordTest extends TestBase {
             getDriver().findElementByAccessibilityId("Navigate up").click();
             Thread.sleep(500);
             getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Account']")).click();
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/alertTitle")));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
             getDriver().findElement(By.xpath("//android.widget.TextView[@text='Change Password']")).click();
 
             //Resend Otp Test
             TestUtils.testTitle("Resend OTP Test");
             testInfo.get().info("Current OTP: "+ConnectDB.getOTPWithoutPhoneNumber());
             getDriver().findElement(By.id("android:id/button3")).click();
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/user_input_dialog")));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/user_input_dialog")));
             testInfo.get().info("New OTP: "+ConnectDB.getOTPWithoutPhoneNumber());
 
             //OTP Verification Modal
             TestUtils.testTitle("OTP Verification Modal Test");
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/dialog_title")));
-            TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/dialog_title", "OTP verification");
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/dialog_title")));
+            TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/dialog_title", "OTP verification");
 
             i++;
         }
@@ -78,22 +78,22 @@ public class ChangePasswordTest extends TestBase {
         String otp = ConnectDB.getOTPWithoutPhoneNumber();
 
         TestUtils.testTitle("Invalid OTP Test: u57267");
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/user_input_dialog")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/user_input_dialog")).sendKeys("u57267");
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/user_input_dialog")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/user_input_dialog")).sendKeys("u57267");
         getDriver().findElement(By.id("android:id/button1")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/alertTitle")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
         TestUtils.assertSearchText("ID", "android:id/message", "There is no record with the otp, msisdn combination.");
         getDriver().findElement(By.id("android:id/button1")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/dialog_title")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/dialog_title")));
 
         TestUtils.testTitle("Valid OTP Test: "+otp);
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/user_input_dialog")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/user_input_dialog")).sendKeys(otp);
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/user_input_dialog")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/user_input_dialog")).sendKeys(otp);
         getDriver().findElement(By.id("android:id/button1")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/title")));
-        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/change_password_title", "Change Password");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/title")));
+        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/change_password_title", "Change Password");
 
-        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/change_password_guide",
+        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/change_password_guide",
 				"Password must contain at least 8 Characters and at most 20 characters with at least 1 LowerCase, 1 UpperCase, 1 Number, and 1 Symbol");
     }
 
@@ -120,19 +120,19 @@ public class ChangePasswordTest extends TestBase {
 		testInfo.get().info(m);
       
         //Current Password
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/current_password")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/current_password")).sendKeys(password);
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/current_password")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/current_password")).sendKeys(password);
 
         //New Password
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/new_password")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/new_password")).sendKeys(invalid_password_policy);
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/new_password")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/new_password")).sendKeys(invalid_password_policy);
 
         //Confirm New Password
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/confirm_password")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/confirm_password")).sendKeys(invalid_password_policy);
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/confirm_password")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/confirm_password")).sendKeys(invalid_password_policy);
 
         //Clicks on Change Button
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/update_pwd")).click();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/update_pwd")).click();
         Thread.sleep(1000);
         TestUtils.assertSearchText("ID", "android:id/message", "Entered password does not match the password policy, please try again.");
         getDriver().findElement(By.id("android:id/button1")).click();
@@ -143,22 +143,22 @@ public class ChangePasswordTest extends TestBase {
 		Markup pa = MarkupHelper.createLabel(notMatchingConfirmPassword, ExtentColor.BLUE);
 		testInfo.get().info(pa);
 		wait.until(ExpectedConditions
-				.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/change_password_title")));
+				.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/change_password_title")));
 		//Current Password
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/current_password")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/current_password")).sendKeys(password);
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/current_password")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/current_password")).sendKeys(password);
         
         //New Password
-		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/new_password")).clear();
-		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/new_password")).sendKeys(newPassword);
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/new_password")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/new_password")).sendKeys(newPassword);
 
 		 //Confirm New Password
-		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/confirm_password")).clear();
-		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/confirm_password"))
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/confirm_password")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/confirm_password"))
 				.sendKeys(confirm_password_not_matching);
 		
 		//Clicks on Change Button
-		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/update_pwd")).click();
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/update_pwd")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
 		TestUtils.assertSearchText("ID", "android:id/message", "Entered passwords do not match");
 		TestUtils.assertSearchText("ID", "android:id/button1", "OK");
@@ -174,22 +174,22 @@ public class ChangePasswordTest extends TestBase {
         Markup e = MarkupHelper.createLabel(validpass3, ExtentColor.AMBER);
         testInfo.get().info(e);
         //Current Password
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/current_password")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/current_password")).sendKeys(password);
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/current_password")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/current_password")).sendKeys(password);
 
         //New Password
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/new_password")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/new_password")).sendKeys(newPassword3);
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/new_password")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/new_password")).sendKeys(newPassword3);
 
         //Confirm New Password
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/confirm_password")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/confirm_password")).sendKeys(newPassword3);
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/confirm_password")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/confirm_password")).sendKeys(newPassword3);
 
         //Submit
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/update_pwd")).click();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/update_pwd")).click();
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/alertTitle")));
-        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/alertTitle", "Password Update");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
+        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/alertTitle", "Password Update");
         TestUtils.assertSearchText("ID", "android:id/message", "Password change successful");
         getDriver().findElement(By.id("android:id/button1")).click();
 
@@ -199,22 +199,22 @@ public class ChangePasswordTest extends TestBase {
 		Markup ee = MarkupHelper.createLabel(validpass2, ExtentColor.AMBER);
 		testInfo.get().info(ee);
         //Current Password
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/current_password")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/current_password")).sendKeys(newPassword3);
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/current_password")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/current_password")).sendKeys(newPassword3);
        
         //New Password
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/new_password")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/new_password")).sendKeys(newPassword2);
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/new_password")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/new_password")).sendKeys(newPassword2);
 
         //Confirm New Password
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/confirm_password")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/confirm_password")).sendKeys(newPassword2);
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/confirm_password")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/confirm_password")).sendKeys(newPassword2);
 
         //Submit
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/update_pwd")).click();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/update_pwd")).click();
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/alertTitle")));
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/alertTitle", "Password Update");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/alertTitle", "Password Update");
         TestUtils.assertSearchText("ID", "android:id/message", "Password change successful");
         getDriver().findElement(By.id("android:id/button1")).click();
 
@@ -224,22 +224,22 @@ public class ChangePasswordTest extends TestBase {
         Markup eee = MarkupHelper.createLabel(validpass, ExtentColor.AMBER);
         testInfo.get().info(eee);
         //Current Password
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/current_password")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/current_password")).sendKeys(newPassword2);
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/current_password")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/current_password")).sendKeys(newPassword2);
 
         //New Password
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/new_password")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/new_password")).sendKeys(newPassword);
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/new_password")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/new_password")).sendKeys(newPassword);
 
         //Confirm New Password
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/confirm_password")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/confirm_password")).sendKeys(newPassword);
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/confirm_password")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/confirm_password")).sendKeys(newPassword);
 
         //Submit
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/update_pwd")).click();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/update_pwd")).click();
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/alertTitle")));
-        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/alertTitle", "Password Update");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
+        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/alertTitle", "Password Update");
         TestUtils.assertSearchText("ID", "android:id/message", "Password change successful");
         getDriver().findElement(By.id("android:id/button1")).click();
 
@@ -248,25 +248,25 @@ public class ChangePasswordTest extends TestBase {
         TestUtils.testTitle("Confirm that a user is not able to change password to a password that matches any of the (x) last password used: "+newPassword2);
         navigateToChangePasswordPage();
         //Current Password
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/current_password")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/current_password")).sendKeys(newPassword);
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/current_password")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/current_password")).sendKeys(newPassword);
 
         //New Password
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/new_password")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/new_password")).sendKeys(newPassword2);
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/new_password")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/new_password")).sendKeys(newPassword2);
 
         //Confirm New Password
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/confirm_password")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/confirm_password")).sendKeys(newPassword2);
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/confirm_password")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/confirm_password")).sendKeys(newPassword2);
 
         //Submit
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/update_pwd")).click();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/update_pwd")).click();
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/alertTitle")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
         TestUtils.assertSearchText("ID", "android:id/message", "You cannot use the same password as your last 3 password. Try a different password.");
         getDriver().findElement(By.id("android:id/button1")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/change_password_title")));
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/cancel")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/change_password_title")));
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/cancel")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
 
         //Logs out
@@ -275,13 +275,13 @@ public class ChangePasswordTest extends TestBase {
 		testInfo.get().info(o);
 		getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
 		wait.until(ExpectedConditions
-				.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/design_menu_item_text")));
+				.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/design_menu_item_text")));
 		TestUtils.scrollDown();
 		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Logout']")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
 		TestUtils.assertSearchText("ID", "android:id/message", "   Log out?");
 		getDriver().findElement(By.id("android:id/button3")).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/otp_login")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/otp_login")));
        
     }
 
@@ -299,33 +299,33 @@ public class ChangePasswordTest extends TestBase {
         String password = (String) envs.get("password");
 
 		// Login in with the new password
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/otp_login")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/login_username")));
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/otp_login")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/login_username")));
         
         // Select Login mode
-     	getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/login_mode_types_spinner")).click();
+     	getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/login_mode_types_spinner")).click();
      	getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Biosmart']")).click();
      	Thread.sleep(500);
 
      	TestUtils.testTitle("Confirm that old password: ( " + password + " ) and valid username ( " + valid_username + " ) can't used to Login");
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/login_username")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/login_username")).sendKeys(valid_username);
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/login_password")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/login_password")).sendKeys(password);
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/submit")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/alertTitle")));
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/login_username")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/login_username")).sendKeys(valid_username);
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/login_password")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/login_password")).sendKeys(password);
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/submit")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
         TestUtils.assertSearchText("ID", "android:id/message", "Invalid username or password entered.");
         getDriver().findElement(By.id("android:id/button1")).click();
      		
         String login = "Login with newly changed password : " + "(" + newPassword + ")"  + " and valid username: " + "(" +valid_username + ")";
 		Markup g = MarkupHelper.createLabel(login, ExtentColor.BLUE);
 		testInfo.get().info(g);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/login_username")));
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/login_username")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/login_username")).sendKeys(valid_username);
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/login_password")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/login_password")).sendKeys(newPassword);
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/submit")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/login_username")));
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/login_username")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/login_username")).sendKeys(valid_username);
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/login_password")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/login_password")).sendKeys(newPassword);
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/submit")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
         TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Home']", "Home");
     }
@@ -350,35 +350,35 @@ public class ChangePasswordTest extends TestBase {
 		Markup m = MarkupHelper.createLabel(pw, ExtentColor.BLUE);
 		testInfo.get().info(m);
         //Current Password
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/current_password")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/current_password")).sendKeys(newPassword);
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/current_password")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/current_password")).sendKeys(newPassword);
 
         //New Password
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/new_password")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/new_password")).sendKeys(password);
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/new_password")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/new_password")).sendKeys(password);
         
         //Confirm New Password
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/confirm_password")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/confirm_password")).sendKeys(password);
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/confirm_password")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/confirm_password")).sendKeys(password);
       
         //Clicks on Change Button
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/update_pwd")).click();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/update_pwd")).click();
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/alertTitle")));
-        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/alertTitle", "Password Update");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
+        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/alertTitle", "Password Update");
         TestUtils.assertSearchText("ID", "android:id/message", "Password change successful");
         getDriver().findElement(By.id("android:id/button1")).click();
 
         //Logs out
         getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
         wait.until(ExpectedConditions
-                .visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/design_menu_item_text")));
+                .visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/design_menu_item_text")));
         TestUtils.scrollDown();
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Logout']")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
         TestUtils.assertSearchText("ID", "android:id/message", "   Log out?");
         getDriver().findElement(By.id("android:id/button3")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/otp_login")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/otp_login")));
     }
 
 
@@ -395,34 +395,34 @@ public class ChangePasswordTest extends TestBase {
         String valid_username = (String) envs.get("valid_username");
 
         // Login in with the new password
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/otp_login")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/login_username")));
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/otp_login")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/login_username")));
 
         // Select Login mode
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/login_mode_types_spinner")).click();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/login_mode_types_spinner")).click();
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Biosmart']")).click();
         Thread.sleep(500);
 
         String login = "Login with old password : " + "(" + password + ")"  + " and valid username: " + "(" +valid_username + ")";
         Markup g = MarkupHelper.createLabel(login, ExtentColor.BLUE);
         testInfo.get().info(g);
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/login_username")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/login_username")).sendKeys(valid_username);
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/login_password")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/login_password")).sendKeys(password);
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/submit")).click();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/login_username")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/login_username")).sendKeys(valid_username);
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/login_password")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/login_password")).sendKeys(password);
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/submit")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
         TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Home']", "Home");
 
         //Logs out
         getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
         wait.until(ExpectedConditions
-                .visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/design_menu_item_text")));
+                .visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/design_menu_item_text")));
         TestUtils.scrollDown();
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Logout']")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
         TestUtils.assertSearchText("ID", "android:id/message", "   Log out?");
         getDriver().findElement(By.id("android:id/button3")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/otp_login")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/otp_login")));
     }
 }

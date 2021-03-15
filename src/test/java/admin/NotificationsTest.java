@@ -24,9 +24,7 @@ public class NotificationsTest extends TestBase {
 
     	WebDriverWait wait = new WebDriverWait(getDriver(), 30);
     	// Navigate to Registration Type
-    	String regType = "Navigate to Notification Page";
-    	Markup r = MarkupHelper.createLabel(regType, ExtentColor.BLUE);
-    	testInfo.get().info(r);
+    	TestUtils.testTitle("Navigate to Notification Page");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
         getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc=\"Navigate up\"]")).click();
         Thread.sleep(500);
@@ -48,9 +46,7 @@ public class NotificationsTest extends TestBase {
 		String searchParam = (String) envs.get("searchParam");
 
 		if (TestUtils.isElementPresent("ID", "com.sf.biocapture.activity:id/message")) {
-			String invalidPass = "Search before viewing notification: " + searchParam;
-			Markup m = MarkupHelper.createLabel(invalidPass, ExtentColor.BLUE);
-			testInfo.get().info(m);
+			TestUtils.testTitle("Search before viewing notification: " + searchParam);
 			getDriver().findElement(By.id("com.sf.biocapture.activity:id/searchView")).sendKeys(searchParam);
 			getDriver().findElement(By.id("com.sf.biocapture.activity:id/message")).click();
 			Thread.sleep(1000);

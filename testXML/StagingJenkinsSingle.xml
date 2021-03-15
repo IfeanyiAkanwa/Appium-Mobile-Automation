@@ -27,88 +27,6 @@
                     <include name="activeDirectoryValidLoginTest"/>
                 </methods>
             </class>
-            <class name="admin.SimSwap">
-                <methods>
-                    <include name="noneSIMSwapPrivilegeTest"/>
-                    <include name="Login"/>
-                    <include name="navigateToCaptureMenuTest"/>
-                    <include name="navigateToSimSwapViewTest"/>
-                    <include name="simSwapViewValidationTest"/>
-                    <include name="capturePrepaidSimUpgrade"/>
-                    <include name="capturePostpaidSimSwap"/>
-                </methods>
-            </class>
-            <class name="admin.MobileNumberPorting">
-                <methods>
-                    <include name="noneMobileNumberPortPrivilegeTest"/>
-                    <include name="Login"/>
-                    <include name="mobileNumberPortingValidationTest"/>
-                    <include name="captureMobileNumberPortingTest"/>
-                    <include name="vanityNumberReg"/>
-                </methods>
-            </class>
-            <class name="admin.ChangePasswordTest">
-                <methods>
-                    <include name="Login"/>
-                    <include name="navigateToChangePasswordPage"/>
-                    <include name="changeToNewPassword"/>
-                    <include name="loginWithNewPassword"/>
-                    <include name="changeBackToOldPassword"/>
-                    <include name="loginWithOldPassword"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-    <test name="test2">
-        <parameter name="email" value="snapshot@seamfix.com"/>
-        <parameter name="systemPort" value="8928"/>
-        <parameter name="deviceNo" value="2"/>
-
-        <classes>
-            <class name="admin.ReRegistrationCapture">
-                <methods>
-                    <include name="Login"/>
-                    <include name="navigateToCaptureMenuTest"/>
-                    <include name="reRegisterationTest"/>
-                </methods>
-            </class>
-            <class name="admin.ReactivationTest">
-                <methods>
-                    <include name="noneReactivationPrivilegeTest"/>
-                    <include name="Login"/>
-                    <include name="navigateToCaptureMenuTest"/>
-                    <include name="msisdnReactivationTest"/>
-                </methods>
-            </class>
-            <class name="admin.AgentSupport">
-                <methods>
-                    <include name="Login"/>
-                    <include name="navigateToAgentSupport"/>
-                    <include name="searchTest"/>
-                    <include name="assertSearchDetailsTest"/>
-                    <include name="logIssueByUser"/>
-                    <include name="logIssueByKit"/>
-                </methods>
-            </class>
-            <class name="admin.ReportsTest">
-                <methods>
-                    <include name="Login"/>
-                    <include name="navigateToReportsPage"/>
-                    <include name="reportSummary"/>
-                    <include name="searchParameters"/>
-                    <include name="reportLoginUser2"/>
-                    <include name="reportHomepage"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-    <test name="test3">
-        <parameter name="email" value="snapshot@seamfix.com"/>
-        <parameter name="systemPort" value="8278"/>
-        <parameter name="deviceNo" value="3"/>
-
-        <classes>
             <class name="admin.NewRegistration">
                 <methods>
                     <include name="Login"/>
@@ -116,6 +34,13 @@
                     <include name="msisdnCategoryAndNDCValidationTest"/>
                     <include name="captureIndividualSimTest"/>
                     <include name="captureCompanyNewSimTest"/>
+                </methods>
+            </class>
+            <class name="admin.ReRegistrationCapture">
+                <methods>
+                    <include name="Login"/>
+                    <include name="navigateToCaptureMenuTest"/>
+                    <include name="reRegisterationTest"/>
                 </methods>
             </class>
             <class name="admin.AdditionalRegistration">
@@ -130,6 +55,25 @@
                     <include name="ndcRule"/>
                 </methods>
             </class>
+            <class name="admin.SimSwap">
+                <methods>
+                    <include name="noneSIMSwapPrivilegeTest"/>
+                    <include name="Login"/>
+                    <include name="navigateToCaptureMenuTest"/>
+                    <include name="navigateToSimSwapViewTest"/>
+                    <include name="simSwapViewValidationTest"/>
+                    <include name="capturePrepaidSimUpgrade"/>
+                    <include name="capturePostpaidSimSwap"/>
+                </methods>
+            </class>
+            <class name="admin.ReactivationTest">
+                <methods>
+                    <include name="noneReactivationPrivilegeTest"/>
+                    <include name="Login"/>
+                    <include name="navigateToCaptureMenuTest"/>
+                    <include name="msisdnReactivationTest"/>
+                </methods>
+            </class>
             <class name="admin.SearchTest">
                 <methods>
                     <include name="Login"/>
@@ -138,11 +82,59 @@
                     <include name="searchBySimSerialTest"/>
                 </methods>
             </class>
+            <class name="admin.AgentSupport">
+                <methods>
+                    <include name="Login"/>
+                    <include name="navigateToAgentSupport"/>
+                    <include name="searchTest"/>
+                    <include name="assertSearchDetailsTest"/>
+                    <include name="logIssueByUser"/>
+                    <include name="logIssueByKit"/>
+                </methods>
+            </class>
+            <class name="admin.MobileNumberPorting">
+                <methods>
+                    <include name="noneMobileNumberPortPrivilegeTest"/>
+                    <include name="Login"/>
+                    <include name="mobileNumberPortingValidationTest"/>
+                    <include name="captureMobileNumberPortingTest"/>
+                    <include name="vanityNumberReg"/>
+                </methods>
+            </class>
+            <class name="admin.ForgotPassword">
+                <methods>
+                    <include name="navigateToForgotPasswordTest"/>
+                    <include name="erorrMessagesValidationTest"/>
+                    <include name="changePasswordWithInvalidUsernameTest"/>
+                    <include name="changePasswordWithValidUsernameTest"/>
+                    <include name="loginWithNewPasswordTest"/>
+                </methods>
+            </class>
             <class name="admin.NotificationsTest">
                 <methods>
                     <include name="Login"/>
                     <include name="navigateToNotifications"/>
                     <include name="viewNotifications"/>
+                </methods>
+            </class>
+            <class name="admin.ReportsTest">
+                <methods>
+                    <include name="Login"/>
+                    <include name="navigateToReportsPage"/>
+                    <include name="reportSummary"/>
+                    <include name="searchParameters"/>
+                    <include name="reportLoginUser2"/>
+                    <include name="reportHomepage"/>
+                </methods>
+            </class>
+            <class name="admin.ChangePasswordTest">
+                <methods>
+                    <include name="Login"/>
+                    <include name="navigateToChangePasswordPage"/>
+                    <include name="changeToNewPassword"/>
+                    <include name="loginWithNewPassword"/>
+                    <include name="changeBackToOldPassword"/>
+                    <include name="loginWithOldPassword"/>
                 </methods>
             </class>
             <class name="admin.AgentOnBoardingTest">
