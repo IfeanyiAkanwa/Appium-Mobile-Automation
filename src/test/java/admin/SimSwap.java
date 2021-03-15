@@ -2,28 +2,19 @@ package admin;
 
 import db.ConnectDB;
 import io.appium.java_client.android.AndroidKeyCode;
-import utils.Asserts;
-import utils.TestBase;
-
-import java.io.File;
-import java.io.FileReader;
-
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-
-import com.aventstack.extentreports.Status;
-import com.aventstack.extentreports.markuputils.ExtentColor;
-import com.aventstack.extentreports.markuputils.Markup;
-import com.aventstack.extentreports.markuputils.MarkupHelper;
-
+import utils.Asserts;
+import utils.TestBase;
 import utils.TestUtils;
+
+import java.io.File;
+import java.io.FileReader;
 
 public class SimSwap extends TestBase {
 
@@ -93,7 +84,7 @@ public class SimSwap extends TestBase {
     }
 
     @Test
-    public static void navigateToCaptureMenuTest() throws InterruptedException {
+    public static void navigateToCaptureMenuTest() {
         WebDriverWait wait = new WebDriverWait(getDriver(), 30);
         // Navigate to Registration Type
         TestUtils.testTitle("Navigate to Registration Type");
