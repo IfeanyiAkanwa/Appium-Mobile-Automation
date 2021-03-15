@@ -237,7 +237,7 @@ public class TestBase {
 
 			}
 		}
-		ExtentTest parent = reports.createTest(getClass().getName());
+		ExtentTest parent = reports.createTest(getClass().getName() +"\n"+TestUtils.getDeviceInfo(udid[deviceNo].trim()));
 		parentTest.set(parent);
 	}
 

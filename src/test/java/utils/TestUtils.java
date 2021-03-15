@@ -20,6 +20,14 @@ import java.util.Collection;
 
 public class TestUtils extends TestBase {
 
+    public static String getDeviceInfo(String deviceID) throws IOException {
+        String deviceVersion = "adb -s " + deviceID + " shell getprop ro.build.version.release";
+        String deviceName = "adb.exe -s " +deviceID+ " shell getprop ro.product.model";
+        String deviceInfo = "<b>Device Name: " + executeAdbCommand(deviceName) +"</b><br/><b>OS Version: " + executeAdbCommand(deviceVersion)+"</b>";
+        System.out.println(deviceInfo);
+        return deviceInfo;
+    }
+
     public static String addScreenshot() {
 
         TakesScreenshot ts = getDriver();
