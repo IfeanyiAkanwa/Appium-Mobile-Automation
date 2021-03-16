@@ -36,7 +36,7 @@ public class Login extends TestBase {
 		String deactivated_username = (String) envs.get("deactivated_username");
 		String invalid_email_format = (String) envs.get("invalid_email_format");
 		String valid_pw = (String) envs.get("valid_pw");
-		
+
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/otp_login")));
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/otp_login")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/login_username")));
@@ -45,7 +45,7 @@ public class Login extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/login_mode_types_spinner")).click();
 		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Biosmart']")).click();
 		Thread.sleep(500);
-		
+
 		// Login with valid username and invalid password
 		TestUtils.testTitle("Login with a valid username " + "(" + valid_username + ")" + " and invalid password " + "(" + invalid_password + ")");
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/login_username")).clear();
@@ -69,7 +69,7 @@ public class Login extends TestBase {
 		TestUtils.assertSearchText("ID", "android:id/message", "Invalid username or password entered.");
 		getDriver().findElement(By.id("android:id/button1")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/login_username")));
-		
+
 		// Login with invalid Email Format and valid password
 		TestUtils.testTitle("Login with invalid Email Format " + "(" + invalid_email_format + ")" + " and valid password " + "(" + valid_password + ")");
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/login_username")).clear();
@@ -105,7 +105,7 @@ public class Login extends TestBase {
 		TestUtils.assertSearchText("ID", "android:id/message", "Your account was deactivated. Please contact support");
 		getDriver().findElement(By.id("android:id/button1")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/login_username")));
-		
+
 		// Login with blacklisted username and valid password
 		TestUtils.testTitle("Login with blacklisted username " + "(" + blacklisted_username	+ ")" + " and valid password " + "(" + valid_pw + ")");
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/login_username")).clear();
@@ -278,6 +278,7 @@ public class Login extends TestBase {
         getDriver().pressKeyCode(AndroidKeyCode.BACK);
         // Go back
         getDriver().pressKeyCode(AndroidKeyCode.BACK);
+		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/cancel")).click();
     }
 
     @Parameters ({"dataEnv"})
@@ -393,23 +394,23 @@ public class Login extends TestBase {
 	@Test (groups = { "Regression" })
 	public void activeDirectoryValidLoginTest(String dataEnv) throws InterruptedException, IOException, ParseException {
 		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
-		
+
 		JSONParser parser = new JSONParser();
 		JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
 		JSONObject envs = (JSONObject) config.get("Login");
 
 		String AD_UserName = (String) envs.get("AD_UserName");
 		String valid_AD_pw = (String) envs.get("valid_AD_pw");
-		
+
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/otp_login")));
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/otp_login")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/login_username")));
-		
+
 		// Select Login Mode Type
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/login_mode_types_spinner")).click();
 		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Active Directory']")).click();
 		Thread.sleep(500);
-		
+
 		// Login with valid username and valid password
 		TestUtils.testTitle("Login with a valid Active Directory username " + "(" + AD_UserName + ")" + " and valid password " + "(" + valid_AD_pw + ")");
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/login_username")).clear();
@@ -420,7 +421,7 @@ public class Login extends TestBase {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
 		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Home']", "Home");
 		Thread.sleep(500);
-				
+
 		// Log out
 		TestUtils.testTitle("Logout " + "(" + AD_UserName + ")");
 		getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
@@ -437,7 +438,7 @@ public class Login extends TestBase {
 	@Test (groups = { "Regression" })
 	public void erorrMessagesBiosmartValidationTest(String dataEnv) throws InterruptedException, FileNotFoundException, IOException, ParseException {
 		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
-		
+
 		JSONParser parser = new JSONParser();
 		JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
 		JSONObject envs = (JSONObject) config.get("Login");
@@ -445,12 +446,12 @@ public class Login extends TestBase {
 		String AD_UserName = (String) envs.get("AD_UserName");
 		String valid_AD_pw = (String) envs.get("valid_AD_pw");
 		String BS_email = (String) envs.get("BS_email");
-		
+
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/otp_login")));
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/otp_login")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/login_username")));
 		Thread.sleep(500);
-		
+
 		// Login with Active Directory user but select Biosmart as Auth mode and biosmart email
 		TestUtils.testTitle("Login with Active Directory user but select Biosmart as Auth mode and biosmart email: " + BS_email);
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/login_mode_types_spinner")).click();
@@ -465,7 +466,7 @@ public class Login extends TestBase {
 		TestUtils.assertSearchText("ID", "android:id/message", "Invalid username or password entered.");
 		getDriver().findElement(By.id("android:id/button1")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/login_username")));
-		
+
 		// Login with Active Directory user but select Biosmart as Auth mode and Active Directory user name
 		TestUtils.testTitle("Login with Active Directory user but select Biosmart as Auth mode and Active Directory user name: " + AD_UserName);
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/login_mode_types_spinner")).click();
@@ -480,7 +481,7 @@ public class Login extends TestBase {
 		TestUtils.assertSearchText("ID", "android:id/message", "Please enter a valid User ID or Please enter a valid Email address");
 		getDriver().findElement(By.id("android:id/button1")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/login_username")));
-		
+
 		// Login with Active Directory user but select Active Directory as Auth mode and Biosmart email
 		TestUtils.testTitle("Login with Active Directory user but select Active Directory as Auth mode and Biosmart email: " + BS_email);
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/login_mode_types_spinner")).click();
@@ -496,20 +497,20 @@ public class Login extends TestBase {
 		getDriver().findElement(By.id("android:id/button1")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/login_username")));
 	}
-	
+
 	@Parameters ({"dataEnv"})
 	@Test (groups = { "Regression" })
 	public void erorrMessagesActiveDirectoryValidationTest(String dataEnv) throws Exception {
 		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
-		
+
 		JSONParser parser = new JSONParser();
 		JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
 		JSONObject envs = (JSONObject) config.get("Login");
-		
+
 		String valid_AD_pw = (String) envs.get("valid_AD_pw");
 		String AD_UserName1 = (String) envs.get("AD_UserName1");
 		String BS_email1 = (String) envs.get("BS_email1");
-		
+
 		// Login with Biosmart user but select Biosmart as Auth mode and Active	Directory username
 		TestUtils.testTitle("Login with Biosmart user but select Biosmart as Auth mode and Active Directory username: " + AD_UserName1);
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/login_mode_types_spinner")).click();
@@ -524,7 +525,7 @@ public class Login extends TestBase {
 		TestUtils.assertSearchText("ID", "android:id/message", "Please enter a valid User ID or Please enter a valid Email address");
 		getDriver().findElement(By.id("android:id/button1")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/login_username")));
-		
+
 		// Login with Biosmart user but select Active Directory as Auth mode and Biosmart email
 		TestUtils.testTitle("Login with Biosmart user but select Active Directory as Auth mode and Biosmart email: " + BS_email1);
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/login_mode_types_spinner")).click();
@@ -539,7 +540,7 @@ public class Login extends TestBase {
 		TestUtils.assertSearchText("ID", "android:id/message", "You are not allowed to login with your AD account. Please login with your BioSmart account; " + BS_email1);
 		getDriver().findElement(By.id("android:id/button1")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/login_username")));
-		
+
 		// Login with Biosmart user but select Active Directory as Auth mode and Active Directory username
 		TestUtils.testTitle("Login with Biosmart user but select Active Directory as Auth mode and Active Directory username: " + AD_UserName1);
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/login_mode_types_spinner")).click();
@@ -554,7 +555,7 @@ public class Login extends TestBase {
 		TestUtils.assertSearchText("ID", "android:id/message","You are not allowed to login with your AD account. Please login with your BioSmart account; " + AD_UserName1);
 		getDriver().findElement(By.id("android:id/button1")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/login_username")));
-		
+
 		// Go back
 		getDriver().pressKeyCode(AndroidKeyCode.BACK);
 	}

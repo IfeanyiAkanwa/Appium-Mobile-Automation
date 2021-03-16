@@ -1,10 +1,12 @@
 package demographics;
 
+import io.appium.java_client.android.AndroidKeyCode;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.interactions.touch.TouchActions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Parameters;
@@ -122,8 +124,45 @@ public class Form extends TestBase {
 		Thread.sleep(500);
 
 		// Next button
+		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity." + Id + ":id/btnContinueReg");
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/btnContinueReg")).click();
 		Thread.sleep(500);
+
+		try{
+			TestUtils.assertSearchText("ID", "android:id/title", "Edit Reason");
+			getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[1]/android.widget.LinearLayout/android.widget.LinearLayout")).click();
+			Thread.sleep(1000);
+			getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Descriptions']")).click();
+
+			getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[2]/android.widget.LinearLayout/android.widget.LinearLayout")).click();
+			Thread.sleep(1000);
+			getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Descriptions']")).click();
+
+			getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[3]/android.widget.LinearLayout/android.widget.LinearLayout")).click();
+			Thread.sleep(1000);
+			getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Descriptions']")).click();
+
+			getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[4]/android.widget.LinearLayout/android.widget.LinearLayout")).click();
+			Thread.sleep(1000);
+			getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Descriptions']")).click();
+
+			TouchActions action = new TouchActions(getDriver());
+			action.scroll(getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[6]/android.widget.LinearLayout/android.widget.LinearLayout")), 10, 100);
+			action.perform();
+
+			getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[5]/android.widget.LinearLayout/android.widget.LinearLayout")).click();
+			Thread.sleep(1000);
+			getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Descriptions']")).click();
+
+			getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[6]/android.widget.LinearLayout/android.widget.LinearLayout")).click();
+			Thread.sleep(1000);
+			getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Descriptions']")).click();
+			// Go back
+			getDriver().pressKeyCode(AndroidKeyCode.BACK);
+		}catch(Exception e){
+
+		}
+
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/countrySpinner")));
 		Thread.sleep(500);
 

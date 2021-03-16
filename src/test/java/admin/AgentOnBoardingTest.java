@@ -139,6 +139,7 @@ public class AgentOnBoardingTest extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/submit")).click();
 		//Thread.sleep(500);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/otp")));
+		Thread.sleep(1000);
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity." + Id + ":id/alertTitle", "OTP verification");
 		//Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/otp")).clear();

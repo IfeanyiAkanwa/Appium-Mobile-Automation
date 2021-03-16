@@ -293,13 +293,13 @@ public class Asserts extends TestBase {
         String assertDetails = "Asserting returned Subscriber's Details";
         Markup ad = MarkupHelper.createLabel(assertDetails, ExtentColor.BLUE);
         testInfo.get().info(ad);
-        String msisdn = getDriver().findElement(By.id("com.sf.biocapture.activity:id/msisdn")).getText();
-        String simSerial = getDriver().findElement(By.id("com.sf.biocapture.activity:id/sim_serial")).getText();
-        String activationStatus = getDriver().findElement(By.id("com.sf.biocapture.activity:id/activation_status"))
+        String msisdn = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/msisdn")).getText();
+        String simSerial = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/sim_serial")).getText();
+        String activationStatus = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/activation_status"))
                 .getText();
-        String failureReason = getDriver().findElement(By.id("com.sf.biocapture.activity:id/failure_reason")).getText();
-        String Agent = getDriver().findElement(By.id("com.sf.biocapture.activity:id/agent")).getText();
-        String DOB = getDriver().findElement(By.id("com.sf.biocapture.activity:id/reg_date")).getText();
+        String failureReason = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/failure_reason")).getText();
+        String Agent = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/agent")).getText();
+        String DOB = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/reg_date")).getText();
 
         String NA = "";
 

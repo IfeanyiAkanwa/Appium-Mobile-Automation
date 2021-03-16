@@ -132,6 +132,8 @@ public class ReactivationTest extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/primary_msisdn_field")).sendKeys(invalid_msisdn);
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/submit_button")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/alertTitle")));
+		Thread.sleep(2000);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='MSISDN is not registered and cannot be used for this use case']")));
 		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='MSISDN is not registered and cannot be used for this use case']", "MSISDN is not registered and cannot be used for this use case");
 		getDriver().findElement(By.id("android:id/button1")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='MSISDN Reactivation']")));

@@ -146,6 +146,7 @@ public class NewRegistration extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/simSerialField")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/simSerialField")).sendKeys(invalidPrefixSimSerial);
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/addMsisdnSimSerialButton")).click();
+		Thread.sleep(3000);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Confirming...']")));
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
 		TestUtils.assertSearchText("ID", "android:id/message", "The requested SIM Card does not exist, Please check it again");
@@ -242,8 +243,11 @@ public class NewRegistration extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/simSerialField")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/simSerialField")).sendKeys(valid_simSerial);
 		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/addMsisdnSimSerialButton")).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/alertTitle")));
+		Thread.sleep(1000);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
+		Thread.sleep(1000);
 		TestUtils.assertSearchText("ID", "android:id/message", "Msisdn is valid");
+		Thread.sleep(2000);
 		getDriver().findElement(By.id("android:id/button1")).click();
 		
 		// Add another Number

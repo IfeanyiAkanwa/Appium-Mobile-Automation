@@ -125,10 +125,10 @@ public class AgentSupport extends TestBase {
             TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/issueTypeTXT", user);
         } catch (Exception e) {
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/contentPanel")));
+            Thread.sleep(1000);
             TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Record was not found']", "Record was not found");
             getDriver().findElement(By.xpath("//android.widget.Button[@text='OK']")).click();
         }
-
 
         //Search By Issue Type Kit
         TestUtils.testTitle("Search By Issue Type (" + kit + ")");
@@ -195,6 +195,7 @@ public class AgentSupport extends TestBase {
             TestUtils.convertDate(table_Date);
         } catch (Exception e) {
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/contentPanel")));
+            Thread.sleep(2000);
             TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Record was not found']", "Record was not found");
             getDriver().findElement(By.xpath("//android.widget.Button[@text='OK']")).click();
         }
@@ -212,6 +213,7 @@ public class AgentSupport extends TestBase {
             TestUtils.checkDateBoundary(startDate, endDate, newDate);
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/issueLogview")));
         } catch (Exception e) {
+            Thread.sleep(1000);
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/contentPanel")));
             TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Record was not found']", "Record was not found");
             getDriver().findElement(By.xpath("//android.widget.Button[@text='OK']")).click();

@@ -72,7 +72,7 @@
     "nin": "11111111111"
   },
   "Reactivation": {
-    "valid_msisdn": "08050000079",
+    "valid_msisdn": "08050000076",
     "invalid_msisdn": "08083733777",
     "lga": "Ibeju-Lekki",
     "valid_username": "eze.sfxtest@yopmail.com",
@@ -89,8 +89,8 @@
     "invalid_OTP": "00000"
   },
   "Search": {
-    "valid_msisdn": "1111113116",
-    "valid_sim_serial_no": "11111111111111111367"
+    "valid_msisdn": "08113825224",
+    "valid_sim_serial_no": "8923450410192953306F"
   },
   "ReRegistration": {
     "valid_msisdn": "08050000001",
@@ -139,12 +139,26 @@
     "lga_of_reg": "Agege"
   },
   "AdditionalRegistration": {
-    "pri_valid_Msisdn": "11111111100",
-    "invalid_Msisdn": "083377",
+    "pri_valid_Msisdn": "07058351178",
+    "valid_Msisdn": "08113825224",
+    "fixed_Msisdn": "08113825212",
+    "invalid_Msisdn": "08113326363",
     "lga": "Ibeju-Lekki",
     "invalid_simSerial": "03733577",
-    "pri_valid_simSerial": "1111111111111111100F",
-    "new_valid_simSerial": "083377"
+    "pri_valid_simSerial": "8923450412192350244F",
+    "valid_simSerial": "8923450410192953306F",
+    "new_valid_simSerial": "083377",
+    "valid_username": "eze.sfxtest@yopmail.com",
+    "invalid_number": "089343363",
+    "valid_password": "Bankole1!!",
+    "company_Msisdn": "09056982570",
+    "company_serial": "8923450205180264678F",
+    "incomplete_Msisdn": "09055329127",
+    "incomplete_serial": "8923450710194933911F",
+    "individual_Msisdn": "09056982570",
+    "individual_serial": "8923450205180264678F",
+    "ninVerificationMode": "Search By NIN",
+    "nin": "11111111111"
   },
   "SIMSwap": {
     "valid_Msisdn": "08118071446",
