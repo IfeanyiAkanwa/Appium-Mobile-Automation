@@ -8,9 +8,6 @@ import com.testinium.deviceinformation.helper.ProcessHelper;
 import enums.TargetTypeEnum;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
-import io.appium.java_client.android.AndroidTouchAction;
-import io.appium.java_client.touch.TapOptions;
-import io.appium.java_client.touch.offset.ElementOption;
 import org.apache.commons.codec.binary.Base64;
 import org.openqa.selenium.*;
 import org.testng.Assert;
@@ -22,6 +19,14 @@ import java.util.Calendar;
 import java.util.Collection;
 
 public class TestUtils extends TestBase {
+
+    public static String getDeviceInfo(String deviceID) throws IOException {
+        String deviceVersion = "adb -s " + deviceID + " shell getprop ro.build.version.release";
+        String deviceName = "adb.exe -s " +deviceID+ " shell getprop ro.product.model";
+        String deviceInfo = "<b>" + executeAdbCommand(deviceName) +"</b><br/><b>Android " + executeAdbCommand(deviceVersion)+".0</b>";
+        System.out.println(deviceInfo);
+        return deviceInfo;
+    }
 
     public static String addScreenshot() {
 
