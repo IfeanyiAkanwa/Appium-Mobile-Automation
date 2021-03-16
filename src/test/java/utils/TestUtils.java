@@ -23,7 +23,7 @@ public class TestUtils extends TestBase {
     public static String getDeviceInfo(String deviceID) throws IOException {
         String deviceVersion = "adb -s " + deviceID + " shell getprop ro.build.version.release";
         String deviceName = "adb.exe -s " +deviceID+ " shell getprop ro.product.model";
-        String deviceInfo = "<b>Device Name: " + executeAdbCommand(deviceName) +"</b><br/><b>OS Version: " + executeAdbCommand(deviceVersion)+"</b>";
+        String deviceInfo = "<b>" + executeAdbCommand(deviceName) +"</b><br/><b>Android " + executeAdbCommand(deviceVersion)+".0</b>";
         System.out.println(deviceInfo);
         return deviceInfo;
     }
