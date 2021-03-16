@@ -1,32 +1,19 @@
 package admin;
 
-import io.appium.java_client.MobileDriver;
+import com.aventstack.extentreports.Status;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.interactions.internal.TouchAction;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-
-import com.aventstack.extentreports.Status;
-import com.aventstack.extentreports.markuputils.ExtentColor;
-import com.aventstack.extentreports.markuputils.Markup;
-import com.aventstack.extentreports.markuputils.MarkupHelper;
-
 import utils.Asserts;
 import utils.TestBase;
 import utils.TestUtils;
 
 import java.io.FileReader;
-import java.io.IOException;
-import java.time.Duration;
-
-import static utils.TestUtils.scroll;
 
 public class ReportsTest extends TestBase {
 
@@ -42,9 +29,9 @@ public class ReportsTest extends TestBase {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
         getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Reports']")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/report_title")));
-        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity." + Id + ":id/report_title", "Report Summary");
-        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity." + Id + ":id/btn_server_reports", "SERVER/CLIENT REPORTS");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/report_title")));
+        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/report_title", "Report Summary");
+        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/btn_server_reports", "SERVER/CLIENT REPORTS");
 
     }
 
@@ -59,7 +46,7 @@ public class ReportsTest extends TestBase {
     public static void reportLoginUser2(String dataEnv) throws Exception {
 
         getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
-        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity." + Id + ":id/tv_camera_la");
+        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/tv_camera_la");
 
         TestUtils.scrollDown();
         Thread.sleep(1000);
@@ -84,9 +71,9 @@ public class ReportsTest extends TestBase {
     public static void reportHomepage() throws Exception {
 
         WebDriverWait wait = new WebDriverWait(getDriver(), 30);
-        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/btn_back_home")).click();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btn_back_home")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Total Subscribers']")));
-        String totalSub = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/kpi_report_value")).getText();
+        String totalSub = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/kpi_report_value")).getText();
         int totalSubVal = TestUtils.convertToInt(totalSub);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Total Sync Sent']")));
 
@@ -94,7 +81,7 @@ public class ReportsTest extends TestBase {
         int totalSyncsentVal = TestUtils.convertToInt(totalSyncsent);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Total Sync Pending']")));
 
-        String totalSyncpending = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/kpi_report_value")).getText();
+        String totalSyncpending = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/kpi_report_value")).getText();
         int totalSyncpendingVal = TestUtils.convertToInt(totalSyncpending);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Total Sync Confirmed']")));
 
@@ -102,17 +89,17 @@ public class ReportsTest extends TestBase {
         int totalSynConfVal = TestUtils.convertToInt(totalSynConf);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Total Rejected']")));
 
-        String totalReject = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/kpi_report_value")).getText();
+        String totalReject = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/kpi_report_value")).getText();
         int totalRejectVal = TestUtils.convertToInt(totalReject);
         //wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Total Rejected']")));
 
         navigateToReportsPage();
 
-        String totalRegistrationsValString = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/reg_subscribers")).getText();
-        String totalSyncSentValString = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/total_sync_sent")).getText();
-        String totalSyncPendingValString = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/total_pending")).getText();
-        String totalSyncConfirmedValString = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/sync_confirmed")).getText();
-        String total_rejectedValString = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/total_rejected")).getText();
+        String totalRegistrationsValString = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/reg_subscribers")).getText();
+        String totalSyncSentValString = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/total_sync_sent")).getText();
+        String totalSyncPendingValString = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/total_pending")).getText();
+        String totalSyncConfirmedValString = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/sync_confirmed")).getText();
+        String total_rejectedValString = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/total_rejected")).getText();
 
         int actualTotalRegistrationsVal = TestUtils.convertToInt(totalRegistrationsValString);
         int actualTotalSyncSentVal = TestUtils.convertToInt(totalSyncSentValString);
@@ -159,47 +146,41 @@ public class ReportsTest extends TestBase {
 
         //Start TimeStamp
         // Set date
-        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/start_date")).click();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/start_date")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/button1")));
         //TestUtils.assertSearchText("ID", "android:id/alertTitle", "Set date");
         getDriver().findElement(By.id("android:id/button1")).click();
-        String sDate = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/start_date")).getText();
+        String sDate = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/start_date")).getText();
         testInfo.get().info("<b> Start Date: </b>" + sDate);
 
         // Set time
-        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/start_time")).click();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/start_time")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/button1")));
         //TestUtils.assertSearchText("ID", "android:id/alertTitle", "Set time");
         getDriver().findElement(By.id("android:id/button1")).click();
-        String sTime = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/start_time")).getText();
+        String sTime = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/start_time")).getText();
         testInfo.get().info("<b> Start Time: </b>" + sTime);
 
         //End TimeStamp
         // Set date
-        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/end_date")).click();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/end_date")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/button1")));
         //TestUtils.assertSearchText("ID", "android:id/alertTitle", "Set date");
         getDriver().findElement(By.id("android:id/button1")).click();
-        String eDate = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/end_date")).getText();
+        String eDate = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/end_date")).getText();
         testInfo.get().info("<b> End Date: </b>" + eDate);
 
         // Set time
-        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/end_time")).click();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/end_time")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/button1")));
         //TestUtils.assertSearchText("ID", "android:id/alertTitle", "Set time");
         getDriver().findElement(By.id("android:id/button1")).click();
-        String eTime = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/end_time")).getText();
+        String eTime = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/end_time")).getText();
         testInfo.get().info("<b> End Date: </b>" + eTime);
 
-        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/query_agent")).click();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/query_agent")).click();
 
         reportSummary();
-        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/btn_back_home")).click();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btn_back_home")).click();
     }
-
-    public void scrollUp() throws Exception {
-
-
-    }
-
 }

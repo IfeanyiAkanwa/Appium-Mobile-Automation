@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="BioSmartSuite" parallel="tests" thread-count="3">
+    <parameter name="groupReport" value="/DroidReport.html"/>
+    <parameter name="toMails" value="cngwu@seamfix.com;soli@seamfix.com;"/>
+    <parameter name="myURL" value="http://10.1.242.245:7080/selfservice/"/>
+    <parameter name="gridUrl" value="https://selenium.k8.seamfix.com/wd/hub"/>
+    <parameter name="config" value="single.conf.json"/>
+    <parameter name="environment" value="chrome"/>
+    <parameter name="server" value="remote-jenkins"/>
+    <parameter name="downloadPath" value="/home/seluser/Downloads/"/>
+    <parameter name="dataEnv" value="prodData" />
+    <parameter name="deviceName" value="SeamfixTab" />
+
+    <test name="test1">
+        <parameter name="email" value="snapshot@seamfix.com"/>
+        <parameter name="systemPort" value="8228"/>
+        <parameter name="deviceNo" value="1"/>
+    <classes>
+        <class name="admin.Login">
+            <methods>
+                <include name="usernamePasswordLogin"/>
+                <include name="fingerprintLogin"/>
+                <include name="deactivateAccount"/>
+                <include name="forgotPassword"/>
+                <include name="validUserIdLogin"/>
+                <include name="erorrMessagesBiosmartValidationTest"/>
+                <include name="erorrMessagesActiveDirectoryValidationTest"/>
+                <include name="activeDirectoryValidLoginTest"/>
+            </methods>
+        </class>
+        <class name="admin.NewRegistration">
+            <methods>
+                <include name="Login"/>
+                <include name="navigateToCaptureMenuTest"/>
+                <include name="msisdnCategoryAndNDCValidationTest"/>
+                <include name="captureIndividualSimTest"/>
+                <include name="captureCompanyNewSimTest"/>
+            </methods>
+        </class>
+        <class name="admin.ReRegistrationCapture">
+            <methods>
+                <include name="Login"/>
+                <include name="navigateToCaptureMenuTest"/>
+                <include name="reRegisterationTest"/>
+            </methods>
+        </class>
+        <class name="admin.AdditionalRegistration">
+            <methods>
+                <include name="noneAdditionalPrivilegeTest"/>
+                <include name="Login"/>
+                <include name="navigateToCaptureMenuTest"/>
+                <include name="navigateToAddReg"/>
+                <include name="MsisdnCategory"/>
+                <include name="additionalRegistration"/>
+                <include name="additionalRegTypePrivilege"/>
+                <include name="ndcRule"/>
+            </methods>
+        </class>
+        <class name="admin.SimSwap">
+            <methods>
+                <include name="noneSIMSwapPrivilegeTest"/>
+                <include name="Login"/>
+                <include name="navigateToCaptureMenuTest"/>
+                <include name="navigateToSimSwapViewTest"/>
+                <include name="simSwapViewValidationTest"/>
+                <include name="capturePrepaidSimUpgrade"/>
+                <include name="capturePostpaidSimSwap"/>
+            </methods>
+        </class>
+        <class name="admin.ReactivationTest">
+            <methods>
+                <include name="noneReactivationPrivilegeTest"/>
+                <include name="Login"/>
+                <include name="navigateToCaptureMenuTest"/>
+                <include name="msisdnReactivationTest"/>
+            </methods>
+        </class>
+        <class name="admin.SearchTest">
+            <methods>
+                <include name="Login"/>
+                <include name="navigateToSearchTest"/>
+                <include name="searchByMsisdnTest"/>
+                <include name="searchBySimSerialTest"/>
+            </methods>
+        </class>
+        <class name="admin.AgentSupport">
+            <methods>
+                <include name="Login"/>
+                <include name="navigateToAgentSupport"/>
+                <include name="searchTest"/>
+                <include name="assertSearchDetailsTest"/>
+                <include name="logIssueByUser"/>
+                <include name="logIssueByKit"/>
+            </methods>
+        </class>
+        <class name="admin.MobileNumberPorting">
+            <methods>
+                <include name="noneMobileNumberPortPrivilegeTest"/>
+                <include name="Login"/>
+                <include name="mobileNumberPortingValidationTest"/>
+                <include name="captureMobileNumberPortingTest"/>
+                <include name="vanityNumberReg"/>
+            </methods>
+        </class>
+        <class name="admin.ForgotPassword">
+            <methods>
+                <include name="navigateToForgotPasswordTest"/>
+                <include name="erorrMessagesValidationTest"/>
+                <include name="changePasswordWithInvalidUsernameTest"/>
+                <include name="changePasswordWithValidUsernameTest"/>
+                <include name="loginWithNewPasswordTest"/>
+            </methods>
+        </class>
+        <class name="admin.NotificationsTest">
+            <methods>
+                <include name="Login"/>
+                <include name="navigateToNotifications"/>
+                <include name="viewNotifications"/>
+            </methods>
+        </class>
+        <class name="admin.ReportsTest">
+            <methods>
+                <include name="Login"/>
+                <include name="navigateToReportsPage"/>
+                <include name="reportSummary"/>
+                <include name="searchParameters"/>
+                <include name="reportLoginUser2"/>
+                <include name="reportHomepage"/>
+            </methods>
+        </class>
+        <class name="admin.ChangePasswordTest">
+            <methods>
+                <include name="Login"/>
+                <include name="navigateToChangePasswordPage"/>
+                <include name="changeToNewPassword"/>
+                <include name="loginWithNewPassword"/>
+                <include name="changeBackToOldPassword"/>
+                <include name="loginWithOldPassword"/>
+            </methods>
+        </class>
+        <class name="admin.AgentOnBoardingTest">
+            <methods>
+                <include name="onboardedAgentLoginTest"/>
+                <include name="navigateToAgentOnBoardingTest"/>
+                <include name="agentOnBoardingTest"/>
+            </methods>
+        </class>
+    </classes>
+</test>
+</suite>

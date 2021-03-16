@@ -25,7 +25,7 @@ public class AgentSupport extends TestBase {
 
         //Click the Menu Button
         getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/design_menu_item_text")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/design_menu_item_text")));
 
         //Click Agent Support
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Agent Support']")).click();
@@ -55,15 +55,15 @@ public class AgentSupport extends TestBase {
 
         //Search By issue ID
         TestUtils.testTitle("Search By Issue ID (" + issueID + ")");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/issueId")));
-        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/issueId")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/issueId")).sendKeys(issueID);
-        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/searchLogBtn")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/issueId")));
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/issueId")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/issueId")).sendKeys(issueID);
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/searchLogBtn")).click();
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/issueLogview")));
-            TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/issueIdTXT", issueID);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/issueLogview")));
+            TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/issueIdTXT", issueID);
         } catch (Exception e) {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/contentPanel")));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/contentPanel")));
             TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Record was not found']", "Record was not found");
             getDriver().findElement(By.xpath("//android.widget.Button[@text='OK']")).click();
         }
@@ -71,38 +71,38 @@ public class AgentSupport extends TestBase {
 
         //Search by Status (Pending)
         TestUtils.testTitle("Search By Status: (" + pending + ")");
-        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/issueId")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/issueId")).clear();
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Select Status']")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='PENDING']")));
         getDriver().findElement(By.xpath("//android.widget.TextView[@text='PENDING']")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/searchLogBtn")));
-        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/searchLogBtn")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/searchLogBtn")));
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/searchLogBtn")).click();
 
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/issueLogview")));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/issueLogview")));
             TestUtils.scrollDown();
-            TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/statusTXT", pending);
+            TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/statusTXT", pending);
         } catch (Exception e) {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/contentPanel")));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/contentPanel")));
             TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Record was not found']", "Record was not found");
             getDriver().findElement(By.xpath("//android.widget.Button[@text='OK']")).click();
         }
 
         //Search by Status (Resolved)
         TestUtils.testTitle("Search By Status (" + resolved + ")");
-        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/issueId")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/issueId")).clear();
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='PENDING']")).clear();
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='PENDING']")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='RESOLVED']")));
         getDriver().findElement(By.xpath("//android.widget.TextView[@text='RESOLVED']")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/searchLogBtn")));
-        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/searchLogBtn")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/searchLogBtn")));
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/searchLogBtn")).click();
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/issueLogview")));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/issueLogview")));
             TestUtils.scrollDown();
-            TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/statusTXT", resolved);
+            TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/statusTXT", resolved);
         } catch (Exception e) {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/contentPanel")));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/contentPanel")));
             TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Record was not found']", "Record was not found");
             getDriver().findElement(By.xpath("//android.widget.Button[@text='OK']")).click();
         }
@@ -113,18 +113,18 @@ public class AgentSupport extends TestBase {
 
         //Search By Issue Type User
         TestUtils.testTitle("Search By Issue Type (" + user + ")");
-        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/issueId")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/issueId")).clear();
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Select Status']")).clear();
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Select Issue Type']")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='USER']")));
         getDriver().findElement(By.xpath("//android.widget.TextView[@text='USER']")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/searchLogBtn")));
-        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/searchLogBtn")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/searchLogBtn")));
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/searchLogBtn")).click();
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/issueLogview")));
-            TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/issueTypeTXT", user);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/issueLogview")));
+            TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/issueTypeTXT", user);
         } catch (Exception e) {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/contentPanel")));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/contentPanel")));
             Thread.sleep(1000);
             TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Record was not found']", "Record was not found");
             getDriver().findElement(By.xpath("//android.widget.Button[@text='OK']")).click();
@@ -132,19 +132,19 @@ public class AgentSupport extends TestBase {
 
         //Search By Issue Type Kit
         TestUtils.testTitle("Search By Issue Type (" + kit + ")");
-        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/issueId")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/issueId")).clear();
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Select Status']")).clear();
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='USER']")).clear();
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='USER']")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='KIT']")));
         getDriver().findElement(By.xpath("//android.widget.TextView[@text='KIT']")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/searchLogBtn")));
-        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/searchLogBtn")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/searchLogBtn")));
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/searchLogBtn")).click();
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/issueLogview")));
-            TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/issueTypeTXT", kit);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/issueLogview")));
+            TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/issueTypeTXT", kit);
         } catch (Exception e) {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/contentPanel")));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/contentPanel")));
             TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Record was not found']", "Record was not found");
             getDriver().findElement(By.xpath("//android.widget.Button[@text='OK']")).click();
         }
@@ -156,22 +156,22 @@ public class AgentSupport extends TestBase {
 
         //Search by Start Date
         TestUtils.testTitle("Search By Start Date (" + startDate + ")");
-        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/issueId")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/issueId")).clear();
 
         //Confirm Date picker is displayed
-        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/selectStartDate")).click();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/selectStartDate")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/date_picker_header_date")));
         getDriver().findElement(By.xpath("//android.widget.Button[@text='OK']")).click();
 
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/startDate")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/startDate")).sendKeys(startDate);
-        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/searchLogBtn")).click();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/startDate")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/startDate")).sendKeys(startDate);
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/searchLogBtn")).click();
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/issueLogview")));
-            String table_Date = getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/dateLogged")).getText() + last_two_digits_of_yr;
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/issueLogview")));
+            String table_Date = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/dateLogged")).getText() + last_two_digits_of_yr;
             TestUtils.convertDate(table_Date);
         } catch (Exception e) {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/contentPanel")));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/contentPanel")));
             TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Record was not found']", "Record was not found");
             getDriver().findElement(By.xpath("//android.widget.Button[@text='OK']")).click();
         }
@@ -180,21 +180,21 @@ public class AgentSupport extends TestBase {
         TestUtils.testTitle("Search By End Date (" + endDate + ")");
 
         //Confirm Date picker is displayed
-        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/selectEndDateBtn")).click();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/selectEndDateBtn")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/date_picker_header_date")));
         getDriver().findElement(By.xpath("//android.widget.Button[@text='OK']")).click();
 
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/startDate")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/selectedEndDate")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/selectedEndDate")).sendKeys(endDate);
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/startDate")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/selectedEndDate")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/selectedEndDate")).sendKeys(endDate);
 
-        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/searchLogBtn")).click();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/searchLogBtn")).click();
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/issueLogview")));
-            String table_Date = getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/dateLogged")).getText() + last_two_digits_of_yr;
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/issueLogview")));
+            String table_Date = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/dateLogged")).getText() + last_two_digits_of_yr;
             TestUtils.convertDate(table_Date);
         } catch (Exception e) {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/contentPanel")));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/contentPanel")));
             Thread.sleep(2000);
             TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Record was not found']", "Record was not found");
             getDriver().findElement(By.xpath("//android.widget.Button[@text='OK']")).click();
@@ -203,49 +203,49 @@ public class AgentSupport extends TestBase {
         //Search By start date and end date
         TestUtils.testTitle("Search by Start Date ( " + startDate + ") and End Date (" + endDate + ")");
 
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/startDate")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/startDate")).sendKeys(endDate);
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/startDate")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/startDate")).sendKeys(endDate);
 
-        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/searchLogBtn")).click();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/searchLogBtn")).click();
         try {
-            String table_Date = getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/dateLogged")).getText() + last_two_digits_of_yr;
+            String table_Date = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/dateLogged")).getText() + last_two_digits_of_yr;
             String newDate = TestUtils.convertDate(table_Date);
             TestUtils.checkDateBoundary(startDate, endDate, newDate);
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/issueLogview")));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/issueLogview")));
         } catch (Exception e) {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/contentPanel")));
             Thread.sleep(1000);
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/contentPanel")));
             TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Record was not found']", "Record was not found");
             getDriver().findElement(By.xpath("//android.widget.Button[@text='OK']")).click();
         }
         //Reset The Start Date and End Date
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/startDate")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/selectedEndDate")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/startDate")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/selectedEndDate")).clear();
 
         //Search By Issue Id and Status Pending
         TestUtils.testTitle("Search By Issue ID (" + issueID + "and Status (" + pending + ")");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/issueId")));
-        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/issueId")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/issueId")).sendKeys(issueID);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/issueId")));
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/issueId")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/issueId")).sendKeys(issueID);
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Select Status']")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='PENDING']")));
         Thread.sleep(500);
         getDriver().findElement(By.xpath("//android.widget.TextView[@text='PENDING']")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/searchLogBtn")));
-        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/searchLogBtn")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/searchLogBtn")));
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/searchLogBtn")).click();
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/issueLogview")));
-            TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/issueIdTXT", issueID);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/issueLogview")));
+            TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/issueIdTXT", issueID);
             TestUtils.scrollDown();
-            TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/statusTXT", pending);
+            TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/statusTXT", pending);
         } catch (Exception e) {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/contentPanel")));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/contentPanel")));
             TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Record was not found']", "Record was not found");
             getDriver().findElement(By.xpath("//android.widget.Button[@text='OK']")).click();
         }
 
         //Reset Issue ID and Search by Status
-        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/issueId")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/issueId")).clear();
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='PENDING']")).click();
         getDriver().findElement(By.xpath("//android.widget.TextView[@text='Select Status']")).click();
 
@@ -256,14 +256,14 @@ public class AgentSupport extends TestBase {
     public void assertSearchDetailsTest() {
         WebDriverWait wait = new WebDriverWait(getDriver(), 30);
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/searchLogBtn")));
-        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/searchLogBtn")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/issueLogview")));
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/viewIssue")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/closeDetailsBtn")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/searchLogBtn")));
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/searchLogBtn")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/issueLogview")));
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/viewIssue")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/closeDetailsBtn")));
         Asserts.AssertSearchDetails();
-        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/closeDetailsBtn")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/logIssuebtn")));
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/closeDetailsBtn")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/logIssuebtn")));
 
 
     }
@@ -291,16 +291,16 @@ public class AgentSupport extends TestBase {
 
         //Log issue Type User
         TestUtils.testTitle("Log Issue Type (" + user + ")");
-        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/logIssuebtn")).click();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/logIssuebtn")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Create Support Request']")));
         TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Create Support Request']", "Create Support Request");
 
         //Proceed without Selecting issue type
         TestUtils.testTitle("Log issue without selecting Issue Type");
         //Click the Log Issue Button
-        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/BtnlogIssue")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/alertTitle")));
-        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/alertTitle", "Empty Field");
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/BtnlogIssue")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
+        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/alertTitle", "Empty Field");
         TestUtils.assertSearchText("ID", "android:id/message", "Please Select an Issue Type");
         getDriver().findElement(By.id("android:id/button1")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Select Issue Type']")));
@@ -317,9 +317,9 @@ public class AgentSupport extends TestBase {
         //Proceed without Selecting issue Summary
         TestUtils.testTitle("Log issue without selecting Issue Summary");
         //Click the Log Issue Button
-        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/BtnlogIssue")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/alertTitle")));
-        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/alertTitle", "Empty Field");
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/BtnlogIssue")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
+        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/alertTitle", "Empty Field");
         TestUtils.assertSearchText("ID", "android:id/message", "Please Select an Issue Summary");
         getDriver().findElement(By.id("android:id/button1")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Select Issue Summary']")));
@@ -342,20 +342,20 @@ public class AgentSupport extends TestBase {
         //Proceed without Entering Description
         TestUtils.testTitle("Log issue without Entering Description");
         //Click the Log Issue Button
-        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/BtnlogIssue")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/alertTitle")));
-        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/alertTitle", "Empty Field");
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/BtnlogIssue")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
+        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/alertTitle", "Empty Field");
         TestUtils.assertSearchText("ID", "android:id/message", "Please enter a description");
         getDriver().findElement(By.id("android:id/button1")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/issueDescription")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/issueDescription")));
 
         //Enter the Description
-        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/issueDescription")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/issueDescription")).sendKeys(description);
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/issueDescription")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/issueDescription")).sendKeys(description);
 
         //Click the Log Issue Button
         TestUtils.testTitle("Log Issue");
-        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/BtnlogIssue")).click();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/BtnlogIssue")).click();
 
         //Assert Toast Message
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/hierarchy/android.widget.Toast")));
@@ -397,16 +397,16 @@ public class AgentSupport extends TestBase {
 
         //Log issue Type User
         TestUtils.testTitle("Log Issue Type (" + kit + ")");
-        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/logIssuebtn")).click();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/logIssuebtn")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Create Support Request']")));
         TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Create Support Request']", "Create Support Request");
 
         //Proceed without Selecting issue type
         TestUtils.testTitle("Log issue without selecting Issue Type");
         //Click the Log Issue Button
-        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/BtnlogIssue")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/alertTitle")));
-        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/alertTitle", "Empty Field");
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/BtnlogIssue")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
+        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/alertTitle", "Empty Field");
         TestUtils.assertSearchText("ID", "android:id/message", "Please Select an Issue Type");
         getDriver().findElement(By.id("android:id/button1")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Select Issue Type']")));
@@ -423,9 +423,9 @@ public class AgentSupport extends TestBase {
         //Proceed without Selecting issue Summary
         TestUtils.testTitle("Log issue without selecting Issue Summary");
         //Click the Log Issue Button
-        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/BtnlogIssue")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/alertTitle")));
-        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/alertTitle", "Empty Field");
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/BtnlogIssue")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
+        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/alertTitle", "Empty Field");
         TestUtils.assertSearchText("ID", "android:id/message", "Please Select an Issue Summary");
         getDriver().findElement(By.id("android:id/button1")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Select Issue Summary']")));
@@ -456,20 +456,20 @@ public class AgentSupport extends TestBase {
         //Proceed without Entering Description
         TestUtils.testTitle("Log issue without Entering Description");
         //Click the Log Issue Button
-        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/BtnlogIssue")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/alertTitle")));
-        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/alertTitle", "Empty Field");
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/BtnlogIssue")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
+        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/alertTitle", "Empty Field");
         TestUtils.assertSearchText("ID", "android:id/message", "Please enter a description");
         getDriver().findElement(By.id("android:id/button1")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/issueDescription")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/issueDescription")));
 
         //Enter the Description
-        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/issueDescription")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/issueDescription")).sendKeys(description);
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/issueDescription")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/issueDescription")).sendKeys(description);
 
         TestUtils.testTitle("Log Issue");
         //Click the Log Issue Button
-        getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/BtnlogIssue")).click();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/BtnlogIssue")).click();
 
         //Assert Toast Message
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/hierarchy/android.widget.Toast")));
