@@ -177,6 +177,7 @@ public class MobileNumberPorting extends TestBase {
         String mothers_maiden_name = (String) envs.get("mothers_maiden_name");
 
         //To confirm that only users with the VNR privilege are able to register vanity numbers
+        Thread.sleep(2000);
         TestUtils.testTitle("To confirm that only users with the VNR privilege are able to register vanity numbers");
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/button_start_capture")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/typeofreg")));

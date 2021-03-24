@@ -1,5 +1,6 @@
 package demographics;
 
+import freemarker.core.Environment;
 import io.appium.java_client.android.AndroidKeyCode;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -126,8 +127,8 @@ public class Form extends TestBase {
 		// Next button
 		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/btnContinueReg");
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btnContinueReg")).click();
-		Thread.sleep(500);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/countrySpinner")));
+		Thread.sleep(3000);
+		//wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/countrySpinner")));
 
 		try{
 			TestUtils.assertSearchText("ID", "android:id/title", "Edit Reason");
@@ -147,9 +148,7 @@ public class Form extends TestBase {
 			Thread.sleep(1000);
 			getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Descriptions']")).click();
 
-			TouchActions action = new TouchActions(getDriver());
-			action.scroll(getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[6]/android.widget.LinearLayout/android.widget.LinearLayout")), 10, 100);
-			action.perform();
+			TestUtils.scrollUntilElementIsVisible("XPATH", "//android.widget.CheckedTextView[@text='Descriptions']");
 
 			getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[5]/android.widget.LinearLayout/android.widget.LinearLayout")).click();
 			Thread.sleep(1000);
@@ -164,7 +163,7 @@ public class Form extends TestBase {
 
 		}
 
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity." + Id + ":id/countrySpinner")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/countrySpinner")));
 		Thread.sleep(500);
 
 		// Nationality
@@ -399,6 +398,7 @@ public class Form extends TestBase {
 			TestUtils.scrollDown();
 			// Push File
 			File pic = new File(System.getProperty("user.dir") + "/files/idCard.jpg");
+
 			getDriver().pushFile("/storage/emulated/0/picture.jpg", pic);
 
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/documentUploadSpinner")).click();
@@ -410,9 +410,11 @@ public class Form extends TestBase {
 			getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Affidavit']")).click();
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/uploadDocumentBtn")));
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/uploadDocumentBtn")).click();
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='picture.jpg']")));
+
+			TestUtils.scrollDown();
 
 			TestUtils.scrollUntilElementIsVisible("XPATH", "//android.widget.TextView[@text='picture.jpg']");
+
 
 			getDriver().findElement(By.xpath("//android.widget.TextView[@text='picture.jpg']")).click();
 			Thread.sleep(500);
@@ -420,7 +422,7 @@ public class Form extends TestBase {
 			Thread.sleep(500);
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/uploadDocumentBtn")).click();
 			Thread.sleep(1000);
-			TestUtils.scrollDown();
+			TestUtils.scrollUntilElementIsVisible("XPATH", "//android.widget.TextView[@text='picture.jpg']");
 			getDriver().findElement(By.xpath("//android.widget.TextView[@text='picture.jpg']")).click();
 			Thread.sleep(500);
 		}catch (Exception e){
@@ -428,7 +430,6 @@ public class Form extends TestBase {
 		}
 
 		TestUtils.scrollDown();
-
 
 		// Capture KYC FORM
 		TestUtils.testTitle("Capture KYC FORM");

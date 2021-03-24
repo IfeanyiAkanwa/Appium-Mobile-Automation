@@ -39,7 +39,7 @@ public class AgentSupport extends TestBase {
     @Parameters({"dataEnv"})
     @Test
     public void searchTest(String dataEnv) throws Exception {
-        WebDriverWait wait = new WebDriverWait(getDriver(), 10);
+        WebDriverWait wait = new WebDriverWait(getDriver(), 30);
         JSONParser parser = new JSONParser();
         JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
         JSONObject envs = (JSONObject) config.get("AgentSupport");
@@ -103,6 +103,7 @@ public class AgentSupport extends TestBase {
             TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/statusTXT", resolved);
         } catch (Exception e) {
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/contentPanel")));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Record was not found']")));
             TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Record was not found']", "Record was not found");
             getDriver().findElement(By.xpath("//android.widget.Button[@text='OK']")).click();
         }
@@ -120,10 +121,12 @@ public class AgentSupport extends TestBase {
         getDriver().findElement(By.xpath("//android.widget.TextView[@text='USER']")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/searchLogBtn")));
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/searchLogBtn")).click();
+        Thread.sleep(2000);
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/issueLogview")));
             TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/issueTypeTXT", user);
         } catch (Exception e) {
+            Thread.sleep(3000);
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/contentPanel")));
             Thread.sleep(1000);
             TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Record was not found']", "Record was not found");
@@ -202,16 +205,19 @@ public class AgentSupport extends TestBase {
 
         //Search By start date and end date
         TestUtils.testTitle("Search by Start Date ( " + startDate + ") and End Date (" + endDate + ")");
+        Thread.sleep(5000);
 
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/startDate")).clear();
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/startDate")).sendKeys(endDate);
 
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/searchLogBtn")).click();
+
+        Thread.sleep(4000);
         try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/issueLogview")));
             String table_Date = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/dateLogged")).getText() + last_two_digits_of_yr;
             String newDate = TestUtils.convertDate(table_Date);
             TestUtils.checkDateBoundary(startDate, endDate, newDate);
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/issueLogview")));
         } catch (Exception e) {
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/contentPanel")));
             Thread.sleep(1000);
@@ -354,10 +360,12 @@ public class AgentSupport extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/issueDescription")).sendKeys(description);
 
         //Click the Log Issue Button
+        Thread.sleep(3000);
         TestUtils.testTitle("Log Issue");
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/BtnlogIssue")).click();
 
         //Assert Toast Message
+        Thread.sleep(3000);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/hierarchy/android.widget.Toast")));
         TestUtils.assertSearchText("XPATH", "/hierarchy/android.widget.Toast", "Logged Issue Successful");
 

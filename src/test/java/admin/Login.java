@@ -24,7 +24,7 @@ public class Login extends TestBase {
     @Parameters({ "dataEnv"})
 	@Test (groups = {"Regression"})
 	public void usernamePasswordLogin(String dataEnv) throws InterruptedException, IOException, ParseException {
-		WebDriverWait wait = new WebDriverWait(getDriver(), 50);
+		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
 		JSONParser parser = new JSONParser();
 		JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
 		JSONObject envs = (JSONObject) config.get("Login");
@@ -56,6 +56,7 @@ public class Login extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/login_password")).sendKeys(invalid_password);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/submit")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/title_template")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
 		TestUtils.assertSearchText("ID", "android:id/message", "Invalid username or password entered.");
 		getDriver().findElement(By.id("android:id/button1")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/login_username")));
@@ -237,6 +238,7 @@ public class Login extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/email")).sendKeys(not_onboarded_username);
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/verify")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
+        Thread.sleep(3000);
         TestUtils.assertSearchText("ID", "android:id/message", "Agent has not been onboarded yet");
         getDriver().findElement(By.id("android:id/button1")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/email")));
@@ -280,7 +282,7 @@ public class Login extends TestBase {
         getDriver().pressKeyCode(AndroidKeyCode.BACK);
         // Go back
         getDriver().pressKeyCode(AndroidKeyCode.BACK);
-		getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/cancel")).click();
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/cancel")).click();
     }
 
     @Parameters ({"dataEnv"})

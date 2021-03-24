@@ -8,6 +8,7 @@ import com.testinium.deviceinformation.helper.ProcessHelper;
 import enums.TargetTypeEnum;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.WaitOptions;
 import org.apache.commons.codec.binary.Base64;
 import org.openqa.selenium.*;
 import org.testng.Assert;
@@ -15,6 +16,7 @@ import org.testng.Assert;
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.util.Calendar;
 import java.util.Collection;
 
@@ -23,7 +25,7 @@ public class TestUtils extends TestBase {
     public static String getDeviceInfo(String deviceID) throws IOException {
         String deviceVersion = "adb -s " + deviceID + " shell getprop ro.build.version.release";
         String deviceName = "adb.exe -s " +deviceID+ " shell getprop ro.product.model";
-        String deviceInfo = "<b>" + executeAdbCommand(deviceName) +"</b><br/><b>Android " + executeAdbCommand(deviceVersion)+".0</b>";
+        String deviceInfo = "<b>" + executeAdbCommand(deviceName) +"</b><br/><b>Android " + executeAdbCommand(deviceVersion)+"</b>";
         System.out.println(deviceInfo);
         return deviceInfo;
     }
@@ -109,7 +111,7 @@ public class TestUtils extends TestBase {
     @SuppressWarnings({"rawtypes", "deprecation"})
     public static void scroll(int fromX, int fromY, int toX, int toY) {
         TouchAction touchAction = new TouchAction(getDriver());
-        touchAction.longPress(fromX, fromY).moveTo(toX, toY).release().perform();
+        touchAction.longPress(fromX, fromY).moveTo(toX, toY).release().waitAction( WaitOptions.waitOptions( Duration.ofMillis( 5000 ) ) ).perform();
     }
 
     public static void scrollDown() {

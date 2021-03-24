@@ -72,7 +72,7 @@
     "nin": "11111111111"
   },
   "Reactivation": {
-    "valid_msisdn": "08050000076",
+    "valid_msisdn": "08114296556",
     "invalid_msisdn": "08083733777",
     "lga": "Ibeju-Lekki",
     "valid_username": "eze.sfxtest@yopmail.com",
@@ -102,7 +102,9 @@
     "onboardedAgent": "vnwauwa@seamfix.com",
     "invalid_email": "y.com@x.com",
     "invalid_OTP": "00000",
-    "used_OTP": "25269"
+    "used_OTP": "25269",
+    "ninVerificationMode": "Search By NIN",
+    "nin": "11111111111"
   },
   "BiometricUpdate": {
     "valid_msisdn": "08142050913",
@@ -218,7 +220,8 @@
     "pp_fdn2": "3647563546",
     "pp_fdn3": "4536475863",
     "pp_fdn4": "94635465768",
-    "pp_fdn5": "8053427645"
+    "pp_fdn5": "8053427645",
+    "ninVerificationMode": "Search By NIN"
   },
   "UserDetails": {
     "surname": "Amanda",

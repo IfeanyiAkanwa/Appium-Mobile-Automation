@@ -316,7 +316,9 @@ public class AdditionalRegistration extends TestBase {
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simSerialField")).sendKeys(valid_simSerial);
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/addSerialButton")).click();
 
+			Thread.sleep(2000);
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
+			Thread.sleep(2000);
 			TestUtils.assertSearchText("ID", "android:id/message", "Subscriber is not allowed to register more than 1 additional SIMS");
 			getDriver().findElement(By.id("android:id/button1")).click();
 
@@ -399,6 +401,7 @@ public class AdditionalRegistration extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/primary_serial_field")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/primary_serial_field")).sendKeys(individual_serial);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/submit_button")).click();
+		Thread.sleep(3000);
 		TestUtils.scrollUntilElementIsVisible("XPATH", "//android.widget.TextView[@text='Registration Type']");
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/summary_ok_button")));
 		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='INDIVIDUAL']", "INDIVIDUAL");
@@ -411,6 +414,7 @@ public class AdditionalRegistration extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/primary_serial_field")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/primary_serial_field")).sendKeys(company_serial);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/submit_button")).click();
+		Thread.sleep(3000);
 		TestUtils.scrollUntilElementIsVisible("XPATH", "//android.widget.TextView[@text='Registration Type']");
 		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='INDIVIDUAL']", "COMPANY");
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/summary_ok_button")).click();
@@ -478,6 +482,7 @@ public class AdditionalRegistration extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/primary_serial_field")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/primary_serial_field")).sendKeys(pri_valid_simSerial);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/submit_button")).click();
+		Thread.sleep(2000);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/summary_title")));
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/summary_title", "Basic Info");
 

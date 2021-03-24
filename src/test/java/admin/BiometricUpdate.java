@@ -24,7 +24,7 @@ import java.io.FileReader;
 public class BiometricUpdate extends TestBase {
 
 	@Test
-	public static void navigateToCaptureMenuTest() throws InterruptedException {
+	public static void navigateToCaptureMenuTest() {
 		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
 		// Navigate to Registration Type
 		String regType = "Navigate to Registration Type";

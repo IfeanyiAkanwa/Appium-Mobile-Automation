@@ -80,7 +80,7 @@ public class ReactivationTest extends TestBase {
 	@Test
     public void msisdnReactivationTest(String dataEnv) throws Exception {
 
-        WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+        WebDriverWait wait = new WebDriverWait(getDriver(), 60);
         JSONParser parser = new JSONParser();
 		JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
 		JSONObject envs = (JSONObject) config.get("Reactivation");

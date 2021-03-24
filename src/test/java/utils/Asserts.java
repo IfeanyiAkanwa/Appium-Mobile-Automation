@@ -41,9 +41,9 @@ public class Asserts extends TestBase {
         String dateOfBirth = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/dateOfBirth")).getText();
         String altPhoneNumber = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/alternatePhone"))
                 .getText();
-        TestUtils.scrollDown();
+        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/alternateEmail");
         String email = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/alternateEmail")).getText();
-        TestUtils.scrollDown();
+        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/spinnerOccupation");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/spinnerOccupation")));
         Thread.sleep(500);
         String occupation = getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='[Select an Occupation]']")).getText();
@@ -293,13 +293,13 @@ public class Asserts extends TestBase {
         String assertDetails = "Asserting returned Subscriber's Details";
         Markup ad = MarkupHelper.createLabel(assertDetails, ExtentColor.BLUE);
         testInfo.get().info(ad);
-        String msisdn = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/msisdn")).getText();
-        String simSerial = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/sim_serial")).getText();
-        String activationStatus = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/activation_status"))
+        String msisdn = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdn")).getText();
+        String simSerial = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/sim_serial")).getText();
+        String activationStatus = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/activation_status"))
                 .getText();
-        String failureReason = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/failure_reason")).getText();
-        String Agent = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/agent")).getText();
-        String DOB = getDriver().findElement(By.id("com.sf.biocapture.activity." + Id + ":id/reg_date")).getText();
+        String failureReason = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/failure_reason")).getText();
+        String Agent = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/agent")).getText();
+        String DOB = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/reg_date")).getText();
 
         String NA = "";
 
