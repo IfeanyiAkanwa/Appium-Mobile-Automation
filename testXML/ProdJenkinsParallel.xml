@@ -79,7 +79,8 @@
                     <include name="noneReactivationPrivilegeTest"/>
                     <include name="Login"/>
                     <include name="navigateToCaptureMenuTest"/>
-                    <include name="msisdnReactivationTest"/>
+                    <include name="validateMsisdn"/>
+<!--                    <include name="msisdnReactivationTest"/>-->
                 </methods>
             </class>
             <class name="admin.AgentSupport">

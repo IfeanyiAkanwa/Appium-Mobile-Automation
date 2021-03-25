@@ -2,6 +2,7 @@ package admin;
 
 import com.aventstack.extentreports.Status;
 import demographics.Form;
+import io.appium.java_client.android.AndroidKeyCode;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.openqa.selenium.By;
@@ -175,6 +176,7 @@ public class MobileNumberPorting extends TestBase {
         String surname = (String) envs.get("surname");
         String first_name = (String) envs.get("first_name");
         String mothers_maiden_name = (String) envs.get("mothers_maiden_name");
+        String nonGloMsisdn= (String) envs.get("nonGloMsisdn");
 
         //To confirm that only users with the VNR privilege are able to register vanity numbers
         Thread.sleep(2000);
@@ -310,9 +312,39 @@ public class MobileNumberPorting extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/validate_serial_button")).click();
         TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Individual']", "Individual");
 
-        //To confirm that the Vanity Number Registration can only be done with a GLO MSISDN
-        TestUtils.testTitle("To confirm that the Vanity Number Registration can only be done with a GLO MSISDN");
+        //To confirm that the Vanity Number Registration can not be done with an MSISDN that is not a GLO MSISDN
+        TestUtils.testTitle("To confirm that the Vanity Number Registration can not be done with an MSISDN that is not a GLO MSISDN("+nonGloMsisdn+")");
         getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/typeofreg")));
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/typeofreg")).click();
+        Thread.sleep(1000);
+        getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Mobile Number Porting']")).click();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/next_button")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Mobile Number Porting']")));
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/primary_msisdn_field")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/primary_msisdn_field")).sendKeys(nonGloMsisdn);
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/sim_serial")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/sim_serial")).sendKeys(pri_valid_simSerial);
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/validate_serial_button")).click();
+        try{
+            Thread.sleep(500);
+            TestUtils.assertSearchText("ID", "android:id/message", "The MSISDN is not a valid GLO MSISDN");
+            getDriver().findElement(By.id("android:id/button1")).click();
+
+        }catch(Exception e){
+            testInfo.get().fail("Validation failed");
+            //Go back
+            getDriver().pressKeyCode(AndroidKeyCode.BACK);
+        }
+
+        //To confirm that the Vanity Number Registration can only be done with a GLO MSISDN
+        TestUtils.testTitle("To confirm that the Vanity Number Registration can only be done with a GLO MSISDN("+pri_valid_Msisdn+")");
+        try {
+            getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
+
+        }catch (Exception e){
+
+        }
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/typeofreg")));
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/typeofreg")).click();
         Thread.sleep(1000);

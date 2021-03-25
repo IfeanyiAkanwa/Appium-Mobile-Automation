@@ -775,10 +775,12 @@ public class SimSwap extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btnSwapOk")).click();
 
         //Proceed with valid details
-        TestUtils.testTitle("Procced with matching details");
+        TestUtils.testTitle("Proceed with matching details");
 
         TestUtils.scrollUp2();
         TestUtils.scrollUp2();
+        TestUtils.scrollUp2();
+
         TestUtils.scrollUp2();
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/firstnameTXT")));

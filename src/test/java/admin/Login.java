@@ -57,6 +57,7 @@ public class Login extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/submit")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/title_template")));
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
+		Thread.sleep(2000);
 		TestUtils.assertSearchText("ID", "android:id/message", "Invalid username or password entered.");
 		getDriver().findElement(By.id("android:id/button1")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/login_username")));

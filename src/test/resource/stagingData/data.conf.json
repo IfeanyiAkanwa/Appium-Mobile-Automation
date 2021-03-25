@@ -294,7 +294,8 @@
     "mothers_maiden_name": "Adenike",
     "valid_username": "eze.sfxtest@yopmail.com",
     "invalid_number": "089343363",
-    "valid_password": "Bankole1!!"
+    "valid_password": "Bankole1!!",
+    "nonGloMsisdn": "08142050512"
   },
   "AgentSupport": {
     "issueID": "ISS-25072020-00304",
