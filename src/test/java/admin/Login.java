@@ -148,7 +148,7 @@ public class Login extends TestBase {
 	@Parameters({ "dataEnv"})
 	@Test (groups = {"Regression"})
 	public void validUserIdLogin(String dataEnv) throws InterruptedException, IOException, ParseException {
-		WebDriverWait wait = new WebDriverWait(getDriver(), 50);
+		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
 		JSONParser parser = new JSONParser();
 		JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
 		JSONObject envs = (JSONObject) config.get("Login");
@@ -378,6 +378,7 @@ public class Login extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/send")).click();
 
         //Confirm OTP dialog pop up
+		Thread.sleep(3000);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/dialog_title")));
         TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/dialog_title", "OTP verification");
 

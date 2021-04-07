@@ -89,10 +89,12 @@ public class MobileNumberPorting extends TestBase {
         String surname = (String) envs.get("surname");
         String first_name = (String) envs.get("first_name");
         String mothers_maiden_name = (String) envs.get("mothers_maiden_name");
+        String nin = (String) envs.get("nin");
 
 
         //To confirm that there is a Registration type called Mobile Number Porting
         TestUtils.testTitle("To confirm that there is a Registration type called Mobile Number Porting");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/button_start_capture")));
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/button_start_capture")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/typeofreg")));
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/typeofreg")).click();
@@ -144,6 +146,12 @@ public class MobileNumberPorting extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/sim_serial")).sendKeys(pri_valid_simSerial);
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/validate_serial_button")).click();
         Thread.sleep(1000);
+        try{
+            //Verify NIN
+            TestBase.verifyNINTest(nin, "Search By NIN");
+        }catch (Exception e){
+
+        }
         TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Personal Details']", "Personal Details");
 
         //To verify that the button to Validate Sim Serial is enabled and functional .

@@ -198,7 +198,7 @@ public class AgentSupport extends TestBase {
             TestUtils.convertDate(table_Date);
         } catch (Exception e) {
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/contentPanel")));
-            Thread.sleep(2000);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Record was not found']")));
             TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Record was not found']", "Record was not found");
             getDriver().findElement(By.xpath("//android.widget.Button[@text='OK']")).click();
         }
@@ -278,7 +278,7 @@ public class AgentSupport extends TestBase {
     @Parameters({"dataEnv"})
     @Test
     public void logIssueByUser(String dataEnv) throws Exception {
-        WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+        WebDriverWait wait = new WebDriverWait(getDriver(), 60);
         JSONParser parser = new JSONParser();
         JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
         JSONObject envs = (JSONObject) config.get("AgentSupport");
@@ -379,7 +379,7 @@ public class AgentSupport extends TestBase {
     @Parameters({"dataEnv"})
     @Test
     public void logIssueByKit(String dataEnv) throws Exception {
-        WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+        WebDriverWait wait = new WebDriverWait(getDriver(), 60);
         JSONParser parser = new JSONParser();
         JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
         JSONObject envs = (JSONObject) config.get("AgentSupport");
@@ -431,6 +431,7 @@ public class AgentSupport extends TestBase {
         //Proceed without Selecting issue Summary
         TestUtils.testTitle("Log issue without selecting Issue Summary");
         //Click the Log Issue Button
+        Thread.sleep(2000);
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/BtnlogIssue")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
         TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/alertTitle", "Empty Field");

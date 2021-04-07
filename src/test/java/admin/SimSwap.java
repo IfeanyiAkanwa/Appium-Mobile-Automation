@@ -189,7 +189,7 @@ public class SimSwap extends TestBase {
     @Test
     public void simSwapViewValidationTest(String dataEnv) throws Exception {
 
-        WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+        WebDriverWait wait = new WebDriverWait(getDriver(), 60);
         JSONParser parser = new JSONParser();
         JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
         JSONObject envs = (JSONObject) config.get("SIMSwap");
@@ -516,7 +516,7 @@ public class SimSwap extends TestBase {
     @Test
     public void capturePrepaidSimUpgrade(String dataEnv) throws Exception {
 
-        WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+        WebDriverWait wait = new WebDriverWait(getDriver(), 60);
         JSONParser parser = new JSONParser();
         JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
         JSONObject envs = (JSONObject) config.get("SIMSwap");

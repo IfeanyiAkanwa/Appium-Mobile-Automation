@@ -460,8 +460,17 @@ public class Form extends TestBase {
 		TestUtils.testTitle("Face Capture");
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/faceCaptureButton", "FACE CAPTURE *");
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/faceCaptureButton")).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")));
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
+
+		try{
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")));
+
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
+		}catch (Exception e){
+
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/buttonCapturePicture")));
+
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/buttonCapturePicture")).click();
+		}
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
 		TestUtils.assertSearchText("ID", "android:id/message", "Subscriber's face was successfully captured");
 		getDriver().findElement(By.id("android:id/button1")).click();
@@ -470,7 +479,7 @@ public class Form extends TestBase {
 		//Click next button
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/nextButton")).click();
 
-		//Fingerprint capture
+		//Fingerprint capture/
 
 		//Submit without overriding fingerprint
 		TestUtils.testTitle("Save Enrollment without overriding fingerprint");

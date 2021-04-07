@@ -271,7 +271,7 @@ public class TestBase {
 	@Parameters ({"dataEnv"})
 	@Test
 	public static void Login(String dataEnv) throws InterruptedException, IOException, ParseException {
-		WebDriverWait wait = new WebDriverWait(getDriver(), 50);
+		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
 		LoginLogic(dataEnv, "Login");
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
 		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Home']", "Home");
@@ -279,7 +279,7 @@ public class TestBase {
 
 	@Test
 	public static void Login1(String valid_username, String valid_password) throws Exception {
-		WebDriverWait wait = new WebDriverWait(getDriver(), 50);
+		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
 	
 		TestUtils.testTitle("Login with a valid username: ( " + valid_username + " ) and valid password: ( "  + valid_password + " )");
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/otp_login")));
@@ -352,9 +352,13 @@ public class TestBase {
 		TestUtils.testTitle("Confirm the searched NIN is returned: "+nin);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/title")));
 		TestUtils.assertSearchText("ID", "android:id/title", "NIN Details");
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/nin")));
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/nin", nin);
 
 		//Proceed
+		Thread.sleep(2000);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/proceed_button")));
+		Thread.sleep(2000);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/proceed_button")).click();
 
 	}

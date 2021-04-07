@@ -146,8 +146,8 @@
     "valid_password": "Bankole1!!",
     "company_Msisdn": "09056982570",
     "company_serial": "8923450205180264678F",
-    "incomplete_Msisdn": "09055329127",
-    "incomplete_serial": "8923450710194933911F",
+    "incomplete_Msisdn": "08114296614",
+    "incomplete_serial": "8923450710193768789F",
     "individual_Msisdn": "09056982570",
     "individual_serial": "8923450205180264678F",
     "ninVerificationMode": "Search By NIN",
@@ -172,7 +172,7 @@
     "unrecognizedMsisdn": "11111111111",
     "approver_username": "soli@seamfix.com",
     "approver_password": "Bankole22!!",
-    "blocked_msisdn": "08057203313",
+    "blocked_msisdn": "08110745614",
     "unavailable_msisdn": "08114538225",
     "fName": "akin",
     "lName": "somto",
@@ -295,7 +295,8 @@
     "valid_username": "eze.sfxtest@yopmail.com",
     "invalid_number": "089343363",
     "valid_password": "Bankole1!!",
-    "nonGloMsisdn": "08142050512"
+    "nonGloMsisdn": "08142050512",
+    "nin": "11111111111"
   },
   "AgentSupport": {
     "issueID": "ISS-25072020-00304",
