@@ -118,7 +118,7 @@
                     <include name="viewNotifications"/>
                 </methods>
             </class>
-            <!--<class name="admin.ReportsTest">
+            <class name="admin.ReportsTest">
                 <methods>
                     <include name="Login"/>
                     <include name="navigateToReportsPage"/>
@@ -127,7 +127,7 @@
                     <include name="reportLoginUser2"/>
                     <include name="reportHomepage"/>
                 </methods>
-            </class>-->
+            </class>
             <class name="admin.ChangePasswordTest">
                 <methods>
                     <include name="Login"/>
