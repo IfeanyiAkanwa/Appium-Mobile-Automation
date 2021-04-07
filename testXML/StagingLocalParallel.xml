@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="BioSmartSuite" parallel="tests" thread-count="3">
-    <parameter name="groupReport" value="/DroidReport.html"/>
-    <parameter name="toMails" value="sosepadeolu@seamfix.com;soli@seamfix.com;cngwu@seamfix.com"/>
-    <parameter name="config" value="data.conf.json"/>
-    <parameter name="environment" value="chrome"/>
-    <parameter name="testConfig" value="parallel.conf.json"/>
-    <parameter name="server" value="local"/>
-    <parameter name="downloadPath" value="/files/"/>
-    <parameter name="dataEnv" value="stagingData"/>
-    <parameter name="deviceName" value="SeamfixTab" />
+	<parameter name="groupReport" value="/DroidReport.html" />
+	<!--<parameter name="toMails" value="sosepadeolu@seamfix.com;soli@seamfix.com;cngwu@seamfix.com" />-->
+    <parameter name="toMails" value="sosepadeolu@seamfix.com;" />
+    <parameter name="config" value="data.conf.json" />
+	<parameter name="environment" value="chrome" />
+	<parameter name="testConfig" value="parallel.conf.json" />
+	<parameter name="server" value="local" />
+	<parameter name="downloadPath" value="/files/" />
+	<parameter name="dataEnv" value="stagingData" />
 
     <test name="test1">
         <parameter name="email" value="snapshot@seamfix.com"/>
@@ -61,7 +61,6 @@
             </class>
         </classes>
     </test>
-
     <test name="test2">
         <parameter name="email" value="snapshot@seamfix.com"/>
         <parameter name="systemPort" value="8428"/>
@@ -80,7 +79,8 @@
                     <include name="noneReactivationPrivilegeTest"/>
                     <include name="Login"/>
                     <include name="navigateToCaptureMenuTest"/>
-                    <include name="msisdnReactivationTest"/>
+                    <include name="validateMsisdn"/>
+                    <!--<include name="msisdnReactivationTest"/>-->
                 </methods>
             </class>
             <class name="admin.AgentSupport">

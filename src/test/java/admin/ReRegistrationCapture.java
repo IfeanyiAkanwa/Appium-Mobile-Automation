@@ -74,7 +74,7 @@ public class ReRegistrationCapture extends TestBase {
 
     @Parameters({ "dataEnv"})
     @Test
-    public void reRegisteration(String dataEnv) throws Exception {
+    public void reRegisterationTest(String dataEnv) throws Exception {
 
     	WebDriverWait wait = new WebDriverWait(getDriver(), 60);
 		JSONParser parser = new JSONParser();
@@ -125,6 +125,7 @@ public class ReRegistrationCapture extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/primary_msisdn_field")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/primary_msisdn_field")).sendKeys(invalid_msisdn);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/submit_button")).click();
+		Thread.sleep(3000);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
 		TestUtils.assertSearchText("ID", "android:id/message", "Record not found");
 		getDriver().findElement(By.id("android:id/button1")).click();
@@ -133,7 +134,6 @@ public class ReRegistrationCapture extends TestBase {
 
 		// Enter valid msisdn with invalid OTP
 		TestUtils.testTitle("Enter valid MSISDN: " + valid_msisdn + " for Re-Registration with invalid OTP: " + invalid_OTP);
-
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/primary_msisdn_field")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/primary_msisdn_field")).sendKeys(valid_msisdn);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/submit_button")).click();
@@ -169,12 +169,12 @@ public class ReRegistrationCapture extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/primary_msisdn_field")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/primary_msisdn_field")).sendKeys(msisdnWithFingerprint);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/submit_button")).click();
+		Thread.sleep(3000);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/verify_finger_print_button")));
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/verify_finger_print_button", "VERIFY FINGERPRINT");
 
 		// Enter valid msisdn with valid OTP
 		TestUtils.testTitle("Enter valid MSISDN with valid OTP: " + valid_msisdn + " for Re-Registration");
-
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/primary_msisdn_field")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/primary_msisdn_field")).sendKeys(valid_msisdn);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/submit_button")).click();
@@ -303,6 +303,7 @@ public class ReRegistrationCapture extends TestBase {
 		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='AFGHANISTAN']")).click();
 		getDriver().findElement(By.xpath("//android.widget.TextView[@text='NIGERIA']")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.CheckedTextView[@text='NIGERIA']")));
+
 
 		getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
 

@@ -24,7 +24,7 @@ public class ChangePasswordTest extends TestBase {
     
     @Test
     public static void navigateToChangePasswordPage() throws InterruptedException, SQLException {
-        WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+        WebDriverWait wait = new WebDriverWait(getDriver(), 60);
         String forgotPasswordPage = "Navigate to Change password page";
 		Markup m = MarkupHelper.createLabel(forgotPasswordPage, ExtentColor.BLUE);
 		testInfo.get().info(m);
@@ -63,6 +63,7 @@ public class ChangePasswordTest extends TestBase {
             //Resend Otp Test
             TestUtils.testTitle("Resend OTP Test");
             testInfo.get().info("Current OTP: "+ConnectDB.getOTPWithoutPhoneNumber());
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/button3")));
             getDriver().findElement(By.id("android:id/button3")).click();
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/user_input_dialog")));
             testInfo.get().info("New OTP: "+ConnectDB.getOTPWithoutPhoneNumber());
@@ -101,7 +102,7 @@ public class ChangePasswordTest extends TestBase {
     @Test
     public static void changeToNewPassword(String dataEnv) throws Exception {
 
-        WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+        WebDriverWait wait = new WebDriverWait(getDriver(), 60);
     	JSONParser parser = new JSONParser();
 		JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
 		JSONObject envs = (JSONObject) config.get("ChangePassword");

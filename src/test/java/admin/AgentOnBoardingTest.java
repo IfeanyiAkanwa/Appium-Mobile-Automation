@@ -71,6 +71,8 @@ public class AgentOnBoardingTest extends TestBase {
 		String invalid_email = (String) envs.get("invalid_email");
 		String invalid_OTP  = (String) envs.get("invalid_OTP");
 		String used_OTP = (String) envs.get("used_OTP");
+		String nin = (String) envs.get("nin");
+		String ninVerificationMode = (String) envs.get("ninVerificationMode");
 
 		// To On-board an already existing agent
 		/*String email1 = "To Onboard an already existing agent: ( " + onboardedAgent + " )";
@@ -139,6 +141,7 @@ public class AgentOnBoardingTest extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/submit")).click();
 		//Thread.sleep(500);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/otp")));
+		Thread.sleep(1000);
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/alertTitle", "OTP verification");
 		//Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/otp")).clear();
@@ -162,7 +165,13 @@ public class AgentOnBoardingTest extends TestBase {
 
 		//Call OTP
 		ConfirmOTPDialogue(dataEnv);
+		try {
+			//NIN Verification
+			TestBase.verifyNINTest(nin, ninVerificationMode);
+		}catch (Exception e){
 
+		}
+		Thread.sleep(3000);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/on_boarding_camera_title")));
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/on_boarding_camera_title", "Camera");
 		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Capture Passport']", "Capture Passport");

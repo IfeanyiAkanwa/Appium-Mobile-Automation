@@ -75,16 +75,17 @@ public class ReactivationTest extends TestBase {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/otp_login")));
 		Thread.sleep(500);
 	}
-    
+
+
 	@Parameters({ "dataEnv"})
 	@Test
-    public void msisdnReactivationTest(String dataEnv) throws Exception {
+	public void validateMsisdn(String dataEnv) throws Exception {
 
-        WebDriverWait wait = new WebDriverWait(getDriver(), 30);
-        JSONParser parser = new JSONParser();
+		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
+		JSONParser parser = new JSONParser();
 		JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
 		JSONObject envs = (JSONObject) config.get("Reactivation");
-		
+
 		String invalid_msisdn = (String) envs.get("invalid_msisdn");
 		String valid_msisdn = (String) envs.get("valid_msisdn");
 		String lga = (String) envs.get("lga");
@@ -97,7 +98,7 @@ public class ReactivationTest extends TestBase {
 		TestUtils.assertSearchText("ID", "android:id/alertTitle", "LGA of Registration*");
 		getDriver().findElement(By.xpath("//android.widget.TextView[@text='" + lga + "']")).click();
 		Thread.sleep(500);
-		
+
 		// Select MSISDN Re-Activation
 		TestUtils.testTitle("Select MSISDN Re-Activation");
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/typeofreg")));
@@ -110,7 +111,7 @@ public class ReactivationTest extends TestBase {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='MSISDN Reactivation']")));
 		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='MSISDN Reactivation']", "MSISDN Reactivation");
 		Thread.sleep(500);
-		
+
 		// Proceed without supplying msisdn
 		TestUtils.testTitle("Proceed without supplying msisdn");
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/primary_msisdn_field")).clear();
@@ -120,17 +121,19 @@ public class ReactivationTest extends TestBase {
 		TestUtils.assertSearchText("ID", "android:id/message", "Required Input Field: Phone Number");
 		getDriver().findElement(By.id("android:id/button1")).click();
 		Thread.sleep(1000);
-		
+
 		// Enter invalid msisdn
 		TestUtils.testTitle("Enter invalid MSISDN: " + invalid_msisdn + " for validation");
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/primary_msisdn_field")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/primary_msisdn_field")).sendKeys(invalid_msisdn);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/submit_button")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
+		Thread.sleep(2000);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='MSISDN is not registered and cannot be used for this use case']")));
 		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='MSISDN is not registered and cannot be used for this use case']", "MSISDN is not registered and cannot be used for this use case");
 		getDriver().findElement(By.id("android:id/button1")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='MSISDN Reactivation']")));
-		
+
 		// Enter valid msisdn with invalid OTP
 		TestUtils.testTitle("Enter valid msisdn: " + valid_msisdn + " with invalid OTP: "  + invalid_OTP);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/primary_msisdn_field")).clear();
@@ -142,21 +145,21 @@ public class ReactivationTest extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/otp_field")).sendKeys(invalid_OTP);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/otp_confirm_button")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
-	    TestUtils.assertSearchText("ID", "android:id/message", "There is no record with the otp, msisdn combination.");
-	    getDriver().findElement(By.id("android:id/button1")).click();
-	    Thread.sleep(500);
+		TestUtils.assertSearchText("ID", "android:id/message", "There is no record with the otp, msisdn combination.");
+		getDriver().findElement(By.id("android:id/button1")).click();
+		Thread.sleep(500);
 		//OTP Buttons
 		TestUtils.testTitle("Confirm Request OTP, Confirm OTP and Bypass OTP buttons are displayed");
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/otp_confirm_button", "CONFIRM OTP");
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/otp_request_button", "REQUEST OTP");
-	     
+
 		// Enter valid msisdn with valid OTP
-	    TestUtils.testTitle("Enter valid msisdn with valid OTP: " + valid_msisdn + " for validation");
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/primary_msisdn_field")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/primary_msisdn_field")).sendKeys(valid_msisdn);
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/submit_button")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/otp_field")));
-        Thread.sleep(1000);
+		TestUtils.testTitle("Enter valid msisdn with valid OTP: " + valid_msisdn + " for validation");
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/primary_msisdn_field")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/primary_msisdn_field")).sendKeys(valid_msisdn);
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/submit_button")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/otp_field")));
+		Thread.sleep(1000);
 
 
 		//Test Cancel Button on Request OTP Modal
@@ -180,19 +183,28 @@ public class ReactivationTest extends TestBase {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/otp_field")));
 
 
-        // DB Connection for OTP
-    	String valid_OTP = ConnectDB.getOTP(valid_msisdn);
+		// DB Connection for OTP
+		String valid_OTP = ConnectDB.getOTP(valid_msisdn);
 
-    	TestUtils.testTitle("Enter valid OTP: " + valid_OTP);
+		TestUtils.testTitle("Enter valid OTP: " + valid_OTP);
 
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/otp_field")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/otp_field")).sendKeys(valid_OTP);
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/otp_confirm_button")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/reactivate_button")));
-        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/reactivate_button", "REACTIVATE SUBSCRIBER");
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/reactivate_button")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='MSISDN has been reactivated successfully.']")));
-        TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='MSISDN has been reactivated successfully.']", "MSISDN has been reactivated successfully.");
-        getDriver().findElement(By.id("android:id/button1")).click();
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/otp_field")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/otp_field")).sendKeys(valid_OTP);
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/otp_confirm_button")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/reactivate_button")));
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/reactivate_button", "REACTIVATE SUBSCRIBER");
+
+	}
+
+	@Parameters({ "dataEnv"})
+	@Test
+    public void msisdnReactivationTest(String dataEnv) throws Exception {
+
+        WebDriverWait wait = new WebDriverWait(getDriver(), 60);
+
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/reactivate_button")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='MSISDN has been reactivated successfully.']")));
+		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='MSISDN has been reactivated successfully.']", "MSISDN has been reactivated successfully.");
+		getDriver().findElement(By.id("android:id/button1")).click();
     }
 }

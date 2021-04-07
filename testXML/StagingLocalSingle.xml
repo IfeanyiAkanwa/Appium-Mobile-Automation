@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="BioSmartSuite">
     <parameter name="groupReport" value="/DroidReport.html"/>
-    <parameter name="toMails" value="sosepadeolu@seamfix.com;soli@seamfix.com;cngwu@seamfix.com"/>
+    <parameter name="toMails" value="sosepadeolu@seamfix.com;"/>
     <parameter name="config" value="data.conf.json"/>
     <parameter name="environment" value="chrome"/>
     <parameter name="testConfig" value="parallel.conf.json"/>
@@ -26,7 +26,7 @@
                     <include name="validUserIdLogin"/>
                     <include name="erorrMessagesBiosmartValidationTest"/>
                     <include name="erorrMessagesActiveDirectoryValidationTest"/>
-                    <include name="activeDirectoryValidLoginTest"/>
+                    <!--<include name="activeDirectoryValidLoginTest"/>-->
                 </methods>
             </class>
             <class name="admin.NewRegistration">
@@ -41,7 +41,7 @@
             <class name="admin.ReRegistrationCapture">
                 <methods>
                     <include name="Login"/>
-                    <include name="navigateToCaptureMenuTest"/>
+                    <include name="navigateToReRegistration"/>
                     <include name="reRegisterationTest"/>
                 </methods>
             </class>
@@ -73,7 +73,8 @@
                     <include name="noneReactivationPrivilegeTest"/>
                     <include name="Login"/>
                     <include name="navigateToCaptureMenuTest"/>
-                    <include name="msisdnReactivationTest"/>
+                    <!--<include name="validateMsisdn"/>
+                    <include name="msisdnReactivationTest"/>-->
                 </methods>
             </class>
             <class name="admin.SearchTest">
@@ -103,13 +104,11 @@
                     <include name="vanityNumberReg"/>
                 </methods>
             </class>
-            <class name="admin.ForgotPassword">
+            <class name="admin.AgentOnBoardingTest">
                 <methods>
-                    <include name="navigateToForgotPasswordTest"/>
-                    <include name="erorrMessagesValidationTest"/>
-                    <include name="changePasswordWithInvalidUsernameTest"/>
-                    <include name="changePasswordWithValidUsernameTest"/>
-                    <include name="loginWithNewPasswordTest"/>
+                    <include name="onboardedAgentLoginTest"/>
+                    <include name="navigateToAgentOnBoardingTest"/>
+                    <include name="agentOnBoardingTest"/>
                 </methods>
             </class>
             <class name="admin.NotificationsTest">
@@ -137,13 +136,6 @@
                     <include name="loginWithNewPassword"/>
                     <include name="changeBackToOldPassword"/>
                     <include name="loginWithOldPassword"/>
-                </methods>
-            </class>
-            <class name="admin.AgentOnBoardingTest">
-                <methods>
-                    <include name="onboardedAgentLoginTest"/>
-                    <include name="navigateToAgentOnBoardingTest"/>
-                    <include name="agentOnBoardingTest"/>
                 </methods>
             </class>
         </classes>

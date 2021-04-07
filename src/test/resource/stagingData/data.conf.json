@@ -72,7 +72,7 @@
     "nin": "11111111111"
   },
   "Reactivation": {
-    "valid_msisdn": "08050000079",
+    "valid_msisdn": "08114296556",
     "invalid_msisdn": "08083733777",
     "lga": "Ibeju-Lekki",
     "valid_username": "eze.sfxtest@yopmail.com",
@@ -80,8 +80,8 @@
     "invalid_OTP": "00000"
   },
   "Search": {
-    "valid_msisdn": "1111113116",
-    "valid_sim_serial_no": "11111111111111111367"
+    "valid_msisdn": "08113825224",
+    "valid_sim_serial_no": "8923450410192953306F"
   },
   "ReRegistration": {
     "valid_msisdn": "08050000001",
@@ -102,7 +102,9 @@
     "onboardedAgent": "vnwauwa@seamfix.com",
     "invalid_email": "y.com@x.com",
     "invalid_OTP": "00000",
-    "used_OTP": "25269"
+    "used_OTP": "25269",
+    "ninVerificationMode": "Search By NIN",
+    "nin": "11111111111"
   },
   "BiometricUpdate": {
     "valid_msisdn": "08142050913",
@@ -130,12 +132,26 @@
     "lga_of_reg": "Agege"
   },
   "AdditionalRegistration": {
-    "pri_valid_Msisdn": "11111111100",
-    "invalid_Msisdn": "083377",
+    "pri_valid_Msisdn": "07058351178",
+    "valid_Msisdn": "08113825224",
+    "fixed_Msisdn": "08113825212",
+    "invalid_Msisdn": "08113326363",
     "lga": "Ibeju-Lekki",
     "invalid_simSerial": "03733577",
-    "pri_valid_simSerial": "1111111111111111100F",
-    "new_valid_simSerial": "083377"
+    "pri_valid_simSerial": "8923450412192350244F",
+    "valid_simSerial": "8923450410192953306F",
+    "new_valid_simSerial": "083377",
+    "valid_username": "eze.sfxtest@yopmail.com",
+    "invalid_number": "089343363",
+    "valid_password": "Bankole1!!",
+    "company_Msisdn": "09056982570",
+    "company_serial": "8923450205180264678F",
+    "incomplete_Msisdn": "08114296614",
+    "incomplete_serial": "8923450710193768789F",
+    "individual_Msisdn": "09056982570",
+    "individual_serial": "8923450205180264678F",
+    "ninVerificationMode": "Search By NIN",
+    "nin": "11111111111"
   },
   "SIMSwap": {
     "nin": "11111111111",
@@ -156,7 +172,7 @@
     "unrecognizedMsisdn": "11111111111",
     "approver_username": "soli@seamfix.com",
     "approver_password": "Bankole22!!",
-    "blocked_msisdn": "08057203313",
+    "blocked_msisdn": "08110745614",
     "unavailable_msisdn": "08114538225",
     "fName": "akin",
     "lName": "somto",
@@ -204,7 +220,8 @@
     "pp_fdn2": "3647563546",
     "pp_fdn3": "4536475863",
     "pp_fdn4": "94635465768",
-    "pp_fdn5": "8053427645"
+    "pp_fdn5": "8053427645",
+    "ninVerificationMode": "Search By NIN"
   },
   "UserDetails": {
     "surname": "Amanda",
@@ -277,7 +294,9 @@
     "mothers_maiden_name": "Adenike",
     "valid_username": "eze.sfxtest@yopmail.com",
     "invalid_number": "089343363",
-    "valid_password": "Bankole1!!"
+    "valid_password": "Bankole1!!",
+    "nonGloMsisdn": "08142050512",
+    "nin": "11111111111"
   },
   "AgentSupport": {
     "issueID": "ISS-25072020-00304",

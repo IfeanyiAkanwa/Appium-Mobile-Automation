@@ -5,6 +5,7 @@ import io.appium.java_client.android.AndroidKeyCode;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Parameters;
@@ -15,6 +16,7 @@ import utils.TestUtils;
 
 import java.io.File;
 import java.io.FileReader;
+import java.util.HashMap;
 
 public class SimSwap extends TestBase {
 
@@ -187,7 +189,7 @@ public class SimSwap extends TestBase {
     @Test
     public void simSwapViewValidationTest(String dataEnv) throws Exception {
 
-        WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+        WebDriverWait wait = new WebDriverWait(getDriver(), 60);
         JSONParser parser = new JSONParser();
         JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
         JSONObject envs = (JSONObject) config.get("SIMSwap");
@@ -390,7 +392,7 @@ public class SimSwap extends TestBase {
         getDriver().findElement(By.id("android:id/button1")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/existingMsisdnField")));
 
-        //Confirm that user can't proceed with Unavailable Old MSISDN
+       /* //Confirm that user can't proceed with Unavailable Old MSISDN
         TestUtils.testTitle("Confirm that user can't proceed with unavailable Old MSISDN (" + unavailable_msisdn + ")");
         //Enter invalid existing MSISDN
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/existingMsisdnField")).clear();
@@ -399,7 +401,9 @@ public class SimSwap extends TestBase {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
         TestUtils.assertSearchText("ID", "android:id/message", unavailable_msisdn + " is not available for SIM Swap.");
         getDriver().findElement(By.id("android:id/button1")).click();
+
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/existingMsisdnField")));
+        */
 
         //Confirm that user can't proceed with Blocked Old MSISDN
         TestUtils.testTitle("Confirm that user can't proceed with Blocked Old MSISDN (" + blocked_msisdn + ")");
@@ -468,8 +472,9 @@ public class SimSwap extends TestBase {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='SIM UPGRADE']")));
 
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btnValidate")).click();
-
+        Thread.sleep(5000);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/dialog_title")));
+
         TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/dialog_title", "OTP verification");
 
         String otp = ConnectDB.getOTP(otp_phone_number);
@@ -479,7 +484,8 @@ public class SimSwap extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/user_input_dialog")).clear();
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/user_input_dialog")).sendKeys(otp);
         getDriver().findElement(By.id("android:id/button1")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
+        Thread.sleep(2000);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
         TestUtils.assertSearchText("ID", "android:id/message", "The specified otp and msisdn combinations are valid.");
         getDriver().findElement(By.id("android:id/button1")).click();
 
@@ -503,13 +509,14 @@ public class SimSwap extends TestBase {
 
         //Verify NIN
         TestBase.verifyNINTest(nin, "Search By NIN");
+
     }
 
     @Parameters({"dataEnv"})
     @Test
     public void capturePrepaidSimUpgrade(String dataEnv) throws Exception {
 
-        WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+        WebDriverWait wait = new WebDriverWait(getDriver(), 60);
         JSONParser parser = new JSONParser();
         JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
         JSONObject envs = (JSONObject) config.get("SIMSwap");
@@ -738,6 +745,9 @@ public class SimSwap extends TestBase {
             testInfo.get().info("Fingerprint validation button not found");
         }
 
+        //scroll down
+        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/submit");
+
         //Submit
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/submit")).click();
 
@@ -765,10 +775,12 @@ public class SimSwap extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btnSwapOk")).click();
 
         //Proceed with valid details
-        TestUtils.testTitle("Procced with matching details");
+        TestUtils.testTitle("Proceed with matching details");
 
         TestUtils.scrollUp2();
         TestUtils.scrollUp2();
+        TestUtils.scrollUp2();
+
         TestUtils.scrollUp2();
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/firstnameTXT")));
@@ -921,6 +933,9 @@ public class SimSwap extends TestBase {
             testInfo.get().info("Fingerprint validation button not found");
         }
 
+        //scroll down
+        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/submit");
+
         //Submit
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/submit")).click();
 
@@ -1023,6 +1038,7 @@ public class SimSwap extends TestBase {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
         TestUtils.assertSearchText("ID", "android:id/message", "Subscriber information successfully saved.");
         getDriver().findElement(By.id("android:id/button1")).click();
+        Thread.sleep(5000);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
     }
 

@@ -19,7 +19,7 @@ public class NewRegistration extends TestBase {
 	@Parameters({ "dataEnv"})
 	@Test
 	public void msisdnCategoryAndNDCValidationTest(String dataEnv) throws Exception {
-		WebDriverWait wait = new WebDriverWait(getDriver(), 10);
+		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
 		JSONParser parser = new JSONParser();
 		JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
 		JSONObject envs = (JSONObject) config.get("NewRegistration");
@@ -55,11 +55,11 @@ public class NewRegistration extends TestBase {
 		// Select Msisdn Category
 		TestUtils.testTitle("Select Mobile Msisdn Category");
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnCategorySpinner")).click();
-		Thread.sleep(500);
+		Thread.sleep(1000);
 		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Mobile']")).click();
-		Thread.sleep(500);
+		Thread.sleep(1000);
 		TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='Mobile']", "Mobile");
-		Thread.sleep(500);
+		Thread.sleep(1000);
 		
 		// Enter msisdn less than 11 digits
 		TestUtils.testTitle("Proceed after supplying msisdn less than 11 digits: " + valid_fixed_msisdn + " and SIM Serial: " + valid_fixed_serial);
@@ -146,9 +146,12 @@ public class NewRegistration extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simSerialField")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simSerialField")).sendKeys(invalidPrefixSimSerial);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/addMsisdnSimSerialButton")).click();
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Confirming...']")));
+
+		Thread.sleep(1000);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
 		TestUtils.assertSearchText("ID", "android:id/message", "The requested SIM Card does not exist, Please check it again");
+
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/button1")));
 		getDriver().findElement(By.id("android:id/button1")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")));
 		Thread.sleep(500);
@@ -157,7 +160,7 @@ public class NewRegistration extends TestBase {
 	@Parameters({ "dataEnv"})
 	@Test
 	public void captureIndividualSimTest(String dataEnv) throws Exception {
-		WebDriverWait wait = new WebDriverWait(getDriver(), 10);
+		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
 		JSONParser parser = new JSONParser();
 		JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
 		JSONObject envs = (JSONObject) config.get("NewRegistration");
@@ -242,8 +245,11 @@ public class NewRegistration extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simSerialField")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simSerialField")).sendKeys(valid_simSerial);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/addMsisdnSimSerialButton")).click();
+		Thread.sleep(2000);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
+		Thread.sleep(2000);
 		TestUtils.assertSearchText("ID", "android:id/message", "Msisdn is valid");
+		Thread.sleep(2000);
 		getDriver().findElement(By.id("android:id/button1")).click();
 		
 		// Add another Number
@@ -350,7 +356,7 @@ public class NewRegistration extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simSerialField")).sendKeys(valid_simSerial);
 
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/addMsisdnSimSerialButton")).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/message")));
 		TestUtils.assertSearchText("ID", "android:id/message", "Msisdn is valid");
 		getDriver().findElement(By.id("android:id/button1")).click();
 
