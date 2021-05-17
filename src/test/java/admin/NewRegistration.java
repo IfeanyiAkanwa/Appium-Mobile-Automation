@@ -147,7 +147,7 @@ public class NewRegistration extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simSerialField")).sendKeys(invalidPrefixSimSerial);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/addMsisdnSimSerialButton")).click();
 
-		Thread.sleep(1000);
+		Thread.sleep(3000);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
 		TestUtils.assertSearchText("ID", "android:id/message", "The requested SIM Card does not exist, Please check it again");
 
@@ -277,6 +277,14 @@ public class NewRegistration extends TestBase {
 		//Remove Second MSISDN
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/delete_button")).click();
 		Thread.sleep(500);
+		try {
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btnCapturePortrait")).click();
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
+
+		}catch (Exception e){
+
+		}
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/nextButton")));
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/nextButton")).click();
 
 		//NIN Verification

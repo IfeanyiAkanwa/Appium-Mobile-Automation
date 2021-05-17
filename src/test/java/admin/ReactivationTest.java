@@ -64,7 +64,7 @@ public class ReactivationTest extends TestBase {
 		Thread.sleep(500);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
 		getDriver().findElement(By.id("android:id/button2")).click();
-		Thread.sleep(500);
+		Thread.sleep(1000);
 		getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
 		Thread.sleep(500);
 		TestUtils.scrollDown();
@@ -74,6 +74,8 @@ public class ReactivationTest extends TestBase {
 		getDriver().findElement(By.id("android:id/button3")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/otp_login")));
 		Thread.sleep(500);
+
+
 	}
 
 
@@ -90,6 +92,7 @@ public class ReactivationTest extends TestBase {
 		String valid_msisdn = (String) envs.get("valid_msisdn");
 		String lga = (String) envs.get("lga");
 		String invalid_OTP = (String) envs.get("invalid_OTP");
+		String nin = (String) envs.get("nin");
 
 		// Select LGA of Registration
 		TestUtils.testTitle("Select LGA of Registration: " + lga);
@@ -139,6 +142,20 @@ public class ReactivationTest extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/primary_msisdn_field")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/primary_msisdn_field")).sendKeys(valid_msisdn);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/submit_button")).click();
+
+		try{
+			//Capture
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btn_capture_portrait")).click();
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/validate_serial_button")));
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/validate_serial_button")).click();
+
+			//Verify NIN
+			TestBase.verifyNINTest(nin, "Search By NIN");
+		}catch (Exception e){
+
+		}
+
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/otp_field")));
 
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/otp_field")).clear();
