@@ -146,6 +146,17 @@ public class MobileNumberPorting extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/sim_serial")).sendKeys(pri_valid_simSerial);
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/validate_serial_button")).click();
         Thread.sleep(1000);
+
+        try{
+            //Capture
+            getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btn_portrait")).click();
+            getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/validate_serial_button")));
+            getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/validate_serial_button")).click();
+
+        }catch (Exception e){
+
+        }
         try{
             //Verify NIN
             TestBase.verifyNINTest(nin, "Search By NIN");
@@ -185,6 +196,7 @@ public class MobileNumberPorting extends TestBase {
         String first_name = (String) envs.get("first_name");
         String mothers_maiden_name = (String) envs.get("mothers_maiden_name");
         String nonGloMsisdn= (String) envs.get("nonGloMsisdn");
+        String nin = (String) envs.get("nin");
 
         //To confirm that only users with the VNR privilege are able to register vanity numbers
         Thread.sleep(2000);
@@ -214,6 +226,20 @@ public class MobileNumberPorting extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/sim_serial")).clear();
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/sim_serial")).sendKeys(pri_valid_simSerial);
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/validate_serial_button")).click();
+
+        try{
+            //Capture
+            getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btn_portrait")).click();
+            getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/validate_serial_button")));
+            getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/validate_serial_button")).click();
+
+            //Verify NIN
+            TestBase.verifyNINTest(nin, "Search By NIN");
+        }catch (Exception e){
+
+        }
+
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/surNameTXT")));
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/surNameTXT")).sendKeys(surname);
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/firstNameTXT")).sendKeys(first_name);
@@ -224,6 +250,7 @@ public class MobileNumberPorting extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/selectDateButton")).click();
         getDriver().findElement(By.xpath("//android.view.View[@index='0']")).click();
         getDriver().findElement(By.id("android:id/button1")).click();
+        TestUtils.scrollDown();
         TestUtils.scrollDown();
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btnContinueReg")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/stateOfOriginSpinner")));

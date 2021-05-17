@@ -313,7 +313,7 @@ public class TestBase {
 
 	@Test
 	public static void verifyNINTest(String nin, String ninVerificationMode) throws InterruptedException {
-		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
 
 		//Proceed to NIN Verification View
 		TestUtils.testTitle("Select NIN Verification Mode: "+ninVerificationMode);
@@ -322,8 +322,9 @@ public class TestBase {
 
 		//Select NIN Verification Type
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/verification_modes")).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/alertTitle")));
-		getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+ninVerificationMode+"']")).click();
+		//wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/alertTitle")));
+
+		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='"+ninVerificationMode+"']")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/proceed")).click();
 
@@ -352,6 +353,7 @@ public class TestBase {
 		TestUtils.testTitle("Confirm the searched NIN is returned: "+nin);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/title")));
 		TestUtils.assertSearchText("ID", "android:id/title", "NIN Details");
+		Thread.sleep(60000);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/nin")));
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/nin", nin);
 

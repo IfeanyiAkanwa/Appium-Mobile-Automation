@@ -231,6 +231,11 @@ public class AdditionalRegistration extends TestBase {
 
 		//Confirm MSISDN does not get more than 11 digits for Additional registration
 		String moreCharacters=pri_valid_Msisdn+"1234";
+		try {
+			navigateToAddReg(dataEnv);
+		}catch (Exception e){
+
+		}
 		TestUtils.testTitle("Confirm MSISDN does not get more than 11 digits ("+moreCharacters+")");
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/primary_msisdn_field")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/primary_msisdn_field")).sendKeys(pri_valid_Msisdn);

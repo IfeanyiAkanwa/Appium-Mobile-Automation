@@ -7,7 +7,7 @@
     "invalid_password": "adazejohn@1",
     "valid_password": "Bankole11!!",
     "valid_pw": "Glo1user11!!",
-    "blacklisted_username": "ada@yopmail.com",
+    "blacklisted_username": "adejuwon@yahoo.com",
     "blacklisted_password": "Bankole11!!",
     "deactivated_username": "akin.ugwu@mtnagent.com",
     "invalid_email_format": "@seamfix.com",
@@ -57,10 +57,10 @@
     "searchParam": "SIM"
   },
   "NewRegistration": {
-    "valid_msisdn": "08159437736",
+    "valid_msisdn": "08159452625",
     "invalid_msisdn": "764785",
     "invalid_simSerial": "177606",
-    "valid_simSerial": "8923450608191696491F",
+    "valid_simSerial": "8923450608191696871F",
     "lga": "Ibeju-Lekki",
     "valid_fixed_msisdn": "080500066",
     "valid_fixed_serial": "8923456000000000066F",
@@ -72,7 +72,7 @@
     "nin": "11111111111"
   },
   "Reactivation": {
-    "valid_msisdn": "08114296556",
+    "valid_msisdn": "08073440307",
     "invalid_msisdn": "08083733777",
     "lga": "Ibeju-Lekki",
     "valid_username": "eze.sfxtest@yopmail.com",
@@ -84,7 +84,7 @@
     "valid_sim_serial_no": "8923450410192953306F"
   },
   "ReRegistration": {
-    "valid_msisdn": "08050000001",
+    "valid_msisdn": "08055931257",
     "invalid_msisdn": "08022222222",
     "invalid_OTP": "00000",
     "lga": "Ibeju-Lekki",

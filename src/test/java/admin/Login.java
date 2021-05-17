@@ -288,7 +288,7 @@ public class Login extends TestBase {
 
     @Parameters ({"dataEnv"})
     @Test (groups = { "Regression" })
-    public void forgotPassword(String dataEnv) throws InterruptedException, IOException, ParseException {
+    public void forgotPassword(String dataEnv) throws InterruptedException, IOException, ParseException, SQLException {
         WebDriverWait wait = new WebDriverWait(getDriver(), 60);
 
         JSONParser parser = new JSONParser();
@@ -327,6 +327,22 @@ public class Login extends TestBase {
 		}
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/login_username")).sendKeys(blacklisted_username);
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/send")).click();
+
+        try {
+			// DB Connection for OTP
+			String valid_OTP = ConnectDB.getOTPWithoutPhoneNumber();
+
+			String ValidOTP = "Enter valid OTP : " + valid_OTP;
+			TestUtils.testTitle(ValidOTP);
+
+			// OTP Validation
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/dialog_title")));
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/user_input_dialog")).clear();
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/user_input_dialog")).sendKeys(valid_OTP);
+			getDriver().findElement(By.id("android:id/button1")).click();
+		}catch (Exception e){
+
+		}
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
         TestUtils.assertSearchText("ID", "android:id/message", "Agent account is deactived, Please contact support");
         getDriver().findElement(By.id("android:id/button1")).click();
