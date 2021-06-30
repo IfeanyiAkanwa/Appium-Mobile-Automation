@@ -14,10 +14,10 @@ public class ConnectDB {
     private static String otp;
     private static String transactionID;
 
-    public static void main(String[] args) throws SQLException {
+    /*public static void main(String[] args) throws SQLException {
         String otp = getOTPWithoutPhoneNumber();
         System.out.println(otp);
-    }
+    }*/
     public static String getOTP(String phoneNumber) throws SQLException {
 
         Connection dbConnection = null;
