@@ -1,5 +1,7 @@
 package utils;
 
+import io.github.cdimascio.dotenv.Dotenv;
+
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
@@ -9,6 +11,7 @@ import java.util.Arrays;
 import java.util.Properties;
 
 public class SendMail {
+    static Dotenv dotenv = Dotenv.load();
     static <T> T[] append(T[] arr, T element) {
         final int N = arr.length;
         arr = Arrays.copyOf(arr, N + 1);
@@ -60,7 +63,7 @@ public class SendMail {
             multipart.addBodyPart(messageBodyPart);
             System.out.println("Sending...");
             message.setContent(multipart);
-            Transport.send(message, "seamfix.test.report@gmail.com", "@Bankole1!!!");
+            Transport.send(message, "seamfix.test.report@gmail.com", dotenv.get("MAIL_PASSWORD"));
             System.out.println("Sent.");
         } catch (MessagingException ex) {
             throw new RuntimeException(ex);
