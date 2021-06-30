@@ -1,13 +1,16 @@
 package db;
 
 import java.sql.*;
+import io.github.cdimascio.dotenv.Dotenv;
 
 public class ConnectDB {
 
-    private static final String DB_DRIVER = "org.postgresql.Driver";
-    private static final String DB_CONNECTION = "jdbc:postgresql://13.56.69.207:5445/biocapture";
-    private static final String DB_USER = "biocaptureqa";
-    private static final String DB_PASSWORD = "3I0K@7t#Ur5Q=";
+    static Dotenv dotenv = Dotenv.load();
+
+    private static final String DB_DRIVER = "oracle.jdbc.driver.OracleDriver";
+    private static final String DB_CONNECTION = dotenv.get("DB_CONNECTION");
+    private static final String DB_USER = dotenv.get("DB_USER");
+    private static final String DB_PASSWORD = dotenv.get("DB_PASSWORD");
     private static String otp;
     private static String transactionID;
 
