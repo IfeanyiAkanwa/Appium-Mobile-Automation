@@ -168,4 +168,45 @@ public class ConnectDB {
 
     }
 
+    public static String selectQueryOnTable (String table, String column, String value, String returnColumn) throws SQLException {
+
+        Connection dbConnection = null;
+        Statement statement = null;
+
+        String getOTPSql = "select * from "+table+" where "+column+" = '" + value + "' ";
+        String returnColumnValue=null;
+        try {
+
+            dbConnection = getDBConnection();
+            if (dbConnection != null) {
+                System.out.println("Connected to db");
+            } else {
+                System.out.println("Not able to connect to db");
+            }
+            statement = dbConnection.createStatement();
+            ResultSet rs = statement.executeQuery(getOTPSql);
+            if (rs.next()) {
+                returnColumnValue = rs.getString(returnColumn);
+            }
+            return returnColumnValue;
+
+        } catch (SQLException e) {
+
+            System.out.println(e.getMessage());
+            return null;
+
+        } finally {
+
+            if (statement != null) {
+                statement.close();
+            }
+
+            if (dbConnection != null) {
+                dbConnection.close();
+            }
+
+        }
+
+    }
+
 }

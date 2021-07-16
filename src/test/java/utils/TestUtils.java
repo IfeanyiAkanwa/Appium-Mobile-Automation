@@ -5,6 +5,7 @@ import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.Markup;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.testinium.deviceinformation.helper.ProcessHelper;
+import db.ConnectDB;
 import enums.TargetTypeEnum;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
@@ -14,6 +15,7 @@ import org.openqa.selenium.*;
 import org.testng.Assert;
 
 import java.io.*;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
@@ -68,6 +70,22 @@ public class TestUtils extends TestBase {
      * @param value
      * @description to check if the expected text is present in the page.
      */
+    public static void assertTableValue(String table, String column, String search, String returnColumn, String expect) throws SQLException {
+
+        StringBuffer verificationErrors = new StringBuffer();
+
+        String value=ConnectDB.selectQueryOnTable(table, column, search, returnColumn);
+        try {
+            Assert.assertEquals(expect, value);
+            testInfo.get().log(Status.INFO, value + " found");
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+            String verificationErrorString = verificationErrors.toString();
+            testInfo.get().error(value + " not found");
+            testInfo.get().error(verificationErrorString);
+        }
+    }
+
     public static void assertSearchText(String type, String element, String value) {
 
         StringBuffer verificationErrors = new StringBuffer();

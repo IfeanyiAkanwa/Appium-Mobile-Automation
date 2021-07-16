@@ -31,11 +31,14 @@
             </class>
             <class name="admin.NewRegistration">
                 <methods>
+                    <include name="noneNewRegPrivilegeTest"/>
                     <include name="Login"/>
                     <include name="navigateToCaptureMenuTest"/>
-                    <include name="msisdnCategoryAndNDCValidationTest"/>
+                    <include name="newRegUseCaseTest"/>
+                    <include name="msisdnCategoryTest"/>
+                    <include name="NDCValidationTest"/>
+                    <include name="newRegistrationFormTest"/>
                     <include name="captureIndividualSimTest"/>
-                    <include name="captureCompanyNewSimTest"/>
                 </methods>
             </class>
             <class name="admin.ReRegistrationCapture">

@@ -40,19 +40,26 @@
     "searchParam": "SIM"
   },
   "NewRegistration": {
-    "valid_msisdn": "08159437736",
+    "valid_msisdn": "08152199845",
     "invalid_msisdn": "764785",
+    "non_valid_msisdn": "08152379129",
     "invalid_simSerial": "177606",
-    "valid_simSerial": "8923450608191696491F",
-    "lga": "Ibeju-Lekki",
+    "valid_simSerial": "8923450704188330796F",
+    "lga": "Anambra East",
     "valid_fixed_msisdn": "080500066",
     "valid_fixed_serial": "8923456000000000066F",
-    "invalidPrefixMsisdn": "07083799086",
+    "invalidPrefixMsisdn": "07483799086",
     "invalidPrefixSimSerial": "8923420037187785273F",
-    "valid_msisdn2": "08159434191",
-    "valid_simSerial2": "8923450608191696434F",
+    "valid_msisdn2": "08152479199",
+    "valid_simSerial2": "8923450704188330515F",
     "ninVerificationMode": "Search By NIN",
-    "nin": "11111111111"
+    "nin": "11111111111",
+    "valid_username": "eze.sfxtest@yopmail.com",
+    "valid_password": "Bankole1!!",
+    "noIndividualReg": "userwithoutindividual@haibacon.com",
+    "noCompanyReg": "userwithoutcompany@haibacon.com",
+    "noPrivilegeUser": "userwithoutpriviledges@haibacon.com",
+    "generalUserPassword": "Bankole11!!"
   },
   "Reactivation": {
     "valid_msisdn": "08050000079",
