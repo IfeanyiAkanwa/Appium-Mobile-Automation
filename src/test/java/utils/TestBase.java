@@ -294,6 +294,7 @@ public class TestBase {
 		
 		// Select Login mode
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/login_mode_types_spinner")).click();
+		Thread.sleep(1000);
 		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Biosmart']")).click();
 		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/login_username")).clear();
@@ -337,7 +338,7 @@ public class TestBase {
 
 	@Test
 	public static int verifyNINTest(String nin, String ninVerificationMode) throws InterruptedException {
-		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
+		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
 		//ninStatus is set to available automatically
 		int ninStatus=1;
 		//Proceed to NIN Verification View
@@ -369,7 +370,7 @@ public class TestBase {
 
 		TestUtils.testTitle("Search by NIN: "+nin);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/title")));
-		TestUtils.assertSearchText("ID", "android:id/title", "Search By Nin");
+		TestUtils.assertSearchText("ID", "android:id/title", "Search By NIN");
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/nin")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/nin")).sendKeys(nin);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/capture_button")).click();
@@ -421,6 +422,7 @@ public class TestBase {
 		}catch (Exception e){
 			//Nin is not available
 			ninStatus=0;
+			Thread.sleep(1000);
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/button1")));
 			getDriver().findElement(By.id("android:id/button1")).click();
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/continue_btn")).click();
