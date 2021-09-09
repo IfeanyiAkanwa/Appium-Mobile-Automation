@@ -9,6 +9,7 @@
     <parameter name="downloadPath" value="/home/seluser/Downloads/"/>
     <parameter name="dataEnv" value="stagingData" />
     <parameter name="deviceName" value="SeamfixTab" />
+    <parameter name="settings" value="false" />
 
     <test name="test1">
         <parameter name="email" value="snapshot@seamfix.com"/>

@@ -10,6 +10,7 @@
     <parameter name="server" value="remote-browserStack"/>
     <parameter name="downloadPath" value="C:/Users/hello/Downloads/"/>
     <parameter name="dataEnv" value="prodData" />
+    <parameter name="settings" value="false" />
 
     <test name="test1">
         <parameter name="email" value="snapshot@seamfix.com"/>

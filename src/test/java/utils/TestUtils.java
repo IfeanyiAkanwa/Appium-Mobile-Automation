@@ -13,6 +13,7 @@ import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.WaitOptions;
 import io.restassured.RestAssured;
+import io.restassured.config.SSLConfig;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.apache.commons.codec.binary.Base64;
@@ -258,7 +259,7 @@ public class TestUtils extends TestBase {
     }
 
     public static void checkNullValues(String value){
-        if (value!=null){
+        if (value!=null &&  !value.isEmpty()){
             testInfo.get().log(Status.INFO, value + " found");
         }else{
             StringBuffer verificationErrors = new StringBuffer();
@@ -587,7 +588,7 @@ public class TestUtils extends TestBase {
         }
         System.out.println("*********RETRIEVING SETTINGS("+settings+")**********");
 
-        RestAssured.baseURI = "http://13.56.69.207:8195/";
+        RestAssured.baseURI = serviceUrl;
         JSONParser parser = new JSONParser();
         JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/settingsApi.conf.json"));
         JSONObject requestBody = (JSONObject) config.get(settings);
@@ -600,7 +601,7 @@ public class TestUtils extends TestBase {
                 header("Client-ID","smartclient").
                 header("Content-Type","application/json").
 
-                body(requestBody).when().post(endPoint).then().assertThat().extract().response();
+                body(requestBody).config(RestAssured.config().sslConfig(new SSLConfig().allowAllHostnames())).when().post(endPoint).then().assertThat().extract().response();
 
         String response = res.asString();
         JsonPath jsonRes = new JsonPath(response);
@@ -648,7 +649,7 @@ public class TestUtils extends TestBase {
 
     public static int updateSettingsApiCall(String dataEnv, JSONObject settingData) throws IOException, org.json.simple.parser.ParseException {
 
-        RestAssured.baseURI = "http://13.56.69.207:8195";
+        RestAssured.baseURI = serviceUrl;
         JSONParser parser = new JSONParser();
         JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/settingsApi.conf.json"));
         JSONObject requestBody = settingData;
@@ -663,7 +664,7 @@ public class TestUtils extends TestBase {
                 header("Client-ID","smartclient").
                 header("Content-Type","application/json").
 
-                body(requestBody).when().post(endPoint).then().assertThat().extract().response();
+                body(requestBody).config(RestAssured.config().sslConfig(new SSLConfig().allowAllHostnames())).when().post(endPoint).then().assertThat().extract().response();
 
         String response = res.asString();
         JsonPath jsonRes = new JsonPath(response);

@@ -53,6 +53,7 @@ public class TestBase {
 	public String local = "local";
 	public String remoteJenkins = "remote-jenkins";
 	public String remoteBrowserStack = "remote-browserStack";
+	public static String serviceUrl = "https://kycphase2test.seamfix.com:8195";
 	public static String Id = ".glo";
 
 	@SuppressWarnings("rawtypes")
@@ -143,8 +144,8 @@ public class TestBase {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@BeforeClass
-	@Parameters({ "systemPort", "deviceNo", "server","deviceName", "testConfig" })
-	public void startApp(String systemPort, int deviceNo, String server, String deviceName, String testConfig) throws Exception {
+	@Parameters({ "systemPort", "deviceNo", "server","deviceName", "testConfig", "settings"})
+	public void startApp(String systemPort, int deviceNo, String server, String deviceName, String testConfig, boolean settings) throws Exception {
 
 		if (server.equals(remoteBrowserStack)) {
 			File path = null;
@@ -243,8 +244,13 @@ public class TestBase {
 
 			}
 		}
-		ExtentTest parent = reports.createTest(getClass().getName() +"\n"+TestUtils.getDeviceInfo(udid[deviceNo].trim()));
-		parentTest.set(parent);
+
+		if (settings==true){
+
+		}else {
+			ExtentTest parent = reports.createTest(getClass().getName() + "\n" + TestUtils.getDeviceInfo(udid[deviceNo].trim()));
+			parentTest.set(parent);
+		}
 	}
 
 	@Parameters ({"dataEnv"})
@@ -285,7 +291,7 @@ public class TestBase {
 
 	@Test
 	public static void Login1(String valid_username, String valid_password) throws Exception {
-		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
+		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
 	
 		TestUtils.testTitle("Login with a valid username: ( " + valid_username + " ) and valid password: ( "  + valid_password + " )");
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/otp_login")));
@@ -338,7 +344,7 @@ public class TestBase {
 
 	@Test
 	public static int verifyNINTest(String nin, String ninVerificationMode) throws InterruptedException {
-		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+		WebDriverWait wait = new WebDriverWait(getDriver(), 20);
 		//ninStatus is set to available automatically
 		int ninStatus=1;
 		//Proceed to NIN Verification View
@@ -423,9 +429,25 @@ public class TestBase {
 			//Nin is not available
 			ninStatus=0;
 			Thread.sleep(1000);
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/button1")));
-			getDriver().findElement(By.id("android:id/button1")).click();
-			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/continue_btn")).click();
+			try {
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/button1")));
+				getDriver().findElement(By.id("android:id/button1")).click();
+				getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/continue_btn")).click();
+
+				Thread.sleep(1000);
+				getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/nin")).sendKeys(nin);
+				Thread.sleep(1000);
+				getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/proceed_button")).click();
+			}catch (Exception e1){
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/continue_btn")));
+				getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/continue_btn")).click();
+
+				Thread.sleep(1000);
+				getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/nin")).sendKeys(nin);
+				Thread.sleep(1000);
+				getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/proceed_button")).click();
+			}
+
 		}
 
 		return ninStatus;

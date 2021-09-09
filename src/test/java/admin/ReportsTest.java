@@ -31,7 +31,7 @@ public class ReportsTest extends TestBase {
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Reports']")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/report_title")));
         TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/report_title", "Report Summary");
-        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/btn_server_reports", "SERVER/CLIENT REPORTS");
+        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/btn_server_reports", "REPORT SUMMARY");
 
     }
 

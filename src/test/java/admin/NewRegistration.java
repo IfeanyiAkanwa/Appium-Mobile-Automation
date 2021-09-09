@@ -102,7 +102,7 @@ public class NewRegistration extends TestBase {
 			TestUtils.updateSettingsApiCall(dataEnv, getSettingParams);
 			closeApp();
 			Thread.sleep(5000);
-			startApp(systemPort, deviceNo, server, deviceName, testConfig);
+			startApp(systemPort, deviceNo, server, deviceName, testConfig, true);
 		}else{
 			//*********NMS is not found proceed************
 
@@ -203,7 +203,7 @@ public class NewRegistration extends TestBase {
 			TestUtils.updateSettingsApiCall(dataEnv, getSettingParams);
 			closeApp();
 			Thread.sleep(5000);
-			startApp(systemPort, deviceNo, server, deviceName, testConfig);
+			startApp(systemPort, deviceNo, server, deviceName, testConfig, true);
 		}else{
 			//*********NMS is not found proceed************
 
@@ -214,7 +214,7 @@ public class NewRegistration extends TestBase {
 		JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
 		JSONObject envs = (JSONObject) config.get("NewRegistration");
 
-		String valid_username = (String) envs.get("valid_username");
+		String valid_username = (String) envs.get("valid_username2");
 		String generalUserPassword = (String) envs.get("generalUserPassword");
 		String lga = (String) envs.get("lga");
 
@@ -241,7 +241,12 @@ public class NewRegistration extends TestBase {
 		Thread.sleep(500);
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/alertTitle", "Select Registration Type");
 		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='New Registration']")).click();
+		Thread.sleep(500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/next_button")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/pageTitle")));
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/pageTitle", "New Registration");
 
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/scanBarCode", "Scan Bar Code");
 
 		Thread.sleep(1000);
 		if(!initialSetting.contains("NMS")) {
@@ -266,25 +271,6 @@ public class NewRegistration extends TestBase {
 			JSONObject getSettingParams=TestUtils.createSettingObject("PILOT-GET-DETAILS-FROM-BARCODE-USECASES", SettinVal,"This determines the use case where details is retrieved using barcode technology");
 			TestUtils.updateSettingsApiCall(dataEnv, getSettingParams);
 		}
-
-		// Log out
-		TestUtils.testTitle("Logout username: "  + valid_username);
-		getDriver().pressKeyCode(AndroidKeyCode.BACK);
-		getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
-		Thread.sleep(500);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
-		getDriver().findElement(By.id("android:id/button2")).click();
-		Thread.sleep(1000);
-		getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
-		Thread.sleep(500);
-		TestUtils.scrollDown();
-		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Logout']")).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
-		TestUtils.assertSearchText("ID", "android:id/message", "   Log out?");
-		getDriver().findElement(By.id("android:id/button3")).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/otp_login")));
-		Thread.sleep(500);
-
 
 
 	}
@@ -347,7 +333,6 @@ public class NewRegistration extends TestBase {
 		getDriver().findElement(By.id("android:id/button3")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/otp_login")));
 		Thread.sleep(500);
-
 
 	}
 
@@ -1007,21 +992,7 @@ public class NewRegistration extends TestBase {
 		//Remove Second MSISDN
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/delete_button")).click();
 		Thread.sleep(500);
-	}
 
-	@Parameters({ "dataEnv"})
-	@Test
-	public void captureIndividualSimTest(String dataEnv) throws Exception {
-		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
-
-		// Select Msisdn Category
-		TestUtils.testTitle("Select Msisdn Category");
-		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='MSISDN Category']", "MSISDN Category");
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnCategorySpinner")).click();
-		Thread.sleep(500);
-		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Mobile']")).click();
-		Thread.sleep(500);
-		
 		// Proceed after supplying empty details
 		TestUtils.testTitle("Proceed after supplying empty details");
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).clear();
@@ -1034,7 +1005,7 @@ public class NewRegistration extends TestBase {
 		getDriver().findElement(By.id("android:id/button1")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")));
 		Thread.sleep(500);
-		
+
 		// Proceed after supplying only Msisdn
 		TestUtils.testTitle("Proceed after supplying only Msisdn: " + valid_msisdn);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).clear();
@@ -1047,7 +1018,7 @@ public class NewRegistration extends TestBase {
 		getDriver().findElement(By.id("android:id/button1")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")));
 		Thread.sleep(500);
-		
+
 		// Proceed after supplying only Sim Serial
 		TestUtils.testTitle("Proceed after supplying only Sim Serial: " + valid_simSerial);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).clear();
@@ -1060,7 +1031,7 @@ public class NewRegistration extends TestBase {
 		getDriver().findElement(By.id("android:id/button1")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")));
 		Thread.sleep(500);
-		
+
 		// Proceed after supplying invalid msisdn and sim serial
 		TestUtils.testTitle("Proceed after supplying invalid msisdn: (" + invalid_msisdn + ") and invalid sim serial: (" + invalid_simSerial + ") for validation");
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).clear();
@@ -1077,6 +1048,22 @@ public class NewRegistration extends TestBase {
 		getDriver().findElement(By.id("android:id/button1")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")));
 		Thread.sleep(500);
+
+	}
+
+	@Parameters({ "dataEnv"})
+	@Test
+	public void captureIndividualSimTest(String dataEnv) throws Exception {
+		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+
+		// Select Msisdn Category
+		TestUtils.testTitle("Select Msisdn Category");
+		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='MSISDN Category']", "MSISDN Category");
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnCategorySpinner")).click();
+		Thread.sleep(500);
+		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Mobile']")).click();
+		Thread.sleep(500);
+		
 
 		// Proceed after supplying multiple msisdns and sim serial
 		TestUtils.testTitle("Proceed after supplying Multiple msisdns: (" + valid_msisdn + ") and (" + valid_msisdn2 + ") for validation");
@@ -1145,10 +1132,10 @@ public class NewRegistration extends TestBase {
 
 		if (ninStatus==0){
 			//Use Form that populate data itself
-			Form.individualForeignerFormNew(dataEnv);
+			Form.individualNigerianForm(dataEnv);
 		}else{
-			//Use autopopulated Form
-			Form.individualForeignerForm(dataEnv);
+			//Use autoPopulated Form
+			Form.individualNigerianFormAutoPopulate(dataEnv);
 		}
 
 		//To confirm that the registration category is saved on DB after successful registration
@@ -1161,7 +1148,8 @@ public class NewRegistration extends TestBase {
 
 		//Do Bulk Assert for Table checking
 		//TestUtils.assertBulkTables(valid_msisdn);
-		TestUtils.assertBulkTables("08118071446", "NIGERIA");
+		Thread.sleep(5000);
+		TestUtils.assertBulkTables(valid_msisdn, "NIGERIA");
 
 		try {
 			getDriver().pressKeyCode(AndroidKeyCode.BACK);
@@ -1198,12 +1186,15 @@ public class NewRegistration extends TestBase {
 	public void captureForeignRegTest(String dataEnv) throws Exception {
 		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
 
-		//Proceed to Capture page
-		navigateToCaptureMenuTest();
+		try {
+			//Proceed to Capture page
+			navigateToCaptureMenuTest();
 
-		//Proceed to new reg
-		newRegUseCaseTest(dataEnv);
+			//Proceed to new reg
+			newRegUseCaseTest(dataEnv);
+		}catch(Exception e){
 
+		}
 		// Select Msisdn Category
 		TestUtils.testTitle("Select Msisdn Category");
 		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='MSISDN Category']", "MSISDN Category");
@@ -1249,7 +1240,7 @@ public class NewRegistration extends TestBase {
 		//Fill the foreigners form here
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/title", "Foreigner Registration");
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/edPassportNumber")).clear();
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/edPassportNumber")).sendKeys(TestUtils.generateSimSrial());
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/edPassportNumber")).sendKeys(TestUtils.generatePhoneNumber());
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/spForeignerTypes")).click();
 		Thread.sleep(1000);
 		TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='Short Stay']", "Short Stay");
@@ -1265,7 +1256,7 @@ public class NewRegistration extends TestBase {
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/edStartDate")).click();
 			getDriver().findElement(By.id("android:id/button1")).click();
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/edEndDate")).click();
-			getDriver().findElement(By.id("//android.view.View[@text='30']")).sendKeys();
+			getDriver().findElement(By.xpath("//android.view.View[@text='30']")).click();
 			getDriver().findElement(By.id("android:id/button1")).click();
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/spForeignerDocs")).click();
 			getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Visa Page']")).click();
@@ -1284,13 +1275,14 @@ public class NewRegistration extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btnProceed")).click();
 
 		//BioMetrics Verification
+		Thread.sleep(1000);
 		TestBase.verifyBioMetricsTest();
 
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/nextButton")));
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/nextButton")).click();
 
 		//NIN Verification
-		int ninStatus=TestBase.verifyNINTest(nin, ninVerificationMode);
+		int ninStatus=0;
 
 
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Personal Details']")));
@@ -1298,19 +1290,20 @@ public class NewRegistration extends TestBase {
 
 		if (ninStatus==0){
 			//Use Form that populate data itself
-			Form.individualForeignerFormNew(dataEnv);
-		}else{
-			//Use autopopulated Form
 			Form.individualForeignerForm(dataEnv);
+		}else{
+			//Use autoPopulated Form
+			Form.individualForeignerFormAutoPopulate(dataEnv);
 		}
 
 		//To confirm that the registration category is saved on DB after successful registration
 		TestUtils.testTitle("To confirm that the registration category is saved on DB after successful registration:"+valid_msisdn);
-		TestUtils.assertTableValue("msisdn_detail", "msisdn", valid_msisdn, "msisdn_category", "FIXED");
+		TestUtils.assertTableValue("msisdn_detail", "msisdn", valid_msisdn, "msisdn_category", "MOBILE");
 
 		//Do Bulk Assert for Table checking
 		//TestUtils.assertBulkTables(valid_msisdn);
-		TestUtils.assertBulkTables("08118071446", "AFGHANISTAN");
+		Thread.sleep(5000);
+		TestUtils.assertBulkTables(valid_msisdn, "AFGHANISTAN");
 
 		try {
 			getDriver().pressKeyCode(AndroidKeyCode.BACK);
@@ -1500,7 +1493,7 @@ public class NewRegistration extends TestBase {
 
 		closeApp();
 		Thread.sleep(10);
-		startApp(systemPort, deviceNo, server, deviceName, testConfig);
+		startApp(systemPort, deviceNo, server, deviceName, testConfig, true);
 
 	}
 
