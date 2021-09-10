@@ -22,11 +22,19 @@
                     <include name="usernamePasswordLogin"/>
                     <include name="fingerprintLogin"/>
                     <include name="deactivateAccount"/>
-                    <include name="forgotPassword"/>
                     <include name="validUserIdLogin"/>
                     <include name="erorrMessagesBiosmartValidationTest"/>
                     <include name="erorrMessagesActiveDirectoryValidationTest"/>
                     <!--<include name="activeDirectoryValidLoginTest"/>-->
+                </methods>
+            </class>
+            <class name="admin.ForgotPassword">
+                <methods>
+                    <include name="navigateToForgotPasswordTest"/>
+                    <include name="changePasswordWithInvalidUsernameTest"/>
+                    <include name="changePasswordWithValidUsernameTest"/>
+                    <include name="loginWithNewPasswordTest"/>
+                    <include name="erorrMessagesValidationTest"/>
                 </methods>
             </class>
             <class name="admin.NewRegistration">
