@@ -18,18 +18,27 @@
         <parameter name="deviceNo" value="1"/>
 
         <classes>
-            <!--<class name="admin.Login">
+            <class name="admin.Login">
                 <methods>
                     <include name="usernamePasswordLogin"/>
                     <include name="fingerprintLogin"/>
                     <include name="deactivateAccount"/>
-                    <include name="forgotPassword"/>
                     <include name="validUserIdLogin"/>
                     <include name="erorrMessagesBiosmartValidationTest"/>
                     <include name="erorrMessagesActiveDirectoryValidationTest"/>
                     <include name="activeDirectoryValidLoginTest"/>
                 </methods>
-            </class>-->
+            </class>
+            <class name="admin.ForgotPassword">
+                <methods>
+                    <include name="navigateToForgotPasswordTest"/>
+                    <include name="changePasswordWithInvalidUsernameTest"/>
+                    <include name="changePasswordWithValidUsernameTest"/>
+                    <include name="loginWithNewPasswordTest"/>
+                    <include name="erorrMessagesValidationTest"/>
+                </methods>
+            </class>
+            </class>
             <class name="admin.NewRegistration">
                 <methods>
                     <include name="noneNewRegPrivilegeTest"/>
@@ -48,7 +57,7 @@
                     <include name="addBarCodePrivilegeTest"/>
                 </methods>
             </class>
-            <!--<class name="admin.ReRegistrationCapture">
+            <class name="admin.ReRegistrationCapture">
                 <methods>
                     <include name="Login"/>
                     <include name="navigateToReRegistration"/>
@@ -120,8 +129,8 @@
                     <include name="navigateToAgentOnBoardingTest"/>
                     <include name="agentOnBoardingTest"/>
                 </methods>
-            </class>-->
-            <!--<class name="admin.NotificationsTest">
+            </class>
+            <class name="admin.NotificationsTest">
                 <methods>
                     <include name="Login"/>
                     <include name="navigateToNotifications"/>
@@ -147,7 +156,7 @@
                     <include name="changeBackToOldPassword"/>
                     <include name="loginWithOldPassword"/>
                 </methods>
-            </class>-->
+            </class>
         </classes>
     </test>
 </suite>
