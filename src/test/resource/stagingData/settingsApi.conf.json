@@ -1,0 +1,19 @@
+{
+  "retrieve_endPoint": "/biocapture/config/settings/retrieve-settings",
+  "update_endPoint": "/biocapture/config/settings/bulk-update",
+  "GET_DETAILS_FROM_BARCODE_USECASES": {
+    "settingNames":[
+      "PILOT-GET-DETAILS-FROM-BARCODE-USECASES"
+    ]
+  },
+  "RETRIEVE_AVAILABLE_USECASES": {
+    "settingNames":[
+      "PILOT-AVAILABLE-USE-CASE"
+    ]
+  },
+  "GET_DETAILS_FROM_BARCODE_USECASES": {
+    "settingNames":[
+      "PILOT-GET-DETAILS-FROM-BARCODE-USECASES"
+    ]
+  }
+}

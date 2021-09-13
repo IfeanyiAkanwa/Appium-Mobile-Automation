@@ -29,7 +29,7 @@
                     <include name="erorrMessagesActiveDirectoryValidationTest"/>
                     <include name="activeDirectoryValidLoginTest"/>
                 </methods>
-            </class>
+            </class>-->
             <class name="admin.NewRegistration">
                 <methods>
                     <include name="noneNewRegPrivilegeTest"/>
@@ -47,15 +47,15 @@
                     <include name="removeNewRegPrivilegeTest"/>
                     <include name="addBarCodePrivilegeTest"/>
                 </methods>
-            </class>-->
-            <class name="admin.ReRegistrationCapture">
+            </class>
+            <!--<class name="admin.ReRegistrationCapture">
                 <methods>
                     <include name="Login"/>
                     <include name="navigateToReRegistration"/>
                     <include name="reRegisterationTest"/>
                 </methods>
             </class>
-            <!--<class name="admin.AdditionalRegistration">
+            <class name="admin.AdditionalRegistration">
                 <methods>
                     <include name="noneAdditionalPrivilegeTest"/>
                     <include name="Login"/>
