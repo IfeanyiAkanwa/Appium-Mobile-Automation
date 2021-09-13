@@ -57,19 +57,27 @@
     "searchParam": "SIM"
   },
   "NewRegistration": {
-    "valid_msisdn": "08159452625",
+    "valid_msisdn": "08152395828",
     "invalid_msisdn": "764785",
+    "non_valid_msisdn": "08152379129",
     "invalid_simSerial": "177606",
-    "valid_simSerial": "8923450608191696871F",
-    "lga": "Ibeju-Lekki",
+    "valid_simSerial": "8923450704188330549F",
+    "lga": "Anambra East",
     "valid_fixed_msisdn": "080500066",
     "valid_fixed_serial": "8923456000000000066F",
-    "invalidPrefixMsisdn": "07083799086",
+    "invalidPrefixMsisdn": "07483799086",
     "invalidPrefixSimSerial": "8923420037187785273F",
-    "valid_msisdn2": "08159434191",
-    "valid_simSerial2": "8923450608191696434F",
+    "valid_msisdn2": "08111645372",
+    "valid_simSerial2": "8923450112196986049F",
     "ninVerificationMode": "Search By NIN",
-    "nin": "11111111111"
+    "nin": "11111111111",
+    "valid_username": "testpriv@yopmail.com",
+    "valid_username2": "gnwabude@seamfix.com",
+    "noIndividualReg": "userwithoutindividual@haibacon.com",
+    "noCompanyReg": "userwithoutcompany@haibacon.com",
+    "noPrivilegeUser": "userwithoutpriviledges@haibacon.com",
+    "noMultiRegUser": "nomultireguser@yopmail.com",
+    "generalUserPassword": "Bankole11!!"
   },
   "Reactivation": {
     "valid_msisdn": "08073440307",
@@ -233,8 +241,8 @@
     "street": "Neville Street",
     "city": "Aba",
     "nationality": "NIGERIA",
-    "state": "BENUE",
-    "LGA": "Ado",
+    "state": "ABIA",
+    "LGA": "Aba North",
     "documentNumber": "89733736AD"
   },
   "CompanyDetails": {

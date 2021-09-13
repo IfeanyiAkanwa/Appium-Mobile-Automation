@@ -9,6 +9,7 @@
     <parameter name="downloadPath" value="C:/Users/hello/Downloads/"/>
     <parameter name="dataEnv" value="prodData" />
     <parameter name="deviceName" value="SeamfixTab" />
+    <parameter name="settings" value="false" />
 
     <test name="test1">
         <parameter name="email" value="snapshot@seamfix.com"/>
@@ -113,11 +114,20 @@
         <classes>
             <class name="admin.NewRegistration">
                 <methods>
+                    <include name="noneNewRegPrivilegeTest"/>
+                    <include name="NewRegPrivilegesTest"/>
                     <include name="Login"/>
+                    <include name="captureReportRecords"/>
                     <include name="navigateToCaptureMenuTest"/>
-                    <include name="msisdnCategoryAndNDCValidationTest"/>
+                    <include name="newRegUseCaseTest"/>
+                    <include name="msisdnCategoryTest"/>
+                    <include name="NPSValidationTest"/>
+                    <include name="NDCValidationTest"/>
+                    <include name="newRegistrationFormTest"/>
                     <include name="captureIndividualSimTest"/>
-                    <include name="captureCompanyNewSimTest"/>
+                    <include name="captureForeignRegTest"/>
+                    <include name="removeNewRegPrivilegeTest"/>
+                    <include name="addBarCodePrivilegeTest"/>
                 </methods>
             </class>
             <class name="admin.AdditionalRegistration">

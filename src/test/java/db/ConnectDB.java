@@ -2,6 +2,8 @@ package db;
 
 import java.sql.*;
 import io.github.cdimascio.dotenv.Dotenv;
+import org.json.simple.JSONArray;
+import utils.TestUtils;
 
 public class ConnectDB {
 
@@ -165,6 +167,138 @@ public class ConnectDB {
         }
 
         return dbConnection;
+
+    }
+
+    public static String selectQueryOnTable (String table, String column, String value, String returnColumn) throws SQLException {
+
+        Connection dbConnection = null;
+        Statement statement = null;
+
+        String getOTPSql = "select * from "+table+" where "+column+" = '" + value + "' ";
+        String returnColumnValue=null;
+        try {
+
+            dbConnection = getDBConnection();
+            if (dbConnection != null) {
+                System.out.println("Connected to db");
+            } else {
+                System.out.println("Not able to connect to db");
+            }
+            statement = dbConnection.createStatement();
+            ResultSet rs = statement.executeQuery(getOTPSql);
+            if (rs.next()) {
+                returnColumnValue = rs.getString(returnColumn);
+            }
+            return returnColumnValue;
+
+        } catch (SQLException e) {
+
+            System.out.println(e.getMessage());
+            return null;
+
+        } finally {
+
+            if (statement != null) {
+                statement.close();
+            }
+
+            if (dbConnection != null) {
+                dbConnection.close();
+            }
+
+        }
+
+    }
+
+    public static JSONArray QueryBulkTable (String msisdn) throws SQLException {
+
+        Connection dbConnection = null;
+        Statement statement = null;
+
+        String getOTPSql = "select *\n" +
+                "from bfp_sync_log bsl  \n" +
+                "left join user_Id ui on ui.unique_id = bsl.unique_id \n" +
+                "left join basic_data bd on bd.user_id_fk = ui.id \n" +
+                "left join dynamic_data dy on dy.basic_data_fk = bd.id \n" +
+                "left join special_data sd  on sd.basic_data_fk = bd.id \n" +
+                "left join signature si on si.basic_data_fk = bd.id \n" +
+                "left join passport_detail pd on pd.signature_fk = si.id \n" +
+                "left join MSISDN_PROVISION_STATUS mps on (mps.msisdn = bsl.msisdn and mps.SIM_SERIAL = bsl.SIM_SERIAL) \n" +
+                "where mps.msisdn = '" + msisdn + "' ";
+        String returnColumnValue=null;
+        try {
+
+            dbConnection = getDBConnection();
+            if (dbConnection != null) {
+                System.out.println("Connected to db");
+            } else {
+                System.out.println("Not able to connect to db");
+            }
+            statement = dbConnection.createStatement();
+            ResultSet rs = statement.executeQuery(getOTPSql);
+
+            JSONArray rs1= TestUtils.convertResultSetToJSON(rs);
+
+            return rs1;
+
+        } catch (SQLException e) {
+
+            System.out.println(e.getMessage());
+            return null;
+
+        } finally {
+
+            if (statement != null) {
+                statement.close();
+            }
+
+            if (dbConnection != null) {
+                dbConnection.close();
+            }
+
+        }
+
+    }
+
+    public static JSONArray ClientActivityLogTable (String unique_id) throws SQLException {
+
+        Connection dbConnection = null;
+        Statement statement = null;
+
+        String getOTPSql = "SELECT * FROM CLIENT_ACTIVITY_LOG cal where unique_activity_code = '" + unique_id + "' order by create_date";
+        String returnColumnValue=null;
+        try {
+
+            dbConnection = getDBConnection();
+            if (dbConnection != null) {
+                System.out.println("Connected to db");
+            } else {
+                System.out.println("Not able to connect to db");
+            }
+            statement = dbConnection.createStatement();
+            ResultSet rs = statement.executeQuery(getOTPSql);
+
+            JSONArray rs1= TestUtils.convertResultSetToJSON(rs);
+
+            return rs1;
+
+        } catch (SQLException e) {
+
+            System.out.println(e.getMessage());
+            return null;
+
+        } finally {
+
+            if (statement != null) {
+                statement.close();
+            }
+
+            if (dbConnection != null) {
+                dbConnection.close();
+            }
+
+        }
 
     }
 
