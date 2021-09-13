@@ -106,7 +106,7 @@ public class ReRegistrationCapture extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/primary_msisdn_field")).sendKeys(msisdnLessThanSix);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/submit_button")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
-		TestUtils.assertSearchText("ID", "android:id/message", "Entered Phone Number is invalid. Entered value should not be less than 6 or more than 11 digits.");
+		TestUtils.assertSearchText("ID", "android:id/message", "Entered Phone Number is invalid. It must be either 7 digits for fixed or 11 digits for mobile.");
 		getDriver().findElement(By.id("android:id/button1")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Re Registration']")));
 
@@ -138,12 +138,10 @@ public class ReRegistrationCapture extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/primary_msisdn_field")).sendKeys(valid_msisdn);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/submit_button")).click();
 
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/capture_image_button")));
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/capture_image_button")).click();
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
-		Thread.sleep(1000);
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/ok")).click();
-		Thread.sleep(500);
+		//BioMetrics Verification
+		verifyBioMetricsTest();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/button1")));
+		getDriver().findElement(By.id("android:id/button1")).click();
 
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/otp_field")));
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/otp_field")).clear();
@@ -178,14 +176,19 @@ public class ReRegistrationCapture extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/primary_msisdn_field")).sendKeys(msisdnWithFingerprint);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/submit_button")).click();
 		Thread.sleep(3000);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/verify_finger_print_button")));
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/verify_finger_print_button", "VERIFY FINGERPRINT");
+
+		/*wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/verify_finger_print_button")));
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/verify_finger_print_button", "VERIFY FINGERPRINT");*/
 
 		// Enter valid msisdn with valid OTP
 		TestUtils.testTitle("Enter valid MSISDN with valid OTP: " + valid_msisdn + " for Re-Registration");
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/primary_msisdn_field")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/primary_msisdn_field")).sendKeys(valid_msisdn);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/submit_button")).click();
+
+		//BioMetrics Verification
+		verifyBioMetricsTest();
+
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/otp_field")));
 
 		//Test Cancel Button on Request OTP Modal
@@ -317,4 +320,90 @@ public class ReRegistrationCapture extends TestBase {
 
 	    Form.individualForeignerForm(dataEnv);
     }
+
+	@Test
+	public static void verifyBioMetricsTest() throws InterruptedException {
+		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
+
+		TestUtils.scrollDown();
+		//Proceed
+		Thread.sleep(2000);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/capture_image_button")));
+		Thread.sleep(2000);
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/capture_image_button")).click();
+
+
+		try{
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")));
+
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
+		}catch (Exception e){
+
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/buttonCapturePicture")));
+
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/buttonCapturePicture")).click();
+		}
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
+		TestUtils.assertSearchText("ID", "android:id/message", "Subscriber's face was successfully captured");
+		getDriver().findElement(By.id("android:id/button1")).click();
+		Thread.sleep(500);
+
+		//Fingerprint capture/
+
+		//Submit without overriding fingerprint
+		TestUtils.testTitle("Save Enrollment without overriding fingerprint");
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/btn_multi_capture")));
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/btn_multi_capture", "MULTI CAPTURE");
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/fp_save_enrolment")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
+		TestUtils.assertSearchText("ID", "android:id/message", "No finger was captured");
+		getDriver().findElement(By.id("android:id/button1")).click();
+		try {
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/fp_save_enrolment")));
+
+			//Override left hand
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btn_override_left")).click();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
+			TestUtils.assertSearchText("ID", "android:id/message", "Are you sure? Note that you have to provide a reason");
+			getDriver().findElement(By.id("android:id/button1")).click();
+			Thread.sleep(500);
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
+			Thread.sleep(1000);
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/ok")).click();
+			Thread.sleep(500);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Ageing']")));
+			getDriver().findElement(By.xpath("//android.widget.TextView[@text='Ageing']")).click();
+
+			//Submit without overriding right hand
+			TestUtils.testTitle("Save Enrollment without capturing Right Hand");
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/fp_save_enrolment")).click();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
+			TestUtils.assertSearchText("ID", "android:id/message", "RIGHT HAND wasn't overridden, and all selected RIGHT HAND fingers were not captured.");
+			getDriver().findElement(By.id("android:id/button1")).click();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/fp_save_enrolment")));
+
+			//Override right hand
+			TestUtils.scrollDown();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/btn_override_right")));
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btn_override_right")).click();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
+			TestUtils.assertSearchText("ID", "android:id/message", "Are you sure? Note that you have to provide a reason");
+			getDriver().findElement(By.id("android:id/button1")).click();
+			Thread.sleep(500);
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
+			Thread.sleep(1000);
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/ok")).click();
+			Thread.sleep(500);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Ageing']")));
+			getDriver().findElement(By.xpath("//android.widget.TextView[@text='Ageing']")).click();
+
+			//Save enrollment
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/fp_save_enrolment")));
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/fp_save_enrolment")).click();
+		}catch (Exception e){
+			//Fingerprint matching unsuccessful. You will be allowed to proceed to the next verification option.
+		}
+
+	}
+
 }
