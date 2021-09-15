@@ -66,6 +66,7 @@ public class AgentOnBoardingTest extends TestBase {
 		JSONObject envs = (JSONObject) config.get("AgentOnboarding");
 
 		String agent_email = (String) envs.get("agent_email");
+		String agent1_email = (String) envs.get("agent1_email");
 		String agent_phoNum = (String) envs.get("agent_phoNum");
 		String onboardedAgent = (String) envs.get("onboardedAgent");
 		String invalid_email = (String) envs.get("invalid_email");
@@ -75,7 +76,7 @@ public class AgentOnBoardingTest extends TestBase {
 		String ninVerificationMode = (String) envs.get("ninVerificationMode");
 
 		// To On-board an already existing agent
-		/*String email1 = "To Onboard an already existing agent: ( " + onboardedAgent + " )";
+		String email1 = "To Onboard an already existing agent: ( " + onboardedAgent + " )";
 		TestUtils.testTitle(email1);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/email")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/email")).sendKeys(onboardedAgent);
@@ -83,9 +84,10 @@ public class AgentOnBoardingTest extends TestBase {
 		//Thread.sleep(500);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
 		//Pass OTP
-		OTP(dataEnv);
-		TestUtils.assertSearchText("ID", "android:id/message", "Agent already onboarded");*/
-		//getDriver().findElement(By.id("android:id/button1")).click();
+		//OTP(dataEnv);
+		TestUtils.assertSearchText("ID", "android:id/message", "Agent already onboarded");
+		getDriver().findElement(By.id("android:id/button1")).click();
+		Thread.sleep(500);
 
 
 		// To On-board agent without supplying email address
@@ -134,6 +136,7 @@ public class AgentOnBoardingTest extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/cancel")).click();
 		//Thread.sleep(1000);
 
+		// To On-board new agent with a Used OTP
 		String email6 = "To On-board new agent: ( " + agent_email + " ) with used OTP: " + used_OTP;
 		TestUtils.testTitle(email6);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/email")).clear();
@@ -160,24 +163,41 @@ public class AgentOnBoardingTest extends TestBase {
 		String email = "To On-board new agent with a valid OTP: ( " + agent_email + " )";
 		TestUtils.testTitle(email);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/email")).clear();
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/email")).sendKeys(agent_email);
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/email")).sendKeys(agent1_email);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/submit")).click();
 
-		//Call OTP
+		/*//Call OTP
 		ConfirmOTPDialogue(dataEnv);
 		try {
 			//NIN Verification
 			TestBase.verifyNINTest(nin, ninVerificationMode);
 		}catch (Exception e){
 
+		}*/
+
+		// DB Connection for OTP
+		String valid_OTP = ConnectDB.getOTP(agent_phoNum);
+
+		String ValidOTP = "Enter valid OTP : " + valid_OTP;
+		Markup o = MarkupHelper.createLabel(ValidOTP, ExtentColor.BLUE);
+		testInfo.get().info(o);
+		if(valid_OTP == null){
+			testInfo.get().log(Status.INFO, "Can't get otp.");
+			getDriver().quit();
 		}
+		Thread.sleep(1000);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/alertTitle")));
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/otp")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/otp")).sendKeys(valid_OTP);
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/otp", valid_OTP);
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/confirm_otp")).click();
+
 		Thread.sleep(3000);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/on_boarding_camera_title")));
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/on_boarding_camera_title", "Camera");
 		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Capture Passport']", "Capture Passport");
 
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/button_capture_image")).click();
-		//getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/buttonCapturePicture")).click();
 
 	}
 
