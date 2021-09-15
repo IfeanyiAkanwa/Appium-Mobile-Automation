@@ -881,15 +881,18 @@ public class ReRegistrationCapture extends TestBase {
 		//int expectedTotalRegistrationsVal = actualTotalSyncSentVal + actualTotalSyncPendingVal;
 
 		try {
+			totalSubVal+=1;
 			Assert.assertEquals(totalSubVal, actualTotalRegistrationsVal);
 			testInfo.get().log(Status.INFO, "Total Registrations (" + totalSubVal + ") is equal to Actual Total Reg  (" + actualTotalRegistrationsVal + ") ");
 
+			totalSyncsentVal+=1;
 			Assert.assertEquals(totalSyncsentVal, actualTotalSyncSentVal);
 			testInfo.get().log(Status.INFO, "Total Sync Sent (" + totalSyncsentVal + ") is equal to Actual Total Sync Sent  (" + actualTotalSyncSentVal + ") ");
 
 			Assert.assertEquals(totalSyncpendingVal, actualTotalSyncPendingVal);
 			testInfo.get().log(Status.INFO, "Total Sync Pending (" + totalSyncpendingVal + ") is equal to Actual Total Sync Pending  (" + actualTotalSyncPendingVal + ") ");
 
+			totalSynConfVal+=1;
 			Assert.assertEquals(totalSynConfVal, actualTotalSyncConfirmedVal);
 			testInfo.get().log(Status.INFO, "Total Sync Confirmed (" + totalSynConfVal + ") is equal to Actual Total Sync Confirmed  (" + actualTotalSyncConfirmedVal + ") ");
 
