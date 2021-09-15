@@ -897,7 +897,7 @@ public class ReRegistrationCapture extends TestBase {
 			testInfo.get().log(Status.INFO, "Total Sync Confirmed (" + totalSynConfVal + ") is equal to Actual Total Sync Confirmed  (" + actualTotalSyncConfirmedVal + ") ");
 
 			Assert.assertEquals(totalRejectVal, total_rejectedVal);
-			testInfo.get().log(Status.INFO, "Total Rejected (" + total_rejectedVal + ") is equal to Actual Total Rejected (" + actualTotalSyncConfirmedVal + ") ");
+			testInfo.get().log(Status.INFO, "Total Rejected (" + total_rejectedVal + ") is equal to Actual Total Rejected (" + totalRejectVal + ") ");
 
 
 		} catch (Error e) {
