@@ -30,27 +30,27 @@ public class NewRegistration extends TestBase {
 
 	private static StringBuffer verificationErrors = new StringBuffer();
 
-	private String valid_msisdn;
-	private String invalid_msisdn;
-	private String valid_simSerial;
-	private String lga;
-	private String valid_fixed_msisdn;
-	private String valid_fixed_serial;
-	private String invalidPrefixMsisdn;
-	private String invalidPrefixSimSerial;
+	private static String valid_msisdn;
+	private static String invalid_msisdn;
+	private static String valid_simSerial;
+	private static String lga;
+	private static String valid_fixed_msisdn;
+	private static String valid_fixed_serial;
+	private static String invalidPrefixMsisdn;
+	private static String invalidPrefixSimSerial;
 
-	private String valid_msisdn2;
-	private String valid_simSerial2;
-	private String nin;
-	private String ninVerificationMode;
-	private String non_valid_msisdn;
-	private String invalid_simSerial;
+	private static String valid_msisdn2;
+	private static String valid_simSerial2;
+	private static String nin;
+	private static String ninVerificationMode;
+	private static String non_valid_msisdn;
+	private static String invalid_simSerial;
 
 	int totalSubVal=0;int totalSyncsentVal = 0;int totalSyncpendingVal = 0;int totalSynConfVal = 0;int totalRejectVal = 0;
 
 	@Parameters({ "dataEnv" })
 	@BeforeMethod
-	public void parseJson(String dataEnv) throws IOException, ParseException {
+	public static void parseJson(String dataEnv) throws IOException, ParseException {
 		File path = null;
 		File classpathRoot = new File(System.getProperty("user.dir"));
 		if (dataEnv.equalsIgnoreCase("stagingData")) {
@@ -580,7 +580,7 @@ public class NewRegistration extends TestBase {
 
 	@Parameters({ "dataEnv"})
 	@Test
-	public void newRegUseCaseTest(String dataEnv) throws Exception {
+	public static void newRegUseCaseTest(String dataEnv) throws Exception {
 		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
 
 		// To confirm that a user can perform New regiatration when it is  in the list of available use case settings and user has privilege
@@ -591,6 +591,7 @@ public class NewRegistration extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/lga_of_reg")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/alertTitle")));
 		TestUtils.assertSearchText("ID", "android:id/alertTitle", "LGA of Registration*");
+		Thread.sleep(1000);
 		getDriver().findElement(By.xpath("//android.widget.TextView[@text='" + lga + "']")).click();
 		Thread.sleep(500);
 
@@ -1183,7 +1184,7 @@ public class NewRegistration extends TestBase {
 
 	@Parameters({ "dataEnv"})
 	@Test
-	public void captureForeignRegTest(String dataEnv) throws Exception {
+	public static void captureForeignRegTest(String dataEnv) throws Exception {
 		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
 
 		try {
@@ -1305,6 +1306,7 @@ public class NewRegistration extends TestBase {
 		Thread.sleep(5000);
 		TestUtils.assertBulkTables(valid_msisdn, "AFGHANISTAN");
 
+
 		try {
 			getDriver().pressKeyCode(AndroidKeyCode.BACK);
 			Thread.sleep(1000);
@@ -1318,8 +1320,19 @@ public class NewRegistration extends TestBase {
 			getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
 			//Logout
 			//TestBase.logOut(valid_msisdn);
-		}catch (Exception e){
+		}catch (Exception e) {
+			try {
+				getDriver().findElement(By.id("android:id/button3")).click();
+				getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/experience_type")).click();
+				getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Network Speed']")).click();
+				getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/rating_ratingBar")).click();
+				getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/rating_btn_dialog_positive")).click();
+				TestUtils.assertSearchText("ID", "android:id/alertTitle", "Feedback sent");
 
+				getDriver().pressKeyCode(AndroidKeyCode.BACK);
+			} catch (Exception e1) {
+
+			}
 		}
 
 	}
