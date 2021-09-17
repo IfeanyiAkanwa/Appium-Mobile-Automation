@@ -50,9 +50,15 @@
         </class>
         <class name="admin.ReRegistrationCapture">
             <methods>
+                <include name="noneReRegPrivilegeTest"/>
+                <include name="ReRegPrivilegesTest"/>
                 <include name="Login"/>
-                <include name="navigateToCaptureMenuTest"/>
+                <include name="captureReportRecords"/>
+                <include name="navigateToReRegistration"/>
+                <include name="validateMsisdnTest"/>
                 <include name="reRegisterationTest"/>
+                <include name="removeReRegPrivilegeTest"/>
+                <include name="disableSubscriberBypassTest"/>
             </methods>
         </class>
         <class name="admin.AdditionalRegistration">
