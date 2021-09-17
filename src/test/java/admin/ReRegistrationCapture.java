@@ -854,7 +854,6 @@ public class ReRegistrationCapture extends TestBase {
 		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
 
 		//
-
 		navigateToReportsPage();
 		Thread.sleep(1000);
 		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/refresh_button");
