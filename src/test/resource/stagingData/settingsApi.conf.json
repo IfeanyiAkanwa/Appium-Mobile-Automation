@@ -15,5 +15,10 @@
     "settingNames":[
       "PILOT-GET-DETAILS-FROM-BARCODE-USECASES"
     ]
+  },
+  "ENABLE_SUBSCRIBER_VALIDATION_BYPASS": {
+    "settingNames":[
+      "PILOT-ENABLE-SUBSCRIBER-VALIDATION-BYPASS"
+    ]
   }
 }

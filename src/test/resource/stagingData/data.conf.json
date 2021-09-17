@@ -92,15 +92,25 @@
     "valid_sim_serial_no": "8923450410192953306F"
   },
   "ReRegistration": {
-    "valid_msisdn": "08055931257",
-    "invalid_msisdn": "08022222222",
+    "valid_msisdn": "08116575689",
+    "foreign_msisdn": "08152395730",
+    "invalid_msisdn": "08022340222",
     "invalid_OTP": "00000",
-    "lga": "Ibeju-Lekki",
+    "expired_OTP": "39352",
+    "lga": "Anambra East",
     "msisdnLessThanSix": "123",
     "unrecognizedMsisdn": "11111111111",
-    "msisdnWithFingerprint": "08050000009",
+    "msisdnWithFingerprint": "09053959903",
     "ninVerificationMode": "Search By NIN",
-    "nin": "11111111111"
+    "nin": "11111111111",
+    "valid_username": "testpriv@yopmail.com",
+    "valid_username2": "gnwabude@seamfix.com",
+    "noIndividualReg": "userwithoutindividual@haibacon.com",
+    "noCompanyReg": "userwithoutcompany@haibacon.com",
+    "noPrivilegeUser": "userwithoutpriviledges@haibacon.com",
+    "noMultiRegUser": "nomultireguser@yopmail.com",
+    "noForeignRegUser": "noforeignreguser@yopmail.com",
+    "generalUserPassword": "Bankole11!!"
   },
   "AgentOnboarding": {
     "valid_username": "vnwauwa@seamfix.com",
