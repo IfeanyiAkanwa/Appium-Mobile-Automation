@@ -18,7 +18,7 @@
         <parameter name="deviceNo" value="1"/>
 
         <classes>
-            <!--<class name="admin.Login">
+            <class name="admin.Login">
                 <methods>
                     <include name="usernamePasswordLogin"/>
                     <include name="fingerprintLogin"/>
@@ -135,7 +135,7 @@
                     <include name="navigateToNotifications"/>
                     <include name="viewNotifications"/>
                 </methods>
-            </class>-->
+            </class>
             <class name="admin.ReportsTest">
                 <methods>
                     <include name="Login"/>
@@ -144,10 +144,9 @@
                     <include name="reportSummary"/>
                     <include name="searchParameters"/>
                     <include name="reportAfterCapture"/>
-                    <!--<include name="reportHomepage"/>-->
                 </methods>
             </class>
-            <!--<class name="admin.ChangePasswordTest">
+            <class name="admin.ChangePasswordTest">
                 <methods>
                     <include name="Login"/>
                     <include name="navigateToChangePasswordPage"/>
@@ -156,7 +155,7 @@
                     <include name="changeBackToOldPassword"/>
                     <include name="loginWithOldPassword"/>
                 </methods>
-            </class>-->
+            </class>
         </classes>
     </test>
 </suite>

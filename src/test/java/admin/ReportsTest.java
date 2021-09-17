@@ -300,7 +300,7 @@ public class ReportsTest extends TestBase {
             //Use autoPopulated Form
             Form.individualForeignerFormAutoPopulate(dataEnv);
         }
-        
+
         try {
             getDriver().pressKeyCode(AndroidKeyCode.BACK);
             Thread.sleep(1000);
