@@ -158,7 +158,7 @@ public class TestUtils extends TestBase {
             String da34 = (String) jsonLineItem.get("dda34");
             checkNullValues( da34);
             TestUtils.testTitle("To confirm that a record saved while connected to network is flagged as ONLINE on DYNAMIC_DATA table");
-            String da33 = (String) jsonLineItem.get("dda33");
+            String da33 = (String) jsonLineItem.get("dda32");
             assertTwoValues( da33, "ONLINE");
             TestUtils.testTitle("bfpsync table status");
             String bfpsyncstatusenum = (String) jsonLineItem.get("bfpsyncstatusenum");
