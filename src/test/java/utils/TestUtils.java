@@ -101,9 +101,9 @@ public class TestUtils extends TestBase {
         //assertBulkTables("08118071446" );
 
         //System.out.println(Setting);
-        JSONObject getSettingParams=TestUtils.createSettingObject("PILOT-AVAILABLE-USE-CASE", "RR","All available registration use case");
+        //JSONObject getSettingParams=TestUtils.createSettingObject("PILOT-AVAILABLE-USE-CASE", "RR","All available registration use case");
         //updateSettingsApiCall( "stagingData",  getSettingParams);
-        retrieveSettingsApiCall("stagingData", "RETRIEVE_AVAILABLE_USECASES");
+        retrieveSettingsApiCall("stagingData", "CHANGE_OF_OWNERSHIP_DOCUMENTS");
     }
 
     public static void assertBulkTables(String msisdn, String Country) throws SQLException, IOException, org.json.simple.parser.ParseException {
@@ -623,13 +623,16 @@ public class TestUtils extends TestBase {
 
         }
 
-        System.out.println(response);
+        //System.out.println(response);
         String setttings= jsonRes.getString("settings");
         String replace = setttings.replace("[","");
         String replace1 = replace.replace("]","");
 
         List<String> myList = new ArrayList<String>(Arrays.asList(replace1.split(":")));
         String settingsVal = myList.get(4);
+        if ( myList.size()> 5){
+            settingsVal=setttings;
+        }
         try {
             testInfo.get().info(response);
         }catch (Exception e){
