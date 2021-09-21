@@ -2014,7 +2014,11 @@ public class Form extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/nextButton")).click();
 
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
-		TestUtils.assertSearchText("ID", "android:id/message", " CHANGE OF OWNERSHIP: Please upload Change of Ownership document ");
+		//TestUtils.assertSearchText("ID", "android:id/message", " CHANGE OF OWNERSHIP: Please upload Change of Ownership document ");
+		String msgErr = getDriver().findElement(By.id("android:id/message")).getText();
+		if (msgErr.contains("CHANGE OF OWNERSHIP: Please upload Change of Ownership document")){
+			testInfo.get().info(msgErr+" found");
+		}
 		getDriver().findElement(By.id("android:id/button1")).click();
 
 		//COO Form
@@ -2037,9 +2041,7 @@ public class Form extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/uploadChangeOfOwnershipDocBtn")).click();
 
 		TestUtils.scrollDown();
-
 		TestUtils.scrollUntilElementIsVisible("XPATH", "//android.widget.TextView[@text='picture.jpg']");
-
 
 		getDriver().findElement(By.xpath("//android.widget.TextView[@text='picture.jpg']")).click();
 		Thread.sleep(500);

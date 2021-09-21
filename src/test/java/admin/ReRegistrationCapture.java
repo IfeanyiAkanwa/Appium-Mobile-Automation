@@ -707,7 +707,7 @@ public class ReRegistrationCapture extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btnContinueReg")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/countrySpinner")));
 
-		Asserts.AssertAddresstDetails();
+		Asserts.AssertAddresstDetails(dataEnv);
 
 
 		getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
@@ -911,16 +911,15 @@ public class ReRegistrationCapture extends TestBase {
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/btn_multi_capture", "MULTI CAPTURE");
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/fp_save_enrolment")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
-		if (fingerPrintCount==0) {
+		String fingerMatch=getDriver().findElement(By.id("android:id/message")).getText();
+		if(fingerMatch.contains("No finger was captured")){
 			TestUtils.assertSearchText("ID", "android:id/message", "No finger was captured");
 		}else{
 			TestUtils.assertSearchText("ID", "android:id/message", "Subscriber does not have fingerprint saved. Verification would proceed to the next verification option.");
-			fingerPrintCount+=1;
 		}
 		getDriver().findElement(By.id("android:id/button1")).click();
 		try {
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/fp_save_enrolment")));
-
 			//Override left hand
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btn_override_left")).click();
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));

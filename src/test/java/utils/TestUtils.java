@@ -101,9 +101,9 @@ public class TestUtils extends TestBase {
         //assertBulkTables("08118071446" );
 
         //System.out.println(Setting);
-        //JSONObject getSettingParams=TestUtils.createSettingObject("PILOT-AVAILABLE-USE-CASE", "RR","All available registration use case");
-        //updateSettingsApiCall( "stagingData",  getSettingParams);
-        retrieveSettingsApiCall("stagingData", "CHANGE_OF_OWNERSHIP_DOCUMENTS");
+        JSONObject getSettingParams=TestUtils.createSettingObject("PILOT-AVAILABLE-USE-CASE", "RR","All available registration use case");
+        updateSettingsApiCall( "stagingData",  getSettingParams);
+        //retrieveSettingsApiCall("stagingData", "CHANGE_OF_OWNERSHIP_DOCUMENTS");
     }
 
     public static void assertBulkTables(String msisdn, String Country) throws SQLException, IOException, org.json.simple.parser.ParseException {
@@ -158,7 +158,7 @@ public class TestUtils extends TestBase {
             String da34 = (String) jsonLineItem.get("dda34");
             checkNullValues( da34);
             TestUtils.testTitle("To confirm that a record saved while connected to network is flagged as ONLINE on DYNAMIC_DATA table");
-            String da33 = (String) jsonLineItem.get("dda32");
+            String da33 = (String) jsonLineItem.get("dda33");
             assertTwoValues( da33, "ONLINE");
             TestUtils.testTitle("bfpsync table status");
             String bfpsyncstatusenum = (String) jsonLineItem.get("bfpsyncstatusenum");
