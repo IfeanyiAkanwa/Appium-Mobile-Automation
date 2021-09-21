@@ -96,9 +96,9 @@ public class Asserts extends TestBase {
         String countryOfOrigin="";
         Thread.sleep(1000);
         try{
-             countryOfOrigin = getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Nigeria']")).getText();
+             countryOfOrigin = getDriver().findElement(By.xpath("//android.widget.TextView[@text='Nigeria']")).getText();
         }catch (Exception e){
-             countryOfOrigin = getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='NIGERIA']")).getText();
+             countryOfOrigin = getDriver().findElement(By.xpath("//android.widget.TextView[@text='NIGERIA']")).getText();
         }
         try {
             stateOfOrigin = getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='"+state+"']")).getText();
