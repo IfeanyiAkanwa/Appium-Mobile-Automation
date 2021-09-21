@@ -106,7 +106,7 @@ public class Asserts extends TestBase {
                 fields.put("State of origin", stateOfOrigin);
             }
             //Assert.assertNotEquals(stateOfOrigin, "[Select State]*");
-            lgaOfOrigin = getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='"+lgaOfOrigin+"']")).getText();
+            lgaOfOrigin = getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='"+LGA+"']")).getText();
             if (lgaOfOrigin.equals("[Select LGA]*")) {
                 fields.put("LGA of Origin", lgaOfOrigin);
             }
