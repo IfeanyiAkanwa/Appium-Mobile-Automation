@@ -56,7 +56,8 @@
                     <include name="captureReportRecords"/>
                     <include name="navigateToReRegistration"/>
                     <include name="validateMsisdnTest"/>
-                    <include name="reRegisterationTest"/>
+                    <include name="captureIndividualReRegTest"/>
+                    <include name="captureCooDetailsTest"/>
                     <include name="removeReRegPrivilegeTest"/>
                     <include name="disableSubscriberBypassTest"/>
                 </methods>

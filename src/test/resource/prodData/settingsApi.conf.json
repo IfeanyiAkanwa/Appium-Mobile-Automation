@@ -20,5 +20,20 @@
     "settingNames":[
       "PILOT-ENABLE-SUBSCRIBER-VALIDATION-BYPASS"
     ]
+  },
+  "CHANGE_OF_OWNERSHIP_DOCUMENTS": {
+    "settingNames":[
+      "CHANGE-OF-OWNERSHIP-DOCUMENTS"
+    ]
+  },
+  "CHANGE_OF_OWNERSHIP_DOCUMENTS_FORMAT": {
+    "settingNames":[
+      "CHANGE-OF-OWNERSHIP-DOCUMENT-FORMAT"
+    ]
+  },
+  "CHANGE_OF_OWNERSHIP_DOCUMENTS_SIZE": {
+    "settingNames":[
+      "CHANGE-OF-OWNERSHIP-DOCUMENT-SIZE"
+    ]
   }
 }
