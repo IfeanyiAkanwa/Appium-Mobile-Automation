@@ -682,9 +682,7 @@ public class TestUtils extends TestBase {
                 settingsVal=settingsVal.replace("value:", "");
             }
         }
-        if ( myList.size()> 5){
-            settingsVal=setttings;
-        }
+
         try {
             testInfo.get().info(response);
         }catch (Exception e){
