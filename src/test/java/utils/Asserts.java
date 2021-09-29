@@ -5,14 +5,18 @@ import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.Markup;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 
+import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.Parameters;
 
 public class Asserts extends TestBase {
     private static StringBuffer verificationErrors = new StringBuffer();
@@ -45,7 +49,7 @@ public class Asserts extends TestBase {
         TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/spinnerOccupation");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/spinnerOccupation")));
         Thread.sleep(500);
-        String occupation = getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='[Select an Occupation]']")).getText();
+        String occupation = getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.ScrollView/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout[6]/android.widget.Spinner/android.widget.CheckedTextView")).getText();
 
         String empty = "";
         Map<String, String> fields = new HashMap<>();
@@ -72,23 +76,37 @@ public class Asserts extends TestBase {
         }
     }
 
-    public static void AssertAddresstDetails() throws Exception {
+    @Parameters({"dataEnv"})
+    public static void AssertAddresstDetails(String dataEnv) throws Exception {
         WebDriverWait wait = new WebDriverWait(getDriver(), 60);
         Map<String, String> fields = new HashMap<>();
         String assertDetails = "Asserting address Details of registered subscriber";
         Markup ad = MarkupHelper.createLabel(assertDetails, ExtentColor.GREEN);
         testInfo.get().info(ad);
-        String countryOfOrigin = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/countrySpinner")).getText();
+        JSONParser parser = new JSONParser();
+        JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
+        JSONObject envs = (JSONObject) config.get("IndividualForeignerDetails");
 
+        String city = (String) envs.get("city");
+        String state = (String) envs.get("state");
+        String LGA = (String) envs.get("LGA");
+        String area = (String) envs.get("area");
         String stateOfOrigin="";
         String lgaOfOrigin="";
+        String countryOfOrigin="";
+        Thread.sleep(1000);
+        try{
+             countryOfOrigin = getDriver().findElement(By.xpath("//android.widget.TextView[@text='Nigeria']")).getText();
+        }catch (Exception e){
+             countryOfOrigin = getDriver().findElement(By.xpath("//android.widget.TextView[@text='NIGERIA']")).getText();
+        }
         try {
-            stateOfOrigin = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/stateOfOriginSpinner")).getText();
+            stateOfOrigin = getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='"+state+"']")).getText();
             if (stateOfOrigin.equals("[Select State]*")) {
                 fields.put("State of origin", stateOfOrigin);
             }
             //Assert.assertNotEquals(stateOfOrigin, "[Select State]*");
-            lgaOfOrigin = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/lgaOfOriginSpinner")).getText();
+            lgaOfOrigin = getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='"+LGA+"']")).getText();
             if (lgaOfOrigin.equals("[Select LGA]*")) {
                 fields.put("LGA of Origin", lgaOfOrigin);
             }
@@ -99,21 +117,22 @@ public class Asserts extends TestBase {
         if (nin.equals("NIN")) {
             fields.put("NIN", nin);
         }
+
         //Assert.assertNotEquals(lgaOfOrigin, "[Select LGA]*");
         TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/stateOfResidenceSpinner");
-        String stateOfResidence = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/stateOfResidenceSpinner")).getText();
+        String stateOfResidence = getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='"+state+"']")).getText();
         if (stateOfResidence.equals("[Select State]*")) {
             fields.put("State of Residence", stateOfResidence);
         }
         //Assert.assertNotEquals(stateOfResidence, "[Select State]*");
         TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/lgaOfResidenceSpinner");
-        String lgaOfResidence = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/lgaOfResidenceSpinner")).getText();
+        String lgaOfResidence = getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='"+LGA+"']")).getText();
         if (lgaOfResidence.equals("[Select State]*")) {
             fields.put("LGA of Residence", lgaOfResidence);
         }
         //Assert.assertNotEquals(lgaOfResidence, "[Select LGA]*");
         TestUtils.scrollDown();
-        String areaOfResidence = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/areaOfResidenceSpinner")).getText();
+        String areaOfResidence = getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='"+area+"']")).getText();
         if (areaOfResidence.equals("[Select Area]*")) {
             fields.put("Area of Residence", areaOfResidence);
         }
@@ -122,7 +141,7 @@ public class Asserts extends TestBase {
         Thread.sleep(500);
         String houseNum = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/houseNumberEditText")).getText();
         String street = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/streetEditText")).getText();
-        String city = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/citySpinner")).getText();
+        city = getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='"+city+"']")).getText();
         String postalCode = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/postalText")).getText();
 
         String empty = "";

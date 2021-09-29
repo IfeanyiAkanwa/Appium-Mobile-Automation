@@ -184,45 +184,6 @@ public class TestUtils extends TestBase {
         }
     }
 
-    public static void assertCNDetailsTables(String primary_tm) throws SQLException {
-        String msisdn=primary_tm;
-        StringBuffer verificationErrors = new StringBuffer();
-        JSONArray dBvalue=ConnectDB.QueryBulkTable(msisdn);
-        try{
-            Object getFirstObject = dBvalue.get(0);
-            System.out.println(getFirstObject);
-            TestUtils.testTitle("Asserting Corporate registration DB values");
-            JSONObject jsonLineItem = (JSONObject) getFirstObject;
-            TestUtils.testTitle("Corporate category is saved in DDA 58");
-            String dda58 = (String) jsonLineItem.get("dda58");
-            assertTwoValues( dda58, "Primary");
-
-            TestUtils.testTitle("To confirm that the primary TM whose MSISDN, Demographics and biometric were validated is saved in DDA59");
-            String dda59 = (String) jsonLineItem.get("dda59");
-            checkNullValues( dda59);
-            testInfo.get().info(dda59);
-
-
-            //Unique ID
-            String unique_id = (String) jsonLineItem.get("unique_id");
-            JSONArray CAL=ConnectDB.ClientActivityLogTable(unique_id);
-            testInfo.get().info(String.valueOf(CAL.get(0)));
-        }catch (Exception e){
-            testInfo.get().error("Could not fetch data for the Registered MSISDN:"+msisdn+", please perform test manually");
-        }
-
-
-        try {
-            //Assert.assertEquals(expect, value);
-            //testInfo.get().log(Status.INFO, value + " found");
-        } catch (Error e) {
-            verificationErrors.append(e.toString());
-            String verificationErrorString = verificationErrors.toString();
-            //testInfo.get().error(value + " not found");
-            testInfo.get().error(verificationErrorString);
-        }
-    }
-
     public static JSONArray convertResultSetToJSON(ResultSet rs) throws SQLException {
         JSONArray json = new JSONArray();
         ResultSetMetaData rsmd = rs.getMetaData();
@@ -662,7 +623,7 @@ public class TestUtils extends TestBase {
 
         }
 
-        System.out.println(response);
+        //System.out.println(response);
         String setttings= jsonRes.getString("settings");
         String replace = setttings.replace("[","");
         String replace1 = replace.replace("]","");
@@ -680,6 +641,9 @@ public class TestUtils extends TestBase {
                 settingsVal = myList.get(3);
                 settingsVal=settingsVal.replace("value:", "");
             }
+        }
+        if ( myList.size()> 5){
+            settingsVal=setttings;
         }
         try {
             testInfo.get().info(response);

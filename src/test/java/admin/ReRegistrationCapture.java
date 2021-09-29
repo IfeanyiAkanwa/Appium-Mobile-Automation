@@ -4,6 +4,7 @@ import db.ConnectDB;
 import demographics.Form;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import io.appium.java_client.android.AndroidKeyCode;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -249,17 +251,6 @@ public class ReRegistrationCapture extends TestBase {
 		wait.until(ExpectedConditions
 				.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/reg_type_placeholder")));
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/reg_type_placeholder", "Registration Type");
-
-		//Select Reg LG
-//		getDriver().findElement(By.xpath("//android.widget.TextView[@text='Agege']")).click();
-//		wait.until(ExpectedConditions
-//				.visibilityOfElementLocated(By.id("android:id/alertTitle")));
-//		TestUtils.assertSearchText("ID", "android:id/alertTitle", "LGA of Registration*");
-//		getDriver().findElement(By.id("android:id/search_src_text")).clear();
-//		getDriver().findElement(By.id("android:id/search_src_text")).sendKeys("Eti Osa");
-//		getDriver().findElement(By.xpath("//android.widget.TextView[@text='Eti Osa']")).click();
-//		wait.until(ExpectedConditions
-//				.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/reg_type_placeholder")));
 
 		//Select Re-Reg
 		getDriver().findElement(By.xpath("//android.widget.TextView[@text='[Select Registration Type]']")).click();
@@ -536,7 +527,7 @@ public class ReRegistrationCapture extends TestBase {
 
 	@Parameters({ "dataEnv"})
     @Test
-    public void reRegisterationTest(String dataEnv) throws Exception {
+    public void captureIndividualReRegTest(String dataEnv) throws Exception {
 
     	WebDriverWait wait = new WebDriverWait(getDriver(), 30);
 		JSONParser parser = new JSONParser();
@@ -669,8 +660,7 @@ public class ReRegistrationCapture extends TestBase {
 		// DB Connection for OTP
     	String valid_OTP = ConnectDB.getOTP(valid_msisdn);
 		String ValidOTP = "Enter valid OTP : " + valid_OTP;
-		Markup o = MarkupHelper.createLabel(ValidOTP, ExtentColor.BLUE);
-		testInfo.get().info(o);
+		TestUtils.testTitle(ValidOTP);
 
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/otp_field")).clear();
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/otp_field")).sendKeys(valid_OTP);
@@ -703,8 +693,8 @@ public class ReRegistrationCapture extends TestBase {
 		}
 
 
-        //Confirm that user can do both Individual and Company Registration
-		TestUtils.testTitle("Confirm that user can do both Individual and Company Registration");
+        //Confirm that user can do both Individual
+		TestUtils.testTitle("Confirm that user can do both Individual");
 		getDriver().findElement(By.xpath("//android.widget.TextView[@text='Individual']")).click();
 		TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='Individual']", "Individual");
 		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Individual']")).click();
@@ -717,7 +707,7 @@ public class ReRegistrationCapture extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btnContinueReg")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/countrySpinner")));
 
-		Asserts.AssertAddresstDetails();
+		Asserts.AssertAddresstDetails(dataEnv);
 
 
 		getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
@@ -760,6 +750,133 @@ public class ReRegistrationCapture extends TestBase {
     }
 
 	@Test
+	@Parameters({"dataEnv"})
+	public static void captureCooDetailsTest(String dataEnv) throws Exception {
+		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+		JSONParser parser = new JSONParser();
+		JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
+		JSONObject envs = (JSONObject) config.get("ReRegistration");
+
+		String valid_msisdn = (String) envs.get("valid_msisdn");
+		String ninVerificationMode = (String) envs.get("ninVerificationMode");
+		String nin = (String) envs.get("nin");
+
+		navigateToReRegistration();
+
+		//Confirm COO checkbox
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/change_sim_ownership")));
+		TestUtils.testTitle("Change of Ownership (COO) Checkbox Test");
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/change_sim_ownership", "Change of Ownership");
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/change_sim_ownership")).click();
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/change_sim_ownership")).click();
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/change_sim_ownership")).click();
+
+		//To confirm that there is a settings that returns the list of COO document types
+		TestUtils.testTitle("To confirm that there is a settings that returns the list of COO document types");
+		String cooDocument=TestUtils.retrieveSettingsApiCall(dataEnv, "CHANGE_OF_OWNERSHIP_DOCUMENTS");
+
+		if (!cooDocument.contains("Affidavit")){
+			testInfo.get().error("Affidavit not found");
+		}else{
+			testInfo.get().info("Affidavit found");
+		}
+
+		if (!cooDocument.contains("Letter of Authorization")){
+			testInfo.get().error("Letter of Authorization not found");
+		}else{
+			testInfo.get().info("Letter of Authorization found");
+		}
+
+		//To confirm that the default value for COO document format is  JPG, JPEG
+		TestUtils.testTitle("To confirm that the default value for COO document format is  JPG, JPEG");
+		String cooDocumentType=TestUtils.retrieveSettingsApiCall(dataEnv, "CHANGE_OF_OWNERSHIP_DOCUMENTS_FORMAT");
+		TestUtils.assertTwoValues(cooDocumentType, "JPG,JPEG");
+
+		//To confirm that the default value for COO document size is 512KB
+		TestUtils.testTitle("To confirm that the default value for COO document size is  512KB");
+		String cooDocumentSize=TestUtils.retrieveSettingsApiCall(dataEnv, "CHANGE_OF_OWNERSHIP_DOCUMENTS_SIZE");
+		TestUtils.assertTwoValues(cooDocumentSize, "512");
+
+		// Enter valid msisdn with valid OTP
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/primary_msisdn_field")));
+		TestUtils.testTitle("Enter valid MSISDN with valid OTP: " + valid_msisdn + " for Re-Registration");
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/primary_msisdn_field")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/primary_msisdn_field")).sendKeys(valid_msisdn);
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/submit_button")).click();
+
+		//BioMetrics Verification
+		verifyBioMetricsTest();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/button1")));
+		getDriver().findElement(By.id("android:id/button1")).click();
+
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/otp_request_button")));
+
+		//Test Cancel Button on Request OTP Modal
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/otp_request_button")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/otpHintMessage")));
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/cancel_otp")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/otp_request_button")));
+
+		//Request OTP Modal
+		TestUtils.testTitle("Request OTP Modal");
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/otp_request_button")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/otpHintMessage")));
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/otpHintMessage", "Tick options for OTP Request");
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/primary_phone_number", "Primary Phone Number");
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/alt_phone_number", "Alternate Phone Number");
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/email_address", "Email Address");
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/cancel_otp", "CANCEL");
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/request_otp", "REQUEST");
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/alt_phone_number")).click();
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/request_otp")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/otp_field")));
+
+		// DB Connection for OTP
+		String valid_OTP = ConnectDB.getOTP(valid_msisdn);
+		String ValidOTP = "Enter valid OTP : " + valid_OTP;
+		TestUtils.testTitle(ValidOTP);
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/otp_field")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/otp_field")).sendKeys(valid_OTP);
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/otp_confirm_button")).click();
+
+		// Next button
+		try{
+			Thread.sleep(2000);
+			if(getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/next_button")).isDisplayed()){
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/next_button")));
+				getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/next_button")).click();
+			}
+
+		}catch (Exception e){
+
+		}
+
+		try{
+			if(getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")).isDisplayed()){
+
+				//NIN Verification
+				TestBase.verifyNINTest(nin, ninVerificationMode);
+
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Personal Details']")));
+				TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Personal Details']", "Personal Details");
+			}
+		} catch(Exception e){
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Personal Details']")));
+			TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Personal Details']", "Personal Details");
+		}
+
+
+		//Confirm that user can do both Individual
+		TestUtils.testTitle("Confirm that user can do both Individual ");
+		getDriver().findElement(By.xpath("//android.widget.TextView[@text='Individual']")).click();
+		TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='Individual']", "Individual");
+		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Individual']")).click();
+
+		Form.changeOfOwnerForm(dataEnv);
+
+	}
+
+	@Test
 	public static void verifyBioMetricsTest() throws InterruptedException {
 		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
 
@@ -794,16 +911,15 @@ public class ReRegistrationCapture extends TestBase {
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/btn_multi_capture", "MULTI CAPTURE");
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/fp_save_enrolment")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
-		if (fingerPrintCount==0) {
+		String fingerMatch=getDriver().findElement(By.id("android:id/message")).getText();
+		if(fingerMatch.contains("No finger was captured")){
 			TestUtils.assertSearchText("ID", "android:id/message", "No finger was captured");
 		}else{
 			TestUtils.assertSearchText("ID", "android:id/message", "Subscriber does not have fingerprint saved. Verification would proceed to the next verification option.");
-			fingerPrintCount+=1;
 		}
 		getDriver().findElement(By.id("android:id/button1")).click();
 		try {
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/fp_save_enrolment")));
-
 			//Override left hand
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btn_override_left")).click();
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
