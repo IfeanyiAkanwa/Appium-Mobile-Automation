@@ -101,9 +101,9 @@ public class TestUtils extends TestBase {
         //assertBulkTables("08118071446" );
 
         //System.out.println(Setting);
-        JSONObject getSettingParams=TestUtils.createSettingObject("PILOT-AVAILABLE-USE-CASE", "RR","All available registration use case");
+        //JSONObject getSettingParams=TestUtils.createSettingObject("PILOT-AVAILABLE-USE-CASE", "RR","All available registration use case");
         //updateSettingsApiCall( "stagingData",  getSettingParams);
-        retrieveSettingsApiCall("stagingData", "RETRIEVE_AVAILABLE_USECASES");
+        retrieveSettingsApiCall("stagingData", "CORPORATE_REGISTRATION_DOCUMENTS");
     }
 
     public static void assertBulkTables(String msisdn, String Country) throws SQLException, IOException, org.json.simple.parser.ParseException {
@@ -163,6 +163,45 @@ public class TestUtils extends TestBase {
             TestUtils.testTitle("bfpsync table status");
             String bfpsyncstatusenum = (String) jsonLineItem.get("bfpsyncstatusenum");
             assertTwoValues( bfpsyncstatusenum, "SUCCESS");
+
+            //Unique ID
+            String unique_id = (String) jsonLineItem.get("unique_id");
+            JSONArray CAL=ConnectDB.ClientActivityLogTable(unique_id);
+            testInfo.get().info(String.valueOf(CAL.get(0)));
+        }catch (Exception e){
+            testInfo.get().error("Could not fetch data for the Registered MSISDN:"+msisdn+", please perform test manually");
+        }
+
+
+        try {
+            //Assert.assertEquals(expect, value);
+            //testInfo.get().log(Status.INFO, value + " found");
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+            String verificationErrorString = verificationErrors.toString();
+            //testInfo.get().error(value + " not found");
+            testInfo.get().error(verificationErrorString);
+        }
+    }
+
+    public static void assertCNDetailsTables(String primary_tm) throws SQLException {
+        String msisdn=primary_tm;
+        StringBuffer verificationErrors = new StringBuffer();
+        JSONArray dBvalue=ConnectDB.QueryBulkTable(msisdn);
+        try{
+            Object getFirstObject = dBvalue.get(0);
+            System.out.println(getFirstObject);
+            TestUtils.testTitle("Asserting Corporate registration DB values");
+            JSONObject jsonLineItem = (JSONObject) getFirstObject;
+            TestUtils.testTitle("Corporate category is saved in DDA 58");
+            String dda58 = (String) jsonLineItem.get("dda58");
+            assertTwoValues( dda58, "Primary");
+
+            TestUtils.testTitle("To confirm that the primary TM whose MSISDN, Demographics and biometric were validated is saved in DDA59");
+            String dda59 = (String) jsonLineItem.get("dda59");
+            checkNullValues( dda59);
+            testInfo.get().info(dda59);
+
 
             //Unique ID
             String unique_id = (String) jsonLineItem.get("unique_id");
@@ -630,6 +669,18 @@ public class TestUtils extends TestBase {
 
         List<String> myList = new ArrayList<String>(Arrays.asList(replace1.split(":")));
         String settingsVal = myList.get(4);
+        if (settingsVal.contains(", id")){
+              myList = new ArrayList<String>(Arrays.asList(replace1.split(",")));
+             settingsVal = myList.get(3);
+             //Remove Value String
+            settingsVal = settingsVal.replace("value:", "");
+        }else{
+            myList = new ArrayList<String>(Arrays.asList(replace1.split(",")));
+            if (myList.size()==4){
+                settingsVal = myList.get(3);
+                settingsVal=settingsVal.replace("value:", "");
+            }
+        }
         try {
             testInfo.get().info(response);
         }catch (Exception e){

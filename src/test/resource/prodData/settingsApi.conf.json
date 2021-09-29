@@ -20,5 +20,20 @@
     "settingNames":[
       "PILOT-ENABLE-SUBSCRIBER-VALIDATION-BYPASS"
     ]
+  },
+  "TM_MSISDN_BIOMETRIC_VALIDATION": {
+    "settingNames":[
+      "PILOT-TM-MSISDN-BIOMETRIC-VALIDATION"
+    ]
+  },
+  "CORPORATE_REGISTRATION_DOCUMENTS": {
+    "settingNames": [
+      "PILOT-CORPORATE-REGISTRATION-DOCUMENTS"
+    ]
+  },
+  "ENABLE_CORPORATE_QUARANTINING": {
+    "settingNames": [
+      "ENABLE-CORPORATE-QUARANTINING"
+    ]
   }
 }

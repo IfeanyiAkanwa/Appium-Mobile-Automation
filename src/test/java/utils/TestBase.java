@@ -332,7 +332,7 @@ public class TestBase {
 	
 	@Test
 	public static void navigateToCaptureMenuTest() {
-		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+		WebDriverWait wait = new WebDriverWait(getDriver(), 5);
 		
 		// Navigate to Registration Type
 		TestUtils.testTitle("Navigate to Registration Type");

@@ -81,6 +81,18 @@
 					<include name="disableSubscriberBypassTest"/>
 				</methods>
 			</class>
+			<class name="admin.CorporateNewRegistration">
+				<methods>
+					<include name="noneCorporatePrivilegeTest"/>
+					<include name="CorporatePrivilegesTest"/>
+					<include name="Login"/>
+					<include name="captureReportRecords"/>
+					<include name="navigateToCorporateRegistration"/>
+					<include name="validateMsisdnTest"/>
+					<include name="captureCorporateReg"/>
+					<include name="removeCorporatePrivilegeTest"/>
+				</methods>
+			</class>
 			<class name="admin.ReactivationTest">
 				<methods>
 					<include name="noneReactivationPrivilegeTest"/>
