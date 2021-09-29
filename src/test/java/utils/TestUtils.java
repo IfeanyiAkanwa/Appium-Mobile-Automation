@@ -184,6 +184,46 @@ public class TestUtils extends TestBase {
         }
     }
 
+    public static void assertCNDetailsTables(String primary_tm) throws SQLException {
+        String msisdn=primary_tm;
+        StringBuffer verificationErrors = new StringBuffer();
+        JSONArray dBvalue=ConnectDB.QueryBulkTable(msisdn);
+        try{
+            Object getFirstObject = dBvalue.get(0);
+            System.out.println(getFirstObject);
+            TestUtils.testTitle("Asserting individual registration DB values");
+            JSONObject jsonLineItem = (JSONObject) getFirstObject;
+
+            //Unique ID
+            String unique_id = (String) jsonLineItem.get("unique_id");
+            JSONArray CAL=ConnectDB.ClientActivityLogTable(unique_id);
+            testInfo.get().info(String.valueOf(CAL.get(0)));
+
+            TestUtils.testTitle("To confirm that corporate category is saved in DDA58");
+            String dd58 = (String) jsonLineItem.get("dd58");
+            assertTwoValues(dd58, "Primary");
+            testInfo.get().info(dd58);
+
+            TestUtils.testTitle("To confirm that the Secondary TM whose MSISDN, Demographics and biometric were validated is saved in DDA59");
+            String dd59 = (String) jsonLineItem.get("dd59");
+            testInfo.get().info(dd59);
+
+        }catch (Exception e){
+            testInfo.get().error("Could not fetch data for the Registered MSISDN:"+msisdn+", please perform test manually");
+        }
+
+
+        try {
+            //Assert.assertEquals(expect, value);
+            //testInfo.get().log(Status.INFO, value + " found");
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+            String verificationErrorString = verificationErrors.toString();
+            //testInfo.get().error(value + " not found");
+            testInfo.get().error(verificationErrorString);
+        }
+    }
+
     public static JSONArray convertResultSetToJSON(ResultSet rs) throws SQLException {
         JSONArray json = new JSONArray();
         ResultSetMetaData rsmd = rs.getMetaData();
@@ -707,5 +747,6 @@ public class TestUtils extends TestBase {
         System.out.println(response);
         return result;
     }
+
 
 }
