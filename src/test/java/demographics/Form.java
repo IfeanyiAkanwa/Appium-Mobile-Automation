@@ -1,5 +1,6 @@
 package demographics;
 
+import admin.CorporateNewRegistration;
 import db.ConnectDB;
 import freemarker.core.Environment;
 import io.appium.java_client.android.AndroidKeyCode;

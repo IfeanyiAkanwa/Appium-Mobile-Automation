@@ -79,7 +79,7 @@
                     <include name="navigateToCorporateRegistration"/>
                     <include name="validateMsisdnTest"/>
                     <include name="captureCorporateReg"/>
-                    <include name="removeCorporatePrivilegeTest"/>
+                    <include name="removeCorporateNewRegTest"/>
                 </methods>
             </class>
             <class name="admin.CorporateReRegistration">

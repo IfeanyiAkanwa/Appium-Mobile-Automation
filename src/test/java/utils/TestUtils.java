@@ -101,9 +101,9 @@ public class TestUtils extends TestBase {
         //assertBulkTables("08118071446" );
 
         //System.out.println(Setting);
-        JSONObject getSettingParams=TestUtils.createSettingObject("PILOT-AVAILABLE-USE-CASE", "RR","All available registration use case");
-        updateSettingsApiCall( "stagingData",  getSettingParams);
-        //retrieveSettingsApiCall("stagingData", "CHANGE_OF_OWNERSHIP_DOCUMENTS");
+        //JSONObject getSettingParams=TestUtils.createSettingObject("PILOT-AVAILABLE-USE-CASE", "RR","All available registration use case");
+        //updateSettingsApiCall( "stagingData",  getSettingParams);
+        retrieveSettingsApiCall("stagingData", "CORPORATE_REGISTRATION_DOCUMENTS");
     }
 
     public static void assertBulkTables(String msisdn, String Country) throws SQLException, IOException, org.json.simple.parser.ParseException {
@@ -670,9 +670,19 @@ public class TestUtils extends TestBase {
 
         List<String> myList = new ArrayList<String>(Arrays.asList(replace1.split(":")));
         String settingsVal = myList.get(4);
-        if ( myList.size()> 5){
-            settingsVal=setttings;
+        if (settingsVal.contains(", id")){
+              myList = new ArrayList<String>(Arrays.asList(replace1.split(",")));
+             settingsVal = myList.get(3);
+             //Remove Value String
+            settingsVal = settingsVal.replace("value:", "");
+        }else{
+            myList = new ArrayList<String>(Arrays.asList(replace1.split(",")));
+            if (myList.size()==4){
+                settingsVal = myList.get(3);
+                settingsVal=settingsVal.replace("value:", "");
+            }
         }
+
         try {
             testInfo.get().info(response);
         }catch (Exception e){
@@ -735,5 +745,6 @@ public class TestUtils extends TestBase {
         System.out.println(response);
         return result;
     }
+
 
 }

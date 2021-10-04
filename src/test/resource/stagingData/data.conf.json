@@ -112,6 +112,32 @@
     "noForeignRegUser": "noforeignreguser@yopmail.com",
     "generalUserPassword": "Bankole11!!"
   },
+  "CorporateRegistration": {
+    "valid_msisdn": "08116575689",
+    "valid_msisdn2": "08111645372",
+    "primary_tm": "08113326363",
+    "secondary_tm": "08116754443",
+    "foreign_msisdn": "08152395730",
+    "invalid_msisdn": "08022340222",
+    "invalid_OTP": "00000",
+    "expired_OTP": "39352",
+    "lga": "Anambra East",
+    "msisdnLessThanSix": "123",
+    "unrecognizedMsisdn": "11111111111",
+    "unrecognizedFixedMsisdn": "1111111",
+    "msisdnWithFingerprint": "09053959903",
+    "ninVerificationMode": "Search By NIN",
+    "nin": "11111111111",
+    "nin2": "22222222222",
+    "valid_username": "testpriv@yopmail.com",
+    "valid_username2": "gnwabude@seamfix.com",
+    "noIndividualReg": "userwithoutindividual@haibacon.com",
+    "noCompanyReg": "userwithoutcompany@haibacon.com",
+    "noPrivilegeUser": "userwithoutpriviledges@haibacon.com",
+    "noMultiRegUser": "nomultireguser@yopmail.com",
+    "noForeignRegUser": "noforeignreguser@yopmail.com",
+    "generalUserPassword": "Bankole11!!"
+  },
   "AgentOnboarding": {
     "valid_username": "vnwauwa@seamfix.com",
     "valid_password": "Bankole11!!",
@@ -324,7 +350,8 @@
     "passport_ID_number": "6861637BC",
     "lga_of_reg": "Agege",
     "documentNumber": "89733736AD",
-    "nin": "11111111111"
+    "nin": "11111111111",
+    "nin2": "22222222222"
   },
   "MNP": {
     "pri_valid_Msisdn": "07058351178",
