@@ -455,14 +455,23 @@ public class TestBase {
 
 	@Test
 	public static void verifyBioMetricsTest() throws InterruptedException {
-		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
+		WebDriverWait wait = new WebDriverWait(getDriver(), 10);
+		try{
+			TestUtils.scrollDown();
+		}catch (Exception e){
 
-		TestUtils.scrollDown();
+		}
 		//Proceed
-		Thread.sleep(2000);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/btnCaptureBiometrics")));
-		Thread.sleep(2000);
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btnCaptureBiometrics")).click();
+		try{
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/btnCaptureBiometrics")));
+			Thread.sleep(2000);
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btnCaptureBiometrics")).click();
+
+		}catch (Exception e){
+
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/verifyBiometricsBtn")).click();
+
+		}
 
 		try{
 			//Select country
@@ -484,6 +493,7 @@ public class TestBase {
 
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/buttonCapturePicture")).click();
 		}
+		Thread.sleep(30000);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
 		TestUtils.assertSearchText("ID", "android:id/message", "Subscriber's face was successfully captured");
 		getDriver().findElement(By.id("android:id/button1")).click();

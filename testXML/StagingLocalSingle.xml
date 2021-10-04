@@ -18,7 +18,7 @@
         <parameter name="deviceNo" value="1"/>
 
         <classes>
-            <class name="admin.Login">
+            <!--<class name="admin.Login">
                 <methods>
                     <include name="usernamePasswordLogin"/>
                     <include name="fingerprintLogin"/>
@@ -70,7 +70,32 @@
                     <include name="disableSubscriberBypassTest"/>
                 </methods>
             </class>
-            <class name="admin.AdditionalRegistration">
+            <class name="admin.CorporateNewRegistration">
+                <methods>
+                    <include name="noneCorporatePrivilegeTest"/>
+                    <include name="CorporatePrivilegesTest"/>
+                    <include name="Login"/>
+                    <include name="captureReportRecords"/>
+                    <include name="navigateToCorporateRegistration"/>
+                    <include name="validateMsisdnTest"/>
+                    <include name="captureCorporateReg"/>
+                    <include name="removeCorporatePrivilegeTest"/>
+                </methods>
+            </class>-->
+            <class name="admin.CorporateReRegistration">
+                <methods>
+                    <!--<include name="noneCorporateReRegPrivilegeTest"/>
+                    <include name="CorporatePrivilegesTest"/>-->
+                    <include name="Login"/>
+                    <include name="captureReportRecords"/>
+                    <include name="navigateToCorporateReRegistration"/>
+                    <include name="validateMsisdnTest"/>
+                    <include name="corporateSubscriberValidationTest"/>
+                    <!--<include name="captureCorporateReReg"/>
+                    <include name="removeCorporateReRegTest"/>-->
+                </methods>
+            </class>
+            <!--<class name="admin.AdditionalRegistration">
                 <methods>
                     <include name="noneAdditionalPrivilegeTest"/>
                     <include name="Login"/>
@@ -162,7 +187,7 @@
                     <include name="changeBackToOldPassword"/>
                     <include name="loginWithOldPassword"/>
                 </methods>
-            </class>
+            </class>-->
         </classes>
     </test>
 </suite>
