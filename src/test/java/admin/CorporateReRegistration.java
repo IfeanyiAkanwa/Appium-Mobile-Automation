@@ -18,6 +18,7 @@ import utils.TestUtils;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class CorporateReRegistration extends TestBase {
     private static StringBuffer verificationErrors = new StringBuffer();
@@ -403,6 +404,14 @@ public class CorporateReRegistration extends TestBase {
         Thread.sleep(3000);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/verifyBiometricsBtn")));
         TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/verifyBiometricsBtn", "Verify Biometrics");
+
+
+    }
+
+    @Test
+    @Parameters({"dataEnv"})
+    public static void captureCorporateReReg(String dataEnv) throws Exception {
+        WebDriverWait wait = new WebDriverWait(getDriver(), 30);
 
         //Select PRIMARY_TM
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/corporateUserTypeSpinner")).click();

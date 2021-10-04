@@ -2623,6 +2623,9 @@ public class Form extends TestBase {
 
 		// Next button
 		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/btnContinueReg");
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/spinnerOccupation")).click();
+		getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+occupation+"']")).click();
+		Thread.sleep(1000);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btnContinueReg")).click();
 
 		//Edit Reasons
@@ -2736,7 +2739,7 @@ public class Form extends TestBase {
 		// Capture Company Documents
 		String docType;
 		docType= getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/tv_sub_sub_heading")).getText();
-		testInfo.get().info(docType);
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/tv_sub_sub_heading", "Other Company Documents");
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/corporateDocSpinner")).click();
 		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Certificate Of Incorporation']")).click();
 
@@ -2760,7 +2763,7 @@ public class Form extends TestBase {
 
 		// Capture MOD Primary TM
 		docType= getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/tv_sub_sub_heading")).getText();
-		testInfo.get().info(docType);
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/tv_sub_sub_heading", "MOD Primary TM");
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/corporateDocSpinner")).click();
 		Thread.sleep(500);
 		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Passport']")).click();
@@ -2785,7 +2788,7 @@ public class Form extends TestBase {
 		// Capture MOD Secondary TM
 		docType= getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/tv_sub_sub_heading")).getText();
 		if(docType.contains("MOD Secondary TM")) {
-			testInfo.get().info(docType);
+			TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/tv_sub_sub_heading", "MOD Secondary TM");
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/corporateDocSpinner")).click();
 			Thread.sleep(500);
 			getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Passport']")).click();
@@ -2809,7 +2812,7 @@ public class Form extends TestBase {
 		}
 		// Capture KYC Form
 		docType= getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/tv_sub_sub_heading")).getText();
-		testInfo.get().info(docType);
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/tv_sub_sub_heading", "KYC Capture Form");
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/corporateDocSpinner")).click();
 		Thread.sleep(500);
 		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Registration Form']")).click();
@@ -2831,90 +2834,92 @@ public class Form extends TestBase {
 		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/bt_next")).click();
 
+		try {
+			//Capture Company Details
+			Thread.sleep(1000);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/company_name_descrptn")));
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/company_name_descrptn")).clear();
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/company_name_descrptn")).sendKeys(company_description);
+			Thread.sleep(500);
 
-		//Capture Company Details
-		Thread.sleep(1000);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/company_name_descrptn")));
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/company_name_descrptn")).clear();
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/company_name_descrptn")).sendKeys(company_description);
-		Thread.sleep(500);
+			// Registration Number
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/company_ok")).click();
+			wait.until(ExpectedConditions.visibilityOfElementLocated((By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle"))));
+			TestUtils.assertSearchText("ID", "android:id/message", "Company Registration Number\n" + "Empty field");
+			getDriver().findElement(By.id("android:id/button1")).click();
+			Thread.sleep(500);
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/company_regno")).clear();
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/company_regno")).sendKeys(company_regno);
+			Thread.sleep(500);
 
-		// Registration Number
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/company_ok")).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated((By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle"))));
-		TestUtils.assertSearchText("ID", "android:id/message", "Company Registration Number\n" + "Empty field");
-		getDriver().findElement(By.id("android:id/button1")).click();
-		Thread.sleep(500);
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/company_regno")).clear();
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/company_regno")).sendKeys(company_regno);
-		Thread.sleep(500);
+			// House/ Flat Number
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/company_ok")).click();
+			wait.until(ExpectedConditions.visibilityOfElementLocated((By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle"))));
+			TestUtils.assertSearchText("ID", "android:id/message", "House/Flat Number\n" +
+					"Empty field");
+			getDriver().findElement(By.id("android:id/button1")).click();
+			Thread.sleep(500);
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/house_or_flat_no")).clear();
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/house_or_flat_no")).sendKeys(house_or_flat_no);
+			Thread.sleep(500);
 
-		// House/ Flat Number
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/company_ok")).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated((By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle"))));
-		TestUtils.assertSearchText("ID", "android:id/message", "House/Flat Number\n" +
-				"Empty field");
-		getDriver().findElement(By.id("android:id/button1")).click();
-		Thread.sleep(500);
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/house_or_flat_no")).clear();
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/house_or_flat_no")).sendKeys(house_or_flat_no);
-		Thread.sleep(500);
-
-		// Street
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/company_ok")).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated((By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle"))));
-		TestUtils.assertSearchText("ID", "android:id/message", "Street\n" +
-				"Empty field");
-		getDriver().findElement(By.id("android:id/button1")).click();
-		Thread.sleep(500);
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/street")).clear();
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/street")).sendKeys(company_street);
-		Thread.sleep(500);
+			// Street
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/company_ok")).click();
+			wait.until(ExpectedConditions.visibilityOfElementLocated((By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle"))));
+			TestUtils.assertSearchText("ID", "android:id/message", "Street\n" +
+					"Empty field");
+			getDriver().findElement(By.id("android:id/button1")).click();
+			Thread.sleep(500);
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/street")).clear();
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/street")).sendKeys(company_street);
+			Thread.sleep(500);
 
 
-		TestUtils.scrollDown();
+			TestUtils.scrollDown();
 
-		// City
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/company_ok")).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated((By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle"))));
-		TestUtils.assertSearchText("ID", "android:id/message", "City\n" +
-				"Empty field");
-		getDriver().findElement(By.id("android:id/button1")).click();
-		Thread.sleep(500);
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/city")).clear();
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/city")).sendKeys(company_city);
-		Thread.sleep(500);
+			// City
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/company_ok")).click();
+			wait.until(ExpectedConditions.visibilityOfElementLocated((By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle"))));
+			TestUtils.assertSearchText("ID", "android:id/message", "City\n" +
+					"Empty field");
+			getDriver().findElement(By.id("android:id/button1")).click();
+			Thread.sleep(500);
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/city")).clear();
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/city")).sendKeys(company_city);
+			Thread.sleep(500);
 
-		// Company Address State
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/company_ok")).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated((By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle"))));
-		TestUtils.assertSearchText("ID", "android:id/message", "Please select State");
-		getDriver().findElement(By.id("android:id/button1")).click();
-		Thread.sleep(500);
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/company_state_address")).click();
-		Thread.sleep(500);
-		getDriver().findElement(By.xpath("//android.widget.TextView[@text='" + company_state_address + "']")).click();
-		Thread.sleep(500);
+			// Company Address State
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/company_ok")).click();
+			wait.until(ExpectedConditions.visibilityOfElementLocated((By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle"))));
+			TestUtils.assertSearchText("ID", "android:id/message", "Please select State");
+			getDriver().findElement(By.id("android:id/button1")).click();
+			Thread.sleep(500);
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/company_state_address")).click();
+			Thread.sleep(500);
+			getDriver().findElement(By.xpath("//android.widget.TextView[@text='" + company_state_address + "']")).click();
+			Thread.sleep(500);
 
-		// Company Address LGA
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/company_ok")).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated((By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle"))));
-		TestUtils.assertSearchText("ID", "android:id/message", "Please select LGA");
-		getDriver().findElement(By.id("android:id/button1")).click();
-		Thread.sleep(500);
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/company_lga_address")).click();
-		Thread.sleep(500);
-		getDriver().findElement(By.xpath("//android.widget.TextView[@text='" + company_lga_address + "']")).click();
-		Thread.sleep(500);
+			// Company Address LGA
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/company_ok")).click();
+			wait.until(ExpectedConditions.visibilityOfElementLocated((By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle"))));
+			TestUtils.assertSearchText("ID", "android:id/message", "Please select LGA");
+			getDriver().findElement(By.id("android:id/button1")).click();
+			Thread.sleep(500);
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/company_lga_address")).click();
+			Thread.sleep(500);
+			getDriver().findElement(By.xpath("//android.widget.TextView[@text='" + company_lga_address + "']")).click();
+			Thread.sleep(500);
 
-		TestUtils.scrollDown();
-		// Postal code
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/company_postalcode")).clear();
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/company_postalcode")).sendKeys(company_postalcode);
-		Thread.sleep(500);
+			TestUtils.scrollDown();
+			// Postal code
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/company_postalcode")).clear();
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/company_postalcode")).sendKeys(company_postalcode);
+			Thread.sleep(500);
 
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/company_ok")).click();
-
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/company_ok")).click();
+		}catch (Exception e){
+			testInfo.get().error("Company details not found");
+		}
 		//Assert Primary TM details
 		TestUtils.testTitle("Assert Primary TM details");
 		Asserts.AssertTMDetails();
