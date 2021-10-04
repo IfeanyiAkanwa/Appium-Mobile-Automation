@@ -101,9 +101,9 @@ public class TestUtils extends TestBase {
         //assertBulkTables("08118071446" );
 
         //System.out.println(Setting);
-        JSONObject getSettingParams=TestUtils.createSettingObject("PILOT-AVAILABLE-USE-CASE", "RR","All available registration use case");
-        updateSettingsApiCall( "stagingData",  getSettingParams);
-        //retrieveSettingsApiCall("stagingData", "CHANGE_OF_OWNERSHIP_DOCUMENTS");
+        //JSONObject getSettingParams=TestUtils.createSettingObject("PILOT-AVAILABLE-USE-CASE", "RR","All available registration use case");
+        //updateSettingsApiCall( "stagingData",  getSettingParams);
+        retrieveSettingsApiCall("stagingData", "CORPORATE_REGISTRATION_DOCUMENTS");
     }
 
     public static void assertBulkTables(String msisdn, String Country) throws SQLException, IOException, org.json.simple.parser.ParseException {
@@ -168,6 +168,46 @@ public class TestUtils extends TestBase {
             String unique_id = (String) jsonLineItem.get("unique_id");
             JSONArray CAL=ConnectDB.ClientActivityLogTable(unique_id);
             testInfo.get().info(String.valueOf(CAL.get(0)));
+        }catch (Exception e){
+            testInfo.get().error("Could not fetch data for the Registered MSISDN:"+msisdn+", please perform test manually");
+        }
+
+
+        try {
+            //Assert.assertEquals(expect, value);
+            //testInfo.get().log(Status.INFO, value + " found");
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+            String verificationErrorString = verificationErrors.toString();
+            //testInfo.get().error(value + " not found");
+            testInfo.get().error(verificationErrorString);
+        }
+    }
+
+    public static void assertCNDetailsTables(String primary_tm) throws SQLException {
+        String msisdn=primary_tm;
+        StringBuffer verificationErrors = new StringBuffer();
+        JSONArray dBvalue=ConnectDB.QueryBulkTable(msisdn);
+        try{
+            Object getFirstObject = dBvalue.get(0);
+            System.out.println(getFirstObject);
+            TestUtils.testTitle("Asserting individual registration DB values");
+            JSONObject jsonLineItem = (JSONObject) getFirstObject;
+
+            //Unique ID
+            String unique_id = (String) jsonLineItem.get("unique_id");
+            JSONArray CAL=ConnectDB.ClientActivityLogTable(unique_id);
+            testInfo.get().info(String.valueOf(CAL.get(0)));
+
+            TestUtils.testTitle("To confirm that corporate category is saved in DDA58");
+            String dd58 = (String) jsonLineItem.get("dd58");
+            assertTwoValues(dd58, "Primary");
+            testInfo.get().info(dd58);
+
+            TestUtils.testTitle("To confirm that the Secondary TM whose MSISDN, Demographics and biometric were validated is saved in DDA59");
+            String dd59 = (String) jsonLineItem.get("dd59");
+            testInfo.get().info(dd59);
+
         }catch (Exception e){
             testInfo.get().error("Could not fetch data for the Registered MSISDN:"+msisdn+", please perform test manually");
         }
@@ -630,9 +670,19 @@ public class TestUtils extends TestBase {
 
         List<String> myList = new ArrayList<String>(Arrays.asList(replace1.split(":")));
         String settingsVal = myList.get(4);
-        if ( myList.size()> 5){
-            settingsVal=setttings;
+        if (settingsVal.contains(", id")){
+              myList = new ArrayList<String>(Arrays.asList(replace1.split(",")));
+             settingsVal = myList.get(3);
+             //Remove Value String
+            settingsVal = settingsVal.replace("value:", "");
+        }else{
+            myList = new ArrayList<String>(Arrays.asList(replace1.split(",")));
+            if (myList.size()==4){
+                settingsVal = myList.get(3);
+                settingsVal=settingsVal.replace("value:", "");
+            }
         }
+
         try {
             testInfo.get().info(response);
         }catch (Exception e){
@@ -695,5 +745,6 @@ public class TestUtils extends TestBase {
         System.out.println(response);
         return result;
     }
+
 
 }
