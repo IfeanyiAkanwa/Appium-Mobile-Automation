@@ -50,6 +50,7 @@ public class CorporateNewRegistration extends TestBase {
     private static String noMultiRegUser;
     private static String primary_tm;
     private static String secondary_tm;
+    private static String unrecognizedFixedMsisdn;
     String totalNo;
     String validNo;
     String invalidNo;
@@ -71,6 +72,7 @@ public class CorporateNewRegistration extends TestBase {
 
         JSONObject envs = (JSONObject) config.get("CorporateRegistration");
 
+        unrecognizedFixedMsisdn = (String) envs.get("unrecognizedFixedMsisdn");
         valid_username = (String) envs.get("valid_username");
         valid_username2 = (String) envs.get("valid_username2");
         primary_tm = (String) envs.get("primary_tm");
@@ -130,7 +132,7 @@ public class CorporateNewRegistration extends TestBase {
 
     @Parameters({ "systemPort", "deviceNo", "server","deviceName", "testConfig", "dataEnv" })
     @Test
-    public void removeCorporatePrivilegeTest(String systemPort, int deviceNo, String server, String deviceName, String testConfig, String dataEnv) throws Exception {
+    public void removeCorporateNewRegTest(String systemPort, int deviceNo, String server, String deviceName, String testConfig, String dataEnv) throws Exception {
 
         //initial setting
         String initialSetting= TestUtils.retrieveSettingsApiCall(dataEnv, "RETRIEVE_AVAILABLE_USECASES");
@@ -470,14 +472,52 @@ public class CorporateNewRegistration extends TestBase {
         TestUtils.testTitle("Proceed with MSISDN with special character: ("+ valid_msisdn_char +" )");
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).clear();
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).sendKeys(valid_msisdn_char);
-        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/msisdnField", valid_msisdn);
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/addMsisdnButton")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
+        TestUtils.assertSearchText("ID", "android:id/message", "Entered Mobile MSISDN is invalid. Entered value should be 11 digits");
+        getDriver().findElement(By.id("android:id/button1")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='"+moduleName+"']")));
 
         //Enter MSISDN with longer Number
         String valid_msisdn_Long=valid_msisdn+"2782";
         TestUtils.testTitle("Proceed with MSISDN with longer Number: ("+ valid_msisdn_Long +" )");
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).clear();
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).sendKeys(valid_msisdn_Long);
-        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/msisdnField", valid_msisdn);
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/addMsisdnButton")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
+        TestUtils.assertSearchText("ID", "android:id/message", "Entered Mobile MSISDN is invalid. Entered value should be 11 digits");
+        getDriver().findElement(By.id("android:id/button1")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='"+moduleName+"']")));
+
+        //Select Fixed category
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnCategorySpinner")).click();
+        getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Fixed']")).click();
+        Thread.sleep(500);
+
+        //Enter Unrecognized fixed MSISDN
+        TestUtils.testTitle("Proceed with Unrecognized Fixed MSISDN: ("+ unrecognizedFixedMsisdn +" )");
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).sendKeys(unrecognizedFixedMsisdn);
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/addMsisdnButton")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
+        TestUtils.assertSearchText("ID", "android:id/message", "Fixed MSISDN: Field must have more than 11 characters;The MSISDN has an unrecognized National Destination Code. Please ensure the MSISDN starts with any of the following NDCs: 0701,0708,0802,0808,0812,0901,0902,0904,0907,0809,0817,0818,0908,0909,0705,0805,0807,0811,0815,0905,0915,0703,0706,0803,0806,0810,0813,0814,0816,0903,0906");
+        getDriver().findElement(By.id("android:id/button1")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='"+moduleName+"']")));
+
+        //Enter MSISDN Less than 6 digits for FIXED
+        TestUtils.testTitle("Proceed with MSISDN Less than 6 digits for FIXED");
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).clear();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).sendKeys(msisdnLessThanSix);
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/addMsisdnButton")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
+        TestUtils.assertSearchText("ID", "android:id/message", "Entered Fixed MSISDN is invalid. Entered value should be 7 digits");
+        getDriver().findElement(By.id("android:id/button1")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='"+moduleName+"']")));
+
+        //Select Mobile category
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnCategorySpinner")).click();
+        getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Mobile']")).click();
+        Thread.sleep(500);
 
         //To confirm that user is required to validate 2 MSISDNs (Primary TM MSISDN and Secondary MSISDN)
         TestUtils.testTitle("To confirm that user is required to validate 2 MSISDNs (Primary TM MSISDN and Secondary MSISDN): ("+ valid_msisdn_Long +" )");
@@ -661,7 +701,7 @@ public class CorporateNewRegistration extends TestBase {
         TestUtils.testTitle("To confirm that the Child Msisdn button is greyed out after successful upload");
         try{
             getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/addChildMsisdnButton")).click();
-            testInfo.get().error("addChildMsisdnButton found after validation");
+            testInfo.get().error("addChil0dMsisdnButton found after validation");
             Thread.sleep(1000);
             getDriver().pressKeyCode(AndroidKeyCode.BACK);
         }catch (Exception e){
