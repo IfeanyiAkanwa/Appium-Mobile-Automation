@@ -2713,7 +2713,7 @@ public class Form extends TestBase {
 
 	@Test
 	@Parameters({"dataEvn"})
-	public static void corporateReRegDocsForm(String dataEnv) throws Exception {
+	public static void corporateDocsForm(String dataEnv) throws Exception {
 
 		JSONParser parser = new JSONParser();
 		JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));

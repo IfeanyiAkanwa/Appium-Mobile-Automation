@@ -299,9 +299,10 @@ public class CorporateReRegistration extends TestBase {
         //To confirm that the corporate category is a dropdown containing Internet of things(IOT) and Corporate
         TestUtils.testTitle("To confirm that the corporate category is a dropdown containing Internet of things(IOT) and Corporate");
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/corporateCategorySpinner")).click();
-        TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='Corporate']", "Corporate");
-        TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='Internet of Things (IoT)']", "Internet of Things (IoT)");
-        getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Corporate']")).click();
+        Thread.sleep(800);
+        TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='CORPORATE']", "CORPORATE");
+        TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='IOT']", "IOT");
+        getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='CORPORATE']")).click();
         Thread.sleep(500);
 
 
@@ -384,9 +385,10 @@ public class CorporateReRegistration extends TestBase {
     public void corporateSubscriberValidationTest(String dataEnv) throws Exception {
         WebDriverWait wait = new WebDriverWait(getDriver(), 60);
 
-        //Select SECONDARY_TM
+        //Select PRIMARY_TM
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/corporateUserTypeSpinner")).click();
-        getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='SECONDARY_TM']")).click();
+        Thread.sleep(1000);
+        getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='PRIMARY_TM']")).click();
         Thread.sleep(500);
 
         //Select Mobile category
@@ -397,7 +399,7 @@ public class CorporateReRegistration extends TestBase {
         //To ensure that Only one TM is required for validation (Primary TM MSISDN or Secondary MSISDN)
         TestUtils.testTitle("To ensure that Only one TM is required for validation (Primary TM MSISDN or Secondary MSISDN): ("+ valid_msisdn +" )");
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).sendKeys(valid_msisdn);
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).sendKeys(valid_msisdn2);
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/checkBtn")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
         TestUtils.assertSearchText("ID", "android:id/message", "Getting Data...");
@@ -415,6 +417,7 @@ public class CorporateReRegistration extends TestBase {
 
         //Select PRIMARY_TM
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/corporateUserTypeSpinner")).click();
+        Thread.sleep(1500);
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='PRIMARY_TM']")).click();
         Thread.sleep(500);
 
@@ -522,7 +525,7 @@ public class CorporateReRegistration extends TestBase {
 
         Form.CorporateRegFormAutoPopulate(dataEnv);
 
-        Form.corporateReRegDocsForm(dataEnv);
+        Form.corporateDocsForm(dataEnv);
         TestUtils.assertCNDetailsTables(valid_msisdn);
         try {
             getDriver().pressKeyCode(AndroidKeyCode.BACK);

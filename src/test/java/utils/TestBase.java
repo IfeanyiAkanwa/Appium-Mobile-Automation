@@ -439,6 +439,7 @@ public class TestBase {
 				Thread.sleep(1000);
 				getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/proceed_button")).click();
 			}catch (Exception e1){
+				System.out.println(e1);
 				wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/continue_btn")));
 				getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/continue_btn")).click();
 

@@ -52,8 +52,8 @@
                     <include name="newRegistrationFormTest"/>
                     <include name="captureIndividualSimTest"/>
                     <include name="captureForeignRegTest"/>
-                    <include name="removeNewRegPrivilegeTest"/>
                     <include name="addBarCodePrivilegeTest"/>
+                    <include name="removeNewRegPrivilegeTest"/>
                 </methods>
             </class>
             <class name="admin.ReRegistrationCapture">

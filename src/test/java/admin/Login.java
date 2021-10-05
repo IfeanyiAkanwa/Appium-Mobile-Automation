@@ -283,7 +283,11 @@ public class Login extends TestBase {
         getDriver().pressKeyCode(AndroidKeyCode.BACK);
         // Go back
         getDriver().pressKeyCode(AndroidKeyCode.BACK);
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/cancel")).click();
+        try {
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/cancel")).click();
+		}catch (Exception e){
+
+		}
     }
 
 	@Parameters ({"dataEnv"})
