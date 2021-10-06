@@ -101,7 +101,7 @@
                     <include name="Login"/>
                     <include name="navigateToCaptureMenuTest"/>
                     <include name="navigateToAddReg"/>
-                    <include name="MsisdnCategory"/>
+                    <include name="msisdnCategory"/>
                     <include name="additionalRegistration"/>
                     <include name="additionalRegTypePrivilege"/>
                     <include name="ndcRule"/>
