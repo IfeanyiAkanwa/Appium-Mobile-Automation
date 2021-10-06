@@ -32,8 +32,8 @@
     "invalid_username": "ada@seamnix.com",
     "invalid_email_format": "@seamfix.com",
     "valid_username": "ilawson@seamfix.com",
-    "new_password": "Bankole2020!!",
-    "confirm_password": "Bankole2020!!",
+    "new_password": "Bankole2020!!!",
+    "confirm_password": "Bankole2020!!!",
     "invalid_password_policy": "ban",
     "confirm_password_not_matching": "ban",
     "invalid_OTP": "0000",
@@ -88,11 +88,11 @@
     "invalid_OTP": "00000"
   },
   "Search": {
-    "valid_msisdn": "08113825224",
-    "valid_sim_serial_no": "8923450410192953306F"
+    "valid_msisdn": "08111645372",
+    "valid_sim_serial_no": "8923450112196986049F"
   },
   "ReRegistration": {
-    "valid_msisdn": "08116575689",
+    "valid_msisdn": "09155285662",
     "foreign_msisdn": "08152395730",
     "invalid_msisdn": "08022340222",
     "invalid_OTP": "00000",
@@ -175,6 +175,33 @@
     "areaOfResidence": "AGILA",
     "passport_ID_number": "6861637BC",
     "lga_of_reg": "Agege"
+  },
+  "CorporateReRegistration": {
+    "valid_msisdn": "08116575689",
+    "fixed_Msisdn": "0811382",
+    "valid_msisdn2": "09053281339",
+    "primary_tm": "08113326363",
+    "secondary_tm": "08116754443",
+    "foreign_msisdn": "08152395730",
+    "invalid_msisdn": "08022340222",
+    "invalid_OTP": "00000",
+    "expired_OTP": "47419",
+    "lga": "Anambra East",
+    "msisdnLessThanSix": "123",
+    "unrecognizedMsisdn": "11111111111",
+    "unrecognizedFixedMsisdn": "1111111",
+    "msisdnWithFingerprint": "09053959903",
+    "ninVerificationMode": "Search By NIN",
+    "nin": "11111111111",
+    "nin2": "22222222222",
+    "valid_username": "testpriv@yopmail.com",
+    "valid_username2": "gnwabude@seamfix.com",
+    "noIndividualReg": "userwithoutindividual@haibacon.com",
+    "noCompanyReg": "userwithoutcompany@haibacon.com",
+    "noPrivilegeUser": "userwithoutpriviledges@haibacon.com",
+    "noMultiRegUser": "nomultireguser@yopmail.com",
+    "noForeignRegUser": "noforeignreguser@yopmail.com",
+    "generalUserPassword": "Bankole11!!"
   },
   "AdditionalRegistration": {
     "pri_valid_Msisdn": "08159452615",

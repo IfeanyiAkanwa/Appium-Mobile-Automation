@@ -52,8 +52,8 @@
                     <include name="newRegistrationFormTest"/>
                     <include name="captureIndividualSimTest"/>
                     <include name="captureForeignRegTest"/>
-                    <include name="removeNewRegPrivilegeTest"/>
                     <include name="addBarCodePrivilegeTest"/>
+                    <include name="removeNewRegPrivilegeTest"/>
                 </methods>
             </class>
             <class name="admin.ReRegistrationCapture">
@@ -80,6 +80,19 @@
                     <include name="validateMsisdnTest"/>
                     <include name="captureCorporateReg"/>
                     <include name="removeCorporateNewRegTest"/>
+                </methods>
+            </class>
+            <class name="admin.CorporateReRegistration">
+                <methods>
+                    <include name="noneCorporateReRegPrivilegeTest"/>
+                    <include name="CorporatePrivilegesTest"/>
+                    <include name="Login"/>
+                    <include name="captureReportRecords"/>
+                    <include name="navigateToCorporateReRegistration"/>
+                    <include name="validateMsisdnTest"/>
+                    <include name="corporateSubscriberValidationTest"/>
+                    <include name="captureCorporateReReg"/>
+                    <include name="removeCorporateReRegTest"/>
                 </methods>
             </class>
             <class name="admin.AdditionalRegistration">
