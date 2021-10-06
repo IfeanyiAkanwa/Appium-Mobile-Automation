@@ -112,6 +112,11 @@
     "noForeignRegUser": "noforeignreguser@yopmail.com",
     "generalUserPassword": "Bankole11!!"
   },
+  "VerifyNinStandAlone": {
+    "nin": "11111111111",
+    "valid_psw": "Bankole11!!",
+    "valid_urn": "userwithoutpriviledges@haibacon.com"
+  },
   "CorporateRegistration": {
     "valid_msisdn": "08116575689",
     "valid_msisdn2": "08111645372",
