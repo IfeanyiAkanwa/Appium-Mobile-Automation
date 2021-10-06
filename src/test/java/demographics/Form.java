@@ -2838,6 +2838,7 @@ public class Form extends TestBase {
 		try {
 			//Capture Company Details
 			Thread.sleep(1000);
+			Asserts.AssertCompanyDetails();
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/company_name_descrptn")));
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/company_name_descrptn")).clear();
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/company_name_descrptn")).sendKeys(company_description);

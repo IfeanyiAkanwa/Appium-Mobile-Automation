@@ -450,10 +450,14 @@ public class CorporateReRegistration extends TestBase {
         Thread.sleep(1000);
 
         captureFingerPrint();
-
-        TestUtils.assertSearchText("ID", "android:id/message", "Fingerprint matching not applicable. You will be allowed to proceed to the next verification option.");
-        getDriver().findElement(By.id("android:id/button1")).click();
-
+        String fingerPrintMsg=getDriver().findElement(By.id("android:id/button1")).getText();
+        if (fingerPrintMsg.contains("Fingerprint matching not applicable. You will be allowed to proceed to the next verification option.")) {
+            TestUtils.assertSearchText("ID", "android:id/message", "Fingerprint matching not applicable. You will be allowed to proceed to the next verification option.");
+            getDriver().findElement(By.id("android:id/button1")).click();
+        }else{
+            TestUtils.assertSearchText("ID", "android:id/message", "Subscriber does not have fingerprint saved. Verification would proceed to the next verification option.");
+            getDriver().findElement(By.id("android:id/button1")).click();
+        }
         Thread.sleep(2000);
         TestUtils.scrollDown();
         TestUtils.testTitle("Test invalid OTP:"+invalid_OTP);
