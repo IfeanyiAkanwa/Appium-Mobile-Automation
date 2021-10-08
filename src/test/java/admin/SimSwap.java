@@ -265,7 +265,7 @@ public class SimSwap extends TestBase {
         TestUtils.testTitle("Verify that User Can't proceed without Supplying Existing MSISDN");
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btnValidate")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
-        TestUtils.assertSearchText("ID", "android:id/message", "Please Enter Existing Msisdn");
+        TestUtils.assertSearchText("ID", "android:id/message", "MSISDN cannot be blank");
         getDriver().findElement(By.id("android:id/button1")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/existingMsisdnField")));
 
@@ -287,7 +287,7 @@ public class SimSwap extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/existingMsisdnField")).sendKeys(msisdn_less_than_11_digits);
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btnValidate")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
-        TestUtils.assertSearchText("ID", "android:id/message", "Entered Existing MSISDN is invalid. Entered value should not be less than 6 or more than 11 digits.");
+        TestUtils.assertSearchText("ID", "android:id/message", "Entered Existing MSISDN is invalid. It must be either 7 digits for fixed or 11 digits for mobile.");
         getDriver().findElement(By.id("android:id/button1")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/existingMsisdnField")));
 
@@ -360,7 +360,7 @@ public class SimSwap extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simSerialField")).sendKeys(msisdn_greater_than_11_digits);
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btnValidate")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
-        TestUtils.assertSearchText("ID", "android:id/message", "New Sim Serial: Sim Serial format is invalid");
+        TestUtils.assertSearchText("ID", "android:id/message", "New SIM Serial: SIM Serial format is invalid. SIM Serial should be 19 numbers with 'F' at the end");
         getDriver().findElement(By.id("android:id/button1")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/simSerialField")));
 
@@ -412,7 +412,7 @@ public class SimSwap extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/existingMsisdnField")).sendKeys(blocked_msisdn);
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btnValidate")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
-        TestUtils.assertSearchText("ID", "android:id/message", "You cannot proceed with the SIM Swap. Further Swap request on "+ blocked_msisdn+" has been Blocked. Contact Support");
+        TestUtils.assertSearchText("ID", "android:id/message", "You cannot proceed with the SIM Swap. SIM Swap request for "+ blocked_msisdn + " has been blocked due to maximum retry. Please Contact Support");
         getDriver().findElement(By.id("android:id/button1")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/existingMsisdnField")));
 
