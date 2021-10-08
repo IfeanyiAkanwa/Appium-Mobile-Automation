@@ -18,7 +18,7 @@
         <parameter name="deviceNo" value="1"/>
 
         <classes>
-            <!--<class name="admin.Login">
+            <class name="admin.Login">
                 <methods>
                     <include name="usernamePasswordLogin"/>
                     <include name="fingerprintLogin"/>
@@ -81,16 +81,7 @@
                     <include name="captureCorporateReg"/>
                     <include name="removeCorporateNewRegTest"/>
                 </methods>
-            </class>-->
-            <class name="admin.VerifyNinStandAlone">
-                <methods>
-                    <include name="noneVerifyNinPrivilegeTest" />
-                    <include name="Login" />
-                    <include name="navigateToVerifyNin" />
-                    <include name="verifyNinStandAloneTest" />
-                </methods>
             </class>
-            <!--<class name="admin.AdditionalRegistration">
             <class name="admin.CorporateReRegistration">
                 <methods>
                     <include name="noneCorporateReRegPrivilegeTest"/>
@@ -102,6 +93,19 @@
                     <include name="corporateSubscriberValidationTest"/>
                     <include name="captureCorporateReReg"/>
                     <include name="removeCorporateReRegTest"/>
+                </methods>
+            </class>
+            <class name="admin.VerifyNinStandAlone">
+                <methods>
+                    <include name="noneVerifyNinPrivilegeTest" />
+                    <include name="Login" />
+                    <include name="navigateToVerifyNin" />
+                    <include name="verifyByNinTest" />
+                    <include name="verifyByPhoneTest" />
+                    <include name="verifyByDemographicsTest" />
+                    <include name="verifyByDocumentNoTest"/>
+                    <include name="verifyByTransactionIdTest"/>
+                    <include name="verifyByNinAndFingerprintTest" />
                 </methods>
             </class>
             <class name="admin.AdditionalRegistration">
@@ -196,7 +200,7 @@
                     <include name="changeBackToOldPassword"/>
                     <include name="loginWithOldPassword"/>
                 </methods>
-            </class>-->
+            </class>
         </classes>
     </test>
 </suite>

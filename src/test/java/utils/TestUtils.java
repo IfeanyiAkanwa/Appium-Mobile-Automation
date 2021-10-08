@@ -191,7 +191,7 @@ public class TestUtils extends TestBase {
         try{
             Object getFirstObject = dBvalue.get(0);
             System.out.println(getFirstObject);
-            TestUtils.testTitle("Asserting individual registration DB values");
+            TestUtils.testTitle("Asserting Corporate new registration DB values");
             JSONObject jsonLineItem = (JSONObject) getFirstObject;
 
             //Unique ID
@@ -221,6 +221,30 @@ public class TestUtils extends TestBase {
             String verificationErrorString = verificationErrors.toString();
             //testInfo.get().error(value + " not found");
             testInfo.get().error(verificationErrorString);
+        }
+    }
+
+    public static void assertNINVerify(String nin) throws SQLException {
+        JSONArray dBvalue=ConnectDB.QueryNinTable();
+        try {
+            Object getFirstObject = dBvalue.get(0);
+            System.out.println(getFirstObject);
+            JSONObject jsonLineItem = (JSONObject) getFirstObject;
+
+            //Transaction ID
+            TestUtils.testTitle("To confirm that backend generates a unique transaction ID for each request");
+            String transaction_id = (String) jsonLineItem.get("transaction_id");
+            TestUtils.checkNullValues(transaction_id);
+
+            //Unique ID
+            TestUtils.testTitle("To confirm that backend generates a unique transaction ID for each request");
+            String db_nin = (String) jsonLineItem.get("nin");
+            TestUtils.assertTwoValues(db_nin, nin);
+
+            TestUtils.testTitle("Logged data");
+            testInfo.get().info(String.valueOf(getFirstObject));
+        }catch (Exception e){
+            testInfo.get().error("Cannot fetch DB:"+e);
         }
     }
 
@@ -745,6 +769,7 @@ public class TestUtils extends TestBase {
         System.out.println(response);
         return result;
     }
+
 
 
 }
