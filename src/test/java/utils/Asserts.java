@@ -94,11 +94,13 @@ public class Asserts extends TestBase {
         String stateOfOrigin="";
         String lgaOfOrigin="";
         String countryOfOrigin="";
-        Thread.sleep(1000);
+        String stateOfResidence="";
+        String lgaOfResidence="";
+        Thread.sleep(1500);
         try{
              countryOfOrigin = getDriver().findElement(By.xpath("//android.widget.TextView[@text='Nigeria']")).getText();
         }catch (Exception e){
-             countryOfOrigin = getDriver().findElement(By.xpath("//android.widget.TextView[@text='NIGERIA']")).getText();
+             countryOfOrigin = getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='NIGERIA']")).getText();
         }
         try {
             stateOfOrigin = getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='"+state+"']")).getText();
@@ -117,19 +119,51 @@ public class Asserts extends TestBase {
         if (nin.equals("NIN")) {
             fields.put("NIN", nin);
         }
+        try{
 
-        //Assert.assertNotEquals(lgaOfOrigin, "[Select LGA]*");
-        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/stateOfResidenceSpinner");
-        String stateOfResidence = getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='"+state+"']")).getText();
-        if (stateOfResidence.equals("[Select State]*")) {
-            fields.put("State of Residence", stateOfResidence);
+
+            //Assert.assertNotEquals(lgaOfOrigin, "[Select LGA]*");
+            TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/stateOfResidenceSpinner");
+            stateOfResidence = getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='"+state+"']")).getText();
+            if (stateOfResidence.equals("[Select State]*")) {
+                fields.put("State of Residence", stateOfResidence);
+            }
+
+            //Assert.assertNotEquals(stateOfResidence, "[Select State]*");
+            TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/lgaOfResidenceSpinner");
+            lgaOfResidence = getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='"+LGA+"']")).getText();
+            if (lgaOfResidence.equals("[Select State]*")) {
+                fields.put("LGA of Residence", lgaOfResidence);
+            }
+        }catch (Exception e){
+            //Select State
+            getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/stateOfResidenceSpinner")).click();
+            Thread.sleep(500);
+            getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+state+"']")).click();
+            Thread.sleep(500);
+
+
+            //Select LGA
+            getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/lgaOfResidenceSpinner")).click();
+            Thread.sleep(500);
+            getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+LGA+"']")).click();
+            Thread.sleep(500);
+
+            //Assert.assertNotEquals(lgaOfOrigin, "[Select LGA]*");
+            TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/stateOfResidenceSpinner");
+            stateOfResidence = getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='"+state+"']")).getText();
+            if (stateOfResidence.equals("[Select State]*")) {
+                fields.put("State of Residence", stateOfResidence);
+            }
+
+            //Assert.assertNotEquals(stateOfResidence, "[Select State]*");
+            TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/lgaOfResidenceSpinner");
+            lgaOfResidence = getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='"+LGA+"']")).getText();
+            if (lgaOfResidence.equals("[Select State]*")) {
+                fields.put("LGA of Residence", lgaOfResidence);
+            }
         }
-        //Assert.assertNotEquals(stateOfResidence, "[Select State]*");
-        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/lgaOfResidenceSpinner");
-        String lgaOfResidence = getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='"+LGA+"']")).getText();
-        if (lgaOfResidence.equals("[Select State]*")) {
-            fields.put("LGA of Residence", lgaOfResidence);
-        }
+
         //Assert.assertNotEquals(lgaOfResidence, "[Select LGA]*");
         TestUtils.scrollDown();
         String areaOfResidence = getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='"+area+"']")).getText();
