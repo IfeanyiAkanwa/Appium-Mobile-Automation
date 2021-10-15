@@ -19,7 +19,7 @@ public class ReactivationTest extends TestBase {
     @Parameters({ "dataEnv"})
 	@Test
 	public void noneReactivationPrivilegeTest(String dataEnv) throws Exception {
-    	 WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+    	 WebDriverWait wait = new WebDriverWait(getDriver(), 60);
 		JSONParser parser = new JSONParser();
 		JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
 		JSONObject envs = (JSONObject) config.get("Reactivation");
@@ -27,7 +27,8 @@ public class ReactivationTest extends TestBase {
 		String valid_username = (String) envs.get("valid_username");
 		String valid_password = (String) envs.get("valid_password");
 		String lga = (String) envs.get("lga");
-	
+
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/otp_login")));
 		TestBase.Login1( valid_username, valid_password);
 		Thread.sleep(500);
 		TestUtils.testTitle("To confirm that a user without Msisdn Reactivation privilege can't access the module");
@@ -50,10 +51,10 @@ public class ReactivationTest extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/typeofreg")).click();
 		Thread.sleep(500);
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/alertTitle", "Select Registration Type");
-		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='MSISDN Re-Activation']")).click();
+		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Re-Registration']")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/alertTitle", "No Privilege");
-		TestUtils.assertSearchText("ID", "android:id/message", "You are not allowed to access MSISDN Re-Activation because you do not have the MSISDN Re-Activation privilege");
+		TestUtils.assertSearchText("ID", "android:id/message", "You are not allowed to access Re-Registration because you do not have the Re-Registration privilege");
 		Thread.sleep(500);
 		getDriver().findElement(By.id("android:id/button1")).click();
 		Thread.sleep(500);
@@ -108,17 +109,17 @@ public class ReactivationTest extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/typeofreg")).click();
 		Thread.sleep(500);
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/alertTitle", "Select Registration Type");
-		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='MSISDN Re-Activation']")).click();
+		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Re-Registration']")).click();
 		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/next_button")).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='MSISDN Reactivation']")));
-		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='MSISDN Reactivation']", "MSISDN Reactivation");
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='48 hours MSISDN Reactivation']")));
+		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='48 hours MSISDN Reactivation']", "48 hours MSISDN Reactivation");
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/use_case_switch")).click();
 		Thread.sleep(500);
 
 		// Proceed without supplying msisdn
 		TestUtils.testTitle("Proceed without supplying msisdn");
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/primary_msisdn_field")).clear();
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/primary_msisdn_field")).sendKeys();
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/submit_button")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
 		TestUtils.assertSearchText("ID", "android:id/message", "Required Input Field: Phone Number");
@@ -132,18 +133,23 @@ public class ReactivationTest extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/submit_button")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
 		Thread.sleep(2000);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='MSISDN is not registered and cannot be used for this use case']")));
-		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='MSISDN is not registered and cannot be used for this use case']", "MSISDN is not registered and cannot be used for this use case");
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/alertTitle")));
+		TestUtils.assertSearchText("ID", "android:id/message", "MSISDN is not registered and cannot be used for this use case");
 		getDriver().findElement(By.id("android:id/button1")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='MSISDN Reactivation']")));
 
 		// Enter valid msisdn with invalid OTP
-		TestUtils.testTitle("Enter valid msisdn: " + valid_msisdn + " with invalid OTP: "  + invalid_OTP);
+		TestUtils.testTitle("Enter valid msisdn: " + valid_msisdn + " with invalid OTP: " + invalid_OTP);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/primary_msisdn_field")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/primary_msisdn_field")).sendKeys(valid_msisdn);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/submit_button")).click();
 
-		try{
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/alertTitle")));
+		TestUtils.assertSearchText("ID", "android:id/message", "MSISDN is not registered and cannot be used for this use case");
+
+	}
+
+	/*	try{
 			//Capture
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btn_capture_portrait")).click();
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
@@ -223,5 +229,5 @@ public class ReactivationTest extends TestBase {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='MSISDN has been reactivated successfully.']")));
 		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='MSISDN has been reactivated successfully.']", "MSISDN has been reactivated successfully.");
 		getDriver().findElement(By.id("android:id/button1")).click();
-    }
+    }*/
 }
