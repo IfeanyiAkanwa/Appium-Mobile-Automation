@@ -19,7 +19,7 @@ public class ReactivationTest extends TestBase {
     @Parameters({ "dataEnv"})
 	@Test
 	public void noneReactivationPrivilegeTest(String dataEnv) throws Exception {
-    	 WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+    	 WebDriverWait wait = new WebDriverWait(getDriver(), 60);
 		JSONParser parser = new JSONParser();
 		JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
 		JSONObject envs = (JSONObject) config.get("Reactivation");
@@ -27,7 +27,8 @@ public class ReactivationTest extends TestBase {
 		String valid_username = (String) envs.get("valid_username");
 		String valid_password = (String) envs.get("valid_password");
 		String lga = (String) envs.get("lga");
-	
+
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/otp_login")));
 		TestBase.Login1( valid_username, valid_password);
 		Thread.sleep(500);
 		TestUtils.testTitle("To confirm that a user without Msisdn Reactivation privilege can't access the module");
@@ -138,12 +139,17 @@ public class ReactivationTest extends TestBase {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='MSISDN Reactivation']")));
 
 		// Enter valid msisdn with invalid OTP
-		TestUtils.testTitle("Enter valid msisdn: " + valid_msisdn + " with invalid OTP: "  + invalid_OTP);
+		TestUtils.testTitle("Enter valid msisdn: " + valid_msisdn + " with invalid OTP: " + invalid_OTP);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/primary_msisdn_field")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/primary_msisdn_field")).sendKeys(valid_msisdn);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/submit_button")).click();
 
-		try{
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/alertTitle")));
+		TestUtils.assertSearchText("ID", "android:id/message", "MSISDN is not registered and cannot be used for this use case");
+
+	}
+
+	/*	try{
 			//Capture
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btn_capture_portrait")).click();
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
@@ -223,5 +229,5 @@ public class ReactivationTest extends TestBase {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='MSISDN has been reactivated successfully.']")));
 		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='MSISDN has been reactivated successfully.']", "MSISDN has been reactivated successfully.");
 		getDriver().findElement(By.id("android:id/button1")).click();
-    }
+    }*/
 }
