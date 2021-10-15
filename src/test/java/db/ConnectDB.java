@@ -261,6 +261,47 @@ public class ConnectDB {
 
     }
 
+    public static JSONArray QueryNinTable () throws SQLException {
+
+        Connection dbConnection = null;
+        Statement statement = null;
+
+        String getOTPSql = "select * from nimc_verification_log nvl order by last_modified DESC;";
+        String returnColumnValue=null;
+        try {
+
+            dbConnection = getDBConnection();
+            if (dbConnection != null) {
+                System.out.println("Connected to db");
+            } else {
+                System.out.println("Not able to connect to db");
+            }
+            statement = dbConnection.createStatement();
+            ResultSet rs = statement.executeQuery(getOTPSql);
+
+            JSONArray rs1= TestUtils.convertResultSetToJSON(rs);
+
+            return rs1;
+
+        } catch (SQLException e) {
+
+            System.out.println(e.getMessage());
+            return null;
+
+        } finally {
+
+            if (statement != null) {
+                statement.close();
+            }
+
+            if (dbConnection != null) {
+                dbConnection.close();
+            }
+
+        }
+
+    }
+
     public static JSONArray ClientActivityLogTable (String unique_id) throws SQLException {
 
         Connection dbConnection = null;
@@ -302,4 +343,42 @@ public class ConnectDB {
 
     }
 
+    public static JSONArray QueryNINLogTable() throws SQLException {
+        Connection dbConnection = null;
+        Statement statement = null;
+
+        String getOTPSql = "select * from nimc_verification_log nvl order by last_modified desc";
+        String returnColumnValue=null;
+        try {
+
+            dbConnection = getDBConnection();
+            if (dbConnection != null) {
+                System.out.println("Connected to db");
+            } else {
+                System.out.println("Not able to connect to db");
+            }
+            statement = dbConnection.createStatement();
+            ResultSet rs = statement.executeQuery(getOTPSql);
+
+            JSONArray rs1= TestUtils.convertResultSetToJSON(rs);
+
+            return rs1;
+
+        } catch (SQLException e) {
+
+            System.out.println(e.getMessage());
+            return null;
+
+        } finally {
+
+            if (statement != null) {
+                statement.close();
+            }
+
+            if (dbConnection != null) {
+                dbConnection.close();
+            }
+
+        }
+    }
 }

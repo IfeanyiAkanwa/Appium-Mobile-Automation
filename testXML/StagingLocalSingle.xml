@@ -95,6 +95,19 @@
                     <include name="removeCorporateReRegTest"/>
                 </methods>
             </class>
+            <class name="admin.VerifyNinStandAlone">
+                <methods>
+                    <include name="noneVerifyNinPrivilegeTest" />
+                    <include name="Login" />
+                    <include name="navigateToVerifyNin" />
+                    <include name="verifyByNinTest" />
+                    <include name="verifyByPhoneTest" />
+                    <include name="verifyByDemographicsTest" />
+                    <include name="verifyByDocumentNoTest"/>
+                    <include name="verifyByTransactionIdTest"/>
+                    <include name="verifyByNinAndFingerprintTest" />
+                </methods>
+            </class>
             <class name="admin.AdditionalRegistration">
                 <methods>
                     <include name="noneAdditionalPrivilegeTest"/>
