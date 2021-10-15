@@ -327,6 +327,7 @@
     "pri_valid_Msisdn": "07058351178",
     "valid_Msisdn": "08113825224",
     "invalid_Msisdn": "0836133263",
+    "nonGlo_Msisdn": "07061277525",
     "invalid_simSerial": "03733577",
     "pri_valid_simSerial": "8923450412192350244F",
     "valid_simSerial": "8923450410192953306F",
@@ -334,10 +335,15 @@
     "surname": "Adedayo",
     "first_name": "Adebayo",
     "mothers_maiden_name": "Adenike",
-    "valid_username": "eze.sfxtest@yopmail.com",
+    "valid_username": "gnwabude@seamfix.com",
+    "valid_username2": "userwithoutpriviledges@haibacon.com",
     "invalid_number": "089343363",
-    "valid_password": "Bankole1!!",
-    "nonGloMsisdn": "08142050512"
+    "valid_password": "Bankole11!!",
+    "alt_phone_number": "08113825225",
+    "generalUserPassword": "Bankole11!!",
+    "nonGloMsisdn": "08142050512",
+    "nin": "11111111111",
+    "lga": "Anambra East"
   },
   "LandingPage_Url": {
     "prodUrl": "http:simreg.mtnnigeria.net"
