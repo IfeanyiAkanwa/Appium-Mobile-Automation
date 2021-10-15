@@ -84,7 +84,7 @@
     "invalid_msisdn": "08083733777",
     "lga": "Ibeju-Lekki",
     "valid_username": "eze.sfxtest@yopmail.com",
-    "valid_password": "Bankole1!!",
+    "valid_password": "Bankole11!!",
     "invalid_OTP": "00000"
   },
   "Search": {
@@ -209,7 +209,7 @@
     "valid_Msisdn1": "08116575689",
     "fixed_Msisdn": "08113825212",
     "invalid_Msisdn": "08113326363",
-    "lga": "Aguata",
+    "lga": "Ibeju-Lekki",
     "invalid_simSerial": "03733577",
     "pri_valid_simSerial": "8923450210189706356F",
     "valid_simSerial": "8923450502181537882F",
@@ -234,7 +234,7 @@
     "valid_sim_serial": "8923450608191696475F",
     "invalid_Msisdn": "08118071455",
     "invalid_new_Msisdn": "08159437636",
-    "lga": "Aguata",
+    "lga": "Ibeju-Lekki",
     "valid_username": "eze.sfxtest@yopmail.com",
     "valid_password": "Bankole11!!",
     "invalid_otp": "00000",

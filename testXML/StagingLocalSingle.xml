@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="BioSmartSuite">
     <parameter name="groupReport" value="/DroidReport.html"/>
-    <parameter name="toMails" value="ilawson@seamfix.com;"/>
+    <parameter name="toMails" value="sosepadeolu@seamfix.com;"/>
     <parameter name="config" value="data.conf.json"/>
     <parameter name="environment" value="chrome"/>
     <parameter name="testConfig" value="parallel.conf.json"/>
@@ -18,7 +18,7 @@
         <parameter name="deviceNo" value="1"/>
 
         <classes>
-        <!--    <class name="admin.Login">
+            <class name="admin.Login">
                 <methods>
                     <include name="usernamePasswordLogin"/>
                     <include name="fingerprintLogin"/>
@@ -106,7 +106,7 @@
                     <include name="additionalRegTypePrivilege"/>
                     <include name="ndcRule"/>
                 </methods>
-            </class>-->
+            </class>
             <class name="admin.SimSwap">
                 <methods>
                     <include name="noneSIMSwapPrivilegeTest"/>
@@ -118,7 +118,7 @@
                     <include name="capturePostpaidSimSwap"/>
                 </methods>
             </class>
-        <!--    <class name="admin.ReactivationTest">
+            <class name="admin.ReactivationTest">
                 <methods>
                     <include name="noneReactivationPrivilegeTest"/>
                     <include name="Login"/>
@@ -187,7 +187,7 @@
                     <include name="changeBackToOldPassword"/>
                     <include name="loginWithOldPassword"/>
                 </methods>
-            </class>-->
+            </class>
         </classes>
     </test>
 </suite>

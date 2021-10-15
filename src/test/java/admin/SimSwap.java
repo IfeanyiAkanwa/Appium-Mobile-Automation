@@ -40,22 +40,9 @@ public class SimSwap extends TestBase {
         TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/reg_type_placeholder", "Registration Type");
         Thread.sleep(500);
 
-        try {
-            // Select LGA of Registration
-            TestUtils.testTitle("Select LGA of Registration: " + lga);
-            getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/lga_of_reg")).click();
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/alertTitle")));
-            TestUtils.assertSearchText("ID", "android:id/alertTitle", "LGA of Registration*");
-            //getDriver().findElement(By.xpath("//android.widget.TextView[@text='" + lga + "']")).click();
-            getDriver().findElement(By.xpath("//android.widget.TextView[@text='[Select LGA]*']")).click();
-            Thread.sleep(500);
-        } catch (Exception e) {
-            testInfo.get().info("LGA already selected");
-        }
-
 
         // Select SIM Swap
-        TestUtils.testTitle("Select SIM Swap");
+        TestUtils.testTitle("Check that SIM Swap is not selectable");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/typeofreg")));
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/typeofreg")).click();
         Thread.sleep(500);
@@ -180,8 +167,8 @@ public class SimSwap extends TestBase {
             TestUtils.testTitle("OTP Validation is turned OFF for SIM Swap");
         }
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/title_header")));
-        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/title_header", "SIM Swap");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/title_header")));
+        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/title_header", "SIM Swap");
 
     }
 
@@ -189,7 +176,7 @@ public class SimSwap extends TestBase {
     @Test
     public void simSwapViewValidationTest(String dataEnv) throws Exception {
 
-        WebDriverWait wait = new WebDriverWait(getDriver(), 60);
+        WebDriverWait wait = new WebDriverWait(getDriver(), 10);
         JSONParser parser = new JSONParser();
         JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
         JSONObject envs = (JSONObject) config.get("SIMSwap");
@@ -213,13 +200,14 @@ public class SimSwap extends TestBase {
         TestUtils.testTitle("Validate SIM Swap View Details");
 
         //Confirm that SIM Swap type field exists
-        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/sim_swap_typeTXT", "SIM Swap Type*");
-        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/radio_item_self", "Self");
-        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/radio_item_proxl", "Proxy");
+        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/sim_swap_typeTXT", "SIM Swap Type*");
+        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/radio_item_self", "Self");
+        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/radio_item_proxl", "Proxy");
 
         //Click Validate without selecting SIM Swap type
         TestUtils.testTitle("Verify that User Can't proceed without selecting SIM Swap type");
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btnValidate")).click();
+        getDriver().findElement(By.xpath("//android.widget.Button")).click();
+        Thread.sleep(500);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
         TestUtils.assertSearchText("ID", "android:id/message", "Please Select Sim Swap Type");
         getDriver().findElement(By.id("android:id/button1")).click();
@@ -231,15 +219,17 @@ public class SimSwap extends TestBase {
         //Select Subscriber Type
         TestUtils.testTitle("Verify that User Can't proceed without selecting Subscriber type");
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btnValidate")).click();
+        Thread.sleep(500);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
         TestUtils.assertSearchText("ID", "android:id/message", "Please Select a Subscriber Type to proceed");
         getDriver().findElement(By.id("android:id/button1")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/subscriberType")));
 
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/subscriberType")).click();
+        Thread.sleep(500);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.CheckedTextView[@text='Prepaid']")));
         TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='Prepaid']", "Prepaid");
-        TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='Postpaid']", "Postpaid");
+//        TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='Postpaid']", "Postpaid");
         TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='Data']", "Data");
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Prepaid']")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Prepaid']")));
