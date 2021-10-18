@@ -165,6 +165,7 @@
                     <include name="mobileNumberPortingValidationTest"/>
                     <include name="captureMobileNumberPortingTest"/>
                     <include name="vanityNumberReg"/>
+                    <include name="removeMobileNumberPortingTest"/>
                 </methods>
             </class>
             <class name="admin.AgentOnBoardingTest">
