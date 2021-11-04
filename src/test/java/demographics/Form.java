@@ -1372,7 +1372,7 @@ public class Form extends TestBase {
 		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
 		JSONParser parser = new JSONParser();
 		JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
-		JSONObject envs = (JSONObject) config.get("IndividualForeignerDetails");
+		JSONObject envs = (JSONObject) config.get("IndividualNigerianDetails");
 
 		String surname = (String) envs.get("surname");
 		String firstname = (String) envs.get("firstname");

@@ -403,6 +403,30 @@
     "nin": "11111111111",
     "nin2": "22222222222"
   },
+  "IndividualNigerianDetails": {
+    "surname": "Saraswati",
+    "firstname": "Joubert",
+    "middlename": "Ganga",
+    "maiden_name": "Merlin",
+    "social_media_type": "INSTAGRAM",
+    "social_media_username": "@ganga",
+    "street": "Banaris",
+    "city": "Otukpo",
+    "nationality": "NIGERIA",
+    "house_or_flat_no": "456C",
+    "state": "BENUE",
+    "LGA": "Ado",
+    "email": "test@yopmail.com",
+    "alt_phone_number": "08110000000",
+    "postalcode": "972101",
+    "occupation": "Aeronautical Engineer",
+    "area": "AGILA",
+    "passport_ID_number": "6861637BC",
+    "lga_of_reg": "Agege",
+    "documentNumber": "89733736AD",
+    "nin": "11111111111",
+    "nin2": "22222222222"
+  },
   "MNP": {
     "pri_valid_Msisdn": "07058351178",
     "valid_Msisdn": "08113825224",
@@ -415,11 +439,15 @@
     "surname": "Adedayo",
     "first_name": "Adebayo",
     "mothers_maiden_name": "Adenike",
-    "valid_username": "eze.sfxtest@yopmail.com",
+    "valid_username": "gnwabude@seamfix.com",
+    "valid_username2": "userwithoutpriviledges@haibacon.com",
     "invalid_number": "089343363",
     "valid_password": "Bankole11!!",
+    "alt_phone_number": "08113825225",
+    "generalUserPassword": "Bankole11!!",
     "nonGloMsisdn": "08142050512",
-    "nin": "11111111111"
+    "nin": "11111111111",
+    "lga": "Anambra East"
   },
   "AgentSupport": {
     "issueID": "ISS-25072020-00304",

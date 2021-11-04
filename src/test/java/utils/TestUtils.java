@@ -85,7 +85,7 @@ public class TestUtils extends TestBase {
         StringBuffer verificationErrors = new StringBuffer();
 
         String value=ConnectDB.selectQueryOnTable(table, column, search, returnColumn);
-        System.out.println(value);
+        //System.out.println(value);
         try {
             Assert.assertEquals(value, expect);
             testInfo.get().log(Status.INFO, value + " found");
