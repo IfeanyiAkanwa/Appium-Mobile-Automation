@@ -1695,8 +1695,7 @@ public class SimSwap extends TestBase {
             }
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
         }
-
-
+        
     }
 
     @Parameters({"dataEnv"})
