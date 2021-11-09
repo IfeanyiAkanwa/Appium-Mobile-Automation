@@ -55,6 +55,7 @@ public class TestBase {
 	public String remoteBrowserStack = "remote-browserStack";
 	public static String serviceUrl = "https://kycphase2test.seamfix.com:8195";
 	public static String Id = ".glo";
+	public static int waitTime = 60;
 
 	@SuppressWarnings("rawtypes")
 	public static AndroidDriver getDriver() {

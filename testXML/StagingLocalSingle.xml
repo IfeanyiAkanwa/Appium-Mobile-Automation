@@ -132,6 +132,18 @@
                     <include name="removeSimSwapPrivilegeTest"/>
                 </methods>
             </class>
+            <class name="admin.CorporateSimSwap">
+                <methods>
+                    <include name="noneCorporateSwapPrivilegeTest"/>
+                    <include name="Login"/>
+                    <include name="navigateToCaptureMenuTest"/>
+                    <include name="navigateToCorporateSimSwap"/>
+                    <include name="corporateSwapMsisdnValidation"/>
+                    <include name="verifyBiometrics"/>
+                    <include name="fdnCheck"/>
+                    <include name="swapRequest"/>
+                </methods>
+            </class>
             <class name="admin.ReactivationTest">
                 <methods>
                     <include name="noneReactivationPrivilegeTest"/>
