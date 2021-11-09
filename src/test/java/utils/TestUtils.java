@@ -97,15 +97,22 @@ public class TestUtils extends TestBase {
         }
     }
 
-    public static void main(String[] args) throws SQLException, IOException, org.json.simple.parser.ParseException {
+    /*public static void main(String[] args) throws SQLException, IOException, org.json.simple.parser.ParseException {
         //assertBulkTables("08118071446" );
 
         //System.out.println(Setting);
         //JSONObject getSettingParams=TestUtils.createSettingObject("PILOT-AVAILABLE-USE-CASE", "RR","All available registration use case");
         //updateSettingsApiCall( "stagingData",  getSettingParams);
-        retrieveSettingsApiCall("stagingData", "CORPORATE_REGISTRATION_DOCUMENTS");
-    }
 
+        String swapID=ConnectDB.getSwapID("09054391786");
+        JSONObject rejectSwapPayLoad = new JSONObject();
+        rejectSwapPayLoad.put("kmUserId", "990");
+        rejectSwapPayLoad.put("swapId", swapID);
+        rejectSwapPayLoad.put("processType", "FAILED_CHECK");
+        rejectSwapPayLoad.put("feedback", "Reject");
+        rejectSwapApiCall("stagingData", rejectSwapPayLoad);
+    }
+*/
     public static void assertBulkTables(String msisdn, String Country) throws SQLException, IOException, org.json.simple.parser.ParseException {
 
 
@@ -768,6 +775,98 @@ public class TestUtils extends TestBase {
         }
         System.out.println(response);
         return result;
+    }
+
+    public static String blockActionApiCall(String dataEnv, JSONObject settingData) throws IOException, org.json.simple.parser.ParseException {
+
+        RestAssured.baseURI = serviceUrl;
+        JSONParser parser = new JSONParser();
+        JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/settingsApi.conf.json"));
+        JSONObject requestBody = settingData;
+        //String endPoint = (String) config.get("unblock_endPoint");
+        String endPoint = "/simrop/biocapture/swap-unblock";
+
+        //requestBody.remove(settings);
+
+        Response res =	given().
+                header("User-Agent", "Smart Client for KYC [Build: 1.0, Install Date: NA]").
+                header("User-UUID","03764868-6f9e-41f3-ba45-45599d8c8e08").
+                header("sc-auth-key","AHVZ0xiTP498n2uUgtXA2wt95nPbIvh7e6sdFgHKB5fcoIvLf6_24KKMHA9H7zG_5EQHAZ6QM221GQo6GUf-wG2QcEo2S_dkirXCgRHOq6N_0Go36DorLZs").
+                header("Client-ID","smartclient").
+                header("Content-Type","application/json").
+
+                body(requestBody).config(RestAssured.config().sslConfig(new SSLConfig().allowAllHostnames())).when().post(endPoint).then().assertThat().extract().response();
+
+        String response = res.asString();
+        JsonPath jsonRes = new JsonPath(response);
+        int statusCode = res.getStatusCode();
+        int result=0;
+        if (statusCode==200){
+            //Successful settings API
+            String status = jsonRes.getString("status");
+            result=1;
+
+        }else{
+            //Failed to make settings
+            testInfo.get().error("BLOCK API FAILED"+response);
+        }
+        /*ArrayList<JSONObject> getSet= (ArrayList<JSONObject>) requestBody.get("settings");
+        JSONObject getData = getSet.get(0);*/
+        //String settings = getSet['']
+
+        System.out.println("*********UPDATING SETTINGS("+jsonRes.getString("response")+")**********");
+        try {
+            testInfo.get().info(response);
+        }catch (Exception e){
+
+        }
+        System.out.println(response);
+        return jsonRes.getString("response");
+    }
+
+    public static String rejectSwapApiCall(String dataEnv, JSONObject settingData) throws IOException, org.json.simple.parser.ParseException {
+
+        RestAssured.baseURI = serviceUrl;
+        JSONParser parser = new JSONParser();
+        JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/settingsApi.conf.json"));
+        JSONObject requestBody = settingData;
+        //String endPoint = (String) config.get("reject_endPoint");
+        String endPoint = "/simrop/biocapture/do-checking";
+
+        //requestBody.remove(settings);
+        Response res =	given().
+                header("User-Agent", "Smart Client for KYC [Build: 1.0, Install Date: NA]").
+                header("User-UUID","03764868-6f9e-41f3-ba45-45599d8c8e08").
+                header("sc-auth-key","AHVZ0xiTP498n2uUgtXA2wt95nPbIvh7e6sdFgHKB5fcoIvLf6_24KKMHA9H7zG_5EQHAZ6QM221GQo6GUf-wG2QcEo2S_dkirXCgRHOq6N_0Go36DorLZs").
+                header("Client-ID","smartclient").
+                header("Content-Type","application/json").
+
+                body(requestBody).config(RestAssured.config().sslConfig(new SSLConfig().allowAllHostnames())).when().post(endPoint).then().assertThat().extract().response();
+
+        String response = res.asString();
+        JsonPath jsonRes = new JsonPath(response);
+        int statusCode = res.getStatusCode();
+        int result=0;
+        if (statusCode==200){
+            //Successful settings API
+            String status = jsonRes.getString("status");
+            result=1;
+
+        }else{
+            //Failed to make settings
+            testInfo.get().error("REJECT API FAILED"+response);
+        }
+
+        //String settings = getSet['']
+
+        System.out.println("*********REJECTING SWAP("+jsonRes.getString("response")+")**********");
+        try {
+            testInfo.get().info(response);
+        }catch (Exception e){
+
+        }
+        System.out.println(response);
+        return jsonRes.getString("response");
     }
 
 
