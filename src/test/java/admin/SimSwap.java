@@ -813,6 +813,7 @@ public class SimSwap extends TestBase {
 
         TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/btnSwapOk");
         TestUtils.testTitle("Summary");
+        Thread.sleep(1000);
         Asserts.AssertSwapSummary();
 
         //click ok
@@ -1033,6 +1034,7 @@ public class SimSwap extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btnSwapOk")).click();
 
         try {
+            Thread.sleep(2000);
             TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/title_header", "Subscriber Data Preview");
             Thread.sleep(1000);
             getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btn_proceed")).click();
@@ -1054,7 +1056,7 @@ public class SimSwap extends TestBase {
         TestUtils.testTitle("Picture of Sim or Sim Card Holder");
         getDriver().findElement(By.xpath("//android.widget.TextView[@text='Picture of Sim or Sim Card Holder']")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
-        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/alertTitle", "Sim Swap Document Upload");
+        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/alertTitle", "SIM Swap Document Upload");
         TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/doc_upload_btn", "DOCUMENT UPLOAD");
         TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/doc_capture_btn", "DOCUMENT CAPTURE");
 
@@ -1087,7 +1089,7 @@ public class SimSwap extends TestBase {
         TestUtils.scrollUntilElementIsVisible("XPATH", "//android.widget.TextView[@text='picture.jpg']");
         getDriver().findElement(By.xpath("//android.widget.TextView[@text='picture.jpg']")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/document")));
-        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/doc_name", "Picture of Sim or Sim Card Holder");
+        TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Picture of Sim or Sim Card Holder']", "Picture of Sim or Sim Card Holder");
 
         //Remove picture and Capture Document
         TestUtils.testTitle("Remove uploaded document and Capture Document");
@@ -1115,14 +1117,15 @@ public class SimSwap extends TestBase {
         getDriver().findElement(By.id("android:id/button1")).click();*/
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
-        TestUtils.assertSearchText("ID", "android:id/message", "Please confirm Submission of SIM Swap for MSISDN "+valid_Msisdn+" to be verified against existing SIM Registration Details.");
+        TestUtils.assertSearchText("ID", "android:id/message", "Please confirm Submission of SIM Swap along with SIM Registration Update for MSISDN "+valid_Msisdn+".");
         getDriver().findElement(By.id("android:id/button1")).click();
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/btn_okay")));
-        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/tv_message", "Subscriber information successfully saved.");
 
         try {
             TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/tv_fail_heading", "Request Failed");
+            TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/tv_message", "Duplicate record.");
+
             TestUtils.testTitle("Unblock Swap after successful swap");
             String swapID=ConnectDB.getSwapID(valid_Msisdn);
             JSONObject unBlockPayLoad = new JSONObject();
@@ -1130,16 +1133,23 @@ public class SimSwap extends TestBase {
             unBlockPayLoad.put("swapId", swapID);
             unBlockPayLoad.put("processType", "APPROVED");
             unBlockPayLoad.put("feedback", "Unblock");
-
+            //Level q unblock
             String response = TestUtils.blockActionApiCall(dataEnv, unBlockPayLoad);
-            if (response.contains("Unblock request for SIM Swap request received... waiting for the next level of approval..")){
-                response = TestUtils.blockActionApiCall(dataEnv, unBlockPayLoad);
-                testInfo.get().info(response);
-            }else
-            {
-                testInfo.get().info(response);
-            }
+            response = TestUtils.blockActionApiCall(dataEnv, unBlockPayLoad);
+            testInfo.get().info(response);
+            getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btn_okay")).click();
+
+            //Go back
+            getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/exitSimSwap")).click();
+            getDriver().findElement(By.id("android:id/button1")).click();
+
+            //Go back
+            getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
+            getDriver().findElement(By.id("android:id/button2")).click();
+
         }catch (Exception e){
+
+            TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/tv_message", "Subscriber information successfully saved.");
             TestUtils.testTitle("Reject Swap after successful swap submission");
             String swapID=ConnectDB.getSwapID(valid_Msisdn);
             JSONObject rejectSwapPayLoad = new JSONObject();
@@ -1492,7 +1502,7 @@ public class SimSwap extends TestBase {
         TestUtils.testTitle("Mandatory Parametter");
         testInfo.get().info("Check Screenshot for report");
         TestUtils.logScreenshot();
-
+        Thread.sleep(1000);
         TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/optionalParamsRecyclerView");
 
         TestUtils.testTitle("Optional Parameter");
@@ -2435,6 +2445,113 @@ public class SimSwap extends TestBase {
         }
 
         return ninStatus;
+    }
+
+    @Parameters({ "systemPort", "deviceNo", "server","deviceName", "testConfig", "dataEnv" })
+    @Test
+    public void removeSimSwapPrivilegeTest(String systemPort, int deviceNo, String server, String deviceName, String testConfig, String dataEnv) throws Exception {
+
+        JSONParser parser = new JSONParser();
+        JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
+        JSONObject envs = (JSONObject) config.get("SIMSwap");
+
+        String valid_username = (String) envs.get("valid_username");
+        String generalUserPassword = (String) envs.get("generalUserPassword");
+        String lga = (String) envs.get("lga");
+        String moduleName = "SIM Swap";
+
+
+        //initial setting
+        String initialSetting= TestUtils.retrieveSettingsApiCall(dataEnv, "RETRIEVE_AVAILABLE_USECASES");
+        String settingCode="SS";
+        if(initialSetting.contains(settingCode)){
+            //Continue the setting is available already, remove NMS
+            //*********UPDATING SETTING FOR AVAILABLE USE CASE************
+            TestUtils.testTitle("UPDATING SETTING FOR AVAILABLE USE CASE("+settingCode+")");
+            String SettinVal= initialSetting.replace(","+settingCode, "");
+            SettinVal = SettinVal.replace(settingCode+",","");
+            if (SettinVal.contains(settingCode)){
+                SettinVal = SettinVal.replace(settingCode,"");
+            }
+
+            JSONObject getSettingParams=TestUtils.createSettingObject("PILOT-AVAILABLE-USE-CASE", SettinVal,"All available registration use case(SS,AR,CR,CN,NMS,RR,MP,MR)");
+            TestUtils.updateSettingsApiCall(dataEnv, getSettingParams);
+            closeApp();
+            Thread.sleep(5000);
+            startApp(systemPort, deviceNo, server, deviceName, testConfig, true);
+        }else{
+            //*********NMS is not found proceed************
+
+        }
+
+        WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+
+        TestBase.Login1( valid_username, generalUserPassword);
+        Thread.sleep(500);
+        TestUtils.testTitle("To confirm that New registration  is not available when it is removed from available use case settings and user has privilege");
+        navigateToCaptureMenuTest();
+
+        // Select LGA of Registration
+        TestUtils.testTitle("Select LGA of Registration: " + lga);
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/lga_of_reg")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/alertTitle")));
+        TestUtils.assertSearchText("ID", "android:id/alertTitle", "LGA of Registration*");
+        getDriver().findElement(By.xpath("//android.widget.TextView[@text='" + lga + "']")).click();
+        Thread.sleep(500);
+
+        // Select Corporate Registration
+        TestUtils.testTitle("Select "+moduleName);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/typeofreg")));
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/typeofreg")).click();
+        Thread.sleep(500);
+        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/alertTitle", "Select Registration Type");
+        try{
+            getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='"+moduleName+"']")).click();
+            testInfo.get().error(moduleName+" is not removed from the AVAILABLE-USE-CASE");
+            Thread.sleep(500);
+            getDriver().findElement(By.id("android:id/button1")).click();
+        }catch (Exception e){
+            testInfo.get().info(moduleName+" is not found, hence successfully removed from AVAILABLE-USE-CASE");
+        }
+
+        Thread.sleep(1000);
+        if(initialSetting.contains(settingCode)) {
+            //Returning initial setting value
+            TestUtils.testTitle("Returning initial setting value(" + initialSetting + ")");
+            JSONObject getSettingParams = TestUtils.createSettingObject("PILOT-AVAILABLE-USE-CASE", initialSetting, "All available registration use case(SS,AR,CR,CN,NMS,RR,MP,MR)");
+            TestUtils.updateSettingsApiCall(dataEnv, getSettingParams);
+        }else{
+            //Add Module and update data
+            //Returning initial setting value
+            initialSetting+=","+settingCode;
+            TestUtils.testTitle("Returning initial setting value(" + initialSetting + ")");
+            JSONObject getSettingParams = TestUtils.createSettingObject("PILOT-AVAILABLE-USE-CASE", initialSetting, "All available registration use case(SS,AR,CR,CN,NMS,RR,MP,MR)");
+            TestUtils.updateSettingsApiCall(dataEnv, getSettingParams);
+        }
+
+        // Log out
+        getDriver().pressKeyCode(AndroidKeyCode.BACK);
+        logOutUser(valid_username);
+
+    }
+    public static void logOutUser(String valid_username) throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(getDriver(), 60);
+        // Log out
+        TestUtils.testTitle("Logout username: "  + valid_username);
+        getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
+        Thread.sleep(500);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
+        getDriver().findElement(By.id("android:id/button2")).click();
+        Thread.sleep(1000);
+        getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
+        Thread.sleep(500);
+        TestUtils.scrollDown();
+        getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Logout']")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
+        TestUtils.assertSearchText("ID", "android:id/message", "   Log out?");
+        getDriver().findElement(By.id("android:id/button3")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/otp_login")));
+        Thread.sleep(500);
     }
 
     public static void reportHomepage(int totalSubVal, int totalSyncsentVal, int totalSyncpendingVal, int totalSynConfVal, int totalRejectVal) throws Exception {

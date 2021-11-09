@@ -18,7 +18,7 @@
         <parameter name="deviceNo" value="1"/>
 
         <classes>
-            <!--<class name="admin.Login">
+            <class name="admin.Login">
                 <methods>
                     <include name="usernamePasswordLogin"/>
                     <include name="fingerprintLogin"/>
@@ -55,8 +55,8 @@
                     <include name="addBarCodePrivilegeTest"/>
                     <include name="removeNewRegPrivilegeTest"/>
                 </methods>
-            </class>-->
-            <!--<class name="admin.ReRegistrationCapture">
+            </class>
+            <class name="admin.ReRegistrationCapture">
                 <methods>
                     <include name="noneReRegPrivilegeTest"/>
                     <include name="ReRegPrivilegesTest"/>
@@ -119,7 +119,7 @@
                     <include name="additionalRegTypePrivilege"/>
                     <include name="ndcRule"/>
                 </methods>
-            </class>-->
+            </class>
             <class name="admin.SimSwap">
                 <methods>
                     <include name="noneSIMSwapPrivilegeTest"/>
@@ -129,9 +129,10 @@
                     <include name="simSwapViewValidationTest"/>
                     <include name="capturePrepaidSimUpgrade"/>
                     <include name="capturePrepaidProxySimSwap"/>
+                    <include name="removeSimSwapPrivilegeTest"/>
                 </methods>
             </class>
-            <!--<class name="admin.ReactivationTest">
+            <class name="admin.ReactivationTest">
                 <methods>
                     <include name="noneReactivationPrivilegeTest"/>
                     <include name="Login"/>
@@ -201,7 +202,7 @@
                     <include name="changeBackToOldPassword"/>
                     <include name="loginWithOldPassword"/>
                 </methods>
-            </class>-->
+            </class>
         </classes>
     </test>
 </suite>
