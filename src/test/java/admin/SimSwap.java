@@ -1640,6 +1640,8 @@ public class SimSwap extends TestBase {
 
         try {
             TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/tv_fail_heading", "Request Failed");
+            TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/tv_message", "Duplicate record.");
+
             TestUtils.testTitle("Unblock Swap after successful swap");
             String swapID=ConnectDB.getSwapID(valid_Msisdn);
             JSONObject unBlockPayLoad = new JSONObject();
@@ -1656,6 +1658,16 @@ public class SimSwap extends TestBase {
             {
                 testInfo.get().info(response);
             }
+            getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btn_okay")).click();
+
+            //Go back
+            getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/exitSimSwap")).click();
+            getDriver().findElement(By.id("android:id/button1")).click();
+
+            //Go back
+            getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
+            getDriver().findElement(By.id("android:id/button2")).click();
+
         }catch (Exception e){
             TestUtils.testTitle("Reject Swap after successful swap submission");
             String swapID=ConnectDB.getSwapID(valid_Msisdn);
