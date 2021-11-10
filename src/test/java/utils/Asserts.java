@@ -646,4 +646,31 @@ public class Asserts extends TestBase {
 
         }
     }
+
+    public static void AssertSwapDataPreview() {
+
+        String mandatoryChecks = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/mandatory_checks_status")).getText();
+        String optionalParameter = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/optional_params_status")).getText();
+        String authParameter = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/auth_parameter_status")).getText();
+        String comment = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/comment")).getText();
+
+        String empty = "";
+        Map<String, String> fields = new HashMap<>();
+
+        fields.put("Mandatory Checks", mandatoryChecks);
+        fields.put("Optional Parameter (Minimum 2)", optionalParameter);
+        fields.put("Authentication Parameter Passed:", authParameter);
+        fields.put("Comment", comment);
+
+        for (Map.Entry<String, String> entry : fields.entrySet()) {
+            try {
+                Assert.assertNotEquals(entry.getValue(), empty);
+                Assert.assertNotEquals(entry.getValue(), null);
+                testInfo.get().log(Status.INFO, "<b>" + entry.getKey() + "</b> : " + entry.getValue());
+            } catch (Error e) {
+                testInfo.get().error("<b>" + entry.getKey() + " </b> : " + entry.getValue());
+            }
+
+        }
+    }
 }

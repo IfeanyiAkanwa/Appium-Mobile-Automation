@@ -128,7 +128,8 @@
                     <include name="navigateToSimSwapViewTest"/>
                     <include name="simSwapViewValidationTest"/>
                     <include name="capturePrepaidSimUpgrade"/>
-                    <include name="capturePostpaidSimSwap"/>
+                    <include name="capturePrepaidProxySimSwap"/>
+                    <include name="removeSimSwapPrivilegeTest"/>
                 </methods>
             </class>
             <class name="admin.CorporateSimSwap">

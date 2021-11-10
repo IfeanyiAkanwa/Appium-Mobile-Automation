@@ -879,8 +879,11 @@ public class ReRegistrationCapture extends TestBase {
 	@Test
 	public static void verifyBioMetricsTest() throws InterruptedException {
 		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
+		try{
+			TestUtils.scrollDown();
+		}catch (Exception e){
 
-		TestUtils.scrollDown();
+		}
 		//Proceed
 		Thread.sleep(2000);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/capture_image_button")));

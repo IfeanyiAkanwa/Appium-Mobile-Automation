@@ -255,6 +255,12 @@ public class AgentSupport extends TestBase {
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='PENDING']")).click();
         getDriver().findElement(By.xpath("//android.widget.TextView[@text='Select Status']")).click();
 
+        try{
+            getDriver().findElement(By.xpath("//android.widget.Button[@text='OK']")).click();
+        }catch (Exception e){
+
+        }
+
     }
 
     @Parameters({"dataEnv"})

@@ -1,6 +1,8 @@
 {
   "retrieve_endPoint": "/biocapture/config/settings/retrieve-settings",
   "update_endPoint": "/biocapture/config/settings/bulk-update",
+  "unblock_endPoint": "/simrop/biocapture/swap-unblock",
+  "reject_endPoint": "/simrop/biocapture/do-checking",
   "GET_DETAILS_FROM_BARCODE_USECASES": {
     "settingNames":[
       "PILOT-GET-DETAILS-FROM-BARCODE-USECASES"

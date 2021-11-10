@@ -99,6 +99,46 @@ public class ConnectDB {
         }
 
     }
+
+    public static String getSwapID(String msisdn) throws SQLException {
+
+        Connection dbConnection = null;
+        Statement statement = null;
+
+        String getSwapIDSql = "select * from sim_swap_demographic ssd where msisdn = '" + msisdn + "' order by create_date desc";
+        String swapID="";
+        try {
+            dbConnection = getDBConnection();
+            if (dbConnection != null) {
+                System.out.println("Connected to db");
+            } else {
+                System.out .println("Not able to connect to db");
+            }
+            statement = dbConnection.createStatement();
+            ResultSet rs = statement.executeQuery(getSwapIDSql);
+            if (rs.next()) {
+                 swapID = rs.getString("pk");
+            }
+            return swapID;
+
+        } catch (SQLException e) {
+
+            System.out.println(e.getMessage());
+            return null;
+
+        } finally {
+
+            if (statement != null) {
+                statement.close();
+            }
+
+            if (dbConnection != null) {
+                dbConnection.close();
+            }
+
+        }
+
+    }
     
     public static String getTransactionID() throws SQLException {
 
