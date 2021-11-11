@@ -19,7 +19,7 @@
         <parameter name="deviceNo" value="1"/>
 
         <classes>
-            <!--<class name="admin.Login">
+            <class name="admin.Login">
                 <methods>
                     <include name="usernamePasswordLogin"/>
                     <include name="fingerprintLogin"/>
@@ -62,20 +62,20 @@
                     <include name="removeReRegPrivilegeTest"/>
                     <include name="disableSubscriberBypassTest"/>
                 </methods>
-            </class>-->
+            </class>
             <class name="admin.CorporateNewRegistration">
                 <methods>
-                    <!--<include name="noneCorporatePrivilegeTest"/>
-                    <include name="CorporatePrivilegesTest"/>-->
+                    <include name="noneCorporatePrivilegeTest"/>
+                    <include name="CorporatePrivilegesTest"/>
                     <include name="Login"/>
                     <include name="captureReportRecords"/>
                     <include name="navigateToCorporateRegistration"/>
-                    <!--<include name="validateMsisdnTest"/>-->
+                    <include name="validateMsisdnTest"/>
                     <include name="captureCorporateReg"/>
-                    <!--<include name="removeCorporatePrivilegeTest"/>-->
+                    <include name="removeCorporatePrivilegeTest"/>
                 </methods>
             </class>
-            <!--<class name="admin.AdditionalRegistration">
+            <class name="admin.AdditionalRegistration">
                 <methods>
                     <include name="noneAdditionalPrivilegeTest"/>
                     <include name="Login"/>
@@ -95,7 +95,8 @@
                     <include name="navigateToSimSwapViewTest"/>
                     <include name="simSwapViewValidationTest"/>
                     <include name="capturePrepaidSimUpgrade"/>
-                    <include name="capturePostpaidSimSwap"/>
+                    <include name="capturePrepaidProxySimSwap"/>
+                    <include name="removeSimSwapPrivilegeTest"/>
                 </methods>
             </class>
             <class name="admin.ReactivationTest">
@@ -124,8 +125,8 @@
                     <include name="logIssueByUser"/>
                     <include name="logIssueByKit"/>
                 </methods>
-            </class>-->
-            <!--<class name="admin.MobileNumberPorting">
+            </class>
+            <class name="admin.MobileNumberPorting">
                 <methods>
                     <include name="noneMobileNumberPortPrivilegeTest"/>
                     <include name="Login"/>
@@ -176,7 +177,7 @@
                     <include name="navigateToAgentOnBoardingTest"/>
                     <include name="agentOnBoardingTest"/>
                 </methods>
-            </class>-->
+            </class>
         </classes>
     </test>
 </suite>
