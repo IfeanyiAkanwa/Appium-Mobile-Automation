@@ -647,20 +647,61 @@ public class Asserts extends TestBase {
         }
     }
 
-    public static void AssertSwapDataPreview() {
+    public static void AssertSwapDataPreview(String simSwapType, String simSwapCategory, String subscriberType, String fName, String lName, String mmn, String gender, String dob, String alternate_phone, String serial, String activation_year, String valid_Msisdn, String new_msisdn, String valid_sim_serial, String puk, String nin, String email, String address, String occupation, String nationality, String state) throws InterruptedException {
 
-        String mandatoryChecks = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/mandatory_checks_status")).getText();
-        String optionalParameter = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/optional_params_status")).getText();
-        String authParameter = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/auth_parameter_status")).getText();
-        String comment = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/comment")).getText();
+        simSwapType = getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+simSwapType+"']")).getText();
+        simSwapCategory = getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+simSwapCategory+"']")).getText();
+        subscriberType = getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+subscriberType+"']")).getText();
+        fName = getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+fName+"']")).getText();
+        lName = getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+lName+"']")).getText();
+        mmn = getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+mmn+"']")).getText();
+        gender = getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+gender+"']")).getText();
+        dob = getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+dob+"']")).getText();
+        valid_Msisdn = getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+valid_Msisdn+"']")).getText();
+        serial = getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+serial+"']")).getText();
+
+        TestUtils.scrollUntilElementIsVisible("XPATH", "//android.widget.TextView[@text='"+activation_year+"']");
+        activation_year = getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+activation_year+"']")).getText();
+        new_msisdn = getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+new_msisdn+"']")).getText();
+        valid_sim_serial = getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+valid_sim_serial+"']")).getText();
+        puk = getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+puk+"']")).getText();
+        alternate_phone = getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+alternate_phone+"']")).getText();
+
+        TestUtils.scrollUntilElementIsVisible("XPATH", "//android.widget.TextView[@text='Update Type:']");
+        nin = getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+nin+"']")).getText();
+        String ninStatus = getDriver().findElement(By.xpath("//android.widget.TextView[@text='NIN_VERIFIED']")).getText();
+        email = getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+email+"']")).getText();
+        address = getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+address+"']")).getText();
+
+        occupation = getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+occupation+"']")).getText();
+        nationality = getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+nationality+"']")).getText();
+        state = getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+state+"']")).getText();
 
         String empty = "";
         Map<String, String> fields = new HashMap<>();
 
-        fields.put("Mandatory Checks", mandatoryChecks);
-        fields.put("Optional Parameter (Minimum 2)", optionalParameter);
-        fields.put("Authentication Parameter Passed:", authParameter);
-        fields.put("Comment", comment);
+        fields.put("SIM Swap Type:", simSwapType);
+        fields.put("SIM Swap Category:", simSwapCategory);
+        fields.put("Subscriber Type:", subscriberType);
+        fields.put("First Name:", fName);
+        fields.put("Last Name:", lName);
+        fields.put("Mother's Maiden Name:", mmn);
+        fields.put("Gender:", gender);
+        fields.put("Date of Birth:", dob);
+        fields.put("Existing Phone Number:", valid_Msisdn);
+        fields.put("Existing SIM Serial:", serial);
+        fields.put("Activation Year:", activation_year);
+        fields.put("Target Phone Number:", new_msisdn);
+        fields.put("Target SIM Serial:", valid_sim_serial);
+        fields.put("Existing PUK:", puk);
+        fields.put("Alternate Phone Number:", alternate_phone);
+        fields.put("NIN:", nin);
+        fields.put("NIN Status:", ninStatus);
+        fields.put("Agent Email:", email);
+        fields.put("Residential Address:", address);
+        fields.put("Occupation:", occupation);
+        fields.put("Nationality:", nationality);
+        fields.put("State of Origin:", state);
 
         for (Map.Entry<String, String> entry : fields.entrySet()) {
             try {

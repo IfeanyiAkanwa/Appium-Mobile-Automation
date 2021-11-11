@@ -182,7 +182,7 @@ public class SimSwap extends TestBase {
     @Test
     public void simSwapViewValidationTest(String dataEnv) throws Exception {
 
-        WebDriverWait wait = new WebDriverWait(getDriver(), 20);
+        WebDriverWait wait = new WebDriverWait(getDriver(), 30);
         JSONParser parser = new JSONParser();
         JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
         JSONObject envs = (JSONObject) config.get("SIMSwap");
@@ -570,11 +570,16 @@ public class SimSwap extends TestBase {
         String fdn4 = (String) envs.get("fdn4");
         String fdn5 = (String) envs.get("fdn5");
         String puk = (String) envs.get("puk");
+        String nin = (String) envs.get("nin");
+        String pp_nin = (String) envs.get("pp_nin");
+        String email = (String) envs.get("agent_email");
         String serial = (String) envs.get("serial");
         String alternate_phone = (String) envs.get("alternate_phone");
         String kmUserId = (String) envs.get("kmUserId");
 
         String inavlidPostFix = "NO";
+        String new_msisdn = (String) envs.get("new_msisdn");
+        String valid_sim_serial = (String) envs.get("valid_sim_serial");
 
        /* //Capture Subscriber face
         TestUtils.testTitle("Capture Subscriber Face");
@@ -1033,14 +1038,13 @@ public class SimSwap extends TestBase {
         Thread.sleep(1000);
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btnSwapOk")).click();
 
-        try {
-            Thread.sleep(2000);
-            TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/title_header", "Subscriber Data Preview");
-            Thread.sleep(1000);
-            getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btn_proceed")).click();
-        }catch (Exception e){
 
-        }
+        Thread.sleep(1000);
+        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/title_header", "Subscriber Data Preview");
+        Thread.sleep(1000);
+        Asserts.AssertSwapDataPreview( "SELF",  "SIM UPGRADE",  "Prepaid",  fName,  lName,  mmn,  gender,  dob,  alternate_phone,  serial,  activation_year,  valid_Msisdn,  new_msisdn,  valid_sim_serial,  puk,  pp_nin,  email,  address,  occupation,  nationality,  state);
+        Thread.sleep(1000);
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btn_proceed")).click();
 
         Thread.sleep(1000);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/title_header")));
@@ -1499,7 +1503,7 @@ public class SimSwap extends TestBase {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='SIM Swap Response']")));
         TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Authentication Score Card']", "Authentication Score Card");
 
-        TestUtils.testTitle("Mandatory Parametter");
+        TestUtils.testTitle("Mandatory Parameter");
         testInfo.get().info("Check Screenshot for report");
         TestUtils.logScreenshot();
         Thread.sleep(1000);
@@ -1695,7 +1699,7 @@ public class SimSwap extends TestBase {
             }
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
         }
-        
+
     }
 
     @Parameters({"dataEnv"})
