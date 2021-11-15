@@ -48,8 +48,8 @@ public class Asserts extends TestBase {
         String email = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/alternateEmail")).getText();
         TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/spinnerOccupation");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/spinnerOccupation")));
-        Thread.sleep(500);
-        String occupation = getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.ScrollView/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout[6]/android.widget.Spinner/android.widget.CheckedTextView")).getText();
+        Thread.sleep(1500);
+        String occupation = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/occupationTXT")).getText();
 
         String empty = "";
         Map<String, String> fields = new HashMap<>();
@@ -166,7 +166,12 @@ public class Asserts extends TestBase {
 
         //Assert.assertNotEquals(lgaOfResidence, "[Select LGA]*");
         TestUtils.scrollDown();
-        String areaOfResidence = getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='"+area+"']")).getText();
+        String areaOfResidence="";
+        try{
+             areaOfResidence = getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='"+area+"']")).getText();
+        }catch (Exception e){
+            areaOfResidence = "";
+        }
         if (areaOfResidence.equals("[Select Area]*")) {
             fields.put("Area of Residence", areaOfResidence);
         }
@@ -175,7 +180,11 @@ public class Asserts extends TestBase {
         Thread.sleep(500);
         String houseNum = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/houseNumberEditText")).getText();
         String street = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/streetEditText")).getText();
-        city = getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='"+city+"']")).getText();
+        try{
+            city = getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='"+city+"']")).getText();
+        }catch (Exception e){
+            city = "";
+        }
         String postalCode = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/postalText")).getText();
 
         String empty = "";

@@ -37,7 +37,7 @@ public class ConnectDB {
             statement = dbConnection.createStatement();
             ResultSet rs = statement.executeQuery(getOTPSql);
             if (rs.next()) {
-                otp = rs.getString("OTP");
+                otp = rs.getString("otp");
             }
             return otp;
 

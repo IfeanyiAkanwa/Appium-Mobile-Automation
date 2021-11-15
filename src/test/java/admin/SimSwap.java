@@ -1139,7 +1139,7 @@ public class SimSwap extends TestBase {
             unBlockPayLoad.put("feedback", "Unblock");
             //Level q unblock
             String response = TestUtils.blockActionApiCall(dataEnv, unBlockPayLoad);
-            response = TestUtils.blockActionApiCall(dataEnv, unBlockPayLoad);
+            TestUtils.blockActionApiCall(dataEnv, unBlockPayLoad);
             testInfo.get().info(response);
             getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btn_okay")).click();
 
@@ -1655,13 +1655,9 @@ public class SimSwap extends TestBase {
             unBlockPayLoad.put("feedback", "Unblock");
 
             String response = TestUtils.blockActionApiCall(dataEnv, unBlockPayLoad);
-            if (response.contains("Unblock request for SIM Swap request received... waiting for the next level of approval..")){
-                response = TestUtils.blockActionApiCall(dataEnv, unBlockPayLoad);
-                testInfo.get().info(response);
-            }else
-            {
-                testInfo.get().info(response);
-            }
+            TestUtils.blockActionApiCall(dataEnv, unBlockPayLoad);
+            testInfo.get().info(response);
+
             getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btn_okay")).click();
 
             //Go back
