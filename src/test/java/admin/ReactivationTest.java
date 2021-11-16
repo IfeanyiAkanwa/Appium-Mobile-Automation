@@ -144,12 +144,12 @@ public class ReactivationTest extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/primary_msisdn_field")).sendKeys(valid_msisdn);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/submit_button")).click();
 
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/alertTitle")));
-		TestUtils.assertSearchText("ID", "android:id/message", "MSISDN is not registered and cannot be used for this use case");
+		//wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/capture_image_button")));
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/capture_image_button", "Verify Biometrics");
+    }
 
-	}
-
-	/*	try{
+		/*//Capture
+		try{
 			//Capture
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btn_capture_portrait")).click();
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
@@ -161,6 +161,8 @@ public class ReactivationTest extends TestBase {
 		}catch (Exception e){
 
 		}
+
+	}
 
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/otp_field")));
 

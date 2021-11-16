@@ -162,7 +162,7 @@ public class MobileNumberPorting extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/primary_msisdn_field")).sendKeys(pri_valid_Msisdn);
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/sim_serial")).clear();
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/sim_serial")).sendKeys(invalid_simSerial);
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btn_capture_biometrics")).click();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/validate_serial_button")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/button1")));
         TestUtils.assertSearchText("ID", "android:id/message", "Sim Serial format is invalid. SIM Serial should be 19 numbers with 'F' at the end.");
         getDriver().findElement(By.id("android:id/button1")).click();
@@ -173,7 +173,7 @@ public class MobileNumberPorting extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/primary_msisdn_field")).sendKeys(pri_valid_Msisdn);
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/sim_serial")).clear();
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/sim_serial")).sendKeys(pri_valid_simSerial);
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btn_capture_biometrics")).click();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/validate_serial_button")).click();
         Thread.sleep(1000);
 
 
@@ -296,7 +296,7 @@ public class MobileNumberPorting extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/primary_msisdn_field")).sendKeys(pri_valid_Msisdn);
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/sim_serial")).clear();
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/sim_serial")).sendKeys(pri_valid_simSerial);
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btn_capture_biometrics")).click();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/validate_serial_button")).click();
 
         //Capture
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
@@ -330,7 +330,7 @@ public class MobileNumberPorting extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/primary_msisdn_field")).sendKeys(nonGloMsisdn);
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/sim_serial")).clear();
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/sim_serial")).sendKeys(pri_valid_simSerial);
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btn_capture_biometrics")).click();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/validate_serial_button")).click();
         try {
             Thread.sleep(500);
             TestUtils.assertSearchText("ID", "android:id/message", "The MSISDN is not a valid GLO MSISDN");
@@ -360,7 +360,7 @@ public class MobileNumberPorting extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/primary_msisdn_field")).sendKeys(pri_valid_Msisdn);
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/sim_serial")).clear();
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/sim_serial")).sendKeys(pri_valid_simSerial);
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btn_capture_biometrics")).click();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/validate_serial_button")).click();
         //Capture
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/button1")));
@@ -396,7 +396,7 @@ public class MobileNumberPorting extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/sim_serial")).clear();
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/sim_serial")).sendKeys(pri_valid_simSerial);
         //getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/dya_check_box")).click();
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btn_capture_biometrics")).click();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/validate_serial_button")).click();
 
         //Capture
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
@@ -472,7 +472,7 @@ public class MobileNumberPorting extends TestBase {
             Assert.assertEquals(check, "false");
             testInfo.get().log(Status.INFO, check + " found");
         }
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btn_capture_biometrics")).click();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/validate_serial_button")).click();
         //Capture
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/button1")));
@@ -492,7 +492,7 @@ public class MobileNumberPorting extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/primary_msisdn_field")).sendKeys(pri_valid_Msisdn);
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/sim_serial")).clear();
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/sim_serial")).sendKeys(pri_valid_simSerial);
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btn_capture_biometrics")).click();
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/validate_serial_button")).click();
         Thread.sleep(2000);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")));
         //Capture

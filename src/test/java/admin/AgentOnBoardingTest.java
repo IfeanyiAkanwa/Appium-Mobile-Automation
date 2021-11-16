@@ -176,8 +176,8 @@ public class AgentOnBoardingTest extends TestBase {
 		}*/
 
 		// DB Connection for OTP
-		String valid_OTP = ConnectDB.getOTP(agent_phoNum);
-
+		//String valid_OTP = ConnectDB.getOTP(agent_phoNum);
+		String valid_OTP = ConnectDB.getOTPWithoutPhoneNumber();
 		String ValidOTP = "Enter valid OTP : " + valid_OTP;
 		Markup o = MarkupHelper.createLabel(ValidOTP, ExtentColor.BLUE);
 		testInfo.get().info(o);

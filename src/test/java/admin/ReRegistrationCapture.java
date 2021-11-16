@@ -153,7 +153,7 @@ public class ReRegistrationCapture extends TestBase {
 
 		TestUtils.testTitle("To verify that the default value for ENABLE SUBSCRIBER VALIDATION BYPASS is TRUE");
 		String initialSetting=TestUtils.retrieveSettingsApiCall(dataEnv, "ENABLE_SUBSCRIBER_VALIDATION_BYPASS");
-		TestUtils.assertTwoValues(initialSetting, "TRUE");
+		TestUtils.assertTwoValues(initialSetting, " TRUE");
 
 		TestUtils.testTitle("To verify that the setting name is ENABLE SUBSCRIBER VALIDATION BYPASS");
 		TestUtils.assertTwoValues(settingName, "PILOT-ENABLE-SUBSCRIBER-VALIDATION-BYPASS");
@@ -218,7 +218,7 @@ public class ReRegistrationCapture extends TestBase {
 		try {
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/otp_bypass_button")));
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/otp_bypass_button")).click();
-			TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/otp_bypass_button", "BYPASS OTP");
+			TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/otp_bypass_button", "Bypass OTP");
 			testInfo.get().error("OTP verification should not be found");
 		}catch (Exception e){
 			testInfo.get().info("OTP verification is not be found");
@@ -420,7 +420,7 @@ public class ReRegistrationCapture extends TestBase {
 
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/otp_field")));
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/otp_bypass_button")).click();
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/otp_bypass_button", "BYPASS OTP");
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/otp_bypass_button", "Bypass OTP");
 
 		getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
 
@@ -521,7 +521,7 @@ public class ReRegistrationCapture extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/primary_msisdn_field")).sendKeys(valid_msisdn);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/submit_button")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/capture_image_button")));
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/capture_image_button", "VERIFY BIOMETRICS");
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/capture_image_button", "Verify Biometrics");
 
 	}
 
@@ -543,6 +543,7 @@ public class ReRegistrationCapture extends TestBase {
 		String msisdnWithFingerprint = (String) envs.get("msisdnWithFingerprint");
 		String ninVerificationMode = (String) envs.get("ninVerificationMode");
 		String nin = (String) envs.get("nin");
+		String alt_phone_number = (String) envs.get("alt_phone_number");
 
 		// Enter valid msisdn with invalid OTP
 		TestUtils.testTitle("Enter valid MSISDN: " + valid_msisdn + " for Re-Registration with invalid OTP: " + invalid_OTP);
@@ -553,8 +554,12 @@ public class ReRegistrationCapture extends TestBase {
 		//BioMetrics Verification
 		fingerPrintCount=0;
 		verifyBioMetricsTest();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/button1")));
-		getDriver().findElement(By.id("android:id/button1")).click();
+		try {
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/button1")));
+			getDriver().findElement(By.id("android:id/button1")).click();
+		}catch (Exception e){
+
+		}
 
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/otp_field")));
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/otp_field")).clear();
@@ -583,9 +588,9 @@ public class ReRegistrationCapture extends TestBase {
 
 		//OTP Buttons
 		TestUtils.testTitle("Confirm Request OTP, Confirm OTP and Bypass OTP buttons are displayed");
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/otp_confirm_button", "CONFIRM OTP");
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/otp_bypass_button", "BYPASS OTP");
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/otp_request_button", "REQUEST OTP");
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/otp_confirm_button", "Confirm OTP");
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/otp_bypass_button", "Bypass OTP");
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/otp_request_button", "Request OTP");
 
 		//Confirm that BYPASS OTP Button is functional
 		TestUtils.testTitle("BYPASS OTP Test");
@@ -658,7 +663,7 @@ public class ReRegistrationCapture extends TestBase {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/otp_field")));
 
 		// DB Connection for OTP
-    	String valid_OTP = ConnectDB.getOTP(valid_msisdn);
+    	String valid_OTP = ConnectDB.getOTPWithoutPhoneNumber();
 		String ValidOTP = "Enter valid OTP : " + valid_OTP;
 		TestUtils.testTitle(ValidOTP);
 
@@ -667,26 +672,23 @@ public class ReRegistrationCapture extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/otp_confirm_button")).click();
 
         // Next button
-		try{
-			Thread.sleep(2000);
-			if(getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/next_button")).isDisplayed()){
-				wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/next_button")));
-				getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/next_button")).click();
-			}
-
-		}catch (Exception e){
-
-		}
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/next_button")));
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/next_button")).click();
+		/*Thread.sleep(2000);
+		if(getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/next_button")).isDisplayed()){
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/next_button")));
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/next_button")).click();
+		}*/
 
         try{
-			if(getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")).isDisplayed()){
+        	//Proceed if NIN modal comes up
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
+			//NIN Verification
+			TestBase.verifyNINTest(nin, ninVerificationMode);
 
-				//NIN Verification
-				TestBase.verifyNINTest(nin, ninVerificationMode);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Personal Details']")));
+			TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Personal Details']", "Personal Details");
 
-				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Personal Details']")));
-				TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Personal Details']", "Personal Details");
-			}
         } catch(Exception e){
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Personal Details']")));
 			TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Personal Details']", "Personal Details");
@@ -702,9 +704,28 @@ public class ReRegistrationCapture extends TestBase {
 		//Assert Invividual Form
 		Asserts.AssertIndividualForm();
 
+		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/alternatePhone");
+
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/alternatePhone")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/alternatePhone")).sendKeys(alt_phone_number);
+
+		// Next button
 		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/btnContinueReg");
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/btnContinueReg")));
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btnContinueReg")).click();
+
+		//Edit Reasons
+		TestUtils.assertSearchText("ID", "android:id/title", "Edit Reason");
+		getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[1]/android.widget.LinearLayout/android.widget.LinearLayout")).click();
+		Thread.sleep(500);
+		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='ALTERNATE PHONE MISMATCH']")).click();
+		Thread.sleep(500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/submit_button")).click();
+
+		// Next button
+		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/btnContinueReg");
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btnContinueReg")).click();
+		Thread.sleep(500);
+
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/countrySpinner")));
 
 		Asserts.AssertAddresstDetails(dataEnv);
@@ -712,7 +733,11 @@ public class ReRegistrationCapture extends TestBase {
 
 		getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
 
-	    Form.individualNigerianForm(dataEnv);
+		try{
+			Form.individualNigerianForm(dataEnv);
+		}catch (Exception e){
+			Form.individualNigerianFormAutoPopulate(dataEnv);
+		}
 
 		//Do Bulk Assert for Table checking
 		//TestUtils.assertBulkTables(valid_msisdn);
@@ -795,7 +820,7 @@ public class ReRegistrationCapture extends TestBase {
 		//To confirm that the default value for COO document size is 512KB
 		TestUtils.testTitle("To confirm that the default value for COO document size is  512KB");
 		String cooDocumentSize=TestUtils.retrieveSettingsApiCall(dataEnv, "CHANGE_OF_OWNERSHIP_DOCUMENTS_SIZE");
-		TestUtils.assertTwoValues(cooDocumentSize, "512");
+		TestUtils.assertTwoValues(cooDocumentSize, " 512");
 
 		// Enter valid msisdn with valid OTP
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/primary_msisdn_field")));
@@ -806,6 +831,7 @@ public class ReRegistrationCapture extends TestBase {
 
 		//BioMetrics Verification
 		verifyBioMetricsTest();
+
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/button1")));
 		getDriver().findElement(By.id("android:id/button1")).click();
 
@@ -852,14 +878,14 @@ public class ReRegistrationCapture extends TestBase {
 		}
 
 		try{
-			if(getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")).isDisplayed()){
+			//Proceed if NIN modal comes up
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
+			//NIN Verification
+			TestBase.verifyNINTest(nin, ninVerificationMode);
 
-				//NIN Verification
-				TestBase.verifyNINTest(nin, ninVerificationMode);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Personal Details']")));
+			TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Personal Details']", "Personal Details");
 
-				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Personal Details']")));
-				TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Personal Details']", "Personal Details");
-			}
 		} catch(Exception e){
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Personal Details']")));
 			TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Personal Details']", "Personal Details");
@@ -890,7 +916,6 @@ public class ReRegistrationCapture extends TestBase {
 		Thread.sleep(2000);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/capture_image_button")).click();
 
-
 		try{
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")));
 
@@ -911,7 +936,7 @@ public class ReRegistrationCapture extends TestBase {
 		//Submit without overriding fingerprint
 		TestUtils.testTitle("Save Enrollment without overriding fingerprint");
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/btn_multi_capture")));
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/btn_multi_capture", "MULTI CAPTURE");
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/btn_multi_capture", "Multi Capture");
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/fp_save_enrolment")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
 		String fingerMatch=getDriver().findElement(By.id("android:id/message")).getText();
@@ -958,11 +983,12 @@ public class ReRegistrationCapture extends TestBase {
 			Thread.sleep(500);
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Ageing']")));
 			getDriver().findElement(By.xpath("//android.widget.TextView[@text='Ageing']")).click();
-
+			Thread.sleep(1000);
 			//Save enrollment
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/fp_save_enrolment")));
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/fp_save_enrolment")).click();
 		}catch (Exception e){
+			System.out.println(e);
 			//Fingerprint matching unsuccessful. You will be allowed to proceed to the next verification option.
 		}
 

@@ -24,9 +24,8 @@ import utils.TestBase;
 import utils.TestUtils;
 
 public class ForgotPassword extends TestBase {
-
+    public static String new_password;
 	@Test
-
 	public static void navigateToForgotPasswordTest() throws InterruptedException {
 		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
 		String forgotPasswordPage = "Navigate to forgot password page";
@@ -97,8 +96,10 @@ public class ForgotPassword extends TestBase {
 		JSONObject envs = (JSONObject) config.get("ForgotPassword");
 
 		String valid_username = (String) envs.get("valid_username");
-		String new_password = (String) envs.get("new_password");
-		String confirm_password = (String) envs.get("confirm_password");
+		/*String new_password = (String) envs.get("new_password");
+		String confirm_password = (String) envs.get("confirm_password");*/
+		new_password = "Bankole@"+TestUtils.generatePhoneNumber();
+		String confirm_password = new_password;
 		String confirm_password_not_matching = (String) envs.get("confirm_password_not_matching");
 		String invalid_password_policy = (String) envs.get("invalid_password_policy");
 		String user_full_name = (String) envs.get("user_full_name");
@@ -234,7 +235,6 @@ public class ForgotPassword extends TestBase {
 		JSONObject envs = (JSONObject) config.get("ForgotPassword");
 
 		String valid_username = (String) envs.get("valid_username");
-		String new_password = (String) envs.get("new_password");
 		String user_phoneNumber = (String) envs.get("user_phoneNumber");
 
 		// Login in with the new password

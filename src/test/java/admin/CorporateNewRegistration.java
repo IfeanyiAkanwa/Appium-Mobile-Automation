@@ -430,9 +430,16 @@ public class CorporateNewRegistration extends TestBase {
         //To confirm that the corporate category is a dropdown containing Internet of things(IOT) and Corporate
         TestUtils.testTitle("To confirm that the corporate category is a dropdown containing Internet of things(IOT) and Corporate");
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/categorySpinner")).click();
-        TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='Corporate']", "Corporate");
-        TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='Internet of Things (IoT)']", "Internet of Things (IoT)");
-        getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Corporate']")).click();
+        try{
+            TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='CORPORATE']", "CORPORATE");
+            TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='IOT']", "IOT");
+            getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='CORPORATE']")).click();
+        }catch(Exception e){
+            TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='Corporate']", "Corporate");
+            TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='Internet of Things (IoT)']", "Internet of Things (IoT)");
+            getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Corporate']")).click();
+        }
+
         Thread.sleep(500);
 
         //To confirm that the MSISDN category is a dropdown containing Mobile and Fixed
@@ -546,7 +553,11 @@ public class CorporateNewRegistration extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnCategorySpinner")).click();
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Mobile']")).click();
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/categorySpinner")).click();
-        getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Corporate']")).click();
+        try{
+            getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='CORPORATE']")).click();
+        }catch (Exception e){
+            getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Corporate']")).click();
+        }
 
         TestUtils.testTitle("To confirm that there is a setting;\n" +
                 "(Setting Name: TM-MSISDN-BIOMETRIC-VALIDATION) exists");
@@ -584,7 +595,11 @@ public class CorporateNewRegistration extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnCategorySpinner")).click();
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Mobile']")).click();
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/categorySpinner")).click();
-        getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Corporate']")).click();
+        try{
+            getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='CORPORATE']")).click();
+        }catch (Exception e){
+            getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Corporate']")).click();
+        }
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).clear();
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).sendKeys(valid_msisdn);
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/addMsisdnButton")).click();
@@ -636,7 +651,11 @@ public class CorporateNewRegistration extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnCategorySpinner")).click();
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Mobile']")).click();
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/categorySpinner")).click();
-        getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Corporate']")).click();
+        try{
+            getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='CORPORATE']")).click();
+        }catch (Exception e){
+            getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Corporate']")).click();
+        }
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).clear();
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).sendKeys(primary_tm);
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/addMsisdnButton")).click();
@@ -741,9 +760,19 @@ public class CorporateNewRegistration extends TestBase {
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Mobile']")).click();
 
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/categorySpinner")).click();
-        getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Corporate']")).click();
+        try{
+            getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='CORPORATE']")).click();
+        }catch (Exception e){
+            getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Corporate']")).click();
+        }
+
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/nextButton")).click();
-        getDriver().findElement(By.id("android:id/button1")).click();
+        try{
+            getDriver().findElement(By.id("android:id/button1")).click();
+        }catch (Exception e){
+
+        }
+
         //Capture Primary TM image
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/uploadButton")).click();
         Thread.sleep(1000);
@@ -808,7 +837,7 @@ public class CorporateNewRegistration extends TestBase {
         //Submit without overriding fingerprint
         TestUtils.testTitle("Save Enrollment without overriding fingerprint");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/btn_multi_capture")));
-        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/btn_multi_capture", "MULTI CAPTURE");
+        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/btn_multi_capture", "Multi Capture");
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/fp_save_enrolment")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
         TestUtils.assertSearchText("ID", "android:id/message", "No finger was captured");
