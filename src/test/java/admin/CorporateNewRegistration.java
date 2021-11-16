@@ -767,7 +767,12 @@ public class CorporateNewRegistration extends TestBase {
         }
 
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/nextButton")).click();
-        getDriver().findElement(By.id("android:id/button1")).click();
+        try{
+            getDriver().findElement(By.id("android:id/button1")).click();
+        }catch (Exception e){
+
+        }
+
         //Capture Primary TM image
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/uploadButton")).click();
         Thread.sleep(1000);

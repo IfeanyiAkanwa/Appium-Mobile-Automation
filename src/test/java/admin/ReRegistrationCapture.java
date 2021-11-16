@@ -554,8 +554,12 @@ public class ReRegistrationCapture extends TestBase {
 		//BioMetrics Verification
 		fingerPrintCount=0;
 		verifyBioMetricsTest();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/button1")));
-		getDriver().findElement(By.id("android:id/button1")).click();
+		try {
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/button1")));
+			getDriver().findElement(By.id("android:id/button1")).click();
+		}catch (Exception e){
+
+		}
 
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/otp_field")));
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/otp_field")).clear();
@@ -979,11 +983,12 @@ public class ReRegistrationCapture extends TestBase {
 			Thread.sleep(500);
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Ageing']")));
 			getDriver().findElement(By.xpath("//android.widget.TextView[@text='Ageing']")).click();
-
+			Thread.sleep(1000);
 			//Save enrollment
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/fp_save_enrolment")));
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/fp_save_enrolment")).click();
 		}catch (Exception e){
+			System.out.println(e);
 			//Fingerprint matching unsuccessful. You will be allowed to proceed to the next verification option.
 		}
 
