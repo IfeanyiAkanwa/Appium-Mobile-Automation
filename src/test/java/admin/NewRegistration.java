@@ -853,7 +853,6 @@ public class NewRegistration extends TestBase {
 
 
 		// Enter msisdn less than 11 digits
-		TestUtils.testTitle("Proceed after supplying msisdn less than 11 digits: " + valid_fixed_msisdn + " and SIM Serial: " + valid_fixed_serial);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).sendKeys(valid_fixed_msisdn);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simSerialField")).clear();
@@ -1273,7 +1272,11 @@ public class NewRegistration extends TestBase {
 			getDriver().findElement(By.id("//android.widget.CheckedTextView[@text='ECOWAS']")).click();
 
 		}
+		Thread.sleep(1000);
+		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/btnProceed");
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btnProceed")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/button1")));
+        getDriver().findElement(By.id("android:id/button1")).click();
 
 		//BioMetrics Verification
 		Thread.sleep(1000);

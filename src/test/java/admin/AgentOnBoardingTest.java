@@ -192,12 +192,15 @@ public class AgentOnBoardingTest extends TestBase {
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/otp", valid_OTP);
 		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/confirm_otp")).click();
 
-		Thread.sleep(3000);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/on_boarding_camera_title")));
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/on_boarding_camera_title", "Camera");
-		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Capture Passport']", "Capture Passport");
+		try {
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/on_boarding_camera_title")));
+			TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/on_boarding_camera_title", "Camera");
+			TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Capture Passport']", "Capture Passport");
 
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/button_capture_image")).click();
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/button_capture_image")).click();
+		}catch(Exception e){
+			testInfo.get().error("OTP is not usable");
+		}
 
 	}
 

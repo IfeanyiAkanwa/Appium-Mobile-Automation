@@ -1,6 +1,7 @@
 {
   "retrieve_endPoint": "/biocapture/config/settings/retrieve-settings",
   "update_endPoint": "/biocapture/config/settings/bulk-update",
+  "release_endPoint": "/simrop/biocapture/quarantine/release-record",
   "GET_DETAILS_FROM_BARCODE_USECASES": {
     "settingNames":[
       "PILOT-GET-DETAILS-FROM-BARCODE-USECASES"

@@ -1,11 +1,14 @@
 package admin;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.sql.SQLException;
 
 import db.ConnectDB;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -21,7 +24,20 @@ import utils.TestUtils;
 
 public class ChangePasswordTest extends TestBase {
     private static int i = 0;
-    
+
+    @Test
+    @Parameters({"dataEnv"})
+    public static void loginToChangePassword(String dataEnv) throws Exception {
+        WebDriverWait wait = new WebDriverWait(getDriver(), 60);
+        JSONParser parser = new JSONParser();
+        JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
+        JSONObject envs = (JSONObject) config.get("ChangePassword");
+
+        String valid_username = (String) envs.get("valid_username");
+
+        String password = (String) envs.get("password");
+        Login1(valid_username, password);
+    }
     @Test
     public static void navigateToChangePasswordPage() throws InterruptedException, SQLException {
         WebDriverWait wait = new WebDriverWait(getDriver(), 60);
