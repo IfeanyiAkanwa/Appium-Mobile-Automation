@@ -551,7 +551,7 @@ public class SimSwap extends TestBase {
 
     @Parameters({"dataEnv"})
     @Test
-    public void capturePrepaidSimUpgrade(String dataEnv) throws Exception {
+    public void captureMobileSimUpgrade(String dataEnv) throws Exception {
 
         WebDriverWait wait = new WebDriverWait(getDriver(), 60);
         JSONParser parser = new JSONParser();
@@ -805,8 +805,15 @@ public class SimSwap extends TestBase {
         TestUtils.scrollDown();
         TestUtils.scrollDown();
         //TestUtils.scrollUntilElementIsVisible("ID", "android:id/text1");
-        TestUtils.assertSearchText("ID", "android:id/text1", "Ensure that the Affidavit check box is checked");
-        getDriver().findElement(By.id("android:id/button1")).click();
+
+        try {
+            TestUtils.assertSearchText("ID", "android:id/text1", "Ensure that the Affidavit check box is checked");
+            getDriver().findElement(By.id("android:id/button1")).click();
+        }catch(Exception e){
+
+        }
+
+        Thread.sleep(60000);
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/check_box_affidavit")).click();
 
         //Submit

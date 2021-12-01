@@ -88,8 +88,8 @@
     "invalid_OTP": "00000"
   },
   "Search": {
-    "valid_msisdn": "09155285662",
-    "valid_sim_serial_no": "8923450708202998132F"
+    "valid_msisdn": "09153245621",
+    "valid_sim_serial_no": "8923450108200272079F"
   },
   "ReRegistration": {
     "valid_msisdn": "09155285662",
@@ -337,18 +337,19 @@
     "lessSerial": "89234181537882F",
     "invalidSerial": "8923450502181739572F",
     "invalidFormatSerial": "89234505021815378820",
-    "nin": "11111111111",
+    "nin": "22222222222",
     "fName": "Uzoh",
     "lName": "Anthony",
     "mmn": "BENO",
     "dob": "1977-10-03",
-    "gender": "Female",
+    "gender": "Male",
     "address": "45 JON ABUJA",
     "nationality": "NIGERIA",
-    "activation_year": "2018",
+    "activation_year": "2020",
     "validSerial": "8923450308064244004F",
     "lastInvoiceAmount": "6387",
-    "lastInvoiceDate": "2021-02-26"
+    "lastInvoiceDate": "2021-02-26",
+    "kmUserId": "990"
   },
   "UserDetails": {
     "surname": "Amanda",
