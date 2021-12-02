@@ -801,23 +801,23 @@ public class SimSwap extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/submit")).click();
 
         //proceed without selecting affidavit box
-        TestUtils.scrollDown();
-        TestUtils.scrollDown();
-        TestUtils.scrollDown();
+
         //TestUtils.scrollUntilElementIsVisible("ID", "android:id/text1");
 
         try {
             TestUtils.assertSearchText("ID", "android:id/text1", "Ensure that the Affidavit check box is checked");
             getDriver().findElement(By.id("android:id/button1")).click();
+
+            getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/check_box_affidavit")).click();
+
+            //Submit
+            getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/submit")).click();
+
         }catch(Exception e){
 
         }
 
-        Thread.sleep(60000);
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/check_box_affidavit")).click();
 
-        //Submit
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/submit")).click();
 
         //Assert Sim Swap Response
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='SIM Swap Response']")));
@@ -1061,7 +1061,7 @@ public class SimSwap extends TestBase {
         Thread.sleep(1000);
         TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/title_header", "Subscriber Data Preview");
         Thread.sleep(1000);
-        Asserts.AssertSwapDataPreview( "SELF",  "SIM UPGRADE",  "Prepaid",  fName,  lName,  mmn,  gender,  dob,  alternate_phone,  serial,  activation_year,  valid_Msisdn,  new_msisdn,  valid_sim_serial,  puk,  pp_nin,  email,  address,  occupation,  nationality,  state);
+        Asserts.AssertSwapDataPreview( "SELF",  "SIM UPGRADE",  "PREPAID",  fName,  lName,  mmn,  gender,  dob,  alternate_phone,  serial,  activation_year,  valid_Msisdn,  new_msisdn,  valid_sim_serial,  puk,  pp_nin,  email,  address,  occupation,  nationality,  state);
         Thread.sleep(1000);
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btn_proceed")).click();
 
@@ -1723,9 +1723,11 @@ public class SimSwap extends TestBase {
 
     @Test
     public static void verifyBioMetricsTest() throws InterruptedException {
-        WebDriverWait wait = new WebDriverWait(getDriver(), 60);
+        WebDriverWait wait = new WebDriverWait(getDriver(), 30);
 
+        //scroll down
         TestUtils.scrollDown();
+
         //Proceed
         Thread.sleep(2000);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/btn_capture")));

@@ -154,9 +154,9 @@ public class ForgotPassword extends TestBase {
 
 		// Assert the ChangePassword modal
 		String assertChangeModal = "Assert the Change Password modal";
-		Markup mark = MarkupHelper.createLabel(assertChangeModal, ExtentColor.BLUE);
-		testInfo.get().info(mark);
+		TestUtils.testTitle(assertChangeModal);
 
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/title")));
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/title", "CHANGE PASSWORD");
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/change_password_title", "Change Password");
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/change_password_guide",

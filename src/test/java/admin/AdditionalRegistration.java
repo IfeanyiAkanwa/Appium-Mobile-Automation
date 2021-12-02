@@ -713,11 +713,11 @@ public class AdditionalRegistration extends TestBase {
 			Thread.sleep(2000);
 
 			// DB Connection for OTP
-			String valid_OTP = ConnectDB.getOTP(num);
+			//String valid_OTP = ConnectDB.getOTP(num);
+			String valid_OTP = ConnectDB.getOTPWithoutPhoneNumber();
 
 			String ValidOTP = "Enter valid OTP : " + valid_OTP;
-			Markup o = MarkupHelper.createLabel(ValidOTP, ExtentColor.BLUE);
-			testInfo.get().info(o);
+			TestUtils.testTitle(valid_OTP);
 			if(valid_OTP == null){
 				testInfo.get().log(Status.INFO, "Can't get otp.");
 				getDriver().quit();

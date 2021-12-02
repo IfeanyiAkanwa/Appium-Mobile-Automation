@@ -1125,8 +1125,12 @@ public class NewRegistration extends TestBase {
 
 		//NIN Verification
 		int ninStatus=TestBase.verifyNINTest(nin, ninVerificationMode);
+		Thread.sleep(2000);
+		try{
+			getDriver().findElement(By.id("android:id/button1")).click();
+		}catch(Exception e){
 
-
+		}
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Personal Details']")));
 		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Personal Details']", "Personal Details");
 

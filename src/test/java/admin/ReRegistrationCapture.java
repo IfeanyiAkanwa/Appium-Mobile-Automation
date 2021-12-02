@@ -690,6 +690,11 @@ public class ReRegistrationCapture extends TestBase {
 			TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Personal Details']", "Personal Details");
 
         } catch(Exception e){
+			try{
+				getDriver().findElement(By.id("android:id/button1")).click();
+			}catch (Exception e1){
+
+			}
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Personal Details']")));
 			TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Personal Details']", "Personal Details");
 		}
@@ -887,6 +892,12 @@ public class ReRegistrationCapture extends TestBase {
 			TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Personal Details']", "Personal Details");
 
 		} catch(Exception e){
+			try{
+				Thread.sleep(1500);
+				getDriver().findElement(By.id("android:id/button1")).click();
+			}catch(Exception e1){
+
+			}
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Personal Details']")));
 			TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Personal Details']", "Personal Details");
 		}
@@ -904,7 +915,8 @@ public class ReRegistrationCapture extends TestBase {
 
 	@Test
 	public static void verifyBioMetricsTest() throws InterruptedException {
-		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
+		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+		WebDriverWait wait2 = new WebDriverWait(getDriver(), 20);
 		try{
 			TestUtils.scrollDown();
 		}catch (Exception e){
@@ -947,7 +959,7 @@ public class ReRegistrationCapture extends TestBase {
 		}
 		getDriver().findElement(By.id("android:id/button1")).click();
 		try {
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/fp_save_enrolment")));
+			wait2.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/fp_save_enrolment")));
 			//Override left hand
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btn_override_left")).click();
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
