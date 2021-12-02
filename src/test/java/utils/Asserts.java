@@ -677,7 +677,12 @@ public class Asserts extends TestBase {
         alternate_phone = getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+alternate_phone+"']")).getText();
 
         TestUtils.scrollUntilElementIsVisible("XPATH", "//android.widget.TextView[@text='Update Type:']");
-        nin = getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+nin+"']")).getText();
+        try{
+            nin = getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+nin+"']")).getText();
+        }catch (Exception e){
+            testInfo.get().error("NIN comparison failed");
+        }
+
         String ninStatus = getDriver().findElement(By.xpath("//android.widget.TextView[@text='NIN_VERIFIED']")).getText();
         email = getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+email+"']")).getText();
         address = getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+address+"']")).getText();

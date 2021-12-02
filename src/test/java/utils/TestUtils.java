@@ -97,22 +97,26 @@ public class TestUtils extends TestBase {
         }
     }
 
-    /*public static void main(String[] args) throws SQLException, IOException, org.json.simple.parser.ParseException {
+    public static void main(String[] args) throws SQLException, IOException, org.json.simple.parser.ParseException {
         //assertBulkTables("08118071446" );
 
         //System.out.println(Setting);
         //JSONObject getSettingParams=TestUtils.createSettingObject("PILOT-AVAILABLE-USE-CASE", "RR","All available registration use case");
         //updateSettingsApiCall( "stagingData",  getSettingParams);
 
-        String swapID=ConnectDB.getSwapID("09054391786");
-        JSONObject rejectSwapPayLoad = new JSONObject();
-        rejectSwapPayLoad.put("kmUserId", "990");
-        rejectSwapPayLoad.put("swapId", swapID);
-        rejectSwapPayLoad.put("processType", "FAILED_CHECK");
-        rejectSwapPayLoad.put("feedback", "Reject");
-        rejectSwapApiCall("stagingData", rejectSwapPayLoad);
+        //Release quarantine item
+        //  TestUtils.testTitle("Release the quarantined item");
+        String uniqueId=ConnectDB.selectQueryOnTable("bfp_sync_log", "msisdn", "09153245593", "unique_id");
+        String quarantineRegPk=ConnectDB.selectQueryOnTable("bfp_sync_log", "msisdn", "09153245593", "pk");
+        JSONObject payload = new JSONObject();
+        payload.put("quarantineRegPk", quarantineRegPk);
+        payload.put("uniqueId", uniqueId);
+        payload.put("feedback", "test");
+        payload.put("loggedInUserId", "2067");
+
+        TestUtils.releaseActionApiCall("stagingData", payload);
     }
-*/
+
     public static void assertBulkTables(String msisdn, String Country) throws SQLException, IOException, org.json.simple.parser.ParseException {
 
 
@@ -869,6 +873,51 @@ public class TestUtils extends TestBase {
         return jsonRes.getString("response");
     }
 
+    public static String releaseActionApiCall(String dataEnv, JSONObject settingData) throws IOException, org.json.simple.parser.ParseException {
+
+        RestAssured.baseURI = serviceUrl;
+        JSONParser parser = new JSONParser();
+        JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/settingsApi.conf.json"));
+        JSONObject requestBody = settingData;
+        String endPoint = (String) config.get("release_endPoint");
+        //String endPoint = "/simrop/biocapture/quarantine/release-record";
+
+
+        Response res =	given().
+                header("User-Agent", "Smart Client for KYC [Build: 1.0, Install Date: NA]").
+                header("User-UUID","03764868-6f9e-41f3-ba45-45599d8c8e08").
+                header("sc-auth-key","AHVZ0xiTP498n2uUgtXA2wt95nPbIvh7e6sdFgHKB5fcoIvLf6_24KKMHA9H7zG_5EQHAZ6QM221GQo6GUf-wG2QcEo2S_dkirXCgRHOq6N_0Go36DorLZs").
+                header("Client-ID","smartclient").
+                header("Content-Type","application/json").
+
+                body(requestBody).config(RestAssured.config().sslConfig(new SSLConfig().allowAllHostnames())).when().post(endPoint).then().assertThat().extract().response();
+
+        String response = res.asString();
+        JsonPath jsonRes = new JsonPath(response);
+        int statusCode = res.getStatusCode();
+        int result=0;
+        if (statusCode==200){
+            //Successful settings API
+            String status = jsonRes.getString("status");
+            result=1;
+
+        }else{
+            //Failed to make settings
+            testInfo.get().error("RELEASE FAILED"+response);
+        }
+        /*ArrayList<JSONObject> getSet= (ArrayList<JSONObject>) requestBody.get("settings");
+        JSONObject getData = getSet.get(0);*/
+        //String settings = getSet['']
+
+        System.out.println("*********RELEASE ITEM("+jsonRes.getString("description")+")**********");
+        try {
+            testInfo.get().info(response);
+        }catch (Exception e){
+
+        }
+        System.out.println(response);
+        return jsonRes.getString("description");
+    }
 
 
 }

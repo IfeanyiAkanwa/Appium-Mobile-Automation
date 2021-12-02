@@ -403,7 +403,7 @@ public class CorporateReRegistration extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/checkBtn")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
         TestUtils.assertSearchText("ID", "android:id/message", "Getting Data...");
-        Thread.sleep(3000);
+        Thread.sleep(3500);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/verifyBiometricsBtn")));
         TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/verifyBiometricsBtn", "Verify Biometrics");
 
@@ -517,11 +517,11 @@ public class CorporateReRegistration extends TestBase {
 
         //Proceed
         try{
-            Thread.sleep(2000);
+            Thread.sleep(4000);
             getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/otp_bypass_btn")).click();
             getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/nextBtn")).click();
         }catch (Exception e){
-            Thread.sleep(2000);
+            Thread.sleep(4000);
             getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/nextBtn")).click();
         }
         //NIN verification

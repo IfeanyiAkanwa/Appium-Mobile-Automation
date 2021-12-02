@@ -56,6 +56,7 @@ public class TestBase {
 	public static String serviceUrl = "https://kycphase2test.seamfix.com:8195";
 	public static String Id = ".glo";
 	public static int waitTime = 60;
+	public static boolean releaseRegItem=false;
 
 	@SuppressWarnings("rawtypes")
 	public static AndroidDriver getDriver() {
@@ -401,37 +402,43 @@ public class TestBase {
 
 			TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/tv_nimc_data", "NIMC Data");
 
-			String firstName = getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[1]/android.widget.TextView[2]")).getText();
-			String Surname = getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[2]/android.widget.TextView[2]")).getText();
-			String dob = getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[3]/android.widget.TextView[2]")).getText();
+			try {
+				String firstName = getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[1]/android.widget.TextView[2]")).getText();
+				String Surname = getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[2]/android.widget.TextView[2]")).getText();
+				String dob = getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[3]/android.widget.TextView[2]")).getText();
 
-			//Confirm the NIMC Data
-			TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Firstname']", "Firstname");
-			TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Surname']", "Surname");
-			TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Date of birth']", "Date of birth");
-			String empty = "";
-			Map<String, String> fields = new HashMap<>();
-			fields.put("Firstname", firstName);
-			fields.put("Surname", Surname);
-			fields.put("Date of birth", dob);
+				//Confirm the NIMC Data
+				TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Firstname']", "Firstname");
+				TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Surname']", "Surname");
+				TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Date of birth']", "Date of birth");
+				String empty = "";
+				Map<String, String> fields = new HashMap<>();
+				fields.put("Firstname", firstName);
+				fields.put("Surname", Surname);
+				fields.put("Date of birth", dob);
 
-			for (Map.Entry<String, String> entry : fields.entrySet()) {
-				try {
-					Assert.assertNotEquals(entry.getValue(), empty);
-					Assert.assertNotEquals(entry.getValue(), null);
-					testInfo.get().log(Status.INFO, "<b>" + entry.getKey() + " : </b>" + entry.getValue());
-				} catch (Error ee) {
-					testInfo.get().error("<b>" + entry.getKey() + " : </b>" + entry.getValue());
+				for (Map.Entry<String, String> entry : fields.entrySet()) {
+					try {
+						Assert.assertNotEquals(entry.getValue(), empty);
+						Assert.assertNotEquals(entry.getValue(), null);
+						testInfo.get().log(Status.INFO, "<b>" + entry.getKey() + " : </b>" + entry.getValue());
+					} catch (Error ee) {
+						testInfo.get().error("<b>" + entry.getKey() + " : </b>" + entry.getValue());
+					}
+
 				}
-
+			}catch (Exception e){
+				testInfo.get().error("NIMC AND SIM REG MISMACTH");
+				TestUtils.addScreenshot();
 			}
 
 			//Proceed
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/accept_button")));
-			Thread.sleep(2000);
+			Thread.sleep(2500);
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/accept_button")).click();
 
 		}catch (Exception e){
+            System.out.println(e);
 			//Nin is not available
 			ninStatus=0;
 			Thread.sleep(1000);
@@ -547,11 +554,11 @@ public class TestBase {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
 		TestUtils.assertSearchText("ID", "android:id/message", "Are you sure? Note that you have to provide a reason");
 		getDriver().findElement(By.id("android:id/button1")).click();
-		Thread.sleep(500);
+		Thread.sleep(1000);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
 		Thread.sleep(1000);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/ok")).click();
-		Thread.sleep(500);
+		Thread.sleep(1000);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Ageing']")));
 		getDriver().findElement(By.xpath("//android.widget.TextView[@text='Ageing']")).click();
 

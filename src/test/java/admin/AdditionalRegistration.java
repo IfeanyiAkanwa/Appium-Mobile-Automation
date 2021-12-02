@@ -326,11 +326,27 @@ public class AdditionalRegistration extends TestBase {
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btn_okay")).click();
 			getDriver().findElement(By.id("android:id/button3")).click();
 		}catch(Exception e) {
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
+			/*wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
 			TestUtils.assertSearchText("ID", "android:id/message", "Captured record was saved successfully");
 			getDriver().findElement(By.id("android:id/button1")).click();
-			getDriver().findElement(By.id("android:id/button3")).click();
+			getDriver().findElement(By.id("android:id/button3")).click();*/
 		}
+
+		if(releaseRegItem==true) {
+			//Release quarantine item
+			TestUtils.testTitle("Release the quarantined item");
+			String uniqueId = ConnectDB.selectQueryOnTable("bfp_sync_log", "msisdn", valid_Msisdn, "unique_id");
+			String quarantineRegPk = ConnectDB.selectQueryOnTable("bfp_sync_log", "msisdn", valid_Msisdn, "pk");
+			Thread.sleep(1500);
+			JSONObject payload = new JSONObject();
+			payload.put("quarantineRegPk", quarantineRegPk);
+			payload.put("uniqueId", uniqueId);
+			payload.put("feedback", "test");
+			payload.put("loggedInUserId", "2067");
+
+			TestUtils.releaseActionApiCall(dataEnv, payload);
+		}
+
 
 
 	}
@@ -697,11 +713,11 @@ public class AdditionalRegistration extends TestBase {
 			Thread.sleep(2000);
 
 			// DB Connection for OTP
-			String valid_OTP = ConnectDB.getOTP(num);
+			//String valid_OTP = ConnectDB.getOTP(num);
+			String valid_OTP = ConnectDB.getOTPWithoutPhoneNumber();
 
 			String ValidOTP = "Enter valid OTP : " + valid_OTP;
-			Markup o = MarkupHelper.createLabel(ValidOTP, ExtentColor.BLUE);
-			testInfo.get().info(o);
+			TestUtils.testTitle(valid_OTP);
 			if(valid_OTP == null){
 				testInfo.get().log(Status.INFO, "Can't get otp.");
 				getDriver().quit();

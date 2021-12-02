@@ -627,7 +627,7 @@ public class CorporateNewRegistration extends TestBase {
         TestUtils.scrollUntilElementIsVisible("XPATH", "//android.widget.TextView[@text='Download']");
         getDriver().findElement(By.xpath("//android.widget.TextView[@text='Download']")).click();
         Thread.sleep(1000);
-        getDriver().findElement(By.xpath("//android.widget.TextView[@text='tm_msisdnSerial_msisdnCategory_numbers.csv']")).click();
+        getDriver().findElement(By.xpath("//android.widget.TextView[@text='CorporateRegistration.csv']")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
         TestUtils.assertSearchText("ID", "android:id/message", "Only TM MSISDN Details that have been previously validated are permitted");
         getDriver().findElement(By.id("android:id/button1")).click();
@@ -683,7 +683,7 @@ public class CorporateNewRegistration extends TestBase {
         TestUtils.scrollUntilElementIsVisible("XPATH", "//android.widget.TextView[@text='Download']");
         getDriver().findElement(By.xpath("//android.widget.TextView[@text='Download']")).click();
         Thread.sleep(1000);
-        getDriver().findElement(By.xpath("//android.widget.TextView[@text='tm_msisdnSerial_msisdnCategory_numbers.csv']")).click();
+        getDriver().findElement(By.xpath("//android.widget.TextView[@text='CorporateRegistration.csv']")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
         TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/alertTitle", "First Level Check Complete");
         totalNo=getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/androidx.appcompat.widget.LinearLayoutCompat/android.widget.FrameLayout/android.widget.ListView/android.widget.TextView[1]")).getText();

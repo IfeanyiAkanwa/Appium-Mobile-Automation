@@ -229,16 +229,26 @@ public class SimSwap extends TestBase {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
         TestUtils.assertSearchText("ID", "android:id/message", "Please Select a Subscriber Type to proceed");
         getDriver().findElement(By.id("android:id/button1")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/subscriberType")));
 
+        /*
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/subscriberType")));
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/subscriberType")).click();
         Thread.sleep(500);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.CheckedTextView[@text='Prepaid']")));
         TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='Prepaid']", "Prepaid");
-//        TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='Postpaid']", "Postpaid");
+        //TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='Postpaid']", "Postpaid");
         TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='Data']", "Data");
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Prepaid']")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Prepaid']")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Prepaid']")));*/
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/simType")));
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simType")).click();
+        Thread.sleep(500);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.CheckedTextView[@text='MOBILE']")));
+        TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='MOBILE']", "MOBILE");
+        TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='DATA']", "DATA");
+        getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='MOBILE']")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='MOBILE']")));
 
         //Select Swap Category
         TestUtils.testTitle("Verify that User Can't proceed without selecting Swap Category");
@@ -541,7 +551,7 @@ public class SimSwap extends TestBase {
 
     @Parameters({"dataEnv"})
     @Test
-    public void capturePrepaidSimUpgrade(String dataEnv) throws Exception {
+    public void captureMobileSimUpgrade(String dataEnv) throws Exception {
 
         WebDriverWait wait = new WebDriverWait(getDriver(), 60);
         JSONParser parser = new JSONParser();
@@ -791,14 +801,23 @@ public class SimSwap extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/submit")).click();
 
         //proceed without selecting affidavit box
-        TestUtils.scrollDown();
-        //TestUtils.scrollUntilElementIsVisible("ID", "android:id/text1");
-        TestUtils.assertSearchText("ID", "android:id/text1", "Ensure that the Affidavit check box is checked");
-        getDriver().findElement(By.id("android:id/button1")).click();
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/check_box_affidavit")).click();
 
-        //Submit
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/submit")).click();
+        //TestUtils.scrollUntilElementIsVisible("ID", "android:id/text1");
+
+        try {
+            TestUtils.assertSearchText("ID", "android:id/text1", "Ensure that the Affidavit check box is checked");
+            getDriver().findElement(By.id("android:id/button1")).click();
+
+            getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/check_box_affidavit")).click();
+
+            //Submit
+            getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/submit")).click();
+
+        }catch(Exception e){
+
+        }
+
+
 
         //Assert Sim Swap Response
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='SIM Swap Response']")));
@@ -1042,7 +1061,7 @@ public class SimSwap extends TestBase {
         Thread.sleep(1000);
         TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/title_header", "Subscriber Data Preview");
         Thread.sleep(1000);
-        Asserts.AssertSwapDataPreview( "SELF",  "SIM UPGRADE",  "Prepaid",  fName,  lName,  mmn,  gender,  dob,  alternate_phone,  serial,  activation_year,  valid_Msisdn,  new_msisdn,  valid_sim_serial,  puk,  pp_nin,  email,  address,  occupation,  nationality,  state);
+        Asserts.AssertSwapDataPreview( "SELF",  "SIM UPGRADE",  "PREPAID",  fName,  lName,  mmn,  gender,  dob,  alternate_phone,  serial,  activation_year,  valid_Msisdn,  new_msisdn,  valid_sim_serial,  puk,  pp_nin,  email,  address,  occupation,  nationality,  state);
         Thread.sleep(1000);
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btn_proceed")).click();
 
@@ -1234,11 +1253,14 @@ public class SimSwap extends TestBase {
         //Select SIM Swap type
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/radio_item_proxl")).click();
 
-        //Select Subscriber Type
+        /*//Select Subscriber Type
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/subscriberType")).click();
         getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Prepaid']")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Prepaid']")));
-
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Prepaid']")));*/
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simType")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.CheckedTextView[@text='MOBILE']")));
+        getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='MOBILE']")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='MOBILE']")));
         //Select Swap Category
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/swapCategory")).click();
         try{
@@ -1698,448 +1720,14 @@ public class SimSwap extends TestBase {
 
     }
 
-    @Parameters({"dataEnv"})
-    @Test
-    public void captureDataSimSwap(String dataEnv) throws Exception {
-
-        WebDriverWait wait = new WebDriverWait(getDriver(), 30);
-        JSONParser parser = new JSONParser();
-        JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
-        JSONObject envs = (JSONObject) config.get("SIMSwap");
-        JSONObject envs2 = (JSONObject) config.get("Login");
-
-        String valid_username = (String) envs2.get("valid_username");
-
-        String valid_sim_serial = (String) envs.get("valid_sim_serial");
-        String valid_Msisdn = (String) envs.get("valid_Msisdn");
-        String new_msisdn = (String) envs.get("new_msisdn");
-        String approver_username = (String) envs.get("approver_username");
-        String approver_password = (String) envs.get("approver_password");
-        String fName = (String) envs.get("fName");
-        String lName = (String) envs.get("lName");
-        String mmn = (String) envs.get("mmn");
-        String dob = (String) envs.get("dob");
-        String occupation = (String) envs.get("occupation");
-        String state = (String) envs.get("state");
-        String gender = (String) envs.get("gender");
-        String nationality = (String) envs.get("nationality");
-        String activation_year = (String) envs.get("activation_year");
-        String address = (String) envs.get("address");
-        String fdn1 = (String) envs.get("fdn1");
-        String fdn2 = (String) envs.get("fdn2");
-        String fdn3 = (String) envs.get("fdn3");
-        String fdn4 = (String) envs.get("fdn4");
-        String fdn5 = (String) envs.get("fdn5");
-        String nin = (String) envs.get("nin");
-        String last_recharge_Amount = (String) envs.get("last_recharge_Amount");
-        String last_recharge_date = (String) envs.get("last_recharge_date");
-        String puk = (String) envs.get("puk");
-        String serial = (String) envs.get("serial");
-        String alternate_phone = (String) envs.get("alternate_phone");
-        String data_pack = (String) envs.get("data_pack");
-
-        navigateToCaptureMenuTest();
-        navigateToSimSwapViewTest(dataEnv);
-
-
-        //Select SIM Swap type
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/radio_item_proxl")).click();
-
-        //Select Subscriber Type
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/subscriberType")).click();
-        getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Data']")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Data']")));
-
-        //Select Swap Category
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/swapCategory")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.CheckedTextView[@text='SIM UPGRADE']")));
-        getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='SIM SWAP']")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='SIM SWAP']")));
-
-        //Enter Valid existing MSISDN
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/existingMsisdnField")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/existingMsisdnField")).sendKeys(valid_Msisdn);
-
-
-        //Enter Valid New MSISDN
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/newMsisdnField")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/newMsisdnField")).sendKeys(new_msisdn);
-
-        //Enter Valid New Sim Serail
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simSerialField")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simSerialField")).sendKeys(valid_sim_serial);
-
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btnValidate")).click();
-
-        //Check for Approve Sim Swap Validation
-        try {
-            TestUtils.testTitle("Approve Sim Swap Validation");
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
-            getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/approve_username")).clear();
-            getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/approve_username")).sendKeys(approver_username);
-            getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/approve_password")).clear();
-            getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/approve_password")).sendKeys(approver_password);
-            getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/approve")).click();
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
-            TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/alertTitle", "Approval Status");
-            TestUtils.assertSearchText("ID", "android:id/message", "Successfully approved!");
-            getDriver().findElement(By.xpath("//android.widget.Button[@text='OK']")).click();
-        } catch (Exception e) {
-            testInfo.get().info("SIM Swap validation not displayed");
-        }
-        //Confirm There is no otp verification when SIM Swap is selected
-        TestUtils.testTitle("Confirm There is no otp verification when SIM Swap is selected");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
-        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/alertTitle", "NIN Verification");
-
-        //BioMetrics Verification
-        verifyBioMetricsTest();
-
-        try{
-            //check for fingerprint warnings
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/button1")));
-            getDriver().findElement(By.id("android:id/button1")).click();
-        }catch(Exception e){
-
-        }
-
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btnNext")).click();
-
-        //Verify NIN
-        TestBase.verifyNINTest(nin, "Search By NIN");
-
-        /*//Capture Subscriber face
-        TestUtils.testTitle("Capture Subscriber Face");
-
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/title_header")));
-        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/title_header", "Face Capture");
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/button_next_action")).click();
-        Thread.sleep(500);
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/faceView")));
-        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/preview", "Preview");
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/button_next_action")).click();
-        Thread.sleep(500);*/
-
-        //Demographics View
-        TestUtils.testTitle("Supply Basic Information");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/title_header")));
-        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/title_header", "Basic Information");
-
-        //Submit with empty details
-        TestUtils.testTitle("Proceed without supplying details");
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/surname")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/firstnameTXT")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/maidenNameTxt")).clear();
-        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/submit");
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/submit")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
-        try {
-            TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='First Name is empty']", "First Name is empty");
-            TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Surname is empty']", "Surname is empty");
-            TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Mother's Maiden Name is empty']", "Mother's Maiden Name is empty");
-            TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Residential Address is empty']", "Residential Address is empty");
-            TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Activation year is empty']", "Activation year is empty");
-            TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Ensure no frequently dialed number field is empty']", "Ensure no frequently dialed number field is empty");
-            TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Last Recharge Date is empty']", "Last Recharge Date is empty");
-            TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Last Recharge Amount is empty']", "Last Recharge Amount is empty");
-            TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Activation year is empty']", "Activation year is empty");
-        } catch (Exception e) {
-
-        }
-        getDriver().findElement(By.id("android:id/button1")).click();
-        TestUtils.scrollUp2();
-        TestUtils.scrollUp2();
-        TestUtils.scrollUp2();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/firstnameTXT")));
-
-
-        //first name
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/firstnameTXT")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/firstnameTXT")).sendKeys(fName);
-
-        //last name
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/surname")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/surname")).sendKeys(lName);
-
-        //Mothers  maiden name
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/maidenNameTxt")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/maidenNameTxt")).sendKeys(mmn);
-
-        //scroll down
-        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/male");
-
-        //gender
-        if (gender.equalsIgnoreCase("Male")) {
-            getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/male")).click();
-        } else {
-            getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/female")).click();
-        }
-
-        //scroll down
-        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/dateofBirthTXT");
-
-        //Date of birth
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/dateofBirthTXT")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/dateofBirthTXT")).sendKeys(dob);
-
-        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/occupationSpinner");
-        //occupation
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/occupationSpinner")));
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/occupationSpinner")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Select Item']")));
-        getDriver().findElement(By.xpath("//android.widget.TextView[@text='" + occupation + "']")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.CheckedTextView[@text='" + occupation + "']")));
-
-        //scroll down
-        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/alternatePhoneTXT");
-
-        //Alternate Phone Number
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/alternatePhoneTXT")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/alternatePhoneTXT")).sendKeys(alternate_phone);
-
-        //scroll down
-        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/residentialAddress");
-
-        //Residential Address
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/residentialAddress")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/residentialAddress")).sendKeys(address);
-
-        //scroll down
-        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/countrySpinner");
-        //Country
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/countrySpinner")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='[Select Nationality]*']")));
-        getDriver().findElement(By.xpath("//android.widget.TextView[@text='" + nationality + "']")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='" + nationality + "']")));
-
-        //scroll down
-        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/stateOfOriginSpinner");
-
-        //State of origin
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/stateOfOriginSpinner")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='[Select State of Origin]']")));
-        getDriver().findElement(By.xpath("//android.widget.TextView[@text='" + state + "']")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='" + state + "']")));
-
-        //scroll down
-        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/serial");
-        //SIM Serial
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/serial")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/serial")).sendKeys(serial);
-
-        //scroll down
-        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/puk");
-        //PUK
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/puk")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/puk")).sendKeys(puk);
-
-        //scroll down
-        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/proxyNameTXT");
-
-
-
-        //scroll down
-        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/activationYear");
-
-        //Activation Year
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/activationYear")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/activationYear")).sendKeys(activation_year);
-
-        //Confirm Data Pack field is displayed
-        TestUtils.testTitle("Confirm Data Pack field is displayed");
-
-        //scroll down
-        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/datePack");
-        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/datePack", "Data Pack*");
-
-        //Data Pack
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/datePack")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/datePack")).sendKeys(data_pack);
-
-        //Todo complete when information is available
-
-        /*
-        //scroll down
-        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/lastRechargeAmt");
-
-        //Last Recharge Amount
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/lastRechargeAmt")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/lastRechargeAmt")).sendKeys(last_recharge_Amount);
-
-        //scroll down
-        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/lastRechargeDate");
-
-        //Last Recharge Date
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/lastRechargeDate")).clear();
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/lastRechargeDate")).sendKeys(last_recharge_date);
-
-        //Frequently Dialed Numbers
-        //scroll down
-        TestUtils.scrollUntilElementIsVisible("XPATH", "//android.widget.EditText[@text='Frequently Dialed Number  1']");
-        //FDN 1
-        getDriver().findElement(By.xpath("//android.widget.EditText[@text='Frequently Dialed Number  1']")).clear();
-        getDriver().findElement(By.xpath("//android.widget.EditText[@text='Frequently Dialed Number  1']")).sendKeys(fdn1);
-
-        //scroll down
-        TestUtils.scrollUntilElementIsVisible("XPATH", "//android.widget.EditText[@text='Frequently Dialed Number  2']");
-        //FDN 2
-        getDriver().findElement(By.xpath("//android.widget.EditText[@text='Frequently Dialed Number  2']")).clear();
-        getDriver().findElement(By.xpath("//android.widget.EditText[@text='Frequently Dialed Number  2']")).sendKeys(fdn2);
-
-        //scroll down
-        TestUtils.scrollUntilElementIsVisible("XPATH", "//android.widget.EditText[@text='Frequently Dialed Number  3']");
-        //FDN 3
-        getDriver().findElement(By.xpath("//android.widget.EditText[@text='Frequently Dialed Number  3']")).clear();
-        getDriver().findElement(By.xpath("//android.widget.EditText[@text='Frequently Dialed Number  3']")).sendKeys(fdn3);
-
-        //scroll down
-        TestUtils.scrollUntilElementIsVisible("XPATH", "//android.widget.EditText[@text='Frequently Dialed Number  4']");
-        //FDN 4
-        getDriver().findElement(By.xpath("//android.widget.EditText[@text='Frequently Dialed Number  4']")).clear();
-        getDriver().findElement(By.xpath("//android.widget.EditText[@text='Frequently Dialed Number  4']")).sendKeys(fdn4);
-
-        //scroll down
-        TestUtils.scrollUntilElementIsVisible("XPATH", "//android.widget.EditText[@text='Frequently Dialed Number  5']");
-
-        //FDN 5
-        getDriver().findElement(By.xpath("//android.widget.EditText[@text='Frequently Dialed Number  5']")).clear();
-        getDriver().findElement(By.xpath("//android.widget.EditText[@text='Frequently Dialed Number  5']")).sendKeys(fdn5);
-
-        //Check for fingerpprint Capture Button
-        try {
-            TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/capturePrint", "CAPTURE FINGER PRINT");
-            getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/capturePrint")).click();
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
-            TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/alertTitle", "Scanner not found");
-            TestUtils.assertSearchText("ID", "android:id/message", "Fingerprint scanner device not detected. Ensure your scanner device is connected and try again.");
-            getDriver().findElement(By.id("android:id/button1")).click();
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/fingerType_text")));
-            //Go back
-            getDriver().pressKeyCode(AndroidKeyCode.BACK);
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/submit")));
-        } catch (Exception e) {
-             testInfo.get().info("Fingerprint validation button not found");
-        }
-
-        //Submit
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/submit")).click();
-
-        //Assert Sim Swap Response
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Sim Swap Response']")));
-        TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Authentication Score Card']", "Authentication Score Card");
-
-        TestUtils.testTitle("Mandatory Parametter");
-        TestUtils.logScreenshot();
-
-        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/optionalParamsRecyclerView");
-
-        TestUtils.testTitle("Optional Parameter");
-        TestUtils.logScreenshot();
-        TestUtils.scrollDown();
-        TestUtils.logScreenshot();
-
-        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/btnSwapOk");
-        TestUtils.scrollDown();
-        TestUtils.testTitle("Summary");
-        Asserts.AssertSwapSummary();
-
-        //click ok
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btnSwapOk")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/title_header")));
-        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/title_header", "Document Upload");
-
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/document_image")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/summary")));
-        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/summary", "SELECT DOCUMENT TYPE");
-        TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Proxy Affidavit']", "Proxy Affidavit");
-        TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Proxy ID']", "Proxy ID");
-        TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Valid ID Card']", "Valid ID Card");
-        TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Court Affidavit']", "Court Affidavit");
-        TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Company Letter of Authorization']", "Company Letter of Authorization");
-        TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Sim Replacement Form']", "Sim Replacement Form");
-
-        //Proxy ID
-        TestUtils.testTitle("Proxy ID");
-        getDriver().findElement(By.xpath("//android.widget.TextView[@text='Proxy ID']")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
-        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/alertTitle", "Sim Swap Document Upload");
-        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/doc_upload_btn", "DOCUMENT UPLOAD");
-        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/doc_capture_btn", "DOCUMENT CAPTURE");
-
-
-        //Upload invalid file
-        TestUtils.testTitle("Upload invalid file");
-        // Push File
-        File pic = new File(System.getProperty("user.dir") + "/files/invalid.png");
-        getDriver().pushFile("/storage/emulated/0/invalid.png", pic);
-
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/doc_upload_btn")).click();
-        Thread.sleep(500);
-        TestUtils.scrollUntilElementIsVisible("XPATH", "//android.widget.TextView[@text='invalid.png']");
-        getDriver().findElement(By.xpath("//android.widget.TextView[@text='invalid.png']")).click();
-
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
-        TestUtils.assertSearchText("ID", "android:id/message", "You have selected an invalid file format, file must be in JPG,PDF format");
-        getDriver().findElement(By.id("android:id/button1")).click();
-
-        TestUtils.testTitle("Upload Valid Document");
-        // Push File
-        File pic2 = new File(System.getProperty("user.dir") + "/files/idCard.jpg");
-        getDriver().pushFile("/storage/emulated/0/picture.jpg", pic2);
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/document_image")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/summary")));
-        getDriver().findElement(By.xpath("//android.widget.TextView[@text='Picture of Sim or Sim Card Holder']")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/doc_upload_btn")).click();
-        Thread.sleep(500);
-        TestUtils.scrollUntilElementIsVisible("XPATH", "//android.widget.TextView[@text='picture.jpg']");
-        getDriver().findElement(By.xpath("//android.widget.TextView[@text='picture.jpg']")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/document")));
-        TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Proxy ID']", "Proxy ID");
-
-        //Continue without uploading Proxy Affidavit
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/continue_btn")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/text1")));
-        TestUtils.assertSearchText("ID", "android:id/text1", "Proxy Affidavit is compulsory");
-        getDriver().pressKeyCode(AndroidKeyCode.BACK);
-
-        //Capture Proxy Affidavit
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/document_image")));
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/document_image")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/summary")));
-        getDriver().findElement(By.xpath("//android.widget.TextView[@text='Proxy Affidavit']")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/doc_capture_btn")).click();
-        Thread.sleep(500);
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
-        Thread.sleep(500);
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/ok")).click();
-        Thread.sleep(500);
-
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/continue_btn")));
-
-        TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Proxy Affidavit']", "Proxy Affidavit");
-
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/continue_btn")).click();
-
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
-        TestUtils.assertSearchText("ID", "android:id/message", "I, " + valid_username + " acknowledge the submission of the swap request for "+valid_Msisdn);
-        getDriver().findElement(By.id("android:id/button1")).click();
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Performing Simswap request']")));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
-        TestUtils.assertSearchText("ID", "android:id/message", "Subscriber information successfully saved.");
-        getDriver().findElement(By.id("android:id/button1")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
-
-        */
-    }
 
     @Test
     public static void verifyBioMetricsTest() throws InterruptedException {
-        WebDriverWait wait = new WebDriverWait(getDriver(), 60);
+        WebDriverWait wait = new WebDriverWait(getDriver(), 30);
 
+        //scroll down
         TestUtils.scrollDown();
+
         //Proceed
         Thread.sleep(2000);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/btn_capture")));

@@ -839,6 +839,12 @@ public class Form extends TestBase {
 		String documentNumber = (String) envs.get("documentNumber");
 		String nin = (String) envs.get("nin");
 
+		try {
+			Thread.sleep(1500);
+			getDriver().findElement(By.id("android:id/button1")).click();
+		}catch (Exception e){
+
+		}
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Personal Details']")));
 
 		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/alternatePhone");
@@ -1741,6 +1747,13 @@ public class Form extends TestBase {
 		String house_or_flat_no = (String) envs.get("house_or_flat_no");
 		String documentNumber = (String) envs.get("documentNumber");
 		String nin = (String) envs.get("nin");
+
+		try {
+			Thread.sleep(1500);
+			getDriver().findElement(By.id("android:id/button1")).click();
+		}catch (Exception e){
+
+		}
 
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Personal Details']")));
 		Thread.sleep(2000);
@@ -2647,6 +2660,12 @@ public class Form extends TestBase {
 		String nin = (String) envs.get("nin");
 		String nin2 = (String) envs.get("nin2");
 
+		try{
+			Thread.sleep(1000);
+			getDriver().findElement(By.id("android:id/button1")).click();
+		}catch (Exception e){
+
+		}
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Personal Details']")));
 
 		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/alternatePhone");
@@ -2796,27 +2815,30 @@ public class Form extends TestBase {
 
 		// Capture MOD Primary TM
 		docType= getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/tv_sub_sub_heading")).getText();
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/tv_sub_sub_heading", "MOD Primary TM");
+		TestUtils.assertSearchText(	"ID", "com.sf.biocapture.activity" + Id + ":id/tv_sub_sub_heading", "MOD Primary TM");
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/corporateDocSpinner")).click();
 		Thread.sleep(500);
 		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Passport']")).click();
 
-		//Submit with Empty files
-		Thread.sleep(500);
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/bt_next")).click();
-		TestUtils.assertSearchText("ID", "android:id/message",
-				"Please ensure you capture all mandatory documents");
-		getDriver().findElement(By.id("android:id/button1")).click();
-		Thread.sleep(500);
+		if(docType.contains("MOD Primary TM")) {
+			//Submit with Empty files
+			Thread.sleep(500);
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/bt_next")).click();
+			TestUtils.assertSearchText("ID", "android:id/message","Please ensure you capture all mandatory documents");
+			getDriver().findElement(By.id("android:id/button1")).click();
+			Thread.sleep(500);
 
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/bt_capture_doc")).click();
-		Thread.sleep(500);
-		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/captureButton");
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
-		Thread.sleep(1000);
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/ok")).click();
-		Thread.sleep(500);
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/bt_next")).click();
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/bt_capture_doc")).click();
+			Thread.sleep(500);
+			TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/captureButton");
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
+			Thread.sleep(1000);
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/ok")).click();
+			Thread.sleep(500);
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/bt_next")).click();
+
+		}
+
 
 		// Capture MOD Secondary TM
 		docType= getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/tv_sub_sub_heading")).getText();
@@ -2827,8 +2849,9 @@ public class Form extends TestBase {
 			getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Passport']")).click();
 
 			//Submit with Empty files
-			Thread.sleep(500);
+			Thread.sleep(1000);
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/bt_next")).click();
+			Thread.sleep(1000);
 			TestUtils.assertSearchText("ID", "android:id/message",
 					"Please ensure you capture all mandatory documents");
 			getDriver().findElement(By.id("android:id/button1")).click();

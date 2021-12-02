@@ -127,8 +127,7 @@
                     <include name="navigateToCaptureMenuTest"/>
                     <include name="navigateToSimSwapViewTest"/>
                     <include name="simSwapViewValidationTest"/>
-                    <include name="capturePrepaidSimUpgrade"/>
-                    <include name="capturePrepaidProxySimSwap"/>
+                    <include name="captureMobileSimUpgrade"/>
                     <include name="removeSimSwapPrivilegeTest"/>
                 </methods>
             </class>
@@ -207,7 +206,7 @@
             </class>
             <class name="admin.ChangePasswordTest">
                 <methods>
-                    <include name="Login"/>
+                    <include name="loginToChangePassword"/>
                     <include name="navigateToChangePasswordPage"/>
                     <include name="changeToNewPassword"/>
                     <include name="loginWithNewPassword"/>
