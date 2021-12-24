@@ -1,5 +1,6 @@
 package admin;
 
+import db.ConnectDB;
 import demographics.Form;
 import io.appium.java_client.android.AndroidKeyCode;
 import org.json.simple.JSONObject;
@@ -800,6 +801,8 @@ public class CorporateNewRegistration extends TestBase {
 
         Form.corporateDocsForm(dataEnv);
 
+        String uniqueId= ConnectDB.selectQueryOnTable("bfp_sync_log", "msisdn", primary_tm, "pk");
+        ConnectDB.query( uniqueId, dataEnv, "FR");
 
         TestUtils.assertCNDetailsTables(primary_tm);
         try {

@@ -763,6 +763,11 @@ public class CorporateSimSwap extends TestBase {
             TestUtils.blockActionApiCall(dataEnv, unBlockPayLoad);
             testInfo.get().info(response);
 
+            //DB checks
+            String uniqueId=ConnectDB.selectQueryOnTable("bfp_sync_log", "msisdn", valid_Msisdn, "unique_id");
+
+            ConnectDB.query( uniqueId, dataEnv, "CS");
+
             getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btn_okay")).click();
 
             //Go back
