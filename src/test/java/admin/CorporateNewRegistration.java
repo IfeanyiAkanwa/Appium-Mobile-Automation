@@ -801,8 +801,21 @@ public class CorporateNewRegistration extends TestBase {
 
         Form.corporateDocsForm(dataEnv);
 
-        String uniqueId= ConnectDB.selectQueryOnTable("bfp_sync_log", "msisdn", primary_tm, "pk");
-        ConnectDB.query( uniqueId, dataEnv, "FR");
+        if (releaseRegItem==true) {
+            String quarantineRegPk=ConnectDB.selectQueryOnTable("bfp_sync_log", "msisdn", primary_tm, "pk");
+            String uniqueId=ConnectDB.selectQueryOnTable("bfp_sync_log", "msisdn", primary_tm, "unique_id");
+
+            //Release quarantine item
+            TestUtils.testTitle("Release the quarantined item("+quarantineRegPk+")");
+            Thread.sleep(1500);
+            JSONObject payload = new JSONObject();
+            payload.put("quarantineRegPk", quarantineRegPk);
+            payload.put("uniqueId", uniqueId);
+            payload.put("feedback", "test");
+            payload.put("loggedInUserId", "2067");
+            TestUtils.releaseActionApiCall(dataEnv, payload);
+            ConnectDB.query(uniqueId, dataEnv, "CN");
+        }
 
         TestUtils.assertCNDetailsTables(primary_tm);
         try {
