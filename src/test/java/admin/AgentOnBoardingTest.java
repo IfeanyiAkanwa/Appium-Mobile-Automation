@@ -190,8 +190,8 @@ public class AgentOnBoardingTest extends TestBase {
 		}*/
 
 		// DB Connection for OTP
-		//String valid_OTP = ConnectDB.getOTP(agent_phoNum);
-		String valid_OTP = ConnectDB.getOTPWithoutPhoneNumber();
+		String valid_OTP = ConnectDB.getOTP(agent_phoNum);
+		//String valid_OTP = ConnectDB.getOTPWithoutPhoneNumber();
 		String ValidOTP = "Enter valid OTP : " + valid_OTP;
 		TestUtils.testTitle(ValidOTP);
 		if(valid_OTP == null){
@@ -206,6 +206,10 @@ public class AgentOnBoardingTest extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/confirm_otp")).click();
 
 		Thread.sleep(2000);
+
+		//NIN Verification
+		TestBase.verifyNINTest(nin, ninVerificationMode);
+
 		//Verify Biometric
 		try{
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")));
@@ -222,9 +226,6 @@ public class AgentOnBoardingTest extends TestBase {
 		TestUtils.assertSearchText("ID", "android:id/message", "Subscriber's face was successfully captured");
 		getDriver().findElement(By.id("android:id/button1")).click();
 		Thread.sleep(500);
-
-		//NIN Verification
-		TestBase.verifyNINTest(nin, ninVerificationMode);
 
 		try {
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/button1")));
