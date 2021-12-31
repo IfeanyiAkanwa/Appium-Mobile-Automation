@@ -1142,7 +1142,7 @@ public class NewRegistration extends TestBase {
 			Form.individualNigerianFormAutoPopulate(dataEnv);
 		}
 
-		//To confirm that the registration category is saved on DB after successful registration
+		/*//To confirm that the registration category is saved on DB after successful registration
 		TestUtils.testTitle("To confirm that the registration category is saved on DB after successful registration:"+valid_msisdn);
 		TestUtils.assertTableValue("msisdn_detail", "msisdn", valid_msisdn, "msisdn_category", "MOBILE");
 
@@ -1153,8 +1153,22 @@ public class NewRegistration extends TestBase {
 		//Do Bulk Assert for Table checking
 		//TestUtils.assertBulkTables(valid_msisdn);
 		Thread.sleep(5000);
-		TestUtils.assertBulkTables(valid_msisdn, "NIGERIA");
+		TestUtils.assertBulkTables(valid_msisdn, "NIGERIA");*/
+        if (releaseRegItem==true) {
+            String quarantineRegPk=ConnectDB.selectQueryOnTable("bfp_sync_log", "msisdn", valid_msisdn, "pk");
+            String uniqueId=ConnectDB.selectQueryOnTable("bfp_sync_log", "msisdn", valid_msisdn, "unique_id");
 
+            //Release quarantine item
+            TestUtils.testTitle("Release the quarantined item("+quarantineRegPk+")");
+            Thread.sleep(1500);
+            JSONObject payload = new JSONObject();
+            payload.put("quarantineRegPk", quarantineRegPk);
+            payload.put("uniqueId", uniqueId);
+            payload.put("feedback", "test");
+            payload.put("loggedInUserId", "2067");
+            TestUtils.releaseActionApiCall(dataEnv, payload);
+            ConnectDB.query(uniqueId, dataEnv, "NMS");
+        }
 		try {
 			getDriver().pressKeyCode(AndroidKeyCode.BACK);
 			Thread.sleep(1000);
@@ -1292,6 +1306,11 @@ public class NewRegistration extends TestBase {
 		//NIN Verification
 		int ninStatus=0;
 
+		try{
+			getDriver().findElement(By.id("android:id/button1")).click();
+		}catch(Exception e){
+
+		}
 
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Personal Details']")));
 		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Personal Details']", "Personal Details");
@@ -1304,15 +1323,16 @@ public class NewRegistration extends TestBase {
 			Form.individualForeignerFormAutoPopulate(dataEnv);
 		}
 
-		//To confirm that the registration category is saved on DB after successful registration
+		/*//To confirm that the registration category is saved on DB after successful registration
 		TestUtils.testTitle("To confirm that the registration category is saved on DB after successful registration:"+valid_msisdn);
 		TestUtils.assertTableValue("msisdn_detail", "msisdn", valid_msisdn, "msisdn_category", "MOBILE");
 
 		//Do Bulk Assert for Table checking
 		//TestUtils.assertBulkTables(valid_msisdn);
 		Thread.sleep(5000);
-		TestUtils.assertBulkTables(valid_msisdn, "AFGHANISTAN");
-
+		TestUtils.assertBulkTables(valid_msisdn, "AFGHANISTAN");*/
+		String uniqueId=ConnectDB.selectQueryOnTable("bfp_sync_log", "msisdn", valid_msisdn, "pk");
+		ConnectDB.query( uniqueId, dataEnv, "FR");
 
 		try {
 			getDriver().pressKeyCode(AndroidKeyCode.BACK);

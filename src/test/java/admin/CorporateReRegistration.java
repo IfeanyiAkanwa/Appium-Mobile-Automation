@@ -531,6 +531,23 @@ public class CorporateReRegistration extends TestBase {
 
         Form.corporateDocsForm(dataEnv);
         TestUtils.assertCNDetailsTables(valid_msisdn);
+
+        //Release Item
+        String quarantineRegPk=ConnectDB.selectQueryOnTable("bfp_sync_log", "msisdn", valid_msisdn, "pk");
+        String uniqueId=ConnectDB.selectQueryOnTable("bfp_sync_log", "msisdn", valid_msisdn, "unique_id");
+
+        //Release quarantine item
+        TestUtils.testTitle("Release the quarantined item("+quarantineRegPk+")");
+        Thread.sleep(1500);
+        JSONObject payload = new JSONObject();
+        payload.put("quarantineRegPk", quarantineRegPk);
+        payload.put("uniqueId", uniqueId);
+        payload.put("feedback", "test");
+        payload.put("loggedInUserId", "2067");
+        TestUtils.releaseActionApiCall(dataEnv, payload);
+
+        ConnectDB.query( uniqueId, dataEnv, "CR");
+
         try {
             getDriver().pressKeyCode(AndroidKeyCode.BACK);
             Thread.sleep(1000);

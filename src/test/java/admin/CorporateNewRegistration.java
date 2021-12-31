@@ -1,5 +1,6 @@
 package admin;
 
+import db.ConnectDB;
 import demographics.Form;
 import io.appium.java_client.android.AndroidKeyCode;
 import org.json.simple.JSONObject;
@@ -800,6 +801,21 @@ public class CorporateNewRegistration extends TestBase {
 
         Form.corporateDocsForm(dataEnv);
 
+        if (releaseRegItem==true) {
+            String quarantineRegPk=ConnectDB.selectQueryOnTable("bfp_sync_log", "msisdn", primary_tm, "pk");
+            String uniqueId=ConnectDB.selectQueryOnTable("bfp_sync_log", "msisdn", primary_tm, "unique_id");
+
+            //Release quarantine item
+            TestUtils.testTitle("Release the quarantined item("+quarantineRegPk+")");
+            Thread.sleep(1500);
+            JSONObject payload = new JSONObject();
+            payload.put("quarantineRegPk", quarantineRegPk);
+            payload.put("uniqueId", uniqueId);
+            payload.put("feedback", "test");
+            payload.put("loggedInUserId", "2067");
+            TestUtils.releaseActionApiCall(dataEnv, payload);
+            ConnectDB.query(uniqueId, dataEnv, "CN");
+        }
 
         TestUtils.assertCNDetailsTables(primary_tm);
         try {

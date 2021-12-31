@@ -1680,6 +1680,10 @@ public class SimSwap extends TestBase {
             TestUtils.blockActionApiCall(dataEnv, unBlockPayLoad);
             testInfo.get().info(response);
 
+            //DB checks
+            String uniqueId=ConnectDB.selectQueryOnTable("bfp_sync_log", "msisdn", new_msisdn, "unique_id");
+            ConnectDB.query( uniqueId, dataEnv, "RR");
+
             getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btn_okay")).click();
 
             //Go back
