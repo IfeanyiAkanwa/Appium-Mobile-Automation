@@ -201,7 +201,7 @@
                     <include name="navigateToReportsPage"/>
                     <include name="reportSummary"/>
                     <include name="searchParameters"/>
-                    <!--<include name="reportAfterCapture"/>-->
+                    <include name="reportAfterCapture"/>
                 </methods>
             </class>
             <class name="admin.ChangePasswordTest">

@@ -24,16 +24,9 @@ public class ConnectDB {
     private static String otp;
     private static String transactionID;
 
-    public static void main(String[] args) throws Exception {
-        dba();
-    }
+    /*public static void main(String[] args) throws Exception {
 
-    public static void dba() throws Exception {
-        //TestBase.setUp("/DroidReport.html", "stagingData");
-        String uniqueId=ConnectDB.selectQueryOnTable("bfp_sync_log", "msisdn", "09155285662", "pk");
-        System.out.println(uniqueId);
-        query( uniqueId, "stagingData", "RR");
-    }
+    }*/
 
     public static String getOTP(String phoneNumber) throws SQLException {
 
