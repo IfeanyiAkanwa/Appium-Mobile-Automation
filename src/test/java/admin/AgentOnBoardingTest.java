@@ -50,7 +50,7 @@ public class AgentOnBoardingTest extends TestBase {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/page_title")));
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/page_title", "Agent Onboarding");
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/page_guide_title", "Get started in 3 easy steps");
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/step_one", "1. Agent ID validation");
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/step_one", "1. Email validation");
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/step_two", "2. OTP validation");
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/step_three", "3. Biometric capture");
 		//Thread.sleep(500);
@@ -85,6 +85,20 @@ public class AgentOnBoardingTest extends TestBase {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
 		//Pass OTP
 		//OTP(dataEnv);
+		/*String valid_OTP = ConnectDB.getOTPWithoutPhoneNumber();
+		if(valid_OTP == null){
+			testInfo.get().log(Status.INFO, "Can't get otp.");
+			getDriver().quit();
+		}
+		Thread.sleep(1000);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/alertTitle")));
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/otp")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/otp")).sendKeys(valid_OTP);
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/otp", valid_OTP);
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/confirm_otp")).click();
+
+		TestUtils.verifyNINTest(nin, ninVerificationMode);*/
+
 		TestUtils.assertSearchText("ID", "android:id/message", "Agent already onboarded");
 		getDriver().findElement(By.id("android:id/button1")).click();
 		Thread.sleep(500);
@@ -122,7 +136,7 @@ public class AgentOnBoardingTest extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/submit")).click();
 		//Thread.sleep(500);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/otp")));
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/alertTitle", "OTP verification");
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/alertTitle", "OTP Verification");
 		//Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/otp")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/otp")).sendKeys(invalid_OTP);
@@ -145,7 +159,7 @@ public class AgentOnBoardingTest extends TestBase {
 		//Thread.sleep(500);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/otp")));
 		Thread.sleep(1000);
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/alertTitle", "OTP verification");
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/alertTitle", "OTP Verification");
 		//Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/otp")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/otp")).sendKeys(used_OTP);
@@ -163,7 +177,7 @@ public class AgentOnBoardingTest extends TestBase {
 		String email = "To On-board new agent with a valid OTP: ( " + agent_email + " )";
 		TestUtils.testTitle(email);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/email")).clear();
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/email")).sendKeys(agent1_email);
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/email")).sendKeys(agent_email);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/submit")).click();
 
 		/*//Call OTP
@@ -179,27 +193,48 @@ public class AgentOnBoardingTest extends TestBase {
 		//String valid_OTP = ConnectDB.getOTP(agent_phoNum);
 		String valid_OTP = ConnectDB.getOTPWithoutPhoneNumber();
 		String ValidOTP = "Enter valid OTP : " + valid_OTP;
-		Markup o = MarkupHelper.createLabel(ValidOTP, ExtentColor.BLUE);
-		testInfo.get().info(o);
+		TestUtils.testTitle(ValidOTP);
 		if(valid_OTP == null){
 			testInfo.get().log(Status.INFO, "Can't get otp.");
 			getDriver().quit();
 		}
 		Thread.sleep(1000);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/alertTitle")));
-		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/otp")).clear();
-		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/otp")).sendKeys(valid_OTP);
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/otp", valid_OTP);
-		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/confirm_otp")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/otp")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/otp")).sendKeys(valid_OTP);
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/otp", valid_OTP);
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/confirm_otp")).click();
+
+		Thread.sleep(2000);
+		//Verify Biometric
+		try{
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")));
+
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
+		}catch (Exception e){
+
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/buttonCapturePicture")));
+
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/buttonCapturePicture")).click();
+		}
+		Thread.sleep(3000);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
+		TestUtils.assertSearchText("ID", "android:id/message", "Subscriber's face was successfully captured");
+		getDriver().findElement(By.id("android:id/button1")).click();
+		Thread.sleep(500);
+
+		//NIN Verification
+		TestBase.verifyNINTest(nin, ninVerificationMode);
 
 		try {
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/on_boarding_camera_title")));
-			TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/on_boarding_camera_title", "Camera");
-			TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Capture Passport']", "Capture Passport");
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/button1")));
+			getDriver().findElement(By.id("android:id/button1")).click();
+			//TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/on_boarding_camera_title", "Camera");
+			Thread.sleep(60000);
+			TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Fingerprint Capture']","Fingerprint Capture");
 
-			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/button_capture_image")).click();
 		}catch(Exception e){
-			testInfo.get().error("OTP is not usable");
+
 		}
 
 	}
@@ -215,7 +250,7 @@ public class AgentOnBoardingTest extends TestBase {
 
 		String agent_phoNum = (String) envs.get("agent_phoNum");
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/alertTitle", "OTP verification");
+		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/alertTitle", "OTP Verification");
 
 		// DB Connection for OTP
 		String valid_OTP = ConnectDB.getOTP(agent_phoNum);
