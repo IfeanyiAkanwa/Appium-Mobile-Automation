@@ -507,7 +507,7 @@ public class TestBase {
 
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/buttonCapturePicture")).click();
 		}
-		Thread.sleep(30000);
+		Thread.sleep(3000);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
 		TestUtils.assertSearchText("ID", "android:id/message", "Subscriber's face was successfully captured");
 		getDriver().findElement(By.id("android:id/button1")).click();

@@ -27,7 +27,6 @@ public class ConnectDB {
     /*public static void main(String[] args) throws Exception {
 
     }*/
-
     public static String getOTP(String phoneNumber) throws SQLException {
 
         Connection dbConnection = null;
