@@ -16,8 +16,8 @@
     "BS_email": "virgyonline1000@gmail.com",
     "AD_UserName1": "camaike",
     "BS_email1": "camaike@seamfix.com",
-    "valid_userid": "VV07030196806_00013",
-    "valid_useridpw": "Bankole11!!"
+    "valid_userid": "OO08118071446_00050",
+    "valid_useridpw": "Bankole11!"
   },
   "Login2": {
     "onboarded_username": "adazejohnson@gmail.com",
@@ -57,18 +57,18 @@
     "searchParam": "SIM"
   },
   "NewRegistration": {
-    "valid_msisdn": "09153245621",
+    "valid_msisdn": "09153245561",
     "invalid_msisdn": "764785",
     "non_valid_msisdn": "08152379129",
     "invalid_simSerial": "177606",
-    "valid_simSerial": "8923450108200272079F",
+    "valid_simSerial": "8923450108200272616F",
     "lga": "Aguata",
     "valid_fixed_msisdn": "080500066",
     "valid_fixed_serial": "8923456000000000066F",
     "invalidPrefixMsisdn": "07483799086",
     "invalidPrefixSimSerial": "8923420037187785273F",
-    "valid_msisdn2": "09153245617",
-    "valid_simSerial2": "8923450108200272111F",
+    "valid_msisdn2": "08115943489",
+    "valid_simSerial2": "8923450704182228582F",
     "ninVerificationMode": "Search By NIN",
     "nin": "11111111111",
     "valid_username": "testpriv@yopmail.com",
@@ -135,7 +135,7 @@
   "CorporateRegistration": {
     "valid_msisdn": "08116575689",
     "valid_msisdn2": "08111645372",
-    "primary_tm": "09153424557",
+    "primary_tm": "08159450939",
     "secondary_tm": "08056497031",
     "foreign_msisdn": "08152395730",
     "invalid_msisdn": "08022340222",
@@ -331,8 +331,8 @@
     "lessMsisdn1": "08055",
     "lessMsisdn2": "08055388",
     "validSimSerial": "8923450704188330796F",
-    "newMsisdn": "09153245567",
-    "newSerial": "8923450108200272558F",
+    "newMsisdn": "09153245624",
+    "newSerial": "8923450108200272053F",
     "moreSerial": "8923450502181537882F1234",
     "lessSerial": "89234181537882F",
     "invalidSerial": "8923450502181739572F",

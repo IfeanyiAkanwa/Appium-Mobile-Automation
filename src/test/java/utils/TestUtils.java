@@ -919,5 +919,12 @@ public class TestUtils extends TestBase {
         return jsonRes.getString("description");
     }
 
+    public static void assertDbValue(String columnName, String expected, String actual){
+        if(expected.equalsIgnoreCase(actual)){
+            testInfo.get().info(columnName+": "+"<b>" +expected+ "</b>"+" is equal to "+actual);
+        }else {
+            testInfo.get().fail(columnName+": "+"<b>" +expected+ "</b>"+" is not equal to "+actual);
+        }
+    }
 
 }

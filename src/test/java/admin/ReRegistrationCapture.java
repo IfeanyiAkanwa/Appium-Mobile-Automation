@@ -746,8 +746,22 @@ public class ReRegistrationCapture extends TestBase {
 
 		//Do Bulk Assert for Table checking
 		//TestUtils.assertBulkTables(valid_msisdn);
-		Thread.sleep(5000);
-		TestUtils.assertBulkTables(valid_msisdn, "NIGERIA");
+		/*Thread.sleep(5000);
+		TestUtils.assertBulkTables(valid_msisdn, "NIGERIA");*/
+		String quarantineRegPk=ConnectDB.selectQueryOnTable("bfp_sync_log", "msisdn", valid_msisdn, "pk");
+		String uniqueId=ConnectDB.selectQueryOnTable("bfp_sync_log", "msisdn", valid_msisdn, "unique_id");
+
+		//Release quarantine item
+		TestUtils.testTitle("Release the quarantined item("+quarantineRegPk+")");
+		Thread.sleep(1500);
+		JSONObject payload = new JSONObject();
+		payload.put("quarantineRegPk", quarantineRegPk);
+		payload.put("uniqueId", uniqueId);
+		payload.put("feedback", "test");
+		payload.put("loggedInUserId", "2067");
+		TestUtils.releaseActionApiCall(dataEnv, payload);
+
+		ConnectDB.query( uniqueId, dataEnv, "RR");
 
 		try {
 			getDriver().pressKeyCode(AndroidKeyCode.BACK);
@@ -778,6 +792,15 @@ public class ReRegistrationCapture extends TestBase {
 			reportHomepage( totalSubVal,  totalSyncsentVal,  totalSyncpendingVal,  totalSynConfVal,  totalRejectVal);
 		}
     }
+
+	@Test
+	@Parameters({"dataEnv"})
+	public static void dbChecksTest(String dataEnv) throws Exception {
+		TestUtils.testTitle("DB Checks");
+		String uniqueId=ConnectDB.selectQueryOnTable("bfp_sync_log", "msisdn", "08159450795", "unique_id");
+		System.out.println(uniqueId);
+		ConnectDB.query( uniqueId, dataEnv, "RR");
+	}
 
 	@Test
 	@Parameters({"dataEnv"})
@@ -910,6 +933,21 @@ public class ReRegistrationCapture extends TestBase {
 		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Individual']")).click();
 
 		Form.changeOfOwnerForm(dataEnv);
+
+        String quarantineRegPk=ConnectDB.selectQueryOnTable("bfp_sync_log", "msisdn", valid_msisdn, "pk");
+        String uniqueId=ConnectDB.selectQueryOnTable("bfp_sync_log", "msisdn", valid_msisdn, "unique_id");
+
+        //Release quarantine item
+        TestUtils.testTitle("Release the quarantined item("+quarantineRegPk+")");
+        Thread.sleep(1500);
+        JSONObject payload = new JSONObject();
+        payload.put("quarantineRegPk", quarantineRegPk);
+        payload.put("uniqueId", uniqueId);
+        payload.put("feedback", "test");
+        payload.put("loggedInUserId", "2067");
+        TestUtils.releaseActionApiCall(dataEnv, payload);
+
+        ConnectDB.query( uniqueId, dataEnv, "RRO");
 
 	}
 

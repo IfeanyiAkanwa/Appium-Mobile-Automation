@@ -274,7 +274,7 @@ public class Login extends TestBase {
         TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/alertTitle", "Scanner not found");
         getDriver().findElement(By.id("android:id/button1")).click();
         Thread.sleep(500);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/finger_image")));
+	    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/finger_image")));
         TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/fingerType_text", "VERIFICATION");
         TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/btnStop", "CAPTURE");
 

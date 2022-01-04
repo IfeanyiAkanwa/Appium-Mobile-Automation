@@ -2822,10 +2822,10 @@ public class Form extends TestBase {
 
 		if(docType.contains("MOD Primary TM")) {
 			//Submit with Empty files
-			Thread.sleep(500);
+			/*Thread.sleep(500);
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/bt_next")).click();
 			TestUtils.assertSearchText("ID", "android:id/message","Please ensure you capture all mandatory documents");
-			getDriver().findElement(By.id("android:id/button1")).click();
+			getDriver().findElement(By.id("android:id/button1")).click();*/
 			Thread.sleep(500);
 
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/bt_capture_doc")).click();
@@ -2849,13 +2849,12 @@ public class Form extends TestBase {
 			getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Passport']")).click();
 
 			//Submit with Empty files
-			Thread.sleep(1000);
+			/*Thread.sleep(1000);
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/bt_next")).click();
 			Thread.sleep(1000);
-			TestUtils.assertSearchText("ID", "android:id/message",
-					"Please ensure you capture all mandatory documents");
+			TestUtils.assertSearchText("ID", "android:id/message","Please ensure you capture all mandatory documents");
 			getDriver().findElement(By.id("android:id/button1")).click();
-			Thread.sleep(500);
+			Thread.sleep(500);*/
 
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/bt_capture_doc")).click();
 			Thread.sleep(500);
@@ -2874,11 +2873,10 @@ public class Form extends TestBase {
 		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Registration Form']")).click();
 
 		//Submit with Empty files
-		Thread.sleep(500);
+		/*Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/bt_next")).click();
-		TestUtils.assertSearchText("ID", "android:id/message",
-				"Please ensure you capture all mandatory documents");
-		getDriver().findElement(By.id("android:id/button1")).click();
+		TestUtils.assertSearchText("ID", "android:id/message","Please ensure you capture all mandatory documents");
+		getDriver().findElement(By.id("android:id/button1")).click();*/
 		Thread.sleep(500);
 
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/bt_capture_doc")).click();

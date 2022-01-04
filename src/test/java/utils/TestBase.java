@@ -293,7 +293,7 @@ public class TestBase {
 
 	@Test
 	public static void Login1(String valid_username, String valid_password) throws Exception {
-		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+		WebDriverWait wait = new WebDriverWait(getDriver(), 40);
 	
 		TestUtils.testTitle("Login with a valid username: ( " + valid_username + " ) and valid password: ( "  + valid_password + " )");
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/otp_login")));
@@ -346,7 +346,7 @@ public class TestBase {
 
 	@Test
 	public static int verifyNINTest(String nin, String ninVerificationMode) throws InterruptedException {
-		WebDriverWait wait = new WebDriverWait(getDriver(), 20);
+		WebDriverWait wait = new WebDriverWait(getDriver(), 25);
 		//ninStatus is set to available automatically
 		int ninStatus=1;
 		//Proceed to NIN Verification View

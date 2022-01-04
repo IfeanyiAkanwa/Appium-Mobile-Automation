@@ -216,18 +216,30 @@ public class MobileNumberPorting extends TestBase {
         }
 
 
-        TestUtils.testTitle("To confirm that there is Client Acivity Log for  port-in requests");
-        String unique_id= ConnectDB.selectQueryOnTable("BFP_SYNC_LOG", "msisdn", pri_valid_Msisdn, "unique_id");
-        JSONArray cal = ConnectDB.ClientActivityLogTable(unique_id);
-        Object getCalObject = cal.get(0);
-        JSONObject getCalObjectItem = (JSONObject) getCalObject;
-        TestUtils.assertTwoValues((String) getCalObjectItem.get("unique_activity_code"), unique_id);
+        if (releaseRegItem==true) {
+            TestUtils.testTitle("DB Checks");
+            String quarantineRegPk=ConnectDB.selectQueryOnTable("bfp_sync_log", "msisdn", pri_valid_Msisdn, "pk");
+            String uniqueId=ConnectDB.selectQueryOnTable("bfp_sync_log", "msisdn", pri_valid_Msisdn, "unique_id");
 
-        JSONArray dbQuery=ConnectDB.QueryBulkTable(pri_valid_Msisdn);
-        Object getDDaObject = dbQuery.get(0);
-        JSONObject getDDaObjectItem = (JSONObject) getDDaObject;
-        TestUtils.testTitle("To ensure the type of registration done is flagged and sent to the backend with other registration data");
-        TestUtils.assertTwoValues((String) getDDaObjectItem.get("DDA11"), "MPI");
+            //Release quarantine item
+            TestUtils.testTitle("Release the quarantined item("+quarantineRegPk+")");
+            Thread.sleep(1500);
+            JSONObject payload = new JSONObject();
+            payload.put("quarantineRegPk", quarantineRegPk);
+            payload.put("uniqueId", uniqueId);
+            payload.put("feedback", "test");
+            payload.put("loggedInUserId", "2067");
+            TestUtils.releaseActionApiCall(dataEnv, payload);
+            ConnectDB.query(uniqueId, dataEnv, "MNP");
+
+            JSONArray dbQuery=ConnectDB.QueryBulkTable(pri_valid_Msisdn);
+            Object getDDaObject = dbQuery.get(0);
+            JSONObject getDDaObjectItem = (JSONObject) getDDaObject;
+            TestUtils.testTitle("To ensure the type of registration done is flagged and sent to the backend with other registration data");
+            TestUtils.assertTwoValues((String) getDDaObjectItem.get("DDA11"), "MPI");
+        }
+
+
 
         try {
             getDriver().pressKeyCode(AndroidKeyCode.BACK);
