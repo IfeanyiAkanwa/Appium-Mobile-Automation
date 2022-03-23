@@ -99,11 +99,11 @@ public class Login extends TestBase {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/login_username")));
 
 		// Login with deactivated username and valid password
-		TestUtils.testTitle("Login with deactivated username " + "(" + deactivated_username + ")" + " and valid password " + "(" + valid_pw + ")");
+		TestUtils.testTitle("Login with deactivated username " + "(" + deactivated_username + ")" + " and valid password " + "(" + valid_password + ")");
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/login_username")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/login_username")).sendKeys(deactivated_username);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/login_password")).clear();
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/login_password")).sendKeys(valid_pw);
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/login_password")).sendKeys(valid_password);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/submit")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/title_template")));
 		TestUtils.assertSearchText("ID", "android:id/message", "Your account was deactivated. Please contact support");
@@ -231,7 +231,14 @@ public class Login extends TestBase {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
         TestUtils.assertSearchText("ID", "android:id/message", "No agent was found with entered email address");
         getDriver().findElement(By.id("android:id/button1")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/email")));
+		Thread.sleep(10000);
+        /*wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
+		TestUtils.assertSearchText("ID","android:id/message","Do you want to make a fingerprint licence request?");
+		getDriver().findElement(By.id("android:id/button1")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
+		TestUtils.assertSearchText("ID","android:id/message","Failed to request license. Unknown user requesting for license");
+		getDriver().findElement(By.id("android:id/button1")).click();*/
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/email")));
 
         // Login with user that has not been onboarded
         TestUtils.testTitle("Login with username that is not onboarded" + "(" + not_onboarded_username + ")");
@@ -243,6 +250,7 @@ public class Login extends TestBase {
         TestUtils.assertSearchText("ID", "android:id/message", "Agent has not been onboarded yet");
         getDriver().findElement(By.id("android:id/button1")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/email")));
+		Thread.sleep(500);
 
         // Login with user that has been blacklisted
         TestUtils.testTitle("Login with blacklisted user " + "(" + blacklisted_username + ")");
@@ -253,6 +261,7 @@ public class Login extends TestBase {
         TestUtils.assertSearchText("ID", "android:id/message", "Your Account has been blacklisted");
         getDriver().findElement(By.id("android:id/button1")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/email")));
+		Thread.sleep(500);
 
         // Login with user that has been deactivated
         TestUtils.testTitle("Login with deactivated user " + "(" + deactivated_username + ")");
@@ -270,10 +279,10 @@ public class Login extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/email")).sendKeys(onboarded_username);
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/verify")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
-        Thread.sleep(500);
+        Thread.sleep(30000);
         TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/alertTitle", "Scanner not found");
         getDriver().findElement(By.id("android:id/button1")).click();
-        Thread.sleep(500);
+        Thread.sleep(30000);
 	    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/finger_image")));
         TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/fingerType_text", "VERIFICATION");
         TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/btnStop", "CAPTURE");

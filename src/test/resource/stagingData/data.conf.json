@@ -7,17 +7,17 @@
     "invalid_password": "adazejohn@1",
     "valid_password": "Bankole11!!",
     "valid_pw": "Glo1user11!!",
-    "blacklisted_username": "adejuwon@yahoo.com",
-    "blacklisted_password": "Bankole11!!",
-    "deactivated_username": "akin.ugwu@mtnagent.com",
+    "blacklisted_username": "glo-dh-001s@gloworld.ng",
+    "blacklisted_password": "Glo1user11!!",
+    "deactivated_username": "deactivateakin@yopmail.com",
     "invalid_email_format": "@seamfix.com",
-    "AD_UserName": "seamfixadconnect",
-    "valid_AD_pw": "S3@mf1x747",
+    "AD_UserName": "Seamfixadconnect",
+    "valid_AD_pw": "Jimoh@123",
     "BS_email": "virgyonline1000@gmail.com",
     "AD_UserName1": "camaike",
     "BS_email1": "camaike@seamfix.com",
-    "valid_userid": "OO08118071446_00050",
-    "valid_useridpw": "Bankole11!"
+    "valid_userid": "EJ08153288784_00001",
+    "valid_useridpw": "Neke123@123"
   },
   "Login2": {
     "onboarded_username": "adazejohnson@gmail.com",
@@ -26,7 +26,7 @@
     "valid_username": "vnwauwa@seamfix.com",
     "invalid_password": "adazejohn@1",
     "valid_password": "Bankole11!!",
-    "deactivated_username": "amusa.adewaleibrahim@mtnagent.com"
+    "deactivated_username": "deactivateakin@yopmail.com"
   },
   "ForgotPassword": {
     "invalid_username": "ada@seamnix.com",
