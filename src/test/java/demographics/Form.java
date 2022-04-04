@@ -240,6 +240,9 @@ public class Form extends TestBase {
 		TestUtils.testTitle("Capture passport Image and Preview");
 		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/capture_passport_image");
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/capture_passport_image")).click();
+		Thread.sleep(1000);
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/switchButton")).click();
+		Thread.sleep(500);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")));
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/ok")));
@@ -354,6 +357,8 @@ public class Form extends TestBase {
 		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/captureIdButton");
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureIdButton")).click();
 		Thread.sleep(1500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/switchButton")).click();
+		Thread.sleep(500);
 		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/captureButton");
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
 		Thread.sleep(1000);
@@ -444,6 +449,8 @@ public class Form extends TestBase {
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/captureKycFormButton", "CAPTURE KYC FORM *");
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureKycFormButton")).click();
 		Thread.sleep(500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/switchButton")).click();
+		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
 		Thread.sleep(1000);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/ok")).click();
@@ -469,8 +476,11 @@ public class Form extends TestBase {
 		TestUtils.testTitle("Face Capture");
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/faceCaptureButton", "FACE CAPTURE *");
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/faceCaptureButton")).click();
+		Thread.sleep(1000);
 
 		try{
+			getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/switchButton")).click();
+			Thread.sleep(500);
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")));
 
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
@@ -507,6 +517,8 @@ public class Form extends TestBase {
 		TestUtils.assertSearchText("ID", "android:id/message", "Are you sure? Note that you have to provide a reason");
 		getDriver().findElement(By.id("android:id/button1")).click();
 		Thread.sleep(500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/switchButton")).click();
+		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
 		Thread.sleep(1000);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/ok")).click();
@@ -529,6 +541,8 @@ public class Form extends TestBase {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
 		TestUtils.assertSearchText("ID", "android:id/message", "Are you sure? Note that you have to provide a reason");
 		getDriver().findElement(By.id("android:id/button1")).click();
+		Thread.sleep(500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/switchButton")).click();
 		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
 		Thread.sleep(1000);
@@ -687,6 +701,8 @@ public class Form extends TestBase {
 		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/captureIdButton");
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureIdButton")).click();
 		Thread.sleep(1500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/switchButton")).click();
+		Thread.sleep(500);
 		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/captureButton");
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
 		Thread.sleep(1000);
@@ -776,6 +792,8 @@ public class Form extends TestBase {
 		TestUtils.testTitle("Capture KYC FORM");
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/captureKycFormButton", "CAPTURE KYC FORM *");
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureKycFormButton")).click();
+		Thread.sleep(500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/switchButton")).click();
 		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
 		Thread.sleep(500);
@@ -924,7 +942,7 @@ public class Form extends TestBase {
 		Thread.sleep(500);
 
 		// City
-		//TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/citySpinner");
+		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/postalCodeSpinner");
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/citySpinner")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='"+city+"']")));
 		getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+city+"']")).click();
@@ -957,6 +975,8 @@ public class Form extends TestBase {
 		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/captureIdButton");
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureIdButton")).click();
 		Thread.sleep(1500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/switchButton")).click();
+		Thread.sleep(500);
 		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/captureButton");
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
 		Thread.sleep(1000);
@@ -1046,6 +1066,8 @@ public class Form extends TestBase {
 		TestUtils.testTitle("Capture KYC FORM");
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/captureKycFormButton", "CAPTURE KYC FORM *");
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureKycFormButton")).click();
+		Thread.sleep(500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/switchButton")).click();
 		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
 		Thread.sleep(500);
@@ -1247,6 +1269,8 @@ public class Form extends TestBase {
 			testInfo.get().error("Passport number is empty");
 		}
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/passport_expiry_date")).click();
+		getDriver().findElement(By.id("android:id/date_picker_header_year")).click();
+		getDriver().findElement(By.xpath("//android.widget.TextView[@text='2024']")).click();
 		getDriver().findElement(By.xpath("//android.view.View[@text='30']")).click();
 		getDriver().findElement(By.id("android:id/button1")).click();
 		//Nigerian resident?
@@ -1255,6 +1279,8 @@ public class Form extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/passport_nigerian_resident")).click();
 		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/capture_passport_image");
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/capture_passport_image")).click();
+		Thread.sleep(500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/switchButton")).click();
 		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
 		Thread.sleep(1000);
@@ -1352,6 +1378,8 @@ public class Form extends TestBase {
 		TestUtils.testTitle("Capture KYC FORM");
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/captureKycFormButton", "CAPTURE KYC FORM *");
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureKycFormButton")).click();
+		Thread.sleep(500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/switchButton")).click();
 		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
 		Thread.sleep(1000);
@@ -1632,6 +1660,8 @@ public class Form extends TestBase {
 		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/captureIdButton");
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureIdButton")).click();
 		Thread.sleep(1500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/switchButton")).click();
+		Thread.sleep(500);
 		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/captureButton");
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
 		Thread.sleep(1000);
@@ -1684,6 +1714,8 @@ public class Form extends TestBase {
 		TestUtils.testTitle("Capture KYC FORM");
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/captureKycFormButton", "CAPTURE KYC FORM *");
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureKycFormButton")).click();
+		Thread.sleep(500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/switchButton")).click();
 		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
 		Thread.sleep(1000);
@@ -1972,6 +2004,8 @@ public class Form extends TestBase {
 		Thread.sleep(1500);
 		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/captureButton");
 		Thread.sleep(500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/switchButton")).click();
+		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
 		Thread.sleep(1000);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/ok")).click();
@@ -2024,6 +2058,8 @@ public class Form extends TestBase {
 		TestUtils.testTitle("Capture KYC FORM");
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/captureKycFormButton", "CAPTURE KYC FORM *");
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureKycFormButton")).click();
+		Thread.sleep(500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/switchButton")).click();
 		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
 		Thread.sleep(1000);
@@ -2445,6 +2481,8 @@ public class Form extends TestBase {
 		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureIdButton")).click();
 		Thread.sleep(1500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/switchButton")).click();
+		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
 		Thread.sleep(1000);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/ok")).click();
@@ -2528,6 +2566,8 @@ public class Form extends TestBase {
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/captureKycFormButton", "CAPTURE KYC FORM *");
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureKycFormButton")).click();
 		Thread.sleep(500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/switchButton")).click();
+		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
 		Thread.sleep(1000);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/ok")).click();
@@ -2552,6 +2592,8 @@ public class Form extends TestBase {
 		TestUtils.testTitle("Face Capture");
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/faceCaptureButton", "FACE CAPTURE *");
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/faceCaptureButton")).click();
+		Thread.sleep(500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/switchButton")).click();
 		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
 		try{
@@ -2587,6 +2629,8 @@ public class Form extends TestBase {
 		TestUtils.assertSearchText("ID", "android:id/message", "Are you sure? Note that you have to provide a reason");
 		getDriver().findElement(By.id("android:id/button1")).click();
 		Thread.sleep(500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/switchButton")).click();
+		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
 		Thread.sleep(1000);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/ok")).click();
@@ -2609,6 +2653,8 @@ public class Form extends TestBase {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
 		TestUtils.assertSearchText("ID", "android:id/message", "Are you sure? Note that you have to provide a reason");
 		getDriver().findElement(By.id("android:id/button1")).click();
+		Thread.sleep(500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/switchButton")).click();
 		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
 		Thread.sleep(1000);
@@ -2806,6 +2852,8 @@ public class Form extends TestBase {
 		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/bt_capture_doc")).click();
 		Thread.sleep(500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/switchButton")).click();
+		Thread.sleep(500);
 		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/captureButton");
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
 		Thread.sleep(1000);
@@ -2829,6 +2877,8 @@ public class Form extends TestBase {
 			Thread.sleep(500);
 
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/bt_capture_doc")).click();
+			Thread.sleep(500);
+			getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/switchButton")).click();
 			Thread.sleep(500);
 			TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/captureButton");
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
@@ -2858,6 +2908,8 @@ public class Form extends TestBase {
 
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/bt_capture_doc")).click();
 			Thread.sleep(500);
+			getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/switchButton")).click();
+			Thread.sleep(500);
 			TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/captureButton");
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
 			Thread.sleep(1000);
@@ -2880,6 +2932,8 @@ public class Form extends TestBase {
 		Thread.sleep(500);
 
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/bt_capture_doc")).click();
+		Thread.sleep(500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/switchButton")).click();
 		Thread.sleep(500);
 		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/captureButton");
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();

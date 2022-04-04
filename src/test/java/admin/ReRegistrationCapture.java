@@ -511,7 +511,7 @@ public class ReRegistrationCapture extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/submit_button")).click();
 		Thread.sleep(3000);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
-		TestUtils.assertSearchText("ID", "android:id/message", "No biometric data was found for the specified MSISDN.");
+		TestUtils.assertSearchText("ID", "android:id/message", "Record not found. ");
 		getDriver().findElement(By.id("android:id/button1")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Re Registration']")));
 
@@ -921,6 +921,7 @@ public class ReRegistrationCapture extends TestBase {
 			}catch(Exception e1){
 
 			}
+			Thread.sleep(10000);
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Personal Details']")));
 			TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Personal Details']", "Personal Details");
 		}
@@ -961,12 +962,15 @@ public class ReRegistrationCapture extends TestBase {
 
 		}
 		//Proceed
-		Thread.sleep(2000);
+		Thread.sleep(30000);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/capture_image_button")));
 		Thread.sleep(2000);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/capture_image_button")).click();
+		Thread.sleep(500);
 
 		try{
+			getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/switchButton")).click();
+			Thread.sleep(500);
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")));
 
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
@@ -976,10 +980,16 @@ public class ReRegistrationCapture extends TestBase {
 
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/buttonCapturePicture")).click();
 		}
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
-		TestUtils.assertSearchText("ID", "android:id/message", "Subscriber's face was successfully captured");
-		getDriver().findElement(By.id("android:id/button1")).click();
-		Thread.sleep(500);
+		try{
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/alertTitle")));
+			TestUtils.assertSearchText("ID","android:id/message","Cropped image did not pass validation Do you want to proceed with original image?");
+			getDriver().findElement(By.id("android:id/button2")).click();
+		}catch (Exception e) {
+
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
+			TestUtils.assertSearchText("ID", "android:id/message", "Subscriber's face was successfully captured");
+			getDriver().findElement(By.id("android:id/button1")).click();
+		}
 
 		//Fingerprint capture/
 
@@ -1004,6 +1014,8 @@ public class ReRegistrationCapture extends TestBase {
 			TestUtils.assertSearchText("ID", "android:id/message", "Are you sure? Note that you have to provide a reason");
 			getDriver().findElement(By.id("android:id/button1")).click();
 			Thread.sleep(500);
+			getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/switchButton")).click();
+			Thread.sleep(500);
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
 			Thread.sleep(1000);
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/ok")).click();
@@ -1026,6 +1038,8 @@ public class ReRegistrationCapture extends TestBase {
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
 			TestUtils.assertSearchText("ID", "android:id/message", "Are you sure? Note that you have to provide a reason");
 			getDriver().findElement(By.id("android:id/button1")).click();
+			Thread.sleep(500);
+			getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/switchButton")).click();
 			Thread.sleep(500);
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
 			Thread.sleep(1000);
