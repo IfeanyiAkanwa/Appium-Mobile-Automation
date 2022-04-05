@@ -253,6 +253,10 @@ public class ForgotPassword extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/login_password")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/login_password")).sendKeys(new_password);
 		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/submit")).click();
+
+		/*wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/alertTitle")));
+		TestUtils.assertSearchText("ID","android:id/message","The device is outside its default location, but you can proceed because you have the bypass privilege.");
+		getDriver().findElement(By.id("android:id/button1")).click();*/
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
 		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Home']", "Home");
 

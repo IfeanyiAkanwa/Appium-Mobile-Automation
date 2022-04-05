@@ -18,7 +18,7 @@
         <parameter name="deviceNo" value="1"/>
 
         <classes>
-            <class name="admin.Login">
+            <!--<class name="admin.Login">
                 <methods>
                     <include name="usernamePasswordLogin"/>
                     <include name="fingerprintLogin"/>
@@ -55,7 +55,7 @@
                     <include name="addBarCodePrivilegeTest"/>
                     <include name="removeNewRegPrivilegeTest"/>
                 </methods>
-            </class>
+            </class>-->
             <class name="admin.ReRegistrationCapture">
                 <methods>
                     <include name="noneReRegPrivilegeTest"/>
@@ -70,7 +70,7 @@
                     <include name="disableSubscriberBypassTest"/>
                 </methods>
             </class>
-            <class name="admin.CorporateNewRegistration">
+            <!--<class name="admin.CorporateNewRegistration">
                 <methods>
                     <include name="noneCorporatePrivilegeTest"/>
                     <include name="CorporatePrivilegesTest"/>
@@ -213,7 +213,7 @@
                     <include name="changeBackToOldPassword"/>
                     <include name="loginWithOldPassword"/>
                 </methods>
-            </class>
+            </class>-->
         </classes>
     </test>
 </suite>
