@@ -53,7 +53,7 @@ public class TestBase {
 	public String local = "local";
 	public String remoteJenkins = "remote-jenkins";
 	public String remoteBrowserStack = "remote-browserStack";
-	public static String serviceUrl = "https://kycphase2test.seamfix.com:8195";
+	public static String serviceUrl = "https://kycphase2test.gloworld.com:8443";
 	public static String Id = ".glo";
 	public static int waitTime = 60;
 	public static boolean releaseRegItem=false;
@@ -241,7 +241,7 @@ public class TestBase {
 				capabilities.setCapability("appPackage", "com.sf.biocapture.activity" +Id);
 				capabilities.setCapability("appActivity", "com.sf.biocapture.activity.SplashScreenActivity");
 
-				driver.set(new AndroidDriver(new URL("http://0.0.0.0:4723/wd/hub"), capabilities));
+				driver.set(new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities));
 				System.out.println("++++++++++UIAUTOMATOR DRIVER INSTANCE RUNNING++++++++++++");
 
 			}
@@ -279,6 +279,10 @@ public class TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/login_password")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/login_password")).sendKeys(valid_password);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/submit")).click();
+
+		/*wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/alertTitle")));
+		TestUtils.assertSearchText("ID","android:id/message","The device is outside its default location, but you can proceed because you have the bypass privilege.");
+		getDriver().findElement(By.id("android:id/button1")).click();*/
 		
 	}
 	
@@ -310,6 +314,9 @@ public class TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/login_password")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/login_password")).sendKeys(valid_password);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/submit")).click();
+		/*wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/alertTitle")));
+		TestUtils.assertSearchText("ID","android:id/message","The device is outside its default location, but you can proceed because you have the bypass privilege.");
+		getDriver().findElement(By.id("android:id/button1")).click();*/
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
 		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Home']", "Home");
 	}
@@ -451,8 +458,10 @@ public class TestBase {
 				getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/nin")).sendKeys(nin);
 				Thread.sleep(1000);
 				getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/proceed_button")).click();
+				Thread.sleep(2500);
 			}catch (Exception e1){
 				System.out.println(e1);
+				Thread.sleep(10000);
 				wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/continue_btn")));
 				getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/continue_btn")).click();
 
@@ -498,6 +507,7 @@ public class TestBase {
 		}
 
 		try{
+			getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/switchButton")).click();
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")));
 
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
@@ -508,9 +518,18 @@ public class TestBase {
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/buttonCapturePicture")).click();
 		}
 		Thread.sleep(3000);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
-		TestUtils.assertSearchText("ID", "android:id/message", "Subscriber's face was successfully captured");
-		getDriver().findElement(By.id("android:id/button1")).click();
+
+		try{
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/alertTitle")));
+			TestUtils.assertSearchText("ID","android:id/message","Cropped image did not pass validation Do you want to proceed with original image?");
+			getDriver().findElement(By.id("android:id/button2")).click();
+		}catch (Exception e) {
+
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
+			TestUtils.assertSearchText("ID", "android:id/message", "Subscriber's face was successfully captured");
+			getDriver().findElement(By.id("android:id/button1")).click();
+
+		}
 		Thread.sleep(500);
 
 		//Fingerprint capture/
@@ -531,6 +550,8 @@ public class TestBase {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
 		TestUtils.assertSearchText("ID", "android:id/message", "Are you sure? Note that you have to provide a reason");
 		getDriver().findElement(By.id("android:id/button1")).click();
+		Thread.sleep(500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/switchButton")).click();
 		Thread.sleep(500);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
 		Thread.sleep(1000);
@@ -554,6 +575,8 @@ public class TestBase {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
 		TestUtils.assertSearchText("ID", "android:id/message", "Are you sure? Note that you have to provide a reason");
 		getDriver().findElement(By.id("android:id/button1")).click();
+		Thread.sleep(1000);
+		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/switchButton")).click();
 		Thread.sleep(1000);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
 		Thread.sleep(1000);

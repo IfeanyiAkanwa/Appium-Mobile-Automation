@@ -835,7 +835,7 @@ public class NewRegistration extends TestBase {
 		Thread.sleep(500);
 
 		// Confirm user cannot add more than MAX(2) msisdn per registration
-		TestUtils.testTitle("Confirm user cannot add more than MAX(2) msisdn per registration: " + valid_fixed_msisdn + " and SIM Serial: " + valid_fixed_serial);
+		/*TestUtils.testTitle("Confirm user cannot add more than MAX(2) msisdn per registration: " + valid_fixed_msisdn + " and SIM Serial: " + valid_fixed_serial);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).sendKeys(valid_fixed_msisdn);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simSerialField")).clear();
@@ -865,7 +865,7 @@ public class NewRegistration extends TestBase {
 				+ "0908,0909,0705,0805,0807,0811,0815,0905,0915,0703,0706,0803,"
 				+ "0806,0810,0813,0814,0816,0903,0906 and must be 11 digits");
 		getDriver().findElement(By.id("android:id/button1")).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")));*/
 		Thread.sleep(500);
 
 		// To confirm that the check is applied on Aternative Phone number input fields on Demographics
@@ -975,7 +975,7 @@ public class NewRegistration extends TestBase {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")));
 		Thread.sleep(500);
 		//Third MSISDN
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).clear();
+		/*getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).sendKeys(valid_fixed_msisdn);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simSerialField")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simSerialField")).sendKeys(valid_fixed_serial);
@@ -984,7 +984,7 @@ public class NewRegistration extends TestBase {
 		TestUtils.assertSearchText("ID", "android:id/message", "You are not allowed to capture more than 2 MSISDN and SIM Serial in one registration");
 		getDriver().findElement(By.id("android:id/button1")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")));
-		Thread.sleep(500);
+		Thread.sleep(500);*/
 
 		//Remove First MSISDN
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/delete_button")).click();
@@ -1031,7 +1031,6 @@ public class NewRegistration extends TestBase {
 		getDriver().findElement(By.id("android:id/button1")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")));
 		Thread.sleep(500);
-
 
 		// Proceed after supplying invalid msisdn and sim serial
 		TestUtils.testTitle("Proceed after supplying invalid msisdn: (" + invalid_msisdn + ") and invalid sim serial: (" + invalid_simSerial + ") for validation");
@@ -1087,6 +1086,7 @@ public class NewRegistration extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simSerialField")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simSerialField")).sendKeys(valid_simSerial2);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/addMsisdnSimSerialButton")).click();
+		Thread.sleep(1000);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
 		TestUtils.assertSearchText("ID", "android:id/message", "Msisdn is valid");
 		getDriver().findElement(By.id("android:id/button1")).click();
