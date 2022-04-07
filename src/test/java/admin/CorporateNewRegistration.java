@@ -410,7 +410,7 @@ public class CorporateNewRegistration extends TestBase {
                 "4. Corporate Category");
         TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='Select Corporate User Type']", "Select Corporate User Type");
         TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='Select MSISDN Category']", "Select MSISDN Category");
-        TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='Select Category']", "Select Category");
+        TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='Select Corporate Category']", "Select Corporate Category");
         TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/msisdnField", "Enter Phone Number");
 
         //To ensure user cannot proceed without picking/inputting a value for the FF fields
@@ -433,7 +433,7 @@ public class CorporateNewRegistration extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/categorySpinner")).click();
         try{
             TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='CORPORATE']", "CORPORATE");
-            TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='IOT']", "IOT");
+            //TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='IOT']", "IOT");
             getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='CORPORATE']")).click();
         }catch(Exception e){
             TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='Corporate']", "Corporate");
@@ -622,7 +622,7 @@ public class CorporateNewRegistration extends TestBase {
         if (info.contains("Click the download button to get the template file. It will be saved in Download folder. NOTE: The following fields are compulsory; MSISDN, SIM Serial, NIN, MSISDN Category and User Category (Possible values are PRIMARY_TM, SECONDARY_TM, CHILD).")){
             testInfo.get().info(info);
         }
-        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/downloadCsvTempBtn", "Download CSV Template");
+        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/downloadCsvTempBtn", "Download Bulk Template");
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/downloadCsvTempBtn")).click();
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/uploadButton")).click();
         TestUtils.scrollUntilElementIsVisible("XPATH", "//android.widget.TextView[@text='Download']");
@@ -671,6 +671,7 @@ public class CorporateNewRegistration extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/addMsisdnButton")).click();
         Thread.sleep(500);
         getDriver().findElement(By.id("android:id/button1")).click();
+        Thread.sleep(500);
         getDriver().findElement(By.id("android:id/button1")).click();
 
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/addChildMsisdnButton")).click();
@@ -687,27 +688,17 @@ public class CorporateNewRegistration extends TestBase {
         getDriver().findElement(By.xpath("//android.widget.TextView[@text='CorporateRegistration.csv']")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
         TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/alertTitle", "First Level Check Complete");
-        totalNo=getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/androidx.appcompat.widget.LinearLayoutCompat/android.widget.FrameLayout/android.widget.ListView/android.widget.TextView[1]")).getText();
+        totalNo=getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/tv_total")).getText();
         testInfo.get().info(totalNo);
-        validNo=getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/androidx.appcompat.widget.LinearLayoutCompat/android.widget.FrameLayout/android.widget.ListView/android.widget.TextView[2]")).getText();
+        validNo=getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/tv_valid")).getText();
         testInfo.get().info(validNo);
-        invalidNo=getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/androidx.appcompat.widget.LinearLayoutCompat/android.widget.FrameLayout/android.widget.ListView/android.widget.TextView[3]")).getText();
+        invalidNo=getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/tv_invalid")).getText();
         testInfo.get().info(invalidNo);
-        TestUtils.assertSearchText("ID", "android:id/button1", "DOWNLOAD");
-        TestUtils.assertSearchText("ID", "android:id/button2", "PROCEED");
-        getDriver().findElement(By.id("android:id/button2")).click();
-        //Second Level Check
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
-        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/alertTitle", "Second Level Check Complete");
-        totalNo=getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/androidx.appcompat.widget.LinearLayoutCompat/android.widget.FrameLayout/android.widget.ListView/android.widget.TextView[1]")).getText();
-        testInfo.get().info(totalNo);
-        validNo=getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/androidx.appcompat.widget.LinearLayoutCompat/android.widget.FrameLayout/android.widget.ListView/android.widget.TextView[2]")).getText();
-        testInfo.get().info(validNo);
-        invalidNo=getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/androidx.appcompat.widget.LinearLayoutCompat/android.widget.FrameLayout/android.widget.ListView/android.widget.TextView[3]")).getText();
-        testInfo.get().info(invalidNo);
-        TestUtils.assertSearchText("ID", "android:id/button1", "DOWNLOAD");
-        TestUtils.assertSearchText("ID", "android:id/button2", "PROCEED");
-        getDriver().findElement(By.id("android:id/button2")).click();
+       // TestUtils.assertSearchText("ID", "android:id/button1", "DOWNLOAD");
+        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity.glo:id/bt_proceed", "Proceed");
+        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/bt_proceed")).click();
+        //getDriver().findElement(By.id("android:id/button2")).click();
+        Thread.sleep(10000);
 
         //Child MSISDN check
         TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/alertTitle", "Corporate New Registration");
@@ -716,6 +707,22 @@ public class CorporateNewRegistration extends TestBase {
         String inValidChild=getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/androidx.appcompat.widget.LinearLayoutCompat/android.widget.FrameLayout/android.widget.ListView/android.widget.TextView[2]")).getText();
         testInfo.get().info(inValidChild);
         getDriver().findElement(By.id("android:id/button1")).click();
+
+        //Second Level Check
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
+        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/alertTitle", "Second Level Check Complete");
+        /*totalNo=getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/androidx.appcompat.widget.LinearLayoutCompat/android.widget.FrameLayout/android.widget.ListView/android.widget.TextView[1]")).getText();
+        testInfo.get().info(totalNo);
+        validNo=getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/androidx.appcompat.widget.LinearLayoutCompat/android.widget.FrameLayout/android.widget.ListView/android.widget.TextView[2]")).getText();
+        testInfo.get().info(validNo);
+        invalidNo=getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/androidx.appcompat.widget.LinearLayoutCompat/android.widget.FrameLayout/android.widget.ListView/android.widget.TextView[3]")).getText();
+        testInfo.get().info(invalidNo);
+        TestUtils.assertSearchText("ID", "android:id/button1", "DOWNLOAD");
+        TestUtils.assertSearchText("ID", "android:id/button2", "PROCEED");*/
+        //getDriver().findElement(By.id("android:id/button2")).click();
+        getDriver().findElement(By.id("android:id/button1")).click();
+
+
 
         //To confirm that the Child Msisdn button is greyed out after successful upload
         TestUtils.testTitle("To confirm that the Child Msisdn button is greyed out after successful upload");
@@ -746,6 +753,7 @@ public class CorporateNewRegistration extends TestBase {
         captureFingerPrint();
 
         //NIN verification
+        Thread.sleep(10000);
         TestUtils.verifyNINTest(nin, ninVerificationMode);
 
         Form.CorporateRegFormAutoPopulate(dataEnv);
@@ -786,6 +794,7 @@ public class CorporateNewRegistration extends TestBase {
         CorporateNewRegistration.captureFingerPrint();
 
         //NIN verification
+        Thread.sleep(10000);
         TestUtils.verifyNINTest(nin2, ninVerificationMode);
 
         Form.CorporateRegFormAutoPopulate(dataEnv);
@@ -867,6 +876,8 @@ public class CorporateNewRegistration extends TestBase {
         TestUtils.assertSearchText("ID", "android:id/message", "Are you sure? Note that you have to provide a reason");
         getDriver().findElement(By.id("android:id/button1")).click();
         Thread.sleep(500);
+        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/switchButton")).click();
+        Thread.sleep(500);
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
         Thread.sleep(1000);
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/ok")).click();
@@ -889,6 +900,8 @@ public class CorporateNewRegistration extends TestBase {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
         TestUtils.assertSearchText("ID", "android:id/message", "Are you sure? Note that you have to provide a reason");
         getDriver().findElement(By.id("android:id/button1")).click();
+        Thread.sleep(500);
+        getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/switchButton")).click();
         Thread.sleep(500);
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
         Thread.sleep(1000);
