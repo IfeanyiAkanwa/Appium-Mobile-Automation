@@ -105,6 +105,7 @@ public class VerifyNinStandAlone extends TestBase {
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/search_field")).sendKeys(nin);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/btn_search")));
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btn_search")).click();
+        Thread.sleep(5000);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
         TestUtils.assertSearchText("ID", "android:id/message", "NIN Verification successful");
         getDriver().findElement(By.id("android:id/button1")).click();
@@ -269,7 +270,7 @@ public class VerifyNinStandAlone extends TestBase {
 
     }
 
-    @Parameters ({"dataEnv"})
+    /*@Parameters ({"dataEnv"})
     @Test
     public static void verifyByPhoneTest(String dataEnv) throws Exception {
 
@@ -363,9 +364,10 @@ public class VerifyNinStandAlone extends TestBase {
         }catch (Exception e){
 
         }
-    }
+    }*/
 
-    @Parameters ({"dataEnv"})
+
+    /*@Parameters ({"dataEnv"})
     @Test
     public static void verifyByDemographicsTest(String dataEnv) throws Exception {
 
@@ -435,9 +437,9 @@ public class VerifyNinStandAlone extends TestBase {
             getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/ok_button")).click();
         }
 
-    }
+    }*/
 
-    @Parameters ({"dataEnv"})
+    /*@Parameters ({"dataEnv"})
     @Test
     public static void verifyByDocumentNoTest(String dataEnv) throws Exception {
 
@@ -548,9 +550,9 @@ public class VerifyNinStandAlone extends TestBase {
             testInfo.get().error("Could not proceed to NIMC detail page("+e+")");
         }
 
-    }
+    }*/
 
-    @Parameters ({"dataEnv"})
+   /* @Parameters ({"dataEnv"})
     @Test
     public static void verifyByTransactionIdTest(String dataEnv) throws Exception {
 
@@ -616,5 +618,5 @@ public class VerifyNinStandAlone extends TestBase {
         }catch (Exception e){
             testInfo.get().error("Could not proceed to NIMC detail page("+e+")");
         }
-    }
+    }*/
 }

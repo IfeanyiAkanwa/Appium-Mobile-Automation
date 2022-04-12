@@ -35,7 +35,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class TestBase {
-	
+
 	String devices;
 	static String[] udid;
 
@@ -54,6 +54,7 @@ public class TestBase {
 	public String remoteJenkins = "remote-jenkins";
 	public String remoteBrowserStack = "remote-browserStack";
 	public static String serviceUrl = "https://kycphase2test.gloworld.com:8443";
+	public static String simropUrl = "https://simroptest.gloworld.com";
 	public static String Id = ".glo";
 	public static int waitTime = 60;
 	public static boolean releaseRegItem=false;
@@ -63,24 +64,24 @@ public class TestBase {
 		return driver.get();
 	}
 
-	 @Parameters ("dataEnv")
-		public static String myUrl(String dataEnv) throws IOException, ParseException {
-	    	JSONParser parser = new JSONParser();
-			JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
-			JSONObject envs = (JSONObject) config.get("LandingPage_Url");
+	@Parameters ("dataEnv")
+	public static String myUrl(String dataEnv) throws IOException, ParseException {
+		JSONParser parser = new JSONParser();
+		JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
+		JSONObject envs = (JSONObject) config.get("LandingPage_Url");
 
-			String stagingUrl = (String) envs.get("stagingUrl");
-			String prodUrl = (String) envs.get("prodUrl");
-			
-			String myUrl = null;
-			if(dataEnv.equalsIgnoreCase("stagingData")) {
-				myUrl = System.getProperty("instance-url", stagingUrl);
-			} else
-			{
-				myUrl = System.getProperty("instance-url", prodUrl);
-			}
-			return myUrl;
+		String stagingUrl = (String) envs.get("stagingUrl");
+		String prodUrl = (String) envs.get("prodUrl");
+
+		String myUrl = null;
+		if(dataEnv.equalsIgnoreCase("stagingData")) {
+			myUrl = System.getProperty("instance-url", stagingUrl);
+		} else
+		{
+			myUrl = System.getProperty("instance-url", prodUrl);
 		}
+		return myUrl;
+	}
 
 	@Parameters({"groupReport", "dataEnv"})
 	@BeforeSuite
@@ -121,7 +122,7 @@ public class TestBase {
 
 		if (result.getStatus() == ITestResult.FAILURE) {
 			String screenshotPath = TestUtils.addScreenshot();
-            testInfo.get().addScreenCaptureFromBase64String(screenshotPath);
+			testInfo.get().addScreenCaptureFromBase64String(screenshotPath);
 			testInfo.get().fail(result.getThrowable());
 		} else if (result.getStatus() == ITestResult.SKIP)
 			testInfo.get().skip(result.getThrowable());
@@ -152,50 +153,50 @@ public class TestBase {
 		if (server.equals(remoteBrowserStack)) {
 			File path = null;
 			File classpathRoot = new File(System.getProperty("user.dir"));
-			path = new File(classpathRoot, "resources/conf/"+testConfig); 
+			path = new File(classpathRoot, "resources/conf/"+testConfig);
 			System.out.println(path);
 			JSONParser parser = new JSONParser();
-	        JSONObject config = (JSONObject) parser.parse(new FileReader(path));
-	        JSONObject envs = (JSONObject) config.get("environments");
+			JSONObject config = (JSONObject) parser.parse(new FileReader(path));
+			JSONObject envs = (JSONObject) config.get("environments");
 
-	        DesiredCapabilities capabilities = new DesiredCapabilities();
+			DesiredCapabilities capabilities = new DesiredCapabilities();
 
 			Map<String, String> envCapabilities = (Map<String, String>) envs.get(deviceName);
-	        Iterator it = envCapabilities.entrySet().iterator();
-	        while (it.hasNext()) {
-	            Map.Entry pair = (Map.Entry)it.next();
-	            capabilities.setCapability(pair.getKey().toString(), pair.getValue().toString());
-	        }
-	        
-	        Map<String, String> commonCapabilities = (Map<String, String>) config.get("capabilities");
-	        it = commonCapabilities.entrySet().iterator();
-	        while (it.hasNext()) {
-	            Map.Entry pair = (Map.Entry)it.next();
-	            if(capabilities.getCapability(pair.getKey().toString()) == null){
-	                capabilities.setCapability(pair.getKey().toString(), pair.getValue().toString());
-	            }
-	        }
+			Iterator it = envCapabilities.entrySet().iterator();
+			while (it.hasNext()) {
+				Map.Entry pair = (Map.Entry)it.next();
+				capabilities.setCapability(pair.getKey().toString(), pair.getValue().toString());
+			}
 
-	        String username = System.getenv("BROWSERSTACK_USERNAME");
-	        if(username == null) {
-	            username = (String) config.get("user");
-	        }
+			Map<String, String> commonCapabilities = (Map<String, String>) config.get("capabilities");
+			it = commonCapabilities.entrySet().iterator();
+			while (it.hasNext()) {
+				Map.Entry pair = (Map.Entry)it.next();
+				if(capabilities.getCapability(pair.getKey().toString()) == null){
+					capabilities.setCapability(pair.getKey().toString(), pair.getValue().toString());
+				}
+			}
 
-	        String accessKey = System.getenv("BROWSERSTACK_ACCESS_KEY");
-	        if(accessKey == null) {
-	            accessKey = (String) config.get("key");
-	        }
+			String username = System.getenv("BROWSERSTACK_USERNAME");
+			if(username == null) {
+				username = (String) config.get("user");
+			}
 
-	        String app = System.getenv("BROWSERSTACK_APP_ID");
-	        if(app != null && !app.isEmpty()) {
-	          capabilities.setCapability("app", app);
-	        }
+			String accessKey = System.getenv("BROWSERSTACK_ACCESS_KEY");
+			if(accessKey == null) {
+				accessKey = (String) config.get("key");
+			}
 
-	        if(capabilities.getCapability("browserstack.local") != null && capabilities.getCapability("browserstack.local") == "true"){
-	        	
-	        }
+			String app = System.getenv("BROWSERSTACK_APP_ID");
+			if(app != null && !app.isEmpty()) {
+				capabilities.setCapability("app", app);
+			}
 
-	        
+			if(capabilities.getCapability("browserstack.local") != null && capabilities.getCapability("browserstack.local") == "true"){
+
+			}
+
+
 			driver.set(new AndroidDriver<AndroidElement>(
 					new URL("https://" + userName + ":" + accessKey + "@hub-cloud.browserstack.com/wd/hub"), capabilities));
 
@@ -269,7 +270,7 @@ public class TestBase {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/otp_login")));
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/otp_login")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/login_username")));
-		
+
 		// Select Login mode
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/login_mode_types_spinner")).click();
 		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Biosmart']")).click();
@@ -283,9 +284,9 @@ public class TestBase {
 		/*wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/alertTitle")));
 		TestUtils.assertSearchText("ID","android:id/message","The device is outside its default location, but you can proceed because you have the bypass privilege.");
 		getDriver().findElement(By.id("android:id/button1")).click();*/
-		
+
 	}
-	
+
 	@Parameters ({"dataEnv"})
 	@Test
 	public static void Login(String dataEnv) throws InterruptedException, IOException, ParseException {
@@ -298,12 +299,12 @@ public class TestBase {
 	@Test
 	public static void Login1(String valid_username, String valid_password) throws Exception {
 		WebDriverWait wait = new WebDriverWait(getDriver(), 40);
-	
+
 		TestUtils.testTitle("Login with a valid username: ( " + valid_username + " ) and valid password: ( "  + valid_password + " )");
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/otp_login")));
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/otp_login")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/login_username")));
-		
+
 		// Select Login mode
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/login_mode_types_spinner")).click();
 		Thread.sleep(1000);
@@ -338,11 +339,11 @@ public class TestBase {
 		getDriver().findElement(By.id("android:id/button3")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/otp_login")));
 	}
-	
+
 	@Test
 	public static void navigateToCaptureMenuTest() {
 		WebDriverWait wait = new WebDriverWait(getDriver(), 5);
-		
+
 		// Navigate to Registration Type
 		TestUtils.testTitle("Navigate to Registration Type");
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
@@ -353,7 +354,7 @@ public class TestBase {
 
 	@Test
 	public static int verifyNINTest(String nin, String ninVerificationMode) throws InterruptedException {
-		WebDriverWait wait = new WebDriverWait(getDriver(), 25);
+		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
 		//ninStatus is set to available automatically
 		int ninStatus=1;
 		//Proceed to NIN Verification View
@@ -389,6 +390,9 @@ public class TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/nin")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/nin")).sendKeys(nin);
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/capture_button")).click();
+
+		//wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Verifying NIN…']")));
+		Thread.sleep(1000);
 
 		try{
 			//NIN Details View
@@ -445,7 +449,7 @@ public class TestBase {
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/accept_button")).click();
 
 		}catch (Exception e){
-            System.out.println(e);
+			System.out.println(e);
 			//Nin is not available
 			ninStatus=0;
 			Thread.sleep(1000);
