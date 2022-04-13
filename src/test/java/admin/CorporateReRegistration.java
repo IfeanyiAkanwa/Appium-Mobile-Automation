@@ -567,26 +567,24 @@ public class CorporateReRegistration extends TestBase {
             } catch (Exception e1) {
 
             }
-            reportHomepage(totalSubVal, totalSyncsentVal, totalSyncpendingVal, totalSynConfVal, totalRejectVal);
+            ReRegistrationCapture.reportHomepage(totalSubVal, totalSyncsentVal, totalSyncpendingVal, totalSynConfVal, totalRejectVal);
         }
         //Release Item
-            String quarantineRegPk = ConnectDB.selectQueryOnTable("bfp_sync_log", "msisdn", valid_msisdn, "pk");
-            String uniqueId = ConnectDB.selectQueryOnTable("bfp_sync_log", "msisdn", valid_msisdn, "unique_id");
+        String quarantineRegPk = ConnectDB.selectQueryOnTable("bfp_sync_log", "msisdn", valid_msisdn, "pk");
+        String uniqueId = ConnectDB.selectQueryOnTable("bfp_sync_log", "msisdn", valid_msisdn, "unique_id");
 
-            //Release quarantine item
-            TestUtils.testTitle("Release the quarantined item(" + quarantineRegPk + ")");
-            Thread.sleep(1500);
-            JSONObject payload = new JSONObject();
-            payload.put("quarantineRegPk", quarantineRegPk);
-            payload.put("uniqueId", uniqueId);
-            payload.put("feedback", "test");
-            payload.put("loggedInUserId", "2067");
-            TestUtils.releaseActionApiCall(dataEnv, payload);
-
-
-            ConnectDB.query(uniqueId, dataEnv, "CR");
+        //Release quarantine item
+        TestUtils.testTitle("Release the quarantined item(" + quarantineRegPk + ")");
+        Thread.sleep(1500);
+        JSONObject payload = new JSONObject();
+        payload.put("quarantineRegPk", quarantineRegPk);
+        payload.put("uniqueId", uniqueId);
+        payload.put("feedback", "test");
+        payload.put("loggedInUserId", "2067");
+        TestUtils.releaseActionApiCall(dataEnv, payload);
 
 
+        ConnectDB.query(uniqueId, dataEnv, "CR");
 
         TestUtils.assertCNDetailsTables(valid_msisdn);
 
@@ -701,66 +699,4 @@ public class CorporateReRegistration extends TestBase {
         Thread.sleep(500);
     }
 
-
-    public static void reportHomepage(int totalSubVal, int totalSyncsentVal, int totalSyncpendingVal, int totalSynConfVal, int totalRejectVal) throws Exception {
-
-        WebDriverWait wait = new WebDriverWait(getDriver(), 30);
-
-        //
-        navigateToReportsPage();
-        Thread.sleep(1000);
-        TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/refresh_button");
-        Thread.sleep(1000);
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/refresh_button")).click();
-        Thread.sleep(1000);
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btn_back_home")).click();
-        Thread.sleep(1000);
-        navigateToReportsPage();
-        Thread.sleep(1000);
-
-        String totalRegistrationsValString = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/reg_subscribers")).getText();
-        String totalSyncSentValString = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/total_sync_sent")).getText();
-        String totalSyncPendingValString = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/total_pending")).getText();
-        String totalSyncConfirmedValString = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/sync_confirmed")).getText();
-        String total_rejectedValString = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/total_rejected")).getText();
-
-        int actualTotalRegistrationsVal = TestUtils.convertToInt(totalRegistrationsValString);
-        int actualTotalSyncSentVal = TestUtils.convertToInt(totalSyncSentValString);
-        int actualTotalSyncPendingVal = TestUtils.convertToInt(totalSyncPendingValString);
-        int actualTotalSyncConfirmedVal = TestUtils.convertToInt(totalSyncConfirmedValString);
-        int total_rejectedVal = TestUtils.convertToInt(total_rejectedValString);
-
-        //int expectedTotalRegistrationsVal = actualTotalSyncSentVal + actualTotalSyncPendingVal;
-
-        try {
-            totalSubVal += 1;
-            Assert.assertEquals(totalSubVal, actualTotalRegistrationsVal);
-            testInfo.get().log(Status.INFO, "Total Registrations (" + totalSubVal + ") is equal to Actual Total Reg  (" + actualTotalRegistrationsVal + ") ");
-
-            totalSyncsentVal += 1;
-            Assert.assertEquals(totalSyncsentVal, actualTotalSyncSentVal);
-            testInfo.get().log(Status.INFO, "Total Sync Sent (" + totalSyncsentVal + ") is equal to Actual Total Sync Sent  (" + actualTotalSyncSentVal + ") ");
-
-            Assert.assertEquals(totalSyncpendingVal, actualTotalSyncPendingVal);
-            testInfo.get().log(Status.INFO, "Total Sync Pending (" + totalSyncpendingVal + ") is equal to Actual Total Sync Pending  (" + actualTotalSyncPendingVal + ") ");
-
-            totalSynConfVal += 1;
-            Assert.assertEquals(totalSynConfVal, actualTotalSyncConfirmedVal);
-            testInfo.get().log(Status.INFO, "Total Sync Confirmed (" + totalSynConfVal + ") is equal to Actual Total Sync Confirmed  (" + actualTotalSyncConfirmedVal + ") ");
-
-            Assert.assertEquals(totalRejectVal, total_rejectedVal);
-            testInfo.get().log(Status.INFO, "Total Rejected (" + total_rejectedVal + ") is equal to Actual Total Rejected (" + totalRejectVal + ") ");
-
-
-        } catch (Error e) {
-
-            verificationErrors.append(e.toString());
-            String verificationErrorString = verificationErrors.toString();
-            testInfo.get().error("Summation not equal");
-            testInfo.get().error(verificationErrorString);
-        }
-
-        //Return to capture page
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btn_back_home")).click();
-    }
 }
