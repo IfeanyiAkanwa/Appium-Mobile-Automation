@@ -875,7 +875,8 @@ public class TestUtils extends TestBase {
 
     public static String releaseActionApiCall(String dataEnv, JSONObject settingData) throws IOException, org.json.simple.parser.ParseException {
 
-        RestAssured.baseURI = serviceUrl;
+        //RestAssured.baseURI = serviceUrl;
+        RestAssured.baseURI =simropUrl;
         JSONParser parser = new JSONParser();
         JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/settingsApi.conf.json"));
         JSONObject requestBody = settingData;
