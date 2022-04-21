@@ -783,7 +783,8 @@ public class TestUtils extends TestBase {
 
     public static String blockActionApiCall(String dataEnv, JSONObject settingData) throws IOException, org.json.simple.parser.ParseException {
 
-        RestAssured.baseURI = serviceUrl;
+        RestAssured.baseURI =simropUrl;
+        //RestAssured.baseURI = serviceUrl;
         JSONParser parser = new JSONParser();
         JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/settingsApi.conf.json"));
         JSONObject requestBody = settingData;
@@ -830,7 +831,8 @@ public class TestUtils extends TestBase {
 
     public static String rejectSwapApiCall(String dataEnv, JSONObject settingData) throws IOException, org.json.simple.parser.ParseException {
 
-        RestAssured.baseURI = serviceUrl;
+        RestAssured.baseURI =simropUrl;
+        //RestAssured.baseURI = serviceUrl;
         JSONParser parser = new JSONParser();
         JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/settingsApi.conf.json"));
         JSONObject requestBody = settingData;

@@ -1060,9 +1060,9 @@ public class SimSwap extends TestBase {
 
         Thread.sleep(1000);
         TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/title_header", "Subscriber Data Preview");
-        Thread.sleep(1000);
-        Asserts.AssertSwapDataPreview( "SELF",  "SIM UPGRADE",  "PREPAID",  fName,  lName,  mmn,  gender,  dob,  alternate_phone,  serial,  activation_year,  valid_Msisdn,  new_msisdn,  valid_sim_serial,  puk,  pp_nin,  email,  address,  occupation,  nationality,  state);
-        Thread.sleep(1000);
+        Thread.sleep(5000);
+       // Asserts.AssertSwapDataPreview( "SELF",  "SIM UPGRADE",  "PREPAID",  fName,  lName,  mmn,  gender,  dob,  alternate_phone,  serial,  activation_year,  valid_Msisdn,  new_msisdn,  valid_sim_serial,  puk,  pp_nin,  email,  address,  occupation,  nationality,  state);
+        //Thread.sleep(1000);
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btn_proceed")).click();
 
         Thread.sleep(1000);
@@ -1126,6 +1126,8 @@ public class SimSwap extends TestBase {
         getDriver().findElement(By.xpath("//android.widget.TextView[@text='Valid ID Card']")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/doc_capture_btn")).click();
+        Thread.sleep(500);
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/switchButton")).click();
         Thread.sleep(500);
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
         Thread.sleep(1000);
@@ -1613,6 +1615,8 @@ public class SimSwap extends TestBase {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/doc_capture_btn")).click();
         Thread.sleep(500);
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/switchButton")).click();
+        Thread.sleep(500);
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
         Thread.sleep(500);
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/ok")).click();
@@ -1630,6 +1634,8 @@ public class SimSwap extends TestBase {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/doc_capture_btn")).click();
         Thread.sleep(500);
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/switchButton")).click();
+        Thread.sleep(500);
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
         Thread.sleep(500);
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/ok")).click();
@@ -1646,6 +1652,8 @@ public class SimSwap extends TestBase {
         getDriver().findElement(By.xpath("//android.widget.TextView[@text='Valid ID Card']")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/doc_capture_btn")).click();
+        Thread.sleep(500);
+        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/switchButton")).click();
         Thread.sleep(500);
         getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
         Thread.sleep(500);
@@ -1740,6 +1748,8 @@ public class SimSwap extends TestBase {
 
 
         try{
+            getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/switchButton")).click();
+            Thread.sleep(500);
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")));
 
             getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
@@ -1749,10 +1759,16 @@ public class SimSwap extends TestBase {
 
             getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/buttonCapturePicture")).click();
         }
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
-        TestUtils.assertSearchText("ID", "android:id/message", "Subscriber's face was successfully captured");
-        getDriver().findElement(By.id("android:id/button1")).click();
-        Thread.sleep(500);
+        try{
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity.glo:id/alertTitle")));
+            TestUtils.assertSearchText("ID","android:id/message","Cropped image did not pass validation Do you want to proceed with original image?");
+            getDriver().findElement(By.id("android:id/button2")).click();
+        }catch (Exception e) {
+
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
+            TestUtils.assertSearchText("ID", "android:id/message", "Subscriber's face was successfully captured");
+            getDriver().findElement(By.id("android:id/button1")).click();
+        }
 
         //Fingerprint capture/
 
@@ -1777,6 +1793,8 @@ public class SimSwap extends TestBase {
             TestUtils.assertSearchText("ID", "android:id/message", "Are you sure? Note that you have to provide a reason");
             getDriver().findElement(By.id("android:id/button1")).click();
             Thread.sleep(500);
+            getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/switchButton")).click();
+            Thread.sleep(500);
             getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
             Thread.sleep(1000);
             getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/ok")).click();
@@ -1799,6 +1817,8 @@ public class SimSwap extends TestBase {
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
             TestUtils.assertSearchText("ID", "android:id/message", "Are you sure? Note that you have to provide a reason");
             getDriver().findElement(By.id("android:id/button1")).click();
+            Thread.sleep(500);
+            getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/switchButton")).click();
             Thread.sleep(500);
             getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
             Thread.sleep(1000);
