@@ -14,6 +14,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import demographics.Features;
 import demographics.Form;
 import utils.Asserts;
 import utils.TestBase;
@@ -404,7 +405,7 @@ public class NewRegistration extends TestBase {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")));
 		getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
 		//Log Out
-		logOutUser(noCompanyReg);
+	//	logOutUser(noCompanyReg);
 
 		//To confirm that users without the individual registration privileges  cannot perform Individual registration
 		TestUtils.testTitle("To confirm that users without the individual registration privileges  cannot perform Individual registration("+noIndividualReg+")");
@@ -444,7 +445,7 @@ public class NewRegistration extends TestBase {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")));
 		getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
 		//Log Out
-		logOutUser(noIndividualReg);
+	//	logOutUser(noIndividualReg);
 
 		//To confirm that users without both the company  and individual  registration privileges  cannot perform New registration
 		TestBase.Login1( noPrivilegeUser, generalUserPassword);
@@ -477,7 +478,7 @@ public class NewRegistration extends TestBase {
 		getDriver().findElement(By.id("android:id/button1")).click();
 		Thread.sleep(500);
 		//Log Out
-		logOutUser(noPrivilegeUser);
+	//	logOutUser(noPrivilegeUser);
 
 		//To confirm that users without the individual registration privileges  cannot perform Individual registration
 		TestUtils.testTitle("To confirm that users without the individual registration privileges  cannot perform Individual registration("+noMultiRegUser+")");
@@ -527,128 +528,12 @@ public class NewRegistration extends TestBase {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")));
 		getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
 		//Log Out
-		logOutUser(noIndividualReg);
+		//logOutUser(noIndividualReg);
 
 	}
 
-	@Test
-	public void captureReportRecords() throws InterruptedException {
-
-		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Total Subscribers']")));
-		String totalSub = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/kpi_report_value")).getText();
-		totalSubVal = TestUtils.convertToInt(totalSub);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Total Sync Sent']")));
-
-		String totalSyncsent = getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.widget.RelativeLayout/android.widget.FrameLayout[1]/androidx.viewpager.widget.ViewPager/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.TextView")).getText();
-		totalSyncsentVal = TestUtils.convertToInt(totalSyncsent);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Total Sync Pending']")));
-
-		String totalSyncpending = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/kpi_report_value")).getText();
-		totalSyncpendingVal = TestUtils.convertToInt(totalSyncpending);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Total Sync Confirmed']")));
-
-		String totalSynConf = getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.widget.RelativeLayout/android.widget.FrameLayout[1]/androidx.viewpager.widget.ViewPager/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.TextView")).getText();
-		totalSynConfVal = TestUtils.convertToInt(totalSynConf);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Total Rejected']")));
-
-		String totalReject = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/kpi_report_value")).getText();
-		totalRejectVal = TestUtils.convertToInt(totalReject);
-		Thread.sleep(3000);
-
-	}
-
-	public static void logOutUser(String valid_username) throws InterruptedException {
-		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
-		// Log out
-		TestUtils.testTitle("Logout username: "  + valid_username);
-		getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
-		Thread.sleep(500);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
-		getDriver().findElement(By.id("android:id/button2")).click();
-		Thread.sleep(1000);
-		getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
-		Thread.sleep(500);
-		TestUtils.scrollDown();
-		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Logout']")).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
-		TestUtils.assertSearchText("ID", "android:id/message", "   Log out?");
-		getDriver().findElement(By.id("android:id/button3")).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/otp_login")));
-		Thread.sleep(500);
-	}
-
-	@Parameters({ "dataEnv"})
-	@Test
-	public static void newRegUseCaseTest(String dataEnv) throws Exception {
-		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
-
-		// To confirm that a user can perform New regiatration when it is  in the list of available use case settings and user has privilege
-		TestUtils.testTitle("To confirm that a user can perform New regiatration when it is  in the list of available use case settings and user has privilege" );
-
-		// Select LGA of Registration
-		TestUtils.testTitle("Select LGA of Registration: " + lga);
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/lga_of_reg")).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/alertTitle")));
-		TestUtils.assertSearchText("ID", "android:id/alertTitle", "LGA of Registration*");
-		Thread.sleep(1000);
-		getDriver().findElement(By.xpath("//android.widget.TextView[@text='" + lga + "']")).click();
-		Thread.sleep(500);
-
-		// Select New Registration
-		TestUtils.testTitle("Select New Registration");
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/typeofreg")));
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/typeofreg")).click();
-		Thread.sleep(500);
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/alertTitle", "Select Registration Type");
-		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='New Registration']")).click();
-		Thread.sleep(500);
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/next_button")).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/pageTitle")));
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/pageTitle", "New Registration");
-
-
-	}
-
-	@Test
-	public void msisdnCategoryTest() throws InterruptedException {
-		// To confirm that the default category for registration is MOBILE
-		TestUtils.testTitle("To confirm that the default category for registration is MOBILE");
-		TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='Mobile']", "Mobile");
-		Thread.sleep(1000);
-
-		//To confirm that the MOBILE category of registration can only accept 11 digits for msisdn
-		String moreCharacters=valid_msisdn+"1234";
-		TestUtils.testTitle("To confirm that the MOBILE category of registration can only accept 11 digits for msisdn  ("+moreCharacters+")");
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).clear();
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).sendKeys(valid_msisdn);
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).clear();
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).sendKeys(moreCharacters);
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/msisdnField", valid_msisdn);
-
-		// Select Msisdn Category
-		TestUtils.testTitle("Select Mobile Msisdn Category");
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnCategorySpinner")).click();
-		Thread.sleep(1000);
-		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Fixed']")).click();
-		Thread.sleep(1000);
-		TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='Fixed']", "Fixed");
-		Thread.sleep(1000);
-
-		//To confirm that the FIXED category of registration can only accept 9 digits for msisdn
-		String priCharacters=valid_fixed_msisdn+"1234";
-		TestUtils.testTitle("To confirm that the FIXED category of registration can only accept 9 digits for msisdn  ("+priCharacters+")");
-		getDriver().findElement(By.id("android:id/text1")).click();
-		getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ListView/android.widget.CheckedTextView[2]")).click();
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).clear();
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).sendKeys(valid_fixed_msisdn);
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).clear();
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).sendKeys(priCharacters);
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/msisdnField", valid_fixed_msisdn);
-
-
-	}
-
+	
+	
 	@Parameters({ "dataEnv"})
 	@Test
 	public void NPSValidationTest(String dataEnv) throws Exception {
@@ -1053,479 +938,440 @@ public class NewRegistration extends TestBase {
 
 	@Parameters({ "dataEnv"})
 	@Test
-	public void captureIndividualSimTest(String dataEnv) throws Exception {
-		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
-
-		// Select Msisdn Category
-		TestUtils.testTitle("Select Msisdn Category");
-		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='MSISDN Category']", "MSISDN Category");
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnCategorySpinner")).click();
-		Thread.sleep(500);
-		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Mobile']")).click();
-		Thread.sleep(500);
+	public void singleMsidnValidationTest(String dataEnv) throws Exception {
+		Features.msisdnValidationOnline(dataEnv, "NMS");
 		
-
-		// Proceed after supplying multiple msisdns and sim serial
-		TestUtils.testTitle("Proceed after supplying Multiple msisdns: (" + valid_msisdn + ") and (" + valid_msisdn2 + ") for validation");
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).clear();
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).sendKeys(valid_msisdn);
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simSerialField")).clear();
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simSerialField")).sendKeys(valid_simSerial);
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/addMsisdnSimSerialButton")).click();
-		Thread.sleep(2000);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
-		Thread.sleep(2000);
-		TestUtils.assertSearchText("ID", "android:id/message", "Msisdn is valid");
-		Thread.sleep(2000);
-		getDriver().findElement(By.id("android:id/button1")).click();
-		
-		// Add another Number
-		TestUtils.testTitle("Add another Number");
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).clear();
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).sendKeys(valid_msisdn2);
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simSerialField")).clear();
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simSerialField")).sendKeys(valid_simSerial2);
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/addMsisdnSimSerialButton")).click();
-		Thread.sleep(1000);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
-		TestUtils.assertSearchText("ID", "android:id/message", "Msisdn is valid");
-		getDriver().findElement(By.id("android:id/button1")).click();
-
-		TestUtils.scrollDown();
-
-		TestUtils.testTitle("Assert First Number");
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/phone_no_view", valid_msisdn);
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/tv_sim_serial", valid_simSerial);
-
-		TestUtils.testTitle("Assert Second Number");
-		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='" + valid_msisdn2 + "']", valid_msisdn2);
-		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='" + valid_simSerial2 + "']", valid_simSerial2);
-		Thread.sleep(500);
-
-		//Remove Second MSISDN
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/delete_button")).click();
-		Thread.sleep(500);
-		try {
-			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btnCapturePortrait")).click();
-			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
-
-		}catch (Exception e){
-
-		}
-		//Select country
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/countryOfOriginSpinner")).click();
-		Thread.sleep(500);
-		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='NIGERIA']")).click();
-		Thread.sleep(500);
-
-		//BioMetrics Verification
-		TestBase.verifyBioMetricsTest();
-
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/nextButton")));
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/nextButton")).click();
-
-		//NIN Verification
-		int ninStatus=TestBase.verifyNINTest(nin, ninVerificationMode);
-		Thread.sleep(2000);
-		try{
-			getDriver().findElement(By.id("android:id/button1")).click();
-		}catch(Exception e){
-
-		}
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Personal Details']")));
-		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Personal Details']", "Personal Details");
-
-		if (ninStatus==0){
-			//Use Form that populate data itself
-			Form.individualNigerianForm(dataEnv);
-		}else{
-			//Use autoPopulated Form
-			Form.individualNigerianFormAutoPopulate(dataEnv);
-		}
-
-		/*//To confirm that the registration category is saved on DB after successful registration
-		TestUtils.testTitle("To confirm that the registration category is saved on DB after successful registration:"+valid_msisdn);
-		TestUtils.assertTableValue("msisdn_detail", "msisdn", valid_msisdn, "msisdn_category", "MOBILE");
-
-		//To confirm that if ICC platform msisdn is added during a single registration on NMS, the ICC platform name should be logged on MSISDN_DETAIL table
-		TestUtils.testTitle("To confirm that if ICC platform msisdn is added during a single registration on NMS, the ICC platform name should be logged on MSISDN_DETAIL table :"+valid_msisdn);
-		TestUtils.assertTableValue("msisdn_detail", "msisdn", valid_msisdn, "platform", "ICC3");
-
-		//Do Bulk Assert for Table checking
-		//TestUtils.assertBulkTables(valid_msisdn);
-		Thread.sleep(5000);
-		TestUtils.assertBulkTables(valid_msisdn, "NIGERIA");*/
-        if (releaseRegItem==true) {
-            String quarantineRegPk=ConnectDB.selectQueryOnTable("bfp_sync_log", "msisdn", valid_msisdn, "pk");
-            String uniqueId=ConnectDB.selectQueryOnTable("bfp_sync_log", "msisdn", valid_msisdn, "unique_id");
-
-            //Release quarantine item
-            TestUtils.testTitle("Release the quarantined item("+quarantineRegPk+")");
-            Thread.sleep(1500);
-            JSONObject payload = new JSONObject();
-            payload.put("quarantineRegPk", quarantineRegPk);
-            payload.put("uniqueId", uniqueId);
-            payload.put("feedback", "test");
-            payload.put("loggedInUserId", "2067");
-            TestUtils.releaseActionApiCall(dataEnv, payload);
-            ConnectDB.query(uniqueId, dataEnv, "NMS");
-        }
-		try {
-			getDriver().pressKeyCode(AndroidKeyCode.BACK);
-			Thread.sleep(1000);
-			getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
-			Thread.sleep(1000);
-			getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
-			Thread.sleep(1000);
-			getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
-			getDriver().findElement(By.id("android:id/button2")).click();
-			Thread.sleep(1000);
-			getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
-			//Logout
-			//TestBase.logOut(valid_msisdn);
-		}catch (Exception e){
-			try{
-				getDriver().findElement(By.id("android:id/button3")).click();
-				getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/experience_type")).click();
-				getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Network Speed']")).click();
-				getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/rating_ratingBar")).click();
-				getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/rating_btn_dialog_positive")).click();
-				TestUtils.assertSearchText("ID", "android:id/alertTitle", "Feedback sent");
-
-				getDriver().pressKeyCode(AndroidKeyCode.BACK);
-			}catch (Exception e1){
-
-			}
-			reportHomepage( totalSubVal,  totalSyncsentVal,  totalSyncpendingVal,  totalSynConfVal,  totalRejectVal);
-		}
 	}
-
+	
 	@Parameters({ "dataEnv"})
 	@Test
-	public static void captureForeignRegTest(String dataEnv) throws Exception {
-		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
-
-		try {
-			//Proceed to Capture page
-			navigateToCaptureMenuTest();
-
-			//Proceed to new reg
-			newRegUseCaseTest(dataEnv);
-		}catch(Exception e){
-
-		}
-		// Select Msisdn Category
-		TestUtils.testTitle("Select Msisdn Category");
-		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='MSISDN Category']", "MSISDN Category");
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnCategorySpinner")).click();
-		Thread.sleep(500);
-		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Mobile']")).click();
-		Thread.sleep(500);
-
-		// Proceed after supplying valid msisdns and sim serial
-		TestUtils.testTitle("Proceed after supplying valid msisdns: (" + valid_msisdn2 + ") and (" + valid_simSerial2 + ") for validation");
-
-		// Add another Number
-		TestUtils.testTitle("Add another Number");
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).clear();
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).sendKeys(valid_msisdn2);
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simSerialField")).clear();
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simSerialField")).sendKeys(valid_simSerial2);
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/addMsisdnSimSerialButton")).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
-		TestUtils.assertSearchText("ID", "android:id/message", "Msisdn is valid");
-		getDriver().findElement(By.id("android:id/button1")).click();
-
-		TestUtils.scrollDown();
-
-		TestUtils.testTitle("Assert Second Number");
-		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='" + valid_msisdn2 + "']", valid_msisdn2);
-		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='" + valid_simSerial2 + "']", valid_simSerial2);
-		Thread.sleep(500);
-
-		try {
-			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btnCapturePortrait")).click();
-			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
-
-		}catch (Exception e){
-
-		}
-		//Select country
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/countryOfOriginSpinner")).click();
-		Thread.sleep(500);
-		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='AFGHANISTAN']")).click();
-		Thread.sleep(1000);
-
-		//Fill the foreigners form here
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/title", "Foreigner Registration");
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/edPassportNumber")).clear();
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/edPassportNumber")).sendKeys(TestUtils.generatePhoneNumber());
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/spForeignerTypes")).click();
-		Thread.sleep(1000);
-		TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='Short Stay']", "Short Stay");
-		TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='ECOWAS']", "ECOWAS");
-		TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='Diplomat']", "Diplomat");
-		TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='Legal Resident(With NIN)']", "Legal Resident(With NIN)");
-		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='ECOWAS']")).click();
-
-		try{
-			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/spForeignerTypes")).click();
-			getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Short Stay']")).click();
-
-			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/edStartDate")).click();
-			getDriver().findElement(By.id("android:id/button1")).click();
-			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/edEndDate")).click();
-			getDriver().findElement(By.xpath("//android.view.View[@text='30']")).click();
-			getDriver().findElement(By.id("android:id/button1")).click();
-			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/spForeignerDocs")).click();
-			getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Visa Page']")).click();
-			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/uploadButton")).click();
-			TestUtils.scrollUp();
-			TestUtils.scrollUntilElementIsVisible("XPATH", "//android.widget.TextView[@text='picture.jpg']");
-
-			getDriver().findElement(By.xpath("//android.widget.TextView[@text='picture.jpg']")).click();
-			Thread.sleep(500);
-
-		}catch (Exception e){
-			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/spForeignerTypes")).click();
-			getDriver().findElement(By.id("//android.widget.CheckedTextView[@text='ECOWAS']")).click();
-
-		}
-		Thread.sleep(1000);
-		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/btnProceed");
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btnProceed")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/button1")));
-        getDriver().findElement(By.id("android:id/button1")).click();
-
-		//BioMetrics Verification
-		Thread.sleep(1000);
-		TestBase.verifyBioMetricsTest();
-
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/nextButton")));
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/nextButton")).click();
-
-		//NIN Verification
-		int ninStatus=0;
-
-		try{
-			getDriver().findElement(By.id("android:id/button1")).click();
-		}catch(Exception e){
-
-		}
-
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Personal Details']")));
-		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Personal Details']", "Personal Details");
-
-		if (ninStatus==0){
-			//Use Form that populate data itself
-			Form.individualForeignerForm(dataEnv);
-		}else{
-			//Use autoPopulated Form
-			Form.individualForeignerFormAutoPopulate(dataEnv);
-		}
-
-		/*//To confirm that the registration category is saved on DB after successful registration
-		TestUtils.testTitle("To confirm that the registration category is saved on DB after successful registration:"+valid_msisdn);
-		TestUtils.assertTableValue("msisdn_detail", "msisdn", valid_msisdn, "msisdn_category", "MOBILE");
-
-		//Do Bulk Assert for Table checking
-		//TestUtils.assertBulkTables(valid_msisdn);
-		Thread.sleep(5000);
-		TestUtils.assertBulkTables(valid_msisdn, "AFGHANISTAN");*/
-		String uniqueId=ConnectDB.selectQueryOnTable("bfp_sync_log", "msisdn", valid_msisdn, "pk");
-		ConnectDB.query( uniqueId, dataEnv, "FR");
-
-		try {
-			getDriver().pressKeyCode(AndroidKeyCode.BACK);
-			Thread.sleep(1000);
-			getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
-			Thread.sleep(1000);
-			getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
-			Thread.sleep(1000);
-			getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
-			getDriver().findElement(By.id("android:id/button2")).click();
-			Thread.sleep(1000);
-			getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
-			//Logout
-			//TestBase.logOut(valid_msisdn);
-		}catch (Exception e) {
-			try {
-				getDriver().findElement(By.id("android:id/button3")).click();
-				getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/experience_type")).click();
-				getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Network Speed']")).click();
-				getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/rating_ratingBar")).click();
-				getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/rating_btn_dialog_positive")).click();
-				TestUtils.assertSearchText("ID", "android:id/alertTitle", "Feedback sent");
-
-				getDriver().pressKeyCode(AndroidKeyCode.BACK);
-			} catch (Exception e1) {
-
-			}
-		}
-
+	public void navigateToCapture(String dataEnv) throws Exception {
+		Features.navigateToCapture(dataEnv, "NMS");
+		
+	}
+	
+	@Test
+	public void captureReportRecords() throws InterruptedException {
+		Features.captureReportRecords();
 	}
 
-	public static void reportHomepage(int totalSubVal, int totalSyncsentVal, int totalSyncpendingVal, int totalSynConfVal, int totalRejectVal) throws Exception {
-
-		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
-
-		//wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Total Rejected']")));
-
-		navigateToReportsPage();
-
-		String totalRegistrationsValString = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/reg_subscribers")).getText();
-		String totalSyncSentValString = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/total_sync_sent")).getText();
-		String totalSyncPendingValString = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/total_pending")).getText();
-		String totalSyncConfirmedValString = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/sync_confirmed")).getText();
-		String total_rejectedValString = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/total_rejected")).getText();
-
-		int actualTotalRegistrationsVal = TestUtils.convertToInt(totalRegistrationsValString);
-		int actualTotalSyncSentVal = TestUtils.convertToInt(totalSyncSentValString);
-		int actualTotalSyncPendingVal = TestUtils.convertToInt(totalSyncPendingValString);
-		int actualTotalSyncConfirmedVal = TestUtils.convertToInt(totalSyncConfirmedValString);
-		int total_rejectedVal = TestUtils.convertToInt(total_rejectedValString);
-
-		//int expectedTotalRegistrationsVal = actualTotalSyncSentVal + actualTotalSyncPendingVal;
-
-		try {
-			Assert.assertEquals(totalSubVal, actualTotalRegistrationsVal);
-			testInfo.get().log(Status.INFO, "Total Registrations (" + totalSubVal + ") is equal to Actual Total Reg  (" + actualTotalRegistrationsVal + ") ");
-
-			Assert.assertEquals(totalSyncsentVal, actualTotalSyncSentVal);
-			testInfo.get().log(Status.INFO, "Total Sync Sent (" + totalSyncsentVal + ") is equal to Actual Total Sync Sent  (" + actualTotalSyncSentVal + ") ");
-
-			Assert.assertEquals(totalSyncpendingVal, actualTotalSyncPendingVal);
-			testInfo.get().log(Status.INFO, "Total Sync Pending (" + totalSyncpendingVal + ") is equal to Actual Total Sync Pending  (" + actualTotalSyncPendingVal + ") ");
-
-			Assert.assertEquals(totalSynConfVal, actualTotalSyncConfirmedVal);
-			testInfo.get().log(Status.INFO, "Total Sync Confirmed (" + totalSynConfVal + ") is equal to Actual Total Sync Confirmed  (" + actualTotalSyncConfirmedVal + ") ");
-
-			Assert.assertEquals(totalRejectVal, total_rejectedVal);
-			testInfo.get().log(Status.INFO, "Total Rejected (" + total_rejectedVal + ") is equal to Actual Total Rejected (" + actualTotalSyncConfirmedVal + ") ");
-
-
-		} catch (Error e) {
-
-			verificationErrors.append(e.toString());
-			String verificationErrorString = verificationErrors.toString();
-			testInfo.get().error("Summation not equal");
-			testInfo.get().error(verificationErrorString);
-		}
-
-		//Return to capture page
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btn_back_home")).click();
-
-
-
-	}
-
+	
 	@Parameters({ "dataEnv"})
 	@Test
-	public void captureCompanyNewSimTest(String dataEnv) throws Exception {
-
-		WebDriverWait wait = new WebDriverWait(getDriver(), 15);
-		JSONParser parser = new JSONParser();
-		JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
-		JSONObject envs = (JSONObject) config.get("NewRegistration");
-
-		String valid_msisdn = (String) envs.get("valid_msisdn");
-		String valid_simSerial = (String) envs.get("valid_simSerial");
-		String lga = (String) envs.get("lga");
-		String nin = (String) envs.get("nin");
-		String ninVerificationMode = (String) envs.get("ninVerificationMode");
-
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Total Subscribers']")));
-		String totalSubBeforeCapture = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/kpi_report_value")).getText();
-		int totalSubVal = TestUtils.convertToInt(totalSubBeforeCapture);
-
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Total Sync Confirmed']")));
-		String totalSynConfBeforeCapture = getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.widget.RelativeLayout/android.widget.FrameLayout[1]/androidx.viewpager.widget.ViewPager/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.TextView")).getText();
-		int totalSynConfVal = TestUtils.convertToInt(totalSynConfBeforeCapture);
-
-		navigateToCaptureMenuTest();
-
-		// Select LGA of Registration
-		try{
-			TestUtils.testTitle("Select LGA of Registration: " + lga);
-			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/lga_of_reg")).click();
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/alertTitle")));
-			TestUtils.assertSearchText("ID", "android:id/alertTitle", "LGA of Registration*");
-			getDriver().findElement(By.xpath("//android.widget.TextView[@text='" + lga + "']")).click();
-			Thread.sleep(500);
-		}catch (Exception e){
-
-		}
-
-		// Select New Registration
-		TestUtils.testTitle("Select New Registration");
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/typeofreg")));
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/typeofreg")).click();
-		Thread.sleep(500);
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/alertTitle", "Select Registration Type");
-		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='New Registration']")).click();
-		Thread.sleep(500);
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/next_button")).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/pageTitle")));
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/pageTitle", "New Registration");
-
-		// Select Msisdn Category
-		TestUtils.testTitle("Select Mobile Msisdn Category");
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnCategorySpinner")).click();
-		Thread.sleep(500);
-		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Mobile']")).click();
-		Thread.sleep(500);
-		TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='Mobile']", "Mobile");
-		Thread.sleep(500);
-
-		// Proceed after supplying valid msisdn and Sim serial
-		TestUtils.testTitle("Proceed after supplying valid msisdn: (" + valid_msisdn + ") and valid Sim serial: (" + valid_simSerial + ")");
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).clear();
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).sendKeys(valid_msisdn);
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simSerialField")).clear();
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simSerialField")).sendKeys(valid_simSerial);
-
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/addMsisdnSimSerialButton")).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/message")));
-		TestUtils.assertSearchText("ID", "android:id/message", "Msisdn is valid");
-		getDriver().findElement(By.id("android:id/button1")).click();
-
-		TestUtils.scrollDown();
-
-		Asserts.assertAddedNumbers();
-
-
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/nextButton")).click();
-
-		//NIN Verification
-		TestBase.verifyNINTest(nin, ninVerificationMode);
-
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Personal Details']")));
-		Thread.sleep(500);
-		Form.NigerianCompanyForm(dataEnv);
-
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Total Subscribers']")));
-		String totalSubAfterCapture = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/kpi_report_value")).getText();
-		int totalSubValAf = TestUtils.convertToInt(totalSubAfterCapture);
-
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Total Sync Confirmed']")));
-		String totalSynConfAfterCapture = getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.widget.RelativeLayout/android.widget.FrameLayout[1]/androidx.viewpager.widget.ViewPager/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.TextView")).getText();
-		int totalSynConfValAf = TestUtils.convertToInt(totalSynConfAfterCapture);
-
-		testInfo.get().info("Total Subscribers Before Capture: "+totalSubBeforeCapture);
-		testInfo.get().info("Total Sync Confirmed Before Capture: "+totalSynConfBeforeCapture);
-
-		if(totalSubValAf == (totalSubVal+1)){
-			testInfo.get().info("Total Subscribers After Capture: "+totalSubValAf);
-		}else {
-			testInfo.get().error("Total Subscribers After Capture: "+totalSubValAf);
-		}
-
-		if(totalSynConfValAf == (totalSynConfVal+1)){
-			testInfo.get().info("Total Sync Confirmed After Capture: "+totalSynConfValAf);
-		}else {
-			testInfo.get().error("Total Sync Confirmed After Capture: "+totalSynConfValAf);
-		}
+	public void MultipleMsisdnValidation(String dataEnv, String country) throws Exception {
+		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+		Features.msisdnMultipleValidationTest(dataEnv, country);
+		//Select country
+		Features.selectCountry(country);
+		
 	}
+	
+
+		
+
+		
+//		//NIN Verification
+//		int ninStatus=TestBase.verifyNINTest(nin, ninVerificationMode);
+//		Thread.sleep(2000);
+//		try{
+//			getDriver().findElement(By.id("android:id/button1")).click();
+//		}catch(Exception e){
+//
+//		}
+//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Personal Details']")));
+//		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Personal Details']", "Personal Details");
+//
+//		if (ninStatus==0){
+//			//Use Form that populate data itself
+//			Form.individualNigerianForm(dataEnv);
+//		}else{
+//			//Use autoPopulated Form
+//			Form.individualNigerianFormAutoPopulate(dataEnv);
+//		}
+//
+//		/*//To confirm that the registration category is saved on DB after successful registration
+//		TestUtils.testTitle("To confirm that the registration category is saved on DB after successful registration:"+valid_msisdn);
+//		TestUtils.assertTableValue("msisdn_detail", "msisdn", valid_msisdn, "msisdn_category", "MOBILE");
+//
+//		//To confirm that if ICC platform msisdn is added during a single registration on NMS, the ICC platform name should be logged on MSISDN_DETAIL table
+//		TestUtils.testTitle("To confirm that if ICC platform msisdn is added during a single registration on NMS, the ICC platform name should be logged on MSISDN_DETAIL table :"+valid_msisdn);
+//		TestUtils.assertTableValue("msisdn_detail", "msisdn", valid_msisdn, "platform", "ICC3");
+//
+//		//Do Bulk Assert for Table checking
+//		//TestUtils.assertBulkTables(valid_msisdn);
+//		Thread.sleep(5000);
+//		TestUtils.assertBulkTables(valid_msisdn, "NIGERIA");*/
+//        if (releaseRegItem==true) {
+//            String quarantineRegPk=ConnectDB.selectQueryOnTable("bfp_sync_log", "msisdn", valid_msisdn, "pk");
+//            String uniqueId=ConnectDB.selectQueryOnTable("bfp_sync_log", "msisdn", valid_msisdn, "unique_id");
+//
+//            //Release quarantine item
+//            TestUtils.testTitle("Release the quarantined item("+quarantineRegPk+")");
+//            Thread.sleep(1500);
+//            JSONObject payload = new JSONObject();
+//            payload.put("quarantineRegPk", quarantineRegPk);
+//            payload.put("uniqueId", uniqueId);
+//            payload.put("feedback", "test");
+//            payload.put("loggedInUserId", "2067");
+//            TestUtils.releaseActionApiCall(dataEnv, payload);
+//            ConnectDB.query(uniqueId, dataEnv, "NMS");
+//        }
+//		try {
+//			getDriver().pressKeyCode(AndroidKeyCode.BACK);
+//			Thread.sleep(1000);
+//			getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
+//			Thread.sleep(1000);
+//			getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
+//			Thread.sleep(1000);
+//			getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
+//			getDriver().findElement(By.id("android:id/button2")).click();
+//			Thread.sleep(1000);
+//			getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
+//			//Logout
+//			//TestBase.logOut(valid_msisdn);
+//		}catch (Exception e){
+//			try{
+//				getDriver().findElement(By.id("android:id/button3")).click();
+//				getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/experience_type")).click();
+//				getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Network Speed']")).click();
+//				getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/rating_ratingBar")).click();
+//				getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/rating_btn_dialog_positive")).click();
+//				TestUtils.assertSearchText("ID", "android:id/alertTitle", "Feedback sent");
+//
+//				getDriver().pressKeyCode(AndroidKeyCode.BACK);
+//			}catch (Exception e1){
+//
+//			}
+//			reportHomepage( totalSubVal,  totalSyncsentVal,  totalSyncpendingVal,  totalSynConfVal,  totalRejectVal);
+//		}
+//	}
+//
+//	@Parameters({ "dataEnv"})
+//	@Test
+//	public static void captureForeignRegTest(String dataEnv) throws Exception {
+//		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+//
+//		try {
+//			//Proceed to Capture page
+//			navigateToCaptureMenuTest();
+//
+//			//Proceed to new reg
+//			newRegUseCaseTest(dataEnv);
+//		}catch(Exception e){
+//
+//		}
+//		// Select Msisdn Category
+//		TestUtils.testTitle("Select Msisdn Category");
+//		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='MSISDN Category']", "MSISDN Category");
+//		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnCategorySpinner")).click();
+//		Thread.sleep(500);
+//		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Mobile']")).click();
+//		Thread.sleep(500);
+//
+//		// Proceed after supplying valid msisdns and sim serial
+//		TestUtils.testTitle("Proceed after supplying valid msisdns: (" + valid_msisdn2 + ") and (" + valid_simSerial2 + ") for validation");
+//
+//		// Add another Number
+//		TestUtils.testTitle("Add another Number");
+//		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).clear();
+//		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).sendKeys(valid_msisdn2);
+//		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simSerialField")).clear();
+//		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simSerialField")).sendKeys(valid_simSerial2);
+//		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/addMsisdnSimSerialButton")).click();
+//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
+//		TestUtils.assertSearchText("ID", "android:id/message", "Msisdn is valid");
+//		getDriver().findElement(By.id("android:id/button1")).click();
+//
+//		TestUtils.scrollDown();
+//
+//		TestUtils.testTitle("Assert Second Number");
+//		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='" + valid_msisdn2 + "']", valid_msisdn2);
+//		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='" + valid_simSerial2 + "']", valid_simSerial2);
+//		Thread.sleep(500);
+//
+//		try {
+//			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btnCapturePortrait")).click();
+//			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
+//
+//		}catch (Exception e){
+//
+//		}
+//		//Select country
+//		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/countryOfOriginSpinner")).click();
+//		Thread.sleep(500);
+//		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='AFGHANISTAN']")).click();
+//		Thread.sleep(1000);
+//
+//		//Fill the foreigners form here
+//		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/title", "Foreigner Registration");
+//		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/edPassportNumber")).clear();
+//		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/edPassportNumber")).sendKeys(TestUtils.generatePhoneNumber());
+//		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/spForeignerTypes")).click();
+//		Thread.sleep(1000);
+//		TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='Short Stay']", "Short Stay");
+//		TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='ECOWAS']", "ECOWAS");
+//		TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='Diplomat']", "Diplomat");
+//		TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='Legal Resident(With NIN)']", "Legal Resident(With NIN)");
+//		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='ECOWAS']")).click();
+//
+//		try{
+//			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/spForeignerTypes")).click();
+//			getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Short Stay']")).click();
+//
+//			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/edStartDate")).click();
+//			getDriver().findElement(By.id("android:id/button1")).click();
+//			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/edEndDate")).click();
+//			getDriver().findElement(By.xpath("//android.view.View[@text='30']")).click();
+//			getDriver().findElement(By.id("android:id/button1")).click();
+//			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/spForeignerDocs")).click();
+//			getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Visa Page']")).click();
+//			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/uploadButton")).click();
+//			TestUtils.scrollUp();
+//			TestUtils.scrollUntilElementIsVisible("XPATH", "//android.widget.TextView[@text='picture.jpg']");
+//
+//			getDriver().findElement(By.xpath("//android.widget.TextView[@text='picture.jpg']")).click();
+//			Thread.sleep(500);
+//
+//		}catch (Exception e){
+//			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/spForeignerTypes")).click();
+//			getDriver().findElement(By.id("//android.widget.CheckedTextView[@text='ECOWAS']")).click();
+//
+//		}
+//		Thread.sleep(1000);
+//		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/btnProceed");
+//		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btnProceed")).click();
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/button1")));
+//        getDriver().findElement(By.id("android:id/button1")).click();
+//
+//		//BioMetrics Verification
+//		Thread.sleep(1000);
+//		TestBase.verifyBioMetricsTest();
+//
+//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/nextButton")));
+//		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/nextButton")).click();
+//
+//		//NIN Verification
+//		int ninStatus=0;
+//
+//		try{
+//			getDriver().findElement(By.id("android:id/button1")).click();
+//		}catch(Exception e){
+//
+//		}
+//
+//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Personal Details']")));
+//		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Personal Details']", "Personal Details");
+//
+//		if (ninStatus==0){
+//			//Use Form that populate data itself
+//			Form.individualForeignerForm(dataEnv);
+//		}else{
+//			//Use autoPopulated Form
+//			Form.individualForeignerFormAutoPopulate(dataEnv);
+//		}
+//
+//		/*//To confirm that the registration category is saved on DB after successful registration
+//		TestUtils.testTitle("To confirm that the registration category is saved on DB after successful registration:"+valid_msisdn);
+//		TestUtils.assertTableValue("msisdn_detail", "msisdn", valid_msisdn, "msisdn_category", "MOBILE");
+//
+//		//Do Bulk Assert for Table checking
+//		//TestUtils.assertBulkTables(valid_msisdn);
+//		Thread.sleep(5000);
+//		TestUtils.assertBulkTables(valid_msisdn, "AFGHANISTAN");*/
+//		String uniqueId=ConnectDB.selectQueryOnTable("bfp_sync_log", "msisdn", valid_msisdn, "pk");
+//		ConnectDB.query( uniqueId, dataEnv, "FR");
+//
+//		try {
+//			getDriver().pressKeyCode(AndroidKeyCode.BACK);
+//			Thread.sleep(1000);
+//			getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
+//			Thread.sleep(1000);
+//			getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
+//			Thread.sleep(1000);
+//			getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
+//			getDriver().findElement(By.id("android:id/button2")).click();
+//			Thread.sleep(1000);
+//			getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
+//			//Logout
+//			//TestBase.logOut(valid_msisdn);
+//		}catch (Exception e) {
+//			try {
+//				getDriver().findElement(By.id("android:id/button3")).click();
+//				getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/experience_type")).click();
+//				getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Network Speed']")).click();
+//				getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/rating_ratingBar")).click();
+//				getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/rating_btn_dialog_positive")).click();
+//				TestUtils.assertSearchText("ID", "android:id/alertTitle", "Feedback sent");
+//
+//				getDriver().pressKeyCode(AndroidKeyCode.BACK);
+//			} catch (Exception e1) {
+//
+//			}
+//		}
+//
+//	}
+
+//	public static void reportHomepage(int totalSubVal, int totalSyncsentVal, int totalSyncpendingVal, int totalSynConfVal, int totalRejectVal) throws Exception {
+//
+//		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+//
+//		//wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Total Rejected']")));
+//
+//		navigateToReportsPage();
+//
+//		String totalRegistrationsValString = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/reg_subscribers")).getText();
+//		String totalSyncSentValString = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/total_sync_sent")).getText();
+//		String totalSyncPendingValString = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/total_pending")).getText();
+//		String totalSyncConfirmedValString = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/sync_confirmed")).getText();
+//		String total_rejectedValString = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/total_rejected")).getText();
+//
+//		int actualTotalRegistrationsVal = TestUtils.convertToInt(totalRegistrationsValString);
+//		int actualTotalSyncSentVal = TestUtils.convertToInt(totalSyncSentValString);
+//		int actualTotalSyncPendingVal = TestUtils.convertToInt(totalSyncPendingValString);
+//		int actualTotalSyncConfirmedVal = TestUtils.convertToInt(totalSyncConfirmedValString);
+//		int total_rejectedVal = TestUtils.convertToInt(total_rejectedValString);
+//
+//		//int expectedTotalRegistrationsVal = actualTotalSyncSentVal + actualTotalSyncPendingVal;
+//
+//		try {
+//			Assert.assertEquals(totalSubVal, actualTotalRegistrationsVal);
+//			testInfo.get().log(Status.INFO, "Total Registrations (" + totalSubVal + ") is equal to Actual Total Reg  (" + actualTotalRegistrationsVal + ") ");
+//
+//			Assert.assertEquals(totalSyncsentVal, actualTotalSyncSentVal);
+//			testInfo.get().log(Status.INFO, "Total Sync Sent (" + totalSyncsentVal + ") is equal to Actual Total Sync Sent  (" + actualTotalSyncSentVal + ") ");
+//
+//			Assert.assertEquals(totalSyncpendingVal, actualTotalSyncPendingVal);
+//			testInfo.get().log(Status.INFO, "Total Sync Pending (" + totalSyncpendingVal + ") is equal to Actual Total Sync Pending  (" + actualTotalSyncPendingVal + ") ");
+//
+//			Assert.assertEquals(totalSynConfVal, actualTotalSyncConfirmedVal);
+//			testInfo.get().log(Status.INFO, "Total Sync Confirmed (" + totalSynConfVal + ") is equal to Actual Total Sync Confirmed  (" + actualTotalSyncConfirmedVal + ") ");
+//
+//			Assert.assertEquals(totalRejectVal, total_rejectedVal);
+//			testInfo.get().log(Status.INFO, "Total Rejected (" + total_rejectedVal + ") is equal to Actual Total Rejected (" + actualTotalSyncConfirmedVal + ") ");
+//
+//
+//		} catch (Error e) {
+//
+//			verificationErrors.append(e.toString());
+//			String verificationErrorString = verificationErrors.toString();
+//			testInfo.get().error("Summation not equal");
+//			testInfo.get().error(verificationErrorString);
+//		}
+//
+//		//Return to capture page
+//		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btn_back_home")).click();
+//
+//
+//
+//	}
+
+//	@Parameters({ "dataEnv"})
+//	@Test
+//	public void captureCompanyNewSimTest(String dataEnv) throws Exception {
+//
+//		WebDriverWait wait = new WebDriverWait(getDriver(), 15);
+//		JSONParser parser = new JSONParser();
+//		JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
+//		JSONObject envs = (JSONObject) config.get("NewRegistration");
+//
+//		String valid_msisdn = (String) envs.get("valid_msisdn");
+//		String valid_simSerial = (String) envs.get("valid_simSerial");
+//		String lga = (String) envs.get("lga");
+//		String nin = (String) envs.get("nin");
+//		String ninVerificationMode = (String) envs.get("ninVerificationMode");
+//
+//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Total Subscribers']")));
+//		String totalSubBeforeCapture = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/kpi_report_value")).getText();
+//		int totalSubVal = TestUtils.convertToInt(totalSubBeforeCapture);
+//
+//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Total Sync Confirmed']")));
+//		String totalSynConfBeforeCapture = getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.widget.RelativeLayout/android.widget.FrameLayout[1]/androidx.viewpager.widget.ViewPager/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.TextView")).getText();
+//		int totalSynConfVal = TestUtils.convertToInt(totalSynConfBeforeCapture);
+//
+//		navigateToCaptureMenuTest();
+//
+//		// Select LGA of Registration
+//		try{
+//			TestUtils.testTitle("Select LGA of Registration: " + lga);
+//			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/lga_of_reg")).click();
+//			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/alertTitle")));
+//			TestUtils.assertSearchText("ID", "android:id/alertTitle", "LGA of Registration*");
+//			getDriver().findElement(By.xpath("//android.widget.TextView[@text='" + lga + "']")).click();
+//			Thread.sleep(500);
+//		}catch (Exception e){
+//
+//		}
+//
+//		// Select New Registration
+//		TestUtils.testTitle("Select New Registration");
+//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/typeofreg")));
+//		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/typeofreg")).click();
+//		Thread.sleep(500);
+//		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/alertTitle", "Select Registration Type");
+//		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='New Registration']")).click();
+//		Thread.sleep(500);
+//		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/next_button")).click();
+//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/pageTitle")));
+//		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/pageTitle", "New Registration");
+//
+//		// Select Msisdn Category
+//		TestUtils.testTitle("Select Mobile Msisdn Category");
+//		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnCategorySpinner")).click();
+//		Thread.sleep(500);
+//		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Mobile']")).click();
+//		Thread.sleep(500);
+//		TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='Mobile']", "Mobile");
+//		Thread.sleep(500);
+//
+//		// Proceed after supplying valid msisdn and Sim serial
+//		TestUtils.testTitle("Proceed after supplying valid msisdn: (" + valid_msisdn + ") and valid Sim serial: (" + valid_simSerial + ")");
+//		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).clear();
+//		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).sendKeys(valid_msisdn);
+//		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simSerialField")).clear();
+//		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simSerialField")).sendKeys(valid_simSerial);
+//
+//		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/addMsisdnSimSerialButton")).click();
+//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/message")));
+//		TestUtils.assertSearchText("ID", "android:id/message", "Msisdn is valid");
+//		getDriver().findElement(By.id("android:id/button1")).click();
+//
+//		TestUtils.scrollDown();
+//
+//		Asserts.assertAddedNumbers();
+//
+//
+//		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/nextButton")).click();
+//
+//		//NIN Verification
+//		TestBase.verifyNINTest(nin, ninVerificationMode);
+//
+//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Personal Details']")));
+//		Thread.sleep(500);
+//		Form.NigerianCompanyForm(dataEnv);
+//
+//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Total Subscribers']")));
+//		String totalSubAfterCapture = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/kpi_report_value")).getText();
+//		int totalSubValAf = TestUtils.convertToInt(totalSubAfterCapture);
+//
+//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Total Sync Confirmed']")));
+//		String totalSynConfAfterCapture = getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.widget.RelativeLayout/android.widget.FrameLayout[1]/androidx.viewpager.widget.ViewPager/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.TextView")).getText();
+//		int totalSynConfValAf = TestUtils.convertToInt(totalSynConfAfterCapture);
+//
+//		testInfo.get().info("Total Subscribers Before Capture: "+totalSubBeforeCapture);
+//		testInfo.get().info("Total Sync Confirmed Before Capture: "+totalSynConfBeforeCapture);
+//
+//		if(totalSubValAf == (totalSubVal+1)){
+//			testInfo.get().info("Total Subscribers After Capture: "+totalSubValAf);
+//		}else {
+//			testInfo.get().error("Total Subscribers After Capture: "+totalSubValAf);
+//		}
+//
+//		if(totalSynConfValAf == (totalSynConfVal+1)){
+//			testInfo.get().info("Total Sync Confirmed After Capture: "+totalSynConfValAf);
+//		}else {
+//			testInfo.get().error("Total Sync Confirmed After Capture: "+totalSynConfValAf);
+//		}
+//	}
 
 	@Parameters({ "systemPort", "deviceNo", "server","deviceName", "testConfig", "dataEnv" })
 	@Test
