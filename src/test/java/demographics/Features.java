@@ -243,157 +243,62 @@ public class Features extends TestBase {
 			TestUtils.testTitle("Assert Number");
 			TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/phone_no_view", valid_msisdn);
 			TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/tv_sim_serial", valid_simSerial);
-		}
+			}
 
 
-}
+	}
+
 	
-		public static void msisdnMultipleValidationTest(String dataEnv, String RegModule) throws Exception {
+	
+		public static void selectCountry(String country) throws Exception {
 			WebDriverWait wait = new WebDriverWait(getDriver(), 30);
-			//Add First Number
-			TestUtils.testTitle("Add First Number");
-			msisdnValidationOnline(dataEnv, RegModule);
-		
-			TestUtils.testTitle("Add another Number");
-			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).clear();
-			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).sendKeys(valid_msisdn2);
-			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simSerialField")).clear();
-			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simSerialField")).sendKeys(valid_simSerial2);
-			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/addMsisdnSimSerialButton")).click();
-				Thread.sleep(1000);
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
-			TestUtils.assertSearchText("ID", "android:id/message", "Msisdn is valid");
-			getDriver().findElement(By.id("android:id/button1")).click();
-
-			TestUtils.scrollDown();
-
-			TestUtils.testTitle("Assert First Number");
-			TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/phone_no_view", valid_msisdn);
-			TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/tv_sim_serial", valid_simSerial);
-
-			TestUtils.testTitle("Assert Second Number");
-			TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='" + valid_msisdn2 + "']", valid_msisdn2);
-			TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='" + valid_simSerial2 + "']", valid_simSerial2);
+			//Select country
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/countryOfOriginSpinner")).click();
 			Thread.sleep(500);
-		
-			//Remove Second MSISDN
-			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/delete_button")).click();
+			getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='"+country+"']")).click();
 			Thread.sleep(500);
-			try {
-			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btnCapturePortrait")).click();
-			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
+		}
 
-			}catch (Exception e){
+	        
+	        
+		public static void selectRegistration(String dataEnv, String regModule) throws InterruptedException, FileNotFoundException, IOException, ParseException {
+	   		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
+
+	   		JSONParser parser = new JSONParser();
+	   		JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
+	   		JSONObject envs = (JSONObject) config.get("NewRegistration");
+	   		String lga = (String) envs.get("lga");
+
+
+	   	      
+	   		TestUtils.testTitle("To confirm that a user can perform "+regModule+" when it is  in the list of available use case settings and user has privilege" );
+
+	   	// Select LGA of Registration
+	   		TestUtils.testTitle("Select LGA of Registration: " + lga);
+	   		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/lga_of_reg")).click();
+	   		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/alertTitle")));
+	   		TestUtils.assertSearchText("ID", "android:id/alertTitle", "LGA of Registration*");
+	   		Thread.sleep(1000);
+	   		getDriver().findElement(By.xpath("//android.widget.TextView[@text='" + lga + "']")).click();
+	   		Thread.sleep(500);
+
+	   		// Select Registration
+	   		TestUtils.testTitle("Select "+regModule);
+	   		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/typeofreg")));
+	   		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/typeofreg")).click();
+	   		Thread.sleep(500);
+	   		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/alertTitle", "Select Registration Type");
+	   		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='"+regModule+"']")).click();
+	   		Thread.sleep(500);
+	   		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/next_button")).click();
+	   		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/pageTitle")));
+	   		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/pageTitle", regModule);
 
 		}
 		
 	}
-	
-	
-	public static void selectCountry(String country) throws Exception {
-		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
-		//Select country
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/countryOfOriginSpinner")).click();
-		Thread.sleep(500);
-		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='"+country+"']")).click();
-		Thread.sleep(500);
-	}
-	
-//	public static void portraitCapture(String country) throws Exception {
-//		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
-//		TestBase.verifyBioMetricsTest();
-//		
-//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/nextButton")));
-//		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/nextButton")).click();
-//
-//	}
-	 @Parameters({ "dataEnv"})
-	 @Test
-	public static void navigateToCapture(String dataEnv, String regModule) throws InterruptedException, FileNotFoundException, IOException, ParseException {
-		 WebDriverWait wait = new WebDriverWait(getDriver(), 60);
-		 
-		    JSONParser parser = new JSONParser();
-	        JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
-	        JSONObject envs = (JSONObject) config.get("NewRegistration");
-	        String lga = (String) envs.get("lga");
-
-	        Features.navigateToCaptureMenuTest();
-
-	        if (regModule.equals("NMS")) {
-	        	TestUtils.testTitle("To confirm that a user can perform New regiatration when it is  in the list of available use case settings and user has privilege" );
-
-	    		// Select LGA of Registration
-	    		TestUtils.testTitle("Select LGA of Registration: " + lga);
-	    		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/lga_of_reg")).click();
-	    		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/alertTitle")));
-	    		TestUtils.assertSearchText("ID", "android:id/alertTitle", "LGA of Registration*");
-	    		Thread.sleep(1000);
-	    		getDriver().findElement(By.xpath("//android.widget.TextView[@text='" + lga + "']")).click();
-	    		Thread.sleep(500);
-
-	    		// Select New Registration
-	    		TestUtils.testTitle("Select New Registration");
-	    		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/typeofreg")));
-	    		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/typeofreg")).click();
-	    		Thread.sleep(500);
-	    		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/alertTitle", "Select Registration Type");
-	    		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='New Registration']")).click();
-	    		Thread.sleep(500);
-	    		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/next_button")).click();
-	    		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/pageTitle")));
-	    		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/pageTitle", "New Registration");
-	        }else if (regModule.equals("RR")) {
-	        	TestUtils.testTitle("To confirm that a user can perform Re-registration when it is  in the list of available use case settings and user has privilege" );
-	    		// Select LGA of Registration
-	    		TestUtils.testTitle("Select LGA of Registration: " + lga);
-	    		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/lga_of_reg")).click();
-	    		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/alertTitle")));
-	    		TestUtils.assertSearchText("ID", "android:id/alertTitle", "LGA of Registration*");
-	    		Thread.sleep(1000);
-	    		getDriver().findElement(By.xpath("//android.widget.TextView[@text='" + lga + "']")).click();
-	    		Thread.sleep(500);
-
-	    		// Select Re Registration
-	    		TestUtils.testTitle("Select Re Registration");
-	    		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/typeofreg")));
-	    		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/typeofreg")).click();
-	    		Thread.sleep(500);
-	    		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/alertTitle", "Select Registration Type");
-	    		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Re-Registration']")).click();
-	    		Thread.sleep(500);
-	    		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/next_button")).click();
-	    		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/pageTitle")));
-	    		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/pageTitle", "Re-Registration");
-	       
-	        }else if (regModule.equals("AR")) {
-	        	TestUtils.testTitle("To confirm that a user can perform Additional Registration when it is  in the list of available use case settings and user has privilege" );
-	        	// Select LGA of Registration
-	    		TestUtils.testTitle("Select LGA of Registration: " + lga);
-	    		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/lga_of_reg")).click();
-	    		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/alertTitle")));
-	    		TestUtils.assertSearchText("ID", "android:id/alertTitle", "LGA of Registration*");
-	    		Thread.sleep(1000);
-	    		getDriver().findElement(By.xpath("//android.widget.TextView[@text='" + lga + "']")).click();
-	    		Thread.sleep(500);
-
-	    		// Select New Registration
-	    		TestUtils.testTitle("Select Additional Registration");
-	    		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/typeofreg")));
-	    		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/typeofreg")).click();
-	    		Thread.sleep(500);
-	    		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/alertTitle", "Select Registration Type");
-	    		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Additional Registration']")).click();
-	    		Thread.sleep(500);
-	    		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/next_button")).click();
-	    		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/pageTitle")));
-	            TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Additional Registration']", "Additional Registration");
-	        }
-
 		
-		
-	}
-		
-	}
+	
 	
 	
 	

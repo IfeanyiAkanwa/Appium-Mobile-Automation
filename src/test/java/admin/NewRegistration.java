@@ -935,18 +935,11 @@ public class NewRegistration extends TestBase {
 		Thread.sleep(500);
 
 	}
-
-	@Parameters({ "dataEnv"})
-	@Test
-	public void singleMsidnValidationTest(String dataEnv) throws Exception {
-		Features.msisdnValidationOnline(dataEnv, "NMS");
-		
-	}
 	
 	@Parameters({ "dataEnv"})
 	@Test
 	public void navigateToCapture(String dataEnv) throws Exception {
-		Features.navigateToCapture(dataEnv, "NMS");
+		Features.navigateToCaptureMenuTest();
 		
 	}
 	
@@ -954,17 +947,23 @@ public class NewRegistration extends TestBase {
 	public void captureReportRecords() throws InterruptedException {
 		Features.captureReportRecords();
 	}
-
 	
 	@Parameters({ "dataEnv"})
 	@Test
-	public void MultipleMsisdnValidation(String dataEnv, String country) throws Exception {
-		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
-		Features.msisdnMultipleValidationTest(dataEnv, country);
-		//Select country
-		Features.selectCountry(country);
+	public void selectRegistrationType(String dataEnv) throws Exception {
+		Features.selectRegistration(dataEnv, "New Registration");
 		
 	}
+
+
+	@Parameters({ "dataEnv"})
+	@Test
+	public void singleMsidnValidationTest(String dataEnv) throws Exception {
+		Features.msisdnValidationOnline(dataEnv, "NMS");
+		
+	}
+
+
 	
 
 		
