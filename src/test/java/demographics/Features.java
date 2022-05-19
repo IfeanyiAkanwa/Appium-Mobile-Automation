@@ -48,8 +48,9 @@ public class Features extends TestBase {
 
 	static int totalSubVal=0;static int totalSyncsentVal = 0;static int totalSyncpendingVal = 0;static int totalSynConfVal = 0;static int totalRejectVal = 0;
 
-
-	public static void logOutUser(String valid_username) throws InterruptedException {
+	@Parameters({ "dataEnv"})
+	@Test
+	public static void logOutUser(String dataEnv, String valid_username) throws InterruptedException {
 		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
 		// Log out
 		TestUtils.testTitle("Logout username: "  + valid_username);
@@ -247,16 +248,24 @@ public class Features extends TestBase {
 
 
 	}
-
-	
-	
-		public static void selectCountry(String country) throws Exception {
+		@Parameters({ "dataEnv"})
+		@Test
+		public static void selectCountry(String dataEnv, String country) throws Exception {
 			WebDriverWait wait = new WebDriverWait(getDriver(), 30);
 			//Select country
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/countryOfOriginSpinner")).click();
 			Thread.sleep(500);
 			getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='"+country+"']")).click();
 			Thread.sleep(500);
+			
+//			try {
+//				getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btnCapturePortrait")).click();
+//				getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
+//
+//				}catch (Exception e){
+//
+//			}
+
 		}
 
 	        
@@ -282,7 +291,7 @@ public class Features extends TestBase {
 	   		getDriver().findElement(By.xpath("//android.widget.TextView[@text='" + lga + "']")).click();
 	   		Thread.sleep(500);
 
-	   		// Select Registration
+	   		// Select Registration Type
 	   		TestUtils.testTitle("Select "+regModule);
 	   		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/typeofreg")));
 	   		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/typeofreg")).click();
@@ -296,7 +305,46 @@ public class Features extends TestBase {
 
 		}
 		
-	}
+		@Parameters({ "dataEnv"})
+		@Test
+		public static void msisdnMultipleValidationTest(String dataEnv, String RegModule) throws Exception {
+			WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+			
+			
+			if(getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/delete_button")).isDisplayed()){
+				getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/delete_button")).click();
+			}
+			Thread.sleep(500);
+			//Add First Number
+			TestUtils.testTitle("Add First Number : (" + valid_msisdn + ") and (" + valid_simSerial + ") for validation");
+			msisdnValidationOnline(dataEnv,RegModule);	
+			TestUtils.testTitle("Add Second Number : (" + valid_msisdn2 + ") and (" + valid_simSerial2 + ") for validation");
+						getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).clear();
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).sendKeys(valid_msisdn2);
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simSerialField")).clear();
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simSerialField")).sendKeys(valid_simSerial2);
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/addMsisdnSimSerialButton")).click();
+				Thread.sleep(1000);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
+			TestUtils.assertSearchText("ID", "android:id/message", "Msisdn is valid");
+			getDriver().findElement(By.id("android:id/button1")).click();
+
+			TestUtils.scrollDown();
+
+			TestUtils.testTitle("Assert First Number");
+			TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/phone_no_view", valid_msisdn);
+			TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/tv_sim_serial", valid_simSerial);
+
+			TestUtils.testTitle("Assert Second Number");
+			TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='" + valid_msisdn2 + "']", valid_msisdn2);
+			TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='" + valid_simSerial2 + "']", valid_simSerial2);
+			Thread.sleep(500);
+		
+			
+		}
+		
+	 }
+	
 		
 	
 	

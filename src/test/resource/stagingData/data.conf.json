@@ -57,18 +57,18 @@
     "searchParam": "SIM"
   },
   "NewRegistration": {
-    "valid_msisdn": "08072712803",
+    "valid_msisdn": "08072712701",
     "invalid_msisdn": "764785",
     "non_valid_msisdn": "08152379129",
     "invalid_simSerial": "177606",
-    "valid_simSerial": "8923450409202450154F",
+    "valid_simSerial": "8923450409202450139F",
     "lga": "Agege",
     "valid_fixed_msisdn": "080500066",
     "valid_fixed_serial": "8923456000000000066F",
     "invalidPrefixMsisdn": "07483799086",
     "invalidPrefixSimSerial": "8923450811198973109F",
-    "valid_msisdn2": "08072712701",
-    "valid_simSerial2": "8923450409202450139F",
+    "valid_msisdn2": "08072712803",
+    "valid_simSerial2": "8923450409202450154F",
     "ninVerificationMode": "Search By NIN",
     "nin": "11111111111",
     "valid_username": "testpriv@yopmail.com",
@@ -77,7 +77,8 @@
     "noCompanyReg": "gnwabude@seamfix.com",
     "noPrivilegeUser": "userwithoutpriviledges@haibacon.com",
     "noMultiRegUser": "nomultireguser@yopmail.com",
-    "generalUserPassword": "Bankole11!!"
+    "generalUserPassword": "Bankole11!!",
+
   },
   "Reactivation": {
     "valid_msisdn": "08073440307",

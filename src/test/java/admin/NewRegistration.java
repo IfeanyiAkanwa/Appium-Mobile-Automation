@@ -162,7 +162,7 @@ public class NewRegistration extends TestBase {
 			TestUtils.updateSettingsApiCall(dataEnv, getSettingParams);
 		}
 
-		// Log out
+		// Log out REUSABLE METHOD
 		TestUtils.testTitle("Logout username: "  + valid_username);
 		getDriver().pressKeyCode(AndroidKeyCode.BACK);
 		getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
@@ -962,6 +962,25 @@ public class NewRegistration extends TestBase {
 		Features.msisdnValidationOnline(dataEnv, "NMS");
 		
 	}
+	
+	@Parameters({ "dataEnv"})
+	@Test
+	public void multipleMsisdnValidation(String dataEnv) throws Exception {
+		
+		Features.msisdnMultipleValidationTest(dataEnv, "NMS");
+	}
+	
+	@Parameters({ "dataEnv"})
+	@Test
+	public void selectCountry(String dataEnv) throws Exception {
+		
+		//Select country
+		Features.selectCountry(dataEnv,"NIGERIA");
+	}
+	
+		
+		
+	
 
 
 	

@@ -47,8 +47,12 @@
                     <include name="navigateToCapture"/>
                     <include name="selectRegistrationType" />
                     <include name="singleMsidnValidationTest"/>
-                    <!--<include name="multipleMsisdnValidation" />
-                     <include name="newRegUseCaseTest"/>
+                    <include name="multipleMsisdnValidation" /> 
+                    <include name="selectCountry"/>
+                    <include name="overridePortrait" />
+                    <include name="overrideHand" />
+
+                 <!--    <include name="newRegUseCaseTest"/>
                     <include name="msisdnCategoryTest"/>
                     <include name="NPSValidationTest"/>
                     <include name="NDCValidationTest"/>
