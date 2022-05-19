@@ -163,6 +163,7 @@ public class NewRegistration extends TestBase {
 		}
 
 		// Log out REUSABLE METHOD
+
 		TestUtils.testTitle("Logout username: "  + valid_username);
 		getDriver().pressKeyCode(AndroidKeyCode.BACK);
 		getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();

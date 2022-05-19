@@ -303,6 +303,7 @@ public class Features extends TestBase {
 	   		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/pageTitle")));
 	   		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/pageTitle", regModule);
 
+
 		}
 		
 		@Parameters({ "dataEnv"})

@@ -86,7 +86,8 @@
     "lga": "Agege",
     "valid_username": "eze.sfxtest@yopmail.com",
     "valid_password": "Bankole11!!",
-    "invalid_OTP": "00000"
+    "invalid_OTP": "00000",
+
   },
   "Search": {
     "valid_msisdn": "09155285662",

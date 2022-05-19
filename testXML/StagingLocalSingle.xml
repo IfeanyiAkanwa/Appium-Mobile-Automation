@@ -52,6 +52,7 @@
                     <include name="overridePortrait" />
                     <include name="overrideHand" />
 
+
                  <!--    <include name="newRegUseCaseTest"/>
                     <include name="msisdnCategoryTest"/>
                     <include name="NPSValidationTest"/>
