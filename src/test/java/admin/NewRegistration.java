@@ -979,7 +979,24 @@ public class NewRegistration extends TestBase {
 		Features.selectCountry(dataEnv,"NIGERIA");
 	}
 	
+	@Parameters({ "dataEnv"})
+	@Test
+	public void overridePortrait(String dataEnv) throws Exception {
 		
+	//	Select override
+		Features.portraitCaptureOverride();
+	}
+	
+	@Parameters({ "dataEnv"})
+	@Test
+	public void overrideHand(String dataEnv) throws Exception {
+		
+	//	Select override
+		Features.captureOverridenHand();
+	}
+	
+	
+	
 		
 	
 

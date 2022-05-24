@@ -57,38 +57,37 @@
     "searchParam": "SIM"
   },
   "NewRegistration": {
-    "valid_msisdn": "08072712701",
+    "valid_msisdn": "08072711414",
     "invalid_msisdn": "764785",
     "non_valid_msisdn": "08152379129",
     "invalid_simSerial": "177606",
-    "valid_simSerial": "8923450409202450139F",
+    "valid_simSerial": "8923450409202450071F",
     "lga": "Agege",
     "valid_fixed_msisdn": "080500066",
     "valid_fixed_serial": "8923456000000000066F",
     "invalidPrefixMsisdn": "07483799086",
     "invalidPrefixSimSerial": "8923450811198973109F",
-    "valid_msisdn2": "08072712803",
-    "valid_simSerial2": "8923450409202450154F",
+    "valid_msisdn2": "08072712701",
+    "valid_simSerial2": "8923450409202450139F",
     "ninVerificationMode": "Search By NIN",
     "nin": "11111111111",
+    "vnin":"XP637697545769L8",
     "valid_username": "testpriv@yopmail.com",
     "valid_username2": "gnwabude@seamfix.com",
     "noIndividualReg": "userwithoutindividual@haibacon.com",
     "noCompanyReg": "gnwabude@seamfix.com",
     "noPrivilegeUser": "userwithoutpriviledges@haibacon.com",
     "noMultiRegUser": "nomultireguser@yopmail.com",
-    "generalUserPassword": "Bankole11!!",
-
-  },
+    "generalUserPassword": "Bankole11!!"
+},
   "Reactivation": {
     "valid_msisdn": "08073440307",
     "invalid_msisdn": "08054339988",
     "lga": "Agege",
     "valid_username": "eze.sfxtest@yopmail.com",
     "valid_password": "Bankole11!!",
-    "invalid_OTP": "00000",
-
-  },
+    "invalid_OTP": "00000"
+},
   "Search": {
     "valid_msisdn": "09155285662",
     "valid_sim_serial_no": "8923450704197654772F"
@@ -390,7 +389,7 @@
     "area": "ARIARIA",
     "lga_of_reg": "Agege",
     "nin": "11111111111",
-    "postalcode": "450101"
+    "postalcode2": "450101"
   },
   "IndividualForeignerDetails": {
     "surname": "Saraswati",

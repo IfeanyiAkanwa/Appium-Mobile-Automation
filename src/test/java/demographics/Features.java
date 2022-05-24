@@ -344,7 +344,103 @@ public class Features extends TestBase {
 			
 		}
 		
-	 }
+		  @Parameters ({"dataEnv"})
+			@Test
+			public static void portraitCaptureOverride() throws Exception {
+			   WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+			   //image capture
+			        
+			  
+			    getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btnCaptureBiometrics")).click();
+			    //getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
+						
+			    getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/switchButton")).click();
+			    Thread.sleep(5000);
+			    getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
+				Thread.sleep(1000);
+				getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/overrideBtn")).click();  
+				Thread.sleep(1000);
+				getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/"
+						+ "android.widget.ListView/android.widget.TextView[4]")).click();
+				
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
+			    TestUtils.assertSearchText("ID", "android:id/message", "Subscriber's face was successfully captured");
+				getDriver().findElement(By.id("android:id/button1")).click();
+		
+
+			  }
+		  
+		  @Parameters ({"dataEnv"})
+	  		@Test
+	  		public static void captureOverridenHand() throws Exception {
+	  		   WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+	  		//Fingerprint capture/
+
+	  			//Submit without overriding fingerprint
+	  			TestUtils.testTitle("Save Enrollment without overriding fingerprint");
+	  			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/btn_multi_capture")));
+	  			TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/btn_multi_capture", "Multi Capture");
+	  			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/fp_save_enrolment")).click();
+	  			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
+	  			TestUtils.assertSearchText("ID", "android:id/message", "No finger was captured");
+	  			getDriver().findElement(By.id("android:id/button1")).click();
+	  			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/fp_save_enrolment")));
+
+
+	  			//Override left hand
+	  			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btn_override_left")).click();
+	  			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
+	  			TestUtils.assertSearchText("ID", "android:id/message", "Are you sure? Note that you have to provide a reason");
+	  			getDriver().findElement(By.id("android:id/button1")).click();
+	  			Thread.sleep(500);
+	  			getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/switchButton")).click();
+	  			Thread.sleep(500);
+	  			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
+	  			Thread.sleep(1000);
+	  			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/ok")).click();
+	  			Thread.sleep(500);
+	  			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Ageing']")));
+	  			getDriver().findElement(By.xpath("//android.widget.TextView[@text='Ageing']")).click();
+
+	  			//Submit without overriding right hand
+	  			TestUtils.testTitle("Save Enrollment without capturing Right Hand");
+	  			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/fp_save_enrolment")).click();
+	  			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
+	  			TestUtils.assertSearchText("ID", "android:id/message", "RIGHT HAND wasn't overridden, and all selected RIGHT HAND fingers were not captured.");
+	  			getDriver().findElement(By.id("android:id/button1")).click();
+	  			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/fp_save_enrolment")));
+
+	  			//Override right hand
+	  			TestUtils.scrollDown();
+	  			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/btn_override_right")));
+	  			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btn_override_right")).click();
+	  			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
+	  			TestUtils.assertSearchText("ID", "android:id/message", "Are you sure? Note that you have to provide a reason");
+	  			getDriver().findElement(By.id("android:id/button1")).click();
+	  			Thread.sleep(1000);
+	  			getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/switchButton")).click();
+	  			Thread.sleep(1000);
+	  			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
+	  			Thread.sleep(1000);
+	  			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/ok")).click();
+	  			Thread.sleep(1000);
+	  			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Ageing']")));
+	  			getDriver().findElement(By.xpath("//android.widget.TextView[@text='Ageing']")).click();
+
+	  			//Save enrollment
+	  		    TestUtils.testTitle("Proceed after overriding both hands on fingerprint");
+	  		    TestUtils.scrollDown();
+	  			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/fp_save_enrolment")));
+	  		//	TestUtils.assertSearchText("ID", "com.sf.biocapture.activity:id/fp_save_enrolment", "Save Fingerprint");
+	  			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/fp_save_enrolment")).click();
+	  			Thread.sleep(1000);
+	  			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/nextButton")).click();
+		  }
+		  
+		
+		
+		  
+}
 	
 		
 	
