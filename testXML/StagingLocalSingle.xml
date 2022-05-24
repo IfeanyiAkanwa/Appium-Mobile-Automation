@@ -52,8 +52,6 @@
                     <include name="overridePortrait" />
                     <include name="overrideHand" />
                   <!--   <include name="ninVerificationOnline" />
-                    <include name="vninVerificationOnline" /> -->
-
 
                  <!--    <include name="newRegUseCaseTest"/>
                     <include name="msisdnCategoryTest"/>

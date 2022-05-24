@@ -990,7 +990,6 @@ public class NewRegistration extends TestBase {
 	@Parameters({ "dataEnv"})
 	@Test
 	public void overrideHand(String dataEnv) throws Exception {
-		
 	//	Select override
 		Features.captureOverridenHand();
 	}

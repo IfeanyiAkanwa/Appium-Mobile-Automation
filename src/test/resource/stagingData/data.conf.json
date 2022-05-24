@@ -78,7 +78,8 @@
     "noCompanyReg": "gnwabude@seamfix.com",
     "noPrivilegeUser": "userwithoutpriviledges@haibacon.com",
     "noMultiRegUser": "nomultireguser@yopmail.com",
-    "generalUserPassword": "Bankole11!!"
+    "generalUserPassword": "Bankole11!!",
+
 },
   "Reactivation": {
     "valid_msisdn": "08073440307",
