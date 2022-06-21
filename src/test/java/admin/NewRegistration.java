@@ -14,7 +14,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import demographics.Features;
+import functions.Features;
 import demographics.Form;
 import utils.Asserts;
 import utils.TestBase;
@@ -942,6 +942,7 @@ public class NewRegistration extends TestBase {
 	public void navigateToCapture(String dataEnv) throws Exception {
 		Features.navigateToCaptureMenuTest();
 		
+		
 	}
 	
 	@Test
@@ -993,6 +994,72 @@ public class NewRegistration extends TestBase {
 	//	Select override
 		Features.captureOverridenHand();
 	}
+	
+	@Parameters({ "dataEnv"})
+	@Test
+	public void vninVerificationOnline(String dataEnv) throws Exception {
+
+		//NIN Verification
+		Features.vNinVerificationOnline(dataEnv);
+	}
+	
+	@Parameters({ "dataEnv"})
+	@Test
+	public void ninVerificationOnline(String dataEnv) throws Exception {
+
+		//NIN Verification
+		Features.ninVerificationOnline(dataEnv);
+	}
+	
+	
+	
+	@Parameters({ "dataEnv"})
+	@Test
+	public void eyeBalling(String dataEnv) throws Exception {
+
+		
+		Features.nimcEyeBalling(dataEnv);
+	}
+	
+	@Parameters({ "dataEnv"})
+	@Test
+	public void demographicsCapture(String dataEnv) throws Exception {
+
+		Form.personalDetails(dataEnv);
+		Form.addressDetails(dataEnv);
+	}
+	
+	@Parameters({ "dataEnv"})
+	@Test
+	public void captureUploadDoc(String dataEnv) throws Exception {
+
+		Form.captureUploadDocument(dataEnv);
+	}
+	
+	@Parameters({ "dataEnv"})
+	@Test
+	public void capturePreview(String dataEnv) throws Exception {
+
+		Form.capturePreview(dataEnv);
+	}
+	
+	@Parameters({ "dataEnv"})
+	@Test
+	public void saveCapture(String dataEnv) throws Exception {
+
+		Form.saveCapture(dataEnv);
+	}
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

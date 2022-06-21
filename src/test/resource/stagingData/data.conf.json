@@ -57,11 +57,11 @@
     "searchParam": "SIM"
   },
   "NewRegistration": {
-    "valid_msisdn": "08072711414",
+    "valid_msisdn": "08072756231",
     "invalid_msisdn": "764785",
     "non_valid_msisdn": "08152379129",
     "invalid_simSerial": "177606",
-    "valid_simSerial": "8923450409202450071F",
+    "valid_simSerial": "8923450409202464882F",
     "lga": "Agege",
     "valid_fixed_msisdn": "080500066",
     "valid_fixed_serial": "8923456000000000066F",
@@ -78,8 +78,7 @@
     "noCompanyReg": "gnwabude@seamfix.com",
     "noPrivilegeUser": "userwithoutpriviledges@haibacon.com",
     "noMultiRegUser": "nomultireguser@yopmail.com",
-    "generalUserPassword": "Bankole11!!",
-
+    "generalUserPassword": "Bankole11!!"
 },
   "Reactivation": {
     "valid_msisdn": "08073440307",

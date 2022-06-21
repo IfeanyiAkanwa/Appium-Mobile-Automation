@@ -1,4 +1,4 @@
-package demographics;
+package functions;
 
 import db.ConnectDB;
 import freemarker.core.Environment;
@@ -245,6 +245,11 @@ public class Features extends TestBase {
 			TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/phone_no_view", valid_msisdn);
 			TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/tv_sim_serial", valid_simSerial);
 			}
+		else if (regModule.equals("RR")){
+			
+		}
+	
+			
 
 
 	}
@@ -267,9 +272,6 @@ public class Features extends TestBase {
 //			}
 
 		}
-
-	        
-	        
 		public static void selectRegistration(String dataEnv, String regModule) throws InterruptedException, FileNotFoundException, IOException, ParseException {
 	   		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
 
@@ -435,7 +437,191 @@ public class Features extends TestBase {
 	  			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/nextButton")).click();
 		  }
 		  
-		
+		  @Test
+		    public static void ninAssertion(String dataEnv) throws Exception {
+
+		        WebDriverWait wait = new WebDriverWait(getDriver(), 60);
+		        JSONParser parser = new JSONParser();
+		        JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
+		        JSONObject envs = (JSONObject) config.get("NewRegistration");
+
+		        String nin = (String) envs.get("nin");
+		        String ninVerificationMode = (String) envs.get("ninVerificationMode");
+
+		        //Select NIN Verification Type
+		        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/verification_modes")).click();
+		        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
+		        getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Search By NIN']")).click();
+		        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
+		        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/proceed")).click();
+
+		        //Search by NIN Modal
+		        TestUtils.testTitle("Click on Search without supplying NIN");
+		        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/nin")).clear();
+		        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/capture_button")).click();
+		        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/error_text")));
+		        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/error_text", "Only numbers and minimum of 11 characters are allowed");
+
+		        TestUtils.testTitle("Search NIN with less than 11 numeric characters: 1111111");
+		        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/nin")).clear();
+		        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/nin")).sendKeys("1111111");
+		        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/capture_button")).click();
+		        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/error_text")));
+		        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/error_text", "Only numbers and minimum of 11 characters are allowed");
+
+		        TestUtils.testTitle("Search by NIN: " + nin);
+		        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/title")));
+		        TestUtils.assertSearchText("ID", "android:id/title", "Search By NIN");
+		        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/nin")).clear();
+		        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/nin")).sendKeys(nin);
+		        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/capture_button")).click();
+		    }
+		  
+		  @Test
+		    public static void vNinAssertion(String dataEnv) throws Exception {
+
+
+		        WebDriverWait wait = new WebDriverWait(getDriver(), 60);
+		        JSONParser parser = new JSONParser();
+		        JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
+		        JSONObject envs = (JSONObject) config.get("NewRegistration");
+
+		        String nin = (String) envs.get("nin");
+		        String vnin = (String) envs.get("vnin");
+		        String ninVerificationMode = (String) envs.get("ninVerificationMode");
+
+		        //Select VNIN Verification Type
+		        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/verification_modes")).click();
+		        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
+		        getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Search By VNIN']")).click();
+		        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
+		        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/proceed")).click();
+
+		        //Search by VNIN Modal
+		        TestUtils.testTitle("Click on Search without supplying VNIN");
+		        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/nin")).clear();
+		        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/capture_button")).click();
+		        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/error_text")));
+		        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/error_text", "VNIN must contain 16 alphanumeric characters in the format 2 alphabets, 12 digits, 2 alphabets");
+
+		        TestUtils.testTitle("Search vNIN with less than 16 alphanumeric characters: AA11111AA");
+		        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/nin")).clear();
+		        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/nin")).sendKeys("AA11111AA");
+		        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/capture_button")).click();
+		        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/error_text")));
+		        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/error_text", "VNIN must contain 16 alphanumeric characters in the format 2 alphabets, 12 digits, 2 alphabets");
+
+		        TestUtils.testTitle("Search by VNIN: " + vnin);
+		        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/title")));
+		        TestUtils.assertSearchText("ID", "android:id/title", "Search By vNIN");
+		        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/nin")).clear();
+		        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/nin")).sendKeys(vnin);
+		        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/capture_button")).click();
+		    }
+		  
+		  @Test
+		    public static void vNinVerificationOnline(String dataEnv) throws Exception {
+
+
+		        WebDriverWait wait = new WebDriverWait(getDriver(), 60);
+		        JSONParser parser = new JSONParser();
+		        JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
+		        JSONObject envs = (JSONObject) config.get("NewRegistration");
+
+		        String nin = (String) envs.get("nin");
+		        String vnin = (String) envs.get("vnin");
+		        String ninVerificationMode = (String) envs.get("ninVerificationMode");
+
+		        if(getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")).isDisplayed()) {
+
+		            //Proceed to NIN Verification View
+		            TestUtils.testTitle("Select NIN Verification Mode");
+		            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
+		            TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/alertTitle", "NIN Verification");
+
+		            vNinAssertion(dataEnv);
+		        //    getDriver().findElement(By.id("android:id/button1")).click();
+		           
+		            Thread.sleep(1000);
+		        }
+		    }
+		  
+		  @Test
+		    public static void ninVerificationOnline(String dataEnv) throws Exception {
+
+		        WebDriverWait wait = new WebDriverWait(getDriver(), 60);
+		        JSONParser parser = new JSONParser();
+		        JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
+		        JSONObject envs = (JSONObject) config.get("NewRegistration");
+
+		        String nin = (String) envs.get("nin");
+		        String vnin = (String) envs.get("vnin");
+		        String ninVerificationMode = (String) envs.get("ninVerificationMode");
+
+		        if(getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")).isDisplayed()) {
+
+		            //Proceed to NIN Verification View
+		            TestUtils.testTitle("Select NIN Verification Mode");
+		            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
+		            TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/alertTitle", "NIN Verification");
+
+		            ninAssertion(dataEnv);
+
+		       //     getDriver().findElement(By.id("android:id/button1")).click();
+		            Thread.sleep(1000);
+		        }
+		    }
+		  
+		    @Test
+		    public static void nimcEyeBalling(String dataEnv) throws Exception {
+
+		        WebDriverWait wait = new WebDriverWait(getDriver(), 60);
+		        JSONParser parser = new JSONParser();
+		        JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
+		        JSONObject envs = (JSONObject) config.get("NewRegistration");
+
+		        String nin = (String) envs.get("nin");
+		        String vnin = (String) envs.get("vnin");
+		        String ninVerificationMode = (String) envs.get("ninVerificationMode");
+
+		        //NIMC Details View
+		        TestUtils.testTitle("Confirm the searched NIMC Data is returned: " + "NIMC Data");
+		        Thread.sleep(2000);
+		        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/nin_verification_title")));
+		        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/nin_verification_title", "NIN Verification");
+		        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/tv_portrait_image")));
+		        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/tv_portrait_image", "Portrait Image");
+		        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/tv_user_data")));
+		        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/tv_user_data", "User Data");
+		        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/tv_nimc_data")));
+		        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/tv_nimc_data", "NIMC Data");
+//		        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[1][@text='Firstname']")));
+//		        TestUtils.assertSearchText("XPATH", "//android.widget.TextView[1][@text='Anthony']", "Anthony");
+//		        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[1][@text='Surname']")));
+//		        TestUtils.assertSearchText("XPATH", "//android.widget.TextView[1][@text='Uzoh']", "Uzoh");
+
+//		        Thread.sleep(5000);
+//		        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/proceed_button")));
+		        Thread.sleep(2000);
+		        if(getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/accept_button")).isDisplayed()){
+		        	String acceptBtn = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/accept_button")).getText();
+		        	testInfo.get().info("<b> Accept Button is Visible </b>");
+		        }
+		        if(getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/reject_button")).isDisplayed()){
+		        	String rejectBtn = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/reject_button")).getText();
+		        	testInfo.get().info("<b> Reject Button is Visible </b>");
+		        }
+		        if(getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/recapture_button")).isDisplayed()){
+		        	String recaptureBtn = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/recapture_button")).getText();
+		        	testInfo.get().info("<b> Recapture Button is Visible </b>");
+		        }
+		        Thread.sleep(1000);
+		        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id +":id/tv_message", "Live Image and NIMC Image matching failed. You are allowed to proceed or perform a recapture");
+		        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/accept_button")).click();
+		        
+		    }
+		    
+			
 		
 		  
 }

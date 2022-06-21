@@ -41,19 +41,58 @@
             <class name="admin.NewRegistration">
                 <methods>
                     <!-- <include name="noneNewRegPrivilegeTest"/>
-                    <include name="NewRegPrivilegesTest"/> -->
+                    <include name="NewRegPrivilegesTest"/>  -->
                     <include name="Login"/>
                     <include name="captureReportRecords"/>
                     <include name="navigateToCapture"/>
                     <include name="selectRegistrationType" />
                     <include name="singleMsidnValidationTest"/>
-                    <!-- <include name="multipleMsisdnValidation" />  -->
+                   <!--  <include name="multipleMsisdnValidation"/>  --> 
                     <include name="selectCountry"/>
                     <include name="overridePortrait" />
                     <include name="overrideHand" />
-                  <!--   <include name="ninVerificationOnline" />
+                    <include name="vninVerificationOnline" /> 
+				    <!-- <include name="ninVerificationOnline" />  -->
+                    <include name="eyeBalling" />
+                    <include name="demographicsCapture" />
+                    <include name="captureUploadDoc" />
+                    <include name="capturePreview" />
+                    <include name="saveCapture" /> 
+            <!--          <include name="newRegUseCaseTest"/>
+                    <include name="msisdnCategoryTest"/>
+                    <include name="NPSValidationTest"/>
+                    <include name="NDCValidationTest"/>
+                    
+              <include name="newRegistrationFormTest"/>
+                    <include name="captureIndividualSimTest"/>
+                    <include name="captureForeignRegTest"/>
+                    <include name="addBarCodePrivilegeTest"/>
+                    <include name="removeNewRegPrivilegeTest"/> -->
+                </methods>
+            </class> 
+            
+             <!--   <class name="admin.ForeignerNewReg">
+                <methods>
+                    <include name="noneNewRegPrivilegeTest"/>
+                    <include name="NewRegPrivilegesTest"/>
+                    <include name="Login"/>
+                    <include name="captureReportRecords"/>
+                    <include name="navigateToCapture"/>
+                    <include name="selectRegistrationType" />
+                    <include name="multipleMsisdnValidation" /> 
+                    <include name="selectForeignerCountry"/>
+                    <include name="overridePortrait" />
+                    <include name="overrideHand" />
+                    <include name="vninVerificationOnline" />
+                    <include name="ninVerificationOnline" />
+                    <include name="faceMatching" />
+                    <include name="demographicsCapture" />
+                    <include name="captureUploadDoc" />
+                    <include name="capturePreview" />
+                    <include name="saveCapture" />
 
-                 <!--    <include name="newRegUseCaseTest"/>
+              
+                    <include name="newRegUseCaseTest"/>
                     <include name="msisdnCategoryTest"/>
                     <include name="NPSValidationTest"/>
                     <include name="NDCValidationTest"/>
@@ -62,10 +101,13 @@
                     <include name="captureIndividualSimTest"/>
                     <include name="captureForeignRegTest"/>
                     <include name="addBarCodePrivilegeTest"/>
-                    <include name="removeNewRegPrivilegeTest"/> -->
+                    <include name="removeNewRegPrivilegeTest"/>
                 </methods>
-            </class>
-          <!--   <class name="admin.ReRegistrationCapture">
+            </class> -->
+            
+            
+                 
+       <!--     <class name="admin.ReRegistrationCapture">
                 <methods>
                     <include name="noneReRegPrivilegeTest"/>
                     <include name="ReRegPrivilegesTest"/>
@@ -75,11 +117,11 @@
                     <include name="validateMsisdnTest"/>
                     <include name="captureIndividualReRegTest"/>
                     <include name="captureCooDetailsTest"/>
-                    <include name="removeReRegPrivilegeTest"/>
-                    <include name="disableSubscriberBypassTest"/>
+             		<include name="removeReRegPrivilegeTest"/>
+                    <include name="disableSubscriberBypassTest"/> 
                 </methods>
-            </class>
-            <class name="admin.CorporateNewRegistration">
+            </class>-->
+     <!--         <class name="admin.CorporateNewRegistration">
                 <methods>
                     <include name="noneCorporatePrivilegeTest"/>
                     <include name="CorporatePrivilegesTest"/>
