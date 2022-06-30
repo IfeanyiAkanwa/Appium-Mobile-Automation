@@ -2,6 +2,7 @@ package admin;
 
 import db.ConnectDB;
 import demographics.Form;
+import functions.Features;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -34,6 +35,7 @@ import utils.TestUtils;
 import static admin.ReportsTest.navigateToReportsPage;
 
 public class ReRegistrationCapture extends TestBase {
+
 	private static StringBuffer verificationErrors = new StringBuffer();
 	int totalSubVal=0;int totalSyncsentVal = 0;int totalSyncpendingVal = 0;int totalSynConfVal = 0;int totalRejectVal = 0;
 	static int fingerPrintCount=0;
@@ -430,32 +432,140 @@ public class ReRegistrationCapture extends TestBase {
 
 	}
 
+//	@Test
+//	public void captureReportRecords() throws InterruptedException {
+//
+//		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Total Subscribers']")));
+//		String totalSub = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/kpi_report_value")).getText();
+//		totalSubVal = TestUtils.convertToInt(totalSub);
+//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Total Sync Sent']")));
+//
+//		String totalSyncsent = getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.widget.RelativeLayout/android.widget.FrameLayout[1]/androidx.viewpager.widget.ViewPager/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.TextView")).getText();
+//		totalSyncsentVal = TestUtils.convertToInt(totalSyncsent);
+//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Total Sync Pending']")));
+//
+//		String totalSyncpending = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/kpi_report_value")).getText();
+//		totalSyncpendingVal = TestUtils.convertToInt(totalSyncpending);
+//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Total Sync Confirmed']")));
+//
+//		String totalSynConf = getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.widget.RelativeLayout/android.widget.FrameLayout[1]/androidx.viewpager.widget.ViewPager/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.TextView")).getText();
+//		totalSynConfVal = TestUtils.convertToInt(totalSynConf);
+//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Total Rejected']")));
+//
+//		String totalReject = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/kpi_report_value")).getText();
+//		totalRejectVal = TestUtils.convertToInt(totalReject);
+//		Thread.sleep(3000);
+//
+//	}
+	
+	@Parameters({ "dataEnv"})
+	@Test
+	public void navigateToCapture(String dataEnv) throws Exception {
+		Features.navigateToCaptureMenuTest();
+	}
+	
 	@Test
 	public void captureReportRecords() throws InterruptedException {
-
-		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Total Subscribers']")));
-		String totalSub = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/kpi_report_value")).getText();
-		totalSubVal = TestUtils.convertToInt(totalSub);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Total Sync Sent']")));
-
-		String totalSyncsent = getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.widget.RelativeLayout/android.widget.FrameLayout[1]/androidx.viewpager.widget.ViewPager/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.TextView")).getText();
-		totalSyncsentVal = TestUtils.convertToInt(totalSyncsent);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Total Sync Pending']")));
-
-		String totalSyncpending = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/kpi_report_value")).getText();
-		totalSyncpendingVal = TestUtils.convertToInt(totalSyncpending);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Total Sync Confirmed']")));
-
-		String totalSynConf = getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.widget.RelativeLayout/android.widget.FrameLayout[1]/androidx.viewpager.widget.ViewPager/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.TextView")).getText();
-		totalSynConfVal = TestUtils.convertToInt(totalSynConf);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Total Rejected']")));
-
-		String totalReject = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/kpi_report_value")).getText();
-		totalRejectVal = TestUtils.convertToInt(totalReject);
-		Thread.sleep(3000);
-
+		Features.captureReportRecords();
 	}
+	
+	@Parameters({ "dataEnv"})
+	@Test
+	public void selectRegistrationType(String dataEnv) throws Exception {
+		Features.selectRegistration(dataEnv, "Re-Registration");
+		
+	}
+
+	@Parameters({ "dataEnv"})
+	@Test
+	public void msisdnValidationOnline(String dataEnv) throws Exception {
+		Features.msisdnValidationOnline(dataEnv,"RR");
+	}
+	
+	@Parameters({ "dataEnv"})
+	@Test
+	public void rroverridePortrait(String dataEnv) throws Exception {
+		
+	//	Select override
+		Features.RRportraitCaptureOverride();
+	}
+	
+	@Parameters({ "dataEnv"})
+	@Test
+	public void overrideHand(String dataEnv) throws Exception {
+	//	Select override
+		Features.captureOverridenHand(dataEnv, "RR");
+	}
+	
+	@Parameters({ "dataEnv"})
+	@Test
+	public void requestOTP(String dataEnv) throws Exception {
+	//	Select override
+		Features.requestOTP(dataEnv);
+	}
+	
+	@Parameters({ "dataEnv"})
+	@Test
+	public void byrequestOTP(String dataEnv) throws Exception {
+	//	Select override
+		Features.byPassrequestOTP(dataEnv);
+	}
+	
+	@Parameters({ "dataEnv"})
+	@Test
+	public void vninVerificationOnline(String dataEnv) throws Exception {
+
+		//NIN Verification
+		Features.vNinVerificationOnline(dataEnv);
+	}
+	
+	@Parameters({ "dataEnv"})
+	@Test
+	public void ninVerificationOnline(String dataEnv) throws Exception {
+
+		//NIN Verification
+		Features.ninVerificationOnline(dataEnv);
+	}
+	
+	@Parameters({ "dataEnv"})
+	@Test
+	public void eyeBalling(String dataEnv) throws Exception {
+
+		
+		Features.nimcEyeBalling(dataEnv);
+	}
+	
+	@Parameters({ "dataEnv"})
+	@Test
+	public void demographicsCapture(String dataEnv) throws Exception {
+
+		Form.personalDetails(dataEnv);
+		Form.addressDetails(dataEnv);
+	}
+	
+	@Parameters({ "dataEnv"})
+	@Test
+	public void captureUploadDoc(String dataEnv) throws Exception {
+
+		Features.captureUploadDocument(dataEnv);
+	}
+	
+	@Parameters({ "dataEnv"})
+	@Test
+	public void capturePreview(String dataEnv) throws Exception {
+
+		Features.capturePreview(dataEnv);
+	}
+	
+	@Parameters({ "dataEnv"})
+	@Test
+	public void saveCapture(String dataEnv) throws Exception {
+
+		Features.saveCapture(dataEnv);
+	}
+	
+	
 
 	@Parameters({ "dataEnv"})
 	@Test

@@ -12,7 +12,7 @@
     <parameter name="deviceName" value="SeamfixTab" />
     <parameter name="settings" value="false" />
 
-    <test name="test1">
+     <test name="test1">
         <parameter name="email" value="snapshot@seamfix.com"/>
         <parameter name="systemPort" value="8228"/>
         <parameter name="deviceNo" value="1"/>
@@ -38,233 +38,140 @@
                     <include name="erorrMessagesValidationTest"/>
                 </methods>
             </class>
-            <class name="admin.NewRegistration">
+            </classes>
+      </test> 
+            
+        <test name="NewReg Non Privilege Test" preserve-order="true">
+			<parameter name="email" value="snapshot@seamfix.com" />
+			<parameter name="systemPort" value="8228" />
+			<parameter name="deviceNo" value="1" />
+			<classes>
+				<class name="admin.NewRegistration">
+				<methods>
+					<include name="noneNewRegPrivilegeTest"/>
+				</methods>
+			</class>
+		</classes>
+		</test> 
+		
+	 <test name="New Registration NIN " preserve-order="true">
+		<classes>
+         <class name="admin.NewRegistration">
                 <methods>
-                    <include name="noneNewRegPrivilegeTest"/>
-                    <include name="NewRegPrivilegesTest"/>  
+                    <include name="NewRegPrivilegesTest"/>   
                     <include name="Login"/>
                     <include name="captureReportRecords"/>
                     <include name="navigateToCapture"/>
                     <include name="selectRegistrationType" />
                     <include name="singleMsidnValidationTest"/>
-                   <!--  <include name="multipleMsisdnValidation"/>  --> 
                     <include name="selectCountry"/>
                     <include name="overridePortrait" />
                     <include name="overrideHand" />
-                    <include name="vninVerificationOnline" /> 
-				    <!-- <include name="ninVerificationOnline" />  -->
+				    <include name="ninVerificationOnline" />
                     <include name="eyeBalling" />
                     <include name="demographicsCapture" />
                     <include name="captureUploadDoc" />
                     <include name="capturePreview" />
                     <include name="saveCapture" /> 
-                    <include name="newRegUseCaseTest"/>
-                    <include name="msisdnCategoryTest"/>
-                    <include name="NPSValidationTest"/>
-                    <include name="NDCValidationTest"/>
-                    
-              <include name="newRegistrationFormTest"/>
-                    <include name="captureIndividualSimTest"/>
-                    <include name="captureForeignRegTest"/>
-                    <include name="addBarCodePrivilegeTest"/>
-                    <include name="removeNewRegPrivilegeTest"/>
                 </methods>
             </class> 
-            
-              <class name="admin.ForeignerNewReg">
+          </classes>
+         </test>  
+         
+         <test name="New Registration Multiple VNIN" preserve-order="true">
+		<classes>
+         <class name="admin.NewRegistration">
                 <methods>
-                    <include name="noneNewRegPrivilegeTest"/>
-                    <include name="NewRegPrivilegesTest"/>
+                    <include name="NewRegPrivilegesTest"/>   
                     <include name="Login"/>
                     <include name="captureReportRecords"/>
                     <include name="navigateToCapture"/>
                     <include name="selectRegistrationType" />
-                    <include name="multipleMsisdnValidation" /> 
-                    <include name="selectForeignerCountry"/>
+                     <include name="multipleMsisdnValidation"/> 
+                    <include name="selectCountry"/>
                     <include name="overridePortrait" />
                     <include name="overrideHand" />
-                    <include name="vninVerificationOnline" />
-                    <include name="ninVerificationOnline" />
-                    <include name="faceMatching" />
+                    <include name="vninVerificationOnline" /> 
+                    <include name="eyeBalling" />
                     <include name="demographicsCapture" />
                     <include name="captureUploadDoc" />
                     <include name="capturePreview" />
-                    <include name="saveCapture" />
-
-              
-                    <include name="newRegUseCaseTest"/>
-                    <include name="msisdnCategoryTest"/>
-                    <include name="NPSValidationTest"/>
-                    <include name="NDCValidationTest"/>
-                    
-                    <include name="newRegistrationFormTest"/>
-                    <include name="captureIndividualSimTest"/>
-                    <include name="captureForeignRegTest"/>
-                    <include name="addBarCodePrivilegeTest"/>
-                    <include name="removeNewRegPrivilegeTest"/>
+                    <include name="saveCapture" /> 
                 </methods>
             </class> 
-            
-            
-                 
-            <class name="admin.ReRegistrationCapture">
+          </classes>
+         </test>  
+         
+   <test name="Re-Reg Non Privilege Test" preserve-order="true">
+			<parameter name="email" value="snapshot@seamfix.com" />
+			<parameter name="systemPort" value="8228" />
+			<parameter name="deviceNo" value="1" />
+			<classes>
+				<class name="admin.ReRegistrationCapture">
+				<methods>
+					 <include name="noneReRegPrivilegeTest"/>
+				</methods>
+			</class>
+		</classes>
+		</test> 
+		
+		<test name="Re-Registration NIN " preserve-order="true">
+		 <parameter name="email" value="snapshot@seamfix.com"/>
+       	 <parameter name="systemPort" value="4723"/>
+         <parameter name="deviceNo" value="1"/>
+		<classes>
+         <class name="admin.ReRegistrationCapture">
                 <methods>
-                    <include name="noneReRegPrivilegeTest"/>
-                    <include name="ReRegPrivilegesTest"/>
+                    <include name="NewRegPrivilegesTest"/> 
                     <include name="Login"/>
                     <include name="captureReportRecords"/>
-                    <include name="navigateToReRegistration"/>
-                    <include name="validateMsisdnTest"/>
-                    <include name="captureIndividualReRegTest"/>
-                    <include name="captureCooDetailsTest"/>
-             		<include name="removeReRegPrivilegeTest"/>
-                    <include name="disableSubscriberBypassTest"/> 
-                </methods>
-            </class>
-          <class name="admin.CorporateNewRegistration">
-                <methods>
-                    <include name="noneCorporatePrivilegeTest"/>
-                    <include name="CorporatePrivilegesTest"/>
-                    <include name="Login"/>
-                    <include name="captureReportRecords"/>
-                    <include name="navigateToCorporateRegistration"/>
-                    <include name="validateMsisdnTest"/>
-                    <include name="captureCorporateReg"/>
-                    <include name="removeCorporateNewRegTest"/>
-                </methods>
-            </class>
-            <class name="admin.CorporateReRegistration">
-                <methods>
-                    <include name="noneCorporateReRegPrivilegeTest"/>
-                    <include name="CorporatePrivilegesTest"/>
-                    <include name="Login"/>
-                    <include name="captureReportRecords"/>
-                    <include name="navigateToCorporateReRegistration"/>
-                    <include name="validateMsisdnTest"/>
-                    <include name="corporateSubscriberValidationTest"/>
-                    <include name="captureCorporateReReg"/>
-                    <include name="removeCorporateReRegTest"/>
-                </methods>
-            </class>
-            <class name="admin.VerifyNinStandAlone">
-                <methods>
-                    <include name="noneVerifyNinPrivilegeTest" />
-                    <include name="Login" />
-                    <include name="navigateToVerifyNin" />
-                    <include name="verifyByNinTest" />
-                    <include name="verifyByPhoneTest" />
-                    <include name="verifyByDemographicsTest" />
-                    <include name="verifyByDocumentNoTest"/>
-                    <include name="verifyByTransactionIdTest"/>
-                    <include name="verifyByNinAndFingerprintTest" />
-                </methods>
-            </class>
-            <class name="admin.AdditionalRegistration">
-                <methods>
-                    <include name="noneAdditionalPrivilegeTest"/>
-                    <include name="Login"/>
-                    <include name="navigateToCaptureMenuTest"/>
-                    <include name="navigateToAddReg"/>
-                    <include name="msisdnCategory"/>
-                    <include name="additionalRegistration"/>
-                    <include name="additionalRegTypePrivilege"/>
-                    <include name="ndcRule"/>
-                </methods>
-            </class>
-            <class name="admin.SimSwap">
-                <methods>
-                    <include name="noneSIMSwapPrivilegeTest"/>
-                    <include name="Login"/>
-                    <include name="navigateToCaptureMenuTest"/>
-                    <include name="navigateToSimSwapViewTest"/>
-                    <include name="simSwapViewValidationTest"/>
-                    <include name="captureMobileSimUpgrade"/>
-                    <include name="removeSimSwapPrivilegeTest"/>
-                </methods>
-            </class>
-            <class name="admin.CorporateSimSwap">
-                <methods>
-                    <include name="noneCorporateSwapPrivilegeTest"/>
-                    <include name="Login"/>
-                    <include name="navigateToCaptureMenuTest"/>
-                    <include name="navigateToCorporateSimSwap"/>
-                    <include name="corporateSwapMsisdnValidation"/>
-                    <include name="verifyBiometrics"/>
-                    <include name="fdnCheck"/>
-                    <include name="swapRequest"/>
-                </methods>
-            </class>
-            <class name="admin.ReactivationTest">
-                <methods>
-                    <include name="noneReactivationPrivilegeTest"/>
-                    <include name="Login"/>
-                    <include name="navigateToCaptureMenuTest"/>
-                    <include name="validateMsisdn"/>
-                    <include name="msisdnReactivationTest"/>
-                </methods>
-            </class>
-            <class name="admin.SearchTest">
-                <methods>
-                    <include name="Login"/>
-                    <include name="navigateToSearchTest"/>
-                    <include name="searchByMsisdnTest"/>
-                    <include name="searchBySimSerialTest"/>
-                </methods>
-            </class>
-            <class name="admin.AgentSupport">
-                <methods>
-                    <include name="Login"/>
-                    <include name="navigateToAgentSupport"/>
-                    <include name="searchTest"/>
-                    <include name="assertSearchDetailsTest"/>
-                    <include name="logIssueByUser"/>
-                    <include name="logIssueByKit"/>
-                </methods>
-            </class>
-            <class name="admin.MobileNumberPorting">
-                <methods>
-                    <include name="noneMobileNumberPortPrivilegeTest"/>
-                    <include name="Login"/>
-                    <include name="mobileNumberPortingValidationTest"/>
-                    <include name="captureMobileNumberPortingTest"/>
-                    <include name="vanityNumberReg"/>
-                    <include name="removeMobileNumberPortingTest"/>
-                </methods>
-            </class>
-            <class name="admin.AgentOnBoardingTest">
-                <methods>
-                    <include name="onboardedAgentLoginTest"/>
-                    <include name="navigateToAgentOnBoardingTest"/>
-                    <include name="agentOnBoardingTest"/>
-                </methods>
-            </class>
-            <class name="admin.NotificationsTest">
-                <methods>
-                    <include name="Login"/>
-                    <include name="navigateToNotifications"/>
-                    <include name="viewNotifications"/>
-                </methods>
-            </class>
-            <class name="admin.ReportsTest">
-                <methods>
-                    <include name="Login"/>
-                    <include name="captureReportRecords"/>
-                    <include name="navigateToReportsPage"/>
-                    <include name="reportSummary"/>
-                    <include name="searchParameters"/>
-                    <include name="reportAfterCapture"/>
-                </methods>
-            </class>
-            <class name="admin.ChangePasswordTest">
-                <methods>
-                    <include name="loginToChangePassword"/>
-                    <include name="navigateToChangePasswordPage"/>
-                    <include name="changeToNewPassword"/>
-                    <include name="loginWithNewPassword"/>
-                    <include name="changeBackToOldPassword"/>
-                    <include name="loginWithOldPassword"/>
+                    <include name="navigateToCapture"/>
+                    <include name="selectRegistrationType" />
+                    <include name="msisdnValidationOnline"/>
+                    <include name="rroverridePortrait" />
+                    <include name="overrideHand" />
+                    <include name="requestOTP" /> 
+                    <include name="ninVerificationOnline" />
+                    <include name="eyeBalling" />
+                    <include name="demographicsCapture" />
+                    <include name="captureUploadDoc" />
+                    <include name="capturePreview" />
+                    <include name="saveCapture" />   
                 </methods>
             </class> 
-        </classes>
-    </test>
+          </classes>
+        </test> 
+         
+      
+          
+          
+      <test name="Re-Registration NIN " preserve-order="true">
+		 <parameter name="email" value="snapshot@seamfix.com"/>
+       	 <parameter name="systemPort" value="4723"/>
+         <parameter name="deviceNo" value="1"/>
+		<classes>
+         <class name="admin.ReRegistrationCapture">
+                <methods>
+                     <include name="NewRegPrivilegesTest"/> 
+                    <include name="Login"/>
+                    <include name="captureReportRecords"/>
+                    <include name="navigateToCapture"/>
+                    <include name="selectRegistrationType" />
+                    <include name="msisdnValidationOnline"/>
+                    <include name="rroverridePortrait" />
+                    <include name="overrideHand" />
+                    <include name="requestOTP" /> 
+                    <include name="ninVerificationOnline" />
+                    <include name="eyeBalling" />
+                    <include name="demographicsCapture" />
+                    <include name="captureUploadDoc" />
+                    <include name="capturePreview" />
+                    <include name="saveCapture" />   
+                </methods>
+            </class> 
+          </classes>
+        </test>
+   
+      
+   
 </suite>

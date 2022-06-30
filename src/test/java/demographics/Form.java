@@ -329,21 +329,7 @@ public class Form extends TestBase {
 		// Proceed with registration without completing the capture process
 		TestUtils.testTitle("Proceed with registration without completing the capture process");
 		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Capture Data']", "Capture Data");
-//		TestUtils.scrollDown();
-//		TestUtils.scrollDown();
-//		TestUtils.scrollDown();
-//		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/nextButton")).click();
-//		Thread.sleep(500);
-//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
-//		TestUtils.assertSearchText("ID", "android:id/message", "\n" +
-//				"KYC Form: Please Capture KYC/REGISTRATION Form \n" +
-//				"Face Capture: Please capture valid portrait \n" +
-//				"");
-//		getDriver().findElement(By.id("android:id/button1")).click();
-//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/nextButton")));
 
-		// Capture Identification Type
-//		TestUtils.scrollUp();
 		TestUtils.testTitle("Capture Identification Type");
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Capture Data']")));
 		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='[Select Identification Type]']", "[Select Identification Type]");
@@ -1867,6 +1853,7 @@ public class Form extends TestBase {
 
 	}
 
+
 	@Parameters({"dataEnv"})
 	public static void demographicsForm(String dataEnv) throws Exception {
 		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
@@ -2045,125 +2032,9 @@ public class Form extends TestBase {
 	}
 	
 	
-	public static void captureUploadDocument(String dataEnv) throws Exception{
-		
-		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
-		JSONParser parser = new JSONParser();
-		JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
-		JSONObject envs = (JSONObject) config.get("IndividualNigerianDetails");
-
-		String documentNumber = (String) envs.get("documentNumber");
-
-
-		TestUtils.testTitle("Capture Identification Type");
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Capture Data']")));
-		TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='[Select Identification Type]']", "[Select Identification Type]");
-		Thread.sleep(500);
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/identificationTypeSpinner")).click();
-		Thread.sleep(500);
-
-		// Capture ID CARD
-		TestUtils.scrollUntilElementIsVisible("XPATH", "//android.widget.CheckedTextView[@text='Passport']");
-		getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Passport']")).click();
-		Thread.sleep(500);
-		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/captureIdButton");
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureIdButton")).click();
-		Thread.sleep(1500);
-		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/switchButton")).click();
-		Thread.sleep(500);
-		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/captureButton");
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
-		Thread.sleep(1000);
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/ok")).click();
-		Thread.sleep(500);
-
-		// Document Number
-		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/documentNumber");
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/documentNumber")).clear();
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/documentNumber")).sendKeys(documentNumber);
-		Thread.sleep(500);
-
-		// Document Expiry Date
-		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/selectDateButton");
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/selectDateButton")).click();
-		Thread.sleep(1000);
-		try {
-			try {
-				getDriver().findElement(By.xpath("//android.widget.Button[@text='2021']")).click();
-				getDriver().findElement(By.id("android:id/button1")).click();
-			} catch (NoSuchElementException e1) {
-				getDriver().findElement(By.xpath("//android.widget.EditText[@text='2021']")).click();
-				getDriver().findElement(By.id("android:id/button1")).click();
-			}
-		} catch (NoSuchElementException ex) {
-			getDriver().findElement(By.id("android:id/date_picker_header_year")).click();
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='2022']")));
-			getDriver().findElement(By.xpath("//android.widget.TextView[@text='2022']")).click();
-			getDriver().findElement(By.id("android:id/button1")).click();
-		}
-
-		// View Captured ID
-		TestUtils.testTitle("Preview captured ID");
-		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/viewCaptureIdButton");
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/viewCaptureIdButton")).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/title")));
-		TestUtils.assertSearchText("ID", "android:id/title", "Preview");
-		if (getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/image")).isDisplayed()) {
-			testInfo.get().info("Captured ID is displayed");
-		} else {
-			testInfo.get().info("Captured ID is not displayed");
-			testInfo.get().addScreenCaptureFromPath(TestUtils.addScreenshot());
-		}
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/done_button")).click();
-		Thread.sleep(500);
-
-		TestUtils.scrollDown();
-
-		// Capture KYC FORM
-		TestUtils.testTitle("Capture KYC FORM");
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/captureKycFormButton", "CAPTURE KYC FORM *");
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureKycFormButton")).click();
-		Thread.sleep(500);
-		getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/switchButton")).click();
-		Thread.sleep(500);
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/captureButton")).click();
-		Thread.sleep(1000);
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/ok")).click();
-		Thread.sleep(500);
-
-	}
 	
 	
-	public static void capturePreview(String dataEnv) throws Exception{
-		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
-		// Preview
-		TestUtils.testTitle("Preview KYC FORM");
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/viewKycFormButton")).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/title")));
-		TestUtils.assertSearchText("ID", "android:id/title", "Preview");
-		if (getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/image")).isDisplayed()) {
-			testInfo.get().info("Captured KYC FORM is displayed");
-		} else {
-			testInfo.get().info("Captured KYC FORM is not displayed");
-			testInfo.get().addScreenCaptureFromPath(TestUtils.addScreenshot());
-		}
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/done_button")).click();
-		Thread.sleep(500);
-
-		TestUtils.scrollDown();
-	}
 	
-	public static void saveCapture(String dataEnv) throws Exception{
-		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
-
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/nextButton")));
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/nextButton")).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/tv_message")));
-		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/tv_message", "Captured record was saved successfully");
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btn_okay")).click();
-	
-	}
-
 	
 	@Parameters({"dataEnv"})
 	public static void changeOfOwnerForm(String dataEnv) throws Exception {
