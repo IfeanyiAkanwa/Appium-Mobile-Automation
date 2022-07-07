@@ -250,7 +250,7 @@ public class CorporateNewRegistration extends TestBase {
 	@Parameters({ "dataEnv"})
 	@Test
 	public void msisdnValidationOnline(String dataEnv) throws Exception {
-		Features.msisdnValidationOnline(dataEnv, "CR");
+		Features.msisdnValidationOnline(dataEnv, "CN");
 		
 	}
 	
