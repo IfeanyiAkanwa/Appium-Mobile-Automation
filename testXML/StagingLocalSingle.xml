@@ -12,7 +12,7 @@
     <parameter name="deviceName" value="SeamfixTab" />
     <parameter name="settings" value="false" />
 
-<!--     <test name="test1">
+   <test name="test1">
         <parameter name="email" value="snapshot@seamfix.com"/>
         <parameter name="systemPort" value="8228"/>
         <parameter name="deviceNo" value="1"/>
@@ -176,7 +176,6 @@
 		<classes>
          <class name="admin.CorporateNewRegistration">
                 <methods>
-                   <include name="removeCorporateNewRegTest"/>  
                     <include name="noneCorporatePrivilegeTest"/>
                 </methods>
          </class>
@@ -242,7 +241,6 @@
 		<classes>
          <class name="admin.CorporateReRegistration">
                 <methods>
-                   <include name="removeCorporateReRegTest"/>  
                     <include name="noneCorporateReRegPrivilegeTest"/>
                 </methods>
          </class>
@@ -273,7 +271,7 @@
                 </methods>
             </class> 
           </classes>
-        </test> -->
+        </test> 
         
  	  <test name="Corporate Re-Registration vNIN" preserve-order="true">
 		 <parameter name="email" value="snapshot@seamfix.com"/>
@@ -299,10 +297,37 @@
                 </methods>
             </class> 
           </classes>
-        </test> 
-
-        
-   
+      </test> 
       
-   
+     <test name="SimSwap Non Privilege Test" preserve-order="true">
+			<parameter name="email" value="snapshot@seamfix.com" />
+			<parameter name="systemPort" value="8228" />
+			<parameter name="deviceNo" value="1" />
+			<classes>
+				<class name="admin.SimSwap">
+				<methods>
+					<include name="noneSIMSwapPrivilegeTest"/>
+				</methods>
+			</class>
+		</classes>
+	</test> 
+		
+	 <test name="Sim Swap " preserve-order="true">
+	  <parameter name="email" value="snapshot@seamfix.com"/>
+      <parameter name="systemPort" value="4723"/>
+      <parameter name="deviceNo" value="1"/>
+		<classes>
+         <class name="admin.SimSwap">
+                <methods>
+                    <include name="Login"/>
+                    <include name="captureReportRecords"/>
+                    <include name="navigateToCapture"/>
+                    <include name="selectRegistrationType" />
+                    <include name="msisdnValidationOnline"/>
+                </methods>
+            </class> 
+          </classes>
+         </test>  
+         
+
 </suite>

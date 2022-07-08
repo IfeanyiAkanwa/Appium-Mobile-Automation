@@ -27,6 +27,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.SQLException;
 
 
 public class Features extends TestBase {
@@ -124,6 +125,8 @@ public class Features extends TestBase {
 			JSONObject envs1 = (JSONObject) config.get("ReRegistration");
 			JSONObject envs2 = (JSONObject) config.get("CorporateRegistration");
 			JSONObject envs3 = (JSONObject) config.get("CorporateReRegistration");
+		
+	        JSONObject envs4 = (JSONObject) config.get("SIMSwap");
     
 			valid_msisdn = (String) envs.get("valid_msisdn");
 			invalid_msisdn = (String) envs.get("invalid_msisdn");
@@ -215,6 +218,26 @@ public class Features extends TestBase {
 		 
 		    ninVerificationMode = (String) envs3.get("ninVerificationMode");
 		    non_valid_msisdn = (String) envs3.get("non_valid_msisdn");
+		    
+		    //SimSwap
+		    
+
+	        String invalid_Msisdn_Format4 = (String) envs4.get("invalid_Msisdn_Format");
+	        String msisdn_greater_than_11_digits4 = (String) envs4.get("msisdn_greater_than_11_digits");
+	        String msisdn_less_than_11_digits4 = (String) envs4.get("msisdn_less_than_11_digits");
+	        String unrecognizedMsisdn4 = (String) envs4.get("unrecognizedMsisdn");
+	        String valid_Msisdn4 = (String) envs4.get("valid_Msisdn");
+	        String invalid_Msisdn4 = (String) envs4.get("invalid_Msisdn");
+	        String invalid_new_Msisdn4 = (String) envs4.get("invalid_new_Msisdn");
+	        String new_msisdn4 = (String) envs4.get("new_msisdn");
+	        String valid_sim_serial4 = (String) envs4.get("valid_sim_serial");
+	        String approver_username4 = (String) envs4.get("approver_username");
+	        String approver_password4 = (String) envs4.get("approver_password");
+	        String blocked_msisdn4 = (String) envs4.get("blocked_msisdn");
+	        String otp_phone_number4 = (String) envs4.get("otp_phone_number");
+	        String nin4 = (String) envs4.get("nin");
+	        String unavailable_msisdn4 = (String) envs4.get("unavailable_msisdn");
+
 
 
 		if (regModule.equals("NMS")) {
@@ -611,6 +634,119 @@ public class Features extends TestBase {
 	        Thread.sleep(1000);
 	      
 		}		
+		
+		
+		}
+		
+		  @Parameters({"dataEnv"})
+		    @Test
+		    public static void validateProxySimSwap(String dataEnv) throws Exception {
+
+		        WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+		        JSONParser parser = new JSONParser();
+		        JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
+		        JSONObject envs = (JSONObject) config.get("SIMSwap");
+		        JSONObject envs2 = (JSONObject) config.get("Login");
+
+		        String valid_username = (String) envs2.get("valid_username");
+
+		        String valid_sim_serial = (String) envs.get("pp_valid_sim_serial");
+		        String valid_Msisdn = (String) envs.get("pp_valid_Msisdn");
+		        String new_msisdn = (String) envs.get("pp_new_msisdn");
+		        String approver_username = (String) envs.get("approver_username");
+		        String approver_password = (String) envs.get("approver_password");
+		        String fName = (String) envs.get("pp_fName");
+		        String lName = (String) envs.get("pp_lName");
+		        String mmn = (String) envs.get("pp_mmn");
+		        String dob = (String) envs.get("pp_dob");
+		        String kmUserId = (String) envs.get("kmUserId");
+		        String state = (String) envs.get("pp_state");
+		        String gender = (String) envs.get("pp_gender");
+		        String pp_last_recharge_Amount = (String) envs.get("pp_last_recharge_Amount");
+		        String activation_year = (String) envs.get("pp_activation_year");
+		        String pp_last_recharge_date = (String) envs.get("pp_last_recharge_date");
+		        String fdn1 = (String) envs.get("pp_fdn1");
+		        String fdn2 = (String) envs.get("pp_fdn2");
+		        String fdn3 = (String) envs.get("pp_fdn3");
+		        String fdn4 = (String) envs.get("pp_fdn4");
+		        String fdn5 = (String) envs.get("pp_fdn5");
+		        String nin = (String) envs.get("nin");
+		        String pp_nin = (String) envs.get("pp_nin");
+		        String proxy_name = (String) envs.get("proxy_name");
+		        String proxy_phone = (String) envs.get("proxy_phone");
+		        String last_invoice_amount = (String) envs.get("pp_last_invoice_amount");
+		        String last_invoice_date = (String) envs.get("pp_last_invoice_date");
+		        String puk = (String) envs.get("pp_puk");
+		        String serial = (String) envs.get("pp_serial");
+		        String alternate_phone = (String) envs.get("alternate_phone");
+		        String otp_phone_number = (String) envs.get("otp_phone_number");
+
+		        //Select SIM Swap type
+		        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/radio_item_proxl")).click();
+
+		        /*//Select Subscriber Type
+		        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/subscriberType")).click();
+		        getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Prepaid']")).click();
+		        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Prepaid']")));*/
+		        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simType")).click();
+		        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.CheckedTextView[@text='MOBILE']")));
+		        getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='MOBILE']")).click();
+		        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='MOBILE']")));
+		        //Select Swap Category
+		        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/swapCategory")).click();
+		        try{
+		            Thread.sleep(1500);
+		            getDriver().findElement(By.xpath("//android.widget.TextView[@text='SIM SWAP']")).click();
+		        }catch (Exception e){
+		            getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='SIM SWAP']")).click();
+		        }
+		        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='SIM SWAP']")));
+
+		        //Enter Valid existing MSISDN
+		        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/existingMsisdnField")).clear();
+		        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/existingMsisdnField")).sendKeys(valid_Msisdn);
+
+
+		        //Enter Valid New MSISDN
+		        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/newMsisdnField")).clear();
+		        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/newMsisdnField")).sendKeys(new_msisdn);
+
+		        //Enter Valid New Sim Serial
+		        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simSerialField")).clear();
+		        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simSerialField")).sendKeys(valid_sim_serial);
+
+		        //Enter Valid Proxy MSISDN
+		        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/proxyMsisdnField")).clear();
+		        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/proxyMsisdnField")).sendKeys(proxy_phone);
+
+
+		        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btnValidate")).click();
+
+		        //Check for Approve Sim Swap Validation
+		        try {
+		            TestUtils.testTitle("Approve Sim Swap Validation");
+		            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
+		            getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/approve_username")).clear();
+		            getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/approve_username")).sendKeys(approver_username);
+		            getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/approve_password")).clear();
+		            getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/approve_password")).sendKeys(approver_password);
+		            getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/approve")).click();
+		            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
+		            TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/alertTitle", "Approval Status");
+		            TestUtils.assertSearchText("ID", "android:id/message", "Successfully approved!");
+		            getDriver().findElement(By.xpath("//android.widget.Button[@text='OK']")).click();
+		        } catch (Exception e) {
+		            testInfo.get().info("SIM Swap validation view not displayed");
+		        }
+
+		        try{
+		            //check for warnings
+		            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/button1")));
+		            getDriver().findElement(By.id("android:id/button1")).click();
+		        }catch(Exception e){
+
+		        }
+
 	
 	}
 		@Parameters({ "dataEnv"})
@@ -1642,7 +1778,34 @@ public class Features extends TestBase {
 
 			}
 
-			}
+		}
+			
+
+		    private static void validateOtp(String otp_phone_number) throws SQLException, InterruptedException {
+		        WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+		        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/dialog_title")));
+
+		        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/dialog_title", "OTP verification");
+
+		        String otp = ConnectDB.getOTP(otp_phone_number);
+
+		        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/dialog_title")));
+		        TestUtils.testTitle("Valid OTP Test: " + otp);
+		        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/user_input_dialog")).clear();
+		        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/user_input_dialog")).sendKeys(otp);
+		        getDriver().findElement(By.id("android:id/button1")).click();
+		        Thread.sleep(2000);
+		        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/button1")));
+		        TestUtils.assertSearchText("ID", "android:id/message", "The specified otp and msisdn combinations are valid.");
+		        getDriver().findElement(By.id("android:id/button1")).click();
+		        try{
+		            //check for warnings
+		            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/button1")));
+		            getDriver().findElement(By.id("android:id/button1")).click();
+		        }catch(Exception e){
+
+		        }
+		    }
 			
 			@Test
 			@Parameters({"dataEvn"})
