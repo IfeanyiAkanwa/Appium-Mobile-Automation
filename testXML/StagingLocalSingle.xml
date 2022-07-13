@@ -12,7 +12,7 @@
     <parameter name="deviceName" value="SeamfixTab" />
     <parameter name="settings" value="false" />
 
-   <test name="test1">
+    <test name="test1">
         <parameter name="email" value="snapshot@seamfix.com"/>
         <parameter name="systemPort" value="8228"/>
         <parameter name="deviceNo" value="1"/>
@@ -41,7 +41,7 @@
             </classes>
       </test> 
             
-        <test name="NewReg Non Privilege Test" preserve-order="true">
+     <test name="NewReg Non Privilege Test" preserve-order="true">
 			<parameter name="email" value="snapshot@seamfix.com" />
 			<parameter name="systemPort" value="8228" />
 			<parameter name="deviceNo" value="1" />
@@ -52,13 +52,12 @@
 				</methods>
 			</class>
 		</classes>
-		</test> 
+	</test> 
 		
 	 <test name="New Registration NIN " preserve-order="true">
 		<classes>
          <class name="admin.NewRegistration">
                 <methods>
-                    <include name="NewRegPrivilegesTest"/>   
                     <include name="Login"/>
                     <include name="captureReportRecords"/>
                     <include name="navigateToCapture"/>
@@ -82,7 +81,6 @@
 		<classes>
          <class name="admin.NewRegistration">
                 <methods>
-                    <include name="NewRegPrivilegesTest"/>   
                     <include name="Login"/>
                     <include name="captureReportRecords"/>
                     <include name="navigateToCapture"/>
@@ -101,28 +99,54 @@
             </class> 
           </classes>
          </test>  
-         
-   <test name="Re-Reg Non Privilege Test" preserve-order="true">
+          
+    <test name="Re-Reg Non Privilege Test" preserve-order="true">
 			<parameter name="email" value="snapshot@seamfix.com" />
 			<parameter name="systemPort" value="8228" />
 			<parameter name="deviceNo" value="1" />
 			<classes>
 				<class name="admin.ReRegistrationCapture">
 				<methods>
+					 <include name="reRegCOOPrivilegesTest"/>
+				</methods>
+			</class>
+		</classes>
+		</test>
+		
+		 <test name="Re-Reg Non Privilege Test" preserve-order="true">
+			<parameter name="email" value="snapshot@seamfix.com" />
+			<parameter name="systemPort" value="8228" />
+			<parameter name="deviceNo" value="1" />
+			<classes>
+				<class name="admin.ReRegistrationCapture">
+				<methods>
+					 <include name="reRegBypassOtpPrivilege"/>  
+				</methods>
+			</class>
+		</classes>
+		</test> 
+		
+		 <test name="Re-Reg Non Privilege Test" preserve-order="true">
+			<parameter name="email" value="snapshot@seamfix.com" />
+			<parameter name="systemPort" value="8228" />
+			<parameter name="deviceNo" value="1" />
+			<classes>
+				<class name="admin.ReRegistrationCapture">
+				<methods>
+					 <include name="reRegCOOPrivilegesTest"/>
 					 <include name="noneReRegPrivilegeTest"/>
 				</methods>
 			</class>
 		</classes>
 		</test>
 		
-  <test name="Re-Registration NIN " preserve-order="true">
+   <test name="Re-Registration NIN " preserve-order="true">
 		 <parameter name="email" value="snapshot@seamfix.com"/>
        	 <parameter name="systemPort" value="4723"/>
          <parameter name="deviceNo" value="1"/>
 		<classes>
          <class name="admin.ReRegistrationCapture">
-                <methods>
-                  	<include name="ReRegPrivilegesTest"/> 
+                <methods> 
                     <include name="Login"/>
                     <include name="captureReportRecords"/>
                     <include name="navigateToCapture"/>
@@ -149,7 +173,6 @@
 		<classes>
          <class name="admin.ReRegistrationCapture">
                 <methods>
-                     <include name="NewRegPrivilegesTest"/> 
                     <include name="Login"/>
                     <include name="captureReportRecords"/>
                     <include name="navigateToCapture"/>
@@ -166,7 +189,7 @@
                     <include name="saveCapture" />   
                 </methods>
             </class> 
-          </classes>
+         </classes>
         </test>
         
       <test name="None Corporate New Registration" preserve-order="true">
@@ -233,7 +256,7 @@
             </class> 
           </classes>
       </test>
-      
+     
        <test name="None Corporate Re Registration" preserve-order="true">
 		 <parameter name="email" value="snapshot@seamfix.com"/>
        	 <parameter name="systemPort" value="4723"/>
@@ -271,9 +294,9 @@
                 </methods>
             </class> 
           </classes>
-        </test> 
+        </test>  
         
- 	  <test name="Corporate Re-Registration vNIN" preserve-order="true">
+ 	   <test name="Corporate Re-Registration vNIN" preserve-order="true">
 		 <parameter name="email" value="snapshot@seamfix.com"/>
        	 <parameter name="systemPort" value="4723"/>
          <parameter name="deviceNo" value="1"/>
@@ -299,35 +322,7 @@
           </classes>
       </test> 
       
-     <test name="SimSwap Non Privilege Test" preserve-order="true">
-			<parameter name="email" value="snapshot@seamfix.com" />
-			<parameter name="systemPort" value="8228" />
-			<parameter name="deviceNo" value="1" />
-			<classes>
-				<class name="admin.SimSwap">
-				<methods>
-					<include name="noneSIMSwapPrivilegeTest"/>
-				</methods>
-			</class>
-		</classes>
-	</test> 
-		
-	 <test name="Sim Swap " preserve-order="true">
-	  <parameter name="email" value="snapshot@seamfix.com"/>
-      <parameter name="systemPort" value="4723"/>
-      <parameter name="deviceNo" value="1"/>
-		<classes>
-         <class name="admin.SimSwap">
-                <methods>
-                    <include name="Login"/>
-                    <include name="captureReportRecords"/>
-                    <include name="navigateToCapture"/>
-                    <include name="selectRegistrationType" />
-                    <include name="msisdnValidationOnline"/>
-                </methods>
-            </class> 
-          </classes>
-         </test>  
-         
+   
+          
 
 </suite>
