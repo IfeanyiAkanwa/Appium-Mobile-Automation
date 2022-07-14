@@ -2962,6 +2962,126 @@ public class Form extends TestBase {
 		TestUtils.assertSearchText("ID", "android:id/message", "Do you wish to Top Up the registered subscriber ?");
 		getDriver().findElement(By.id("android:id/button3")).click();
 	}
+	
+	
+	public static void CorporateRegFormAutoPopulate2(String dataEnv) throws InterruptedException, IOException, ParseException {
+		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+		JSONParser parser = new JSONParser();
+		JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
+		JSONObject envs = (JSONObject) config.get("IndividualForeignerDetails");
+		JSONObject envs2 = (JSONObject) config.get("NewRegistration");
+
+		String valid_msisdn = (String) envs.get("valid_msisdn");
+		String ninVerificationMode = (String) envs.get("ninVerificationMode");
+		String surname = (String) envs.get("surname");
+		String firstname = (String) envs.get("firstname");
+		String middlename = (String) envs.get("middlename");
+		String maiden_name = (String) envs.get("maiden_name");
+		String social_media_username = (String) envs.get("social_media_username");
+		String street = (String) envs.get("street");
+		String city = (String) envs.get("city");
+		String nationality = (String) envs.get("nationality");
+		String state = (String) envs.get("state");
+		String LGA = (String) envs.get("LGA");
+		String email = (String) envs.get("email");
+		String alt_phone_number = (String) envs.get("alt_phone_number");
+		String occupation = (String) envs.get("occupation");
+		String postalcode = (String) envs.get("postalcode");
+		String area = (String) envs.get("area");
+		String passport_ID_number = (String) envs.get("passport_ID_number");
+		String house_or_flat_no = (String) envs.get("house_or_flat_no");
+		String documentNumber = (String) envs.get("documentNumber");
+		String nin = (String) envs.get("nin");
+		String nin2 = (String) envs.get("nin2");
+
+		try {
+			Thread.sleep(1000);
+			getDriver().findElement(By.id("android:id/button1")).click();
+		} catch (Exception e) {
+
+		}
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Personal Details']")));
+
+		//Form.EditCompanyDetailsForm(dataEnv);
+		
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/surNameTXT")).click();
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/surNameTXT")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/surNameTXT")).sendKeys(surname);
+
+		
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/firstNameTXT")).click();
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/firstNameTXT")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/firstNameTXT")).sendKeys(firstname);
+
+		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/middleNameTXT");
+
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/middleNameTXT")).click();
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/middleNameTXT")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/middleNameTXT")).sendKeys(middlename);
+
+		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/momsMaidenNameTXT");
+
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/momsMaidenNameTXT")).click();
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/momsMaidenNameTXT")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/momsMaidenNameTXT")).sendKeys(maiden_name);
+
+		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/maleRadioButton");
+
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/maleRadioButton")).click();
+
+		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/selectDateButton");
+
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/selectDateButton")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/date_picker_header_year")));
+		getDriver().findElement(By.id("android:id/date_picker_header_year")).click();
+
+		TestUtils.scrollUntilElementIsVisible("XPATH", "//android.widget.TextView[@text='2000']");
+
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='2000']")));
+		getDriver().findElement(By.xpath("//android.widget.TextView[@text='2000']")).click();
+		getDriver().findElement(By.id("android:id/button1")).click();
+
+		
+		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/alternateEmail");
+
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/alternateEmail")).click();
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/alternateEmail")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/alternateEmail")).sendKeys(email);
+
+		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/spinnerOccupation");
+
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/spinnerOccupation")));
+		Thread.sleep(500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/spinnerOccupation")).click();
+
+		TestUtils.scrollUntilElementIsVisible("XPATH", "//android.widget.TextView[@text='Select Item']");
+		Thread.sleep(500);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Select Item']")));
+
+		TestUtils.scrollUntilElementIsVisible("XPATH", "//android.widget.TextView[@text='" + occupation + "']");
+		Thread.sleep(500);
+		getDriver().findElement(By.xpath("//android.widget.TextView[@text='" + occupation + "']")).click();
+		Thread.sleep(500);
+
+		// Social Media
+		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/socialMediaUsername");
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/socialMediaUsername")));
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/socialMediaUsername")).click();
+		Thread.sleep(500);
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/socialMediaUsername")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/socialMediaUsername")).sendKeys(social_media_username);
+		Thread.sleep(500);
+
+		// Next button
+		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/btnContinueReg");
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btnContinueReg")).click();
+		Thread.sleep(1000);
+
+
+
+		Thread.sleep(1000);
+
+	}
 
 
 	public static void CorporateRegFormAutoPopulate(String dataEnv) throws InterruptedException, IOException, ParseException {

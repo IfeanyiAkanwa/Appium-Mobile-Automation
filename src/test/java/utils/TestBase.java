@@ -21,6 +21,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
@@ -148,7 +149,7 @@ public class TestBase {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@BeforeClass
 	@Parameters({ "systemPort", "deviceNo", "server","deviceName", "testConfig", "settings"})
-	public void startApp(String systemPort, int deviceNo, String server, String deviceName, String testConfig, boolean settings) throws Exception {
+	public void startApp(String systemPort, int deviceNo, String server, String deviceName, String testConfig, boolean settings, ITestContext context) throws Exception {
 
 		if (server.equals(remoteBrowserStack)) {
 			File path = null;
@@ -251,7 +252,7 @@ public class TestBase {
 		if (settings==true){
 
 		}else {
-			ExtentTest parent = reports.createTest(getClass().getName() + "\n" + TestUtils.getDeviceInfo(udid[deviceNo].trim()));
+			ExtentTest parent = reports.createTest(context.getName() + "\n" + TestUtils.getDeviceInfo(udid[deviceNo].trim()));
 			parentTest.set(parent);
 		}
 	}

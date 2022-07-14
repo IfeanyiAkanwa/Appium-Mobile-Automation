@@ -93,7 +93,7 @@ public class CorporateNewRegistration extends TestBase {
 	@Test
 	public void demographicsCapture(String dataEnv) throws Exception {
 
-		Form.CorporateRegFormAutoPopulate(dataEnv);
+		Form.CorporateRegFormAutoPopulate2(dataEnv);
 		Form.addressDetails(dataEnv);
 	}
 	
