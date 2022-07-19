@@ -257,10 +257,10 @@
   },
   "SIMSwap": {
     "nin": "11111111111",
-    "pp_nin": "22222222222",
-    "valid_Msisdn": "08072756557",
-    "new_msisdn": "08052365234",
-    "valid_sim_serial": "8923450108200272079F",
+    "pp_nin": "90909090909",
+    "valid_Msisdn": "08072756550",
+    "new_msisdn": "08072756001",
+    "valid_sim_serial": "8923450701214517453F",
     "invalid_Msisdn": "08111071565",
     "invalid_new_Msisdn": "08159888886",
     "lga": "Agege",
@@ -297,7 +297,7 @@
     "fdn4": "8022775569",
     "fdn5": "8053427645",
     "proxy_name": "Bisi",
-    "proxy_phone": "09153072876",
+    "proxy_phone": "08156741809",
     "puk": "27002247",
     "serial": "8923450811198985673F",
     "alternate_phone": "08066609142",
@@ -327,6 +327,7 @@
     "pp_fdn4": "8150501137",
     "pp_fdn5": "8079904088",
     "ninVerificationMode": "Search By NIN",
+    "pninVerificationMode": "Proxy's NIN Verification - Search By NIN",
     "kmUserId": "990"
   },
   "CorporateSIMSwap": {
