@@ -43,60 +43,17 @@ public class SimSwap extends TestBase {
 
 		 proxy_phone = (String) envs.get("proxy_phone");
 	}
+	
+	  @Parameters({ "dataEnv"})
+	    @Test
+	    public void noneSIMSwapPrivilegeTest(String dataEnv) throws Exception {
+		Features feature = new Features();
+		feature.noneUsecasePrivilegeTest(dataEnv, "SIM Swap");
+	    Features.logOutUser();
 
-    @Parameters({"dataEnv"})
-    @Test
-    public void noneSIMSwapPrivilegeTest(String dataEnv) throws Exception {
-        WebDriverWait wait = new WebDriverWait(getDriver(), 30);
-        JSONParser parser = new JSONParser();
-        JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
-        JSONObject envs = (JSONObject) config.get("SIMSwap");
-
-        String valid_username = (String) envs.get("valid_username");
-        String valid_password = (String) envs.get("valid_password");
-        String lga = (String) envs.get("lga");
-
-        TestBase.Login1(valid_username, valid_password);
-        Thread.sleep(500);
-        TestUtils.testTitle("To confirm that a user without SIM Swap privilege can't access the module");
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/button_start_capture")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/reg_type_placeholder")));
-        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/reg_type_placeholder", "Registration Type");
-        Thread.sleep(500);
+	    }
 
 
-        // Select SIM Swap
-        TestUtils.testTitle("Check that SIM Swap is not selectable");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/typeofreg")));
-        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/typeofreg")).click();
-        Thread.sleep(500);
-        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/alertTitle", "Select Registration Type");
-        getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='SIM Swap']")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
-        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/alertTitle", "No Privilege");
-        TestUtils.assertSearchText("ID", "android:id/message", "You are not allowed to access SIM Swap because you do not have the SIM Swap privilege");
-        Thread.sleep(500);
-        getDriver().findElement(By.id("android:id/button1")).click();
-        Thread.sleep(500);
-        getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
-        TestUtils.assertSearchText("ID", "android:id/message", "Capture session is currently active, Exit will cause loss of currently captured data! do you wish to cancel current capture session?");
-        getDriver().findElement(By.id("android:id/button2")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Home']")));
-        Thread.sleep(500);
-
-        //Log out
-        getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/design_menu_item_text")));
-        TestUtils.scrollDown();
-        getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Logout']")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
-        TestUtils.assertSearchText("ID", "android:id/message", "   Log out?");
-        getDriver().findElement(By.id("android:id/button3")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/otp_login")));
-    }
-    
-    
     
 	@Parameters({ "dataEnv"})
 	@Test
@@ -188,7 +145,7 @@ public class SimSwap extends TestBase {
 	@Test
 	public void captureUploadDoc(String dataEnv) throws Exception {
 
-		Form.captureSimSwapDocument(dataEnv);
+		Features.captureSimSwapDocument(dataEnv);
 	}
 	
 	
@@ -196,7 +153,7 @@ public class SimSwap extends TestBase {
 	@Test
 	public void saveCapture(String dataEnv) throws Exception {
 
-		Form.simSwapSubmit(dataEnv);
+		Features.simSwapSubmit(dataEnv);
 	}
 	
 
