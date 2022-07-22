@@ -83,13 +83,13 @@ public class CorporateReRegistration extends TestBase {
 	public void ninVerificationOnline(String dataEnv) throws Exception {
 
 		//NIN Verification
-		Features.ninVerificationOnline(dataEnv);
+		Features.ninVerificationOnline(dataEnv, "Search By NIN");
 	}
 	
 	@Parameters({ "dataEnv"})
 	@Test
 	public void vninVerificationOnline(String dataEnv) throws Exception {
-		Features.vNinVerificationOnline(dataEnv);
+		Features.vNinVerificationOnline(dataEnv, "Search By NIN");
 	}
 	
 	@Parameters({ "dataEnv"})
