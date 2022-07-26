@@ -57,11 +57,11 @@
     "searchParam": "SIM"
   },
   "NewRegistration": {
-    "valid_msisdn": "08072756231",
+    "valid_msisdn": "08156741353",
     "invalid_msisdn": "764785",
     "non_valid_msisdn": "08152379129",
     "invalid_simSerial": "177606",
-    "valid_simSerial": "8923450409202464882F",
+    "valid_simSerial": "8923450508192747295F",
     "lga": "Agege",
     "valid_fixed_msisdn": "080500066",
     "valid_fixed_serial": "8923456000000000066F",
@@ -70,7 +70,7 @@
     "valid_msisdn2": "08072712701",
     "valid_simSerial2": "8923450409202450139F",
     "ninVerificationMode": "Search By NIN",
-    "nin": "11111111111",
+    "nin": "43434343434",
     "vnin":"XP637697545769L8",
     "valid_username": "testpriv@yopmail.com",
     "valid_username2": "gnwabude@seamfix.com",
@@ -256,7 +256,7 @@
     "nin": "11111111111"
   },
   "SIMSwap": {
-    "nin": "11111111111",
+    "nin": "43434343434",
     "vnin": "XP637697545769L8",
     "pp_nin": "43434343434",
     "valid_Msisdn": "08156741493",
@@ -342,13 +342,13 @@
     "lessMsisdn1": "08055",
     "lessMsisdn2": "08055388",
     "validSimSerial": "8923450704188330796F",
-    "newMsisdn": "09153245624",
-    "newSerial": "8923450108200272053F",
+    "newMsisdn": "08156741353",
+    "newSerial": "8923450508192747295F",
     "moreSerial": "8923450502181537882F1234",
     "lessSerial": "89234181537882F",
     "invalidSerial": "8923450502181739572F",
     "invalidFormatSerial": "89234505021815378820",
-    "nin": "22222222222",
+    "nin": "43434343434",
     "fName": "Uzoh",
     "lName": "Anthony",
     "mmn": "BENO",
@@ -360,8 +360,10 @@
     "validSerial": "8923450308064244004F",
     "lastInvoiceAmount": "6387",
     "lastInvoiceDate": "2021-02-26",
-    "kmUserId": "990"
-  },
+    "kmUserId": "990",
+    "childMsisdn":"09153245618"
+    
+ },
   "UserDetails": {
     "surname": "Amanda",
     "firstname": "Rock",

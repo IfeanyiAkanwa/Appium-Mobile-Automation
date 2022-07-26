@@ -166,22 +166,23 @@ public class Features extends TestBase {
 		
 	        JSONObject envs4 = (JSONObject) config.get("SIMSwap");
     
-			valid_msisdn = (String) envs.get("valid_msisdn");
-			invalid_msisdn = (String) envs.get("invalid_msisdn");
-			valid_simSerial = (String) envs.get("valid_simSerial");
-			invalid_simSerial = (String) envs.get("invalid_simSerial");
+			String valid_msisdn01 = (String) envs.get("valid_msisdn");
+			String invalid_msisdn01 = (String) envs.get("invalid_msisdn");
+			String valid_simSerial01 = (String) envs.get("valid_simSerial");
+			String invalid_simSerial01 = (String) envs.get("invalid_simSerial");
 			lga = (String) envs.get("lga");
-			valid_fixed_msisdn = (String) envs.get("valid_fixed_msisdn");
-			valid_fixed_serial = (String) envs.get("valid_fixed_serial");
-			invalidPrefixMsisdn = (String) envs.get("invalidPrefixMsisdn");
-			invalidPrefixSimSerial = (String) envs.get("invalidPrefixSimSerial");
+			String valid_fixed_msisdn01 = (String) envs.get("valid_fixed_msisdn");
+			String valid_fixed_serial01 = (String) envs.get("valid_fixed_serial");
+			String invalidPrefixMsisdn01 = (String) envs.get("invalidPrefixMsisdn");
+			String invalidPrefixSimSerial01 = (String) envs.get("invalidPrefixSimSerial");
 
-			valid_msisdn2 = (String) envs.get("valid_msisdn2");
-			valid_simSerial2 = (String) envs.get("valid_simSerial2");
+			String valid_msisdn201 = (String) envs.get("valid_msisdn2");
+			String valid_simSerial201 = (String) envs.get("valid_simSerial2");
 			nin = (String) envs.get("nin");
 			ninVerificationMode = (String) envs.get("ninVerificationMode");
 			non_valid_msisdn = (String) envs.get("non_valid_msisdn");
-
+			
+			
 	
 			//Re-reg
 
@@ -310,15 +311,15 @@ public class Features extends TestBase {
 			Thread.sleep(1000);
 
 			//To confirm that the FIXED category of registration can only accept 9 digits for msisdn
-			String priCharacters=valid_fixed_msisdn+"1234";
+			String priCharacters=valid_fixed_msisdn01+"1234";
 			TestUtils.testTitle("To confirm that the FIXED category of registration can only accept 9 digits for msisdn  ("+priCharacters+")");
 			getDriver().findElement(By.id("android:id/text1")).click();
 			getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ListView/android.widget.CheckedTextView[2]")).click();
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).clear();
-			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).sendKeys(valid_fixed_msisdn);
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).sendKeys(valid_fixed_msisdn01);
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).clear();
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).sendKeys(priCharacters);
-			TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/msisdnField", valid_fixed_msisdn);
+			TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/msisdnField", valid_fixed_msisdn01);
 
 			
 			TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='MSISDN Category']", "MSISDN Category");
@@ -328,20 +329,20 @@ public class Features extends TestBase {
 			Thread.sleep(500);
 			
 			//To confirm that the MOBILE category of registration can only accept 11 digits for msisdn
-			String moreCharacters=valid_msisdn+"1234";
+			String moreCharacters=valid_msisdn01+"1234";
 			TestUtils.testTitle("To confirm that the MOBILE category of registration can only accept 11 digits for msisdn  ("+moreCharacters+")");
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).clear();
-			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).sendKeys(valid_msisdn);
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).sendKeys(valid_msisdn01);
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).clear();
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).sendKeys(moreCharacters);
-			TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/msisdnField", valid_msisdn);
+			TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/msisdnField", valid_msisdn01);
 			
 			// To confirm error message for invalid combination of MSISDN AND SIM SERIAL
-			TestUtils.testTitle("To confirm error message for invalid combination of MSISDN AND SIM SERIAL:"+invalidPrefixSimSerial+ " and Valid MSISDN: " + valid_msisdn);
+			TestUtils.testTitle("To confirm error message for invalid combination of MSISDN AND SIM SERIAL:"+invalidPrefixSimSerial01+ " and Valid MSISDN: " + valid_msisdn01);
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).clear();
-			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).sendKeys(valid_msisdn);
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).sendKeys(valid_msisdn01);
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simSerialField")).clear();
-			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simSerialField")).sendKeys(invalidPrefixSimSerial);
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simSerialField")).sendKeys(invalidPrefixSimSerial01);
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/addMsisdnSimSerialButton")).click();
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/button1")));
 			TestUtils.assertSearchText("ID", "android:id/message", "Msisdn and Sim serial combination is invalid");
@@ -349,11 +350,11 @@ public class Features extends TestBase {
 			Thread.sleep(1000);
 
 			// To confirm error message when invalid SIMSERIAL  is inputed by user
-			TestUtils.testTitle("To confirm error message when invalid SIMSERIAL  is inputed by user:"+invalidPrefixSimSerial+ " and Valid MSISDN: " + valid_msisdn);
+			TestUtils.testTitle("To confirm error message when invalid SIMSERIAL  is inputed by user:"+invalidPrefixSimSerial01+ " and Valid MSISDN: " + valid_msisdn01);
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).clear();
-			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).sendKeys(invalidPrefixMsisdn);
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).sendKeys(invalidPrefixMsisdn01);
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simSerialField")).clear();
-			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simSerialField")).sendKeys(invalidPrefixSimSerial);
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simSerialField")).sendKeys(invalidPrefixSimSerial01);
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/addMsisdnSimSerialButton")).click();
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
 			TestUtils.assertSearchText("ID", "android:id/message", "The MSISDN has an unrecognized National Destination Code. "
@@ -365,18 +366,18 @@ public class Features extends TestBase {
 			Thread.sleep(1000);
 
 			//Check that the user is not allowed to exceed the specified max SIMSERIAL length
-			moreCharacters=valid_simSerial+"1234";
+			moreCharacters=valid_simSerial01+"1234";
 			TestUtils.testTitle("Check that the user is not allowed to exceed the specified max SIMSERIAL length  ("+moreCharacters+")");
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simSerialField")).clear();
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simSerialField")).sendKeys(moreCharacters);
-			TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/simSerialField", valid_simSerial);
+			TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/simSerialField", valid_simSerial01);
 
 			// Check that the user is not allowed to go below the specified min SIMSERIAL length
-			TestUtils.testTitle("Check that the user is not allowed to go below the specified min SIMSERIAL length:"+invalid_simSerial+ " and Valid MSISDN: " + valid_msisdn);
+			TestUtils.testTitle("Check that the user is not allowed to go below the specified min SIMSERIAL length:"+invalid_simSerial01+ " and Valid MSISDN: " + valid_msisdn01);
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).clear();
-			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).sendKeys(valid_msisdn);
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).sendKeys(valid_msisdn01);
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simSerialField")).clear();
-			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simSerialField")).sendKeys(invalid_simSerial);
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simSerialField")).sendKeys(invalid_simSerial01);
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/addMsisdnSimSerialButton")).click();
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
 			TestUtils.assertSearchText("ID", "android:id/message", "Sim Serial format is invalid. SIM Serial should be 19 numbers with 'F' at the end.");
@@ -386,11 +387,11 @@ public class Features extends TestBase {
 	
 
 			// Proceed after supplying single msisdns and sim serial
-			TestUtils.testTitle("Proceed after supplying single msisdn: (" + valid_msisdn + ") and (" + valid_simSerial + ") for validation");
+			TestUtils.testTitle("Proceed after supplying single msisdn: (" + valid_msisdn01 + ") and (" + valid_simSerial01 + ") for validation");
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).clear();
-			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).sendKeys(valid_msisdn);
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).sendKeys(valid_msisdn01);
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simSerialField")).clear();
-			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simSerialField")).sendKeys(valid_simSerial);
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simSerialField")).sendKeys(valid_simSerial01);
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/addMsisdnSimSerialButton")).click();
 			Thread.sleep(2000);
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
@@ -400,8 +401,8 @@ public class Features extends TestBase {
 			getDriver().findElement(By.id("android:id/button1")).click();
 	
 			TestUtils.testTitle("Assert Number");
-			TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/phone_no_view", valid_msisdn);
-			TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/tv_sim_serial", valid_simSerial);
+			TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/phone_no_view", valid_msisdn01);
+			TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/tv_sim_serial", valid_simSerial01);
 		    getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btnCaptureBiometrics")).click();
 			}
 		
@@ -908,8 +909,7 @@ public class Features extends TestBase {
 
 		}else if(regModule.equals("CSS")) {
 		    TestUtils.testTitle("Validate Corporate SIM Swap View Details");
-		   
-
+		    
 	        //Select sim type
 	        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/simType")));
 	        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simType")).click();
@@ -933,7 +933,7 @@ public class Features extends TestBase {
 	        TestUtils.testTitle("To ensure the Swap Type field is a compulsory field");
 	        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btnValidate")).click();
 	        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
-	        TestUtils.assertSearchText("ID", "android:id/message", "Please Select SIM Swap Type");
+	        TestUtils.assertSearchText("ID", "android:id/message", "Please select a SIM Swap Type to proceed");
 	        getDriver().findElement(By.id("android:id/button1")).click();
 	        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/radio_item_tm")));
 	        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/radio_item_tm")).click();
@@ -970,7 +970,7 @@ public class Features extends TestBase {
 	        TestUtils.testTitle("Confirm the Existing TM MSISDN field accepts only digits and no letters or special characters (" + invalidFormat + ")");
 	        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/existingMsisdnField")).clear();
 	        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/existingMsisdnField")).sendKeys(invalidFormat);
-	        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/existingMsisdnField", lessMsisdn52);
+	        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/existingMsisdnField", invalidFormat);
 	        Thread.sleep(500);
 
 	        // Confirm Existing TM MSISDN field has validation for Glo
@@ -984,7 +984,7 @@ public class Features extends TestBase {
 	        TestUtils.scrollDown();
 	        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btnValidate")).click();
 	        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
-	        TestUtils.assertSearchText("ID", "android:id/message", invalidMsisdn5 + " is not available for SIM Swap. Please Contact Support");
+	        TestUtils.assertSearchText("ID", "android:id/message", "Old Msisdn : Error while processing validation on NPS: The requested SIM Card does not exist, Please check it again");
 	        getDriver().findElement(By.id("android:id/button1")).click();
 	        Thread.sleep(500);
 	        TestUtils.testTitle("Confirm Existing MSISDN cannot take more than 11 digits (" + moreMsisdn5 + ")");
@@ -1004,7 +1004,7 @@ public class Features extends TestBase {
 	        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/existingMsisdnField")).sendKeys(lessMsisdn52);
 	        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btnValidate")).click();
 	        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
-	        TestUtils.assertSearchText("ID", "android:id/message", "Existing MSISDN: The MSISDN has an unrecognized National Destination Code. Please ensure the MSISDN starts with any of the following NDCs: 0701,0708,0802,0808,0812,0901,0902,0904,0907,0809,0817,0818,0908,0909,0705,0805,0807,0811,0815,0905,0915,0703,0706,0803,0806,0810,0813,0814,0816,0903,0906 and must be 11 digits");
+	        TestUtils.assertSearchText("ID", "android:id/message", "Existing MSISDN: The MSISDN has an unrecognized National Destination Code. Please ensure the MSISDN starts with any of the following NDCs: 0701,0708,0802,0808,0812,0901,0902,0904,0907,0809,0817,0818,0908,0909,0705,0805,0807,0811,0815,0905,0915,0703,0706,0803,0806,0810,0813,0814,0816,0903,0906,0913 and must be 11 digits");
 	        getDriver().findElement(By.id("android:id/button1")).click();
 	        Thread.sleep(500);
 
@@ -1021,7 +1021,7 @@ public class Features extends TestBase {
 	        Thread.sleep(500);
 	        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/newMsisdnField")).clear();
 	        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/newMsisdnField")).sendKeys(invalidFormat);
-	        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/newMsisdnField", lessMsisdn52);
+	        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/newMsisdnField", invalidFormat);
 	        Thread.sleep(500);
 
 	        // Ensure New MSISDN field has MSISDN validation for Glo
@@ -1030,7 +1030,7 @@ public class Features extends TestBase {
 	        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/newMsisdnField")).sendKeys(invalidMsisdn5);
 	        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btnValidate")).click();
 	        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
-	        TestUtils.assertSearchText("ID", "android:id/message", "New Msisdn : MSISDN Platform not allowed for Corporate Swap");
+	        TestUtils.assertSearchText("ID", "android:id/message", "New Msisdn : MSISDN has an active registration and cannot be used for this Usecase");
 	        getDriver().findElement(By.id("android:id/button1")).click();
 	        Thread.sleep(500);
 	        TestUtils.testTitle("Confirm New MSISDN field cannot take more than 11 digits (" + moreMsisdn5 + ")");
@@ -1043,14 +1043,14 @@ public class Features extends TestBase {
 	        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/newMsisdnField")).sendKeys(lessMsisdn51);
 	        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btnValidate")).click();
 	        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
-	        TestUtils.assertSearchText("ID", "android:id/message", "New MSISDN : Invalid MSISDN. It must be either 7 digits for fixed or 11 digit(s) for mobile ");
+	        TestUtils.assertSearchText("ID", "android:id/message", "New MSISDN : Invalid MSISDN. It must be either 6 digits for fixed or 11 digit(s) for mobile ");
 	        getDriver().findElement(By.id("android:id/button1")).click();
 	        Thread.sleep(500);
 	        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/newMsisdnField")).clear();
 	        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/newMsisdnField")).sendKeys(lessMsisdn52);
 	        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btnValidate")).click();
 	        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
-	        TestUtils.assertSearchText("ID", "android:id/message", "Existing MSISDN: The MSISDN has an unrecognized National Destination Code. Please ensure the MSISDN starts with any of the following NDCs: 0701,0708,0802,0808,0812,0901,0902,0904,0907,0809,0817,0818,0908,0909,0705,0805,0807,0811,0815,0905,0915,0703,0706,0803,0806,0810,0813,0814,0816,0903,0906 and must be 11 digits");
+	        TestUtils.assertSearchText("ID", "android:id/message", "New Msisdn : Error while processing validation on NPS: The requested SIM Card does not exist, Please check it again");
 	        getDriver().findElement(By.id("android:id/button1")).click();
 	        Thread.sleep(500);
 
@@ -1159,13 +1159,7 @@ public class Features extends TestBase {
 	            testInfo.get().log(Status.INFO,"Validate Button is not enabled");
 	        }
 	        
-	        // To test "Verify Biometrics" button is clickable after MSISDN validation
-	        TestUtils.testTitle("To test Verify Biometrics button is clickable after MSISDN validation");
 	        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btnValidate")).click();
-	        Thread.sleep(1000);
-	        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
-	        getDriver().findElement(By.id("android:id/button1")).click();
-	        Thread.sleep(500);
 	      
 	        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/btn_capture")));
 	        TestUtils.assertSearchText("ID","com.sf.biocapture.activity" + Id + ":id/btn_capture","Verify Biometrics");
@@ -1174,14 +1168,33 @@ public class Features extends TestBase {
 	        } else {
 	            testInfo.get().log(Status.INFO,"Verify Biometrics Button is not enabled");
 	        }
-
+	       
+	        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btn_capture")).click();
 
 	    }
-
+		else if (regModule.equalsIgnoreCase("FR")) {
+	  		   // Proceed after supplying single msisdns and sim serial
+			TestUtils.testTitle("Proceed after supplying single msisdn: (" + valid_msisdn01 + ") and (" + valid_simSerial01 + ") for validation");
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).clear();
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/msisdnField")).sendKeys(valid_msisdn01);
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simSerialField")).clear();
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/simSerialField")).sendKeys(valid_simSerial01);
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/addMsisdnSimSerialButton")).click();
+			Thread.sleep(2000);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
+			Thread.sleep(2000);
+			TestUtils.assertSearchText("ID", "android:id/message", "Msisdn is valid");
+			Thread.sleep(2000);
+			getDriver().findElement(By.id("android:id/button1")).click();
 		
-		
+			TestUtils.testTitle("Assert Number");
+			TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/phone_no_view", valid_msisdn01);
+			TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/tv_sim_serial", valid_simSerial01);
+			//Fill the foreigners form here
 		}
-		
+	
+		}
+
 		  	@Parameters({"dataEnv"})
 		    @Test
 		    public static void validateProxySimSwap(String dataEnv) throws Exception {
@@ -1363,11 +1376,6 @@ public class Features extends TestBase {
 		        getDriver().findElement(By.xpath("//android.widget.TextView[@text='picture.jpg']")).click();
 		        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/document")));
 		        TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Sworn FDN Affidavit']", "Sworn FDN Affidavit");
-		        
-		       
-		        
-		        
-
 
 		        //Remove picture and Capture Document
 		        TestUtils.testTitle("Remove uploaded document and Capture Document");
@@ -1390,7 +1398,7 @@ public class Features extends TestBase {
 		        Thread.sleep(500);
 		        
 		        
-		        if (getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/document_image")).isDisplayed()) {
+		        try {
 		        	
 		        		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/document_image")).click();
 				        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/summary")));
@@ -1442,19 +1450,16 @@ public class Features extends TestBase {
 				        TestUtils.scrollUntilElementIsVisible("XPATH", "//android.widget.TextView[@text='picture.jpg']");
 				        getDriver().findElement(By.xpath("//android.widget.TextView[@text='picture.jpg']")).click();
 				        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/document")));
-				        TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Proxy Affidavit']", "Proxy	 Affidavit");
+				        TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Proxy Affidavit']", "Proxy Affidavit");
 
-		        }else {
-		        	getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/touch_outside")).click();
+		        }catch(Exception e){	     
+		        		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/continue_btn")));
+		        		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/continue_btn")).click();
+		      	
 		        }
-		        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/continue_btn")));
-		        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/continue_btn")).click();
-
-		        
-
+		      
 		        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
-		        TestUtils.assertSearchText("ID", "android:id/message", "Please confirm Submission for MSISDN "+valid_Msisdn+" to be verified against existing SIM Registration Details.");
-		        getDriver().findElement(By.id("android:id/button1")).click();
+		        TestUtils.assertSearchText("ID", "android:id/message", "Please confirm Submission of SIM Swap for MSISDN "+valid_Msisdn+" to be verified against existing SIM Registration Details.");
 			}
 			
 			
@@ -1614,7 +1619,6 @@ public class Features extends TestBase {
 						TestUtils.assertSearchText("ID","android:id/message","Cropped image did not pass validation Do you want to proceed with original image?");
 						getDriver().findElement(By.id("android:id/button2")).click();
 					}catch (Exception e) {
-
 						wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
 						TestUtils.assertSearchText("ID", "android:id/message", "Subscriber's face was successfully captured");
 						getDriver().findElement(By.id("android:id/button1")).click();
@@ -1690,14 +1694,14 @@ public class Features extends TestBase {
 	  			
 	  			if (regModule.equals("NMS")) {
 	  				getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/nextButton")).click();
-	  			}else if(regModule.equals("RR") || regModule.equals("CN") || regModule.equals("CR") || regModule.equals("SSP")) {
+	  			}else if(regModule.equals("RR") || regModule.equals("CN") || regModule.equals("CR") || regModule.equals("SSP") ) {
 	  				Thread.sleep(500);
 	  				getDriver().findElement(By.id("android:id/button1")).click();
 	  				wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
 	  				getDriver().findElement(By.id("android:id/button1")).click();
 	  				
 		    	}
-	  			else if(regModule.equals("SSS") ) {
+	  			else if(regModule.equals("SSS") || regModule.equals("CSS") ) {
 		    		Thread.sleep(500);
 		    		getDriver().findElement(By.id("android:id/button1")).click();
 		    		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
@@ -1705,8 +1709,10 @@ public class Features extends TestBase {
 		    		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/btnNext")));
 		    		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btnNext")).click();
 		    		
-  			}
-		  }
+  			} 
+		    }
+		    
+		
 		  
 		    @Parameters ({"dataEnv"})
 		  	@Test
@@ -2276,6 +2282,51 @@ public class Features extends TestBase {
 				TestUtils.scrollDown();
 			}
 			
+		    
+		    @Test
+		    public static void foreignerEyeBalling(String dataEnv) throws Exception {
+
+		        WebDriverWait wait = new WebDriverWait(getDriver(), 60);
+		       
+		        
+		        //NIMC Details View
+		        TestUtils.testTitle("Confirm the searched Live and Password Image is returned: " );
+		        Thread.sleep(2000);
+		        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/tv_title")));
+		        
+		        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/tv_title", "Foreigner Image Matching");
+		       
+		        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/tv_live_image")));
+		        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/tv_live_image", "Live Image");
+		        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/tv_pp_image")));
+		        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/tv_user_data", "Passport Image");
+		        
+		        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/tv_nimc_data")));
+
+		        Thread.sleep(2000);
+		        if(getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/bt_proceed")).isDisplayed()){
+		        	String proceedBtn = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/bt_proceed")).getText();
+		        	testInfo.get().info("<b> Proceed Button is Visible </b>");
+		        }
+		        if(getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/bt_recapture_live")).isDisplayed()){
+		        	String recaptureLiveBtn = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/bt_recapture_live")).getText();
+		        	testInfo.get().info("<b> Recapture Live Button is Visible </b>");
+		        }
+		        if(getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/bt_recapture_pp")).isDisplayed()){
+		        	String recaptureBtn = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/bt_recapture_pp")).getText();
+		        	testInfo.get().info("<b> Recapture Passport Button is Visible </b>");
+		        }
+		        Thread.sleep(1000);
+		        try {
+		        	  TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id +":id/tv_message", "Facial Match Result: Reject, Further processing NOT Allowed. You will be able to proceed because you have the required privilege");
+			        }catch(Exception e){
+			        	testInfo.get().info("<b> No FaceMatching Message Displayed  </b>");
+			        }
+		      
+		        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/bt_proceed")).click();
+		    }
+		    
+		    
 			public static void saveCapture(String dataEnv) throws Exception{
 				WebDriverWait wait = new WebDriverWait(getDriver(), 30);
 

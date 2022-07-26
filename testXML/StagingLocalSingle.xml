@@ -14,7 +14,7 @@
         <parameter name="email" value="snapshot@seamfix.com"/>
         <parameter name="systemPort" value="8228"/>
         <parameter name="deviceNo" value="1"/>
-    <test name="Login">
+     <test name="Login">
        <classes>
            <class name="admin.Login">
                 <methods>
@@ -73,7 +73,9 @@
                 </methods>
             </class> 
           </classes>
-         </test>  
+         </test> 
+         
+      
          
     <test name="New Registration Multiple VNIN" preserve-order="true">
 		<classes>
@@ -357,4 +359,44 @@
             </class> 
           </classes>
         </test>  
+        
+      <test name="Corporate SimSwap Non Privilege Test" preserve-order="true">
+			<parameter name="email" value="snapshot@seamfix.com" />
+			<parameter name="systemPort" value="8228" />
+			<parameter name="deviceNo" value="1" />
+			<classes>
+				<class name="admin.CorporateSimSwap">
+				<methods>
+					<include name="noneCorporarteSIMSwapPrivilegeTest"/>
+				</methods>
+			</class>
+		</classes>
+	</test> 
+        
+      <test name="Corporate Sim Swap TM" preserve-order="true">
+	  <parameter name="email" value="snapshot@seamfix.com"/>
+      <parameter name="systemPort" value="4723"/>
+      <parameter name="deviceNo" value="1"/>
+		<classes>
+         <class name="admin.CorporateSimSwap">
+                <methods>
+                    <include name="Login"/>
+                    <include name="captureReportRecords"/>
+                    <include name="navigateToCapture"/>
+                    <include name="selectRegistrationType" />
+                    <include name="msisdnValidationOnline"/>
+                    <include name="portraitFileUpload" />
+                    <include name="overrideHand" />
+                    <include name="ninVerificationOnline" />
+                    <include name="eyeBalling" />
+                    <include name="demographicsCapture" />
+                    <include name="captureUploadDoc" />
+                    <include name="saveCapture" />     
+                </methods>
+            </class> 
+          </classes>
+         </test>
+
+
+
 </suite>
