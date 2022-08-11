@@ -80,6 +80,15 @@ public class CorporateReRegistration extends TestBase {
 	
 	@Parameters({ "dataEnv"})
 	@Test
+	public void byrequestOTP(String dataEnv) throws Exception {
+	
+		Features.byPassrequestOTP(dataEnv);
+	}
+	
+	
+	
+	@Parameters({ "dataEnv"})
+	@Test
 	public void ninVerificationOnline(String dataEnv) throws Exception {
 
 		//NIN Verification
