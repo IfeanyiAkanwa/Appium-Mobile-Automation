@@ -2965,7 +2965,7 @@ public class Form extends TestBase {
 
 		//Form.EditCompanyDetailsForm(dataEnv);
 		
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/surNameTXT")).click();
+//		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/surNameTXT")).click();
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/surNameTXT")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/surNameTXT")).sendKeys(surname);
 
@@ -2985,22 +2985,32 @@ public class Form extends TestBase {
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/momsMaidenNameTXT")).click();
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/momsMaidenNameTXT")).clear();
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/momsMaidenNameTXT")).sendKeys(maiden_name);
+		
+		
 
 		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/maleRadioButton");
 
 		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/maleRadioButton")).click();
 
-		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/selectDateButton");
+//		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/selectDateButton");
+//
+//		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/selectDateButton")).click();
+//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/date_picker_header_year")));
+//		getDriver().findElement(By.id("android:id/date_picker_header_year")).click();
 
-		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/selectDateButton")).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/date_picker_header_year")));
-		getDriver().findElement(By.id("android:id/date_picker_header_year")).click();
+//		TestUtils.scrollUntilElementIsVisible("XPATH", "//android.widget.TextView[@text='1977']");
+//
+//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='1977']")));
+//		getDriver().findElement(By.xpath("//android.widget.TextView[@text='1977']")).click();
+//		getDriver().findElement(By.id("android:id/button1")).click();
+		
+		
+		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/alternatePhone");
+		
 
-		TestUtils.scrollUntilElementIsVisible("XPATH", "//android.widget.TextView[@text='2000']");
-
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='2000']")));
-		getDriver().findElement(By.xpath("//android.widget.TextView[@text='2000']")).click();
-		getDriver().findElement(By.id("android:id/button1")).click();
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/alternatePhone")).click();
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/alternatePhone")).clear();
+		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/alternatePhone")).sendKeys(alt_phone_number);
 
 		
 		TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/alternateEmail");

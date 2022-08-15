@@ -57,11 +57,11 @@
     "searchParam": "SIM"
   },
   "NewRegistration": {
-    "valid_msisdn": "09150676382",
+    "valid_msisdn": "08052365234",
     "invalid_msisdn": "764785",
     "non_valid_msisdn": "08152379129",
     "invalid_simSerial": "177606",
-    "valid_simSerial": "8923450805200503094F",
+    "valid_simSerial": "8923450108200272079F",
     "lga": "Agege",
     "valid_fixed_msisdn": "080500066",
     "valid_fixed_serial": "8923456000000000066F",
@@ -137,7 +137,7 @@
   "CorporateRegistration": {
     "valid_msisdn": "09150676377",
     "valid_msisdn2": "09150676379",
-    "primary_tm": "08052363886",
+    "primary_tm": "09150676374",
     "secondary_tm": "08072756010",
     "foreign_msisdn": "08152395730",
     "invalid_msisdn": "08022340222",
@@ -205,10 +205,10 @@
     "lga_of_reg": "Agege"
   },
   "CorporateReRegistration": {
-    "valid_msisdn": "09150676376",
+    "valid_msisdn": "09150676382",
     "fixed_Msisdn": "0811382",
     "valid_msisdn2": "09159891765",
-    "primary_tm": "09153424557",
+    "primary_tm": "08072756026",
     "secondary_tm": "08116754443",
     "foreign_msisdn": "08152395730",
     "invalid_msisdn": "08022340222",
@@ -399,10 +399,10 @@
     "postalcode2": "450101"
   },
   "IndividualForeignerDetails": {
-    "surname": "Saraswati",
-    "firstname": "Joubert",
-    "middlename": "Ganga",
-    "maiden_name": "Merlin",
+    "surname": "Uzoh",
+    "firstname": "Anthony",
+    "middlename": "Chinedubo",
+    "maiden_name": "Beno",
     "social_media_type": "INSTAGRAM",
     "social_media_username": "@ganga",
     "street": "Banaris",
@@ -412,7 +412,7 @@
     "state": "BENUE",
     "LGA": "Ado",
     "email": "test@yopmail.com",
-    "alt_phone_number": "08110000000",
+    "alt_phone_number": "08067716200",
     "postalcode": "972101",
     "occupation": "Aeronautical Engineer",
     "area": "AGILA",

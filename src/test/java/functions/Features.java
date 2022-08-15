@@ -1707,7 +1707,7 @@ public class Features extends TestBase {
 	  			
 	  			if (regModule.equals("NMS")) {
 	  				getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/nextButton")).click();
-	  			}else if(regModule.equals("RR") || regModule.equals("CN") || regModule.equals("CR") || regModule.equals("SSP") ) {
+	  			}else if(regModule.equals("RR") ||  regModule.equals("CR") || regModule.equals("SSP") ) {
 	  				Thread.sleep(500);
 	  				getDriver().findElement(By.id("android:id/button1")).click();
 	  				wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/message")));
@@ -2111,21 +2111,21 @@ public class Features extends TestBase {
 		        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/nin")).clear();
 		        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/capture_button")).click();
 		        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/error_text")));
-		        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/error_text", "VNIN must contain 16 alphanumeric characters in the format 2 alphabets, 12 digits, 2 alphabets");
+		        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/error_text", "VNIN must contain 16 alphanumeric characters in the format 2 alphabets, 12 digits, 2 alphabets/digits");
 
 		        TestUtils.testTitle("Search vNIN with less than 16 alphanumeric characters: AA11111AA");
 		        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/nin")).clear();
 		        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/nin")).sendKeys("AA11111AA");
 		        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/capture_button")).click();
 		        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/error_text")));
-		        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/error_text", "VNIN must contain 16 alphanumeric characters in the format 2 alphabets, 12 digits, 2 alphabets");
+		        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/error_text", "VNIN must contain 16 alphanumeric characters in the format 2 alphabets, 12 digits, 2 alphabets/digits");
 
-		        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/title")));
+		       // wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/title")));
 		        String vninVerificationMode =  getDriver().findElement(By.id("android:id/title")).getText();
 		        
-		        if(vninVerificationMode.equalsIgnoreCase("Search By NIN")) {
+		        if(vninVerificationMode.equalsIgnoreCase("Search By VNIN")) {
 		        TestUtils.testTitle("Search by VNIN: " + vnin);
-		        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/title")));
+		       // wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/title")));
 		        TestUtils.assertSearchText("ID", "android:id/title", "Search By vNIN");
 		        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/nin")).clear();
 		        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/nin")).sendKeys(vnin);
