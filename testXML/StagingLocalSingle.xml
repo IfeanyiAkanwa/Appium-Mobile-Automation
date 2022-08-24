@@ -14,7 +14,7 @@
     <parameter name="email" value="snapshot@seamfix.com"/>
     <parameter name="systemPort" value="8228"/>
     <parameter name="deviceNo" value="1"/>
-   <test name="Login">
+    <test name="Login">
        <classes>
            <class name="admin.Login">
                 <methods>
@@ -37,7 +37,7 @@
                 </methods>
             </class>
             </classes>
-      </test> 
+      </test>  
             
      <test name="NewReg Non Privilege Test" preserve-order="true">
 			<parameter name="email" value="snapshot@seamfix.com" />
@@ -80,7 +80,7 @@
          
       
          
-    <test name="New Registration Multiple VNIN" preserve-order="true">
+     <test name="New Registration Multiple VNIN" preserve-order="true">
 		<classes>
          <class name="admin.NewRegistration">
                 <methods>
@@ -100,7 +100,7 @@
                     <include name="saveCapture" /> 
                 </methods>
             </class> 
-          </classes>
+          </classes> 
        </test>
        
         <test name="Foreigner Registration" preserve-order="true">
@@ -193,7 +193,7 @@
                 </methods>
             </class> 
          </classes>
-        </test> 
+        </test>  
         
      <test name="None Corporate New Registration" preserve-order="true">
 		 <parameter name="email" value="snapshot@seamfix.com"/>
@@ -206,9 +206,9 @@
                 </methods>
          </class>
          </classes>
-      </test>
+     </test>
    
-       <test name="Corporate New Registration File Upload" preserve-order="true">
+       <test name="Corporate New Registration VNIN File Upload" preserve-order="true">
 		 <parameter name="email" value="snapshot@seamfix.com"/>
        	 <parameter name="systemPort" value="4723"/>
          <parameter name="deviceNo" value="1"/>
@@ -222,7 +222,7 @@
                     <include name="msisdnValidationOnline"/>
                     <include name="portraitFileUpload"/>
                     <include name="overrideHand" />
-                    <include name="ninVerificationOnline" />
+                    <include name="vninVerificationOnline" />
                     <include name="eyeBalling" />
                     <include name="demographicsCapture" />
                     <include name="captureUploadDoc" />
@@ -233,7 +233,7 @@
           </classes>
       </test>
       
-      <test name="Corporate New Registration vNIN" preserve-order="true">
+      <test name="Corporate New Registration NIN" preserve-order="true">
 		 <parameter name="email" value="snapshot@seamfix.com"/>
        	 <parameter name="systemPort" value="4723"/>
          <parameter name="deviceNo" value="1"/>
@@ -247,7 +247,7 @@
                     <include name="msisdnValidationOnline"/>
                     <include name="corporateOverridePortrait"/>
                     <include name="overrideHand" />
-                    <include name="vninVerificationOnline" />
+                    <include name="ninVerificationOnline" />
                     <include name="eyeBalling" />
                     <include name="demographicsCapture" />
                     <include name="captureUploadDoc" />
@@ -257,9 +257,9 @@
                 </methods>
             </class> 
           </classes>
-      </test>  
+      </test>   
      
-    <test name="None Corporate Re Registration" preserve-order="true">
+   <test name="None Corporate Re Registration" preserve-order="true">
 		 <parameter name="email" value="snapshot@seamfix.com"/>
        	 <parameter name="systemPort" value="4723"/>
          <parameter name="deviceNo" value="1"/>
@@ -272,7 +272,7 @@
          </classes>
       </test> 
       
-         <test name="Corporate Re-Registration NIN" preserve-order="true">
+      <test name="Corporate Re-Registration NIN" preserve-order="true">
 		 <parameter name="email" value="snapshot@seamfix.com"/>
        	 <parameter name="systemPort" value="4723"/>
          <parameter name="deviceNo" value="1"/>
@@ -296,7 +296,7 @@
                 </methods>
             </class> 
           </classes>
-        </test>
+        </test> 
          
     <test name="Corporate Re-Registration vNIN" preserve-order="true">
 		 <parameter name="email" value="snapshot@seamfix.com"/>
@@ -351,7 +351,7 @@
                     <include name="msisdnValidationOnline"/>
                     <include name="portraitFileUpload" />
                     <include name="overrideHand" />
-                    <include name="ninVerificationOnline" />
+                    <include name="ninVerificationOnline"/>
                     <include name="eyeBalling" />
                     <include name="demographicsCapture" />
                     <include name="captureUploadDoc" />
@@ -361,7 +361,7 @@
           </classes>
          </test> 
       
-        <test name="SimSwap Non Privilege Test" preserve-order="true">
+       <test name="SimSwap Non Privilege Test" preserve-order="true">
 			<parameter name="email" value="snapshot@seamfix.com" />
 			<parameter name="systemPort" value="8228" />
 			<parameter name="deviceNo" value="1" />
@@ -396,9 +396,9 @@
                 </methods>
             </class> 
           </classes>
-     </test>
+     </test> 
          
-     <test name="Sim Swap Proxy" preserve-order="true">
+   <test name="Sim Swap Proxy" preserve-order="true">
 	  <parameter name="email" value="snapshot@seamfix.com"/>
       <parameter name="systemPort" value="4723"/>
       <parameter name="deviceNo" value="1"/>
@@ -418,12 +418,11 @@
                     <include name="subscriberNIN"/>
                     <include name="subscriberEyeBalling" />
                     <include name="ProxydemographicsCapture" />
-                    <include name="captureUploadDoc" />
+                    <include name="captureUploadDocProxy" />
                     <include name="saveCapture" />   
                 </methods>
             </class> 
           </classes>
         </test>
-
 
 </suite>

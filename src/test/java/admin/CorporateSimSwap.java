@@ -131,7 +131,7 @@ public void captureUploadDoc(String dataEnv) throws Exception {
 @Test
 public void saveCapture(String dataEnv) throws Exception {
 
-	Features.simSwapSubmit(dataEnv);
+	Features.simSwapSubmit2(dataEnv);
 }
 
 
