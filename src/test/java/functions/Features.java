@@ -2404,13 +2404,13 @@ public class Features extends TestBase {
 		        if(verificationMode.equalsIgnoreCase("Search By vNIN")) {
 		            //Proceed to NIN Verification View
 		          TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/alertTitle", "NIN Verification");
-		       }else if (verificationMode.equalsIgnoreCase("Subscriber's NIN Verification - Search By NIN")) {
+		       }else if (verificationMode.equalsIgnoreCase("Subscriber's NIN Verification - Search By vNIN")) {
 		          TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/alertTitle", "Subscriber's NIN Verification");
 		       
 		       }  
 		        
 
-		            vNinAssertion(dataEnv, verificationMode);
+		         vNinAssertion(dataEnv, verificationMode);
 		        
 		           
 		            Thread.sleep(1000);
