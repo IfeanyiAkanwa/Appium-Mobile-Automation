@@ -47,6 +47,7 @@ public class TestUtils extends TestBase {
         return deviceInfo;
     }
 
+
     public static String addScreenshot() {
 
         TakesScreenshot ts = getDriver();
@@ -876,22 +877,16 @@ public class TestUtils extends TestBase {
     }
 
     public static String releaseActionApiCall(String dataEnv, JSONObject settingData) throws IOException, org.json.simple.parser.ParseException {
-
-        //RestAssured.baseURI = serviceUrl;
+  
         RestAssured.baseURI =simropUrl;
         JSONParser parser = new JSONParser();
         JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/settingsApi.conf.json"));
         JSONObject requestBody = settingData;
         String endPoint = (String) config.get("release_endPoint");
-        //String endPoint = "/simrop/biocapture/quarantine/release-record";
-
 
         Response res =	given().
-                header("User-Agent", "Smart Client for KYC [Build: 1.0, Install Date: NA]").
-                header("User-UUID","03764868-6f9e-41f3-ba45-45599d8c8e08").
-                header("sc-auth-key","AHVZ0xiTP498n2uUgtXA2wt95nPbIvh7e6sdFgHKB5fcoIvLf6_24KKMHA9H7zG_5EQHAZ6QM221GQo6GUf-wG2QcEo2S_dkirXCgRHOq6N_0Go36DorLZs").
-                header("Client-ID","smartclient").
-                header("Content-Type","application/json").
+        	      header("Content-Type","application/json").
+                  header("user-id","990").
 
                 body(requestBody).config(RestAssured.config().sslConfig(new SSLConfig().allowAllHostnames())).when().post(endPoint).then().assertThat().extract().response();
 
@@ -903,23 +898,13 @@ public class TestUtils extends TestBase {
             //Successful settings API
             String status = jsonRes.getString("status");
             result=1;
-
+            testInfo.get().info("RELEASE SUCCESSFULLY"+response);
         }else{
             //Failed to make settings
             testInfo.get().error("RELEASE FAILED"+response);
         }
-        /*ArrayList<JSONObject> getSet= (ArrayList<JSONObject>) requestBody.get("settings");
-        JSONObject getData = getSet.get(0);*/
-        //String settings = getSet['']
-
-        System.out.println("*********RELEASE ITEM("+jsonRes.getString("description")+")**********");
-        try {
-            testInfo.get().info(response);
-        }catch (Exception e){
-
-        }
-        System.out.println(response);
-        return jsonRes.getString("description");
+		return response;
+       
     }
 
     public static void assertDbValue(String columnName, String expected, String actual){

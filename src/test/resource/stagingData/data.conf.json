@@ -3,9 +3,9 @@
     "onboarded_username": "soli@seamfix.com",
     "invalid_username": "ada@seamnix.com",
     "not_onboarded_username": "kakaa.sfxtest@yopmail.com",
-    "valid_username": "gnwabude@seamfix.com",
+    "valid_username": "iakanwa007@seamfix.com",
     "invalid_password": "adazejohn@1",
-    "valid_password": "Bankole11!!",
+    "valid_password": "Bankole22!!",
     "valid_pw": "Glo1user11!!",
     "blacklisted_username": "glo-dh-001s@gloworld.ng",
     "blacklisted_password": "Glo1user11!!",
@@ -57,7 +57,7 @@
     "searchParam": "SIM"
   },
   "NewRegistration": {
-    "valid_msisdn": "08052365234",
+    "valid_msisdn": "08052363886",
     "invalid_msisdn": "764785",
     "non_valid_msisdn": "08152379129",
     "invalid_simSerial": "177606",
@@ -93,7 +93,7 @@
     "valid_sim_serial_no": "8923450704197654772F"
   },
   "ReRegistration": {
-    "valid_msisdn": "08116575689",      
+    "valid_msisdn": "08052365234",      
     "foreign_msisdn": "08152395730",
     "invalid_msisdn": "08022340222",
     "invalid_OTP": "00000",
@@ -196,7 +196,7 @@
     "house_or_flat_no": "456C",
     "state": "BENUE",
     "LGA": "Ado",
-    "email": "test@yopmail.com",
+    "email": "gmbaocha@gmail.com",
     "alt_phone_number": "08000000000",
     "postalcode": "746583",
     "occupation": "Aeronautical Engineer",
@@ -329,7 +329,7 @@
     "pp_fdn5": "8079904088",
     "ninVerificationMode": "Search By NIN",
     "pninVerificationMode": "Proxy's NIN Verification - Search By NIN",
-    "sninVerification": "Subsriber's NIN Verification - Search By NIN",
+    "sninVerification": "Subsriber's NIN Verification - Search By vNIN",
     "kmUserId": "990"
   },
   "CorporateSIMSwap": {
@@ -411,8 +411,8 @@
     "house_or_flat_no": "456C",
     "state": "BENUE",
     "LGA": "Ado",
-    "email": "test@yopmail.com",
-    "alt_phone_number": "08067716200",
+    "email": "gmbaocha@gmail.com",
+    "alt_phone_number": "08067721620",
     "postalcode": "972101",
     "occupation": "Aeronautical Engineer",
     "area": "AGILA",
@@ -503,5 +503,6 @@
   "LandingPage_Url": {
     "stagingUrl": "https:simregtest.gloworld.com"
   }
+
 }
 

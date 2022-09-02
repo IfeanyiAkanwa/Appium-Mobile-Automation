@@ -28,11 +28,6 @@ import java.util.ArrayList;
 import static admin.ReportsTest.navigateToReportsPage;
 
 public class NewRegistration extends TestBase {
-
-
-	int totalSubVal=0;int totalSyncsentVal = 0;int totalSyncpendingVal = 0;int totalSynConfVal = 0;int totalRejectVal = 0;
-
-	
 	@Parameters({ "dataEnv"})
 	@Test
 	public void noneNewRegPrivilegeTest(String dataEnv) throws Exception {
@@ -83,7 +78,6 @@ public class NewRegistration extends TestBase {
 		Features.selectCountry(dataEnv,"NIGERIA");
 	}
 
-
 	@Parameters({ "dataEnv"})
 	@Test
 	public void overridePortrait(String dataEnv) throws Exception {
@@ -96,9 +90,7 @@ public class NewRegistration extends TestBase {
 	public void overrideHand(String dataEnv) throws Exception {
 		Features.captureOverridenHand(dataEnv, "NMS");
 	}
-	
-	
-	
+
 	@Parameters({ "dataEnv"})
 	@Test
 	public void vninVerificationOnline(String dataEnv) throws Exception {
@@ -114,9 +106,7 @@ public class NewRegistration extends TestBase {
 		//NIN Verification
 		Features.ninVerificationOnline(dataEnv, "Search By NIN");
 	}
-	
-	
-	
+
 	@Parameters({ "dataEnv"})
 	@Test
 	public void eyeBalling(String dataEnv) throws Exception {
@@ -152,7 +142,33 @@ public class NewRegistration extends TestBase {
 	public void saveCapture(String dataEnv) throws Exception {
 
 		Features.saveCapture(dataEnv);
+		
 	}
+
+	@Parameters({ "dataEnv"})
+	@Test
+
+    public void databaseAssertions(String dataEnv) throws Exception {
+
+        String nmUniqueId = unique_Id;
+
+        TestUtils.testTitle("Database Checks: Basic Data, Meta Data, BFP Sync Log, User Identification, SMS Activation Request, MSISDN Details, Passport Details");
+
+        Thread.sleep(1000);
+
+        ConnectDB.query(nmUniqueId, dataEnv, "NMS");
+
+        ConnectDB.specialData();
+
+    }
 	
+	@Parameters({ "dataEnv"})
+	@Test
+
+    public void releaseQuarantinedRecords(String dataEnv) throws Exception {
+        Thread.sleep(30000);
+		
+		Features.releaseQuarantinedRecords(dataEnv, unique_Id);
+    }
 
 }

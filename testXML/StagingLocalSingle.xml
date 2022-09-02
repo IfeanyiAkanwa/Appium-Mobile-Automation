@@ -64,15 +64,16 @@
                     <include name="navigateToCapture"/>
                     <include name="selectRegistrationType" />
                     <include name="singleMsidnValidationTest"/>
-                    
                     <include name="overridePortrait" />
                     <include name="overrideHand" />
-				    <include name="ninVerificationOnline" />
+				    <include name="vninVerificationOnline" />
                     <include name="eyeBalling" />
                     <include name="demographicsCapture" />
                     <include name="captureUploadDoc" />
                     <include name="capturePreview" />
                     <include name="saveCapture" /> 
+                    <include name="releaseQuarantinedRecords" />
+                    <include name="database" />
                 </methods>
             </class> 
           </classes>
@@ -98,6 +99,8 @@
                     <include name="captureUploadDoc" />
                     <include name="capturePreview" />
                     <include name="saveCapture" /> 
+                    <include name="releaseQuarantinedRecords" />
+                    <include name="database" />
                 </methods>
             </class> 
           </classes> 
@@ -123,7 +126,9 @@
                   <include name="demographicsCapture" />
                   <include name="captureUploadDoc" />
                   <include name="capturePreview" />
-                  <include name="saveCapture" /> 
+                  <include name="saveCapture" />
+                  <include name="releaseQuarantinedRecords" />
+                  <include name="database" /> 
               </methods>
           </class> 
         </classes>

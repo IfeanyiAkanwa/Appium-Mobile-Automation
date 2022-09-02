@@ -35,6 +35,7 @@ public class Features extends TestBase {
 	private static StringBuffer verificationErrors = new StringBuffer();
 
 	private static String valid_msisdn;
+	private static String valid_msisdn01;
 	private static String invalid_msisdn;
 	private static String valid_simSerial;
 	private static String lga;
@@ -152,6 +153,55 @@ public class Features extends TestBase {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/reg_type_placeholder")));
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/reg_type_placeholder","Registration Type");
 	}
+	
+	
+	@Parameters({ "dataEnv"})
+	@Test
+
+    public static void releaseQuarantinedRecords(String dataEnv, String unique_id) throws Exception {
+
+        String quarantineRegPk=ConnectDB.selectQueryOnTable("bfp_sync_log", "unique_id", unique_id, "PK");
+
+        //Release quarantine item
+        TestUtils.testTitle("Release the quarantined item("+quarantineRegPk+")");
+        Thread.sleep(1500);
+        JSONObject payload = new JSONObject();
+        payload.put("quarantineRegPk", quarantineRegPk);
+        payload.put("uniqueId", unique_id);
+        payload.put("feedback", "Test");
+        payload.put("loggedInUserId", "990");
+        TestUtils.releaseActionApiCall(dataEnv, payload);
+    
+	try {
+		getDriver().pressKeyCode(AndroidKeyCode.BACK);
+		Thread.sleep(1000);
+		getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
+		Thread.sleep(1000);
+		getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
+		Thread.sleep(1000);
+		getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
+		getDriver().findElement(By.id("android:id/button2")).click();
+		Thread.sleep(1000);
+		getDriver().findElement(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']")).click();
+		//Logout
+		//TestBase.logOut(valid_msisdn);
+	}catch (Exception e){
+		try{
+			getDriver().findElement(By.id("android:id/button3")).click();
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/experience_type")).click();
+			getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='Network Speed']")).click();
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/rating_ratingBar")).click();
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/rating_btn_dialog_positive")).click();
+			TestUtils.assertSearchText("ID", "android:id/alertTitle", "Feedback sent");
+
+			getDriver().pressKeyCode(AndroidKeyCode.BACK);
+		}catch (Exception e1){
+
+		}
+		
+	}
+}
+
 
 		@Parameters({ "dataEnv"})
 		@Test
@@ -166,7 +216,7 @@ public class Features extends TestBase {
 		
 	        JSONObject envs4 = (JSONObject) config.get("SIMSwap");
     
-			String valid_msisdn01 = (String) envs.get("valid_msisdn");
+			valid_msisdn01 = (String) envs.get("valid_msisdn");
 			String invalid_msisdn01 = (String) envs.get("invalid_msisdn");
 			String valid_simSerial01 = (String) envs.get("valid_simSerial");
 			String invalid_simSerial01 = (String) envs.get("invalid_simSerial");
@@ -1612,7 +1662,6 @@ public class Features extends TestBase {
 		        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/doc_capture_btn", "DOCUMENT CAPTURE");
 		        
 		        TestUtils.testTitle("Upload Valid Document");
-		      
 		        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/doc_upload_btn")).click();
 		        Thread.sleep(500);
 		        TestUtils.scrollUntilElementIsVisible("XPATH", "//android.widget.TextView[@text='picture.jpg']");
@@ -1623,7 +1672,7 @@ public class Features extends TestBase {
 //        		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/document_image")).click();
 //		        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/summary")));
 //		        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/summary", "SELECT DOCUMENT TYPE");
-		        
+
 		        try {
 		        	
 
@@ -1742,11 +1791,10 @@ public class Features extends TestBase {
 	   		JSONObject envs = (JSONObject) config.get("NewRegistration");
 	   		JSONObject envs1 = (JSONObject) config.get("ReRegistration");
 	   		String lga = (String) envs.get("lga");
-	   	
-
-
-	   	      
-	   		TestUtils.testTitle("To confirm that a user can perform "+regModule+" when it is  in the list of available use case settings and user has privilege" );
+	   		
+	   	 // Getting Unique ID
+            unique_Id = getDriver().findElement(By.id("com.sf.biocapture.activity.glo:id/unique_id")).getText();
+         	TestUtils.testTitle("To confirm that a user can perform "+regModule+" when it is  in the list of available use case settings and user has privilege" );
 
 	   	// Select LGA of Registration
 	   		TestUtils.testTitle("Select LGA of Registration: " + lga);
@@ -2394,7 +2442,6 @@ public class Features extends TestBase {
 		  @Test
 		    public static void vNinVerificationOnline(String dataEnv, String verificationMode) throws Exception {
 
-
 		        WebDriverWait wait = new WebDriverWait(getDriver(), 60);
 		        JSONParser parser = new JSONParser();
 		        JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
@@ -2731,6 +2778,7 @@ public class Features extends TestBase {
 				wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/tv_message")));
 				TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/tv_message", "Captured record was saved successfully");
 				getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btn_okay")).click();
+			
 			
 			}
 			
@@ -3139,6 +3187,8 @@ public class Features extends TestBase {
 			}
 
 			
+			
+		
 		  
 }
 	

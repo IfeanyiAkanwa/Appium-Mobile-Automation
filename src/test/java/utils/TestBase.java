@@ -48,7 +48,6 @@ public class TestBase {
 	public static ThreadLocal<ExtentTest> testInfo = new ThreadLocal<ExtentTest>();
 	public static String gridUrl = System.getProperty("grid-url", "https:simregtest.gloworld.com");
 	public static String toAddress;
-
 	public static String userName = "USERNAME";
 	public static String accessKey = "ACCESS_KEY";
 	public String local = "local";
@@ -58,7 +57,9 @@ public class TestBase {
 	public static String simropUrl = "https://simroptest.gloworld.com";
 	public static String Id = ".glo";
 	public static int waitTime = 60;
-	public static boolean releaseRegItem=false;
+	public static boolean releaseRegItem=true;
+	public static String unique_Id;
+	public static int basic_data_fk;
 
 	@SuppressWarnings("rawtypes")
 	public static AndroidDriver getDriver() {
@@ -226,7 +227,7 @@ public class TestBase {
 				capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.ANDROID_UIAUTOMATOR2);
 
 				driver.set(new AndroidDriver(new URL("http://0.0.0.0:4723/wd/hub"), capabilities));
-				System.out.println("++++++++++UIAUTOMATOR 2 DRIVER INSTANCE RUNNING++++++++++++");
+		//		System.out.println("++++++++++UIAUTOMATOR 2 DRIVER INSTANCE RUNNING++++++++++++");
 
 			} catch (WebDriverException e) {
 				DesiredCapabilities capabilities = new DesiredCapabilities();
@@ -244,7 +245,7 @@ public class TestBase {
 				capabilities.setCapability("appActivity", "com.sf.biocapture.activity.SplashScreenActivity");
 
 				driver.set(new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities));
-				System.out.println("++++++++++UIAUTOMATOR DRIVER INSTANCE RUNNING++++++++++++");
+		//		System.out.println("++++++++++UIAUTOMATOR DRIVER INSTANCE RUNNING++++++++++++");
 
 			}
 		}

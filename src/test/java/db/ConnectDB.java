@@ -3,17 +3,27 @@ package db;
 import java.io.File;
 import java.io.FileReader;
 import java.sql.*;
+import java.util.HashMap;
+import java.util.Map;
+
 import io.github.cdimascio.dotenv.Dotenv;
 import org.apache.commons.codec.binary.Base64;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+
+import com.aventstack.extentreports.markuputils.ExtentColor;
+import com.aventstack.extentreports.markuputils.Markup;
+import com.aventstack.extentreports.markuputils.MarkupHelper;
+
 import utils.TestBase;
 import utils.TestUtils;
 
 import static utils.TestBase.testInfo;
 
-public class ConnectDB {
+public class ConnectDB extends TestBase{
+	
+	public static Map<String, String> dbValues = new HashMap<>();
 
     static Dotenv dotenv = Dotenv.load();
 
@@ -492,6 +502,7 @@ public class ConnectDB {
 
         Connection dbConnection = null;
         Statement statement = null;
+     
 
         String getRegDetsSql = "select bsl.*, bd.*, dd.*, sar.*, md.*, md2.*, p.*, s.*, pd.*, nv.* " +
                 "from DYNAMIC_DATA dd " +
@@ -517,12 +528,12 @@ public class ConnectDB {
             }
             statement = dbConnection.createStatement();
             ResultSet rs = statement.executeQuery(getRegDetsSql);
-            System.out.println(" here "+getRegDetsSql);
+
             if (rs.next()) {
-                System.out.println(" here rs");
+                
                 ResultSetMetaData rsmd = rs.getMetaData();
                 int columnCount = rsmd.getColumnCount();
-
+                basic_data_fk  = rs.getInt("basic_data_fk");
 
                 // The column count starts from 1
                 for (int i = 1; i <= columnCount; i++) {
@@ -644,5 +655,92 @@ public class ConnectDB {
 
         }
 
+    }
+    //Database Trial
+    
+    public static void multipleRowQeury(String qry) throws SQLException {
+
+        Connection dbConnection = null;
+        Statement statement = null;
+        try {
+            dbConnection = getDBConnection();
+            if (dbConnection != null) {
+                System.out.println("Connected to db");
+            } else {
+                System.out.println("Not able to connect to db");
+            }
+            statement = dbConnection.createStatement();
+            ResultSet rs = statement.executeQuery(qry);
+            int row = 1;
+            while (rs.next()) {
+                ResultSetMetaData rsmd = rs.getMetaData();
+                int columnCount = rsmd.getColumnCount();
+                String rows = "ROW: " + row;
+                row++;
+                Markup u = MarkupHelper.createLabel(rows, ExtentColor.GREEN);
+                testInfo.get().info(u);
+                // The column count starts from 1
+                for (int i = 1; i <= columnCount; i++) {
+                    String name = rsmd.getColumnName(i);
+                    String data = "";
+
+                    switch (rsmd.getColumnType(i)) {
+                        case Types.BLOB:
+
+                            Blob image = rs.getBlob(i);
+                            if (image == null) {
+                                break;
+                            }
+
+                            String encodedBase64 = null;
+                            byte[] bytes = image.getBytes(1L, (int) image.length());
+                            encodedBase64 = new String(Base64.encodeBase64(bytes));
+                            data = encodedBase64;
+                            break;
+                        case Types.VARCHAR:
+                            data = rs.getString(i);
+                            break;
+
+                        default:
+                            data = rs.getString(i);
+                            break;
+                    }
+
+                    if (data == null) {
+                        testInfo.get().error("<b>" + name + "</b><br/>" + data);
+                    } else if (data.length() > 100) {
+                        testInfo.get().info("<b>" + name + "</b><br/><img src=\"data:image/jpeg;base64," + data + "\">");
+                    } else {
+                        testInfo.get().info("<b>" + name + "</b><br/>" + data);
+                    }
+                }
+            }
+            rs.close();
+            statement.close();
+        } catch (
+
+                SQLException e) {
+
+            System.out.println(e.getMessage());
+
+        } finally {
+
+            if (statement != null) {
+                statement.close();
+            }
+
+            if (dbConnection != null) {
+                dbConnection.close();
+            }
+
+        }
+    }
+
+    public static void specialData() throws SQLException {
+        String userIDQuery = "Query special data table for basic_data_fk: " + basic_data_fk;
+        Markup m = MarkupHelper.createLabel(userIDQuery, ExtentColor.BLUE);
+        testInfo.get().info(m);
+        String qry = "SELECT * FROM SPECIAL_DATA where BASIC_DATA_FK = " + basic_data_fk;
+        multipleRowQeury(qry);
     }
 }
