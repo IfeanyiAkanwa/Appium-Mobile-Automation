@@ -1674,7 +1674,6 @@ public class Features extends TestBase {
 //		        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/summary", "SELECT DOCUMENT TYPE");
 
 		        try {
-		        	
 
 				        TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Proxy ID']", "Proxy ID");
 				 
@@ -2018,9 +2017,13 @@ public class Features extends TestBase {
 	  		@Test
 	  		public static void foreignerRegForm(String dataEnv) throws Exception {
 		    	 WebDriverWait wait = new WebDriverWait(getDriver(), 60);
+		    	 JSONParser parser = new JSONParser();
+			   	 JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
+			   	 JSONObject envs = (JSONObject) config.get("IndividualForeignerDetails");
+			   	 String passportNo = (String) envs.get("passport_ID_number");
 			TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/title", "Foreigner Registration");
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/edPassportNumber")).clear();
-			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/edPassportNumber")).sendKeys(TestUtils.generatePhoneNumber());
+			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/edPassportNumber")).sendKeys(passportNo);
 			getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/spForeignerTypes")).click();
 			Thread.sleep(1000);
 			TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='Short Stay']", "Short Stay");

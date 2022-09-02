@@ -29,7 +29,6 @@ import static admin.ReportsTest.navigateToReportsPage;
 
 public class ForeignerNewReg extends TestBase {
 
-
 	int totalSubVal=0;int totalSyncsentVal = 0;int totalSyncpendingVal = 0;int totalSynConfVal = 0;int totalRejectVal = 0;
 
 	
@@ -80,7 +79,7 @@ public class ForeignerNewReg extends TestBase {
 	public void selectCountry(String dataEnv) throws Exception {
 		
 		//Select country
-		Features.selectCountry(dataEnv,"AFGHANISTAN");
+		Features.selectCountry(dataEnv,"ALBANIA");
 	}
 
 
@@ -153,6 +152,33 @@ public class ForeignerNewReg extends TestBase {
 
 		Features.saveCapture(dataEnv);
 	}
+	
+	@Parameters({ "dataEnv"})
+	@Test
+
+    public void databaseAssertions(String dataEnv) throws Exception {
+
+        String nmUniqueId = unique_Id;
+
+        TestUtils.testTitle("Database Checks: Basic Data, Meta Data, BFP Sync Log, User Identification, SMS Activation Request, MSISDN Details, Passport Details");
+
+        Thread.sleep(1000);
+
+        ConnectDB.query(nmUniqueId, dataEnv, "FR");
+
+        ConnectDB.specialData();
+
+    }
+	
+	@Parameters({ "dataEnv"})
+	@Test
+
+    public void releaseQuarantinedRecords(String dataEnv) throws Exception {
+        Thread.sleep(30000);
+		
+		Features.releaseQuarantinedRecords(dataEnv, unique_Id);
+    }
+
 	
 	
 	

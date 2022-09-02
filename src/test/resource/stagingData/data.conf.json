@@ -57,11 +57,11 @@
     "searchParam": "SIM"
   },
   "NewRegistration": {
-    "valid_msisdn": "08052363886",
+    "valid_msisdn": "08072711380",
     "invalid_msisdn": "764785",
     "non_valid_msisdn": "08152379129",
     "invalid_simSerial": "177606",
-    "valid_simSerial": "8923450108200272079F",
+    "valid_simSerial": "8923450409202450089F",
     "lga": "Agege",
     "valid_fixed_msisdn": "080500066",
     "valid_fixed_serial": "8923456000000000066F",

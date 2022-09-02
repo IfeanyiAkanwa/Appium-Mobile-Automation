@@ -14,7 +14,7 @@
     <parameter name="email" value="snapshot@seamfix.com"/>
     <parameter name="systemPort" value="8228"/>
     <parameter name="deviceNo" value="1"/>
-    <test name="Login">
+   <test name="Login">
        <classes>
            <class name="admin.Login">
                 <methods>
@@ -73,7 +73,7 @@
                     <include name="capturePreview" />
                     <include name="saveCapture" /> 
                     <include name="releaseQuarantinedRecords" />
-                    <include name="database" />
+                    <include name="databaseAssertions" />
                 </methods>
             </class> 
           </classes>
@@ -100,11 +100,11 @@
                     <include name="capturePreview" />
                     <include name="saveCapture" /> 
                     <include name="releaseQuarantinedRecords" />
-                    <include name="database" />
+                    <include name="databaseAssertions" />
                 </methods>
             </class> 
           </classes> 
-       </test>
+       </test> 
        
         <test name="Foreigner Registration" preserve-order="true">
         	<parameter name="email" value="snapshot@seamfix.com"/>
@@ -128,14 +128,14 @@
                   <include name="capturePreview" />
                   <include name="saveCapture" />
                   <include name="releaseQuarantinedRecords" />
-                  <include name="database" /> 
+                  <include name="databaseAssertions" /> 
               </methods>
           </class> 
         </classes>
        </test> 
          
 		
-	 <test name="Re-Reg Non Privilege Test" preserve-order="true">
+	  <test name="Re-Reg Non Privilege Test" preserve-order="true">
 			<parameter name="email" value="snapshot@seamfix.com" />
 			<parameter name="systemPort" value="8228" />
 			<parameter name="deviceNo" value="1" />
@@ -168,11 +168,13 @@
                     <include name="demographicsCapture" />
                     <include name="captureUploadDoc" />
                     <include name="capturePreview" />
-                    <include name="saveCapture" />   
+                    <include name="saveCapture" />
+                    <include name="releaseQuarantinedRecords" />
+                    <include name="databaseAssertions" />   
                 </methods>
             </class> 
           </classes>
-        </test>  
+        </test>
         
 	 <test name="Re-Registration vNIN" preserve-order="true">
 		 <parameter name="email" value="snapshot@seamfix.com"/>
@@ -194,13 +196,15 @@
                     <include name="demographicsCapture" />
                     <include name="captureUploadDoc" />
                     <include name="capturePreview" />
-                    <include name="saveCapture" />   
+                    <include name="saveCapture" /> 
+                    <include name="releaseQuarantinedRecords" />
+                    <include name="databaseAssertions" />  
                 </methods>
             </class> 
          </classes>
         </test>  
         
-     <test name="None Corporate New Registration" preserve-order="true">
+ <test name="None Corporate New Registration" preserve-order="true">
 		 <parameter name="email" value="snapshot@seamfix.com"/>
        	 <parameter name="systemPort" value="4723"/>
          <parameter name="deviceNo" value="1"/>

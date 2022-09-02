@@ -1280,7 +1280,7 @@ public class Form extends TestBase {
 		//Passport details
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/passport_details_title", "Passport/ID Details");
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/field_issuing_country", "Passport Issuing Country*");
-		TestUtils.assertSearchText("ID", "android:id/text1", "AFGHANISTAN");
+		TestUtils.assertSearchText("ID", "android:id/text1", "ALBANIA");
 		TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/field_passport_number", "Passport/ID Number*");
 		String pass_no = getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/passport_number")).getText();
 		if (pass_no == "") {
@@ -1811,7 +1811,6 @@ public class Form extends TestBase {
 				getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btnContinueReg")).click();
 				Thread.sleep(1000);
 				//wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/countrySpinner")));
-
 	}
 
 
