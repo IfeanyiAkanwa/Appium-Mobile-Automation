@@ -1800,7 +1800,7 @@ public class Form extends TestBase {
 				// Social Media
 				TestUtils.scrollUntilElementIsVisible("ID", "com.sf.biocapture.activity" + Id + ":id/socialMediaUsername");
 				wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/socialMediaUsername")));
-				getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/socialMediaUsername")).click();
+			//	getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/socialMediaUsername")).click();
 				Thread.sleep(500);
 				getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/socialMediaUsername")).clear();
 				getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/socialMediaUsername")).sendKeys(social_media_username);

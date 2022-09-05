@@ -14,7 +14,7 @@
     <parameter name="email" value="snapshot@seamfix.com"/>
     <parameter name="systemPort" value="8228"/>
     <parameter name="deviceNo" value="1"/>
-   <test name="Login">
+    <test name="Login">
        <classes>
            <class name="admin.Login">
                 <methods>
@@ -174,7 +174,7 @@
                 </methods>
             </class> 
           </classes>
-        </test>
+        </test> 
         
 	 <test name="Re-Registration vNIN" preserve-order="true">
 		 <parameter name="email" value="snapshot@seamfix.com"/>
@@ -204,7 +204,7 @@
          </classes>
         </test>  
         
- <test name="None Corporate New Registration" preserve-order="true">
+ 	<test name="None Corporate New Registration" preserve-order="true">
 		 <parameter name="email" value="snapshot@seamfix.com"/>
        	 <parameter name="systemPort" value="4723"/>
          <parameter name="deviceNo" value="1"/>
@@ -237,6 +237,8 @@
                     <include name="captureUploadDoc" />
                     <include name="capturePreview" />
                     <include name="saveCapture" /> 
+                    <include name="releaseQuarantinedRecords" />
+                    <include name="databaseAssertions" />  
                 </methods>
             </class> 
           </classes>
@@ -261,7 +263,9 @@
                     <include name="demographicsCapture" />
                     <include name="captureUploadDoc" />
                     <include name="capturePreview" />
-                    <include name="saveCapture" />   
+                    <include name="saveCapture" /> 
+                    <include name="releaseQuarantinedRecords" />
+                    <include name="databaseAssertions" />    
                  
                 </methods>
             </class> 
@@ -433,5 +437,5 @@
             </class> 
           </classes>
         </test>
-
+ 
 </suite>
