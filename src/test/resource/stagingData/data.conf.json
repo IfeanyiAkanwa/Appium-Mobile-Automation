@@ -56,12 +56,13 @@
   "Notifications": {
     "searchParam": "SIM"
   },
+  
   "NewRegistration": {
-    "valid_msisdn": "08072711380",
+    "valid_msisdn": "08072711510",
     "invalid_msisdn": "764785",
     "non_valid_msisdn": "08152379129",
     "invalid_simSerial": "177606",
-    "valid_simSerial": "8923450409202450089F",
+    "valid_simSerial": "8923450308064244004F",
     "lga": "Agege",
     "valid_fixed_msisdn": "080500066",
     "valid_fixed_serial": "8923456000000000066F",
@@ -137,7 +138,7 @@
   "CorporateRegistration": {
     "valid_msisdn": "09150676377",
     "valid_msisdn2": "09150676379",
-    "primary_tm": "08156742434",
+    "primary_tm": "09150677760",
     "secondary_tm": "08072756010",
     "foreign_msisdn": "08152395730",
     "invalid_msisdn": "08022340222",
@@ -205,7 +206,7 @@
     "lga_of_reg": "Agege"
   },
   "CorporateReRegistration": {
-    "valid_msisdn": "09150676382",
+    "valid_msisdn": "07057351672",
     "fixed_Msisdn": "0811382",
     "valid_msisdn2": "09159891765",
     "primary_tm": "08072756026",
@@ -260,8 +261,8 @@
     "vnin": "XP637697545769L8",
     "pp_nin": "43434343434", 
     "valid_Msisdn": "09150676381",
-    "new_msisdn": "08072756245",
-    "valid_sim_serial": "8923450811198986176F", 
+    "new_msisdn": "08072711510",
+    "valid_sim_serial": "8923450308064244004F", 
     "invalid_Msisdn": "08111071565",
     "invalid_new_Msisdn": "08159888886",
     "lga": "Agege",
@@ -336,14 +337,14 @@
     "valid_username": "eze.sfxtest@yopmail.com",
     "valid_password": "Bankole11!!",
     "lga": "Agege",
-    "validMsisdn": "09150678014",
+    "validMsisdn": "09150677767",
     "invalidMsisdn": "08118071455",
     "moreMsisdn": "080553881681234",
     "lessMsisdn1": "08055",
     "lessMsisdn2": "08055388",
     "validSimSerial": "8923450704188330796F",
-    "newMsisdn": "08156741769",
-    "newSerial": "8923450508192747477F",
+    "newMsisdn": "09150677761",
+    "newSerial": "8923450805200516872F",
     "moreSerial": "8923450502181537882F1234",
     "lessSerial": "89234181537882F",
     "invalidSerial": "8923450502181739572F",

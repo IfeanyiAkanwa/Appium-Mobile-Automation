@@ -5,13 +5,13 @@ import functions.Features;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import db.ConnectDB;
 import demographics.Form;
 import utils.TestBase;
+import utils.TestUtils;
 
 public class CorporateReRegistration extends TestBase {
-
-
-    @Parameters({"dataEnv"})
+ @Parameters({"dataEnv"})
     @Test
     public void noneCorporateReRegPrivilegeTest(String dataEnv) throws Exception {
     	Features feature = new Features();
@@ -135,6 +135,32 @@ public class CorporateReRegistration extends TestBase {
 
 		Features.saveEnrollment(dataEnv);
 	}
+	
+	@Parameters({ "dataEnv"})
+	@Test
+
+    public void databaseAssertions(String dataEnv) throws Exception {
+
+        String nmUniqueId = unique_Id;
+
+        TestUtils.testTitle("Database Checks: Basic Data, Meta Data, BFP Sync Log, User Identification, SMS Activation Request, MSISDN Details, Passport Details");
+
+        Thread.sleep(1000);
+
+        ConnectDB.query(nmUniqueId, dataEnv, "CR");
+
+        ConnectDB.specialData();
+
+    }
+	
+	@Parameters({ "dataEnv"})
+	@Test
+
+    public void releaseQuarantinedRecords(String dataEnv) throws Exception {
+        Thread.sleep(30000);
+		
+		Features.releaseQuarantinedRecords(dataEnv, unique_Id);
+    }
 	
 
 }

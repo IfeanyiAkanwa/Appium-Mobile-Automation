@@ -14,7 +14,7 @@
     <parameter name="email" value="snapshot@seamfix.com"/>
     <parameter name="systemPort" value="8228"/>
     <parameter name="deviceNo" value="1"/>
-    <test name="Login">
+  <test name="Login">
        <classes>
            <class name="admin.Login">
                 <methods>
@@ -37,7 +37,7 @@
                 </methods>
             </class>
             </classes>
-      </test>  
+      </test>   
             
      <test name="NewReg Non Privilege Test" preserve-order="true">
 			<parameter name="email" value="snapshot@seamfix.com" />
@@ -72,7 +72,7 @@
                     <include name="captureUploadDoc" />
                     <include name="capturePreview" />
                     <include name="saveCapture" /> 
-                    <include name="releaseQuarantinedRecords" />
+                     <include name="releaseQuarantinedRecords" />
                     <include name="databaseAssertions" />
                 </methods>
             </class> 
@@ -81,7 +81,7 @@
          
       
          
-     <test name="New Registration Multiple VNIN" preserve-order="true">
+      <test name="New Registration Multiple VNIN" preserve-order="true">
 		<classes>
          <class name="admin.NewRegistration">
                 <methods>
@@ -127,8 +127,8 @@
                   <include name="captureUploadDoc" />
                   <include name="capturePreview" />
                   <include name="saveCapture" />
-                  <include name="releaseQuarantinedRecords" />
-                  <include name="databaseAssertions" /> 
+                   <include name="releaseQuarantinedRecords" />
+                  <include name="databaseAssertions" />  
               </methods>
           </class> 
         </classes>
@@ -148,7 +148,7 @@
 		</classes>
 	</test> 
 		 
-    <test name="Re-Registration NIN " preserve-order="true">
+	 <test name="Re-Registration NIN " preserve-order="true">
 		 <parameter name="email" value="snapshot@seamfix.com"/>
        	 <parameter name="systemPort" value="4723"/>
          <parameter name="deviceNo" value="1"/>
@@ -174,7 +174,7 @@
                 </methods>
             </class> 
           </classes>
-        </test> 
+        </test>  
         
 	 <test name="Re-Registration vNIN" preserve-order="true">
 		 <parameter name="email" value="snapshot@seamfix.com"/>
@@ -198,7 +198,7 @@
                     <include name="capturePreview" />
                     <include name="saveCapture" /> 
                     <include name="releaseQuarantinedRecords" />
-                    <include name="databaseAssertions" />  
+                    <include name="databaseAssertions" />   
                 </methods>
             </class> 
          </classes>
@@ -215,7 +215,7 @@
                 </methods>
          </class>
          </classes>
-     </test>
+     </test> 
    
        <test name="Corporate New Registration VNIN File Upload" preserve-order="true">
 		 <parameter name="email" value="snapshot@seamfix.com"/>
@@ -229,7 +229,7 @@
                     <include name="navigateToCapture"/>
                     <include name="selectRegistrationType" />
                     <include name="msisdnValidationOnline"/>
-                    <include name="portraitFileUpload"/>
+                    <include name="corporateOverridePortrait"/>
                     <include name="overrideHand" />
                     <include name="vninVerificationOnline" />
                     <include name="eyeBalling" />
@@ -244,7 +244,7 @@
           </classes>
       </test>
       
-      <test name="Corporate New Registration NIN" preserve-order="true">
+ <test name="Corporate New Registration NIN" preserve-order="true">
 		 <parameter name="email" value="snapshot@seamfix.com"/>
        	 <parameter name="systemPort" value="4723"/>
          <parameter name="deviceNo" value="1"/>
@@ -256,7 +256,7 @@
                     <include name="navigateToCapture"/>
                     <include name="selectRegistrationType" />
                     <include name="msisdnValidationOnline"/>
-                    <include name="corporateOverridePortrait"/>
+                    <include name="portraitFileUpload"/>
                     <include name="overrideHand" />
                     <include name="ninVerificationOnline" />
                     <include name="eyeBalling" />
@@ -270,7 +270,7 @@
                 </methods>
             </class> 
           </classes>
-      </test>   
+      </test>  
      
    <test name="None Corporate Re Registration" preserve-order="true">
 		 <parameter name="email" value="snapshot@seamfix.com"/>
@@ -285,7 +285,7 @@
          </classes>
       </test> 
       
-      <test name="Corporate Re-Registration NIN" preserve-order="true">
+       <test name="Corporate Re-Registration NIN" preserve-order="true">
 		 <parameter name="email" value="snapshot@seamfix.com"/>
        	 <parameter name="systemPort" value="4723"/>
          <parameter name="deviceNo" value="1"/>
@@ -299,7 +299,7 @@
                     <include name="msisdnValidationOnline"/>
                     <include name="corporateOverridePortrait" /> 
                     <include name="overrideHand" />
-                    <include name="requestOTP" /> 
+                    <include name="byrequestOTP" />  
                     <include name="ninVerificationOnline" />
                     <include name="eyeBalling" />
                     <include name="demographicsCapture" />
@@ -309,7 +309,7 @@
                 </methods>
             </class> 
           </classes>
-        </test> 
+        </test>
          
     <test name="Corporate Re-Registration vNIN" preserve-order="true">
 		 <parameter name="email" value="snapshot@seamfix.com"/>
@@ -325,19 +325,21 @@
                     <include name="msisdnValidationOnline"/>
                     <include name="portraitFileUpload" />
                     <include name="overrideHand" />
-                    <include name="byrequestOTP" /> 
+                    <include name="requestOTP" /> 
                     <include name="vninVerificationOnline" />
                     <include name="eyeBalling" />
                     <include name="demographicsCapture" />
                     <include name="captureUploadDoc" />
                     <include name="capturePreview" />
-                    <include name="saveCapture" />   
+                    <include name="saveCapture" /> 
+                    <include name="releaseQuarantinedRecords" />
+                    <include name="databaseAssertions" />   
                 </methods>
             </class> 
           </classes>
       </test>   
 
-      <test name="Corporate SimSwap Non Privilege Test" preserve-order="true">
+     <test name="Corporate SimSwap Non Privilege Test" preserve-order="true">
 			<parameter name="email" value="snapshot@seamfix.com" />
 			<parameter name="systemPort" value="8228" />
 			<parameter name="deviceNo" value="1" />
@@ -364,7 +366,7 @@
                     <include name="msisdnValidationOnline"/>
                     <include name="portraitFileUpload" />
                     <include name="overrideHand" />
-                    <include name="ninVerificationOnline"/>
+                    <include name="vninVerificationOnline"/>
                     <include name="eyeBalling" />
                     <include name="demographicsCapture" />
                     <include name="captureUploadDoc" />
@@ -372,7 +374,7 @@
                 </methods>
             </class> 
           </classes>
-         </test> 
+         </test>  
       
        <test name="SimSwap Non Privilege Test" preserve-order="true">
 			<parameter name="email" value="snapshot@seamfix.com" />
@@ -401,7 +403,7 @@
                     <include name="msisdnValidationOnline"/>
                     <include name="rroverridePortrait" />
                     <include name="overrideHand" />
-                    <include name="ninVerificationOnline" />
+                    <include name="vninVerificationOnline" />
                     <include name="eyeBalling" />
                     <include name="demographicsCapture" />
                     <include name="captureUploadDoc" />

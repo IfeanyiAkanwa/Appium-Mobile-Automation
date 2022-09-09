@@ -2109,13 +2109,13 @@ public class Features extends TestBase {
 				}catch(Exception e) {
 					TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/otp_confirm_btn", "Confirm OTP");
 				}
-				
-				try {
-					TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/otp_bypass_button", "Bypass OTP");
-				}catch(Exception e) {
-					TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/otp_bypass_btn", "Bypass OTP");
-				}
-				
+//				
+//				try {
+//					TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/otp_bypass_button", "Bypass OTP");
+//				}catch(Exception e) {
+//					TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/otp_bypass_btn", "Bypass OTP");
+//				}
+//				
 				try {
 					TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/otp_request_button", "Request OTP");
 				}catch(Exception e) {
