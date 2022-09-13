@@ -205,7 +205,7 @@ public class Features extends TestBase {
 
 		@Parameters({ "dataEnv"})
 		@Test
-		public static void msisdnValidationOnline(String dataEnv, String regModule) throws Exception {
+		public static void msisdnValidationOnline(String dataEnv, String regModule) throws Exception {	
 			WebDriverWait wait = new WebDriverWait(getDriver(), 60);
 			JSONParser parser = new JSONParser();
 			JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
@@ -1609,12 +1609,13 @@ public class Features extends TestBase {
 		        getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/document_image")).click();
 		        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/summary")));
 		        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/summary", "SELECT DOCUMENT TYPE");
-		        TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Valid ID Card']", "Valid ID Card");
+		        TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Sworn FDN Affidavit']", "Sworn FDN Affidavit");
+		       
 		 
 
 		        //Sworn Affidavit
-		        TestUtils.testTitle("Valid ID Card");
-		        getDriver().findElement(By.xpath("//android.widget.TextView[@text='Valid ID Card']")).click();
+		        TestUtils.testTitle("Sworn FDN Affidavit");
+		        getDriver().findElement(By.xpath("//android.widget.TextView[@text='Sworn FDN Affidavit']")).click();
 		        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/alertTitle")));
 		        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/alertTitle", "SIM Swap Document Upload");
 		        TestUtils.assertSearchText("ID", "com.sf.biocapture.activity" + Id + ":id/doc_upload_btn", "DOCUMENT UPLOAD");
@@ -1627,7 +1628,7 @@ public class Features extends TestBase {
 		        TestUtils.scrollUntilElementIsVisible("XPATH", "//android.widget.TextView[@text='picture.jpg']");
 		        getDriver().findElement(By.xpath("//android.widget.TextView[@text='picture.jpg']")).click();
 		        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/document")));
-		        TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Valid ID Card']", "Valid ID Card");
+		        TestUtils.assertSearchText("XPATH", "//android.widget.TextView[@text='Sworn FDN Affidavit']", "Sworn FDN Affidavit");
 
 		        //Remove picture and Capture Document
 		        TestUtils.testTitle("Remove uploaded document and Capture Document");
