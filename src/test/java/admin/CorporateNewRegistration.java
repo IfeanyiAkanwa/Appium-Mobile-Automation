@@ -6,7 +6,10 @@ import functions.Features;
 
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
+import db.ConnectDB;
 import utils.TestBase;
+import utils.TestUtils;
 
 
 public class CorporateNewRegistration extends TestBase {
@@ -24,8 +27,7 @@ public class CorporateNewRegistration extends TestBase {
 	@Test
 	public void navigateToCapture(String dataEnv) throws Exception {
 		Features.navigateToCaptureMenuTest();
-		
-		
+
 	}
 	
 	@Test
@@ -117,6 +119,34 @@ public class CorporateNewRegistration extends TestBase {
 
 		Features.saveEnrollment(dataEnv);
 	}
+	
+	@Parameters({ "dataEnv"})
+	@Test
+
+    public void databaseAssertions(String dataEnv) throws Exception {
+
+        String nmUniqueId = unique_Id;
+        System.out.println(">>>>>>>>>>>" +unique_Id);
+
+        TestUtils.testTitle("Database Checks: Basic Data, Meta Data, BFP Sync Log, User Identification, SMS Activation Request, MSISDN Details, Passport Details");
+
+        Thread.sleep(1000);
+
+        ConnectDB.query(nmUniqueId, dataEnv, "CN");
+
+        ConnectDB.specialData();
+
+    }
+	
+	@Parameters({ "dataEnv"})
+	@Test
+
+    public void releaseQuarantinedRecords(String dataEnv) throws Exception {
+        Thread.sleep(30000);
+	
+        System.out.println(">>>>>>>>>>>" +unique_Id);
+		Features.releaseQuarantinedRecords(dataEnv, unique_Id);
+    }
 
 
   
