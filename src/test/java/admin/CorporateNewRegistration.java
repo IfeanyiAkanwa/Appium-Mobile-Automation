@@ -126,7 +126,6 @@ public class CorporateNewRegistration extends TestBase {
     public void databaseAssertions(String dataEnv) throws Exception {
 
         String nmUniqueId = unique_Id;
-        System.out.println(">>>>>>>>>>>" +unique_Id);
 
         TestUtils.testTitle("Database Checks: Basic Data, Meta Data, BFP Sync Log, User Identification, SMS Activation Request, MSISDN Details, Passport Details");
 
@@ -144,7 +143,6 @@ public class CorporateNewRegistration extends TestBase {
     public void releaseQuarantinedRecords(String dataEnv) throws Exception {
         Thread.sleep(30000);
 	
-        System.out.println(">>>>>>>>>>>" +unique_Id);
 		Features.releaseQuarantinedRecords(dataEnv, unique_Id);
     }
 
