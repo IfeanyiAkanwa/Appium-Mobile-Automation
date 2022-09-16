@@ -3330,7 +3330,7 @@ public class Form extends TestBase {
 	        String fName = (String) envs.get("fName");
 	        String lName = (String) envs.get("lName");
 	        String mmn = (String) envs.get("mmn");
-	        String dob = (String) envs.get("dob");
+	        String dob = (String) envs.get("pp_dob");
 	        String last_recharge_Amount = (String) envs.get("last_recharge_Amount");
 	        String last_recharge_date = (String) envs.get("last_recharge_date");
 	        String occupation = (String) envs.get("occupation");
@@ -3826,7 +3826,7 @@ public class Form extends TestBase {
         String fName = (String) envs.get("fName");
         String lName = (String) envs.get("lName");
         String mmn = (String) envs.get("mmn");
-        String dob = (String) envs.get("dob");
+        String dob = (String) envs.get("dob2");
         String last_recharge_Amount = (String) envs.get("last_recharge_Amount");
         String last_recharge_date = (String) envs.get("last_recharge_date");
         String occupation = (String) envs.get("occupation");

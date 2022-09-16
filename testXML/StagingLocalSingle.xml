@@ -14,7 +14,7 @@
     <parameter name="email" value="snapshot@seamfix.com"/>
     <parameter name="systemPort" value="8228"/>
     <parameter name="deviceNo" value="1"/>
-   <test name="Login">
+    <test name="Login">
        <classes>
            <class name="admin.Login">
                 <methods>
@@ -389,9 +389,9 @@
 				</methods>
 			</class>
 		</classes>
-	</test> 
+	</test>  
 		
-	 <test name="Sim Swap" preserve-order="true">
+	<test name="Sim Swap" preserve-order="true">
 	  <parameter name="email" value="snapshot@seamfix.com"/>
       <parameter name="systemPort" value="4723"/>
       <parameter name="deviceNo" value="1"/>
@@ -405,17 +405,19 @@
                     <include name="msisdnValidationOnline"/>
                     <include name="rroverridePortrait" />
                     <include name="overrideHand" />
-                    <include name="vninVerificationOnline" />
+                    <include name="ninVerificationOnline" />
                     <include name="eyeBalling" />
                     <include name="demographicsCapture" />
                     <include name="captureUploadDoc" />
-                    <include name="saveCapture" />    
+                    <include name="saveCapture" /> 
+                    <include name="releaseQuarantinedRecords" />
+                    <include name="databaseAssertions" />      
                 </methods>
             </class> 
           </classes>
      </test> 
          
-  <test name="Sim Swap Proxy" preserve-order="true">
+ <test name="Sim Swap Proxy" preserve-order="true">
 	  <parameter name="email" value="snapshot@seamfix.com"/>
       <parameter name="systemPort" value="4723"/>
       <parameter name="deviceNo" value="1"/>
@@ -436,10 +438,12 @@
                     <include name="subscriberEyeBalling" />
                     <include name="ProxydemographicsCapture" />
                     <include name="captureUploadDocProxy" />
-                    <include name="saveCapture" />   
+                    <include name="saveCapture" />  
+                    <include name="releaseQuarantinedRecords" />
+                    <include name="databaseAssertions" />     
                 </methods>
             </class> 
           </classes>
-        </test>
+        </test> 
  
 </suite>
