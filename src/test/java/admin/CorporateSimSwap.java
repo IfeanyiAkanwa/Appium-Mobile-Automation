@@ -134,5 +134,32 @@ public void saveCapture(String dataEnv) throws Exception {
 	Features.simSwapSubmit2(dataEnv);
 }
 
+@Parameters({ "dataEnv"})
+@Test
+
+public void databaseAssertions(String dataEnv) throws Exception {
+
+    String nmUniqueId = unique_Id;
+
+    TestUtils.testTitle("Database Checks: Basic Data, Meta Data, BFP Sync Log, User Identification, SMS Activation Request, MSISDN Details, Passport Details");
+
+    Thread.sleep(1000);
+
+    ConnectDB.query(nmUniqueId, dataEnv, "CSS");
+
+    ConnectDB.specialData();
+
+}
+
+@Parameters({ "dataEnv"})
+@Test
+
+public void releaseQuarantinedRecords(String dataEnv) throws Exception {
+    Thread.sleep(30000);
+	
+	Features.releaseQuarantinedRecords(dataEnv, unique_Id);
+}
+
+
 
 }

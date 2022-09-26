@@ -14,7 +14,7 @@
     <parameter name="email" value="snapshot@seamfix.com"/>
     <parameter name="systemPort" value="8228"/>
     <parameter name="deviceNo" value="1"/>
-    <test name="Login">
+ <test name="Login">
        <classes>
            <class name="admin.Login">
                 <methods>
@@ -77,8 +77,8 @@
                 </methods>
             </class> 
           </classes>
-         </test>  
-         
+      </test>  
+          
       
          
       <test name="New Registration Multiple VNIN" preserve-order="true">
@@ -309,7 +309,7 @@
                 </methods>
             </class> 
           </classes>
-        </test>
+        </test> 
          
     <test name="Corporate Re-Registration vNIN" preserve-order="true">
 		 <parameter name="email" value="snapshot@seamfix.com"/>
@@ -338,7 +338,7 @@
             </class> 
           </classes>
       </test>   
-
+ 
      <test name="Corporate SimSwap Non Privilege Test" preserve-order="true">
 			<parameter name="email" value="snapshot@seamfix.com" />
 			<parameter name="systemPort" value="8228" />
@@ -350,9 +350,9 @@
 				</methods>
 			</class>
 		</classes>
-	</test>  
+	</test> 
         
-      <test name="Corporate Sim Swap TM" preserve-order="true">
+    <test name="Corporate Sim Swap TM" preserve-order="true">
 	  <parameter name="email" value="snapshot@seamfix.com"/>
       <parameter name="systemPort" value="4723"/>
       <parameter name="deviceNo" value="1"/>
@@ -378,7 +378,7 @@
           </classes>
          </test>  
       
- 	 <test name="SimSwap Non Privilege Test" preserve-order="true">
+	 <test name="SimSwap Non Privilege Test" preserve-order="true">
 			<parameter name="email" value="snapshot@seamfix.com" />
 			<parameter name="systemPort" value="8228" />
 			<parameter name="deviceNo" value="1" />
@@ -444,6 +444,8 @@
                 </methods>
             </class> 
           </classes>
-        </test> 
+        </test>  
+
+
  
 </suite>

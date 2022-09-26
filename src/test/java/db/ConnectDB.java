@@ -529,46 +529,50 @@ public class ConnectDB extends TestBase{
             statement = dbConnection.createStatement();
             ResultSet rs = statement.executeQuery(getRegDetsSql);
 
-            if (rs.next()) {
-                
-                ResultSetMetaData rsmd = rs.getMetaData();
-                int columnCount = rsmd.getColumnCount();
-                basic_data_fk  = rs.getInt("basic_data_fk");
+            int row = 1;
+			while (rs.next()) {
+				ResultSetMetaData rsmd = rs.getMetaData();
+				int columnCount = rsmd.getColumnCount();
+				String rows = "ROW: " + row;
+				row++;
+				Markup u = MarkupHelper.createLabel(rows, ExtentColor.GREEN);
+				testInfo.get().info(u);
+				basic_data_fk  = rs.getInt("basic_data_fk");
+				// The column count starts from 1
+				for (int i = 1; i <= columnCount; i++) {
+					String name = rsmd.getColumnName(i);
+					String data = "";
 
-                // The column count starts from 1
-                for (int i = 1; i <= columnCount; i++) {
-                    String name = rsmd.getColumnName(i);
-                    String data = "";
+					switch (rsmd.getColumnType(i)) {
+					case Types.BLOB:
 
-                    switch (rsmd.getColumnType(i)) {
-                        case Types.BLOB:
-                            Blob image = rs.getBlob(i);
-                            if (image == null) {
-                                break;
-                            }
+						Blob image = rs.getBlob(i);
+						if (image == null) {
+							break;
+						}
 
-                            String encodedBase64 = null;
-                            byte[] bytes = image.getBytes(1L, (int) image.length());
-                            encodedBase64 = new String(Base64.encodeBase64(bytes));
-                            data = encodedBase64;
-                            break;
-                        case Types.VARCHAR:
-                            data = rs.getString(i);
-                            break;
+						String encodedBase64 = null;
+						byte[] bytes = image.getBytes(1L, (int) image.length());
+						encodedBase64 = new String(Base64.encodeBase64(bytes));
+						data = encodedBase64;
+						break;
+					case Types.VARCHAR:
+						data = rs.getString(i);
+						break;
 
-                        default:
-                            data = rs.getString(i);
-                            break;
-                    }
+					default:
+						data = rs.getString(i);
+						break;
+					}
 
-                    /*String aa = prefix == null ? dbValues.put(name, data) : dbValues.put(prefix + name, data);*/
-                    if (data == null) {
-                        testInfo.get().warning("<b>" + name + "</b><br/>" + data);
-                    } else if (data.length() > 1000) {
-                        testInfo.get().info("<b>" + name + "</b><br/><img src=\"data:image/jpeg;base64," + data + "\">");
-                    } else {
-                        testInfo.get().info("<b>" + name + "</b><br/>" + data);
-                    }
+					if (data == null) {
+						testInfo.get().error("<b>" + name + "</b><br/>" + data);
+					} else if (data.length() > 100) {
+						testInfo.get().info("<b>" + name + "</b><br/><img src=\"data:image/jpeg;base64," + data + "\">");
+					} else {
+						testInfo.get().info("<b>" + name + "</b><br/>" + data);
+					}
+				
 
                 }
 

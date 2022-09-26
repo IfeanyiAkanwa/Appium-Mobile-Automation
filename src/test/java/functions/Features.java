@@ -2015,8 +2015,8 @@ public class Features extends TestBase {
 	  			else if(regModule.equals("SSS") || regModule.equals("CSS") ) {
 		    		Thread.sleep(500);
 		    		getDriver().findElement(By.id("android:id/button1")).click();
-		    		Thread.sleep(9000);
-		    		getDriver().findElement(By.id("android:id/button1")).click();
+//		    		Thread.sleep(8000);
+//		    		getDriver().findElement(By.id("android:id/button1")).click();
 		    		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sf.biocapture.activity" + Id + ":id/btnNext")));
 		    		getDriver().findElement(By.id("com.sf.biocapture.activity" + Id + ":id/btnNext")).click();
 		    		
@@ -2519,7 +2519,7 @@ public class Features extends TestBase {
 		    @Test
 		    public static void nimcEyeBalling(String dataEnv) throws Exception {
 
-		        WebDriverWait wait = new WebDriverWait(getDriver(), 60);
+		        WebDriverWait wait = new WebDriverWait(getDriver(), 180);
 		        JSONParser parser = new JSONParser();
 		        JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
 		        JSONObject envs = (JSONObject) config.get("NewRegistration");
