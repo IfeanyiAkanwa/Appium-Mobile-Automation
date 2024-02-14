@@ -138,11 +138,11 @@ public class ReportsTest extends TestBase {
         Thread.sleep(1000);
         getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/androidx.appcompat.widget.LinearLayoutCompat[10]/android.widget.CheckedTextView")).click();
 
-        getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.Button[1]")).click();
+    //    getDriver().findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.Button[1]")).click();
 
         JSONParser parser = new JSONParser();
         JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resource/" + dataEnv + "/data.conf.json"));
-        JSONObject envs = (JSONObject) config.get("Login2");
+        JSONObject envs = (JSONObject) config.get("Login");
 
         String valid_username = (String) envs.get("valid_username");
         String valid_password = (String) envs.get("valid_password");
@@ -295,7 +295,7 @@ public class ReportsTest extends TestBase {
 
         if (ninStatus==0){
             //Use Form that populate data itself
-            Form.individualForeignerForm(dataEnv);
+        //    Form.individualForeignerForm(dataEnv);
         }else{
             //Use autoPopulated Form
             Form.individualForeignerFormAutoPopulate(dataEnv);

@@ -66,7 +66,7 @@
                     <include name="singleMsidnValidationTest"/>
                     <include name="overridePortrait" />
                     <include name="overrideHand" />
-				    <include name="vninVerificationOnline" />
+				    <include name="ninVerificationOnline" />
                     <include name="eyeBalling" />
                     <include name="demographicsCapture" />
                     <include name="captureUploadDoc" />

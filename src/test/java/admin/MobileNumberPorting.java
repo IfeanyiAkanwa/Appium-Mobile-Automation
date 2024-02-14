@@ -12,6 +12,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.ITestContext;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -574,7 +575,7 @@ public class MobileNumberPorting extends TestBase {
 
     @Parameters({ "systemPort", "deviceNo", "server","deviceName", "testConfig", "dataEnv" })
     @Test
-    public void removeMobileNumberPortingTest(String systemPort, int deviceNo, String server, String deviceName, String testConfig, String dataEnv) throws Exception {
+    public void removeMobileNumberPortingTest(String systemPort, int deviceNo, String server, String deviceName, String testConfig, String dataEnv, ITestContext context) throws Exception {
 
         //initial setting
         String initialSetting= TestUtils.retrieveSettingsApiCall(dataEnv, "RETRIEVE_AVAILABLE_USECASES");
@@ -594,7 +595,7 @@ public class MobileNumberPorting extends TestBase {
             TestUtils.updateSettingsApiCall(dataEnv, getSettingParams);
             closeApp();
             Thread.sleep(5000);
-            startApp(systemPort, deviceNo, server, deviceName, testConfig, true);
+            startApp(systemPort, deviceNo, server, deviceName, testConfig, true, context);
         }else{
             //*********NMS is not found proceed************
 

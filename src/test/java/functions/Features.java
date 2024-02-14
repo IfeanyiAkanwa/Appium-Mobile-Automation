@@ -359,6 +359,8 @@ public class Features extends TestBase {
 			Thread.sleep(1000);
 			TestUtils.assertSearchText("XPATH", "//android.widget.CheckedTextView[@text='Fixed']", "Fixed");
 			Thread.sleep(1000);
+			
+			
 
 			//To confirm that the FIXED category of registration can only accept 9 digits for msisdn
 			String priCharacters=valid_fixed_msisdn01+"1234";
